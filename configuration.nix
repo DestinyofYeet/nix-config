@@ -37,5 +37,8 @@
 
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  networking.firewall.enable = false;
+  networking.firewall = {
+		enable = true;
+		allowedTCPPorts = [80 443];
+	};
 }
