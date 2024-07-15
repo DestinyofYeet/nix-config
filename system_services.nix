@@ -55,8 +55,4 @@
     			ExecStart = "${pkgs.innernet}/bin/innernet up infra --daemon --interval 60";
 		};
 	};
-
-    virtualisation.docker = {
-      enable = true;
-    };  
 }

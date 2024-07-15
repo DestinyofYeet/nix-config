@@ -40,8 +40,5 @@
   networking.firewall = {
 		enable = true;
 		allowedTCPPorts = [80 443];
-	};
-
-  # Maybe fixes docker
-  systemd.enableUnifiedCgroupHierarchy = false;  
+      };
 }
