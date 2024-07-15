@@ -7,9 +7,10 @@
     networking.firewall = {
     	# conduit: 6167
     	# ssh: 22 (just to be sure)
-    	# innernet: 51820
-    	allowedTCPPorts = [ 6167 22 51820 ];
-    	allowedUDPPorts = [ 6167 22 51820 ];
+        # innernet: 51820
+        # netdata: 19999
+    	allowedTCPPorts = [ 6167 22 51820 19999 ];
+        allowedUDPPorts = [ 6167 22 51820 19999 ];
     };
 
 
@@ -42,7 +43,8 @@
     services.netdata = {
       enable = true;
     };
-    
+
+    # for connecting to my innernet network
     systemd.services.innernet-infra = {
     		description = "innernet client for infra";
     		wantedBy = [ "multi-user.target" ];
@@ -54,4 +56,7 @@
 		};
 	};
 
+    virtualisation.docker = {
+      enable = true;
+    };  
 }

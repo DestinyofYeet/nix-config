@@ -13,6 +13,7 @@
         nginx
         bat
         netdata
+        docker_27
   	];
 
 	environment.variables = { EDITOR = "vim"; };
