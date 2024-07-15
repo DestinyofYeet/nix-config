@@ -10,6 +10,10 @@
 		git
 		gh
 		matrix-conduit
-		nginx
-  ];
+        nginx
+        bat
+        netdata
+  	];
+
+	environment.variables = { EDITOR = "vim"; };
 }

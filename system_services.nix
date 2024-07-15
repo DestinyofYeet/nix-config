@@ -39,6 +39,10 @@
     		};
 	};
 
+    services.netdata = {
+      enable = true;
+    };
+    
     systemd.services.innernet-infra = {
     		description = "innernet client for infra";
     		wantedBy = [ "multi-user.target" ];
