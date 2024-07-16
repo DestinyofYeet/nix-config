@@ -4,10 +4,11 @@ let
     wireguard = 51820;
     netdata = 19999;
     conduit = 6167;
+    qbit = 8080;
     ssh = 22;
   };
 
-  firewall_ports = [ ports.conduit ports.ssh ports.wireguard ports.netdata];
+  firewall_ports = [ ports.conduit ports.ssh ports.wireguard ports.netdata ports.qbit];
 
   namespaces = {
     name = "vpn-ns";
@@ -18,10 +19,6 @@ in
     services.openssh.enable = true;
     
     networking.firewall = {
-    	# conduit: 6167
-    	# ssh: 22 (just to be sure)
-        # innernet / wireguard: 51820
-        # netdata: 19999
     	allowedTCPPorts = firewall_ports;
     	allowedUDPPorts = firewall_ports;
     };
@@ -46,13 +43,22 @@ in
 
     services.nginx = {
     		enable = false;
-    		recommendedProxySettings = true;
-    		recommendedTlsSettings = true;
-    		
-    		virtualHosts."matrix.ole.blue" = {
+            # recommendedProxySettings = false;
+            # recommendedTlsSettings = true;
+
+            virtualHosts."qbit" = {
+              listen = [{ port = 8080; addr = "0.0.0.0"; ssl = false; }];
     			locations."/" = {
-    				proxyPass = "http://127.0.0.1:123";
-    				proxyWebsockets = true;
+    				proxyPass = "http://10.1.1.1:8080";
+                    proxyWebsockets = true;
+
+                    extraConfig = 
+                    "proxy_pass_header Authorization;" +
+                    "proxy_set_header X-Real-IP $remote_addr;" +
+	                "proxy_set_header Host $host;" +
+                	"proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;" +
+                    "proxy_set_header X-Forwarded-Proto $scheme;"
+                    ;
     			};
     		};
 	};
@@ -82,22 +88,54 @@ in
         Type = "oneshot";
         RemainAfterExit = "true";
         ExecStart = pkgs.writeScript "ns-isolation" ''
-          #! ${pkgs.bash}/bin/bash
-            export PATH=${pkgs.iproute}/bin:${pkgs.wireguard-tools}/bin:$PATH
-            ${pkgs.iproute2}/bin/ip netns add ${namespaces.name}
-            ${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} ip link set dev lo up
-            ${pkgs.iproute2}/bin/ip link add wg0 type wireguard
-            ${pkgs.iproute2}/bin/ip link set wg0 netns ${namespaces.name}
-            ${pkgs.iproute2}/bin/ip -n ${namespaces.name} addr add 10.178.79.23/24 dev wg0
-            ${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} wg syncconf wg0 <(${pkgs.wireguard-tools}/bin/wg-quick strip /etc/nixos/secrets/airvpn.conf)
-            ${pkgs.iproute2}/bin/ip -n ${namespaces.name} link set wg0 up
-            ${pkgs.iproute2}/bin/ip -n ${namespaces.name} route add default dev wg0
+          #!${pkgs.bash}/bin/bash
+            export PATH=${pkgs.iproute}/bin:${pkgs.wireguard-tools}/bin:${pkgs.nettools}/bin:${pkgs.iptables}/bin:$PATH
+            ip netns add ${namespaces.name}
+            ip netns exec ${namespaces.name} ip link set dev lo up
+            ip link add wg0 type wireguard
+            ip link set wg0 netns ${namespaces.name}
+            ip -n ${namespaces.name} addr add 10.178.79.23/24 dev wg0
+            ip netns exec ${namespaces.name} wg syncconf wg0 <(${pkgs.wireguard-tools}/bin/wg-quick strip /etc/nixos/secrets/airvpn.conf)
+            ip -n ${namespaces.name} link set wg0 up
+            ip -n ${namespaces.name} route add default dev wg0
+
+            ip link add veth0 type veth peer name veth1
+            ip link set veth1 netns ${namespaces.name}
+            ip netns exec ${namespaces.name} ifconfig veth1 10.1.1.1/24 up
+            ifconfig veth0 10.1.1.2/24 up
+            ip netns exec ${namespaces.name} ip link set dev lo up
+
+            # route all traffic from the local port 8080 to the namespace port 8080, so we can access the webinterface
+            iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
+            iptables -t nat -A POSTROUTING -j MASQUERADE    
         '';
 
-        ExecStop = ''
-          #! ${pkgs.bash}/bin/bash
+        ExecStop = pkgs.writeScript "ns-isolation-stop" ''
+          #!${pkgs.bash}/bin/bash
           ${pkgs.iproute2}/bin/ip netns delete ${namespaces.name}
         '';
+      };
+    };
+
+    systemd.services.qbittorrent-nox =
+      let 
+        qbit_config_dir = "~/.config/qBittorrent";
+        qbit_config = "${qbit_config_dir}/qBittorrent.conf";
+      in
+        {
+      description = "Run Qbittorrent-nox";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "vpn-ns.service" ];
+      serviceConfig = {
+        Type = "simple";
+        Restart = "always";
+        ExecStartPre = pkgs.writeScript "qbittorrent-nox-pre" ''
+        #!${pkgs.bash}/bin/bash
+          mkdir -p ${qbit_config_dir}
+          echo "[Preferences]" > ${qbit_config}
+          echo "WebUI\HostHeaderValidation=false" >> ${qbit_config}
+        '';
+        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
       };
     };
 }
