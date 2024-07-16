@@ -14,6 +14,8 @@
         bat
         netdata
         libcgroup
+        wireguard-tools
+        iproute2
   	];
 
 	environment.variables = { EDITOR = "vim"; };
