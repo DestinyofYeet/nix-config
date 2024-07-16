@@ -16,6 +16,7 @@
         libcgroup
         wireguard-tools
         iproute2
+        qbittorrent-nox
   	];
 
 	environment.variables = { EDITOR = "vim"; };

@@ -38,7 +38,7 @@ in
     			address = "0.0.0.0";
     			server_name = "matrix.ole.blue";
     			allow_registration = true;
-    			registration_token = "VX3deHVAEU49CkAWLj3cPfk3BrMgBsGNnWAPV3kV";
+    			registration_token = builtins.readFile ./secrets/conduit_registration_token.txt;
     			enable_lightning_bolt = false;
     		};	
 	};
