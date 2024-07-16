@@ -17,6 +17,9 @@
         wireguard-tools
         iproute2
         qbittorrent-nox
+        nettools
+        python3
+        iptables
   	];
 
 	environment.variables = { EDITOR = "vim"; };
