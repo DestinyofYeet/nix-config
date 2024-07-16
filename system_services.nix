@@ -115,31 +115,24 @@ in
           #!${pkgs.bash}/bin/bash
           set -e
           ${pkgs.iproute2}/bin/ip netns delete ${namespaces.name}
-          iptables -t nat -D PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
-          iptables -t nat -D POSTROUTING -j MASQUERADE    
+          ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
+          ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -j MASQUERADE    
         '';
       };
     };
 
     systemd.services.qbittorrent-nox =
       let 
-        qbit_config_dir = "~/.config/qBittorrent";
-        qbit_config = "${qbit_config_dir}/qBittorrent.conf";
+        qbit_config_dir = "/configs/";
       in
         {
       description = "Run Qbittorrent-nox";
       wantedBy = [ "multi-user.target" ];
-      after = [ "vpn-ns.service" ];
+      requires = [ "vpn-ns.service" ];
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        #ExecStartPre = pkgs.writeScript "qbittorrent-nox-pre" ''
-        ##!${pkgs.bash}/bin/bash
-        #  mkdir -p ${qbit_config_dir}
-        #  echo "[Preferences]" > ${qbit_config}
-        #  echo "WebUI\HostHeaderValidation=false" >> ${qbit_config}
-        #'';
-        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
+        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit_config_dir}";
       };
     };
 }
