@@ -89,6 +89,7 @@ in
         RemainAfterExit = "true";
         ExecStart = pkgs.writeScript "ns-isolation" ''
           #!${pkgs.bash}/bin/bash
+            set -e
             export PATH=${pkgs.iproute}/bin:${pkgs.wireguard-tools}/bin:${pkgs.nettools}/bin:${pkgs.iptables}/bin:$PATH
             ip netns add ${namespaces.name}
             ip netns exec ${namespaces.name} ip link set dev lo up
@@ -112,7 +113,10 @@ in
 
         ExecStop = pkgs.writeScript "ns-isolation-stop" ''
           #!${pkgs.bash}/bin/bash
+          set -e
           ${pkgs.iproute2}/bin/ip netns delete ${namespaces.name}
+          iptables -t nat -D PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
+          iptables -t nat -D POSTROUTING -j MASQUERADE    
         '';
       };
     };
@@ -129,12 +133,12 @@ in
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStartPre = pkgs.writeScript "qbittorrent-nox-pre" ''
-        #!${pkgs.bash}/bin/bash
-          mkdir -p ${qbit_config_dir}
-          echo "[Preferences]" > ${qbit_config}
-          echo "WebUI\HostHeaderValidation=false" >> ${qbit_config}
-        '';
+        #ExecStartPre = pkgs.writeScript "qbittorrent-nox-pre" ''
+        ##!${pkgs.bash}/bin/bash
+        #  mkdir -p ${qbit_config_dir}
+        #  echo "[Preferences]" > ${qbit_config}
+        #  echo "WebUI\HostHeaderValidation=false" >> ${qbit_config}
+        #'';
         ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
       };
     };
