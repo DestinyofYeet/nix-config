@@ -167,4 +167,12 @@ in
     group = "apps";
     openFirewall = true;
   };
+
+  services.sonarr = {
+    enable = true;
+    dataDir = "/configs/sonarr";
+    user = "apps";
+    group = "apps";
+    openFirewall = true;
+  };
 }
