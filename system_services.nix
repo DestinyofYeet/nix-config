@@ -184,7 +184,7 @@ in
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} /run/wrappers/bin/sudo -u apps  ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${apps.qbit.dirs.config}";
+        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} /run/wrappers/bin/sudo -u ${apps.user}  ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${apps.qbit.dirs.config}";
       };
     };
 
