@@ -41,4 +41,6 @@
 		enable = true;
 		allowedTCPPorts = [80 443];
       };
+
+  security.sudo.extraConfig = "user ALL=(ALL) ${pkgs.iproute2}/bin/ip netns";
 }

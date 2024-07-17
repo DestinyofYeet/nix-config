@@ -11,5 +11,14 @@
     		packages = with pkgs; [
     			neovim
     		];
-    	};
+          };
+    users.users.apps = {
+      isSystemUser = true;
+      uid = 568;
+      group = "apps";
+    };
+
+    users.groups.apps = {
+      gid = 568;
+    };
 }

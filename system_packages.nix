@@ -20,6 +20,7 @@
         nettools
         python3
         iptables
+        dig
   	];
 
 	environment.variables = { EDITOR = "vim"; };
