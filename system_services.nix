@@ -8,7 +8,27 @@ let
     ssh = 22;
   };
 
-  firewall_ports = [ ports.conduit ports.ssh ports.wireguard ports.netdata ports.qbit];
+  apps = {
+    user = "apps";
+    group = "apps";
+
+    qbit = {
+      dirs.config = "/configs/";
+      enable = true;      
+    };
+    
+    sonarr = {
+      dirs.config = "/configs/sonarr";
+      enable = true;
+    };
+
+    jellyfin = {
+      dirs.config = "/configs/jellyfin";
+      enable = true;
+    };
+  };
+
+  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit];
 
   namespaces = {
     name = "vpn-ns";
@@ -94,9 +114,15 @@ in
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" "nss-lookup.target" ];
       wants = [ "network-online.target" "nss-lookup.target" ];
+
+      upholds = [ "qbittorrent-nox.service" ];
+
+      onFailure = [ "vpn-ns-failure.service" ];
+
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = "true";
+        ConditionPathExists= "!/var/run/netns/${namespaces.name}";
         ExecStart = pkgs.writeScript "ns-isolation" ''
           #!${pkgs.bash}/bin/bash
             set -e
@@ -118,15 +144,17 @@ in
 
             # route all traffic from the local port 8080 to the namespace port 8080, so we can access the webinterface
             iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
-            iptables -t nat -A POSTROUTING -j MASQUERADE    
+            iptables -t nat -A POSTROUTING -j MASQUERADE
         '';
 
         ExecStop = pkgs.writeScript "ns-isolation-stop" ''
           #!${pkgs.bash}/bin/bash
           set -e
-          ${pkgs.iproute2}/bin/ip netns delete ${namespaces.name}
-          ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
-          ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -j MASQUERADE    
+          export PATH=${pkgs.iproute}/bin:${pkgs.iptables}/bin:$PATH
+          ip netns delete ${namespaces.name}
+          iptables -t nat -D PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
+          iptables -t nat -D POSTROUTING -j MASQUERADE
+          ip link delete veth0 
         '';
       };
     };
@@ -144,35 +172,35 @@ in
       };
     };
 
-    systemd.services.qbittorrent-nox =
-      let 
-        qbit_config_dir = "/configs/";
-      in
-        {
+    systemd.services.qbittorrent-nox = {
       description = "Run Qbittorrent-nox";
       wantedBy = [ "multi-user.target" ];
       requires = [ "vpn-ns.service" ];
       after = [ "vpn-ns.service" ];
+
+      partOf = [ "vpn-ns.service" ];
+
+      enable = apps.qbit.enable;
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} /run/wrappers/bin/sudo -u apps  ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit_config_dir}";
+        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} /run/wrappers/bin/sudo -u apps  ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${apps.qbit.dirs.config}";
       };
     };
 
   services.jellyfin = {
-    enable = true;
-    dataDir = "/configs/jellyfin";
-    user = 	"apps";
-    group = "apps";
+    enable = apps.jellyfin.enable;
+    dataDir = apps.jellyfin.dirs.config;
+    user = 	apps.user;
+    group = apps.group;
     openFirewall = true;
   };
 
   services.sonarr = {
-    enable = true;
-    dataDir = "/configs/sonarr";
-    user = "apps";
-    group = "apps";
+    enable = apps.sonarr.enable;
+    dataDir = apps.sonarr.dirs.config;
+    user = apps.user;
+    group = apps.group;
     openFirewall = true;
   };
 }
