@@ -10,37 +10,15 @@
       # No touchey !!!
       # Since Nix runs in a systemd-nspawn environment, it doesn't boot without this
       "${modulesPath}/virtualisation/lxc-container.nix"
+      # No touchey end
 
+      ./system_networking.nix
       ./system_packages.nix
       ./system_users.nix
       ./system_services.nix
       ./home_manager.nix
     ];
 
-  networking = {
-    dhcpcd.enable = false;
-    useDHCP = false;
-    useHostResolvConf = false;
-  };
-
-  systemd.network = {
-    enable = true;
-    networks."50-eth0" = {
-      matchConfig.Name = "eth0";
-      networkConfig = {
-        DHCP = "ipv4";
-        IPv6AcceptRA = true;
-      };
-      linkConfig.RequiredForOnline = "routable";
-    };
-  };
 
   system.stateVersion = "24.05"; # Did you read the comment?
-
-  networking.firewall = {
-		enable = true;
-		allowedTCPPorts = [80 443];
-      };
-
-  security.sudo.extraConfig = "user ALL=(ALL) ${pkgs.iproute2}/bin/ip netns";
 }

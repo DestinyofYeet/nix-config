@@ -6,6 +6,9 @@ let
     conduit = 6167;
     qbit = 8080;
     ssh = 22;
+    http = 80;
+    https = 443;
+    dns = 53;
   };
 
   apps = {
@@ -28,7 +31,7 @@ let
     };
   };
 
-  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit];
+  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit http https dns ];
 
   namespaces = {
     name = "vpn-ns";
@@ -43,19 +46,7 @@ in
     	allowedUDPPorts = firewall_ports;
     };
 
-    networking.nat.enable = true;
-    networking.nat.externalInterface = "host0";
-    networking.nat.internalInterfaces = [ "wg0" ];
 
-    networking.nameservers = [ "1.1.1.1#one.one.one.one" "8.8.8.8#eight.eight.eight.eight" ];
-
-    services.resolved = {
-      enable = true;
-      dnssec = "true";
-      domains = [ "~." ];
-      fallbackDns = [ "1.1.1.1#one.one.one.one" "8.8.8.8#eight.eight.eight.eight" ];
-      dnsovertls = "true";
-    };
 
 
     # matrix conduit server, default port 6167
