@@ -9,6 +9,7 @@ let
     http = 80;
     https = 443;
     dns = 53;
+    surrealdb = apps.surrealdb.port;
   };
 
   apps = {
@@ -29,15 +30,39 @@ let
       dirs.config = "/configs/jellyfin";
       enable = true;
     };
+
+    surrealdb = {
+      port = 8000;
+      enable = true;
+      host = "0.0.0.0";
+      pw = builtins.readFile ./secrets/surrealdb_root_pw.txt;
+      extraFlags = [
+        "--auth"
+        "--user"
+        "--user"
+        "root"
+        "--pass"
+        "${builtins.readFile ./secrets/surrealdb_root_pw.txt}"
+      ];
+    };
+
+    vpn-ns = {
+      vpn-config = "/etc/nixos/secrets/airvpn.conf";
+    };
   };
 
-  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit http https dns ];
+  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit http https dns surrealdb ];
 
   namespaces = {
     name = "vpn-ns";
   };
-in
-{
+in {
+
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+           "surrealdb"
+         ];
+    
+
     # enable openssh server
     services.openssh.enable = true;
     
@@ -122,8 +147,8 @@ in
             ip netns exec ${namespaces.name} ip link set dev lo up
             ip link add wg0 type wireguard
             ip link set wg0 netns ${namespaces.name}
-            ip -n ${namespaces.name} addr add 10.178.79.23/24 dev wg0
-            ip netns exec ${namespaces.name} wg syncconf wg0 <(${pkgs.wireguard-tools}/bin/wg-quick strip /etc/nixos/secrets/airvpn.conf)
+            ip -n ${namespaces.name} addr add $(${pkgs.coreutils}/bin/cat ${apps.vpn-ns.vpn-config} | ${pkgs.gnugrep}/bin/grep Address | ${pkgs.gawk}/bin/awk '{print $3}' | ${pkgs.gnused}/bin/sed 's/,.*$//')/24 dev wg0
+            ip netns exec ${namespaces.name} wg syncconf wg0 <(${pkgs.wireguard-tools}/bin/wg-quick strip ${apps.vpn-ns.vpn-config})
             ip -n ${namespaces.name} link set wg0 up
             ip -n ${namespaces.name} route add default dev wg0
 
@@ -193,5 +218,9 @@ in
     user = apps.user;
     group = apps.group;
     openFirewall = true;
+  };
+
+  services.surrealdb = {
+    inherit (apps.surrealdb) enable host extraFlags port;
   };
 }

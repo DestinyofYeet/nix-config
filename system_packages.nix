@@ -21,6 +21,10 @@
         python3
         iptables
         dig
+        gawk
+        gnugrep
+        gnused
+        coreutils
   	];
 
 	environment.variables = { EDITOR = "vim"; };
