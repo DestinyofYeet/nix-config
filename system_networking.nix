@@ -23,9 +23,9 @@
     resolveLocalQueries = true;
     settings = {
       server = { 
-        interface = [ "192.168.0.248" "127.0.0.1" ];
+        interface = [ "192.168.0.248" "127.0.0.1" "10.1.1.2" ];
         port = 53;
-        access-control = [ "192.168.0.248 allow" "127.0.0.1 allow" ];
+        access-control = [ "192.168.0.248 allow" "127.0.0.1 allow" "10.1.1.2 allow" ];
 
         harden-glue = true;
         harden-dnssec-stripped = true;

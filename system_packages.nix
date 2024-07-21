@@ -25,7 +25,14 @@
         gnugrep
         gnused
         coreutils
-  	];
+        nmap
+        file
+      ];
+
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "surrealdb"
+      "elasticsearch"
+    ];
 
 	environment.variables = { EDITOR = "vim"; };
 }

@@ -21,4 +21,14 @@
     users.groups.apps = {
       gid = 568;
     };
+
+    users.users.monero = {
+      isSystemUser = true;
+      uid = 992;
+      group = "monero";
+    };
+
+    users.groups.monero = {
+      gid = 991;
+    };
 }

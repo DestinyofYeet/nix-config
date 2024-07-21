@@ -10,6 +10,7 @@ let
     https = 443;
     dns = 53;
     surrealdb = apps.surrealdb.port;
+    uptime-kuma = apps.uptime-kuma.port;
   };
 
   apps = {
@@ -17,18 +18,20 @@ let
     group = "apps";
 
     qbit = {
-      dirs.config = "/configs/";
+      dataDir = "/configs";
       enable = true;      
     };
     
     sonarr = {
-      dirs.config = "/configs/sonarr";
+      dataDir = "/configs/sonarr";
       enable = true;
+      openFirewall = true;
     };
 
     jellyfin = {
-      dirs.config = "/configs/jellyfin";
+      dataDir = "/configs/jellyfin";
       enable = true;
+      openFirewall = true;
     };
 
     surrealdb = {
@@ -49,20 +52,35 @@ let
     vpn-ns = {
       vpn-config = "/etc/nixos/secrets/airvpn.conf";
     };
+
+    elasticsearch = {
+      enable = false;
+      port = 9200;
+      listenAddress = "0.0.0.0";
+    };
+
+    monerod = {
+      enable = true;
+      dataDir = "/data/monero-node";
+    };
+
+    uptime-kuma = {
+      enable = true;
+      port = 3001;
+      settings = {
+        PORT = builtins.toString apps.uptime-kuma.port;
+        HOST = "0.0.0.0";
+      };
+    };
   };
 
-  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit http https dns surrealdb ];
+  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit http https dns surrealdb uptime-kuma ];
 
   namespaces = {
     name = "vpn-ns";
   };
-in {
-
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-           "surrealdb"
-         ];
-    
-
+in 
+  {
     # enable openssh server
     services.openssh.enable = true;
     
@@ -128,8 +146,10 @@ in {
     systemd.services.vpn-ns = { 
       description = "Route all traffic in the namespace to the vpn";
       wantedBy = [ "multi-user.target" ];
-      after = [ "network-online.target" "nss-lookup.target" ];
-      wants = [ "network-online.target" "nss-lookup.target" ];
+      after = [ "network-online.target" "nss-lookup.target" "unbound.service" ];
+      wants = [ "network-online.target" "nss-lookup.target" "unbound.service" ];
+
+      requires = [ "unbound.service" ];
 
       upholds = [ "qbittorrent-nox.service" ];
 
@@ -179,6 +199,7 @@ in {
       description = "Delete the vpn namespace if the service fails";
       serviceConfig = {
         Type = "oneshot";
+        ExecStartPre="/run/current-system/sw/bin/sleep 30";
         ExecStart = pkgs.writeScript "vpn-ns-failure" ''
           #!${pkgs.bash}/bin/bash
             set -e
@@ -200,27 +221,33 @@ in {
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} /run/wrappers/bin/sudo -u ${apps.user}  ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${apps.qbit.dirs.config}";
+        ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} /run/wrappers/bin/sudo -u ${apps.user}  ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${apps.qbit.dataDir}";
       };
     };
 
   services.jellyfin = {
-    enable = apps.jellyfin.enable;
-    dataDir = apps.jellyfin.dirs.config;
-    user = 	apps.user;
-    group = apps.group;
-    openFirewall = true;
+    inherit (apps.jellyfin) enable dataDir openFirewall;
+    inherit (apps) user group;
   };
 
   services.sonarr = {
-    enable = apps.sonarr.enable;
-    dataDir = apps.sonarr.dirs.config;
-    user = apps.user;
-    group = apps.group;
-    openFirewall = true;
+    inherit (apps.sonarr) enable dataDir openFirewall;
+    inherit (apps) user group;
   };
 
   services.surrealdb = {
     inherit (apps.surrealdb) enable host extraFlags port;
+  };
+
+  services.elasticsearch = {
+    inherit (apps.elasticsearch) enable port listenAddress;
+  };
+
+  services.monero = {
+    inherit (apps.monerod) enable dataDir;
+  };
+
+  services.uptime-kuma = {
+    inherit (apps.uptime-kuma) enable settings;
   };
 }
