@@ -23,10 +23,11 @@
     enable = true;
     resolveLocalQueries = true;
     settings = {
-      server = { 
+      server = {
         interface = [ "192.168.0.248" "127.0.0.1" "10.1.1.2" ];
         port = 53;
-        access-control = [ "192.168.0.248 allow" "127.0.0.1 allow" "10.1.1.2 allow" ];
+        access-control =
+          [ "192.168.0.248 allow" "127.0.0.1 allow" "10.1.1.2 allow" ];
 
         harden-glue = true;
         harden-dnssec-stripped = true;
@@ -38,16 +39,12 @@
         hide-identity = true;
         hide-version = true;
       };
-      forward-zone = [
-        {
-          name = ".";
-          forward-addr = [
-            "9.9.9.9#dns.quad9.net"
-            "149.112.112.112#dns.quad9.net"
-          ];
-          forward-tls-upstream = true;
-        }
-      ];
+      forward-zone = [{
+        name = ".";
+        forward-addr =
+          [ "9.9.9.9#dns.quad9.net" "149.112.112.112#dns.quad9.net" ];
+        forward-tls-upstream = true;
+      }];
     };
   };
 
@@ -58,7 +55,7 @@
       networkConfig = {
         DHCP = "ipv4";
         IPv6AcceptRA = true;
-        DNS = [];
+        DNS = [ ];
         #LLMNR = false;
         #useDomains = false;
         #multicastDNS = false;

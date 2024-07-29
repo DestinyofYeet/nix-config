@@ -5,28 +5,27 @@
 { config, pkgs, lib, modulesPath, ... }:
 
 {
-  imports =
+  imports = [
+    # No touchey !!!
+    # Since Nix runs in a systemd-nspawn environment, it doesn't boot without this
+    "${modulesPath}/virtualisation/lxc-container.nix"
+    # No touchey end
+
+    ./system_networking.nix
+    ./system_packages.nix
+    ./system_users.nix
+    ./system_services.nix
+  ];
+
+  system.stateVersion = "24.05"; # Did you read the comment?
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs;
     [
-      # No touchey !!!
-      # Since Nix runs in a systemd-nspawn environment, it doesn't boot without this
-      "${modulesPath}/virtualisation/lxc-container.nix"
-      # No touchey end
-
-      ./system_networking.nix
-      ./system_packages.nix
-      ./system_users.nix
-      ./system_services.nix
-    ];
-
-
-    system.stateVersion = "24.05"; # Did you read the comment?
-
-    programs.nix-ld.enable = true;
-    programs.nix-ld.libraries = with pkgs; [
       # Add any missing dynamic libraries for unpackages programs here, not in environment.systemPackages
     ];
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    networking.hostName = "nix-server";
+  networking.hostName = "nix-server";
 }

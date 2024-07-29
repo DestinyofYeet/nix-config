@@ -6,17 +6,17 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... } : {
+  outputs = { self, nixpkgs, home-manager, agenix, ... }: {
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ 
-        ./configuration.nix 
+      modules = [
+        ./configuration.nix
         home-manager.nixosModules.home-manager
         ./home_manager.nix
         agenix.nixosModules.default
 
-        ({...}:{
-        environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
+        ({ ... }: {
+          environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
         })
       ];
     };

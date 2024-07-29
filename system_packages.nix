@@ -1,41 +1,39 @@
 { config, pkgs, lib, modulesPath, ... }:
 
 {
-	environment.systemPackages = with pkgs; [
-		btop
-		vim
-		man
-		openssh
-		innernet
-		git
-		gh
-		matrix-conduit
-        nginx
-        bat
-        netdata
-        libcgroup
-        wireguard-tools
-        iproute2
-        qbittorrent-nox
-        nettools
-        python3
-        iptables
-        dig
-        gawk
-        gnugrep
-        gnused
-        coreutils
-        nmap
-        file
-        ripgrep
-        tree
-        nixfmt-classic
-      ];
+  environment.systemPackages = with pkgs; [
+    btop
+    vim
+    man
+    openssh
+    innernet
+    git
+    gh
+    matrix-conduit
+    nginx
+    bat
+    netdata
+    libcgroup
+    wireguard-tools
+    iproute2
+    qbittorrent-nox
+    nettools
+    python3
+    iptables
+    dig
+    gawk
+    gnugrep
+    gnused
+    coreutils
+    nmap
+    file
+    ripgrep
+    tree
+    nixfmt-classic
+  ];
 
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "surrealdb"
-      "elasticsearch"
-    ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "surrealdb" "elasticsearch" ];
 
-	environment.variables = { EDITOR = "vim"; };
+  environment.variables = { EDITOR = "vim"; };
 }
