@@ -16,9 +16,17 @@
       ./system_packages.nix
       ./system_users.nix
       ./system_services.nix
-      ./home_manager.nix
     ];
 
 
-  system.stateVersion = "24.05"; # Did you read the comment?
+    system.stateVersion = "24.05"; # Did you read the comment?
+
+    programs.nix-ld.enable = true;
+    programs.nix-ld.libraries = with pkgs; [
+      # Add any missing dynamic libraries for unpackages programs here, not in environment.systemPackages
+    ];
+
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    networking.hostName = "nix-server";
 }

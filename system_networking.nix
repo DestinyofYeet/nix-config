@@ -11,6 +11,7 @@
     nat = {
       enable = true;
       externalInterface = "host0";
+      internalInterfaces = [ "infra" "veth" ];
     };
 
     ## no touchey end

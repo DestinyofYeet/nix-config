@@ -12,6 +12,8 @@
     			neovim
     		];
           };
+
+    # the following uids are mapped to accounts on the host
     users.users.apps = {
       isSystemUser = true;
       uid = 568;

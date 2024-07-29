@@ -11,6 +11,7 @@ let
     dns = 53;
     surrealdb = apps.surrealdb.port;
     uptime-kuma = apps.uptime-kuma.port;
+    innernet = 29139;
   };
 
   apps = {
@@ -38,19 +39,18 @@ let
       port = 8000;
       enable = true;
       host = "0.0.0.0";
-      pw = builtins.readFile ./secrets/surrealdb_root_pw.txt;
       extraFlags = [
         "--auth"
         "--user"
         "--user"
         "root"
         "--pass"
-        "${builtins.readFile ./secrets/surrealdb_root_pw.txt}"
+        "${builtins.readFile config.age.secrets.surrealdb_root_pw.path}"
       ];
     };
 
     vpn-ns = {
-      vpn-config = "/etc/nixos/secrets/airvpn.conf";
+      vpn-config = config.age.secrets.airvpn_config.path;
     };
 
     elasticsearch = {
@@ -72,9 +72,14 @@ let
         HOST = "0.0.0.0";
       };
     };
+
+    add-replay-gain = {
+      enable = false;
+      workingDir = "/data/programs/add_replay_gain_to_files";
+    };
   };
 
-  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit http https dns surrealdb uptime-kuma ];
+  firewall_ports = with ports; [ conduit ssh wireguard netdata qbit http https dns surrealdb uptime-kuma innernet ];
 
   namespaces = {
     name = "vpn-ns";
@@ -85,12 +90,26 @@ in
     services.openssh.enable = true;
     
     networking.firewall = {
+        enable = false;
     	allowedTCPPorts = firewall_ports;
     	allowedUDPPorts = firewall_ports;
     };
 
+    
+    age.secrets = {
+      airvpn_config = {
+        file = ./secrets/airvpn_config.age;
+        path = "/etc/wireguard/wg0.conf";
+      };
 
+      conduit_registration = {
+        file = ./secrets/conduit_registration_token.age;
+      };
 
+      surrealdb_root_pw = {
+        file = ./secrets/surrealdb_root_pw.age;
+      };
+    };
 
     # matrix conduit server, default port 6167
     services.matrix-conduit = {
@@ -99,7 +118,7 @@ in
     			address = "0.0.0.0";
     			server_name = "matrix.ole.blue";
     			allow_registration = true;
-    			registration_token = builtins.readFile ./secrets/conduit_registration_token.txt;
+    			registration_token = builtins.readFile config.age.secrets.conduit_registration.path;
     			enable_lightning_bolt = false;
     		};	
 	};
@@ -139,7 +158,7 @@ in
     		wants = [ "network-online.target" "nss-lookup.target" ];
     		serviceConfig = {
     			Restart = "always";
-    			ExecStart = "${pkgs.innernet}/bin/innernet up infra --daemon --interval 60";
+    			ExecStart = "${pkgs.innernet}/bin/innernet up infra --daemon --interval 60 --no-write-hosts";
 		};
       };
 
@@ -199,7 +218,7 @@ in
       description = "Delete the vpn namespace if the service fails";
       serviceConfig = {
         Type = "oneshot";
-        ExecStartPre="/run/current-system/sw/bin/sleep 30";
+        # ExecStartPre="/run/current-system/sw/bin/sleep 30";
         ExecStart = pkgs.writeScript "vpn-ns-failure" ''
           #!${pkgs.bash}/bin/bash
             set -e
@@ -222,6 +241,22 @@ in
         Type = "simple";
         Restart = "always";
         ExecStart = "${pkgs.iproute2}/bin/ip netns exec ${namespaces.name} /run/wrappers/bin/sudo -u ${apps.user}  ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${apps.qbit.dataDir}";
+      };
+    };
+
+    systemd.services.add-replay-gain = {
+      description = "Automatically add replay gain to files";
+      wantedBy = [ "multi-user.target" ];
+
+      inherit (apps.add-replay-gain) enable;
+
+      serviceConfig = {
+        Type = "simple";
+        Restart = "always";
+        ExecStart = "${apps.add-replay-gain.workingDir}/add_replay_gain_to_files";
+        WorkingDir = apps.add-replay-gain.workingDir;
+        User = apps.user;
+        Group = apps.group;
       };
     };
 

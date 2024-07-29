@@ -27,6 +27,9 @@
         coreutils
         nmap
         file
+        ripgrep
+        tree
+        nixfmt-classic
       ];
 
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
