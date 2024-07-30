@@ -4,5 +4,6 @@
   imports = [
     ./kde.nix
     ./vim.nix
+    ./bash.nix
   ];
 }

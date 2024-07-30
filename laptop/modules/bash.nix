@@ -1,13 +1,18 @@
 { pkgs, ... }: {
-  programs.bash = {
+
+  programs.bash = let  
+    rebuild-system = pkgs.writeShellScriptBin "rebuild-system" ''
+      set -e
+      cd /home/ole/nixos
+      ./build.sh
+      cd -
+    '';
+  in 
+  {
     enable = true;
 
     shellAliases = {
-      rebuild-system = pkgs.writeShellScript "rebuild-system" ''
-        cd /home/ole/nixos
-        ./build
-        cd -
-       ''; 
+      rebuild-system = "${rebuild-system}/bin/rebuild-system";
     };
   };
 }

@@ -1,6 +1,6 @@
-{ config, pkgs, ... }: {
+{ ... }: {
 	# natural scrolling or smth
-  services.libinput.touchpad.naturalScrolling = true;
+  services.libinput.touchpad.naturalScrolling = false;
 
 
   # Enable CUPS to print documents.

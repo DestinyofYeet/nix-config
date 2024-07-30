@@ -3,6 +3,14 @@
   programs.plasma = {
     enable = true;
 
+    overrideConfig = true;
+
+    workspace = {
+      clickItemTo = "select";
+      theme = "breeze-dark";
+      lookAndFeel = "org.kde.breezedark.desktop";
+    };
+
     panels = [{
       location = "bottom";
       widgets = [
