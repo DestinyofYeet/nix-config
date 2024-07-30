@@ -31,19 +31,13 @@
     };
 
 		nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
-			system = "x86_64-linux";
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit home-manager plasma-manager;
+      };
 			modules = [
 				./laptop
         home-manager.nixosModules.home-manager
-        {
-          
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
-
-          home-manager.users.ole = import ./laptop/home_manager.nix;
-        }
 
 				agenix.nixosModules.default
 
