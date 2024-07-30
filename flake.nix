@@ -10,9 +10,9 @@
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
+        ./sever/configuration.nix
         home-manager.nixosModules.home-manager
-        ./home_manager.nix
+        ./server/home_manager.nix
         agenix.nixosModules.default
 
         ({ ... }: {
