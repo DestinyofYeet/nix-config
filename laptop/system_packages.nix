@@ -17,5 +17,6 @@
     nixfmt-classic
     gh
     git
+    ripgrep
   ];
 }

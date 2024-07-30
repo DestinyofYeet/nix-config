@@ -11,6 +11,23 @@
       lookAndFeel = "org.kde.breezedark.desktop";
     };
 
+    input.keyboard = {
+      layouts = [ "de" ];
+      numlockOnStartup = "on";
+    };
+
+    input.touchpads = [
+      {
+        enable = true;
+        disableWhileTyping = true;
+        name = "SynPS/2 Synaptics TouchPad"; # touchpad of kartoffelkiste (alt)
+        tapToClick = true;
+        naturalScroll = true;
+        vendorId = "0002";
+        productId = "0007";
+      }
+    ];
+
     panels = [{
       location = "bottom";
       widgets = [
