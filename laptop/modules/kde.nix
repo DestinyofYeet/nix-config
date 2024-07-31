@@ -77,7 +77,17 @@
 
     kwin = {
       edgeBarrier = 0;
-      # cornerBarier = false;
+      cornerBarrier = false;
+      effects.blur.enable = true;
+      titlebarButtons = {
+        left = [
+          "close"
+          "maximize"
+          "minimize"
+        ];
+
+        right = [];
+      };
     };
   };
 }

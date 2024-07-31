@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -31,5 +31,5 @@
   # services.xserver.libinput.enable = true;
 
   # Enable networking
-  # networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
 }

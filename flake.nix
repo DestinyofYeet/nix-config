@@ -14,9 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    stylix.url = "github:danth/stylix/release-24.05";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager,  stylix, ... }@inputs: {
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -33,13 +35,13 @@
 		nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        inherit home-manager plasma-manager;
+        inherit home-manager plasma-manager inputs;
       };
 			modules = [
 				./laptop
         home-manager.nixosModules.home-manager
 
-				agenix.nixosModules.default
+        agenix.nixosModules.default
 
 				(
 					{ ... }: {

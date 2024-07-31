@@ -5,5 +5,6 @@
     ./kde.nix
     ./vim.nix
     ./bash.nix
+    ./stylix.nix
   ];
 }
