@@ -4,13 +4,9 @@
   home-manager.users.ole = {
     home.stateVersion = "24.05";
 
-    programs.vim = {
-      enable = true;
-      extraConfig = ''
-        set tabstop=4
-        set number
-      '';
-    };
+    imports = [
+      ../baseline/modules
+    ];
   };
 
   # Optionally, use home-manager.extraSpecialArgs to pass

@@ -1,6 +1,9 @@
 
 { config, pkgs, ... }: {
 
+  # zsh config
+  environment.pathsToLink = [ "/share/zsh" ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -12,5 +15,7 @@
     zed-editor
     nixfmt-classic
     tlp
+    zoxide
+    fzf
   ];
 }

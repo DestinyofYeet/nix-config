@@ -16,9 +16,11 @@
     };
 
     stylix.url = "github:danth/stylix/release-24.05";
+
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager,  stylix, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: {
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -37,11 +39,14 @@
       specialArgs = {
         inherit home-manager plasma-manager inputs;
       };
-			modules = [
+      modules = [
+        { nixpkgs.overlays = [ nur.overlay ]; }
 				./laptop
         home-manager.nixosModules.home-manager
 
         agenix.nixosModules.default
+
+        nur.nixosModules.nur
 
 				(
 					{ ... }: {

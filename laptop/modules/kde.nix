@@ -28,6 +28,7 @@
       }
     ];
 
+
     panels = [{
       location = "bottom";
       widgets = [
@@ -42,7 +43,7 @@
             launchers = [ 
               "applications:firefox.desktop" 
               "applications:org.kde.dolphin.desktop"
-              "applications:org.kde.konsole.desktop"
+              "applications:kitty.desktop"
             ];
           };
         }

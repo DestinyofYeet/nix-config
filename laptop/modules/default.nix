@@ -2,9 +2,12 @@
   home.stateVersion = "24.05";
 
   imports = [
+    ../../baseline/modules
     ./kde.nix
-    ./vim.nix
     ./bash.nix
     ./stylix.nix
+    ./firefox.nix
+    ./kitty.nix
+    ./zsh.nix
   ];
 }

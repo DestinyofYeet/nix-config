@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./system_packages.nix
+      ./packages.nix
       ./desktop_environment.nix
       ./system_users.nix
     ];

@@ -12,6 +12,7 @@
   home-manager.users.ole = import ./modules;
         
   imports = [
+    ../baseline
     ./configuration.nix    
   ];
 }
