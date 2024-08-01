@@ -90,5 +90,10 @@
         right = [];
       };
     };
+
+    configFile = {
+      # makes the default border edge action dissapear
+      kwinrc."Effect-overview"."BorderActivate" = 9;
+    };
   };
 }

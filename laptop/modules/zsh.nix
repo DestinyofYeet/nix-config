@@ -4,7 +4,7 @@ let
       set -e
       cd /home/ole/nixos
       ./build.sh
-      cd -
+      cd - > /dev/null
     '';
 in {
 
@@ -15,6 +15,8 @@ in {
 
     shellAliases = {
       rebuild-system = "${rebuild-system}/bin/rebuild-system";
+      kssh = "kitten ssh";
+      icat = "kitten icat";
     };
 
     oh-my-zsh = {

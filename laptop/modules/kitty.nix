@@ -10,7 +10,6 @@
 
     extraConfig = ''
       shell ${pkgs.zsh}/bin/zsh
-      # shell ${pkgs.bash}/bin/bash
       editor vim
 
       shell_integration enabled no-cursor
@@ -29,7 +28,12 @@
       map ctrl+space>6 goto_tab 6
       map ctrl+space>7 goto_tab 7
 
-      map ctrl+space>c  new_tab_with_cmd
+      map ctrl+space>c  new_tab_with_cwd
+
+      tab_bar_min_tabs  1
+      tab_bar_edge      bottom
+      tab_bar_style     powerline
+      tab_title_template {title}{' :{}:'.format(num_windows) if num_windows > 1 else ' '}
     '';
   };
 }

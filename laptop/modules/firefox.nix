@@ -8,32 +8,35 @@ in {
     name = "default-profile";
     isDefault = true;
 
-    search.engines = {
-      "Startpage" = {
-        urls = [{
-          template = "https://www.startpage.com/sp/search";
-          params = [
-            {
-              name = "q";
-              value = "{searchTerms}";
-            }
-          ];
-        }];
-      };
+    search = {
+      force = true;
 
-      "Home-manager Option" = {
-        urls = [{
-          template = "https://home-manager-options.extranix.com";
-          params = [
-            { name = "release"; value = "release-24.05"; }
-            { name = "query"; value = "{searchTerms}"; }
-          ];
-        }];
+      engines = {
+        "Startpage" = {
+          urls = [{
+            template = "https://www.startpage.com/sp/search";
+            params = [
+              {
+                name = "q";
+                value = "{searchTerms}";
+              }
+            ];
+          }];
+        };
 
-        definedAliases = [ "@hmo" ];
-      };
+        "Home-manager Option" = {
+          urls = [{
+            template = "https://home-manager-options.extranix.com";
+            params = [
+              { name = "release"; value = "release-24.05"; }
+              { name = "query"; value = "{searchTerms}"; }
+            ];
+          }];
 
-      "Nix Packages" = {
+          definedAliases = [ "@hmo" ];
+        };
+
+        "Nix Packages" = {
           urls = [{
             template = "https://search.nixos.org/packages";
             params = [
@@ -42,20 +45,40 @@ in {
             ];
           }];
 
+          icon = ../../images/nix-logo.png;
+
           definedAliases = [ "@np" ];
         };
 
-      "Nix Options" = {
-        urls = [{
-          template = "https://search.nixos.org/options";
-          params = [
-            { name = "channel"; value = "24.05"; }
-            { name = "query"; value = "{searchTerms}"; }
-          ];
-        }];
+        "Nix Options" = {
+          urls = [{
+            template = "https://search.nixos.org/options";
+            params = [
+              { name = "channel"; value = "24.05"; }
+              { name = "query"; value = "{searchTerms}"; }
+            ];
+          }];
 
-        definedAliases = [ "@no" ];
+          icon = ../../images/nix-logo.png;
+
+          definedAliases = [ "@no" ];
+        };
       };
+    };
+
+    containersForce = true;
+
+    containers = {
+      personal = {
+        color = "blue";
+        id = 0;
+        icon = "fingerprint";
+      };
+    };
+
+    settings = {
+      "privacy.resistFingerprinting" = true;
+      "browser.toolbars.bookmarks.visibility" = "never";
     };
 
     search.default = "Startpage";
@@ -74,6 +97,10 @@ in {
       don-t-fuck-with-paste
       return-youtube-dislikes
       single-file
+      temporary-containers
+      facebook-container
+      multi-account-containers
+      enhancer-for-youtube
     ];
 
     settings = {
