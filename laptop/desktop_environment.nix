@@ -32,4 +32,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # make window decorations work properly
+  programs.dconf.enable = true;
 }

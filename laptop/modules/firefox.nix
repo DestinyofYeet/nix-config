@@ -63,6 +63,10 @@ in {
 
           definedAliases = [ "@no" ];
         };
+
+        "Bing".metaData.hidden = true;
+        "Google".metaData.hidden = true;
+        "DuckDuckGo".metaData.hidden = true;
       };
     };
 
@@ -79,6 +83,7 @@ in {
     settings = {
       "privacy.resistFingerprinting" = true;
       "browser.toolbars.bookmarks.visibility" = "never";
+      "browser.startup.homepage" = "about:blank";
     };
 
     search.default = "Startpage";

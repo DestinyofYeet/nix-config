@@ -4,6 +4,11 @@
   # zsh config
   environment.pathsToLink = [ "/share/zsh" ];
 
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+  ];
+
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
