@@ -84,6 +84,11 @@ in {
       "privacy.resistFingerprinting" = true;
       "browser.toolbars.bookmarks.visibility" = "never";
       "browser.startup.homepage" = "about:blank";
+      "browser.newtabpage.enabled" = false;
+      "trailhead.firstrun.didSeeAboutWelcome" = true;
+      "app.shield.optoutstudies.enabled" = false;
+      "extensions.formautofill.creditCards.enabled" = false;
+      "signon.rememberSignons" = false;
     };
 
     search.default = "Startpage";
