@@ -21,6 +21,5 @@
     nixfmt-classic
     tlp
     zoxide
-    fzf
   ];
 }

@@ -12,5 +12,6 @@
     gh
     git
     ripgrep
+    fzf
   ];
 }

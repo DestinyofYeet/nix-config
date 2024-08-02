@@ -3,12 +3,10 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
 
-lib.mkIf (config.networking.hostName == "kartoffelkiste"){
+{
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
-
-  networking.hostName = "kartoffelkiste"; # Define your hostname.
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ata_piix" "usb_storage" "sd_mod" "sr_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
@@ -48,4 +46,6 @@ lib.mkIf (config.networking.hostName == "kartoffelkiste"){
   boot.loader.grub.enableCryptodisk=true;
 
   boot.initrd.luks.devices."luks-dee51788-373b-40a0-ac17-7a45a17f3fab".keyFile = "/crypto_keyfile.bin";
+  networking.hostName = "kartoffelkiste"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 }

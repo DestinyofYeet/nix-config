@@ -41,6 +41,7 @@
       };
       modules = [
         { nixpkgs.overlays = [ nur.overlay ]; }
+        ./laptop/hardware/kartoffelkiste.nix
 				./laptop
         home-manager.nixosModules.home-manager
 
