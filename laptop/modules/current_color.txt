@@ -1,1 +1,1 @@
-synth-midnight-dark.yaml
+tokyo-night-terminal-dark.yaml

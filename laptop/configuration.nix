@@ -11,6 +11,7 @@
       ./packages.nix
       ./desktop_environment.nix
       ./system_users.nix
+      ./services.nix
     ];
 
   # Bootloader.

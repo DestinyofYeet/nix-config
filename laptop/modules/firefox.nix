@@ -72,13 +72,13 @@ in {
 
     containersForce = true;
 
-    containers = {
-      personal = {
-        color = "blue";
-        id = 0;
-        icon = "fingerprint";
-      };
-    };
+    #containers = {
+    #  personal = {
+    #    color = "blue";
+    #    id = 0;
+    #    icon = "fingerprint";
+    #  };
+    #};
 
     settings = {
       "privacy.resistFingerprinting" = true;

@@ -7,8 +7,16 @@
 
     workspace = {
       clickItemTo = "select";
-      theme = "breeze-dark";
-      lookAndFeel = "org.kde.breezedark.desktop";
+
+      # Theme is getting set by stylix
+
+      #theme = "Carl";
+      #lookAndFeel = "Carl";
+
+      #cursor = {
+      #  theme = "Posy's Cursor Black [Posy_Cursor_Black]";
+      #  size = 32;
+      #};
     };
 
     input.keyboard = {
@@ -35,6 +43,7 @@
         {
           kickoff = {
             sortAlphabetically = true;
+            compactDisplayStyle = true;
             icon = "nix-snowflake-white";
           };
         }
@@ -93,7 +102,13 @@
 
     configFile = {
       # makes the default border edge action dissapear
-      kwinrc."Effect-overview"."BorderActivate" = 9;
+      kwinrc = {
+        "Effect-overview"."BorderActivate" = 9;
+        #"org.kde.kdecoration2" = {
+        #  "library" = "org.kde.kwin.aurorae";
+        #  "theme" = "__aurorae__svg__Carl";
+        #};
+      };
     };
   };
 }

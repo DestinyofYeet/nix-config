@@ -1,9 +1,18 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: let
+
+  read_color = builtins.readFile ./current_color.txt;
+  current_color = pkgs.lib.removeSuffix "\n" read_color; 
+in
+{
   stylix.enable = true;
 
-  # stylix.targets.gnome.enable = false;
-
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+  # me likey
+  # catppucin-frappe
+  # nebula
+  # tokyo-night-terminal-dark
+  # synth-midnight-dark
+  # tokyo-city-dark
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${current_color}";
 
   stylix.image = pkgs.fetchurl {
     url = "https://w.wallhaven.cc/full/qz/wallhaven-qzq1p5.jpg";
