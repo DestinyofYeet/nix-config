@@ -9,5 +9,6 @@
     ./firefox.nix
     ./kitty.nix
     ./zsh.nix
+    ./nextcloud.nix
   ];
 }
