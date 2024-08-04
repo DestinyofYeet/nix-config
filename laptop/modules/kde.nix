@@ -8,15 +8,18 @@
     workspace = {
       clickItemTo = "select";
 
-      # Theme is getting set by stylix
+      colorScheme = "BreezeDark";
+      theme = "breeze-dark";
 
-      #theme = "Carl";
-      #lookAndFeel = "Carl";
+      windowDecorations = {
+        library = "org.kde.kwin.aurorae";
+        theme  = "__aurorae__svg__Carl";
+      };
 
-      #cursor = {
-      #  theme = "Posy's Cursor Black [Posy_Cursor_Black]";
-      #  size = 32;
-      #};
+      cursor = {
+        theme = "Posy's Cursor Black [Posy_Cursor_Black]";
+        size = 32;
+      };
     };
 
     input.keyboard = {

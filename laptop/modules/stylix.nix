@@ -18,4 +18,8 @@ in
     url = "https://w.wallhaven.cc/full/qz/wallhaven-qzq1p5.jpg";
     sha256 = "sha256-iGVndavzet3G3NgpT8XGSDW6wi5eRD2SrwnJwsQqAUs=";
   };
+
+  stylix.targets.kitty.variant256Colors = true;
+
+  stylix.targets.kde.enable = false;
 }
