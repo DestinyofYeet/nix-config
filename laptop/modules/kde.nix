@@ -10,6 +10,7 @@
 
       colorScheme = "BreezeDark";
       theme = "breeze-dark";
+      iconTheme = "candy-icons";
 
       windowDecorations = {
         library = "org.kde.kwin.aurorae";
