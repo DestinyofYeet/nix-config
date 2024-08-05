@@ -65,4 +65,13 @@ in
       RADEON_POWER_PROFILE_ON_BAT = "low";
     };    
   };
+
+  # disable baloo
+   environment = {
+    etc."xdg/baloofilerc".source = (pkgs.formats.ini {}).generate "baloorc" {
+      "Basic Settings" = {
+        "Indexing-Enabled" = false;
+      };
+    };
+  };
 }

@@ -1,4 +1,13 @@
-{ lib, ... }: {
+{ lib, config, pkgs, ... }: let
+  dirs = rec {
+    home = "${config.home.homeDirectory}";
+    scripts = "${home}/scripts";
+    icons = "${home}/.local/share/icons";
+  };
+  scripts = {
+    update-needed-content = "${dirs.scripts}/update-needed-content.sh";
+  };
+in {
   services.kdeconnect = {
     enable = true;
     indicator = true;
@@ -21,6 +30,11 @@
       windowDecorations = {
         library = "org.kde.kwin.aurorae";
         theme  = "__aurorae__svg__Sweet-ambar-blue";
+      };
+
+      cursor = {
+        theme = "Posy_Cursor_Black_125_175";
+        size = 32;
       };
 
       #splashScreen = {
@@ -183,16 +197,10 @@
     };
   };
 
-  home.file = {
-    # copy splash screen to path
-    #"/home/ole/.local/share/plasma/look-and-feel/Aretha-Splash-6" = {
-    #  source = ../needed-content/Aretha-Splashscreen/Aretha-Splash-6;
-    #  recursive = true;
-    #};
 
-    "/home/ole/.local/share/icons/BeautySolar/" = {
-      source = ../needed-content/Icons/BeautySolar;
-      recursive = true;
-    };
+  home.activation = {
+    updateIcons = ''
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Icons/BeautySolar} ${dirs.icons}/BeautySolar
+    '';
   };
 }

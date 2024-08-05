@@ -6,6 +6,7 @@
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
+    baloo # fuck this shit
   ];
 
 
@@ -23,5 +24,7 @@
     zoxide
     xournalpp
     bitwarden-desktop
+    vesktop
+    brave
   ];
 }

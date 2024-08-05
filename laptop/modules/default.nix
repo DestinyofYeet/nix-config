@@ -16,5 +16,7 @@
     ./btop.nix
     ./ssh.nix
     ./agenix.nix
+    ./git.nix
+    ./scripts.nix
   ];
 }
