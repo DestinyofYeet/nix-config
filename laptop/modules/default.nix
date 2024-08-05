@@ -11,5 +11,6 @@
     ./zsh.nix
     ./nextcloud.nix
     ./btop.nix
+    ./ssh.nix
   ];
 }
