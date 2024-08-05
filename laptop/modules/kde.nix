@@ -2,7 +2,11 @@
   dirs = rec {
     home = "${config.home.homeDirectory}";
     scripts = "${home}/scripts";
-    icons = "${home}/.local/share/icons";
+    share = "${home}/.local/share";
+    icons = "${share}/icons";
+    plasma = "${share}/plasma";
+    desktoptheme = "${plasma}/desktoptheme";
+    window-decors = "${share}/aurorae/themes";
   };
   scripts = {
     update-needed-content = "${dirs.scripts}/update-needed-content.sh";
@@ -201,6 +205,14 @@ in {
   home.activation = {
     updateIcons = ''
       ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Icons/BeautySolar} ${dirs.icons}/BeautySolar
+    '';
+
+    updateTheme = ''
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Themes/Sweet-Ambar-Blue} ${dirs.desktoptheme}/Sweet-Ambar-Blue
+    '';
+
+    updateWindowDecors = ''
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/WindowDecors/Sweet-ambar-blue} ${dirs.window-decors}/Sweet-ambar-blue
     '';
   };
 }
