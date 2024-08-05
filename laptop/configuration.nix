@@ -43,7 +43,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

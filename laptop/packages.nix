@@ -13,7 +13,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-		firefox
+    firefox
     neovim
     asciiquarium
     cowsay
@@ -21,5 +21,6 @@
     nixfmt-classic
     tlp
     zoxide
+    xournalpp
   ];
 }

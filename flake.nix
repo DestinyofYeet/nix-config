@@ -34,7 +34,7 @@
       ];
     };
 
-		nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
         inherit home-manager plasma-manager inputs;
@@ -42,6 +42,29 @@
       modules = [
         { nixpkgs.overlays = [ nur.overlay ]; }
         ./laptop/hardware/kartoffelkiste.nix
+				./laptop
+        home-manager.nixosModules.home-manager
+
+        agenix.nixosModules.default
+
+        nur.nixosModules.nur
+
+				(
+					{ ... }: {
+						environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
+					}
+				)
+			];
+		};
+
+    nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit home-manager plasma-manager inputs;
+      };
+      modules = [
+        { nixpkgs.overlays = [ nur.overlay ]; }
+        ./laptop/hardware/wattson.nix
 				./laptop
         home-manager.nixosModules.home-manager
 

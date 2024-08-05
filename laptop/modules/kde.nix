@@ -1,5 +1,4 @@
-{ ... }: {
-
+{ lib, ... }: {
   programs.plasma = {
     enable = true;
 
@@ -8,19 +7,26 @@
     workspace = {
       clickItemTo = "select";
 
+      wallpaper = ../../images/wallhaven-nightsky.jpg;
+
       colorScheme = "BreezeDark";
       theme = "breeze-dark";
-      iconTheme = "candy-icons";
+      iconTheme = "BeautySolar";
 
       windowDecorations = {
         library = "org.kde.kwin.aurorae";
-        theme  = "__aurorae__svg__Carl";
+        theme  = "__aurorae__svg__Sweet-ambar-blue";
       };
 
       cursor = {
         theme = "Posy's Cursor Black [Posy_Cursor_Black]";
         size = 32;
       };
+    };
+    
+
+    kscreenlocker = {
+      wallpaper = ../../images/wallhaven-lighthouse-snow.jpg;
     };
 
     input.keyboard = {
@@ -38,11 +44,22 @@
         vendorId = "0002";
         productId = "0007";
       }
+      {
+        enable = true;
+        disableWhileTyping = true;
+        name = "ELAN06FA:00 04F3:3293 Touchpad"; # touchpad of wattson
+        tapToClick = true;
+        pointerSpeed = 0;
+        naturalScroll = true;
+        vendorId = "04f3";
+        productId = "3293";
+      }
     ];
 
 
     panels = [{
       location = "bottom";
+      height = 48;
       widgets = [
         {
           kickoff = {
@@ -57,6 +74,25 @@
               "applications:firefox.desktop" 
               "applications:org.kde.dolphin.desktop"
               "applications:kitty.desktop"
+            ];
+          };
+        }
+
+        {  
+          systemMonitor = {
+            showLegend = false;
+            displayStyle = "org.kde.ksysguard.textonly";
+            sensors = [ 
+              {
+                name = "cpu/all/averageTemperature";
+                color = "255,255,255";
+                label = "CPU";
+              }
+              {
+                name = "power/1451/chargeRate";
+                color = "0,0,0";
+                label = "Charging Rate";
+              }
             ];
           };
         }
@@ -113,6 +149,13 @@
         #  "theme" = "__aurorae__svg__Carl";
         #};
       };
+    };
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = lib.mkForce "Sweet-Ambar-Blue-Dark-v40";
     };
   };
 }

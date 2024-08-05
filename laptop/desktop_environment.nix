@@ -8,7 +8,7 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
-	services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Enable sound with pipewire.
@@ -35,4 +35,7 @@
 
   # make window decorations work properly
   programs.dconf.enable = true;
+
+  # disable mouse accel
+  services.libinput.mouse.accelProfile = "flat";
 }

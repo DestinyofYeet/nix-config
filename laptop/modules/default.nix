@@ -10,5 +10,6 @@
     ./kitty.nix
     ./zsh.nix
     ./nextcloud.nix
+    ./btop.nix
   ];
 }
