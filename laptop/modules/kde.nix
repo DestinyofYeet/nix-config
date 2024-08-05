@@ -1,4 +1,9 @@
 { lib, ... }: {
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
+
   programs.plasma = {
     enable = true;
 
@@ -80,6 +85,7 @@
               "applications:firefox.desktop" 
               "applications:org.kde.dolphin.desktop"
               "applications:kitty.desktop"
+              "applications:com.github.xournalpp.xournalpp.desktop"
             ];
           };
         }
@@ -150,10 +156,15 @@
       # makes the default border edge action dissapear
       kwinrc = {
         "Effect-overview"."BorderActivate" = 9;
-        #"org.kde.kdecoration2" = {
-        #  "library" = "org.kde.kwin.aurorae";
-        #  "theme" = "__aurorae__svg__Carl";
-        #};
+      };
+
+      # disable saving clipboard across DE-Sessions
+      klipperrc = {
+        "General" = {
+          "KeepClipboardContents" = false;
+          "MaxClipItems" = 100;
+          "IgnoreImages" = false;
+        };
       };
     };
   };

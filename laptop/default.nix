@@ -7,6 +7,7 @@
   home-manager.sharedModules = [ 
     plasma-manager.homeManagerModules.plasma-manager 
     inputs.stylix.homeManagerModules.stylix 
+    inputs.agenix.homeManagerModules.age
   ];
 
   home-manager.users.ole = import ./modules;

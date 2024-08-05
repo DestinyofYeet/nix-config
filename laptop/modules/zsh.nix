@@ -47,6 +47,10 @@ in {
       icat = "kitten icat";
     };
 
+    sessionVariables = {
+      EDITOR = "vim";
+    };
+
     oh-my-zsh = {
       enable = true;
 

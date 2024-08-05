@@ -13,5 +13,10 @@
     git
     ripgrep
     fzf
+    autoconf
+    automake
+    gcc
+    gccgo
+    gnumake
   ];
 }

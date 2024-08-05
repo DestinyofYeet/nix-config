@@ -7,4 +7,5 @@ let
 in {
   "ssh-key-fachschaft-server.age".publicKeys = authed;
   "ssh-key-oth-gitlab.age".publicKeys = authed;
+  "ssh-key-vps-main.age".publicKeys = authed;
 }

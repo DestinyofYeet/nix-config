@@ -5,5 +5,8 @@
     ssh-gitlab-oth = {
       file = ../secrets/ssh-key-oth-gitlab.age;
     };
+    ssh-vps-main = {
+      file = ../secrets/ssh-key-vps-main.age;
+    };
   };
 }

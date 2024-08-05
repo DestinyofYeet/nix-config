@@ -3,7 +3,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAPoi8INcA/HMRtCF9A3sIyfaCIYN0MOTWNg4IEe7zUO root@nixos";
 
   ole_laptop =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH+VUI7U1fv0W6Lp40Jss9yA6JX+JG/Hocroff6HtlFT ole@kartoffelkiste";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHeF66q9/UKixJjXGjYXTlwrYcSfMVaYD+W/3pJ+4DP ole@wattson";
   ole_main =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhLrbWc/gopTJ2ZZW4ZfCzGhjhV9fKb1wdvFLQpmP3y ole@main";
 
