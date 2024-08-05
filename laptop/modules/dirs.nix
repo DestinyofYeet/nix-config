@@ -1,4 +1,4 @@
-dirs = rec {
+{config, ... }: rec {
   home = {
     path = "${config.home.homeDirectory}";
     scripts = {
@@ -41,4 +41,4 @@ dirs = rec {
       };
     };
   };
-};
+}

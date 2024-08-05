@@ -1,51 +1,14 @@
 { lib, config, pkgs, ... }: let
-  dirs = rec {
-    home = {
-      path = "${config.home.homeDirectory}";
-      scripts = {
-        path = "${home.path}/scripts";
-      };
+  dirs = import ./dirs.nix { inherit config; };
 
-      icons = {
-        path = "${home.path}/.icons";
-      };
+  scripts = import ./scripts.nix { inherit pkgs; };
 
-      local = {
-        path = "${home.path}/.local";
+  gen-activation = src : dst : ''
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content}/bin/update-needed-content ${src} ${dst}
+    '';
+   
+  
 
-        share = {
-          path = "${home.local.path}/share";
-
-          icons = {
-            path = "${home.local.share.path}/icons";
-          };
-
-          aurorae = {
-            path = "${home.local.share.path}/aurorae";
-
-            themes = {
-              path = "${home.local.share.aurorae.path}/themes";
-            };
-          };
-
-          plasma = {
-            path = "${home.local.share.path}/plasma";
-
-            desktoptheme = {
-              path = "${home.local.share.plasma.path}/desktoptheme";
-            };
-
-            look-and-feel = {
-              path = "${home.local.share.plasma.path}/look-and-feel";
-            };
-          };
-        };
-      };
-    };
-  };
-  scripts = {
-    update-needed-content = "${dirs.home.scripts.path}/update-needed-content.sh";
-  };
 in {
   services.kdeconnect = {
     enable = true;
@@ -238,24 +201,16 @@ in {
 
 
   home.activation = {
-    updateIcons = ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Icons/BeautySolar} ${dirs.home.local.share.icons.path}/BeautySolar
-    '';
 
-    updateTheme = ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Themes/Sweet-Ambar-Blue} ${dirs.home.local.share.plasma.desktoptheme.path}/Sweet-Ambar-Blue
-    '';
+    updateIcons = gen-activation ../needed-content/Icons/BeautySolar "${dirs.home.local.share.icons.path}/BeautySolar";
 
-    updateWindowDecors = ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/WindowDecors/Sweet-ambar-blue} ${dirs.home.local.share.aurorae.themes.path}/Sweet-ambar-blue
-    '';
+    updateTheme = gen-activation ../needed-content/Themes/Sweet-Ambar-Blue "${dirs.home.local.share.plasma.desktoptheme.path}/Sweet-Ambar-Blue";
 
-    updateSplashScreen = ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Splashscreens/Aretha-Splash-6} ${dirs.home.local.share.plasma.look-and-feel.path}/Aretha-Splash-6
-    '';
+    updateWindowDecors = gen-activation ../needed-content/WindowDecors/Sweet-ambar-blue "${dirs.home.local.share.aurorae.themes.path}/Sweet-ambar-blue";
 
-    updateCursor = ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Cursors/Posy_Cursor_Black_125_175} ${dirs.home.icons.path}/Posy_Cursor_Black_125_175
-    '';
+    updateSplashScreen = gen-activation ../needed-content/Splashscreens/Aretha-Splash-6 "${dirs.home.local.share.plasma.look-and-feel.path}/Aretha-Splash-6";
+
+    updateCursor = gen-activation ../needed-content/Cursors/Posy_Cursor_Black_125_175 "${dirs.home.icons.path}/Posy_Cursor_Black_125_175";
+
   };
 }
