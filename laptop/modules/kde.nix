@@ -1,15 +1,50 @@
 { lib, config, pkgs, ... }: let
   dirs = rec {
-    home = "${config.home.homeDirectory}";
-    scripts = "${home}/scripts";
-    share = "${home}/.local/share";
-    icons = "${share}/icons";
-    plasma = "${share}/plasma";
-    desktoptheme = "${plasma}/desktoptheme";
-    window-decors = "${share}/aurorae/themes";
+    home = {
+      path = "${config.home.homeDirectory}";
+      scripts = {
+        path = "${home.path}/scripts";
+      };
+
+      icons = {
+        path = "${home.path}/.icons";
+      };
+
+      local = {
+        path = "${home.path}/.local";
+
+        share = {
+          path = "${home.local.path}/share";
+
+          icons = {
+            path = "${home.local.share.path}/icons";
+          };
+
+          aurorae = {
+            path = "${home.local.share.path}/aurorae";
+
+            themes = {
+              path = "${home.local.share.aurorae.path}/themes";
+            };
+          };
+
+          plasma = {
+            path = "${home.local.share.path}/plasma";
+
+            desktoptheme = {
+              path = "${home.local.share.plasma.path}/desktoptheme";
+            };
+
+            look-and-feel = {
+              path = "${home.local.share.plasma.path}/look-and-feel";
+            };
+          };
+        };
+      };
+    };
   };
   scripts = {
-    update-needed-content = "${dirs.scripts}/update-needed-content.sh";
+    update-needed-content = "${dirs.home.scripts.path}/update-needed-content.sh";
   };
 in {
   services.kdeconnect = {
@@ -41,9 +76,9 @@ in {
         size = 32;
       };
 
-      #splashScreen = {
-      #  theme = "Aretha-Splash-6";
-      #};
+      splashScreen = {
+        theme = "Aretha-Splash-6";
+      };
 
       # cursors are broken somehow lol
 
@@ -204,15 +239,23 @@ in {
 
   home.activation = {
     updateIcons = ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Icons/BeautySolar} ${dirs.icons}/BeautySolar
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Icons/BeautySolar} ${dirs.home.local.share.icons.path}/BeautySolar
     '';
 
     updateTheme = ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Themes/Sweet-Ambar-Blue} ${dirs.desktoptheme}/Sweet-Ambar-Blue
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Themes/Sweet-Ambar-Blue} ${dirs.home.local.share.plasma.desktoptheme.path}/Sweet-Ambar-Blue
     '';
 
     updateWindowDecors = ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/WindowDecors/Sweet-ambar-blue} ${dirs.window-decors}/Sweet-ambar-blue
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/WindowDecors/Sweet-ambar-blue} ${dirs.home.local.share.aurorae.themes.path}/Sweet-ambar-blue
+    '';
+
+    updateSplashScreen = ''
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Splashscreens/Aretha-Splash-6} ${dirs.home.local.share.plasma.look-and-feel.path}/Aretha-Splash-6
+    '';
+
+    updateCursor = ''
+      ${pkgs.bash}/bin/bash ${scripts.update-needed-content} ${../needed-content/Cursors/Posy_Cursor_Black_125_175} ${dirs.home.icons.path}/Posy_Cursor_Black_125_175
     '';
   };
 }
