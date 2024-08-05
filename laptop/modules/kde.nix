@@ -9,18 +9,24 @@
 
       wallpaper = ../../images/wallhaven-nightsky.jpg;
 
-      colorScheme = "BreezeDark";
-      theme = "breeze-dark";
+      colorScheme = "SweetAmbarBlue";
+      theme = "Sweet-Ambar-Blue";
       iconTheme = "BeautySolar";
 
       windowDecorations = {
         library = "org.kde.kwin.aurorae";
         theme  = "__aurorae__svg__Sweet-ambar-blue";
       };
-
+      # But this doesn't reeee
+      # cursor = {
+      #   theme = "Posy_Cursor_Black_125_175";
+      #   size = 32;
+      # }; 
+      
+      # This shit works
       cursor = {
-        theme = "Posy's Cursor Black [Posy_Cursor_Black]";
-        size = 32;
+        theme = "Sweet-cursors";
+        size = 24;
       };
     };
     
@@ -65,7 +71,7 @@
           kickoff = {
             sortAlphabetically = true;
             compactDisplayStyle = true;
-            icon = "nix-snowflake-white";
+            icon = "${../../images/nyan_cat_home.png}";
           };
         }
         {
@@ -85,12 +91,12 @@
             sensors = [ 
               {
                 name = "cpu/all/averageTemperature";
-                color = "255,255,255";
-                label = "CPU";
+                color = "13,0,255";
+                label = "CPU Temp";
               }
               {
                 name = "power/1451/chargeRate";
-                color = "0,0,0";
+                color = "183,0,255";
                 label = "Charging Rate";
               }
             ];
