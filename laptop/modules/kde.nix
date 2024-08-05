@@ -22,6 +22,13 @@
         library = "org.kde.kwin.aurorae";
         theme  = "__aurorae__svg__Sweet-ambar-blue";
       };
+
+      #splashScreen = {
+      #  theme = "Aretha-Splash-6";
+      #};
+
+      # cursors are broken somehow lol
+
       # But this doesn't reeee
       # cursor = {
       #   theme = "Posy_Cursor_Black_125_175";
@@ -29,10 +36,10 @@
       # }; 
       
       # This shit works
-      cursor = {
-        theme = "Sweet-cursors";
-        size = 24;
-      };
+      # cursor = {
+      #   theme = "Sweet-cursors";
+      #   size = 24;
+      # };
     };
     
 
@@ -173,6 +180,19 @@
     enable = true;
     theme = {
       name = lib.mkForce "Sweet-Ambar-Blue-Dark-v40";
+    };
+  };
+
+  home.file = {
+    # copy splash screen to path
+    #"/home/ole/.local/share/plasma/look-and-feel/Aretha-Splash-6" = {
+    #  source = ../needed-content/Aretha-Splashscreen/Aretha-Splash-6;
+    #  recursive = true;
+    #};
+
+    "/home/ole/.local/share/icons/BeautySolar/" = {
+      source = ../needed-content/Icons/BeautySolar;
+      recursive = true;
     };
   };
 }

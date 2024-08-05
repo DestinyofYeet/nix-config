@@ -7,15 +7,16 @@
   home.file = {
     "/home/ole/.ssh/config" = {
       text = ''
-        Host gitlab-oth
-          Hostname gitlab.oth-regensburg.de
-          User beo45216
-          IdentityFile ${config.age.secrets.ssh-gitlab-oth.path}
+        IdentityFile ${config.age.secrets.ssh-gitlab-oth.path}
 
         Host uwuwhatsthis.de
           Hostname uwuwhatsthis.de
           User ole
           IdentityFile ${config.age.secrets.ssh-vps-main.path}
+
+        Host nix-server
+          Hostname 192.168.0.248
+          User ole
       '';
     };
   };

@@ -7,9 +7,23 @@
   services.xserver.enable = false;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "catppuccin-mocha";
+  };
+
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  environment.systemPackages = [(
+    pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      #font  = "Noto Sans";
+      #fontSize = "9";
+      background = "${../images/forest.png}";
+      loginBackground = true;
+    }
+  )];
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;

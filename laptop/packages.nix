@@ -22,5 +22,6 @@
     tlp
     zoxide
     xournalpp
+    bitwarden-desktop
   ];
 }
