@@ -26,5 +26,6 @@
     bitwarden-desktop
     vesktop
     brave
+    innernet
   ];
 }

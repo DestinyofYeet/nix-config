@@ -42,20 +42,6 @@ in {
       splashScreen = {
         theme = "Aretha-Splash-6";
       };
-
-      # cursors are broken somehow lol
-
-      # But this doesn't reeee
-      # cursor = {
-      #   theme = "Posy_Cursor_Black_125_175";
-      #   size = 32;
-      # }; 
-      
-      # This shit works
-      # cursor = {
-      #   theme = "Sweet-cursors";
-      #   size = 24;
-      # };
     };
     
 

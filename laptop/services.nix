@@ -26,6 +26,10 @@ in
       };  
     };
 
+  networking.firewall = {
+    enable = false;
+  };
+
   services.power-profiles-daemon.enable = false;
 
   services.tlp = {
@@ -64,6 +68,20 @@ in
       RADEON_POWER_PROFILE_ON_AC = "high";
       RADEON_POWER_PROFILE_ON_BAT = "low";
     };    
+  };
+
+  # for connecting to my innernet network
+  systemd.services.innernet-infra = {
+    enable = true;
+    description = "innernet client for infra";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" "nss-lookup.target" ];
+    wants = [ "network-online.target" "nss-lookup.target" ];
+    serviceConfig = {
+      Restart = "always";
+      ExecStart =
+        "${pkgs.innernet}/bin/innernet up infra --daemon --interval 60 --no-write-hosts";
+    };
   };
 
   # disable baloo
