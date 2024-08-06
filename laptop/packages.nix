@@ -1,5 +1,8 @@
 
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: let
+  unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/d3f42bd62aa840084563e3b93e4eab73cb0a0448) { config = config.nixpkgs.config; };
+in
+  {
 
   # zsh config
   environment.pathsToLink = [ "/share/zsh" ];
@@ -18,7 +21,7 @@
     neovim
     asciiquarium
     cowsay
-    zed-editor
+    unstable.zed-editor
     nixfmt-classic
     tlp
     zoxide
@@ -27,5 +30,7 @@
     vesktop
     brave
     innernet
+    rustup
+    jetbrains-toolbox
   ];
 }

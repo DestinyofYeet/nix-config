@@ -17,6 +17,5 @@
     ./ssh.nix
     ./agenix.nix
     ./git.nix
-    ./zed.nix
   ];
 }

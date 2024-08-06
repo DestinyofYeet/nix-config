@@ -1,6 +1,15 @@
 {config, ... }: rec {
   home = {
     path = "${config.home.homeDirectory}";
+
+    config = {
+      path = "${home.path}/.config";
+
+      zed = {
+        path = "${home.config.path}/zed";
+      };
+    };
+
     scripts = {
       path = "${home.path}/scripts";
     };
