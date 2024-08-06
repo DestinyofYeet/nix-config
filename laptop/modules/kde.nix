@@ -1,14 +1,11 @@
 { lib, config, pkgs, ... }: let
-  dirs = import ./dirs.nix { inherit config; };
+  dirs = import ./dirs.nix { inherit config;  };
 
   scripts = import ./scripts.nix { inherit pkgs; };
 
   gen-activation = src : dst : ''
       ${pkgs.bash}/bin/bash ${scripts.update-needed-content}/bin/update-needed-content ${src} ${dst}
     '';
-   
-  
-
 in {
   services.kdeconnect = {
     enable = true;
