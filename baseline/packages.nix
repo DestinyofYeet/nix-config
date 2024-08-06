@@ -18,5 +18,6 @@
     gcc
     gccgo
     gnumake
+    unzip
   ];
 }
