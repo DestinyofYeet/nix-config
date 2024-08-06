@@ -20,11 +20,8 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: {
-    nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./server
+  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
+    baseline-modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
 
@@ -32,6 +29,19 @@
           environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
         })
       ];
+
+    laptop-modules = [ 
+      { nixpkgs.overlays = [ nur.overlay ]; }
+
+      nur.nixosModules.nur
+    ] ++ baseline-modules;
+  in
+  {
+    nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./server
+      ] ++ baseline-modules;
     };
 
     nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
@@ -40,21 +50,9 @@
         inherit home-manager plasma-manager inputs;
       };
       modules = [
-        { nixpkgs.overlays = [ nur.overlay ]; }
         ./laptop/hardware/kartoffelkiste.nix
 				./laptop
-        home-manager.nixosModules.home-manager
-
-        agenix.nixosModules.default
-
-        nur.nixosModules.nur
-
-				(
-					{ ... }: {
-						environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
-					}
-				)
-			];
+			] ++ laptop-modules;
 		};
 
     nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
@@ -63,21 +61,9 @@
         inherit home-manager plasma-manager inputs;
       };
       modules = [
-        { nixpkgs.overlays = [ nur.overlay ]; }
         ./laptop/hardware/wattson.nix
 				./laptop
-        home-manager.nixosModules.home-manager
-
-        agenix.nixosModules.default
-
-        nur.nixosModules.nur
-
-				(
-					{ ... }: {
-						environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
-					}
-				)
-			];
+			] ++ laptop-modules;
 		};
   };
 }
