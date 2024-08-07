@@ -9,14 +9,21 @@ in {
   programs.neovim = {
     enable = true;
 
+    extraConfig = builtins.readFile ./neovim-cfg/settings.lua;
+
     plugins = with pkgs.vimPlugins; [
-      lualine-nvim
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = builtins.readFile ./neovim-cfg/lualine.lua;
+      }
       telescope-zf-native-nvim
       nvim-tree-lua
       nvim-web-devicons
       mason-nvim
       nvim-lspconfig
       nvim-cmp
+      telescope-nvim
     ] ++ treesitter-parsers;
   };
 }
