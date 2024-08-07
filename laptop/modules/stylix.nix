@@ -19,7 +19,11 @@ in
     sha256 = "sha256-iGVndavzet3G3NgpT8XGSDW6wi5eRD2SrwnJwsQqAUs=";
   };
 
-  stylix.targets.kitty.variant256Colors = true;
-
-  stylix.targets.kde.enable = false;
+  stylix.targets = {
+    kde.enable = false;
+    kitty = {
+      enable = true;
+      variant256Colors = true;
+    };
+  };
 }

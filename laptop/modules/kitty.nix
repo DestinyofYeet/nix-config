@@ -7,8 +7,14 @@
     enable = true;
 
     shellIntegration.enableBashIntegration = true;
+    shellIntegration.enableZshIntegration = true;
 
     extraConfig = ''
+      font_family         Comic Code Ligatures
+      bold_font           auto
+      italic_font         auto
+      bolit_italic_font   auto
+
       shell ${pkgs.zsh}/bin/zsh
       editor vim
 

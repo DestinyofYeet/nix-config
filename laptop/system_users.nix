@@ -4,6 +4,7 @@
   users.users.ole = {
     isNormalUser = true;
     description = "ole";
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kdePackages.kate

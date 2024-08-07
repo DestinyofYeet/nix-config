@@ -1,4 +1,6 @@
-opt = vim.opt
+vim.g.mapleader = " "
+
+local opt = vim.opt
 
 opt.smarttab = true
 opt.smartindent = true
@@ -13,7 +15,7 @@ opt.cursorline = true -- Highlight cursor line
 opt.ignorecase = true -- Ignore case search
 opt.smartcase = true -- Smart search
 opt.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
-opt.shiftwidth = 0 -- Number of spaces to use for each step of auto indent
+opt.shiftwidth = 2 -- Number of spaces to use for each step of auto indent
 opt.softtabstop = -1 -- Number of spaces that a <Tab> counts
 opt.expandtab = true -- Use spaces instead of tab characters
 opt.signcolumn = 'yes' -- Always draw the sign column even if there is no sign in it
@@ -26,7 +28,7 @@ opt.scrolloff = 999
 -- press t to focus tree
 vim.keymap.set('n', 't', '<cmd>NvimTreeFocus<cr>')
 
--- press F6 to rename a variable
+-- press F2 to rename a variable
 vim.keymap.set('n', '<F2>', function() vim.lsp.buf.rename() end)
 
 -- clears the highlight

@@ -1,6 +1,12 @@
 
 { config, pkgs, ... }: let
   unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/d3f42bd62aa840084563e3b93e4eab73cb0a0448) { config = config.nixpkgs.config; };
+
+  lua-pkgs = with pkgs; [
+    luajitPackages.luarocks
+    lua
+    luajit
+  ];
 in
   {
 
@@ -32,5 +38,12 @@ in
     innernet
     rustup
     jetbrains-toolbox
-  ];
+    jellyfin-media-player
+    wireguard-tools
+    monero-gui
+    fd
+    tree-sitter
+    nodePackages.nodejs
+    nerdfonts
+  ] ++ lua-pkgs;
 }
