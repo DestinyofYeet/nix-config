@@ -1,4 +1,4 @@
-{ ... }: let {
+{ ... }: let 
   ports = {
     wireguard = 51820;
     netdata = 19999;
