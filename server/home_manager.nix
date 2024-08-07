@@ -6,6 +6,7 @@
 
     imports = [
       ../baseline/modules
+      ./hm-modules
     ];
   };
 

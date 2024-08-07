@@ -60,6 +60,7 @@ let
     monerod = {
       enable = true;
       dataDir = "/data/monero-node";
+      rpc.address = "0.0.0.0";
     };
 
     uptime-kuma = {
