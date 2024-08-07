@@ -9,7 +9,7 @@
 in {
   services.kdeconnect = {
     enable = true;
-    indicator = true;
+    indicator = false;
   };
 
   programs.plasma = {
@@ -42,7 +42,7 @@ in {
     };
     
 
-    kscreenlocker = {
+    kscreenlocker.appearance = {
       wallpaper = ../../images/wallhaven-lighthouse-snow.jpg;
     };
 
@@ -135,7 +135,7 @@ in {
       ];
     }];
 
-    powerdevil = {
+    powerdevil.AC = {
       powerButtonAction = "lockScreen";
       turnOffDisplay = {
         idleTimeout = 1000;

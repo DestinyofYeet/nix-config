@@ -1,9 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -15,7 +15,7 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    stylix.url = "github:danth/stylix/release-24.05";
+    stylix.url = "github:danth/stylix";
 
     nur.url = "github:nix-community/NUR";
   };

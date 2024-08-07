@@ -1,6 +1,6 @@
 
 { config, pkgs, ... }: let
-  unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/d3f42bd62aa840084563e3b93e4eab73cb0a0448) { config = config.nixpkgs.config; };
+  # unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/d3f42bd62aa840084563e3b93e4eab73cb0a0448) { config = config.nixpkgs.config; };
 
   lua-pkgs = with pkgs; [
     luajitPackages.luarocks
@@ -27,7 +27,7 @@ in
     neovim
     asciiquarium
     cowsay
-    unstable.zed-editor
+    zed-editor
     nixfmt-classic
     tlp
     zoxide
