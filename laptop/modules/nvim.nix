@@ -5,25 +5,31 @@
     python
     vim
   ];
+
+  mkPlugin = name: file : {
+    plugin = name;
+    type = "lua";
+    config = builtins.readFile file;
+  };
+
 in {
   programs.neovim = {
     enable = true;
 
-    extraConfig = builtins.readFile ./neovim-cfg/settings.lua;
+    extraLuaConfig = builtins.readFile ./neovim-cfg/settings.lua;
 
     plugins = with pkgs.vimPlugins; [
-      {
-        plugin = lualine-nvim;
-        type = "lua";
-        config = builtins.readFile ./neovim-cfg/lualine.lua;
-      }
+      (mkPlugin lualine-nvim ./neovim-cfg/lualine.lua)
+      (mkPlugin nvim-cmp ./neovim-cfg/nvim-cmp.lua)
+      (mkPlugin nvim-tree-lua ./neovim-cfg/nvim-tree.lua)
       telescope-zf-native-nvim
-      nvim-tree-lua
       nvim-web-devicons
       mason-nvim
       nvim-lspconfig
-      nvim-cmp
       telescope-nvim
+      auto-pairs
+      dressing-nvim
+      luasnip
     ] ++ treesitter-parsers;
   };
 }
