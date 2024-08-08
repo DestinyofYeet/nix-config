@@ -72,9 +72,17 @@ let
       };
     };
 
-    add-replay-gain = {
-      enable = false;
-      workingDir = "/data/programs/add_replay_gain_to_files";
+    navidrome = {
+      enable = true;
+      settings = {  
+        Port = 4533;
+        Address = "0.0.0.0";
+
+        MusicFolder = "/data/media/navidrome";
+        DataFolder = "/configs/navidrome";
+        FFmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
+        EnableSharing = true;
+      };
     };
   };
 
@@ -270,4 +278,6 @@ in {
   services.monero = { inherit (apps.monerod) enable dataDir; };
 
   services.uptime-kuma = { inherit (apps.uptime-kuma) enable settings; };
+
+  services.navidrome = {inherit (apps.navidrome) enable settings; inherit (apps) user group; };
 }
