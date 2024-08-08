@@ -15,4 +15,5 @@ in {
   "surrealdb_root_pw.age".publicKeys = authed;
   "airvpn_config.age".publicKeys = authed;
   "conduit_registration_token.age".publicKeys = authed;
+  "hydra-email-credentials.age".publicKeys = authed;
 }
