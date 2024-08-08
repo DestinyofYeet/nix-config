@@ -30,6 +30,8 @@
     ripgrep
     tree
     nixfmt-classic
+    wormhole-rs
+    nix-serve
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
