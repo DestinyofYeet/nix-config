@@ -57,10 +57,10 @@ let
       listenAddress = "0.0.0.0";
     };
 
-    monerod = {
+    monero = {
       enable = true;
       dataDir = "/data/monero-node";
-      rpc.address = "0.0.0.0";
+      # rpc.address = "0.0.0.0";  # use an ssh-tunnel instead
     };
 
     uptime-kuma = {
@@ -72,9 +72,31 @@ let
       };
     };
 
-    add-replay-gain = {
-      enable = false;
-      workingDir = "/data/programs/add_replay_gain_to_files";
+    navidrome = {
+      enable = true;
+      settings = {  
+        Port = 4533;
+        Address = "0.0.0.0";
+
+        MusicFolder = "/data/media/navidrome";
+        DataFolder = "/configs/navidrome";
+        FFmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
+        EnableSharing = true;
+      };
+    };
+
+    nix-serve = {
+      enable = true;
+      secretKeyFile = "/var/cache-priv-key.pem";
+    };
+
+    hydra = {
+      enable = true;
+      hydraURL = "http://10.42.5.3:3000";
+      notificationSender = "hydra@uwuwhatsthis.de";
+      smtpHost = "mx.uwuwhatsthis.de";
+      buildMachinesFiles = [];
+      useSubstitutes = true;
     };
   };
 
@@ -249,25 +271,26 @@ in {
     };
   };
 
-  services.jellyfin = {
-    inherit (apps.jellyfin) enable dataDir openFirewall;
-    inherit (apps) user group;
+  services = {
+    jellyfin = {  
+      inherit (apps.jellyfin) enable dataDir openFirewall;
+      inherit (apps) user group;
+    };
+
+    sonarr = { 
+      inherit (apps.sonarr) enable dataDir openFirewall;
+      inherit (apps) user group;
+    };
+    
+    navidrome = {
+      inherit (apps.navidrome) enable settings;
+      inherit (apps) user group;
+    };
+
+    uptime-kuma = {
+      inherit (apps.uptime-kuma) enable settings;
+    };
+
+    inherit (apps) surrealdb elasticsearch monero nix-serve hydra;
   };
-
-  services.sonarr = {
-    inherit (apps.sonarr) enable dataDir openFirewall;
-    inherit (apps) user group;
-  };
-
-  services.surrealdb = {
-    inherit (apps.surrealdb) enable host extraFlags port;
-  };
-
-  services.elasticsearch = {
-    inherit (apps.elasticsearch) enable port listenAddress;
-  };
-
-  services.monero = { inherit (apps.monerod) enable dataDir; };
-
-  services.uptime-kuma = { inherit (apps.uptime-kuma) enable settings; };
 }
