@@ -134,6 +134,8 @@ in {
     conduit_registration = { file = ./secrets/conduit_registration_token.age; };
 
     surrealdb_root_pw = { file = ./secrets/surrealdb_root_pw.age; };
+
+    hydra-email-credentials = { file = ./secrets/hydra-email-credentials.age; };
   };
 
   # matrix conduit server, default port 6167
@@ -293,4 +295,11 @@ in {
 
     inherit (apps) surrealdb elasticsearch monero nix-serve hydra;
   };
+
+  systemd.services.hydra-notify = {
+    serviceConfig.EnvironmentFile = "${config.age.secrets.hydra-email-credentials.path}";
+  };
+
+  # systemd.services.hydra-queue-runner.path = [ pkgs.ssmtp ];
+  # systemd.services.hydra-server.path = [ pkgs.ssmtp ];
 }
