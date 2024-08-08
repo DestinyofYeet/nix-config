@@ -29,6 +29,7 @@ in {
             template = "https://home-manager-options.extranix.com";
             params = [
               { name = "release"; value = "release-24.05"; }
+              { name = "channel"; value = "unstable"; }
               { name = "query"; value = "{searchTerms}"; }
             ];
           }];
@@ -41,6 +42,7 @@ in {
             template = "https://search.nixos.org/packages";
             params = [
               { name = "type"; value = "packages"; }
+              { name = "channel"; value = "unstable"; }
               { name = "query"; value = "{searchTerms}"; }
             ];
           }];
@@ -111,6 +113,7 @@ in {
       facebook-container
       multi-account-containers
       enhancer-for-youtube
+      skip-redirect
     ];
 
     settings = {
