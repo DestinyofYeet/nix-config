@@ -46,5 +46,7 @@ in
     nodePackages.nodejs
     nerdfonts
     ungoogled-chromium
+    magic-wormhole-rs
+    element-desktop
   ] ++ lua-pkgs;
 }

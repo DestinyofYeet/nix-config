@@ -43,7 +43,18 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+
+      substituters = [
+        "http://10.42.5.3:5000"
+        "https://cache.nixos.org/"
+      ];
+
+      trusted-public-keys = [
+        "10.42.5.3:pPIfgSqGXJJIarqPqoY03sMiK8PvHyfOLRfXtOTI5DY="
+      ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

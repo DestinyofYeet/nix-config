@@ -32,6 +32,8 @@ let
 
       ${rebuild-system}/bin/rebuild-system
     '';
+
+    scripts = import ./scripts.nix { inherit pkgs; };
 in {
 
   programs.zsh = {
@@ -45,6 +47,8 @@ in {
 
       kssh = "kitten ssh";
       icat = "kitten icat";
+
+      # generate-email-alias = "${scripts.generate-email-alias}/bin/generate-email-alias";
     };
 
     sessionVariables = {

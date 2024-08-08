@@ -12,6 +12,10 @@
       ssh-vps-main = {
         file = ../secrets/ssh-key-vps-main.age;
       };
+
+      ssh-fsim-ori = {
+        file = ../secrets/ssh-key-fsim-ori.age;
+      };
     };
   };
 }

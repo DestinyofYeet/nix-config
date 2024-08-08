@@ -25,6 +25,7 @@ in {
       lua-language-server
       clang-tools
       ast-grep
+      pyright
     ];
 
     plugins = with pkgs.vimPlugins; [

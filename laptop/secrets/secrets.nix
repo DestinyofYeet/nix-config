@@ -5,7 +5,7 @@ let
   authed = [ ole_laptop ];
 
 in {
-  "ssh-key-fachschaft-server.age".publicKeys = authed;
+  "ssh-key-fsim-ori.age".publicKeys = authed;
   "ssh-key-oth-gitlab.age".publicKeys = authed;
   "ssh-key-vps-main.age".publicKeys = authed;
 }

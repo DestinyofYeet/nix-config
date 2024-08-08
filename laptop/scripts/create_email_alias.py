@@ -29,7 +29,7 @@ def main():
         exit(1)
 
     print(f"Alias: {alias}@uwuwhatsthis.de")    
-    os.system(f"stalwart-cli -u https://mx.uwuwhatsthis.de -c 'ole:&F8U%s&eWG#^qNcYg82UqzaSkcwNmsZ9ctj*sk4v' account add-email ole {alias}@uwuwhatsthis.de")
+    os.system(f"${pkgs.stalwart-mail}/bin/stalwart-cli -u https://mx.uwuwhatsthis.de -c 'ole:&F8U%s&eWG#^qNcYg82UqzaSkcwNmsZ9ctj*sk4v' account add-email ole {alias}@uwuwhatsthis.de")
 
 if __name__ == '__main__':
     main()
