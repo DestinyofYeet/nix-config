@@ -15,7 +15,6 @@
     ./system_packages.nix
     ./system_users.nix
     ./system_services.nix
-    ./services
   ];
 
   system.stateVersion = "24.05"; # Did you read the comment?

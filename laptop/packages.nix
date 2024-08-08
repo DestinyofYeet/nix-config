@@ -45,5 +45,6 @@ in
     tree-sitter
     nodePackages.nodejs
     nerdfonts
+    ungoogled-chromium
   ] ++ lua-pkgs;
 }
