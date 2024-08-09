@@ -47,8 +47,8 @@
     experimental-features = [ "nix-command" "flakes" ];
 
       substituters = [
-        "http://10.42.5.3:5000"
         "https://cache.nixos.org/"
+        "http://10.42.5.3:5000"
       ];
 
       trusted-public-keys = [
@@ -65,4 +65,8 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   programs.zsh.enable = true;
+
+  networking.extraHosts = ''
+    10.42.5.3 nix-server.infra.wg
+  '';
 }

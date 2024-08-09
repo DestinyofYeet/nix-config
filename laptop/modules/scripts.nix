@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
 
   update-needed-content = pkgs.writeShellScriptBin "update-needed-content" ''
     set -e
@@ -12,42 +12,45 @@
   '';
 
   generate-email-alias = pkgs.writers.writePython3Bin "generate-email-alias" {
-    flakeIgnore = [ "W291" "E305" "E501" ];
+    flakeIgnore = [ "W291" "E305" "E501" "E111" "E302" ];
   } ''
-  import random
-  import string
-  import argparse
-  import os
+    import random
+    import string
+    import argparse
+    import os
 
-  def generate_alias(length: int, chars_to_use: list[str]) -> str:
-    password = ""
-    for _ in range(length):
-        password += random.choice(random.choice(chars_to_use))
+    def generate_alias(length: int, chars_to_use: list[str]) -> str:
+      password = ""
+      for _ in range(length):
+          password += random.choice(random.choice(chars_to_use))
 
-    return password
+      return password
 
 
-  def main():
-    parser = argparse.ArgumentParser(description="Creates a new permanent email alias")
+    def main():
+      parser = argparse.ArgumentParser(description="Creates a new permanent email alias")
 
-    parser.add_argument("--random", action="store_true", dest="random", help="Generates a new alias to use")
-    parser.add_argument("given_alias", nargs="?", help="Uses the given alias to use")
+      parser.add_argument("--random", action="store_true", dest="random", help="Generates a new alias to use")
+      parser.add_argument("given_alias", nargs="?", help="Uses the given alias to use")
 
-    parsed = parser.parse_args()
+      parsed = parser.parse_args()
 
-    alias = parsed.given_alias
+      alias = parsed.given_alias
 
-    if parsed.random:
-        alias = generate_alias(20, [string.ascii_letters + string.digits])
+      if parsed.random:
+          alias = generate_alias(20, [string.ascii_letters + string.digits])
 
-    if alias is None:
-        parser.print_help()
-        exit(1)
+      if alias is None:
+          parser.print_help()
+          exit(1)
 
-    print(f"Alias: {alias}@uwuwhatsthis.de")    
-    os.system(f"${pkgs.stalwart-mail}/bin/stalwart-cli -u https://mx.uwuwhatsthis.de -c 'ole:&F8U%s&eWG#^qNcYg82UqzaSkcwNmsZ9ctj*sk4v' account add-email ole {alias}@uwuwhatsthis.de")
+      with open("${config.age.secrets.stalwart-ole-pw.path}") as f:
+        password = f.read().removesuffix("\n")
 
-  if __name__ == '__main__':
-    main()
+      print(f"Alias: {alias}@uwuwhatsthis.de")    
+      os.system(f"${pkgs.stalwart-mail}/bin/stalwart-cli -u https://mx.uwuwhatsthis.de -c 'ole:{password}' account add-email ole {alias}@uwuwhatsthis.de")
+
+    if __name__ == '__main__':
+      main()
   '';
 }

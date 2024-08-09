@@ -48,5 +48,6 @@ in
     ungoogled-chromium
     magic-wormhole-rs
     element-desktop
+    python3
   ] ++ lua-pkgs;
 }

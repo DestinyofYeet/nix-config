@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let  
     rebuild-system = pkgs.writeShellScriptBin "rebuild-system" ''
       set -e
@@ -33,7 +33,7 @@ let
       ${rebuild-system}/bin/rebuild-system
     '';
 
-    scripts = import ./scripts.nix { inherit pkgs; };
+    scripts = import ./scripts.nix { inherit pkgs config; };
 in {
 
   programs.zsh = {
@@ -48,7 +48,7 @@ in {
       kssh = "kitten ssh";
       icat = "kitten icat";
 
-      # generate-email-alias = "${scripts.generate-email-alias}/bin/generate-email-alias";
+      generate-email-alias = "${scripts.generate-email-alias}/bin/generate-email-alias";
     };
 
     sessionVariables = {
