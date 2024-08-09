@@ -8,4 +8,5 @@ in {
   "ssh-key-fsim-ori.age".publicKeys = authed;
   "ssh-key-oth-gitlab.age".publicKeys = authed;
   "ssh-key-vps-main.age".publicKeys = authed;
+  "stalwart-ole-pw.age".publicKeys = authed;
 }

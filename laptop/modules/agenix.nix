@@ -16,6 +16,10 @@
       ssh-fsim-ori = {
         file = ../secrets/ssh-key-fsim-ori.age;
       };
+
+      stalwart-ole-pw = {
+        file = ../secrets/stalwart-ole-pw.age;
+      };
     };
   };
 }

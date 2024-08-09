@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }: let
   dirs = import ./dirs.nix { inherit config;  };
 
-  scripts = import ./scripts.nix { inherit pkgs; };
+  scripts = import ./scripts.nix { inherit pkgs config; };
 
   gen-activation = src : dst : ''
       ${pkgs.bash}/bin/bash ${scripts.update-needed-content}/bin/update-needed-content ${src} ${dst}
