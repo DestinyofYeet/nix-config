@@ -97,6 +97,9 @@ let
       smtpHost = "mx.uwuwhatsthis.de";
       buildMachinesFiles = [];
       useSubstitutes = true;
+      extraConfig = ''
+        email_notification = 1
+      '';
     };
   };
 
