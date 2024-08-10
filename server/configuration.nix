@@ -25,7 +25,18 @@
       # Add any missing dynamic libraries for unpackages programs here, not in environment.systemPackages
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = { 
+    settings = { 
+      experimental-features = [ "nix-command" "flakes" ]; 
+
+      # needed for hydra to be able to pull from github src
+      allowed-uris = [
+        "github:"
+        "git+https://github.com/"
+        "git+ssh://github.com/"
+      ];
+    };
+  };
 
   networking.hostName = "nix-server";
 }
