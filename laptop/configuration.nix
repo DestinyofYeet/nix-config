@@ -48,11 +48,11 @@
 
       substituters = [
         "https://cache.nixos.org/"
-        "http://10.42.5.3:5000"
+        "https://cache.uwuwhatsthis.de"
       ];
 
       trusted-public-keys = [
-        "10.42.5.3:pPIfgSqGXJJIarqPqoY03sMiK8PvHyfOLRfXtOTI5DY="
+        "cache.uwuwhatsthis.de:txvk1Ce262SZ7Wd/5qRKO1ycmSVm5Xt+/Izf1FGPCbA="
       ];
   };
 
