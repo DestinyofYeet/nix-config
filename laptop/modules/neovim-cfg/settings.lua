@@ -46,7 +46,7 @@ vim.keymap.set('x', '<', '<gv')
 -- vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")
 
 -- Use system clipboard
-opt.clipboard:append("unnamedplus")
+opt.clipboard = { 'unnamedplus', 'unnamed' }
 
 -- config telescope
 -- set keymaps
