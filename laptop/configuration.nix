@@ -64,8 +64,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  programs.zsh.enable = true;
-
   networking.extraHosts = ''
     10.42.5.3 nix-server.infra.wg
   '';

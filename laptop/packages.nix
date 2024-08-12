@@ -22,8 +22,10 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  programs.zsh.enable = true;
+  programs.firefox.enable = true;
+
   environment.systemPackages = with pkgs; [
-    firefox
     neovim
     asciiquarium
     cowsay
@@ -49,5 +51,6 @@ in
     magic-wormhole-rs
     element-desktop
     python3
+    helix
   ] ++ lua-pkgs;
 }

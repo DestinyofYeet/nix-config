@@ -47,7 +47,11 @@ in {
     };
 
     input.keyboard = {
-      layouts = [ "de" ];
+      layouts = [
+        {
+          layout = "de";
+        }
+      ];
       numlockOnStartup = "on";
     };
 
