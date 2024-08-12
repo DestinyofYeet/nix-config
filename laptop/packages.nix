@@ -24,6 +24,7 @@ in
 
   programs.zsh.enable = true;
   programs.firefox.enable = true;
+  programs.neovim.enable = true;
 
   environment.systemPackages = with pkgs; [
     neovim
@@ -52,5 +53,8 @@ in
     element-desktop
     python3
     helix
+    libreoffice-qt6-fresh
+    vlc
+    wl-clipboard
   ] ++ lua-pkgs;
 }
