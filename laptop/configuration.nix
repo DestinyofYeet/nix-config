@@ -66,6 +66,7 @@
 
   networking.extraHosts = ''
     10.42.5.3 nix-server.infra.wg
+    10.42.5.1 truenas.infra.wg
   '';
 
   environment.etc."current-system-packages".text =
@@ -75,4 +76,7 @@
       formatted = builtins.concatStringsSep "\n" sortedUnique;
     in
       formatted;
+
+  boot.supportedFilesystems = [ "nfs" ];
+  services.rpcbind.enable = true;
 }

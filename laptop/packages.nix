@@ -61,5 +61,6 @@ in
     nfs-utils
     mp3gain
     flac
+    nmap
   ] ++ lua-pkgs;
 }
