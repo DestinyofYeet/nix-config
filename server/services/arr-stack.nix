@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   namespace = "vpn-ns";
 
@@ -6,11 +6,17 @@ let
     dataDir = "/configs";
     enable = true;
   };
+
+  sonarr = {
+      dataDir = "/configs/sonarr";
+      enable = true;
+      openFirewall = true;
+  };
 in {
 
   age.secrets = {
     airvpn-config = {
-      file = ./secrets/airvpn_config.age;
+      file = ../secrets/airvpn_config.age;
       path = "/etc/wireguard/wg0.conf";
     };
   };
@@ -27,10 +33,13 @@ in {
 
     onFailure = [ "vpn-ns-failure.service" ];
 
+    unitConfig = {
+      ConditionPathExists = "!/var/run/netns/${namespace}";
+    };
+
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = "true";
-      ConditionPathExists = "!/var/run/netns/${namespace}";
       ExecStart = pkgs.writeScript "ns-isolation" ''
         #!${pkgs.bash}/bin/bash
           set -e
@@ -39,7 +48,7 @@ in {
           ip netns exec ${namespace} ip link set dev lo up
           ip link add wg0 type wireguard
           ip link set wg0 netns ${namespace}
-          ip -n ${namespace} addr add $(${pkgs.coreutils}/bin/cat ${apps.vpn-ns.vpn-config} | ${pkgs.gnugrep}/bin/grep Address | ${pkgs.gawk}/bin/awk '{print $3}' | ${pkgs.gnused}/bin/sed 's/,.*$//')/24 dev wg0
+          ip -n ${namespace} addr add $(${pkgs.coreutils}/bin/cat ${config.age.secrets.airvpn-config.path} | ${pkgs.gnugrep}/bin/grep Address | ${pkgs.gawk}/bin/awk '{print $3}' | ${pkgs.gnused}/bin/sed 's/,.*$//')/24 dev wg0
           ip netns exec ${namespace} wg syncconf wg0 <(${pkgs.wireguard-tools}/bin/wg-quick strip ${config.age.secrets.airvpn-config.path})
           ip -n ${namespace} link set wg0 up
           ip -n ${namespace} route add default dev wg0
@@ -93,8 +102,16 @@ in {
     serviceConfig = {
       Type = "simple";
       Restart = "always";
+      NetworkNamespacePath="/var/run/netns/${namespace}";
+      User = config.serviceSettings.user;
+      Group = config.serviceSettings.group;
       ExecStart =
-        "${pkgs.iproute2}/bin/ip netns exec ${namespace} /run/wrappers/bin/sudo -u ${apps.user}  ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit.dataDir}";
+        "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit.dataDir}";
     };
+  };
+
+  services.sonarr = {
+    inherit (sonarr) enable dataDir openFirewall;
+    inherit (config.serviceSettings) user group;
   };
 }

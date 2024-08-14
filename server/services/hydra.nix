@@ -1,4 +1,4 @@
-{ ... }:{
+{ config, ... }:{
   age.secrets = {
     hydra-email-credentials = { file = ../secrets/hydra-email-credentials.age; };
   };

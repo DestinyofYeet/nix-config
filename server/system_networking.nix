@@ -72,4 +72,6 @@
       nameserver 127.0.0.1
     '';
   };
+
+  networking.firewall.enable = false;
 }
