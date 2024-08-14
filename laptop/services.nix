@@ -67,6 +67,8 @@ in
 
       RADEON_POWER_PROFILE_ON_AC = "high";
       RADEON_POWER_PROFILE_ON_BAT = "low";
+
+      WOL_DISABLE= "Y";
     };    
   };
 
@@ -92,4 +94,6 @@ in
       };
     };
   };
+
+  services.fwupd.enable = true;
 }
