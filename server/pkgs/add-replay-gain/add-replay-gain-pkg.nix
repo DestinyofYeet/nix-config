@@ -1,7 +1,7 @@
 { 
-  fetchFromGitHub,
   rustPlatform,
   lib,
+  fetchzip,
 }: 
 
 rustPlatform.buildRustPackage rec {
@@ -17,9 +17,9 @@ rustPlatform.buildRustPackage rec {
   #  hash = "sha256-hDOpIcz+OAWa+sH/kMqA4gcCdo7/aVf8pyslWhXenLY=";
   #};
 
-  src = fetchTarball {
-    url = "https://github.com/DestinyofYeet/add_replay_gain/archive/refs/tags/v1.2.tar.gz";
-    sha256 = "0rp0grzl6szyzcda3lzn76w21vab9pl63v95lbsx3x95xg2dpkgp";
+  src = fetchzip {
+    url = "https://github.com/DestinyofYeet/add_replay_gain/archive/00649d11166476d0557f98a3a0ef559ff7f31861.zip";
+    hash = "sha256-M/ykbeuBUSe41rfB0lucsHoSr6bKCSSVkOepY7i35Rk=";
   };
 
   cargoHash = "sha256-WCo8S4BwEW8X4DxJbTbSiRBwUap89hWA9ivohyPEpqY=";
