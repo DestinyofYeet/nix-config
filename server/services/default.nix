@@ -17,5 +17,6 @@
     ./openssh.nix
     ./hydra.nix
     ./nginx.nix
+    ./innernet.nix
   ];
 }
