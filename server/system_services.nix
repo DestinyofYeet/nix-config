@@ -1,5 +1,9 @@
 { config, pkgs, lib, modulesPath, ... }:
 let
+  custom_pkgs_imports = [
+    ./pkgs/add-replay-gain/module.nix 
+  ];
+
   ports = {
     wireguard = 51820;
     netdata = 19999;
@@ -102,6 +106,11 @@ let
         allowed-uris = https://github.com/*
       '';
     };
+
+    addReplayGain = {
+      enable = true;
+      watchDirectory = "/data/media/navidrome";
+    };
   };
 
   firewall_ports = with ports; [
@@ -120,6 +129,9 @@ let
 
   namespaces = { name = "vpn-ns"; };
 in {
+
+  imports = custom_pkgs_imports;
+
   # enable openssh server
   services.openssh.enable = true;
 
@@ -295,6 +307,11 @@ in {
 
     uptime-kuma = {
       inherit (apps.uptime-kuma) enable settings;
+    };
+
+    addReplayGain = {
+      inherit (apps.addReplayGain) enable watchDirectory;
+      inherit (apps) user group;
     };
 
     inherit (apps) surrealdb elasticsearch monero nix-serve hydra;

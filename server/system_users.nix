@@ -31,4 +31,11 @@
   };
 
   users.groups.monero = { gid = 991; };
+
+  users.users.nix-serve = {
+    isSystemUser = true;
+    group = "nix-serve";
+  };
+
+  users.groups.nix-serve = {};
 }
