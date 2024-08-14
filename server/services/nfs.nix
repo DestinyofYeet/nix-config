@@ -1,6 +1,6 @@
 { ... }:
 let
-  apps-id = 568; 
+  apps-id = "568"; 
 in {
   fileSystems."/nfs/navidrome" = {
     device = "/data/media/navidrome";
@@ -14,4 +14,4 @@ in {
       /export/navidrome   192.168.0.0/24(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=${apps-id},anongid=${apps-id})
     '';
   };
-};
+}
