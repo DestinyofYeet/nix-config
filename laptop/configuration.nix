@@ -48,11 +48,11 @@
 
       substituters = [
         "https://cache.nixos.org/"
-        "https://cache.uwuwhatsthis.de"
+        "http://nix-server.infra.wg:5000?priority=10"
       ];
 
       trusted-public-keys = [
-        "cache.uwuwhatsthis.de:txvk1Ce262SZ7Wd/5qRKO1ycmSVm5Xt+/Izf1FGPCbA="
+        "nix-server.infra.wg:6NVrebwBuWHxZx8PNXQwgBHamQer7VcMBYxerF/xvr8="
       ];
   };
 
@@ -67,4 +67,12 @@
   networking.extraHosts = ''
     10.42.5.3 nix-server.infra.wg
   '';
+
+  environment.etc."current-system-packages".text =
+    let
+      packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+      sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
+      formatted = builtins.concatStringsSep "\n" sortedUnique;
+    in
+      formatted;
 }

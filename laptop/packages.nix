@@ -56,5 +56,8 @@ in
     libreoffice-qt6-fresh
     vlc
     wl-clipboard
+    openfortivpn
+    openvpn
+    nfs-utils
   ] ++ lua-pkgs;
 }
