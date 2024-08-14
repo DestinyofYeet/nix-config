@@ -59,5 +59,7 @@ in
     openfortivpn
     openvpn
     nfs-utils
+    mp3gain
+    flac
   ] ++ lua-pkgs;
 }
