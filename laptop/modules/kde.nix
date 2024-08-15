@@ -14,8 +14,13 @@ in {
 
   programs.plasma = {
     enable = true;
-
     overrideConfig = true;
+
+    spectacle = {
+      shortcuts = {
+        captureRectangularRegion = "Meta+Shift+S";
+      };
+    };
 
     workspace = {
       clickItemTo = "select";
@@ -96,6 +101,7 @@ in {
               "applications:org.kde.dolphin.desktop"
               "applications:kitty.desktop"
               "applications:com.github.xournalpp.xournalpp.desktop"
+              "applications:org.kde.spectacle.desktop"
             ];
           };
         }
