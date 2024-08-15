@@ -8,11 +8,7 @@ let
 in {
   options = {
     services.addReplayGain = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Enable the add_replay_gain service.";
-      };
+      enable = mkEnableOption "add replay gain to files";
 
       watchDirectory = mkOption {
         type = types.str;
