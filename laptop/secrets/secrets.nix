@@ -9,4 +9,5 @@ in {
   "ssh-key-oth-gitlab.age".publicKeys = authed;
   "ssh-key-vps-main.age".publicKeys = authed;
   "stalwart-ole-pw.age".publicKeys = authed;
+  "ssh-key-github-wattson.age".publicKeys = authed;
 }
