@@ -35,6 +35,7 @@ in {
       (mkPlugin nvim-treesitter ./neovim-cfg/nvim-tree-sitter.lua)
       (mkPlugin mason-nvim ./neovim-cfg/lsp/mason.lua)
       (mkPlugin nvim-lspconfig ./neovim-cfg/lsp/lspconfig.lua)
+      (mkPlugin trouble-nvim ./neovim-cfg/trouble.lua)
       telescope-zf-native-nvim
       nvim-web-devicons
       mason-lspconfig-nvim
