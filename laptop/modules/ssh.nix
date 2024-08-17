@@ -3,6 +3,23 @@
 
   programs.ssh.addKeysToAgent = "yes";
 
+  age.secrets = {
+      ssh-gitlab-oth = {
+        file = ../secrets/ssh-key-oth-gitlab.age;
+      };
+      ssh-vps-main = {
+        file = ../secrets/ssh-key-vps-main.age;
+      };
+
+      ssh-fsim-ori = {
+        file = ../secrets/ssh-key-fsim-ori.age;
+      };
+
+      ssh-github-wattson = {
+        file = ../secrets/ssh-key-github-wattson.age;
+      };
+  };
+
 
   home.file = {
     "/home/ole/.ssh/config" = {
@@ -26,6 +43,11 @@
           Hostname gitlab.oth-regensburg.de
           User git
           IdentityFile ${config.age.secrets.ssh-gitlab-oth.path}
+
+        Host github.com
+          Hostname github.com
+          User git
+          IdentityFile ${config.age.secrets.ssh-github-wattson.path}
       '';
     };
   };
