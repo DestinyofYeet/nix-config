@@ -62,5 +62,6 @@ in
     mp3gain
     flac
     nmap
+    brightnessctl
   ] ++ lua-pkgs;
 }

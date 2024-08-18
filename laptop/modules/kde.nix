@@ -16,6 +16,15 @@ in {
     enable = true;
     overrideConfig = true;
 
+    kscreenlocker = {
+      appearance.wallpaper = ../../images/wallhaven-lighthouse-snow.jpg;
+      autoLock = true;
+      lockOnResume = true;
+      passwordRequired = true;
+      passwordRequiredDelay = 5;
+      timeout = 5;
+    };
+
     spectacle = {
       shortcuts = {
         captureRectangularRegion = "Meta+Shift+S";
@@ -46,10 +55,6 @@ in {
       };
     };
     
-
-    kscreenlocker.appearance = {
-      wallpaper = ../../images/wallhaven-lighthouse-snow.jpg;
-    };
 
     input.keyboard = {
       layouts = [
