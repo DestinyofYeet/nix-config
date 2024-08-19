@@ -5,7 +5,7 @@
   };
 
   services.surrealdb = {
-    enable = true;
+    enable = false;
     host = "0.0.0.0";
     extraFlags = [
       "--auth"

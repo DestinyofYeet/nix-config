@@ -19,4 +19,10 @@
   systemd.services.hydra-notify = {
     serviceConfig.EnvironmentFile = "${config.age.secrets.hydra-email-credentials.path}";
   };  
+
+  nix.settings.allowed-uris = [
+    "github:"
+    "git+https://github.com/"
+    "git+ssh://github.com/"
+  ];
 }

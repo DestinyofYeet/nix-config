@@ -32,6 +32,8 @@
     nixfmt-classic
     wormhole-rs
     nix-serve
+    docker
+    docker-compose
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
