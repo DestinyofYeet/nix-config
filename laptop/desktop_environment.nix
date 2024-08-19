@@ -10,9 +10,10 @@
   services.displayManager.sddm = {
     enable = true;
     theme = "catppuccin-mocha";
+
+    wayland.enable = true;
   };
 
-  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   environment.systemPackages = [(
