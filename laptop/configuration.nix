@@ -48,7 +48,7 @@
 
       substituters = [
         "https://cache.nixos.org/"
-        "http://nix-server.infra.wg:5000?priority=10"
+        "http://nix-server.infra.wg:5000?priority=50"
       ];
 
       trusted-public-keys = [
