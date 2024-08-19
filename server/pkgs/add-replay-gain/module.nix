@@ -39,14 +39,18 @@ in {
         description = "Group to run as";
       };
 
+      uptimeUrl = mkOption {
+        type = types.str;
+        default = null;
+        description = "The url to GET every 60 seconds";
+      };
+
       extraSettings = mkOption {
         type = types.lines;
         default = "";
         description = "Additional settings to include in the config.toml.";
       };
-    };
-  };
-
+    }; };
   config = mkIf cfg.enable {
     systemd.services.add-replay-gain = let 
       config-file = pkgs.writeText "config.toml" ''
@@ -60,6 +64,9 @@ in {
         [MP3]
         mp3gain_bin = ${pkgs.mp3gain}/bin/mp3gain
         mp3gain_flags = ${cfg.mp3GainFlags}
+
+        [UPTIME]
+        uptime_url = ${cfg.uptimeUrl}
         '';
 
     in {

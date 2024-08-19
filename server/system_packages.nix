@@ -34,6 +34,8 @@
     nix-serve
     docker
     docker-compose
+    openssl.dev
+    pkg-config 
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:

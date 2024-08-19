@@ -18,5 +18,6 @@
     ./hydra.nix
     ./nginx.nix
     ./innernet.nix
+    ./prowlarr.nix
   ];
 }
