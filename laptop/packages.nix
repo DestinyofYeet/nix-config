@@ -63,5 +63,6 @@ in
     flac
     nmap
     brightnessctl
+    feishin
   ] ++ lua-pkgs;
 }
