@@ -1,4 +1,8 @@
-{ config }:{
+{ config, ... }:{
+  age.secrets = {
+    syncthing-handy-id = { file = ../secrets/syncthing-handy-id.age; };
+  };
+
   services.syncthing = {
     enable = true;
     settings = {
@@ -7,16 +11,33 @@
           path = "/data/photos/handy/Camera";
           label = "Camera";
           id = "camera";
+
+          devices = [ "handy" ];
+        };
+
+        default = {
+          path = "/data/syncthing/default-folder";
+          label = "Default Folder";
+          id = "default";
         };
       };
 
       devices = {
         handy = {
           name = "Handy";
-          id = "handy";
+          id = config.serviceSettings.secrets.syncthing.handy.id;
         };
       };
+
+      gui = {
+        user = "admin";
+        password = "$2b$12$6/o5B5F0.L14z4AAa2beju7zKXELfXD/toTtH1iH8xQ4A7nX3vQE6";
+      };
     };
+
+    guiAddress = "0.0.0.0:8384";
+
+    dataDir = "/data/syncthing";
 
     inherit (config.serviceSettings) user group;
   };

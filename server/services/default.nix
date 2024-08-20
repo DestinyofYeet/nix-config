@@ -19,5 +19,6 @@
     ./nginx.nix
     ./innernet.nix
     ./prowlarr.nix
+    ./syncthing.nix
   ];
 }

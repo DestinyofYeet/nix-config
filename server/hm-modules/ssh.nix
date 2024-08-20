@@ -4,7 +4,7 @@
   programs.ssh.addKeysToAgent = true;
 
   age.secrets = {
-    ssh-github = { file = ../secrets/ssh-github.age; };
+    ssh-github = { file = ../secrets/ssh-github-nixos.age; };
   };
 
   home.file = {

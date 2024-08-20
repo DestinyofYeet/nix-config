@@ -39,6 +39,7 @@
   {
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit home-manager inputs; };
       modules = [
         ./server
       ] ++ baseline-modules;

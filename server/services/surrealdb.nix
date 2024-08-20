@@ -1,9 +1,5 @@
 { config, ... }:{
   
-  age.secrets = {
-    surrealdb-root-pw = { file  = ../secrets/surrealdb_root_pw.age; };
-  };
-
   services.surrealdb = {
     enable = false;
     host = "0.0.0.0";
@@ -12,7 +8,7 @@
       "--user"
       "root"
       "--pass"
-      "${builtins.readFile config.age.secrets.surrealdb-root-pw.path}"
+      "${config.serviceSettings.secrets.surrealdb.root-pw}"
     ];
   };
 }
