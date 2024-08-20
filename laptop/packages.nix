@@ -26,6 +26,13 @@ in
   programs.firefox.enable = true;
   programs.neovim.enable = true;
 
+  programs.steam = {
+    enable = true;
+    gamescopeSession = {
+      enable = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     neovim
     asciiquarium
