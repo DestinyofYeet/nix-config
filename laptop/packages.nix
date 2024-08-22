@@ -68,5 +68,6 @@ in
     nmap
     brightnessctl
     feishin
+    android-tools
   ] ++ lua-pkgs;
 }
