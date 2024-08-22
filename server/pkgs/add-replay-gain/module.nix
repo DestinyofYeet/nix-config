@@ -71,7 +71,7 @@ in {
 
     in {
       description = "Add Replay Gain to audio files";
-      after = [ "multi-user.target" ];
+      wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         ExecStart = "${addReplayGain}/bin/add_replay_gain_to_files --config ${config-file}";
         Restart = "on-failure";

@@ -1,8 +1,4 @@
 { config, ... }:{
-  age.secrets = {
-    syncthing-handy-id = { file = ../secrets/syncthing-handy-id.age; };
-  };
-
   services.syncthing = {
     enable = true;
     settings = {
