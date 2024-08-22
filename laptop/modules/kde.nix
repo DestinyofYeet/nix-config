@@ -171,6 +171,26 @@ in {
 
         right = [];
       };
+
+      nightLight = {
+        enable = true;
+
+        mode = "times";
+        temperature = {
+          day = 6500;
+          night = 3500;
+        };
+
+        time = {
+          # start
+          evening = "22:00";
+
+          # stop
+          morning = "06:00";
+        };
+
+        transitionTime = 10;
+      };
     };
 
     configFile = {
