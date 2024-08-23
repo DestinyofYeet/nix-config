@@ -16,7 +16,6 @@
     ./btop.nix
     ./ssh.nix
     ./agenix.nix
-    ./git.nix
     ./nvim.nix
   ];
 }
