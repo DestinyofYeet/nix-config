@@ -5,7 +5,11 @@
     isNormalUser = true;
     description = "ole";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ 
+      "networkmanager" 
+      "wheel" 
+    ];
+    hashedPassword = "$y$j9T$crvVN5eaEGJM85SYKOAVm/$WYjB56/3GcSB5sR7/u8Ldpz0wtMcyrJWinqru/dvkB/";
     packages = with pkgs; [
       kdePackages.kate
       thunderbird

@@ -26,6 +26,11 @@ in
   programs.firefox.enable = true;
   programs.neovim.enable = true;
 
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
+
   programs.steam = {
     enable = true;
   };
