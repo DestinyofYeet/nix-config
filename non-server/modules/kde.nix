@@ -27,6 +27,7 @@
   };
 
   used-kde-bar = if osConfig.networking.hostName == "wattson" then [ laptop-kde-bar ] else [];
+
 in {
   services.kdeconnect = {
     enable = true;
@@ -123,6 +124,7 @@ in {
     panels = [{
       location = "bottom";
       height = 48;
+      screen = "all";
       widgets = [
         {
           kickoff = {
