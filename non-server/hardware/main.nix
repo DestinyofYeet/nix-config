@@ -54,7 +54,7 @@
     };
 
     "/drives/langsames_drecks_ding2" = {
-      device = "/dev/sda2";
+      device = "/dev/sdc2";
       fsType = "btrfs";
       options = [
        "nofail" 
