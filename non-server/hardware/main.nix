@@ -43,4 +43,22 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  fileSystems = {
+    "/drives/navidrome" = {
+      device = "192.168.0.248:/export/navidrome";
+      fsType = "nfs";
+    };
+
+    "/drives/langsames_drecks_ding2" = {
+      device = "/dev/sda2";
+      fsType = "btrfs";
+    };
+
+    "/drives/programming-Stuff" = {
+      device = "192.168.0.250:/mnt/data/data/Programming-Stuff";
+      fsType = "nfs";
+      options = [ "hard" "intr" ];
+    };
+  };
 }
