@@ -51,8 +51,8 @@
         inherit home-manager plasma-manager inputs;
       };
       modules = [
-        ./laptop/hardware/kartoffelkiste.nix
-				./laptop
+        ./non-server/hardware/kartoffelkiste.nix
+				./non-server
 			] ++ laptop-modules;
 		};
 
@@ -62,9 +62,22 @@
         inherit home-manager plasma-manager inputs;
       };
       modules = [
-        ./laptop/hardware/wattson.nix
-				./laptop
+        ./non-server/hardware/wattson.nix
+				./non-server
+        ./non-server/extra-configurations/laptop.nix
 			] ++ laptop-modules;
 		};
+
+	nixosConfigurations.main = nixpkgs.lib.nixosSystem {
+		system = "x86_64-linux";
+		specialArgs = {
+			inherit home-manager plasma-manager inputs;
+		};
+		modules = [
+			./non-server/hardware/main.nix
+			./non-server/extra-configurations/main.nix
+      ./non-server
+ 		] ++ laptop-modules;
+	};
   };
 }
