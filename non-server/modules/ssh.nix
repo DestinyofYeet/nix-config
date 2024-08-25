@@ -35,29 +35,11 @@ in {
     "ssh-vps-main"
   ];
 
-  #age.secrets = {
-  #    ssh-gitlab-oth = {
-  #      file = builtins.toPath "${per-device-secrets}/ssh-key-oth-gitlab.age";
-  #    };
-  #    ssh-vps-main = {
-  #      file = builtins.toPath "${per-device-secrets}/ssh-key-vps-main.age";
-  #    };
-
-  #    ssh-fsim-ori = {
-  #      file = builtins.toPath "${per-device-secrets}/ssh-key-fsim-ori.age";
-  #    };
-
-  #    ssh-github = {
-  #      file = builtins.toPath "${per-device-secrets}/ssh-key-github.age";
-  #    };
-  #};
-
-
   home.file = {
     "/home/ole/.ssh/config" = {
       text = ''
         Host nix-server
-          Hostname 192.168.0.248
+          Hostname nix-server.infra.wg
           User ole
 
         ${config-github}
