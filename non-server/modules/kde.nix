@@ -86,6 +86,17 @@ in {
       numlockOnStartup = "on";
     };
 
+    input.mice = [
+      {
+        enable = true;
+        accelerationProfile = "none";
+        acceleration = -0.18;
+        name = "Logitech Gaming Mouse G502";
+        vendorId = "046d";
+        productId = "c332";
+      }
+    ];
+
     input.touchpads = [
       {
         enable = true;

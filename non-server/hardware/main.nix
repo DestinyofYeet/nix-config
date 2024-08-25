@@ -48,17 +48,24 @@
     "/drives/navidrome" = {
       device = "192.168.0.248:/export/navidrome";
       fsType = "nfs";
+      options = [
+       "nofail" 
+      ];
     };
 
     "/drives/langsames_drecks_ding2" = {
       device = "/dev/sda2";
       fsType = "btrfs";
+      options = [
+       "nofail" 
+      ];
     };
 
     "/drives/programming-Stuff" = {
       device = "192.168.0.250:/mnt/data/data/Programming-Stuff";
       fsType = "nfs";
-      options = [ "hard" "intr" ];
+      options = [ "hard" "intr" "nofail" ];
     };
   };
+  
 }
