@@ -57,7 +57,7 @@ in {
 
       wallpaper = ../../images/wallhaven-nightsky.jpg;
 
-      colorScheme = "SweetAmbarBlue";
+      colorScheme = "BreezeDark";
       theme = "Sweet-Ambar-Blue";
       iconTheme = "BeautySolar";
 

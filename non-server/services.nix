@@ -86,14 +86,6 @@ in
     };
   };
 
-  # disable baloo
-   environment = {
-    etc."xdg/baloofilerc".source = (pkgs.formats.ini {}).generate "baloorc" {
-      "Basic Settings" = {
-        "Indexing-Enabled" = false;
-      };
-    };
-  };
 
   services.fwupd.enable = true;
 }

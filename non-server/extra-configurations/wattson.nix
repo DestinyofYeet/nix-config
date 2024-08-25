@@ -20,4 +20,17 @@
     10.42.5.3 nix-server.infra.wg
     10.42.5.1 truenas.infra.wg
   '';
+
+  # disable baloo
+   environment = {
+    etc."xdg/baloofilerc".source = (pkgs.formats.ini {}).generate "baloorc" {
+      "Basic Settings" = {
+        "Indexing-Enabled" = false;
+      };
+    };
+  };
+
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    baloo # fuck this shit
+  ];
 }
