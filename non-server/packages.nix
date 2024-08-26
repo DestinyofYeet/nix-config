@@ -34,6 +34,8 @@ in
     enable = true;
   };
 
+  programs.direnv.enable = true;
+
   programs.noisetorch.enable = true;
 
   environment.systemPackages = with pkgs; [
