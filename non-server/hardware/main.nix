@@ -67,5 +67,14 @@
       options = [ "hard" "intr" "nofail" ];
     };
   };
-  
+
+  systemd.services = {
+    fix-sleep-issue = {
+      description = "Fix the sleep issue on my motherboard";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.bash}/bin/sh -c 'echo GPP0 > /proc/acpi/wakeup'";
+      };
+    };
+  };
 }
