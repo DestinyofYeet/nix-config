@@ -34,6 +34,8 @@ in
     enable = true;
   };
 
+  programs.noisetorch.enable = true;
+
   environment.systemPackages = with pkgs; [
     neovim
     asciiquarium

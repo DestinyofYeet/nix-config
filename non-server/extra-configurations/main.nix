@@ -2,8 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ ... }:
-
+{ pkgs, ... }:
+let
+  gaming-pkgs = with pkgs; [
+    gamescope
+    mangohud
+    amdvlk
+    gamemode
+    vkbasalt
+  ];
+in
 {
   nix.settings = {
       substituters = [
@@ -26,4 +34,12 @@
   networking.extraHosts = ''
     192.168.0.248 nix-server.infra.wg
   '';
+
+  programs.steam.extraPackages = gaming-pkgs;
+
+  hardware.amdgpu.amdvlk.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    vulkan-tools
+  ] ++ gaming-pkgs;
 }

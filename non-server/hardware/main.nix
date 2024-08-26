@@ -54,7 +54,7 @@
     };
 
     "/drives/langsames_drecks_ding2" = {
-      device = "/dev/sdc2";
+      device = "/dev/disk/by-uuid/f5674361-378c-410d-a600-8ebe8b5056dd";
       fsType = "btrfs";
       options = [
        "nofail" 
