@@ -7,27 +7,6 @@
       ${pkgs.bash}/bin/bash ${scripts.update-needed-content}/bin/update-needed-content ${src} ${dst}
     '';
 
-  laptop-kde-bar = {  
-    systemMonitor = {
-      showLegend = false;
-      displayStyle = "org.kde.ksysguard.textonly";
-      sensors = [ 
-        {
-          name = "cpu/all/averageTemperature";
-          color = "13,0,255";
-          label = "CPU Temp";
-        }
-        {
-          name = "power/1451/chargeRate";
-          color = "183,0,255";
-          label = "Charging Rate";
-        }
-      ];
-    };
-  };
-
-  used-kde-bar = if osConfig.networking.hostName == "wattson" then [ laptop-kde-bar ] else [];
-
 in {
   services.kdeconnect = {
     enable = true;
@@ -144,6 +123,25 @@ in {
             ];
           };
         }
+        
+        (lib.mkIf (osConfig.networking.hostName == "wattson") {
+          systemMonitor = {
+            showLegend = false;
+            displayStyle = "org.kde.ksysguard.textonly";
+            sensors = [ 
+              {
+                name = "cpu/all/averageTemperature";
+                color = "13,0,255";
+                label = "CPU Temp";
+              }
+              {
+                name = "power/1451/chargeRate";
+                color = "183,0,255";
+                label = "Charging Rate";
+              }
+            ];
+          };
+        })
 
         "org.kde.plasma.marginsseparator"
 
@@ -162,7 +160,7 @@ in {
             time.format = "24h";
           };
         }
-      ] ++ used-kde-bar;
+      ];
     }];
 
     powerdevil.AC = {

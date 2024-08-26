@@ -63,8 +63,8 @@
       };
       modules = [
         ./non-server/hardware/wattson.nix
+        ./non-server/extra-configurations/wattson.nix
 				./non-server
-        ./non-server/extra-configurations/laptop.nix
 			] ++ laptop-modules;
 		};
 
