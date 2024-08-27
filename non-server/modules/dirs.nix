@@ -24,6 +24,10 @@
       share = {
         path = "${home.local.path}/share";
 
+        color-schemes = {
+          path = "${home.local.share.path}/color-schemes";
+        };
+
         icons = {
           path = "${home.local.share.path}/icons";
         };

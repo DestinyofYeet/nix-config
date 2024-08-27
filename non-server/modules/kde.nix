@@ -7,6 +7,10 @@
       ${pkgs.bash}/bin/bash ${scripts.update-needed-content}/bin/update-needed-content ${src} ${dst}
     '';
 
+  gen-activation-file = src : dst : ''
+    ${pkgs.bash}/bin/bash ${scripts.update-needed-content-file}/bin/update-needed-content-file ${src} ${dst} 
+  '';
+
 in {
   services.kdeconnect = {
     enable = true;
@@ -37,7 +41,7 @@ in {
 
       wallpaper = ../../images/wallhaven-nightsky.jpg;
 
-      colorScheme = "BreezeDark";
+      colorScheme = "";
       theme = "Sweet-Ambar-Blue";
       iconTheme = "BeautySolar";
 
@@ -246,6 +250,8 @@ in {
     updateSplashScreen = gen-activation ../needed-content/Splashscreens/Aretha-Splash-6 "${dirs.home.local.share.plasma.look-and-feel.path}/Aretha-Splash-6";
 
     updateCursor = gen-activation ../needed-content/Cursors/Posy_Cursor_Black_125_175 "${dirs.home.icons.path}/Posy_Cursor_Black_125_175";
+
+    updateColorSchemes = gen-activation-file ../needed-content/color-schemes/SweetAmbarBlue.colors "${dirs.home.local.share.color-schemes.path}/SweetAmbarBlue.colors";
 
   };
 }
