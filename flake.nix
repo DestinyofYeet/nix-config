@@ -68,16 +68,16 @@
 			] ++ laptop-modules;
 		};
 
-	nixosConfigurations.main = nixpkgs.lib.nixosSystem {
-		system = "x86_64-linux";
-		specialArgs = {
-			inherit home-manager plasma-manager inputs;
-		};
-		modules = [
-			./non-server/hardware/main.nix
-			./non-server/extra-configurations/main.nix
-      ./non-server
- 		] ++ laptop-modules;
-	};
+    nixosConfigurations.main = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit home-manager plasma-manager inputs;
+      };
+      modules = [
+        ./non-server/hardware/main.nix
+        ./non-server/extra-configurations/main.nix
+        ./non-server
+      ] ++ laptop-modules;
+    };
   };
 }
