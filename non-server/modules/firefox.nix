@@ -3,6 +3,11 @@
 in {
   programs.firefox.enable = true;
 
+  home.sessionVariables = {
+    # enable wayland for firefox
+    MOZ_ENABLE_WAYLAND = 1;
+  };
+
   programs.firefox.profiles.default-profile = {
     id = 0;
     name = "default-profile";
@@ -91,6 +96,7 @@ in {
       "app.shield.optoutstudies.enabled" = false;
       "extensions.formautofill.creditCards.enabled" = false;
       "signon.rememberSignons" = false;
+      "widget.use-xdg-desktop-portal.file-picker" = 1;
     };
 
     search.default = "Startpage";

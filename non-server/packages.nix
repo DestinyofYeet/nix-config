@@ -77,5 +77,6 @@ in
     brightnessctl
     feishin
     android-tools
+    signal-desktop
   ] ++ lua-pkgs;
 }
