@@ -20,6 +20,6 @@
     ./innernet.nix
     ./prowlarr.nix
     ./syncthing.nix
-    ../../pkgs/
+    ../../pkgs
   ];
 }
