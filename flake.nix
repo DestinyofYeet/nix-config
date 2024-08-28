@@ -79,5 +79,10 @@
         ./non-server
       ] ++ laptop-modules;
     };
+
+    hydraJobs = {
+      wattson = self.nixosConfigurations.wattson.config.system.build.toplevel;
+      main = self.nixosConfigurations.main.config.system.build.toplevel;
+    };
   };
 }
