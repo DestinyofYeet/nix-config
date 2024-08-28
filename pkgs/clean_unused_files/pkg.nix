@@ -30,7 +30,7 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "A tool to automatically remove unused files from qbittorrent";
     license = licenses.gpl3;
-    maintainers = [ maintainers.DestinyofYeet ];
+    # maintainers = [ maintainers.DestinyofYeet ];
     platforms = platforms.all;
   };
 }
