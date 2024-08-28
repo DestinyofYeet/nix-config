@@ -14,5 +14,5 @@ in
 {
   pkgs = mapAttrs filterValidPkgs outputs.packages;
   hosts = mapAttrs getCfg outputs.nixosConfigurations;
-  homes = mapAttrs getHomeCfg outputs.homeConfigurations;
+  # homes = mapAttrs getHomeCfg outputs.homeConfigurations;
 }
