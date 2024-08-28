@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1724876110,
-        "narHash": "sha256-xTa3Tgfgz1OOvxPez0RBqHqsJWQZC2bAmb2LrSJd2JE=",
+        "lastModified": 1724876999,
+        "narHash": "sha256-iflW2um2g4c/oBKdQEc9R80Ds9LOb6Bf1pdKDp9yeBM=",
         "owner": "DestinyofYeet",
         "repo": "add_replay_gain",
-        "rev": "87d7f5478e89ab9dcd008a68bbde75141c1438e8",
+        "rev": "2301fb9c973b3af48a0774379de68394a2bb13ee",
         "type": "github"
       },
       "original": {
