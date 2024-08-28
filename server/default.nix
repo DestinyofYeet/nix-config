@@ -8,6 +8,7 @@
   home-manager.users.ole = import ./hm-modules;
 
   imports = [
+    ../baseline
     ./configuration.nix
     ./home_manager.nix
   ];
