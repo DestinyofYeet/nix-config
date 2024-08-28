@@ -19,10 +19,13 @@
 
     nur.url = "github:nix-community/NUR";
 
-    add-replay-gain.url = "github:DestinyofYeet/add_replay_gain";
+    add-replay-gain = {
+      url = "github:DestinyofYeet/add_replay_gain";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
+  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, add-replay-gain, ... }@inputs: let 
     inherit (self) outputs;
     baseline-modules = [
         home-manager.nixosModules.home-manager
@@ -44,7 +47,7 @@
       system = "x86_64-linux";
       specialArgs = { inherit home-manager inputs; };
       modules = [
-        inputs.add-replay-gain.add-replay-gain
+        inputs.add-replay-gain.nixosModules.add-replay-gain
         ./server
       ] ++ baseline-modules;
     };

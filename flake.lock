@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "add-replay-gain": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1724875048,
+        "narHash": "sha256-jjI2dnxNGptWB7o4XhxqrUo2zC2Tl5Sp43Bj/raymqI=",
+        "owner": "DestinyofYeet",
+        "repo": "add_replay_gain",
+        "rev": "436908fd0f9e74a5eda527a5f419da5ffdc48607",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "add_replay_gain",
+        "type": "github"
+      }
+    },
     "agenix": {
       "inputs": {
         "darwin": "darwin",
@@ -377,6 +397,7 @@
     },
     "root": {
       "inputs": {
+        "add-replay-gain": "add-replay-gain",
         "agenix": "agenix",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs_2",
