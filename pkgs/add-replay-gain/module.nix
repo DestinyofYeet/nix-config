@@ -50,7 +50,9 @@ in {
         default = "";
         description = "Additional settings to include in the config.toml.";
       };
-    }; };
+    }; 
+  };
+
   config = mkIf cfg.enable {
     systemd.services.add-replay-gain = let 
       config-file = pkgs.writeText "config.toml" ''

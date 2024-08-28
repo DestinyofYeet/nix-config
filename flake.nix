@@ -18,6 +18,8 @@
     stylix.url = "github:danth/stylix";
 
     nur.url = "github:nix-community/NUR";
+
+    add-replay-gain.url = "github:DestinyofYeet/add_replay_gain";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -42,6 +44,7 @@
       system = "x86_64-linux";
       specialArgs = { inherit home-manager inputs; };
       modules = [
+        inputs.add-replay-gain.add-replay-gain
         ./server
       ] ++ baseline-modules;
     };
