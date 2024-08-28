@@ -79,5 +79,7 @@
         ./non-server
       ] ++ laptop-modules;
     };
+
+    hydraJobs = import ./hydra.nix { inherit inputs outputs; };
   };
 }
