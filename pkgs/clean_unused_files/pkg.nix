@@ -7,16 +7,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "clean_unused_files";
-  version = "1.2";
+  version = "1.3";
 
   src = fetchFromGitHub {
     owner = "DestinyofYeet";
     repo = pname;
-    rev = "ba6da58217dabcc56a9ba9f744ff6ebb0f738445";
-    hash = "sha256-1iYk2SPh7iFoHK/ndcqYAIkkQEWSVJJlgpCCW4TCKoo=";
+    rev = "7133a549552629703cf890872c45e73c0a161ecb";
+    hash = "sha256-AWv+LEadDRgT1TN2zNs2ARAf8kcUm3kWgu61f5lx11M=";
   };
 
-  cargoHash = "sha256-k8QL8qJTZx6p7EwFDbLtt+Bd46zfnKgjC+0/ydHaudg=";
+  cargoHash = "sha256-Yk/GLdXi510foEyn/g9bijhugJ0vopsBMlfezHj0UCI=";
 
   nativeBuildInputs = with pkgs; [
     pkg-config
