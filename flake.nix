@@ -21,6 +21,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
+    inherit (self) outputs;
     baseline-modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
@@ -80,9 +81,6 @@
       ] ++ laptop-modules;
     };
 
-    hydraJobs = {
-      wattson = self.nixosConfigurations.wattson.config.system.build.toplevel;
-      main = self.nixosConfigurations.main.config.system.build.toplevel;
-    };
+    hydraJobs = import ./hydra.nix { inherit inputs outputs; };
   };
 }
