@@ -3,11 +3,11 @@
 with lib;
 
 let
-  cfg = config.services.clean_unused_files;
+  cfg = config.services.cleanUnusedFiles;
   pkg = pkgs.callPackage ./pkg.nix { };
 in {
   options = {
-    services.clean_unused_files = {
+    services.cleanUnusedFiles = {
       enable = mkEnableOption "cleaning of unused files";
 
       qbit = {
@@ -73,8 +73,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services.clean-unused-files = let 
-      config-file = pkgs.writeText "config.toml" ''
+    systemd.services.cleanUnusedFiles = let 
+      configFile = pkgs.writeText "config.toml" ''
         [QBIT]
         url = ${cfg.qbit.url}
         user = ${cfg.qbit.user}
@@ -93,13 +93,13 @@ in {
       description = "Clean qbittorrent of unused files";
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkg}/bin/clean_unused_files --config-file ${config-file} --data-file ${data-file}";
+        ExecStart = "${pkg}/bin/clean_unused_files --config-file ${configFile} --data-file ${cfg.dataFile}";
         User = cfg.user;
         Group = cfg.group;
       };
     };
 
-    systemd.timers.clean-unused-files = {
+    systemd.timers.cleanUnusedFiles = {
       wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = "daily";

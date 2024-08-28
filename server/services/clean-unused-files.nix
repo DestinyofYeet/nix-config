@@ -3,7 +3,7 @@ let
   secrets = config.serviceSettings.secrets; 
 in {
   
-  services.clean-unused-files = {
+  services.cleanUnusedFiles = {
     enable = true;
 
     qbit = {

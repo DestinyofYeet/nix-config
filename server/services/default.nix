@@ -21,5 +21,6 @@
     ./prowlarr.nix
     ./syncthing.nix
     ../../pkgs
+    ./clean-unused-files.nix
   ];
 }
