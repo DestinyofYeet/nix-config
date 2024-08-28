@@ -78,5 +78,6 @@ in
     feishin
     android-tools
     signal-desktop
+    easyeffects
   ] ++ lua-pkgs;
 }

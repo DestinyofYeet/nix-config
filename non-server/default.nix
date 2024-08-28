@@ -14,6 +14,7 @@
         
   imports = [
     ../baseline
-    ./configuration.nix    
+    ./configuration.nix
+    ./extra-configurations
   ];
 }
