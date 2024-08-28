@@ -17,5 +17,6 @@
     ./ssh.nix
     ./agenix.nix
     ./nvim.nix
+    ./git.nix
   ];
 }
