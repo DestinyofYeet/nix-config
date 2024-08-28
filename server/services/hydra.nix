@@ -12,7 +12,6 @@
     useSubstitutes = true;
     extraConfig = ''
       email_notification = 1
-      allowed-uris = https://github.com/*
     '';
   };
 
