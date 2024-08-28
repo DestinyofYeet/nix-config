@@ -11,9 +11,8 @@ let
   
   getCfg = name: cfg: if name == excludedHost then null else cfg.config.system.build.toplevel;
   
-  filterNulls = attrs: filterAttrs (_: v: v != null) attrs; getCfg = _: cfg: cfg.config.system.build.toplevel;
-in
-{
+  filterNulls = attrs: filterAttrs (_: v: v != null) attrs; 
+in {
   pkgs = mapAttrs filterValidPkgs outputs.packages;
   hosts = filterNulls (mapAttrs getCfg outputs.nixosConfigurations);
 }
