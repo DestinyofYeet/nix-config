@@ -64,6 +64,14 @@ in {
         description = "The group to run the service as";
       };
 
+      timerConfig = mkOption {
+        type = types.attrs;
+        default = {
+          OnCalendar = "daily";
+        };
+        description = "The systemd timer configuration";
+      };
+
       extraConfig = mkOption {
         type = types.lines;
         default = "";
@@ -101,9 +109,7 @@ in {
 
     systemd.timers.cleanUnusedFiles = {
       wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = "daily";
-      };
+      inherit (cfg) timerConfig;
     }; 
   };
 }
