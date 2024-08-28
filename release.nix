@@ -1,8 +1,6 @@
 { ... }:
 let 
   nixpkgs = (import <nixpkgs> {});
-  mkBuild = pkgs : packageNames: 
-        builtins.listToAttrs (map (name: { inherit name; value = pkgs.callPackage ${name} {}; }) packageNames);  
 
   forAllSystems = function:
     nixpkgs.lib.genAttrs [
