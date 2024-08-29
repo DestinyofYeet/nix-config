@@ -39,6 +39,8 @@ in
 
   hardware.amdgpu.amdvlk.enable = true;
 
+  programs.gamemode.enable = true;
+
   environment.systemPackages = with pkgs; [
     vulkan-tools
   ] ++ gaming-pkgs;
