@@ -120,6 +120,7 @@ in {
       multi-account-containers
       enhancer-for-youtube
       skip-redirect
+      keepassxc-browser
     ];
 
     settings = {
