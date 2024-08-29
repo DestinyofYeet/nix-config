@@ -37,6 +37,8 @@ in
 
   programs.noisetorch.enable = true;
 
+  programs.adb.enable = true;
+
   environment.systemPackages = with pkgs; [
     neovim
     asciiquarium
