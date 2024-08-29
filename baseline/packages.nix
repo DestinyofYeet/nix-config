@@ -19,5 +19,6 @@
     gccgo
     gnumake
     unzip
+    file
   ];
 }

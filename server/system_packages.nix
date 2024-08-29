@@ -26,7 +26,6 @@
     gnused
     coreutils
     nmap
-    file
     ripgrep
     tree
     nixfmt-classic
