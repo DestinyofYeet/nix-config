@@ -110,7 +110,7 @@
         builtins.listToAttrs (map (package: {name = package.name; value = package; }) packages);
 
     in {
-      packages = makePackages (mergePackages [
+      packages.x86_64-linux = makePackages (mergePackages [
         "wattson"
         "main"
         "nix-server"
