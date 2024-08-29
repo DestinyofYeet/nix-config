@@ -109,6 +109,7 @@
         "main"
         ] [
         "nixos-help"
+        "steam-run"
       ]);
     };
   };
