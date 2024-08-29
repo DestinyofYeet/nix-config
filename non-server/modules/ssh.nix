@@ -21,7 +21,7 @@ let
 
   config-github = mkConfigEntry "github.com" "github.com" "git" "ssh-key-github";
   config-oth-gitlab = mkConfigEntry "gitlab.oth-regensburg.de" "gitlab.oth-regensburg.de" "git" "ssh-key-oth-gitlab";
-  config-fsim-ori = mkConfigEntry "fsim-ori" "fsim.othr.de" "beo45216" "ssh-fsim-ori";
+  config-fsim-ori = mkConfigEntry "fsim-ori" "fsim.othr.de" "beo45216" "ssh-key-fsim-ori";
   config-vps-main = mkConfigEntry "uwuwhatsthis.de" "uwuwhatsthis.de" "ole" "ssh-key-vps-main";
   config-nix-server = mkConfigEntry "nix-server.infra.wg" "nix-server.infra.wg" "ole" "ssh-key-nix-server";
 in {
@@ -32,7 +32,7 @@ in {
   age.secrets = mkSecrets [
     "ssh-key-oth-gitlab"
     "ssh-key-github"
-    "ssh-fsim-ori"
+    "ssh-key-fsim-ori"
     "ssh-key-vps-main"
     "ssh-key-nix-server"
   ];
