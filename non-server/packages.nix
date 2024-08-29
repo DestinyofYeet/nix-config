@@ -80,5 +80,6 @@ in
     android-tools
     signal-desktop
     easyeffects
+    keepassxc
   ] ++ lua-pkgs;
 }
