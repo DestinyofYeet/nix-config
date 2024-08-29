@@ -20,7 +20,6 @@
     ./innernet.nix
     ./prowlarr.nix
     ./syncthing.nix
-    ../../pkgs
     ./clean-unused-files.nix
     ./nix-daemon.nix
   ];

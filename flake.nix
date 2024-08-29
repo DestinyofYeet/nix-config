@@ -46,8 +46,6 @@
 
       nur.nixosModules.nur
     ] ++ baseline-modules;
-
-    pkgs = import nixpkgs { system = "x86_64-linux"; };
   in
   {
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
@@ -109,33 +107,21 @@
         "steam"
       ];
 
-      lib = pkgs.lib;
-
       isNotBlacklisted = blacklist: pkg: !(builtins.elem pkg.name blacklist);
 
       mergePackages = configurations: blacklisted-pkgs :
         builtins.filter (isNotBlacklisted blacklisted-pkgs) (builtins.concatLists (map (configuration: self.nixosConfigurations.${configuration}.config.environment.systemPackages) configurations));
       
-      mergeCustomInputsPackages = customInputs :
-        builtins.concatLists (map (customInput: lib.lists.toList inputs.${customInput}.packages.x86_64-linux.${customInput}) customInputs);
-
-
       makePackages = packages:
         builtins.listToAttrs (map (package: {name = package.name; value = package; }) packages);
 
     in {
       packages.x86_64-linux = makePackages (
-        (mergeCustomInputsPackages 
-          [
-            "add-replay-gain"
-            "clean-unused-files"
-          ]) ++ (
-            mergePackages [
-              "wattson"
-              "main"
-              "nix-server"
-            ] blacklist
-          )
+        mergePackages [
+          "wattson"
+          "main"
+          "nix-server"
+        ] blacklist
       );
     };
   };
