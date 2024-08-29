@@ -23,6 +23,7 @@ let
   config-oth-gitlab = mkConfigEntry "gitlab.oth-regensburg.de" "gitlab.oth-regensburg.de" "git" "ssh-key-oth-gitlab";
   config-fsim-ori = mkConfigEntry "fsim-ori" "fsim.othr.de" "beo45216" "ssh-fsim-ori";
   config-vps-main = mkConfigEntry "uwuwhatsthis.de" "uwuwhatsthis.de" "ole" "ssh-vps-main";
+  config-nix-server = mkConfigEntry "nix-server" "nix-server.infra.wg" "ole" "ssh-vps-main";
 in {
   services.ssh-agent.enable = true;
 
@@ -33,6 +34,7 @@ in {
     "ssh-key-github"
     "ssh-fsim-ori"
     "ssh-vps-main"
+    "ssh-key-nix-server"
   ];
 
   home.file = {
@@ -46,6 +48,7 @@ in {
         ${config-oth-gitlab}
         ${config-fsim-ori}
         ${config-vps-main}
+        ${config-nix-server}
       '';
     };
   };

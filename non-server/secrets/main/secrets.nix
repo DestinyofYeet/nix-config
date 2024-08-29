@@ -6,4 +6,5 @@ let
 in {
   "ssh-key-github.age".publicKeys = authed;
   "ssh-key-oth-gitlab.age".publicKeys = authed;
+  "ssh-key-nix-server.age".publicKeys = authed;
 }
