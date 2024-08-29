@@ -155,6 +155,26 @@
         "type": "github"
       }
     },
+    "clean-unused-files": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1724934777,
+        "narHash": "sha256-Hy3IiXndi0GbLKlgPKkq0Syzg/WS7VC+H1j+ubuT5Q0=",
+        "owner": "DestinyofYeet",
+        "repo": "clean_unused_files",
+        "rev": "ca8236e8894fd5f92162ca1185f7a394a158f9ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "clean_unused_files",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -399,6 +419,7 @@
       "inputs": {
         "add-replay-gain": "add-replay-gain",
         "agenix": "agenix",
+        "clean-unused-files": "clean-unused-files",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",

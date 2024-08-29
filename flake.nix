@@ -23,9 +23,14 @@
       url = "github:DestinyofYeet/add_replay_gain";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    clean-unused-files = {
+      url = "github:DestinyofYeet/clean_unused_files";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, add-replay-gain, ... }@inputs: let 
+  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
     inherit (self) outputs;
     baseline-modules = [
         home-manager.nixosModules.home-manager
@@ -41,6 +46,8 @@
 
       nur.nixosModules.nur
     ] ++ baseline-modules;
+
+    pkgs = import nixpkgs { system = "x86_64-linux"; };
   in
   {
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
@@ -48,6 +55,7 @@
       specialArgs = { inherit home-manager inputs; };
       modules = [
         inputs.add-replay-gain.nixosModules.add-replay-gain
+        inputs.clean-unused-files.nixosModules.clean-unused-files
         ./server
       ] ++ baseline-modules;
     };
@@ -101,20 +109,34 @@
         "steam"
       ];
 
+      lib = pkgs.lib;
+
       isNotBlacklisted = blacklist: pkg: !(builtins.elem pkg.name blacklist);
 
       mergePackages = configurations: blacklisted-pkgs :
         builtins.filter (isNotBlacklisted blacklisted-pkgs) (builtins.concatLists (map (configuration: self.nixosConfigurations.${configuration}.config.environment.systemPackages) configurations));
+      
+      mergeCustomInputsPackages = customInputs :
+        builtins.concatLists (map (customInput: lib.lists.toList inputs.${customInput}.packages.x86_64-linux.${customInput}) customInputs);
+
 
       makePackages = packages:
         builtins.listToAttrs (map (package: {name = package.name; value = package; }) packages);
 
     in {
-      packages.x86_64-linux = makePackages (mergePackages [
-        "wattson"
-        "main"
-        "nix-server"
-        ] blacklist);
+      packages.x86_64-linux = makePackages (
+        (mergeCustomInputsPackages 
+          [
+            "add-replay-gain"
+            "clean-unused-files"
+          ]) ++ (
+            mergePackages [
+              "wattson"
+              "main"
+              "nix-server"
+            ] blacklist
+          )
+      );
     };
   };
 }
