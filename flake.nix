@@ -109,19 +109,11 @@
       makePackages = packages:
         builtins.listToAttrs (map (package: {name = package.name; value = package; }) packages);
 
-      makeConfiguration = configurations: 
-        builtins.listToAttrs (map (configuration: { name = configuration; value = self.nixosConfigurations.${configuration}.config.system.build.toplevel; }) configurations);
-
     in {
       packages = makePackages (mergePackages [
         "wattson"
         "main"
         ] blacklist);
-
-      systems = makeConfiguration [
-        "wattson"
-        "main"
-      ];  
     };
   };
 }
