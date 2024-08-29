@@ -93,7 +93,7 @@
     #};
 
     hydraJobs = {
-      packages = [] ++ self.nixosConfigurations.wattson.config.environment.systemPackages ++ self.nixosConfigurations.main.config.environment.systemPackages;
+      packages = builtins.listToAttrs (builtins.map (p: { name = "${p.name}"; value = p; }) (self.nixosConfigurations.wattson.config.environment.systemPackages ++ self.nixosConfigurations.main.config.environment.systemPackages));
     };
   };
 }
