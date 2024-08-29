@@ -113,6 +113,7 @@
       packages = makePackages (mergePackages [
         "wattson"
         "main"
+        "nix-server"
         ] blacklist);
     };
   };
