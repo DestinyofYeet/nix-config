@@ -19,6 +19,10 @@ in {
 
     dataFile = "/data/programs/clean_unused_files/data.json";
 
+    timerConfig = {
+      OnCalendar = "weekly";
+    };
+
     inherit (config.serviceSettings) user group;
   };
 }
