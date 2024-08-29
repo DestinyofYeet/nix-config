@@ -41,6 +41,8 @@
 
       nur.nixosModules.nur
     ] ++ baseline-modules;
+
+    pkgs = import nixpkgs { system = "x86_64-linux"; };
   in
   {
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
@@ -92,8 +94,21 @@
     #  main = self.nixosConfigurations.main.config.system.build.toplevel;
     #};
 
-    hydraJobs = {
-      packages = builtins.listToAttrs (builtins.map (p: { name = "${p.name}"; value = p; }) (self.nixosConfigurations.wattson.config.environment.systemPackages ++ self.nixosConfigurations.main.config.environment.systemPackages));
+    hydraJobs = 
+
+    let 
+     
+      lib = pkgs.lib;
+      mergePackages = configurations:
+        lib.concatLists (map (configuration: self.nixosConfigurations.${configuration}.config.environment.systemPackages) configurations);
+
+      makePackages = packages:
+        lib.listToAttrs (map (package: {name = package.name; value = package; }) packages);
+    in {
+      packages = makePackages (mergePackages [
+        "wattson"
+        "main"
+      ]);
     };
   };
 }
