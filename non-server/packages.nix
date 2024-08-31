@@ -81,5 +81,6 @@ in
     signal-desktop
     easyeffects
     keepassxc
+    ffmpeg
   ] ++ lua-pkgs;
 }
