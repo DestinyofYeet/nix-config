@@ -126,6 +126,7 @@
 
       system-builds = {
         main = self.nixosConfigurations.main.config.system.build.toplevel;
+        wattson = self.nixosConfigurations.wattson.system.build.toplevel;
       };
     };
   };
