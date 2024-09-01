@@ -28,5 +28,8 @@ in
       enable = true;
       variant256Colors = true;
     };
+
+    hyprland.enable = false;
+    hyprpaper.enable = false;
   };
 }
