@@ -82,5 +82,6 @@ in
     easyeffects
     keepassxc
     ffmpeg
+    noto-fonts
   ] ++ lua-pkgs;
 }
