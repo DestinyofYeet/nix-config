@@ -125,7 +125,7 @@
       );
 
       system-builds = {
-        main = self.nixosConfigurations.main.config.system.build;
+        main = self.nixosConfigurations.main.config.system.build.toplevel;
       };
     };
   };
