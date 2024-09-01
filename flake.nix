@@ -123,6 +123,10 @@
           "nix-server"
         ] blacklist
       );
+
+      system-builds = {
+        main = self.nixosConfigurations.main.config.system.build;
+      };
     };
   };
 }
