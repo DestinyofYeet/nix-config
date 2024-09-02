@@ -137,7 +137,6 @@
       system-builds = makeConfigurations [
         "main"
         "wattson"
-        "nix-server"
       ];
     };
   };

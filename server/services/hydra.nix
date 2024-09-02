@@ -23,5 +23,6 @@
     "github:"
     "git+https://github.com/"
     "git+ssh://github.com/"
+    "git+ssh://git@github.com/"
   ];
 }
