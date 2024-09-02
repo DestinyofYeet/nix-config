@@ -122,6 +122,9 @@
       makePackages = packages:
         builtins.listToAttrs (map (package: {name = package.name; value = package; }) packages);
 
+      makeConfigurations = configurations:
+        builtins.listToAttrs (map (configuration: { name = configuration; value = self.nixosConfigurations.${configuration}.config.system.build.toplevel; }) configurations);
+
     in {
       packages.x86_64-linux = makePackages (
         mergePackages [
@@ -131,10 +134,11 @@
         ] blacklist
       );
 
-      system-builds = {
-        main = self.nixosConfigurations.main.config.system.build.toplevel;
-        wattson = self.nixosConfigurations.wattson.config.system.build.toplevel;
-      };
+      system-builds = makeConfigurations [
+        "main"
+        "wattson"
+        "nix-server"
+      ];
     };
   };
 }
