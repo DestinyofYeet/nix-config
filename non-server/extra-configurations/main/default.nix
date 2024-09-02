@@ -33,6 +33,7 @@ in
 
   networking.extraHosts = ''
     192.168.0.248 nix-server.infra.wg
+    192.168.0.247 docker-jail
   '';
 
   programs.steam.extraPackages = gaming-pkgs;
