@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1724939604,
-        "narHash": "sha256-60Pjjlwcb3twyO9uEmnDgVSS4qZo4s/lR+92vKD080Y=",
+        "lastModified": 1725269930,
+        "narHash": "sha256-n9pkW//6JP5w4UW6Y2KbXkTBooJEZeiv/YIqShz1Vqk=",
         "owner": "DestinyofYeet",
         "repo": "add_replay_gain",
-        "rev": "c900cb9af024b7ed6dd1ff666e7215c38710b65f",
+        "rev": "3983aa5e763709fe635fdb2d28b0dc8c605b9e85",
         "type": "github"
       },
       "original": {
@@ -328,11 +328,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1725215701,
-        "narHash": "sha256-EUEsWlgqj8Y5WnhiVNhcbcT26wSpydqTGV9ZZ14CgMg=",
+        "lastModified": 1725267338,
+        "narHash": "sha256-PM8w4aivrIjfkrmMY2ndIlVhvcJD6XFsNBthfoIC0y4=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "69f4e1e77a583662bfce0d0147203ba31efeb6af",
+        "rev": "22e350ecdc47dc5dbba7dfe0e63cf58c3482a0bd",
         "type": "github"
       },
       "original": {
