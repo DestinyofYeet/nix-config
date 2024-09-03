@@ -17,7 +17,9 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ 
+    zenpower
+  ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/3b3ee9fb-0791-4926-a9a8-60cb2c2ae817";
@@ -43,6 +45,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.amdgpu.amdvlk.enable = true;
 
   fileSystems = {
     "/drives/navidrome" = {

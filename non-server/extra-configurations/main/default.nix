@@ -39,8 +39,6 @@ in
 
   programs.steam.extraPackages = gaming-pkgs;
 
-  hardware.amdgpu.amdvlk.enable = true;
-
   programs.gamemode.enable = true;
 
   environment.systemPackages = with pkgs; [
