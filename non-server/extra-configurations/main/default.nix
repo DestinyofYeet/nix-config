@@ -10,6 +10,7 @@ let
     amdvlk
     gamemode
     vkbasalt
+    goverlay
   ];
 in
 {
