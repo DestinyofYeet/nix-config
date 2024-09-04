@@ -83,5 +83,6 @@ in
     keepassxc
     ffmpeg
     noto-fonts
+    yubioath-flutter
   ] ++ lua-pkgs;
 }
