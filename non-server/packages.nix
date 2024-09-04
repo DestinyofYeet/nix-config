@@ -84,5 +84,6 @@ in
     ffmpeg
     noto-fonts
     yubioath-flutter
+    yubikey-manager-qt
   ] ++ lua-pkgs;
 }
