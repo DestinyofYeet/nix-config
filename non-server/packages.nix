@@ -85,5 +85,6 @@ in
     noto-fonts
     yubioath-flutter
     yubikey-manager-qt
+    yubikey-personalization-gui
   ] ++ lua-pkgs;
 }
