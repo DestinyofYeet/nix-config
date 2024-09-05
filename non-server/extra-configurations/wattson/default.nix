@@ -19,6 +19,7 @@
   networking.extraHosts = ''
     10.42.5.1 truenas.infra.wg
     127.0.0.1 nix-server.infra.wg
+    10.42.5.3 ssh.nix-server.infra.wg
   '';
 
   # disable baloo

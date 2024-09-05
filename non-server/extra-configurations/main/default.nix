@@ -34,6 +34,7 @@ in
 
   networking.extraHosts = ''
     192.168.0.248 nix-server.infra.wg
+    192.168.0.248 ssh.nix-server.infra.wg
     192.168.0.247 docker-jail
   '';
 
