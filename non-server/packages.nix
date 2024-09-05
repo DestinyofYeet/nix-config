@@ -87,5 +87,6 @@ in
     yubikey-manager-qt
     yubikey-personalization-gui
     nextcloud-client
+    traceroute
   ] ++ lua-pkgs;
 }

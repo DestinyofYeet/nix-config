@@ -8,7 +8,7 @@
   nix.settings = {
       substituters = [
         "https://cache.nixos.org/"
-        "http://nix-server.infra.wg:5000?priority=50"
+        "http://nix-server.infra.wg?priority=50"
       ];
 
       trusted-public-keys = [
@@ -17,8 +17,8 @@
   };
 
   networking.extraHosts = ''
-    10.42.5.3 nix-server.infra.wg
     10.42.5.1 truenas.infra.wg
+    127.0.0.1 nix-server.infra.wg
   '';
 
   # disable baloo
@@ -74,5 +74,35 @@
 
       WOL_DISABLE= "Y";
     };    
+  };
+
+  services.nginx = {
+    enable = true;
+
+    upstreams."nix_server" = {
+      extraConfig = ''
+        server 192.168.0.248:5000 max_fails=1 fail_timeout=10m;
+        server 10.42.5.3:5000 backup;
+      '';
+    };
+
+    virtualHosts."nix-server.infra.wg" = {
+      serverName = "nix-server.infra.wg";
+      listen = [
+        {
+          addr = "127.0.0.1";
+          port = 80;
+        }
+      ];
+
+      locations = {
+        "/" = {
+          proxyPass = "http://nix_server";
+          extraConfig = ''
+            proxy_connect_timeout 2s;
+          '';
+        };
+      };
+    };
   };
 }
