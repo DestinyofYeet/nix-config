@@ -86,5 +86,6 @@ in
     yubioath-flutter
     yubikey-manager-qt
     yubikey-personalization-gui
+    nextcloud-client
   ] ++ lua-pkgs;
 }
