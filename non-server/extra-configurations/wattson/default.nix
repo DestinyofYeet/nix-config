@@ -8,18 +8,18 @@
   nix.settings = {
       substituters = [
         "https://cache.nixos.org/"
-        "http://nix-server.infra.wg?priority=50"
+        "http://cache.nix-server.infra.wg?priority=50"
       ];
 
       trusted-public-keys = [
-        "nix-server.infra.wg:6NVrebwBuWHxZx8PNXQwgBHamQer7VcMBYxerF/xvr8="
+        "cache.nix-server.infra.wg:a3zHFCxeNIQx7m/mym4jK247+EmNypjsJ8icYhp31n0="
       ];
   };
 
   networking.extraHosts = ''
     10.42.5.1 truenas.infra.wg
-    127.0.0.1 nix-server.infra.wg
-    10.42.5.3 ssh.nix-server.infra.wg
+    127.0.0.1 cache.nix-server.infra.wg
+    10.42.5.3 nix-server.infra.wg
   '';
 
   # disable baloo

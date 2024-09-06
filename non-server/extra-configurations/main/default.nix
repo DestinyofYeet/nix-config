@@ -16,11 +16,11 @@ in
 {
   nix.settings = {
       substituters = [
-        "http://nix-server.infra.wg:5000?priority=30"
+        "http://cache.nix-server.infra.wg:5000?priority=30"
       ];
 
       trusted-public-keys = [
-        "nix-server.infra.wg:6NVrebwBuWHxZx8PNXQwgBHamQer7VcMBYxerF/xvr8="
+        "cache.nix-server.infra.wg:a3zHFCxeNIQx7m/mym4jK247+EmNypjsJ8icYhp31n0="
       ];
   };
 
@@ -34,7 +34,7 @@ in
 
   networking.extraHosts = ''
     192.168.0.248 nix-server.infra.wg
-    192.168.0.248 ssh.nix-server.infra.wg
+    192.168.0.248 cache.nix-server.infra.wg
     192.168.0.247 docker-jail
   '';
 
