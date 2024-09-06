@@ -88,5 +88,6 @@ in
     yubikey-personalization-gui
     nextcloud-client
     traceroute
+    discord
   ] ++ lua-pkgs;
 }
