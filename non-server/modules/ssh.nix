@@ -23,7 +23,7 @@ let
   config-oth-gitlab = mkConfigEntry "gitlab.oth-regensburg.de" "gitlab.oth-regensburg.de" "git" "ssh-key-oth-gitlab";
   config-fsim-ori = mkConfigEntry "fsim-ori" "fsim.othr.de" "beo45216" "ssh-key-fsim-ori";
   config-vps-main = mkConfigEntry "uwuwhatsthis.de" "uwuwhatsthis.de" "ole" "ssh-key-vps-main";
-  config-nix-server = mkConfigEntry "nix-server.infra.wg" "ssh.nix-server.infra.wg" "ole" "ssh-key-nix-server";
+  config-nix-server = mkConfigEntry "nix-server.infra.wg" "nix-server.infra.wg" "ole" "ssh-key-nix-server";
 in {
   services.ssh-agent.enable = true;
 
