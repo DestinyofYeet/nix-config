@@ -1,7 +1,5 @@
 vim.g.mapleader = " "
-
 local opt = vim.opt
-
 opt.smarttab = true
 opt.smartindent = true
 opt.termguicolors = true
@@ -59,7 +57,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- trouble
-vim.keymap.set('n', '<leader>xx', "<cmd>Trouble diagnostics toggle<cr>", {})
+vim.keymap.set('n', '<leader>xx', function() require("trouble").open("diagnostics") end, {})
 
 -- barbar
 vim.keymap.set('n', '<leader>1', "<cmd>BufferGoto 1<cr>", {})
