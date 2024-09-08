@@ -89,5 +89,6 @@ in
     nextcloud-client
     traceroute
     discord
+    audacity
   ] ++ lua-pkgs;
 }
