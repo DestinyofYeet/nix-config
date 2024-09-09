@@ -21,6 +21,6 @@
     unzip
     file
     lshw
-    pcieutils
+    pciutils
   ];
 }
