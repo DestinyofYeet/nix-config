@@ -20,5 +20,7 @@
     gnumake
     unzip
     file
+    lshw
+    pcieutils
   ];
 }
