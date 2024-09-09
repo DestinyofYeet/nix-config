@@ -23,5 +23,6 @@
     lshw
     pciutils
     amdgpu_top
+    radeontop
   ];
 }
