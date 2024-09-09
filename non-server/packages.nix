@@ -1,6 +1,6 @@
 
 { config, pkgs, ... }: let
-  # unstable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/d3f42bd62aa840084563e3b93e4eab73cb0a0448) { config = config.nixpkgs.config; };
+  stable = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/51ab9e080fba4f75fb8a0f753c99e99801543519) { config = config.nixpkgs.config; };
 
   lua-pkgs = with pkgs; [
     luajitPackages.luarocks
@@ -90,5 +90,7 @@ in
     traceroute
     discord
     audacity
+    gdb
   ] ++ lua-pkgs;
 }
+
