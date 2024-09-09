@@ -22,5 +22,6 @@
     file
     lshw
     pciutils
+    amdgpu_top
   ];
 }
