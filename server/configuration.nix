@@ -6,10 +6,7 @@
 
 {
   imports = [
-    # No touchey !!!
-    # Since Nix runs in a systemd-nspawn environment, it doesn't boot without this
-    "${modulesPath}/virtualisation/lxc-container.nix"
-    # No touchey end
+    ./hardware-configuration.nix 
 
     ./system_networking.nix
     ./system_packages.nix
@@ -19,17 +16,35 @@
 
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs;
-    [
-      # Add any missing dynamic libraries for unpackages programs here, not in environment.systemPackages
-    ];
-
   nix = { 
     settings = { 
       experimental-features = [ "nix-command" "flakes" ]; 
     };
   };
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  console.keyMap = "de";
+
+  # Set your time zone.
+  time.timeZone = "Europe/Berlin";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "de_DE.UTF-8";
+    LC_IDENTIFICATION = "de_DE.UTF-8";
+    LC_MEASUREMENT = "de_DE.UTF-8";
+    LC_MONETARY = "de_DE.UTF-8";
+    LC_NAME = "de_DE.UTF-8";
+    LC_NUMERIC = "de_DE.UTF-8";
+    LC_PAPER = "de_DE.UTF-8";
+    LC_TELEPHONE = "de_DE.UTF-8";
+    LC_TIME = "de_DE.UTF-8";
+  };
+
+  boot.supportedFilesystems = [ "zfs" ];
+
+  networking.hostId = "170d9b6c";
 
   networking.hostName = "nix-server";
 

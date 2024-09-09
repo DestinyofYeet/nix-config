@@ -1,9 +1,9 @@
-{ ... }:
+{ config, ... }:
 let
   apps-id = "568"; 
 in {
   fileSystems."/export/navidrome" = {
-    device = "/data/media/navidrome";
+    device = "${config.serviceSettings.paths.data}/media/navidrome";
     options = [ "bind" ];
   };
 

@@ -6,6 +6,10 @@ let
     rev = "a63ed48562b5c101b089c7b77c68d0708ee9d132";
     ref = "main";
   }; 
+
+  mkStringOpt = lib.mkOption {
+    type = lib.types.str;
+  };
 in {
 
   options.serviceSettings = with lib; {
@@ -20,6 +24,11 @@ in {
     secrets = mkOption {
       type = types.attrs;
     };
+
+    paths = {
+      data = mkStringOpt;
+      configs = mkStringOpt; 
+    };
   };
 
   config.serviceSettings = {
@@ -27,5 +36,8 @@ in {
     group = "apps";
 
     secrets = import "${secrets}/secrets.nix" {};
+
+    paths.data = "/mnt/data/data";
+    paths.configs = "/mnt/data/configs";
   };
 }

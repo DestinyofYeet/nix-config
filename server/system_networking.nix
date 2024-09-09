@@ -5,6 +5,7 @@
     dhcpcd.enable = false;
     useDHCP = false;
     useHostResolvConf = false;
+    networkmanager.enable = true;
 
     # no touchey !!!!!
     # this is needed to see the qbit webinterface
@@ -19,15 +20,17 @@
 
   services.resolved.enable = false;
 
+  systemd.network.wait-online.enable = false;
+
   services.unbound = {
     enable = true;
     resolveLocalQueries = true;
     settings = {
       server = {
-        interface = [ "192.168.0.248" "127.0.0.1" "10.1.1.2" ];
+        interface = [ "192.168.0.250" "127.0.0.1" "10.1.1.2" ];
         port = 53;
         access-control =
-          [ "192.168.0.248 allow" "127.0.0.1 allow" "10.1.1.2 allow" ];
+          [ "192.168.0.250 allow" "127.0.0.1 allow" "10.1.1.2 allow" ];
 
         harden-glue = true;
         harden-dnssec-stripped = true;

@@ -34,6 +34,7 @@
     docker
     docker-compose
     screen
+    zfs
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:

@@ -20,7 +20,7 @@ in
       ];
 
       trusted-public-keys = [
-        "cache.nix-server.infra.wg:a3zHFCxeNIQx7m/mym4jK247+EmNypjsJ8icYhp31n0="
+        "cache.nix-server.infra.wg:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
       ];
   };
 

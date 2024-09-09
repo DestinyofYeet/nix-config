@@ -9,7 +9,7 @@
     isNormalUser = true;
     home = "/home/ole";
     description = "me";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "apps" ];
     hashedPassword =
       "$6$s5ZWf9efO2lEySC0$ztuOgJsHnckwmcP5EEpgcDJeUpJD3ZJuynRIuuC.IEBLMBtkZS5R1JQ7c4a/oUU6Tp8eDWNUoHjckyL/hivvg1";
     openssh.authorizedKeys.keys = [
@@ -32,6 +32,7 @@
     isSystemUser = true;
     uid = 992;
     group = "monero";
+    extraGroups = [ "apps" ];
   };
 
   users.groups.monero = { gid = 991; };

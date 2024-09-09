@@ -17,7 +17,7 @@ in {
       recipient = "ole@uwuwhatsthis.de";
     };
 
-    dataFile = "/data/programs/clean_unused_files/data.json";
+    dataFile = "${config.serviceSettings.paths.data}/programs/clean_unused_files/data.json";
 
     timerConfig = {
       OnCalendar = "weekly";

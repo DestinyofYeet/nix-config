@@ -4,7 +4,7 @@
     settings = {
       folders = {
         camera = {
-          path = "/data/photos/handy/Camera";
+          path = "${config.serviceSettings.paths.data}/photos/handy/Camera";
           label = "Camera";
           id = "camera";
 
@@ -12,7 +12,7 @@
         };
 
         default = {
-          path = "/data/syncthing/default-folder";
+          path = "${config.serviceSettings.paths.data}/syncthing/default-folder";
           label = "Default Folder";
           id = "default";
         };
@@ -33,7 +33,7 @@
 
     guiAddress = "0.0.0.0:8384";
 
-    dataDir = "/data/syncthing";
+    dataDir = "${config.serviceSettings.paths.data}/syncthing";
 
     inherit (config.serviceSettings) user group;
   };

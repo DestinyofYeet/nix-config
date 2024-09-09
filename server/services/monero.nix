@@ -1,7 +1,7 @@
-{ ... }:{
+{ config, ... }:{
   services.monero = {
     enable = true;
-    dataDir = "/data/monero-node";
+    dataDir = "${config.serviceSettings.paths.data}/monero-node";
     # rpc.address = "0.0.0.0";  # use an ssh-tunnel instead
   };
 }

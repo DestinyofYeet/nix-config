@@ -3,12 +3,12 @@ let
   namespace = "vpn-ns";
 
   qbit = {
-    dataDir = "/configs";
+    dataDir = "${config.serviceSettings.paths.configs}";
     enable = true;
   };
 
   sonarr = {
-      dataDir = "/configs/sonarr";
+      dataDir = "${config.serviceSettings.paths.configs}/sonarr";
       enable = true;
       openFirewall = true;
   };
