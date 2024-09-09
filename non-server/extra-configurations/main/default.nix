@@ -33,8 +33,8 @@ in
   system.stateVersion = "24.05"; # Did you read the comment?
 
   networking.extraHosts = ''
-    192.168.0.248 nix-server.infra.wg
-    192.168.0.248 cache.nix-server.infra.wg
+    192.168.0.250 nix-server.infra.wg
+    192.168.0.250 cache.nix-server.infra.wg
     192.168.0.247 docker-jail
   '';
 
