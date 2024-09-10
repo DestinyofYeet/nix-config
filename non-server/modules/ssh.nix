@@ -24,6 +24,7 @@ let
   config-fsim-ori = mkConfigEntry "fsim-ori" "fsim.othr.de" "beo45216" "ssh-key-fsim-ori";
   config-vps-main = mkConfigEntry "uwuwhatsthis.de" "uwuwhatsthis.de" "ole" "ssh-key-vps-main";
   config-nix-server = mkConfigEntry "nix-server.infra.wg" "nix-server.infra.wg" "ole" "ssh-key-nix-server";
+  config-nix-server-root = mkConfigEntry "nix-server.infra.wg" "nix-server.infra.wg" "root" "ssh-key-nix-server";
 in {
   services.ssh-agent.enable = true;
 
@@ -45,6 +46,7 @@ in {
         ${config-fsim-ori}
         ${config-vps-main}
         ${config-nix-server}
+        ${config-nix-server-root}
       '';
     };
   };
