@@ -91,6 +91,7 @@ in
     discord
     audacity
     gdb
+    ventoy-full
   ] ++ lua-pkgs;
 }
 
