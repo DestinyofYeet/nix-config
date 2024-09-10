@@ -24,5 +24,6 @@
     ./nix-daemon.nix
     ./virtualisation.nix
     ./shokoserver.nix
+    ./flaresolverr.nix
   ];
 }
