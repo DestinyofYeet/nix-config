@@ -11,6 +11,7 @@ in {
   "airvpn_config.age".publicKeys = authed;
   "hydra-email-credentials.age".publicKeys = authed;
   "nix-serve-priv-key.age".publicKeys = authed;
+  "fireflyiii-appkey.age".publicKeys = authed;
 
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
 }
