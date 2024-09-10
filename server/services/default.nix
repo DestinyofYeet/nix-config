@@ -4,7 +4,7 @@
     ./nfs.nix
     ./add-replay-gain.nix
     ./matrix-conduit.nix
-    ./arr-stack.nix
+    ./qbittorrent.nix
     ./jellyfin.nix
     ./surrealdb.nix
     ./monero.nix
@@ -25,5 +25,6 @@
     ./virtualisation.nix
     ./shokoserver.nix
     ./flaresolverr.nix
+    ./sonarr.nix
   ];
 }

@@ -6,12 +6,6 @@ let
     dataDir = "${config.serviceSettings.paths.configs}";
     enable = true;
   };
-
-  sonarr = {
-      dataDir = "${config.serviceSettings.paths.configs}/sonarr";
-      enable = true;
-      openFirewall = true;
-  };
 in {
 
   age.secrets = {
@@ -109,10 +103,5 @@ in {
       ExecStart =
         "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit.dataDir}";
     };
-  };
-
-  services.sonarr = {
-    inherit (sonarr) enable dataDir openFirewall;
-    inherit (config.serviceSettings) user group;
   };
 }
