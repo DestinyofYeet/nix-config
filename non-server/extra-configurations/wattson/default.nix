@@ -21,6 +21,7 @@
     127.0.0.1 cache.nix-server.infra.wg
     10.42.5.3 nix-server.infra.wg
     10.42.5.3 engelsystem.nix-server.infra.wg
+    10.42.5.3 firefly.nix-server.infra.wg
   '';
 
   # disable baloo
@@ -88,8 +89,8 @@
       '';
     };
 
-    virtualHosts."nix-server.infra.wg" = {
-      serverName = "nix-server.infra.wg";
+    virtualHosts."cache.nix-server.infra.wg" = {
+      serverName = "cache.nix-server.infra.wg";
       listen = [
         {
           addr = "127.0.0.1";

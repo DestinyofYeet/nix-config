@@ -92,6 +92,7 @@ in
     audacity
     gdb
     ventoy-full
+    qbittorrent
   ] ++ lua-pkgs;
 }
 
