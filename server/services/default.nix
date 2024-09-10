@@ -16,7 +16,6 @@
     ./netdata.nix
     ./openssh.nix
     ./hydra.nix
-    ./nginx.nix
     ./innernet.nix
     ./prowlarr.nix
     ./syncthing.nix
@@ -26,5 +25,8 @@
     ./shokoserver.nix
     ./flaresolverr.nix
     ./sonarr.nix
+    ./fireflyiii.nix
+    ./engelsystem.nix
+    ./postgresql.nix
   ];
 }
