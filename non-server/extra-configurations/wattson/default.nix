@@ -82,7 +82,7 @@
 
     upstreams."nix_server" = {
       extraConfig = ''
-        server 192.168.0.248:5000 max_fails=1 fail_timeout=10m;
+        server 192.168.0.250:5000 max_fails=1 fail_timeout=10m;
         server 10.42.5.3:5000 backup;
       '';
     };
