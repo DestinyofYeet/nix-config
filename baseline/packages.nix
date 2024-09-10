@@ -24,5 +24,6 @@
     pciutils
     amdgpu_top
     radeontop
+    deploy-rs
   ];
 }
