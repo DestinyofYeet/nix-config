@@ -2,8 +2,7 @@
 
 {
   users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhLrbWc/gopTJ2ZZW4ZfCzGhjhV9fKb1wdvFLQpmP3y ole@main"
-  ];
+  ] ++ config.users.users.ole.openssh.authorizedKeys.keys;
 
   users.users.ole = {
     isNormalUser = true;
@@ -13,7 +12,7 @@
     hashedPassword =
       "$6$s5ZWf9efO2lEySC0$ztuOgJsHnckwmcP5EEpgcDJeUpJD3ZJuynRIuuC.IEBLMBtkZS5R1JQ7c4a/oUU6Tp8eDWNUoHjckyL/hivvg1";
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH+VUI7U1fv0W6Lp40Jss9yA6JX+JG/Hocroff6HtlFT ole@kartoffelkiste"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQWyDZw1M7t47nJ0vu7EvAd6wfN0yrdDBnT7RaWILN5 ole@wattson"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhLrbWc/gopTJ2ZZW4ZfCzGhjhV9fKb1wdvFLQpmP3y ole@main"
     ];
     packages = with pkgs; [ neovim ];
