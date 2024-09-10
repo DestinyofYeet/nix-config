@@ -26,16 +26,15 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/data" = {
-    depends = [ "/mnt/data" ];
-    device = "/mnt/data/data";
-    options = [ "bind" ];
+  fileSystems."/nix" = {
+    device = "data/nix";
+    neededForBoot = true;
+    fsType = "zfs";
   };
 
-  fileSystems."/configs" = {
-    depends = [ "/mnt/data" ];
-    device = "/mnt/data/configs";
-    options = [ "bind" ];
+  services.zfs = {
+    autoScrub.enable = true;
+    trim.enable = true;
   };
 
   # Bootloader.

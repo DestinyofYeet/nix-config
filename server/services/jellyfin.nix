@@ -1,7 +1,7 @@
 { config, pkgs, ... }:{
   services.jellyfin = {
     enable = true;
-    dataDir = "/configs/jellyfin";
+    dataDir = "${config.serviceSettings.paths.configs}/jellyfin";
     inherit (config.serviceSettings) user group;
   };
 

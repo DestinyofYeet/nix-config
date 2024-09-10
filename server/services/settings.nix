@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   # for this to work, the ssh key needs to be in /root/.ssh and the /root/.ssh/config file has to have a github.com Hostname thingy
   secrets = builtins.fetchGit {
@@ -21,6 +21,9 @@ in {
       type = types.str;
     };
 
+    uid = mkStringOpt;
+    gid = mkStringOpt;
+
     secrets = mkOption {
       type = types.attrs;
     };
@@ -34,6 +37,9 @@ in {
   config.serviceSettings = {
     user = "apps";
     group = "apps";
+
+    uid = builtins.toString config.users.users.${config.serviceSettings.user}.uid; 
+    gid = builtins.toString config.users.groups.${config.serviceSettings.group}.gid; 
 
     secrets = import "${secrets}/secrets.nix" {};
 

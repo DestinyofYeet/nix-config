@@ -22,5 +22,7 @@
     ./syncthing.nix
     ./clean-unused-files.nix
     ./nix-daemon.nix
+    ./virtualisation.nix
+    ./shokoserver.nix
   ];
 }

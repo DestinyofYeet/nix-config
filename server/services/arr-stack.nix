@@ -40,6 +40,7 @@ in {
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = "true";
+      ExecStartPre = "${pkgs.bash}/bin/sh -c 'until /run/current-system/sw/bin/host de3.vpn.airdns.org; do sleep 1; done'";
       ExecStart = pkgs.writeScript "ns-isolation" ''
         #!${pkgs.bash}/bin/bash
           set -e

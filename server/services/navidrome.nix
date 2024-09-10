@@ -6,7 +6,7 @@
       Address = "0.0.0.0";
 
       MusicFolder = "${config.serviceSettings.paths.data}/media/navidrome";
-      DataFolder = "/configs/navidrome";
+      DataFolder = "${config.serviceSettings.paths.configs}/navidrome";
       FFmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
       EnableSharing = true; 
     };
