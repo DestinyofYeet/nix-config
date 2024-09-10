@@ -126,13 +126,13 @@
         builtins.listToAttrs (map (configuration: { name = configuration; value = self.nixosConfigurations.${configuration}.config.system.build.toplevel; }) configurations);
 
     in {
-      packages.x86_64-linux = makePackages (
-        mergePackages [
-          "wattson"
-          "main"
-          "nix-server"
-        ] blacklist
-      );
+      #packages.x86_64-linux = makePackages (
+      #  mergePackages [
+      #    "wattson"
+      #    "main"
+      #    "nix-server"
+      #  ] blacklist
+      #);
 
       system-builds = makeConfigurations [
         "main"
