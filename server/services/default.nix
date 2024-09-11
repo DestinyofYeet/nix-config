@@ -29,5 +29,7 @@
     ./engelsystem.nix
     ./postgresql.nix
     ./firefly-iii-importer.nix
+    ./mariadb.nix
+    ./passbolt.nix
   ];
 }
