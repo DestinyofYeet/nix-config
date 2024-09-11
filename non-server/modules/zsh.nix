@@ -8,6 +8,13 @@ let
       cd - > /dev/null
     '';
 
+    deploy-nix-server = pkgs.writeShellScriptBin "deploy-nix-server" ''
+      set -e
+      cd /home/ole/nixos
+      deploy -s ".#nix-server" $@
+      cd - > /dev/null
+    '';
+
     stylix-color-picker = pkgs.writeShellScriptBin "stylix-color-picker" ''
       set -e 
 
@@ -43,6 +50,7 @@ in {
 
     shellAliases = {
       rebuild-system = "${rebuild-system}/bin/rebuild-system";
+      deploy-nix-server = "${deploy-nix-server}/bin/deploy-nix-server";
       stylix-color-picker = "${stylix-color-picker}/bin/stylix-color-picker";
 
       kssh = "kitten ssh";

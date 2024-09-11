@@ -12,6 +12,7 @@ in {
   "hydra-email-credentials.age".publicKeys = authed;
   "nix-serve-priv-key.age".publicKeys = authed;
   "fireflyiii-appkey.age".publicKeys = authed;
+  "scripts-email-pw.age".publicKeys = authed;
 
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
 }

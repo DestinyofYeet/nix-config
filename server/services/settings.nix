@@ -32,6 +32,10 @@ in {
       data = mkStringOpt;
       configs = mkStringOpt; 
     };
+
+    scripts = mkOption {
+      type = types.attrs;
+    }
   };
 
   config.serviceSettings = {
@@ -42,6 +46,8 @@ in {
     gid = builtins.toString config.users.groups.${config.serviceSettings.group}.gid; 
 
     secrets = import "${secrets}/secrets.nix" {};
+
+    scripts = import ../scripts { inherit pkgs; };
 
     paths.data = "/mnt/data/data";
     paths.configs = "/mnt/data/configs";

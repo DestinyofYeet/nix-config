@@ -28,5 +28,6 @@
     ./fireflyiii.nix
     ./engelsystem.nix
     ./postgresql.nix
+    ./firefly-iii-importer.nix
   ];
 }
