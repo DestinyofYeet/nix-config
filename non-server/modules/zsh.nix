@@ -8,10 +8,10 @@ let
       cd - > /dev/null
     '';
 
-    deploy-nix-server = pkgs.writeShellScriptBin "deploy-nix-server" ''
+    deploy-node = pkgs.writeShellScriptBin "deploy-node" ''
       set -e
       cd /home/ole/nixos
-      deploy -s ".#nix-server" $@
+      deploy -s ".#$1" ''${@:2}
       cd - > /dev/null
     '';
 
@@ -50,7 +50,7 @@ in {
 
     shellAliases = {
       rebuild-system = "${rebuild-system}/bin/rebuild-system";
-      deploy-nix-server = "${deploy-nix-server}/bin/deploy-nix-server";
+      deploy-node = "${deploy-node}/bin/deploy-node";
       stylix-color-picker = "${stylix-color-picker}/bin/stylix-color-picker";
 
       kssh = "kitten ssh";
