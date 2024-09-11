@@ -1,3 +1,4 @@
+#!/bin/python3
 import argparse
 import smtplib
 
@@ -9,16 +10,12 @@ EMAIL_DATA = {
     "port": 587,  # StartTLS 587
     "receiver_email": "ole@uwuwhatsthis.de",
     "user": "scripts@uwuwhatsthis.de",
-    "password": "",
+    "password": "H<;-2C9K7<JUSOU>1s.ADi^8H8054Akt{h%=Qz@6"
 }
 
-def send_mail(subject: str, content: str, password_file: str) -> int:
-    if type(content) is list:
+def send_mail(subject: str, content: str) -> int:
+    if type(content) == list:
         content = " ".join(content)
-
-    with open(password_file) as f:
-        EMAIL_DATA["password"] = f.read().strip()
-
     try:
         with smtplib.SMTP(EMAIL_DATA["smtp"], EMAIL_DATA["port"], timeout=30) as server:
             server.starttls()
@@ -44,7 +41,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Send emails as scripts@uwuwhatsthis.de")
     parser.add_argument("--subject", required=True, help="The subject to set", type=str)
     parser.add_argument("--content", required=True, help="The content", nargs="+", type=str)
-    parser.add_argument("--password_file", required=True, help="The file containing the password", type=str)
     parsed = parser.parse_args()
 
-    send_mail(parsed.subject, parsed.content, parsed.password_file)
+    send_mail(parsed.subject, parsed.content)

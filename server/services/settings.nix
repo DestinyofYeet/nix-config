@@ -47,8 +47,6 @@ in {
 
     secrets = import "${secrets}/secrets.nix" {};
 
-    scripts = import ../scripts { inherit pkgs; };
-
     paths.data = "/mnt/data/data";
     paths.configs = "/mnt/data/configs";
   };
