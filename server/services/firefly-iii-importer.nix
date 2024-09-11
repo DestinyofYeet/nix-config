@@ -23,7 +23,7 @@
         content="Successfully imported data"
       fi
 
-      ${config.serviceSettings.scripts.send-mail}/bin/send-mail --subject "Imported Firefly III data" --content $content --password-file ${config.age.secrets.send-email-pw.path}
+      ${config.serviceSettings.scripts.send-email}/bin/send-email --subject "Imported Firefly III data" --content $content --password-file ${config.age.secrets.send-email-pw.path}
     '';
   };
 

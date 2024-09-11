@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
   # for this to work, the ssh key needs to be in /root/.ssh and the /root/.ssh/config file has to have a github.com Hostname thingy
   secrets = builtins.fetchGit {
@@ -35,7 +35,7 @@ in {
 
     scripts = mkOption {
       type = types.attrs;
-    }
+    };
   };
 
   config.serviceSettings = {
