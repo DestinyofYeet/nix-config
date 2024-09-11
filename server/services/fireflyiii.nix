@@ -14,6 +14,8 @@
     settings = {
       APP_KEY_FILE = config.age.secrets.app-key-file.path;
       APP_URL = "https://firefly.nix-server.infra.wg";
+      TZ = "Europe/Berlin";
+      DEFAULT_LOCALE = "de_DE";
     };
 
     dataDir = "${config.serviceSettings.paths.configs}/fireflyiii";
