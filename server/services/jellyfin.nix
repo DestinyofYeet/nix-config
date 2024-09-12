@@ -2,30 +2,31 @@
   services.jellyfin = {
     enable = true;
     dataDir = "${config.serviceSettings.paths.configs}/jellyfin";
+    cacheDir = "/var/cache/jellyfin";
     inherit (config.serviceSettings) user group;
   };
 
-  ## patch intro-skipper. Doesn't work
-  # nixpkgs.overlays = with pkgs; [
-  #   (
-  #     final: prev:
-  #       {
-  #         jellyfin-web = prev.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
-  #           installPhase = ''
-  #             runHook preInstall
+  # intro-skipper patch
+  nixpkgs.overlays = with pkgs; [
+    (
+      final: prev:
+        {
+          jellyfin-web = prev.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
+            installPhase = ''
+              runHook preInstall
 
-  #             # this is the important line
-  #             sed -i "s#</head>#<script src=\"configurationpage?name=skip-intro-button.js\"></script></head>#" dist/index.html
+              # this is the important line
+              sed -i "s#</head>#<script src=\"configurationpage?name=skip-intro-button.js\"></script></head>#" dist/index.html
 
-  #             mkdir -p $out/share
-  #             cp -a dist $out/share/jellyfin-web
+              mkdir -p $out/share
+              cp -a dist $out/share/jellyfin-web
 
-  #             runHook postInstall
-  #           '';
-  #         });
-  #       }
-  #   )
-  # ];
+              runHook postInstall
+            '';
+          });
+        }
+    )
+  ];
 
   hardware.graphics = {
     enable = true;
