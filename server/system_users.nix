@@ -23,6 +23,9 @@
     isSystemUser = true;
     uid = 568;
     group = "apps";
+
+    createHome = true;
+    home = "/var/homes/apps";
   };
 
   users.groups.apps = { gid = 568; };
