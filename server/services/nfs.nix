@@ -3,14 +3,16 @@ let
   apps-id = config.serviceSettings.uid;
   apps-gid = config.serviceSettings.gid;
 in {
-  fileSystems."/export/navidrome" = {
-    device = "${config.serviceSettings.paths.data}/media/navidrome";
-    options = [ "bind" ];
-  };
+  fileSystems = {
+    "/export/navidrome" = {
+      device = "${config.serviceSettings.paths.data}/media/navidrome";
+      options = [ "bind" ];
+    };
 
-  fileSystems."/export/programmingStuff" = {
-    device = "${config.serviceSettings.paths.data}/Programming-Stuff";
-    options = [ "bind" ];
+    "/export/programmingStuff" = {
+      device = "${config.serviceSettings.paths.data}/Programming-Stuff";
+      options = [ "bind" ];
+    };
   };
 
   services.nfs.server = {

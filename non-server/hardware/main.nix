@@ -50,11 +50,9 @@
 
   fileSystems = {
     "/drives/navidrome" = {
-      device = "192.168.0.248:/export/navidrome";
+      device = "192.168.0.250:/export/navidrome";
       fsType = "nfs";
-      options = [
-       "nofail" 
-      ];
+      options = [ "hard" "intr" "nofail" ];
     };
 
     "/drives/langsames_drecks_ding2" = {
@@ -66,7 +64,7 @@
     };
 
     "/drives/programming-Stuff" = {
-      device = "192.168.0.250:/mnt/data/data/Programming-Stuff";
+      device = "192.168.0.250:/export/programmingStuff";
       fsType = "nfs";
       options = [ "hard" "intr" "nofail" ];
     };
