@@ -22,6 +22,7 @@
     10.42.5.3 nix-server.infra.wg
     10.42.5.3 engelsystem.nix-server.infra.wg
     10.42.5.3 firefly.nix-server.infra.wg
+    10.42.5.3 passbolt.nix-server.infra.wg
   '';
 
   # disable baloo
