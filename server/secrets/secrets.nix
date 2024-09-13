@@ -8,7 +8,10 @@ let
   ole_laptop =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHeF66q9/UKixJjXGjYXTlwrYcSfMVaYD+W/3pJ+4DP ole@wattson";
 
-  authed = [ system system_ole ole_laptop ];
+  ole_main = 
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKC+o4K+CbcAYSGz+8KWqsm3r878EK2wDSHplFbULwQv ole@main";
+
+  authed = [ system system_ole ole_laptop ole_main ];
 
 in {
   "airvpn_config.age".publicKeys = authed;
@@ -18,6 +21,7 @@ in {
   "scripts-email-pw.age".publicKeys = authed;
   "mysql-init-setup.age".publicKeys = authed;
   "mysql-passbolt-pw.age".publicKeys = authed;
+  "passbolt-env-file.age".publicKeys = authed;
 
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
 }
