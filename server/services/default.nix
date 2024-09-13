@@ -30,5 +30,6 @@
     ./postgresql.nix
     ./firefly-iii-importer.nix
     ./passbolt.nix
+    ./unbound.nix
   ];
 }
