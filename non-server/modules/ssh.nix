@@ -25,6 +25,7 @@ let
   config-vps-main = mkConfigEntry "uwuwhatsthis.de" "uwuwhatsthis.de" "ole" "ssh-key-vps-main";
   config-nix-server = mkConfigEntry "nix-server.infra.wg" "nix-server.infra.wg" "ole" "ssh-key-nix-server";
   config-nix-server-root = mkConfigEntry "nix-server.infra.wg" "nix-server.infra.wg" "root" "ssh-key-nix-server";
+  config-fsim-monolith = mkConfigEntry "fsim-monolith" "wiki.fsim" "ole" "ssh-key-fsim-ori";
 in {
   services.ssh-agent.enable = true;
 
@@ -43,10 +44,11 @@ in {
       text = ''
         ${config-github}
         ${config-oth-gitlab}
-        ${config-fsim-ori}
         ${config-vps-main}
         ${config-nix-server}
         ${config-nix-server-root}
+        ${config-fsim-ori}
+        ${config-fsim-monolith}
       '';
     };
   };
