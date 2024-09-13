@@ -7,7 +7,7 @@
   };
 
   home.activation.nix-config = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    run ln -s ${config.age.secrets.nix-file-config.path} $HOME/.config/nix/nix.conf
+    run rm $HOME/.config/nix/nix.conf && ln -s ${config.age.secrets.nix-file-config.path} $HOME/.config/nix/nix.conf
   '';
 
 }

@@ -93,6 +93,7 @@ in
     gdb
     ventoy-full
     qbittorrent
+    dig
   ] ++ lua-pkgs;
 }
 
