@@ -40,6 +40,10 @@ let
       ${rebuild-system}/bin/rebuild-system
     '';
 
+    gitui-proper = pkgs.writeShellScriptBin "gitui-proper" ''
+      ${pkgs.bash}/bin/bash -c 'eval $(ssh-agent) && ssh-add ${config.age.secrets.ssh-key-github.path} && gitui && eval $(ssh-agent -k)'
+    '';
+
     scripts = import ./scripts.nix { inherit pkgs config; };
 in {
 
@@ -52,6 +56,7 @@ in {
       rebuild-system = "${rebuild-system}/bin/rebuild-system";
       deploy-node = "${deploy-node}/bin/deploy-node";
       stylix-color-picker = "${stylix-color-picker}/bin/stylix-color-picker";
+      gitui-proper = "${gitui-proper}/bin/gitui-proper";
 
       kssh = "kitten ssh";
       icat = "kitten icat";

@@ -35,7 +35,7 @@ in
   networking.extraHosts = ''
     192.168.0.250 nix-server.infra.wg
     192.168.0.250 cache.nix-server.infra.wg
-    192.168.0.247 docker-jail
+    192.168.0.250 firefly.nix-server.infra.wg
   '';
 
   programs.steam.extraPackages = gaming-pkgs;
