@@ -18,5 +18,6 @@
     ./agenix.nix
     ./nvim.nix
     ./git.nix
+    ./nix.nix
   ];
 }

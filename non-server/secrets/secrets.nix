@@ -8,4 +8,5 @@ let
 
 in {
   "stalwart-ole-pw.age".publicKeys = authed;
+  "nix-config-file.age".publicKeys = authed;
 }
