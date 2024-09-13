@@ -94,6 +94,7 @@ in
     ventoy-full
     qbittorrent
     dig
+    freerdp3
   ] ++ lua-pkgs;
 }
 
