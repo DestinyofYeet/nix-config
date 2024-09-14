@@ -31,5 +31,6 @@
     ./firefly-iii-importer.nix
     ./passbolt.nix
     ./unbound.nix
+    ./ups.nix
   ];
 }

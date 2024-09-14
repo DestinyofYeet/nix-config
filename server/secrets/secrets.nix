@@ -22,6 +22,7 @@ in {
   "mysql-init-setup.age".publicKeys = authed;
   "mysql-passbolt-pw.age".publicKeys = authed;
   "passbolt-env-file.age".publicKeys = authed;
+  "upsmon-password-file.age".publicKeys = authed;
 
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
 }
