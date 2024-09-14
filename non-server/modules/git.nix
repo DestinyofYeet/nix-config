@@ -1,9 +1,12 @@
-{ ... }:
-{
+{ pkgs, ... }: let
+  extra-conf = pkgs.writeText "git-extra.conf" ''
+    [safe] 
+      directory = *;
+  '';
+in {
   programs.git = {
-    extraConfig = ''
-      [safe] 
-        directory = *;
-    '';
+    includes = [
+      { path = "${extra-conf}"; }
+    ];
   };
 }
