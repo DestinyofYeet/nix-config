@@ -19,5 +19,7 @@
     ./nvim.nix
     ./git.nix
     ./nix.nix
+    ./helix.nix
+    ./settings.nix
   ];
 }

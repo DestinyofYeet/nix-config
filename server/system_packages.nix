@@ -35,6 +35,7 @@
     docker-compose
     screen
     zfs
+    iotop
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
