@@ -412,7 +412,28 @@
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
+        "strichliste": "strichliste",
         "stylix": "stylix"
+      }
+    },
+    "strichliste": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1726442469,
+        "narHash": "sha256-hyo7GbZ9x4SZL7mEplfY5xgQEIOBcEKuizFW55T3Xjc=",
+        "owner": "DestinyofYeet",
+        "repo": "nix-strichliste",
+        "rev": "73c9566d59d3c79f59d726833a503f2e1d76ebc8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "nix-strichliste",
+        "type": "github"
       }
     },
     "stylix": {

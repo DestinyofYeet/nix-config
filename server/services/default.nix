@@ -32,5 +32,6 @@
     ./passbolt.nix
     ./unbound.nix
     ./ups.nix
+    ./strichliste.nix
   ];
 }

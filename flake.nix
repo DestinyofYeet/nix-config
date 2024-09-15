@@ -40,6 +40,11 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    strichliste = {
+      url = "github:DestinyofYeet/nix-strichliste";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -66,6 +71,7 @@
       modules = [
         inputs.add-replay-gain.nixosModules.add-replay-gain
         inputs.clean-unused-files.nixosModules.clean-unused-files
+        inputs.strichliste.nixosModules.strichliste
         ./server
       ] ++ baseline-modules;
     };
