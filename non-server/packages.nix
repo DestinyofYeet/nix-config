@@ -7,6 +7,10 @@
     lua
     luajit
   ];
+
+  kdePackages = with pkgs.kdePackages; [
+    kcalc
+  ];
 in
   {
 
@@ -95,6 +99,6 @@ in
     qbittorrent
     dig
     freerdp3
-  ] ++ lua-pkgs;
+  ] ++ lua-pkgs ++ kdePackages;
 }
 
