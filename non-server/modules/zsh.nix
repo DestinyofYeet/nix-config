@@ -65,7 +65,7 @@ in {
     };
 
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "hx";
     };
 
     oh-my-zsh = {

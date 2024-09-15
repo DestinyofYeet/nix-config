@@ -20,6 +20,7 @@
   };  
 
   nix.settings.allowed-uris = [
+    "https://"
     "github:"
     "git+https://github.com/"
     "git+ssh://github.com/"
