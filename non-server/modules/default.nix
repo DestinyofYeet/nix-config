@@ -21,5 +21,6 @@
     ./nix.nix
     ./helix.nix
     ./settings.nix
+    ./xdg-open.nix
   ];
 }
