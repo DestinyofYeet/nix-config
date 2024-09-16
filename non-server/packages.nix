@@ -102,6 +102,10 @@ in
     cifs-utils
     samba
     keyutils
+    lua-language-server
+    clang-tools
+    rust-analyzer
+    nil
   ] ++ lua-pkgs ++ kdePackages;
 }
 
