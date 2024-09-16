@@ -2,6 +2,6 @@
   ...
 }:{
   services.strichliste = {
-    enable = false;
+    enable = true;
   };
 }

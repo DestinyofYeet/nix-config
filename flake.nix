@@ -42,7 +42,8 @@
     };
 
     strichliste = {
-      url = "github:DestinyofYeet/nix-strichliste";
+      # url = "github:DestinyofYeet/nix-strichliste";
+      url = "path:///home/ole/github/nix-strichliste";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

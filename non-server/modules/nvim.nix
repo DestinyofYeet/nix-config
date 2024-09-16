@@ -19,6 +19,8 @@ in {
   programs.neovim = {
     enable = true;
 
+    defaultEditor = false;
+
     extraLuaConfig = builtins.readFile ./neovim-cfg/settings.lua;
 
     extraPackages = with pkgs; [

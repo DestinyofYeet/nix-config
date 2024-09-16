@@ -99,6 +99,9 @@ in
     qbittorrent
     dig
     freerdp3
+    cifs-utils
+    samba
+    keyutils
   ] ++ lua-pkgs ++ kdePackages;
 }
 

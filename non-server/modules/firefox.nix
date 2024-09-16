@@ -97,6 +97,7 @@ in {
       "extensions.formautofill.creditCards.enabled" = false;
       "signon.rememberSignons" = false;
       "widget.use-xdg-desktop-portal.file-picker" = 1;
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     };
 
     search.default = "Startpage";
@@ -121,10 +122,20 @@ in {
       enhancer-for-youtube
       skip-redirect
       keepassxc-browser
+      tree-style-tab
     ];
 
     settings = {
       "extensions.autoDisableScopes" = 0; # automatically enable plugins
     };
+
+    userChrome = ''
+
+      /* hides the native tabs */
+      #TabsToolbar {
+        visibility: collapse !important;
+      }     
+
+    '';
   };
 }
