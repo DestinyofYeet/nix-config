@@ -106,6 +106,7 @@ in
     clang-tools
     rust-analyzer
     nil
+    bash-language-server
   ] ++ lua-pkgs ++ kdePackages;
 }
 

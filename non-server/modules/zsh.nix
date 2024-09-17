@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, osConfig, ... }:
 let  
     rebuild-system = pkgs.writeShellScriptBin "rebuild-system" ''
       set -e
@@ -57,6 +57,8 @@ in {
       deploy-node = "${deploy-node}/bin/deploy-node";
       stylix-color-picker = "${stylix-color-picker}/bin/stylix-color-picker";
       gitui = "${gitui-proper}/bin/gitui-proper";
+
+      setup-env = "${osConfig.customScripts.setup-env}";
 
       kssh = "kitten ssh";
       icat = "kitten icat";

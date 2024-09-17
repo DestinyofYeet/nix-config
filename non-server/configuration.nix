@@ -11,6 +11,7 @@
       ./desktop_environment.nix
       ./system_users.nix
       ./services.nix
+      ./scripts
     ];
 
 

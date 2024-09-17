@@ -92,7 +92,7 @@
     nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        inherit home-manager plasma-manager inputs;
+        inherit home-manager inputs;
       };
       modules = [
         ./non-server/hardware/kartoffelkiste.nix
@@ -103,7 +103,7 @@
     nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        inherit home-manager plasma-manager inputs;
+        inherit home-manager inputs;
       };
       modules = [
         ./non-server/hardware/wattson.nix
@@ -115,7 +115,7 @@
     nixosConfigurations.main = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        inherit home-manager plasma-manager inputs;
+        inherit home-manager inputs;
       };
       modules = [
         ./non-server/hardware/main.nix
@@ -124,40 +124,12 @@
       ] ++ laptop-modules;
     };
 
-    #hydraJobs = {
-    #  wattson = self.nixosConfigurations.wattson.config.system.build.toplevel;
-    #  main = self.nixosConfigurations.main.config.system.build.toplevel;
-    #};
-
-    hydraJobs = 
-
-    let 
-      blacklist = [
-        "nixos-help"
-        "steam-run"
-        "steam"
-      ];
-
-      isNotBlacklisted = blacklist: pkg: !(builtins.elem pkg.name blacklist);
-
-      mergePackages = configurations: blacklisted-pkgs :
-        builtins.filter (isNotBlacklisted blacklisted-pkgs) (builtins.concatLists (map (configuration: self.nixosConfigurations.${configuration}.config.environment.systemPackages) configurations));
-      
-      makePackages = packages:
-        builtins.listToAttrs (map (package: {name = package.name; value = package; }) packages);
+    hydraJobs = let 
 
       makeConfigurations = configurations:
         builtins.listToAttrs (map (configuration: { name = configuration; value = self.nixosConfigurations.${configuration}.config.system.build.toplevel; }) configurations);
 
     in {
-      #packages.x86_64-linux = makePackages (
-      #  mergePackages [
-      #    "wattson"
-      #    "main"
-      #    "nix-server"
-      #  ] blacklist
-      #);
-
       system-builds = makeConfigurations [
         "main"
         "wattson"
