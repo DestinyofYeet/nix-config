@@ -108,6 +108,7 @@ in
     nil
     bash-language-server
     trunk
+    vscode-langservers-extracted
   ] ++ lua-pkgs ++ kdePackages;
 }
 

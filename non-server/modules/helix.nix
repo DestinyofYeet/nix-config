@@ -12,5 +12,20 @@
         };
       };
     };
+
+    ".config/helix/languages.toml" = {
+      source = (pkgs.formats.toml {}).generate "languages.toml" {
+        language-server = {
+          rust-analyzer = {
+            config = {
+              procMacro.ignored.leptos_macro = [
+                # "server"
+                # "component"
+              ];
+            };
+          };
+        };
+      };
+    };
   };
 }
