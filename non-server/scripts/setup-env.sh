@@ -9,6 +9,7 @@ function setup_rust {
 
   if [ -z "$project_name" ]; then
     echo "Project name not given, skipping cargo creation!"
+    flake_init
     exit 0
   fi
 
