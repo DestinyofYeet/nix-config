@@ -107,6 +107,7 @@ in
     rust-analyzer
     nil
     bash-language-server
+    trunk
   ] ++ lua-pkgs ++ kdePackages;
 }
 
