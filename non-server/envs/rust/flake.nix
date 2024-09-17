@@ -14,7 +14,7 @@
         rustc 
         cargo
         openssl
-        pkg-config        
+        pkg-config
       ];
     };
 

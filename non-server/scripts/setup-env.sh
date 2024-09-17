@@ -9,7 +9,7 @@ function setup_rust {
 
   if [ -z "$project_name" ]; then
     echo "Project name not given, skipping cargo creation!"
-    flake_init
+    flake_rust_init
     exit 0
   fi
 
@@ -17,6 +17,10 @@ function setup_rust {
 
   cd "$project_name" || (echo "Failed to cd into $project_name!" && exit 1)
 
+  flake_rust_init
+}
+
+function flake_rust_init {
   flake_copy
   git add flake.nix
   flake_update
