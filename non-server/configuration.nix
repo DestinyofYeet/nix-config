@@ -66,4 +66,6 @@
 
   boot.supportedFilesystems = [ "nfs" ];
   services.rpcbind.enable = true;
+
+  hardware.keyboard.zsa.enable = true;
 }
