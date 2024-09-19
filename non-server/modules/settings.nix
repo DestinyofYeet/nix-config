@@ -18,10 +18,15 @@ in {
         name = "nixpkgs";
       };
     };
+
+    currentEditor = mkOption {
+      type = types.str;
+    };
   };
 
   config.customSettings = {
     stable-pkgs = pkgs-stable;
+    currentEditor = "hx";
   };
 }
 

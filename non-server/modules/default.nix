@@ -22,5 +22,6 @@
     ./helix.nix
     ./settings.nix
     ./xdg-open.nix
+    ./mutt.nix
   ];
 }
