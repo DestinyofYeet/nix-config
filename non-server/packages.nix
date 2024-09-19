@@ -110,6 +110,7 @@ in
     trunk
     vscode-langservers-extracted
     keymapp
+    tree
   ] ++ lua-pkgs ++ kdePackages;
 }
 

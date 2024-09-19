@@ -423,8 +423,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1726708477,
-        "narHash": "sha256-Z3ZnKvcyEVEAzMEB2RmrGO9VdG7O7/4uB4RPj7IdF90=",
+        "lastModified": 1726749062,
+        "narHash": "sha256-wnl0rm66POkla9hb1tR4F150MtWt490qxLgn7mb8T3Q=",
         "path": "/home/ole/github/nix-strichliste",
         "type": "path"
       },
