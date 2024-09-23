@@ -68,4 +68,9 @@
   services.rpcbind.enable = true;
 
   hardware.keyboard.zsa.enable = true;
+
+  # hardware.graphics.extraPackages = with pkgs.rocmPackages; [
+    # rocm-runtime
+    # rocm-smi
+  # ];
 }

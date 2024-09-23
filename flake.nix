@@ -49,7 +49,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
-    inherit (self) outputs;
+    inherit self;
     baseline-modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
@@ -66,6 +66,8 @@
     ] ++ baseline-modules;
   in
   {
+    nixpkgs.config.rocmSupport = true;
+    
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit home-manager inputs; };
