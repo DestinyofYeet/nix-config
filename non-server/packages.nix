@@ -111,6 +111,7 @@ in
     keymapp
     tree
     mutt
+    whois
   ] ++ lua-pkgs ++ kdePackages;
 }
 

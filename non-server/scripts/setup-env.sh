@@ -54,5 +54,5 @@ fi
 
 case "$type" in 
   "rust") setup_rust "$@";;
-  *) create_flake;;
+  *) flake_init;;
 esac
