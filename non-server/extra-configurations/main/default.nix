@@ -45,4 +45,18 @@ in
   environment.systemPackages = with pkgs; [
     vulkan-tools
   ] ++ gaming-pkgs;
+
+  services.postgresql = {
+    enable = false;
+    ensureDatabases = [
+      "strichliste-rs"
+    ];
+
+    ensureUsers = [
+        {
+          name = "strichliste-rs";
+          ensureDBOwnership = true;
+        }
+    ];
+  };
 }
