@@ -7,10 +7,10 @@
     resolveLocalQueries = true;
     settings = {
       server = {
-        interface = [ "192.168.0.250" "127.0.0.1" "10.1.1.2" "0.0.0.0" ];
+        interface = [ "0.0.0.0" "::0" ];
         port = 53;
         access-control =
-          [ "192.168.0.250 allow" "127.0.0.1 allow" "10.1.1.2 allow" "0.0.0.0 allow" ];
+          [ "0.0.0.0 allow" "::0" ];
 
         harden-glue = true;
         harden-dnssec-stripped = true;
@@ -25,7 +25,7 @@
       forward-zone = [{
         name = ".";
         forward-addr =
-          [ "9.9.9.9#dns.quad9.net" "149.112.112.112#dns.quad9.net" ];
+          [ "9.9.9.9" "8.8.8.8" "1.1.1.1" ];
         forward-tls-upstream = true;
       }];
     };
