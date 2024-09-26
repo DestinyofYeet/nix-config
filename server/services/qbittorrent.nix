@@ -91,7 +91,7 @@ in {
     requires = [ "vpn-ns.service" ];
     after = [ "vpn-ns.service" ];
 
-    partOf = [ "vpn-ns.service" ];
+    partOf = [ "vpn-ns.service" ]; # qbit stops if the vpn-namespace service stops
 
     enable = qbit.enable;
     serviceConfig = {
@@ -102,6 +102,8 @@ in {
       Group = config.serviceSettings.group;
       ExecStart =
         "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit.dataDir}";
+
+      TimeoutStopSec = 30; # takes the full 90 seconds when trying to stop this service, dunno why
     };
   };
 }
