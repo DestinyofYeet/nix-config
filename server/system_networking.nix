@@ -44,6 +44,7 @@
     source = pkgs.writeText "resolv.conf" ''
       # Set in /etc/nixos/system_networking.nix
       nameserver 127.0.0.1
+      nameserver 8.8.8.8
     '';
   };
 
