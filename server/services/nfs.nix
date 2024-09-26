@@ -5,11 +5,17 @@ let
 in {
   fileSystems = {
     "/export/navidrome" = {
+      depends = [
+        "/mnt/data/data/media"
+      ];
       device = "${config.serviceSettings.paths.data}/media/navidrome";
       options = [ "bind" ];
     };
 
     "/export/programmingStuff" = {
+      depends = [
+        "/mnt/data/data/media"
+      ];
       device = "${config.serviceSettings.paths.data}/Programming-Stuff";
       options = [ "bind" ];
     };

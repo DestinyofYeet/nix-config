@@ -112,6 +112,7 @@ in
     tree
     mutt
     whois
+    jetbrains.rust-rover
   ] ++ lua-pkgs ++ kdePackages;
 }
 
