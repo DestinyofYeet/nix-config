@@ -10,7 +10,7 @@
         interface = [ "0.0.0.0" "::0" ];
         port = 53;
         access-control =
-          [ "0.0.0.0 allow" "::0" ];
+          [ "0.0.0.0/0 allow" "::0/0 allow" ];
 
         harden-glue = true;
         harden-dnssec-stripped = true;
