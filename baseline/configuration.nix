@@ -8,5 +8,7 @@
 
   # optimise nix-store with deduplication
   nix.settings.auto-optimise-store = true;
+
+  nix.settings.max-jobs = "auto";
 }
 
