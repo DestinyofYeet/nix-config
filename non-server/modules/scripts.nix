@@ -60,8 +60,8 @@
       with open("${config.age.secrets.stalwart-ole-pw.path}") as f:
         password = f.read().removesuffix("\n")
 
-      print(f"Alias: {alias}@uwuwhatsthis.de")    
-      os.system(f"${config.customSettings.stable-pkgs.stalwart-mail}/bin/stalwart-cli -u https://mx.uwuwhatsthis.de -c 'ole:{password}' account add-email ole {alias}@uwuwhatsthis.de")
+      print(f"Alias: {alias}@uwuwhatsthis.de")  # if stalwarts breaks again, use config.customSettings.stable-pkgs.stalwart-mail
+      os.system(f"${pkgs.stalwart-mail}/bin/stalwart-cli -u https://mx.uwuwhatsthis.de -c 'ole:{password}' account add-email ole {alias}@uwuwhatsthis.de")
 
     if __name__ == '__main__':
       main()
