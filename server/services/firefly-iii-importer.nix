@@ -30,7 +30,7 @@
   systemd.timers."import-firefly-data" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "daily";
+      OnCalendar = "*-*-* 1:00:00";
       Unit = "import-firefly-data.service";
     };
   };
