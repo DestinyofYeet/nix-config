@@ -33,5 +33,6 @@
     ./unbound.nix
     ./ups.nix
     ./strichliste.nix
+    # ./access-point.nix
   ];
 }
