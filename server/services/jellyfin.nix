@@ -28,6 +28,12 @@
     )
   ];
 
+  services.nginx.virtualHosts."jellyfin.nix-server.infra.wg" = {
+    locations."/" = {
+      proxyPass = "http://localhost:8096";
+    };
+  };
+
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [

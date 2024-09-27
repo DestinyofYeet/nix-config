@@ -32,12 +32,6 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  networking.extraHosts = ''
-    192.168.0.250 nix-server.infra.wg
-    192.168.0.250 cache.nix-server.infra.wg
-    192.168.0.250 firefly.nix-server.infra.wg
-  '';
-
   programs.steam.extraPackages = gaming-pkgs;
 
   programs.gamemode.enable = true;

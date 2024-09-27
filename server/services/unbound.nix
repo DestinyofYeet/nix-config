@@ -1,7 +1,14 @@
 {
   config,
   ...
-}:{
+}:
+
+let
+  root-domain = "nix-server.infra.wg";
+  ip = "192.168.0.250";
+  build-subdomains = sub-domains:
+    (map (sub-domain:  "\"${sub-domain}.${root-domain}. IN A ${ip}\"") sub-domains);
+in {
   services.unbound = {
     enable = true;
     resolveLocalQueries = true;
@@ -21,17 +28,34 @@
         # Custom settings
         hide-identity = true;
         hide-version = true;
+
+        # no quotes
+        local-zone = [
+          "${root-domain}. static"
+        ];
+
+        # needs quotes
+        local-data = [
+          "\"${root-domain}. IN A ${ip}\""
+        ] ++ build-subdomains [
+          "jellyfin"
+          "firefly"
+          "cache"
+          "hydra"
+        ];
       };
-      forward-zone = [{
-        name = ".";
-        forward-addr =
-          [ 
-            "9.9.9.9@853" 
-            "8.8.8.8@853" 
-            "1.1.1.1@853" 
-          ];
-        forward-tls-upstream = true;
-      }];
+      forward-zone = [
+        {
+          name = ".";
+          forward-addr =
+            [ 
+              "9.9.9.9@853" 
+              "8.8.8.8@853" 
+              "1.1.1.1@853" 
+            ];
+          forward-tls-upstream = true;
+        }
+      ];
     };
   };
 
