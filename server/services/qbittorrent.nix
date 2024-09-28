@@ -106,4 +106,10 @@ in {
       TimeoutStopSec = 30; # takes the full 90 seconds when trying to stop this service, dunno why
     };
   };
+
+  services.nginx.virtualHosts."qbittorrent.nix-server.infra.wg" = {
+    locations."/" = {
+      proxyPass = "http://10.1.1.1:8080";
+    };
+  };
 }

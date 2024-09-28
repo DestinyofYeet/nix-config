@@ -14,4 +14,10 @@
         "${pkgs.prowlarr}/bin/Prowlarr -nobrowser -data=${config.serviceSettings.paths.configs}/prowlarr";
     };
   };
+
+  services.nginx.virtualHosts."prowlarr.nix-server.infra.wg" = {
+    locations."/" = {
+      proxyPass = "http://localhost:9696";
+    };
+  };
 }

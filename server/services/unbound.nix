@@ -42,6 +42,9 @@ in {
           "firefly"
           "cache"
           "hydra"
+          "qbittorrent"
+          "sonarr"
+          "prowlarr"
         ];
       };
       forward-zone = [
