@@ -3,7 +3,7 @@ let
   # for this to work, the ssh key needs to be in /root/.ssh and the /root/.ssh/config file has to have a github.com Hostname thingy
   secrets = builtins.fetchGit {
     url = "git@github.com:DestinyofYeet/nix-secrets.git";
-    rev = "a63ed48562b5c101b089c7b77c68d0708ee9d132";
+    rev = "0ee6b577a3159cd252ad59a3a652dd5cedc3b7f0";
     ref = "main";
   }; 
 
