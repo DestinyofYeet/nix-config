@@ -42,8 +42,8 @@
     };
 
     strichliste = {
-      url = "github:DestinyofYeet/nix-strichliste";
-      # url = "path:///home/ole/github/nix-strichliste";
+      # url = "github:DestinyofYeet/nix-strichliste";
+      url = "path:///home/ole/github/nix-strichliste";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -111,6 +111,7 @@
         ./non-server/hardware/wattson.nix
         ./non-server/extra-configurations/wattson
 				./non-server
+        inputs.strichliste.nixosModules.strichliste
 			] ++ laptop-modules;
 		};
 

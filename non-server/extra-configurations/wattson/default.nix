@@ -109,4 +109,55 @@
       };
     };
   };
+
+  # services.strichliste = {
+  #   enable = true;
+  #   # nginxSettings.domain = "strichliste.localhost";
+  #   # nginxSettings.listenAddress = [ "127.0.0.1" ];
+
+  #   configuration.parameters.strichliste.payment = rec {
+  #     deposit.steps = [
+  #       100
+  #       500
+  #       10000
+  #       20000
+  #       50000
+  #       100000
+  #     ];
+
+  #     dispense.steps = deposit.steps;
+  #   };
+
+  #   databaseUrl = "mysql://nginx@localhost/strichliste";
+  # };
+
+  # virtualisation.podman = {
+  #   enable = true;
+  #   autoPrune.enable = true;
+  #   dockerCompat = true;
+  #   defaultNetwork.settings = {
+  #     # Required for container networking to be able to use names.
+  #     dns_enabled = true;
+  #   };
+  # };
+
+  # virtualisation.oci-containers.backend = "podman";
+
+  # services.mysql = {
+  #   enable = true;
+  #   package = pkgs.mariadb;
+
+  #   ensureDatabases = [
+  #     "strichliste"
+  #   ];
+
+  #   ensureUsers = [
+  #     {
+  #       name = "nginx";
+  #       ensurePermissions = {
+  #         "strichliste.*" = "ALL PRIVILEGES";
+  #       };
+  #     }
+  #   ];
+  # };
 }
