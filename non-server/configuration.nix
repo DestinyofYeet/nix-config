@@ -82,4 +82,10 @@
     nssmdns6 = true;
     openFirewall = true;
   };
+
+  # programs.command-not-found.enable = false;
+  
+  # programs.nix-index = {
+  #   enable = true;
+  # };
 }

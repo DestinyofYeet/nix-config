@@ -174,7 +174,7 @@ in {
         idleTimeoutWhenLocked = "immediately";
       };
 
-      autoSuspend = lib.mkIf (osConfig.networking.hostName == "main") {
+      autoSuspend = {
         action = "nothing";
       };
     };
