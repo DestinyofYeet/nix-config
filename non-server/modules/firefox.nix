@@ -104,6 +104,7 @@ in {
         "signon.rememberSignons" = false;
         "widget.use-xdg-desktop-portal.file-picker" = 1;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "browser.fixup.domainsuffixwhitelist.wg" = true; # make nix-server.infra.wg not result in a search
       };
 
       search.default = "Startpage";

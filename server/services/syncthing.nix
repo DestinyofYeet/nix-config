@@ -31,10 +31,16 @@
       };
     };
 
-    guiAddress = "0.0.0.0:8384";
+    guiAddress = "127.0.0.1:8384";
 
     dataDir = "${config.serviceSettings.paths.data}/syncthing";
 
     inherit (config.serviceSettings) user group;
+  };
+
+  services.nginx.virtualHosts."syncthing.nix-server.infra.wg" = {
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8384";
+    };
   };
 }

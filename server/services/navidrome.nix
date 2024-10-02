@@ -13,4 +13,10 @@
 
     inherit (config.serviceSettings) user group;
   };
+
+  services.nginx.virtualHosts."navidrome.nix-server.infra.wg" = {
+    locations."/" = {
+      proxyPass = "http://localhost:4533";
+    };
+  };
 }

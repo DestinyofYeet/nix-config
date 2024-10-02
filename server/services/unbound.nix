@@ -45,6 +45,8 @@ in {
           "qbittorrent"
           "sonarr"
           "prowlarr"
+          "navidrome"
+          "syncthing"
         ];
       };
       forward-zone = [
