@@ -11,6 +11,7 @@
     ./system_networking.nix
     ./system_packages.nix
     ./system_users.nix
+    ./nvidia.nix
     ./services
     ./scripts
   ];
