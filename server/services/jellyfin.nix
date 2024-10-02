@@ -45,4 +45,17 @@
       intel-media-sdk # QSV up to 11th gen
     ];
   };
+
+  # was to removed due to a lack of maintanance
+  # hardware.opengl = {
+  #   extraPackages = with pkgs; [ linuxPackages.amdgpu-pro ];
+  # };
+
+  # boot.extraModulePackages = with config.boot.kernelPackages; [
+  #   amdgpu-pro
+  # ];
+
+  # environment.systemPackages = with pkgs; [
+  #   linuxPackages.amdgpu-pro
+  # ];
 }

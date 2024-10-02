@@ -46,7 +46,7 @@ in
   };
 
 
-  services.fwupd.enable = true;
+  # services.fwupd.enable = true;
 
   # needed for yubikey to work in keepass
   services.udev.packages = with pkgs; [
