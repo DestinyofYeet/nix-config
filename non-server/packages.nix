@@ -113,6 +113,8 @@ in
     mutt
     whois
     jetbrains.rust-rover
+    rnote
+    maliit-keyboard
   ] ++ lua-pkgs ++ kdePackages;
 }
 
