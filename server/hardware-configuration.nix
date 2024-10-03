@@ -13,7 +13,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.zfs.extraPools = [ "data" ];
+  boot.zfs.extraPools = [ "data" "ARCHIVE" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/7418e0ef-35fd-4ab8-ab8d-e5cc08acd82a";

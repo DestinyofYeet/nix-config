@@ -34,5 +34,7 @@
     ./ups.nix
     ./strichliste.nix
     # ./access-point.nix
+    ./znapzend.nix
+    ./bazarr.nix
   ];
 }
