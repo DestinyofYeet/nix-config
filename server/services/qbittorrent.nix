@@ -107,9 +107,9 @@ in {
     };
   };
 
-  services.nginx.virtualHosts."qbittorrent.nix-server.infra.wg" = {
-    locations."/" = {
-      proxyPass = "http://10.1.1.1:8080";
-    };
-  };
+  # services.nginx.virtualHosts."qbittorrent.nix-server.infra.wg" = {
+  #   locations."/" = {
+  #     proxyPass = "http://10.1.1.1:8080";
+  #   };
+  # };
 }

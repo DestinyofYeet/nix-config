@@ -6,9 +6,9 @@
     inherit (config.serviceSettings) user group;
   };
 
-  services.nginx.virtualHosts."sonarr.nix-server.infra.wg" = {
-    locations."/" = {
-      proxyPass = "http://localhost:8989";
-    };
-  };
+  # services.nginx.virtualHosts."sonarr.nix-server.infra.wg" = {
+  #   locations."/" = {
+  #     proxyPass = "http://localhost:8989";
+  #   };
+  # };
 }

@@ -15,9 +15,9 @@
     };
   };
 
-  services.nginx.virtualHosts."prowlarr.nix-server.infra.wg" = {
-    locations."/" = {
-      proxyPass = "http://localhost:9696";
-    };
-  };
+  # services.nginx.virtualHosts."prowlarr.nix-server.infra.wg" = {
+  #   locations."/" = {
+  #     proxyPass = "http://localhost:9696";
+  #   };
+  # };
 }

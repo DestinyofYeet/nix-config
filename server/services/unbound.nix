@@ -42,9 +42,9 @@ in {
           "firefly"
           "cache"
           "hydra"
-          "qbittorrent"
-          "sonarr"
-          "prowlarr"
+          # "qbittorrent"
+          # "sonarr"
+          # "prowlarr"
           "navidrome"
           "syncthing"
         ];
