@@ -36,6 +36,7 @@
     screen
     zfs
     iotop
+    nvtopPackages.full
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
