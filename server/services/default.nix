@@ -36,5 +36,6 @@
     # ./access-point.nix
     ./znapzend.nix
     ./bazarr.nix
+    ./zfs-mail.nix
   ];
 }

@@ -23,6 +23,7 @@ in {
   "mysql-passbolt-pw.age".publicKeys = authed;
   "passbolt-env-file.age".publicKeys = authed;
   "upsmon-password-file.age".publicKeys = authed;
+  "zed-email-credentials.age".publicKeys = authed;
 
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
 }
