@@ -115,6 +115,7 @@ in
     jetbrains.rust-rover
     rnote
     maliit-keyboard
+    thunderbird
   ] ++ lua-pkgs ++ kdePackages;
 }
 
