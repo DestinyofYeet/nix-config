@@ -2,23 +2,26 @@
   pkgs,
   config,
   ...
-}: let
-  aliases-file = pkgs.writeText "aliases" ''
-    root: ole@uwuwhatsthis.de
-  '';
-in {
+}:{
   age.secrets = {
     zed-email-credentials = { file = ../secrets/zed-email-credentials.age; };
   };
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    zfsStable = pkgs.zfsStable.override { enableMail = true; }; # Recompile ZFS with mail Capabilities
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   zfsStable = pkgs.zfsStable.override { enableMail = true; }; # Recompile ZFS with mail Capabilities
+  # };
+
+  environment.etc."aliases" = {
+    text = ''
+      root: ole@uwuwhatsthis.de
+    '';
   };
 
   programs.msmtp = {
+    enable = true;
     setSendmail = true;
     defaults = {
-      aliases = aliases-file;
+      aliases = "/etc/aliases";
       port = 465;
       tls_trust_file = "/etc/ssl/certs/ca-certificates.crt";
       tls = "on";
@@ -29,7 +32,7 @@ in {
     accounts = {
       default = {
         host = "mx.uwuwhatsthis.de";
-        passwordeval = "cat ${config.age.secrets.zed-email-credentials}";
+        passwordeval = "cat ${config.age.secrets.zed-email-credentials.path}";
         user = "zed@uwuwhatsthis.de";
         from = "zed@uwuwhatsthis.de";
       };
@@ -49,5 +52,5 @@ in {
     ZED_SCRUB_AFTER_RESILVER = true;
   };
 
-  services.zfs.zed.enableMail = true;
+  services.zfs.zed.enableMail = false;
 }
