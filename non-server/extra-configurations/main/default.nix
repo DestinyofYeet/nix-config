@@ -36,6 +36,10 @@ in
 
   programs.gamemode.enable = true;
 
+  networking.extraHosts = ''
+    192.168.0.250 nix-server.infra.wg
+  '';
+
   environment.systemPackages = with pkgs; [
     vulkan-tools
   ] ++ gaming-pkgs;

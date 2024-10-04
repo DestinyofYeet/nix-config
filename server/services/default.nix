@@ -33,9 +33,9 @@
     ./unbound.nix
     ./ups.nix
     ./strichliste.nix
-    # ./access-point.nix
     ./znapzend.nix
     ./bazarr.nix
     ./zfs-mail.nix
+    ./wifi.nix
   ];
 }
