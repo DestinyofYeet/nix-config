@@ -9,6 +9,10 @@
 
   kdePackages = with pkgs.kdePackages; [
     kcalc
+    kparts
+    svgpart
+    markdownpart
+    konqueror
   ];
 in
   {
@@ -116,6 +120,8 @@ in
     rnote
     maliit-keyboard
     thunderbird
+    d2
+    gimp-with-plugins
   ] ++ lua-pkgs ++ kdePackages;
 }
 
