@@ -24,8 +24,9 @@ let
       86400        ; Minimum TTL
     ) IN NS ns.local.ole.blue.
 
-    ns.local.ole.blue. IN A 192.168.0.250
-    *.local.ole.blue IN A 192.168.0.250
+    ns.local.ole.blue.   IN A 192.168.0.250
+    local.ole.blue.      IN A 192.168.0.250
+    *.local.ole.blue.    IN A 192.168.0.250
   '';
 in {
   services.unbound = {
@@ -71,20 +72,12 @@ in {
       };
 
       # I want the unbound server to have a local storage of the zone data incase the internet goes out
-      # stub-zone = [
-      #   {
-      #     name = wrap-string "local.ole.blue.";
-      #     stub-addr = "192.168.0.250";
-      #     # zonefile = wrap-string "${zone-file}";
-      #   }
-      # ];
-
-      # auth-zone = [
-      #   {
-      #     name = wrap-string "local.ole.blue";
-      #     zonefile = wrap-string "${zone-file}";
-      #   }
-      # ];
+      auth-zone = [
+        {
+          name = wrap-string "local.ole.blue";
+          zonefile = wrap-string "${zone-file}";
+        }
+      ];
 
       forward-zone = [
         {
