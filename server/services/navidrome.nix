@@ -14,9 +14,17 @@
     inherit (config.serviceSettings) user group;
   };
 
-  services.nginx.virtualHosts."navidrome.nix-server.infra.wg" = {
-    locations."/" = {
-      proxyPass = "http://localhost:4533";
+  services.nginx = let
+    default-config = {
+      locations."/" = {
+        proxyPass = "http://localhost:4533";
+      };
+    };
+  in {
+    virtualHosts = {
+      "navidrome.nix-server.infra.wg" = {} // default-config;
+
+      "navidrome.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
     };
   };
 }

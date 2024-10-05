@@ -14,4 +14,16 @@
       };
     };
   };
+
+  services.nginx = let
+    default-config = {
+      locations."/" = {
+        proxyPass = "http://localhost:8111";
+      };
+    };
+  in {
+    virtualHosts = {
+      "shoko.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+    };
+  };
 }

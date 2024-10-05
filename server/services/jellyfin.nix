@@ -28,12 +28,23 @@
     )
   ];
 
-  services.nginx.virtualHosts."jellyfin.nix-server.infra.wg" = {
-    locations."/" = {
-      proxyPass = "http://localhost:8096";
+  services.nginx = 
+  let
+    default-config = {
+      locations."/" = {
+        proxyPass = "http://localhost:8096";
+        extraConfig = ''
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+        '';
+      };
     };
-  };
-
+  in { 
+    virtualHosts = {    
+      "jellyfin.nix-server.infra.wg" = {} // default-config;
+      "jellyfin.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+    };
+  }; 
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -45,17 +56,4 @@
       intel-media-sdk # QSV up to 11th gen
     ];
   };
-
-  # was to removed due to a lack of maintanance
-  # hardware.opengl = {
-  #   extraPackages = with pkgs; [ linuxPackages.amdgpu-pro ];
-  # };
-
-  # boot.extraModulePackages = with config.boot.kernelPackages; [
-  #   amdgpu-pro
-  # ];
-
-  # environment.systemPackages = with pkgs; [
-  #   linuxPackages.amdgpu-pro
-  # ];
 }

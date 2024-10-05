@@ -38,9 +38,16 @@
     inherit (config.serviceSettings) user group;
   };
 
-  services.nginx.virtualHosts."syncthing.nix-server.infra.wg" = {
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:8384";
+  services.nginx = let 
+    default-config = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8384";
+      };
     };
+  in {
+    virtualHosts = {
+      "syncthing.nix-server.infra.wg" = {} // default-config;    
+      "syncthing.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+    }; 
   };
 }

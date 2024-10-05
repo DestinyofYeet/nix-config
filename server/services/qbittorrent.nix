@@ -107,21 +107,29 @@ in {
     };
   };
 
-  services.nginx.virtualHosts."qbittorrent.nix-server.infra.wg" = {
-    locations."/" = {
-      proxyPass = "http://10.1.1.1:8080";
-      extraConfig = ''
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+  services.nginx = let
+    default-config = {
+      locations."/" = {
+        proxyPass = "http://10.1.1.1:8080";
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
 
-        # Prevent gzip encoding issues
-        proxy_set_header Accept-Encoding "";
+          # Prevent gzip encoding issues
+          proxy_set_header Accept-Encoding "";
 
-        # If necessary, disable buffer to get immediate response from upstream
-        proxy_buffering off;
-      '';
+          # If necessary, disable buffer to get immediate response from upstream
+          proxy_buffering off;
+        '';
+      };
+    };
+  in {
+    virtualHosts = {
+      "qbittorrent.nix-server.infra.wg" = {} // default-config;
+
+      "qbittorrent.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
     };
   };
 }

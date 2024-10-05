@@ -48,6 +48,10 @@ in {
         name = "nixpkgs";
       };
     };
+
+    nginx-local-ssl = mkOption {
+      type = types.attrs;
+    };
   };
 
   config.serviceSettings = {
@@ -62,6 +66,11 @@ in {
     paths.data = "/mnt/data/data";
     paths.configs = "/mnt/data/configs";
 
-    stable-pkgs = import nixos-stable { system = "x86_64-linux"; };    
+    stable-pkgs = import nixos-stable { system = "x86_64-linux"; };
+
+    nginx-local-ssl = {
+      forceSSL = true;
+      useACMEHost = "wildcard.local.ole.blue";
+    };
   };
 }
