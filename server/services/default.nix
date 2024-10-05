@@ -37,5 +37,6 @@
     ./bazarr.nix
     ./zfs-mail.nix
     ./wifi.nix
+    ./acme.nix
   ];
 }

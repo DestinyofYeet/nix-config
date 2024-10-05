@@ -25,5 +25,7 @@ in {
   "upsmon-password-file.age".publicKeys = authed;
   "zed-email-credentials.age".publicKeys = authed;
 
+  "porkbun-api-env.age".publicKeys = authed;
+
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
 }

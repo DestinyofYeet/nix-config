@@ -15,9 +15,14 @@
     };
   };
 
-  # services.nginx.virtualHosts."prowlarr.nix-server.infra.wg" = {
-  #   locations."/" = {
-  #     proxyPass = "http://localhost:9696";
-  #   };
-  # };
+  services.nginx.virtualHosts."prowlarr.nix-server.infra.wg" = {
+    locations."/" = {
+      proxyPass = "http://localhost:9696";
+      extraConfig = ''
+        # Headers for WebSocket support
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+      '';
+    };
+  };
 }

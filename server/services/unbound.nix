@@ -44,7 +44,7 @@ in {
           "hydra"
           "qbittorrent"
           "sonarr"
-          # "prowlarr"
+          "prowlarr"
           "navidrome"
           "syncthing"
         ];
