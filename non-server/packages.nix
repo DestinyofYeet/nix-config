@@ -13,6 +13,7 @@
     svgpart
     markdownpart
     konqueror
+    konversation
   ];
 in
   {

@@ -30,15 +30,23 @@ let
   '';
 in {
   services.unbound = {
+    user = "nginx";
     enable = true;
     checkconf = true;
     resolveLocalQueries = true;
     settings = {
       server = {
-        interface = [ "0.0.0.0" "::0" ];
-        port = 53;
+        interface = [ 
+          "0.0.0.0@53" 
+          "::0@53"
+          "0.0.0.0@853"
+          "::0@853"
+        ];
         access-control =
           [ "0.0.0.0/0 allow" "::0/0 allow" ];
+
+        tls-service-key = "/var/lib/acme/local.ole.blue/key.pem";
+        tls-service-pem = "/var/lib/acme/local.ole.blue/fullchain.pem";
 
         harden-glue = true;
         harden-dnssec-stripped = true;
