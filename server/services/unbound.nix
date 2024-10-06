@@ -29,24 +29,6 @@ let
     *.local.ole.blue.    IN A 192.168.0.250
   '';
 in {
-
-  services.nginx = {
-    virtualHosts."local.ole.blue" = {
-      listen = [
-        {
-          addr = "192.168.0.250";
-          port = 443;
-          ssl = true;
-        }
-      ];
-      forceSSL = true;
-      useACMEHost = "local.ole.blue";
-      locations."/dns-query" = {
-        proxyPass = "http://localhost:8853/dns-query";
-      };
-    };
-  };
-
   services.unbound = {
     user = "nginx";
     enable = true;
@@ -66,7 +48,7 @@ in {
         tls-service-key = "/var/lib/acme/local.ole.blue/key.pem";
         tls-service-pem = "/var/lib/acme/local.ole.blue/fullchain.pem";
 
-        https-port = "8853";
+        # https-port = "8853";
 
         harden-glue = true;
         harden-dnssec-stripped = true;
