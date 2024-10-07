@@ -140,6 +140,7 @@ in
     gimp-with-plugins
     rpi-imager
     zoom-us
+    texliveFull
   ] ++ lua-pkgs ++ kdePackages;
 }
 
