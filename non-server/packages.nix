@@ -42,6 +42,21 @@ in
     enable = true;
   };
 
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-backgroundremoval
+    ];
+  };
+
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
+
+  boot.extraModprobeConfig = ''
+    options v4l2loopback video_nr=10 card_label=Video-Loopback exclusive_caps=1
+  '';
+
 
   programs.noisetorch.enable = true;
 
@@ -123,6 +138,8 @@ in
     thunderbird
     d2
     gimp-with-plugins
+    rpi-imager
+    zoom-us
   ] ++ lua-pkgs ++ kdePackages;
 }
 
