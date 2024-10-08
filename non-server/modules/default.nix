@@ -24,5 +24,6 @@
     ./xdg-open.nix
     ./mutt.nix
     ./yazi.nix
+    ./fuck.nix
   ];
 }
