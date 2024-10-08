@@ -218,6 +218,7 @@ in {
       # makes the default border edge action dissapear
       kwinrc = {
         "Effect-overview"."BorderActivate" = 9;
+        "Wayland"."InputMethod" = "/run/current-system/sw/share/applications/com.github.maliit.keyboard.desktop";
       };
 
       # disable saving clipboard across DE-Sessions
