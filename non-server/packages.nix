@@ -12,7 +12,6 @@
     kparts
     svgpart
     markdownpart
-    konqueror
     konversation
   ];
 in
