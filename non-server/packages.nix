@@ -141,6 +141,8 @@ in
     rpi-imager
     zoom-us
     texliveFull
+    inkscape-with-extensions
+    texlab
   ] ++ lua-pkgs ++ kdePackages;
 }
 
