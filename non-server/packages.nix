@@ -142,6 +142,8 @@ in
     texliveFull
     inkscape-with-extensions
     texlab
+    tinymist
+    typst
   ] ++ lua-pkgs ++ kdePackages;
 }
 
