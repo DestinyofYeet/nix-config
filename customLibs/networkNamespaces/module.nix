@@ -48,9 +48,9 @@ in {
               description = "The ip to connect from the namespace to the host system";
             };
 
-            routePorts = mkOption {
+            iptableChains = mkOption {
               type = with types; listOf str;
-              description = "A list of ports to route from the host to the namespace";
+              description = "A list of chains to create and delete";
               default = [];
             };
           };
@@ -101,6 +101,7 @@ in {
             ip netns exec ${nsName} ip link set dev lo up
 
             # route all traffic from the local port 8080 to the namespace port 8080, so we can access the webinterface
+            ${concatStringsSep "\n" (map (chain: "iptables -t nat -A" + chain) cfg.iptableChains)}
             # iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
             # iptables -t nat -A POSTROUTING -j MASQUERADE
         '';
@@ -112,6 +113,7 @@ in {
           ip netns delete ${nsName}
           # iptables -t nat -D PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.1.1.1:8080
           # iptables -t nat -D POSTROUTING -j MASQUERADE
+          ${concatStringsSep "\n" (map (chain: "iptables -t nat -D" + chain) cfg.iptableChains)}
           ip link delete ${nsName}-veth0 
         '';
       };
