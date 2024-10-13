@@ -300,6 +300,23 @@
         "type": "github"
       }
     },
+    "networkNamespaces": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1728848053,
+        "narHash": "sha256-Z6G2qMHG8QDbfi4e2TfqakJmLdSap9WjOkxlxQkSAvU=",
+        "path": "/home/ole/nixos/customLibs/networkNamespaces",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/ole/nixos/customLibs/networkNamespaces",
+        "type": "path"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1728492678,
@@ -361,31 +378,11 @@
         "clean-unused-files": "clean-unused-files",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager_2",
+        "networkNamespaces": "networkNamespaces",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
-        "strichliste": "strichliste",
         "stylix": "stylix"
-      }
-    },
-    "strichliste": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1726751166,
-        "narHash": "sha256-ERJmxUDPGnEPr1NSrSDm8ur5tBdZMt8Jz6rVMieTuw0=",
-        "owner": "DestinyofYeet",
-        "repo": "nix-strichliste",
-        "rev": "5f24e0c5dc4eecdfa18a9540778ba1e05043dec2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DestinyofYeet",
-        "repo": "nix-strichliste",
-        "type": "github"
       }
     },
     "stylix": {

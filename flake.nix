@@ -41,11 +41,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    strichliste = {
-      url = "github:DestinyofYeet/nix-strichliste";
-      # url = "path:///home/ole/github/nix-strichliste";
+    networkNamespaces = {
+      url = "path:///home/ole/nixos/customLibs/networkNamespaces";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # strichliste = {
+    #   url = "github:DestinyofYeet/nix-strichliste";
+    #   # url = "path:///home/ole/github/nix-strichliste";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -74,7 +79,8 @@
       modules = [
         inputs.add-replay-gain.nixosModules.add-replay-gain
         inputs.clean-unused-files.nixosModules.clean-unused-files
-        inputs.strichliste.nixosModules.strichliste
+        # inputs.strichliste.nixosModules.strichliste
+        inputs.networkNamespaces.nixosModules.networkNamespaces
         ./server
       ] ++ baseline-modules;
     };
@@ -111,7 +117,7 @@
         ./non-server/hardware/wattson.nix
         ./non-server/extra-configurations/wattson
 				./non-server
-        inputs.strichliste.nixosModules.strichliste
+        # inputs.strichliste.nixosModules.strichliste
 			] ++ laptop-modules;
 		};
 

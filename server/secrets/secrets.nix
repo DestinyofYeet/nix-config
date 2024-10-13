@@ -27,5 +27,7 @@ in {
 
   "porkbun-api-env.age".publicKeys = authed;
 
+  "airvpn-deluge.age".publicKeys = authed;
+
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
 }

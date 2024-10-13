@@ -38,5 +38,6 @@
     ./zfs-mail.nix
     ./wifi.nix
     ./acme.nix
+    ./deluge.nix
   ];
 }
