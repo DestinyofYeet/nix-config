@@ -96,8 +96,8 @@ in {
 
             ip link add ${nsName}-veth0 type veth peer name ${nsName}-veth1
             ip link set ${nsName}-veth1 netns ${nsName}
-            ip netns exec ${nsName} ifconfig ${nsName}-veth1 ${namespaceConfig.networkIpIn}/24 up
-            ifconfig ${nsName}-veth0 ${namespaceConfig.networkIpOut}/24 up
+            ip netns exec ${nsName} ifconfig ${nsName}-veth1 ${namespaceConfig.networkIpOut}/24 up
+            ifconfig ${nsName}-veth0 ${namespaceConfig.networkIpIn}/24 up
             ip netns exec ${nsName} ip link set dev lo up
 
             # route all traffic from the local port 8080 to the namespace port 8080, so we can access the webinterface
