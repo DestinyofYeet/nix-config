@@ -307,14 +307,19 @@
         ]
       },
       "locked": {
-        "lastModified": 1728848053,
-        "narHash": "sha256-Z6G2qMHG8QDbfi4e2TfqakJmLdSap9WjOkxlxQkSAvU=",
-        "path": "/home/ole/nixos/customLibs/networkNamespaces",
-        "type": "path"
+        "dir": "customLibs/networkNamespaces",
+        "lastModified": 1728857251,
+        "narHash": "sha256-Tdmte1Suw28pgHy9ZC2xxtIq8UEdZuLb/SfT0QuTaMk=",
+        "owner": "DestinyofYeet",
+        "repo": "nix-config",
+        "rev": "5206fc3ea7a59f23638247be7a0a4bc95f1c2d3c",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ole/nixos/customLibs/networkNamespaces",
-        "type": "path"
+        "dir": "customLibs/networkNamespaces",
+        "owner": "DestinyofYeet",
+        "repo": "nix-config",
+        "type": "github"
       }
     },
     "nixpkgs": {
