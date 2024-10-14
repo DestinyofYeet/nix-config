@@ -1,0 +1,3 @@
+[submodule "customLibs/namespaces.nix"]
+	path = customLibs/namespaces.nix
+	url = git@github.com:DestinyofYeet/namespaces.nix

@@ -77,6 +77,20 @@ in {
             definedAliases = [ "@no" ];
           };
 
+          "Nix manual search" = {
+            urls = [
+              {
+                template = "https://noogle.dev/";
+                params = [{
+                  name = "term";
+                  value = "{searchTerms}";
+                }];              
+              }
+            ];
+
+            definedAliases = [ "@nms" ];
+          };
+
           "Bing".metaData.hidden = true;
           "Google".metaData.hidden = true;
           "DuckDuckGo".metaData.hidden = true;
