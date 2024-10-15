@@ -70,7 +70,7 @@ in
     tlp
     zoxide
     xournalpp
-    bitwarden-desktop
+    # bitwarden-desktop
     vesktop
     brave
     innernet
