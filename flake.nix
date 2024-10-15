@@ -48,6 +48,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    zen-browser = {
+      url = "github:ch4og/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # strichliste = {
     #   url = "github:DestinyofYeet/nix-strichliste";
     #   # url = "path:///home/ole/github/nix-strichliste";
@@ -70,6 +75,7 @@
       { nixpkgs.overlays = [ nur.overlay ]; }
 
       nur.nixosModules.nur
+      inputs.zen-browser.specific
     ] ++ baseline-modules;
   in
   {

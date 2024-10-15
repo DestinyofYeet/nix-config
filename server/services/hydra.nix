@@ -8,12 +8,22 @@
     hydraURL = "http://nix-server.infra.wg:3000";
     notificationSender = "hydra@uwuwhatsthis.de";
     smtpHost = "mx.uwuwhatsthis.de";
-    buildMachinesFiles = [];
+    buildMachinesFiles = [ "/etc/nix/machines" ];
     useSubstitutes = true;
     extraConfig = ''
       email_notification = 1
     '';
   };
+
+  nix.buildMachines = [
+    {
+      hostName = "localhost";
+      protocol = null;
+      system = "x86_64-linux";
+      supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
+      maxJobs = 8;    
+    }
+  ];
 
   systemd.services.hydra-notify = {
     serviceConfig.EnvironmentFile = "${config.age.secrets.hydra-email-credentials.path}";
