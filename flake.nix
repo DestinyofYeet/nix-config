@@ -75,7 +75,11 @@
       { nixpkgs.overlays = [ nur.overlay ]; }
 
       nur.nixosModules.nur
-      inputs.zen-browser.specific
+      (
+        {...}:{
+          environment.systemPackages = [ inputs.zen-browser.packages.x86_64-linux.specific ];
+        }
+      )
     ] ++ baseline-modules;
   in
   {
