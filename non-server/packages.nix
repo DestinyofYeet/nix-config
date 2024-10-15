@@ -144,6 +144,7 @@ in
     texlab
     tinymist
     typst
+    lolcat
   ] ++ lua-pkgs ++ kdePackages;
 }
 
