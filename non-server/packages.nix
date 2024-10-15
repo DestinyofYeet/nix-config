@@ -132,7 +132,7 @@ in
     mutt
     whois
     jetbrains.rust-rover
-    rnote
+    # rnote
     maliit-keyboard
     thunderbird
     d2
