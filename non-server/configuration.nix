@@ -88,4 +88,10 @@
   # programs.nix-index = {
   #   enable = true;
   # };
+
+  # other configuration is in baseline
+  nix.gc = {
+    dates = "05:00:00"; 
+    options = "--delete-older-than 7d";
+  };
 }

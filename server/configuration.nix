@@ -58,4 +58,10 @@
       formatted = builtins.concatStringsSep "\n" sortedUnique;
     in
       formatted;
+  
+  # other configuration is in baseline
+  nix.gc = {
+    dates = "05:00:00"; 
+    options = "--delete-older-than 14d";
+  };
 }
