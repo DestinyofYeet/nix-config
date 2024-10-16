@@ -25,5 +25,6 @@
     ./mutt.nix
     ./yazi.nix
     ./fuck.nix
+    ./zellij.nix
   ];
 }
