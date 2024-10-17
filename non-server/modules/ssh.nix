@@ -17,9 +17,10 @@ let
       Hostname ${hostname}
       User ${user}
       IdentityFile ${config.age.secrets.${identFile}.path}
+      ForwardAgent yes
   '' else "";
 
-  config-github = mkConfigEntry "github.com" "github.com" "git" "ssh-key-github";
+  config-github = mkConfigEntry "github" "github.com" "git" "ssh-key-github";
   config-oth-gitlab = mkConfigEntry "gitlab.oth-regensburg.de" "gitlab.oth-regensburg.de" "git" "ssh-key-oth-gitlab";
   config-fsim-ori = mkConfigEntry "ori.fsim" "fsim.othr.de" "beo45216" "ssh-key-fsim-ori";
   config-vps-main = mkConfigEntry "uwuwhatsthis.de" "uwuwhatsthis.de" "ole" "ssh-key-vps-main";
