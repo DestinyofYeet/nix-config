@@ -59,4 +59,7 @@ in
   environment.systemPackages = with pkgs; [
     yubikey-personalization
   ];
+
+  # ipfs
+  # services.kubo.enable = true;
 }

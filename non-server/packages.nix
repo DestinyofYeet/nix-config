@@ -145,6 +145,7 @@ in
     tinymist
     typst
     lolcat
+    tor-browser
   ] ++ lua-pkgs ++ kdePackages;
 }
 
