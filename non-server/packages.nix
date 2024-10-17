@@ -32,7 +32,7 @@ in
   programs.firefox.enable = true;
   programs.neovim.enable = true;
 
-  programs.ssh.startAgent = true;
+  # programs.ssh.startAgent = true;
 
   programs.wireshark = {
     enable = true;
