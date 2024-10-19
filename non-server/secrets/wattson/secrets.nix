@@ -11,4 +11,5 @@ in {
   "ssh-key-github.age".publicKeys = authed;
   "ssh-key-nix-server.age".publicKeys = authed;
   "ssh-key-fsim-backup.age".publicKeys = authed;
+  "ssh-key-fsim-pedro.age".publicKeys = authed;
 }

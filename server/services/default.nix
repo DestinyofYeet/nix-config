@@ -39,5 +39,6 @@
     ./wifi.nix
     ./acme.nix
     ./deluge.nix
+    ./ankisync.nix
   ];
 }

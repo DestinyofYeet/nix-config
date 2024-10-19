@@ -25,6 +25,8 @@ in {
   "upsmon-password-file.age".publicKeys = authed;
   "zed-email-credentials.age".publicKeys = authed;
 
+  "ankisync-users-ole.age".publicKeys = authed;
+
   "porkbun-api-env.age".publicKeys = authed;
 
   "airvpn-deluge.age".publicKeys = authed;

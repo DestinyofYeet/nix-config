@@ -13,6 +13,8 @@
     svgpart
     markdownpart
     konversation
+    krdc
+    krdp
   ];
 in
   {
@@ -148,6 +150,8 @@ in
     typst
     lolcat
     tor-browser
+    anki-bin
+    tldr
   ] ++ lua-pkgs ++ kdePackages;
 }
 
