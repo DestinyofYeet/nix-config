@@ -152,6 +152,7 @@ in
     tor-browser
     anki-bin
     tldr
+    authenticator
   ] ++ lua-pkgs ++ kdePackages;
 }
 
