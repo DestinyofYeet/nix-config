@@ -11,6 +11,7 @@
       "x-scheme-handler/https"         = [ "firefox.desktop" ];
       "x-scheme-handler/http"          = [ "firefox.desktop" ];
       "application/x-xopp" = [ "com.github.xournalpp.xournalpp.desktop" ];
+      "application/pdf" = [ "org.kde.okular.desktop" ];
     };
 
     defaultApplications = associations.added;
