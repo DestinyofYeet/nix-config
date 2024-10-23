@@ -10,7 +10,6 @@ let
     amdvlk
     gamemode
     vkbasalt
-    goverlay
   ];
 in
 {
@@ -42,6 +41,7 @@ in
 
   environment.systemPackages = with pkgs; [
     vulkan-tools
+    goverlay
   ] ++ gaming-pkgs;
 
   services.postgresql = {
