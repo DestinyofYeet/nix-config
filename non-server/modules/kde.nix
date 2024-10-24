@@ -234,6 +234,12 @@ in {
           "IgnoreImages" = false;
         };
       };
+
+      ksmserverrc = {
+        "General" = {
+          "loginMode" = "emptySession";
+        };
+      };
     };
   };
 
