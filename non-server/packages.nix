@@ -29,6 +29,7 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.nvidia.acceptLicense = true;
 
   programs.zsh.enable = true;
   programs.firefox.enable = true;
@@ -43,6 +44,12 @@ in
 
   programs.steam = {
     enable = true;
+    # package = pkgs.steam.override {
+    #   extraPkgs = pkgs: with pkgs; [ bumblebee glxinfo ];
+    # };
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
   };
 
   programs.obs-studio = {
@@ -153,6 +160,7 @@ in
     anki-bin
     tldr
     authenticator
+    lutris
   ] ++ lua-pkgs ++ kdePackages;
 }
 
