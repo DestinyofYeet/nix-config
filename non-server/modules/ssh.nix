@@ -27,7 +27,7 @@ let
   config-nix-server = mkConfigEntry "nix-server.infra.wg" "nix-server.infra.wg" "ole" "ssh-key-nix-server";
   config-nix-server-root = mkConfigEntry "nix-server.infra.wg" "nix-server.infra.wg" "root" "ssh-key-nix-server";
   config-fsim-backup = mkConfigEntry "fsim.backup" "wiki.fsim" "ole" "ssh-key-fsim-backup";
-  config-fsim-pedro = mkConfigEntry "fsim.pedro" "194.95.108.46" "beo45216" "ssh-key-fsim-pedro";
+  config-fsim-pedro = mkConfigEntry "fsim.pedro" "195.37.211.44" "beo45216" "ssh-key-fsim-pedro";
 in {
   age.secrets = mkSecrets [
     "ssh-key-oth-gitlab"

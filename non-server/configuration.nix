@@ -74,7 +74,10 @@
     # rocm-smi
   # ];
 
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
 
   services.avahi = {
     enable = true;
