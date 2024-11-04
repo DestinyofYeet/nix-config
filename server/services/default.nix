@@ -40,5 +40,6 @@
     ./acme.nix
     ./deluge.nix
     ./ankisync.nix
+    ./roundcube.nix
   ];
 }

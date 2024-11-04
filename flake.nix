@@ -44,6 +44,7 @@
 
     networkNamespaces = {
       # url = "path:///home/ole/nixos/customLibs/networkNamespaces";
+      # url = "path:///home/ole/github/namespaces.nix";
       url = "github:DestinyofYeet/namespaces.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
