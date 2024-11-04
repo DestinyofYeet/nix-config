@@ -34,4 +34,10 @@
       Unit = "import-firefly-data.service";
     };
   };
+
+  services.nginx.virtualHosts."firefly-importer.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
+    locations."/" = {
+      proxyPass = "http://localhost:7070";
+    };
+  };
 }

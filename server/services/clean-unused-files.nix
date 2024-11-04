@@ -4,7 +4,7 @@ let
 in {
   
   services.cleanUnusedFiles = {
-    enable = true;
+    enable = false;
 
     qbit = {
       url = "http://10.1.1.1:8080";

@@ -25,5 +25,6 @@
     amdgpu_top
     radeontop
     deploy-rs
+    helix
   ];
 }

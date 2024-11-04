@@ -18,7 +18,7 @@ in {
 
     settings = {
       APP_KEY_FILE = config.age.secrets.app-key-file.path;
-      APP_URL = "https://firefly.nix-server.infra.wg";
+      APP_URL = "https://firefly.local.ole.blue";
       TZ = "Europe/Berlin";
       DEFAULT_LOCALE = "de_DE";
     };
@@ -26,10 +26,16 @@ in {
     dataDir = "${config.serviceSettings.paths.configs}/fireflyiii";
 
     # virtualHost = "firefly.nix-server.infra.wg";
-    virtualHost = "firefly.uwuwhatsthis.de";
+    virtualHost = "firefly.local.ole.blue";
 
     enableNginx = true;
 
     # inherit (config.serviceSettings) user group;
+  };
+
+  services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
+    enableACME = false;
+    useACMEHost = config.serviceSettings.nginx-local-ssl.useACMEHost;
+    forceSSL = true;
   };
 }
