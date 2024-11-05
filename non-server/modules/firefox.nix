@@ -161,6 +161,12 @@ in {
             color = "blue";
           };
         }
+        {
+          personal = {
+            color = "blue";
+            icon = "fingerprint";
+          };
+        }
       ];
 
       settings = {
