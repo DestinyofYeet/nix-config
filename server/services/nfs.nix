@@ -6,7 +6,7 @@ in {
   fileSystems = {
     "/export/navidrome" = {
       depends = [
-        "/mnt/data/data/media"
+        "${config.serviceSettings.paths.data}/media/navidrome"
       ];
       device = "${config.serviceSettings.paths.data}/media/navidrome";
       options = [ "bind" ];
@@ -14,7 +14,7 @@ in {
 
     "/export/programmingStuff" = {
       depends = [
-        "/mnt/data/data/media"
+        "${config.serviceSettings.paths.data}/Programming-Stuff"
       ];
       device = "${config.serviceSettings.paths.data}/Programming-Stuff";
       options = [ "bind" ];
