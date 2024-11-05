@@ -6,6 +6,7 @@
       icon = value.icon or "circle";
       id = i;
     }) v) container-list);
+
 in {
   programs.firefox.enable = true;
 
@@ -150,6 +151,16 @@ in {
             color = "purple";
           };
         }
+        {
+          coding = {
+            color = "blue";
+          };
+        }
+        {
+          vps = {
+            color = "blue";
+          };
+        }
       ];
 
       settings = {
@@ -158,12 +169,37 @@ in {
         "browser.startup.homepage" = "about:blank";
         "browser.newtabpage.enabled" = false;
         "trailhead.firstrun.didSeeAboutWelcome" = true;
-        "app.shield.optoutstudies.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
         "signon.rememberSignons" = false;
         "widget.use-xdg-desktop-portal.file-picker" = 1;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.fixup.domainsuffixwhitelist.wg" = true; # make nix-server.infra.wg not result in a search
+
+        # telemetry
+        "datareporting.policy.dataSubmissionEnabled" = false;
+        "datareporting.healthreport.uploadEnabled" = false;
+        "toolkit.telemetry.unified" = false;
+        "toolkit.telemetry.enabled" = false;
+        "toolkit.telemetry.server" = "data:,";
+        "toolkit.telemetry.archive.enabled" = false;
+        "toolkit.telemetry.newProfilePing.enabled" = false;
+        "toolkit.telemetry.shutdownPingSender.enabled" = false;
+        "toolkit.telemetry.updatePing.enabled" = false;
+        "toolkit.telemetry.bhrPing.enabled" = false;
+        "toolkit.telemetry.firstShutdownPing.enabled" = false;
+        "toolkit.telemetry.coverage.opt-out" = true;
+        "toolkit.coverage.opt-out" = true;
+        "toolkit.coverage.endpoint.base" = "";
+        "browser.ping-centre.telemetry" = false;
+        "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+        "browser.newtabpage.activity-stream.telemetry" = false;
+
+        # Studies
+      	"app.shield.optoutstudies.enabled" = false;
+      	"app.normandy.enabled" = false;
+      	"app.normandy.api_url" = "";
+
+        "browser.contentblocking.category" = "strict";
       };
 
       search.default = "Startpage";
