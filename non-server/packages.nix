@@ -1,13 +1,13 @@
 
 { config, pkgs, ... }: let
 
-  lua-pkgs = with pkgs; [
+  luaPkgs = with pkgs; [
     luajitPackages.luarocks
     lua
     luajit
   ];
 
-  kdePackages = with pkgs.kdePackages; [
+  kdePkgs = with pkgs.kdePackages; [
     kcalc
     kparts
     svgpart
@@ -15,6 +15,16 @@
     konversation
     krdc
     krdp
+  ];
+
+  jetbrainsPkgs = with pkgs.jetbrains; [
+    rust-rover
+    pycharm-professional
+  ];
+
+  pythonPkgs = with pkgs.python312Packages; [
+    python-lsp-server
+    pyclip
   ];
 in
   {
@@ -88,7 +98,6 @@ in
     brave
     innernet
     rustup
-    jetbrains-toolbox
     jellyfin-media-player
     wireguard-tools
     monero-gui
@@ -144,7 +153,6 @@ in
     tree
     mutt
     whois
-    jetbrains.rust-rover
     # rnote
     maliit-keyboard
     thunderbird
@@ -164,8 +172,7 @@ in
     authenticator
     lutris
     waydroid
-    python312Packages.pyclip
     lzip
-  ] ++ lua-pkgs ++ kdePackages;
+  ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
