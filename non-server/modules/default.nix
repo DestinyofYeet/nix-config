@@ -26,5 +26,9 @@
     ./yazi.nix
     ./fuck.nix
     ./zellij.nix
+    ./zoxide.nix
+    ./direnv.nix
+    ./nushell.nix
+    ./starship.nix
   ];
 }

@@ -1,9 +1,8 @@
 {
   ...
 }:{
-  programs.yazi = {
+  programs.direnv = {
     enable = true;
-    enableZshIntegration = true;
     enableNushellIntegration = true;
-  };  
+  };
 }
