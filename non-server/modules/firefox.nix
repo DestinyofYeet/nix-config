@@ -1,5 +1,11 @@
-{ pkgs, ... }: let 
+{ pkgs, lib, ... }: let 
   addons = pkgs.nur.repos.rycee.firefox-addons;
+
+  build-containers = container-list : lib.mkMerge (lib.imap1 (i: v: builtins.mapAttrs (name: value: {
+      color = value.color or "toolbar";
+      icon = value.icon or "circle";
+      id = i;
+    }) v) container-list);
 in {
   programs.firefox.enable = true;
 
@@ -99,28 +105,52 @@ in {
 
       containersForce = true;
 
-      containers = {
-        dummy = {
-          color = "toolbar";
-          id = 0;
-          icon = "circle";
-        };
-        google = {
-          color = "red";
-          id = 1;
-          icon = "circle";
-        };
-        oth = {
-          color = "turquoise";
-          id = 2;
-          icon = "circle";
-        };
-        ai = {
-          color = "red";
-          id = 3;
-          icon = "circle";
-        };
-      };
+      # containers = {
+      #   dummy = {
+      #     color = "toolbar";
+      #     id = 0;
+      #     icon = "circle";
+      #   };
+      #   google = {
+      #     color = "red";
+      #     id = 1;
+      #     icon = "circle";
+      #   };
+      #   oth = {
+      #     color = "turquoise";
+      #     id = 2;
+      #     icon = "circle";
+      #   };
+      #   ai = {
+      #     color = "red";
+      #     id = 3;
+      #     icon = "circle";
+      #   };
+      # };
+
+      containers = build-containers [
+        {
+          google = {
+            color = "red";
+          };
+        }
+        {
+          oth = {
+            color = "turquoise";
+          };
+        }
+        {
+          ai = {
+            color = "red";
+          };
+        }
+        {
+          amazon = {
+            icon = "cart";
+            color = "purple";
+          };
+        }
+      ];
 
       settings = {
         "privacy.resistFingerprinting" = true;
