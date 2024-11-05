@@ -43,6 +43,26 @@
         "type": "github"
       }
     },
+    "auto-add-torrents": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1730844846,
+        "narHash": "sha256-K51E/WV1cLeRFEz6KVeHTFEJAJM0RgjBLNhBaPQdlmQ=",
+        "owner": "DestinyofYeet",
+        "repo": "auto-add-torrents.nix",
+        "rev": "27ad5d017a4cb877dfbd83159f58df7765f844e5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "auto-add-torrents.nix",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -378,6 +398,7 @@
       "inputs": {
         "add-replay-gain": "add-replay-gain",
         "agenix": "agenix",
+        "auto-add-torrents": "auto-add-torrents",
         "clean-unused-files": "clean-unused-files",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager_2",

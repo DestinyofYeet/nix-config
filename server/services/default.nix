@@ -41,5 +41,6 @@
     ./deluge.nix
     ./ankisync.nix
     ./roundcube.nix
+    ./auto-add-torrents.nix
   ];
 }

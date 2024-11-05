@@ -59,6 +59,12 @@
     #   # url = "path:///home/ole/github/nix-strichliste";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
+    auto-add-torrents = {
+      # url = "path:///drives/programming-Stuff/python/auto-add-torrents-clean";
+      url = "github:DestinyofYeet/auto-add-torrents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -94,6 +100,7 @@
         inputs.clean-unused-files.nixosModules.clean-unused-files
         # inputs.strichliste.nixosModules.strichliste
         inputs.networkNamespaces.nixosModules.networkNamespaces
+        inputs.auto-add-torrents.nixosModules.auto-add-torrents
         ./server
       ] ++ baseline-modules;
     };

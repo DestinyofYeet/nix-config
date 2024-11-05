@@ -31,5 +31,7 @@ in {
 
   "airvpn-deluge.age".publicKeys = authed;
 
+  "auto-add-torrents.conf.age".publicKeys = authed;
+
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
 }
