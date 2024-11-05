@@ -97,15 +97,30 @@ in {
         };
       };
 
-      # containersForce = true;
+      containersForce = true;
 
-      # containers = {
-      #   testing = {
-      #     color = "blue";
-      #     id = 600;
-      #     icon = "cart";
-      #   };
-      # };
+      containers = {
+        dummy = {
+          color = "toolbar";
+          id = 0;
+          icon = "circle";
+        };
+        google = {
+          color = "red";
+          id = 1;
+          icon = "circle";
+        };
+        oth = {
+          color = "turquoise";
+          id = 2;
+          icon = "circle";
+        };
+        ai = {
+          color = "red";
+          id = 3;
+          icon = "circle";
+        };
+      };
 
       settings = {
         "privacy.resistFingerprinting" = true;
