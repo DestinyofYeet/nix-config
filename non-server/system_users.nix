@@ -4,7 +4,7 @@
   users.users.ole = {
     isNormalUser = true;
     description = "ole";
-    shell = pkgs.zsh;
+    shell = pkgs.nushell;
     extraGroups = [ 
       "networkmanager" 
       "wheel" 
