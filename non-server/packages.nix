@@ -35,6 +35,8 @@ in
   programs.firefox.enable = true;
   programs.neovim.enable = true;
 
+  virtualisation.waydroid.enable = true;
+
   # programs.ssh.startAgent = true;
 
   programs.wireshark = {
@@ -161,6 +163,9 @@ in
     tldr
     authenticator
     lutris
+    waydroid
+    python312Packages.pyclip
+    lzip
   ] ++ lua-pkgs ++ kdePackages;
 }
 
