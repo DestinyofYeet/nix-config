@@ -97,15 +97,15 @@ in {
         };
       };
 
-      containersForce = true;
+      # containersForce = true;
 
-      #containers = {
-      #  personal = {
-      #    color = "blue";
-      #    id = 0;
-      #    icon = "fingerprint";
-      #  };
-      #};
+      # containers = {
+      #   testing = {
+      #     color = "blue";
+      #     id = 600;
+      #     icon = "cart";
+      #   };
+      # };
 
       settings = {
         "privacy.resistFingerprinting" = true;
