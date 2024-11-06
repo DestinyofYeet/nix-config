@@ -20,6 +20,8 @@
       alias rebuild-system = sudo nixos-rebuild switch --flake /home/ole/nixos#
 
       alias yz = yazi
+
+      alias kssh = kitten ssh
     '';
   };
 }
