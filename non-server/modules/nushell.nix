@@ -24,7 +24,7 @@
 
       alias kssh = kitten ssh
 
-      source ${config.nuScripts.deploy-node}
+      # source ${config.nuScripts.deploy-node}
     '';
   };
 }
