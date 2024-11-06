@@ -6,6 +6,8 @@
 
   imports = [
     ../../baseline/modules
+    ./nu-scripts
+    
     ./kde.nix
     ./bash.nix
     ./stylix.nix
