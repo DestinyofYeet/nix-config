@@ -23,8 +23,7 @@
       alias yz = yazi
 
       alias kssh = kitten ssh
-
-      # source ${config.nuScripts.deploy-node}
+      alias icat = kitten icat
     '';
   };
 }
