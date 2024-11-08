@@ -167,6 +167,11 @@ in {
             icon = "fingerprint";
           };
         }
+        {
+          reddit = {
+            color = "red";
+          };
+        }
       ];
 
       settings = {
