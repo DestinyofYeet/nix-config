@@ -32,10 +32,10 @@
         networkIpIn = "10.1.2.1";
         networkIpOut = "10.1.2.2";
         wireguardConfigPath = config.age.secrets.airvpn-deluge.path;
-        # iptableChains = [
-        #   "PREROUTING -p tcp --dport 58846 -j DNAT --to-destination 10.1.2.1:58846"
-        #   "POSTROUTING -j MASQUERADE"
-        # ];
+        iptableChains = [
+          "PREROUTING -p tcp --dport 58846 -j DNAT --to-destination 10.1.2.1:58846"
+          "POSTROUTING -j MASQUERADE"
+        ];
       }; 
     };
   };

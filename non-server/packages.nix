@@ -173,6 +173,7 @@ in
     lutris
     waydroid
     lzip
+    deluge-gtk
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

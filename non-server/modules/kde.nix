@@ -246,7 +246,7 @@ in {
   gtk = {
     enable = true;
     theme = {
-      name = lib.mkForce "Sweet-Ambar-Blue-Dark-v40";
+      name = lib.mkForce "adw-gtk3-dark";
     };
   };
 
