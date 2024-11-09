@@ -38,4 +38,6 @@ in {
   "qbit-prometheus-exporter.age".publicKeys = authed;
 
   "deluge-password-file.age".publicKeys = authed;
+
+  "hydra-github-auth.age".publicKeys = authed;
 }

@@ -1,6 +1,12 @@
 { config, ... }:{
   age.secrets = {
     hydra-email-credentials = { file = ../secrets/hydra-email-credentials.age; };
+    hydra-github-credentials = {
+      file = ../secrets/hydra-github-auth.age;
+      owner = "hydra";
+      group = "hydra";
+      mode = "750";
+    };
   };
 
   services.hydra = {
@@ -13,6 +19,15 @@
     useSubstitutes = true;
     extraConfig = ''
       email_notification = 1
+
+      Include ${config.age.secrets.hydra-github-credentials.path}
+
+      <hydra_notify>
+        <prometheus>
+          listen_address = 127.0.0.1
+          port = 9199
+        </prometheus>
+      </hydra_notify>
     '';
   };
 

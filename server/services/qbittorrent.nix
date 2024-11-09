@@ -97,4 +97,22 @@ in {
   #     config.age.secrets.qbit-prometheus-exporter.path
   #   ];
   # };
+
+  # virtualisation.oci-containers.containers."qbittorrent-prometheus-exporter" = {
+  #   image = "ghcr.io/martabal/qbittorrent-exporter:latest";
+
+  #   ports = [
+  #     "8090:8090"
+  #   ];
+
+  #   environmentFiles = [
+  #     config.age.secrets.qbit-prometheus-exporter.path
+  #   ];
+  # };
+
+  services.qbittorrent-prometheus-exporter = {
+    enable = false;
+
+    envFile = config.age.secrets.qbit-prometheus-exporter.path;
+  };
 }

@@ -394,6 +394,26 @@
         "type": "github"
       }
     },
+    "prometheus-qbit": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1731194753,
+        "narHash": "sha256-6eUpmoPtHeYG8FY7fcJSTrzcKtHne48WASaN84mxFL0=",
+        "owner": "DestinyofYeet",
+        "repo": "prometheus-qbitorrent.nix",
+        "rev": "a4f57afa208cb538314050dd2a819daa091542a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "prometheus-qbitorrent.nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "add-replay-gain": "add-replay-gain",
@@ -406,6 +426,7 @@
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
+        "prometheus-qbit": "prometheus-qbit",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
       }

@@ -71,5 +71,7 @@
     delugeHost = "10.1.2.1";
 
     delugePasswordFile = config.age.secrets.deluge-password-file.path;
+
+    exportPerTorrentMetrics = true;
   };
 }

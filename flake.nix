@@ -65,6 +65,12 @@
       url = "github:DestinyofYeet/auto-add-torrents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    prometheus-qbit = {
+      # url = "path:///home/ole/github/prometheus-qbitorrent.nix";
+      url = "github:DestinyofYeet/prometheus-qbitorrent.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -101,6 +107,7 @@
         # inputs.strichliste.nixosModules.strichliste
         inputs.networkNamespaces.nixosModules.networkNamespaces
         inputs.auto-add-torrents.nixosModules.auto-add-torrents
+        inputs.prometheus-qbit.nixosModules.default
         ./server
       ] ++ baseline-modules;
     };
