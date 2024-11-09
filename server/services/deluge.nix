@@ -4,14 +4,18 @@
   ...
 }:{
 
-  config.age.secrets = {
+  age.secrets = {
     airvpn-deluge = {
       file = ../secrets/airvpn-deluge.age;
       path = "/etc/wireguard/wg1.conf";
     };
+
+    deluge-password-file = {
+      file = ../secrets/deluge-password-file.age;
+    };
   };
 
-  config.services.deluge = {
+  services.deluge = {
     enable = true;
     web.enable = true;
     dataDir = "/mnt/data/configs/deluge";
@@ -19,11 +23,11 @@
     inherit (config.serviceSettings) user group;
   };
 
-  config.systemd.services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/deluge";
+  systemd.services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/deluge";
 
-  config.systemd.services.deluged.serviceConfig.ExecStart = lib.mkForce "${config.services.deluge.package}/bin/deluged --do-not-daemonize --config /mnt/data/configs/deluge/.config/deluge --ui-interface 10.1.2.1";
+  systemd.services.deluged.serviceConfig.ExecStart = lib.mkForce "${config.services.deluge.package}/bin/deluged --do-not-daemonize --config /mnt/data/configs/deluge/.config/deluge --ui-interface 10.1.2.1";
 
-  config.customLibs.networkNamespaces = {
+  customLibs.networkNamespaces = {
     enable = true;
     spaces = {
       deluge = {
@@ -40,7 +44,7 @@
     };
   };
 
-  config.services.nginx.virtualHosts = {
+  services.nginx.virtualHosts = {
     "deluge.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
       locations."/" = {
         proxyPass = "http://localhost:8112";
@@ -59,5 +63,13 @@
         '';              
       };
     };
+  };
+
+  services.prometheus.exporters.deluge = {
+    enable = true;
+
+    delugeHost = "10.1.2.1";
+
+    delugePasswordFile = config.age.secrets.deluge-password-file.path;
   };
 }

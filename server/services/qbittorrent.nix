@@ -13,6 +13,10 @@ in {
       file = ../secrets/airvpn_config.age;
       path = "/etc/wireguard/wg0.conf";
     };
+
+    qbit-prometheus-exporter = {
+      file = ../secrets/qbit-prometheus-exporter.age;
+    };
   };
 
   customLibs.networkNamespaces = {
@@ -75,4 +79,22 @@ in {
       "qbittorrent.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
     };
   };
+
+  # virtualisation.oci-containers.containers."prometheus-qbittorrent-exporter" = {
+  #   image = "ghcr.io/esanchezm/prometheus-qbittorrent-exporter";
+
+  #   ports = [
+  #     "8000:8000"
+  #   ];
+
+  #   environment = {
+  #     QBITTORRENT_HOST = "10.1.1.1";
+  #     QBITTORRENT_PORT = "8080";
+  #     # QBITTORRENT_SSL = "True";
+  #   };
+
+  #   environmentFiles = [
+  #     config.age.secrets.qbit-prometheus-exporter.path
+  #   ];
+  # };
 }

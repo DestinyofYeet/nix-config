@@ -53,4 +53,8 @@
   };
 
   services.zfs.zed.enableMail = false;
+
+  services.prometheus.exporters.zfs = {
+    enable = true;
+  };
 }

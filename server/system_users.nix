@@ -6,6 +6,7 @@
 
   users.users.ole = {
     isNormalUser = true;
+    shell = pkgs.nushell;
     home = "/home/ole";
     description = "me";
     extraGroups = [ "wheel" "docker" "apps" ];

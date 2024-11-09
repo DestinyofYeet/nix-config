@@ -34,8 +34,9 @@ in {
     enable = true;
     checkconf = true;
     resolveLocalQueries = true;
+    localControlSocketPath = "/run/unbound/unbound.ctl";
     settings = {
-      server = {
+      server = {     
         interface = [ 
           "0.0.0.0@53" 
           "::0@53"
@@ -106,4 +107,18 @@ in {
       ];
     };
   };
+
+  # services.prometheus.exporters.unbound = {
+  #   enable = true;
+  #   # listenAddress = "localhost";
+  #   unbound = {
+  #     host = config.services.unbound.localControlSocketPath;
+  #   };
+
+  #   # inherit (config.services.unbound) user group;
+  # };
+
+  # users.groups.${config.services.unbound.group}.members = [
+  #   config.services.prometheus.exporters.unbound.user
+  # ];
 }

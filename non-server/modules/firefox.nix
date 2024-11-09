@@ -74,7 +74,7 @@ in {
             urls = [{
               template = "https://search.nixos.org/options";
               params = [
-                { name = "channel"; value = "24.05"; }
+                { name = "channel"; value = "unstable"; }
                 { name = "query"; value = "{searchTerms}"; }
               ];
             }];

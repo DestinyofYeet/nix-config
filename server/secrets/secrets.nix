@@ -34,4 +34,8 @@ in {
   "auto-add-torrents.conf.age".publicKeys = authed;
 
   "ssh-github-nixos.age".publicKeys =  [ system_ole ];
+
+  "qbit-prometheus-exporter.age".publicKeys = authed;
+
+  "deluge-password-file.age".publicKeys = authed;
 }
