@@ -16,4 +16,6 @@
     configFile = config.age.secrets.auto-add-torrents-conf.path;
     developerMode = false;
   };
+
+  systemd.services.auto-add-torrents.after = [ "prowlarr.service" ];
 }

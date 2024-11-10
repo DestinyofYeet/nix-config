@@ -18,8 +18,9 @@
 
   config.systemd.services.nix-gc = lib.mkIf config.nix.enable {
     script = lib.mkForce ''
-      exec ${config.nix.package.out}/bin/nix-env ${config.nix.gc.options}
-      exec ${config.nix.package.out}/bin/nix-collect-garbage'';
+      ${config.nix.package.out}/bin/nix-env ${config.nix.gc.options}
+      ${config.nix.package.out}/bin/nix-collect-garbage
+    '';
   };
 }
 
