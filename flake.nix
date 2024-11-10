@@ -67,7 +67,6 @@
     };
 
     prometheus-qbit = {
-      # url = "path:///home/ole/github/prometheus-qbitorrent.nix";
       url = "github:DestinyofYeet/prometheus-qbitorrent.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };

@@ -80,38 +80,8 @@ in {
     };
   };
 
-  # virtualisation.oci-containers.containers."prometheus-qbittorrent-exporter" = {
-  #   image = "ghcr.io/esanchezm/prometheus-qbittorrent-exporter";
-
-  #   ports = [
-  #     "8000:8000"
-  #   ];
-
-  #   environment = {
-  #     QBITTORRENT_HOST = "10.1.1.1";
-  #     QBITTORRENT_PORT = "8080";
-  #     # QBITTORRENT_SSL = "True";
-  #   };
-
-  #   environmentFiles = [
-  #     config.age.secrets.qbit-prometheus-exporter.path
-  #   ];
-  # };
-
-  # virtualisation.oci-containers.containers."qbittorrent-prometheus-exporter" = {
-  #   image = "ghcr.io/martabal/qbittorrent-exporter:latest";
-
-  #   ports = [
-  #     "8090:8090"
-  #   ];
-
-  #   environmentFiles = [
-  #     config.age.secrets.qbit-prometheus-exporter.path
-  #   ];
-  # };
-
   services.qbittorrent-prometheus-exporter = {
-    enable = false;
+    enable = true;
 
     envFile = config.age.secrets.qbit-prometheus-exporter.path;
   };

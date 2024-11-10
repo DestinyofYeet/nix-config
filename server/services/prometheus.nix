@@ -18,12 +18,6 @@
           targets = [ "localhost:${toString config.services.prometheus.exporters.zfs.port}"];
         }];
       }
-      # {
-      #   job_name = "qbittorrent";
-      #   static_configs = [{
-      #     targets = [ "localhost:${config.virtualisation.oci-containers.containers."prometheus-qbittorrent-exporter".environment.QBITTORRENT_PORT}"];
-      #   }];
-      # }
       {
         job_name = "deluge";
         static_configs = [{

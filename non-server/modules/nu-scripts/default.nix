@@ -13,6 +13,7 @@
   scripts = [
     "deploy-node"
     "mount-navidrome"
+    "commands"
   ];
   
 in {
