@@ -9,4 +9,8 @@ in {
       { path = "${extra-conf}"; }
     ];
   };
+
+  programs.lazygit = {
+    enable = true;
+  };
 }
