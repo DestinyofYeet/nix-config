@@ -15,7 +15,7 @@
         show_banner: false
       }
 
-      alias ll = ls -l
+      alias ll = ls -la
       alias l = ls
 
       alias lg = lazygit
