@@ -18,6 +18,8 @@
       alias ll = ls -l
       alias l = ls
 
+      alias lg = lazygit
+
       alias rebuild-system = sudo nixos-rebuild switch --flake /home/ole/nixos#
       
       alias yz = yazi
