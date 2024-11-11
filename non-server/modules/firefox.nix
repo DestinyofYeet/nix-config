@@ -106,29 +106,6 @@ in {
 
       containersForce = true;
 
-      # containers = {
-      #   dummy = {
-      #     color = "toolbar";
-      #     id = 0;
-      #     icon = "circle";
-      #   };
-      #   google = {
-      #     color = "red";
-      #     id = 1;
-      #     icon = "circle";
-      #   };
-      #   oth = {
-      #     color = "turquoise";
-      #     id = 2;
-      #     icon = "circle";
-      #   };
-      #   ai = {
-      #     color = "red";
-      #     id = 3;
-      #     icon = "circle";
-      #   };
-      # };
-
       containers = build-containers [
         {
           google = {
@@ -175,7 +152,11 @@ in {
       ];
 
       settings = {
+        # privacy stuff
         "privacy.resistFingerprinting" = true;
+        # "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
+
+
         "browser.toolbars.bookmarks.visibility" = "never";
         "browser.startup.homepage" = "about:blank";
         "browser.newtabpage.enabled" = false;
