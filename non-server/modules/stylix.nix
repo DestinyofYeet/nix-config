@@ -31,5 +31,7 @@ in
 
     hyprland.enable = false;
     hyprpaper.enable = false;
+
+    helix.enable = false;
   };
 }
