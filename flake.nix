@@ -70,6 +70,11 @@
       url = "github:DestinyofYeet/prometheus-qbitorrent.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-topology = {
+      url = "github:oddlama/nix-topology";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -77,6 +82,7 @@
     baseline-modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
+        inputs.nix-topology.nixosModules.default
 
         ({ ... }: {
           environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
@@ -157,6 +163,17 @@
         ./non-server/extra-configurations/main
         ./non-server
       ] ++ laptop-modules;
+    };
+
+    topology.x86_64-linux = import inputs.nix-topology {
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        overlays = [ inputs.nix-topology.overlays.default ];
+      };
+
+      modules = [
+        { nixosConfigurations = self.nixosConfigurations; }
+      ];
     };
 
     hydraJobs = let 
