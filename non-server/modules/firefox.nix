@@ -157,7 +157,7 @@ in {
           };
         }
         {
-          vps = {
+          infra = {
             color = "blue";
           };
         }

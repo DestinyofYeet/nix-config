@@ -21,7 +21,7 @@
     PIPEFN /etc/nut/upssched.pipe
     LOCKFN /etc/nut/upssched.lock
 
-    AT ONBATT * START-TIMER onbattwarn 120
+    AT ONBATT * START-TIMER onbattwarn 240
     AT ONLINE * CANCEL-TIMER onbattwarn
     AT ONLINE * EXECUTE ups-back-on-power
   '';
