@@ -9,4 +9,6 @@ let
 in {
   "stalwart-ole-pw.age".publicKeys = authed;
   "nix-config-file.age".publicKeys = authed;
+
+  "ssh-key-github-signing.age".publicKeys = authed;
 }
