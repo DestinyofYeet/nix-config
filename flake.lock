@@ -567,11 +567,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1731372186,
-        "narHash": "sha256-6NqqDeodAX3OUNWlgZkQHyfki+0y6QYCi7HrI7nCXKQ=",
+        "lastModified": 1731407479,
+        "narHash": "sha256-xjp+AuZd/gC9pnpvLMg/awBwSuAxsROsVb5D2w2TAhU=",
         "owner": "DestinyofYeet",
         "repo": "shell-aliases.nix",
-        "rev": "d3fb7a5ed6c41f954d88cd4c5b9d2015c63f1ed7",
+        "rev": "156d98fa2cf6332c69edf80d8c84c53e13842665",
         "type": "github"
       },
       "original": {

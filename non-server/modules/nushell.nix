@@ -14,18 +14,6 @@
       $env.config = {
         show_banner: false
       }
-
-      alias ll = ls -la
-      alias l = ls
-
-      alias lg = lazygit
-
-      alias rebuild-system = sudo nixos-rebuild switch --flake /home/ole/nixos#
-      
-      alias yz = yazi
-
-      alias kssh = kitten ssh
-      alias icat = kitten icat
     '';
   };
 }

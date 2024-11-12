@@ -8,12 +8,20 @@
         default = "ls -lah";
 
         nushell = "ls -la";
-        bash = null;
       };
 
+      "rebuild-system" = "sudo nixos-rebuild switch --flake /home/ole/nixos#";
+      "test-system" = "sudo nixos-rebuild test --flake /home/ole/nixos#";
+
+      "l" = "ls";
+
+      "yz" = "yazi";
       "lg" = "lazygit";
 
-      "rebuild-system" = "sudo nixos-rebuild switch --flake /home/ole/nixos#";
+      "kssh" = "kitten ssh";
+      "icat" = "kitten icat";
     };
   };
+
+  programs.fish.enable = true;
 }

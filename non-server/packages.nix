@@ -174,6 +174,7 @@ in
     waydroid
     lzip
     deluge-gtk
+    nix-diff
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
