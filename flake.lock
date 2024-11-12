@@ -555,8 +555,29 @@
         "nur": "nur",
         "plasma-manager": "plasma-manager",
         "prometheus-qbit": "prometheus-qbit",
+        "shell-aliases": "shell-aliases",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
+      }
+    },
+    "shell-aliases": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1731372186,
+        "narHash": "sha256-6NqqDeodAX3OUNWlgZkQHyfki+0y6QYCi7HrI7nCXKQ=",
+        "owner": "DestinyofYeet",
+        "repo": "shell-aliases.nix",
+        "rev": "d3fb7a5ed6c41f954d88cd4c5b9d2015c63f1ed7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "shell-aliases.nix",
+        "type": "github"
       }
     },
     "stylix": {

@@ -53,7 +53,7 @@ in {
     enableCompletion = true;
 
     shellAliases = {
-      rebuild-system = "${rebuild-system}/bin/rebuild-system";
+      # rebuild-system = "${rebuild-system}/bin/rebuild-system";
       deploy-node = "${deploy-node}/bin/deploy-node";
       stylix-color-picker = "${stylix-color-picker}/bin/stylix-color-picker";
       gitui = "${gitui-proper}/bin/gitui-proper";

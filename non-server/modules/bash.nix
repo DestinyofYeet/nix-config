@@ -11,8 +11,8 @@
   {
     enable = true;
 
-    shellAliases = {
-      rebuild-system = "${rebuild-system}/bin/rebuild-system";
-    };
+    # shellAliases = {
+    #   rebuild-system = "${rebuild-system}/bin/rebuild-system";
+    # };
   };
 }

@@ -75,6 +75,12 @@
       url = "github:oddlama/nix-topology";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    shell-aliases = {
+      # url = "path:///home/ole/github/shell-aliases.nix";
+      url = "github:DestinyofYeet/shell-aliases.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 

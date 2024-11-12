@@ -32,5 +32,6 @@
     ./direnv.nix
     ./nushell.nix
     ./starship.nix
+    ./shell-aliases.nix
   ];
 }
