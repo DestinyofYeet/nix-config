@@ -22,6 +22,4 @@
       "icat" = "kitten icat";
     };
   };
-
-  programs.fish.enable = true;
 }
