@@ -5,7 +5,8 @@
 { config, pkgs, ... }:
 
 {
-  nix.settings = {
+  nix = {
+    settings = {
       substituters = [
         "https://cache.nixos.org/"
         "http://cache.nix-server.infra.wg?priority=50"
@@ -14,6 +15,23 @@
       trusted-public-keys = [
         "cache.nix-server.infra.wg:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
       ];
+    };
+
+    buildMachines = [
+      # {
+      #   hostName = "fsim-builder";
+      #   system = "x86_64-linux";
+      #   protocol = "ssh";
+      #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      #   mandatoryFeatures = [ ];
+      # }
+    ];
+
+    distributedBuilds = true;
+
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
   };
 
   networking.extraHosts = ''

@@ -33,5 +33,7 @@
     ./nushell.nix
     ./starship.nix
     ./shell-aliases.nix
+    ./neomutt.nix
+    ./emails.nix
   ];
 }

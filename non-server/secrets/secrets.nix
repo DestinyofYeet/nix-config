@@ -11,4 +11,6 @@ in {
   "nix-config-file.age".publicKeys = authed;
 
   "ssh-key-github-signing.age".publicKeys = authed;
+
+  "oth-regensburg-email-pw.age".publicKeys = authed;
 }

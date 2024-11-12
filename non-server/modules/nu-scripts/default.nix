@@ -14,6 +14,7 @@
     "deploy-node"
     "mount-navidrome"
     "commands"
+    "oth-mensa"
   ];
   
 in {
