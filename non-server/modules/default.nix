@@ -35,5 +35,6 @@
     ./shell-aliases.nix
     ./neomutt.nix
     ./emails.nix
+    ./mailcap.nix
   ];
 }

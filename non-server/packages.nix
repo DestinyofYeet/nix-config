@@ -175,6 +175,7 @@ in
     lzip
     deluge-gtk
     nix-diff
+    mailcap
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

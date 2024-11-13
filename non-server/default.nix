@@ -1,18 +1,26 @@
-{ home-manager, inputs, config, ... }: {
-  
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.backupFileExtension = "backup";
+{ inputs, ... }: {
 
-  home-manager.sharedModules = [ 
-    inputs.plasma-manager.homeManagerModules.plasma-manager 
-    inputs.stylix.homeManagerModules.stylix 
-    inputs.agenix.homeManagerModules.age
-    inputs.shell-aliases.homeManagerModules.default
-  ];
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
 
-  home-manager.users.ole = import ./modules;
-        
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+
+    sharedModules = [ 
+      inputs.plasma-manager.homeManagerModules.plasma-manager 
+      inputs.stylix.homeManagerModules.stylix 
+      inputs.agenix.homeManagerModules.age
+      inputs.shell-aliases.homeManagerModules.default
+    ];
+
+    users = {
+      ole = import ./modules;
+    };
+  };  
+       
   imports = [
     ../baseline
     ./configuration.nix

@@ -81,6 +81,11 @@
       url = "github:DestinyofYeet/shell-aliases.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    prpr-muttkalendar = {
+      url = "github:DestinyofYeet/Muttkalendar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -101,7 +106,9 @@
       nur.nixosModules.nur
       (
         {...}:{
-          environment.systemPackages = [ inputs.zen-browser.packages.x86_64-linux.specific ];
+          environment.systemPackages = [ 
+            inputs.zen-browser.packages.x86_64-linux.specific 
+          ];
         }
       )
     ] ++ baseline-modules;
@@ -149,7 +156,7 @@
     nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        inherit home-manager inputs;
+        inherit inputs;
       };
       modules = [
         ./non-server/hardware/wattson.nix
@@ -162,7 +169,7 @@
     nixosConfigurations.main = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        inherit home-manager inputs;
+        inherit inputs;
       };
       modules = [
         ./non-server/hardware/main.nix

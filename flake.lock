@@ -541,6 +541,26 @@
         "type": "github"
       }
     },
+    "prpr-muttkalendar": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1726532820,
+        "narHash": "sha256-QlRF6qyD0x0s/I1zKtJ9tR2W2I8T/w59CCbSkluc54s=",
+        "owner": "DestinyofYeet",
+        "repo": "Muttkalendar",
+        "rev": "c0848ddbace38a1b2257d7f81de89e1106e11642",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "Muttkalendar",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "add-replay-gain": "add-replay-gain",
@@ -555,6 +575,7 @@
         "nur": "nur",
         "plasma-manager": "plasma-manager",
         "prometheus-qbit": "prometheus-qbit",
+        "prpr-muttkalendar": "prpr-muttkalendar",
         "shell-aliases": "shell-aliases",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
