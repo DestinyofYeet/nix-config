@@ -13,4 +13,6 @@ in {
   "ssh-key-github-signing.age".publicKeys = authed;
 
   "oth-regensburg-email-pw.age".publicKeys = authed;
+
+  "email-uwuwhatsthis-pw.age".publicKeys = authed;
 }
