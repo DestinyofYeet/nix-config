@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    stable-nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -112,6 +114,12 @@
         }
       )
     ] ++ baseline-modules;
+
+    stable-pkgs = import inputs.stable-nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
+
+    defaultSpecialArgs = {
+      inherit inputs stable-pkgs;
+    };
   in
   {
     nixpkgs.config.rocmSupport = true;
@@ -144,9 +152,7 @@
 
     nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit home-manager inputs;
-      };
+      specialArgs = defaultSpecialArgs;
       modules = [
         ./non-server/hardware/kartoffelkiste.nix
 				./non-server
@@ -155,9 +161,7 @@
 
     nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-      };
+      specialArgs = defaultSpecialArgs;
       modules = [
         ./non-server/hardware/wattson.nix
         ./non-server/extra-configurations/wattson
@@ -168,9 +172,7 @@
 
     nixosConfigurations.main = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-      };
+      specialArgs = defaultSpecialArgs;
       modules = [
         ./non-server/hardware/main.nix
         ./non-server/extra-configurations/main

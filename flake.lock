@@ -577,6 +577,7 @@
         "prometheus-qbit": "prometheus-qbit",
         "prpr-muttkalendar": "prpr-muttkalendar",
         "shell-aliases": "shell-aliases",
+        "stable-nixpkgs": "stable-nixpkgs",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
       }
@@ -598,6 +599,22 @@
       "original": {
         "owner": "DestinyofYeet",
         "repo": "shell-aliases.nix",
+        "type": "github"
+      }
+    },
+    "stable-nixpkgs": {
+      "locked": {
+        "lastModified": 1731386116,
+        "narHash": "sha256-lKA770aUmjPHdTaJWnP3yQ9OI1TigenUqVC3wweqZuI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "689fed12a013f56d4c4d3f612489634267d86529",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
