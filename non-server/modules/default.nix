@@ -36,5 +36,6 @@
     ./neomutt.nix
     ./emails.nix
     ./mailcap.nix
+    ./environment.nix
   ];
 }
