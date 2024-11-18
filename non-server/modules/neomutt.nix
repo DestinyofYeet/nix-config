@@ -30,5 +30,11 @@
         map = [ "index" ];
       }
     ];
+
+    changeFolderWhenSourcingAccount = true;
+
+    extraConfig = ''
+      set sig_on_top = yes
+    '';    
   };
 }

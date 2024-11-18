@@ -24,7 +24,6 @@
     ./helix.nix
     ./settings.nix
     ./xdg-open.nix
-    ./mutt.nix
     ./yazi.nix
     ./fuck.nix
     ./zellij.nix

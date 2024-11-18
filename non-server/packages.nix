@@ -176,6 +176,7 @@ in
     deluge-gtk
     nix-diff
     mailcap
+    lynx
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
