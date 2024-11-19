@@ -177,6 +177,7 @@ in
     nix-diff
     mailcap
     lynx
+    youtube-music
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
