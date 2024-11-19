@@ -548,11 +548,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726532820,
-        "narHash": "sha256-QlRF6qyD0x0s/I1zKtJ9tR2W2I8T/w59CCbSkluc54s=",
+        "lastModified": 1732046913,
+        "narHash": "sha256-2phQGU8uQ8gB8H2Mj+XcCqOxGgydpiOHB22bS9FyG2I=",
         "owner": "DestinyofYeet",
         "repo": "Muttkalendar",
-        "rev": "c0848ddbace38a1b2257d7f81de89e1106e11642",
+        "rev": "66b2ad1d559fb7e6e4ee73d65cced8443c2c9acf",
         "type": "github"
       },
       "original": {
