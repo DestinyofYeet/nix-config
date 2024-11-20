@@ -178,6 +178,7 @@ in
     mailcap
     lynx
     youtube-music
+    pdftk
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
