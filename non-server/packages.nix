@@ -179,6 +179,7 @@ in
     lynx
     youtube-music
     pdftk
+    lldb_19
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
