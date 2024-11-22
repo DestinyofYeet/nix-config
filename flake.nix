@@ -141,8 +141,9 @@
     deploy.nodes.nix-server = {
       hostname = "nix-server.infra.wg";
       profiles.system = {
-        sshUser = "root";
+        sshUser = "ole";
         user = "root";
+        interactiveSudo = true;
         path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nix-server;
       };
     };
