@@ -17,5 +17,8 @@
     developerMode = false;
   };
 
-  systemd.services.auto-add-torrents.after = [ "prowlarr.service" ];
+  systemd.services.auto-add-torrents = {
+    after = [ "prowlarr.service" ];
+    requires = [ "prowlarr.service" ];
+  };
 }

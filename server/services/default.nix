@@ -44,5 +44,6 @@
     ./auto-add-torrents.nix
     ./prometheus.nix
     ./grafana.nix
+    ./radarr.nix
   ];
 }
