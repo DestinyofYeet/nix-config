@@ -110,7 +110,7 @@ in
     element-desktop
     python3
     helix
-    libreoffice-qt6-fresh
+    stable-pkgs.libreoffice-qt6-fresh
     vlc
     wl-clipboard
     openfortivpn
