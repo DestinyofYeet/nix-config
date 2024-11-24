@@ -240,6 +240,12 @@ in {
           "loginMode" = "emptySession";
         };
       };
+
+      plasmaparc = {
+        "General" = {
+          "RaiseMaximumVolume" = true;
+        };
+      };
     };
   };
 
