@@ -181,6 +181,7 @@ in
     pdftk
     lldb_19
     nix-output-monitor
+    nvtopPackages.full
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
