@@ -1,3 +1,3 @@
-def deploy-node [server: string, args?: string] {
-  deploy -s $'/home/ole/nixos#($server)' ...($args | split row " ")
+def --wrapped deploy-node [server: string, ...args] {
+  deploy -s $'/home/ole/nixos#($server)' ...$args
 }
