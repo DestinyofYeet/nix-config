@@ -180,6 +180,7 @@ in
     youtube-music
     pdftk
     lldb_19
+    nix-output-monitor
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

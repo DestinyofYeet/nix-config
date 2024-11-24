@@ -10,8 +10,19 @@
         nushell = "ls -la";
       };
 
-      "rebuild-system" = "sudo nixos-rebuild switch --flake /home/ole/nixos#";
-      "test-system" = "sudo nixos-rebuild test --flake /home/ole/nixos#";
+      "rebuild-system" = {
+        default = "sudo nixos-rebuild switch --flake /home/ole/nixos#";      
+
+        # nushell = "'sudo -v; sudo nixos-rebuild build --flake /home/ole/nixos# --log-format internal-json -v o+e>| nom --json'";
+        nushell = null;
+      };
+
+      "test-system" = {
+        default = "sudo nixos-rebuild test --flake /home/ole/nixos#";
+
+        # nushell = "'sudo -v; sudo nixos-rebuild test --flake /home/ole/nixos#'";
+        nushell = null;
+      };
 
       "l" = "ls";
 
