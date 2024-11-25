@@ -1,12 +1,11 @@
-{ lib, config, ... }: {
+{ lib, config, pkgs, ... }: {
 
   # automatically collect garbage
   config = {
     nix.gc = {
       automatic = true;
       persistent = true;
-
-      options = "--delete-generations +10";
+      options = "10";
       dates = "05:00:00"; 
     };
 
@@ -18,8 +17,7 @@
 
   config.systemd.services.nix-gc = lib.mkIf config.nix.enable {
     script = lib.mkForce ''
-      ${config.nix.package.out}/bin/nix-env ${config.nix.gc.options}
-      ${config.nix.package.out}/bin/nix-collect-garbage
+      ${pkgs.nushell}/bin/nu ${../non-server/modules/nu-scripts/custom-nix-gc.nu} ${config.nix.gc.options}
     '';
   };
 }
