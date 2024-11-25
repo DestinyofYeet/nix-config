@@ -1,4 +1,4 @@
-{ config, ... }:{
+{ config, stable-pkgs, ... }:{
   age.secrets = {
     hydra-email-credentials = { file = ../secrets/hydra-email-credentials.age; };
     hydra-github-credentials = {
@@ -11,6 +11,7 @@
 
   services.hydra = {
     enable = true;
+    package = stable-pkgs.hydra_unstable;
     hydraURL = "http://nix-server.infra.wg:3000";
     notificationSender = "hydra@uwuwhatsthis.de";
     smtpHost = "mx.uwuwhatsthis.de";

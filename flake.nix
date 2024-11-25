@@ -138,7 +138,7 @@
     
     nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit home-manager inputs; };
+      specialArgs = { inherit home-manager inputs stable-pkgs; };
       modules = [
         inputs.add-replay-gain.nixosModules.add-replay-gain
         inputs.clean-unused-files.nixosModules.clean-unused-files
