@@ -88,6 +88,11 @@
       url = "github:DestinyofYeet/Muttkalendar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-fast-build = {
+      url = "github:Mic92/nix-fast-build";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -98,7 +103,9 @@
         inputs.nix-topology.nixosModules.default
 
         ({ ... }: {
-          environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
+          environment.systemPackages = [ 
+            agenix.packages.x86_64-linux.default 
+          ];
         })
       ];
 
@@ -110,6 +117,7 @@
         {...}:{
           environment.systemPackages = [ 
             inputs.zen-browser.packages.x86_64-linux.specific 
+            inputs.nix-fast-build.packages.x86_64-linux.default
           ];
         }
       )
@@ -120,6 +128,10 @@
     defaultSpecialArgs = {
       inherit inputs stable-pkgs;
     };
+
+    
+    makeConfigurations = configurations:
+      builtins.listToAttrs (map (configuration: { name = configuration; value = self.nixosConfigurations.${configuration}.config.system.build.toplevel; }) configurations);
   in
   {
     nixpkgs.config.rocmSupport = true;
@@ -149,7 +161,7 @@
     };
 
     # This is highly advised, and will prevent many possible mistakes
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
+    checks = makeConfigurations [ "main" "wattson" ] // builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
 
     nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -192,17 +204,10 @@
       ];
     };
 
-    hydraJobs = let 
-
-      makeConfigurations = configurations:
-        builtins.listToAttrs (map (configuration: { name = configuration; value = self.nixosConfigurations.${configuration}.config.system.build.toplevel; }) configurations);
-
-    in {
-      system-builds = makeConfigurations [
+    hydraJobs.system-builds =  makeConfigurations [
         "main"
         "wattson"
 #         "nix-server" # doesn't work, because to fetch the secrets repository, it needs access to /root/.ssh/config, which it doesn't do
-      ];
+      ];    
     };
-  };
 }
