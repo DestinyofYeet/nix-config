@@ -32,4 +32,20 @@
       ${scripts.update-needed-content-file}/bin/update-needed-content-file "${source}" "/home/ole/.config/nushell/scripts/task.nu"
     '';
   };
+
+  systemd.user.services = {
+    pueued = {
+      Unit = {
+        Description = "Pueued Service";
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        ExecStart = "${pkgs.pueue}/bin/pueued";
+      };
+    };
+  };
 }
