@@ -109,10 +109,15 @@
         })
       ];
 
-    laptop-modules = [ 
-      { nixpkgs.overlays = [ nur.overlay ]; }
+    non-server-modules = [ 
+      { 
+        nixpkgs.overlays = [ 
+          nur.overlay
+        ]; 
+      }
 
       nur.nixosModules.nur
+
       (
         {...}:{
           environment.systemPackages = [ 
@@ -169,7 +174,7 @@
       modules = [
         ./non-server/hardware/kartoffelkiste.nix
 				./non-server
-			] ++ laptop-modules;
+			] ++ non-server-modules;
 		};
 
     nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
@@ -180,7 +185,7 @@
         ./non-server/extra-configurations/wattson
 				./non-server
         # inputs.strichliste.nixosModules.strichliste
-			] ++ laptop-modules;
+			] ++ non-server-modules;
 		};
 
     nixosConfigurations.main = nixpkgs.lib.nixosSystem {
@@ -190,7 +195,7 @@
         ./non-server/hardware/main.nix
         ./non-server/extra-configurations/main
         ./non-server
-      ] ++ laptop-modules;
+      ] ++ non-server-modules;
     };
 
     topology.x86_64-linux = import inputs.nix-topology {

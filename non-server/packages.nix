@@ -182,6 +182,7 @@ in
     lldb_19
     nix-output-monitor
     nvtopPackages.full
+    pueue
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
