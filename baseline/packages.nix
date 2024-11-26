@@ -26,5 +26,6 @@
     radeontop
     deploy-rs
     helix
+    dig
   ];
 }

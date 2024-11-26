@@ -151,17 +151,29 @@
         inputs.networkNamespaces.nixosModules.networkNamespaces
         inputs.auto-add-torrents.nixosModules.auto-add-torrents
         inputs.prometheus-qbit.nixosModules.default
-        ./server
+        ./server/nix-server
       ] ++ baseline-modules;
     };
 
-    deploy.nodes.nix-server = {
-      hostname = "nix-server.infra.wg";
-      profiles.system = {
-        sshUser = "ole";
-        user = "root";
-        interactiveSudo = true;
-        path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nix-server;
+    deploy.nodes = {
+      nix-server = {
+        hostname = "nix-server.infra.wg";
+        profiles.system = {
+          sshUser = "ole";
+          user = "root";
+          interactiveSudo = true;
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nix-server;
+        };
+      };
+
+      teapot = {
+        hostname = "ole.blue";
+        profiles.system = {
+          sshUser = "ole";
+          user = "root";
+          interactiveSudo = true;
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.teapot;
+        };
       };
     };
 
@@ -196,6 +208,13 @@
         ./non-server/extra-configurations/main
         ./non-server
       ] ++ non-server-modules;
+    };
+
+    nixosConfigurations.teapot = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./server/teapot
+      ];
     };
 
     topology.x86_64-linux = import inputs.nix-topology {

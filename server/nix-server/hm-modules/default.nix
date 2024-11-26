@@ -6,7 +6,6 @@
 
 
   imports = [
-    ../../baseline/modules
     ./btop.nix
     ./bash.nix
     ./ssh.nix

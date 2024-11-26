@@ -9,7 +9,7 @@
     home.stateVersion = "24.05";
 
     imports = [
-      ../baseline/modules
+      ../../baseline/modules
       ./hm-modules
     ];
   };
