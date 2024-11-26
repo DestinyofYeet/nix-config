@@ -183,6 +183,7 @@ in
     nix-output-monitor
     nvtopPackages.full
     pueue
+    colmena
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

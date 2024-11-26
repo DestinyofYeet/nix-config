@@ -46,6 +46,7 @@
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "ole" ];
   };
 
   # This value determines the NixOS release from which the default
