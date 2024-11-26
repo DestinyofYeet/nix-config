@@ -1,4 +1,5 @@
 {
+  lib,
   ...
 }:{
   networking = {
@@ -21,7 +22,7 @@
       interface = "enp6s18";
     };
 
-    nameservers = [
+    nameservers = lib.mkForce [
       "1.1.1.1"
       "8.8.8.8"
     ];

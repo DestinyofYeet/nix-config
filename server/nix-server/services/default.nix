@@ -40,7 +40,7 @@
     ./acme.nix
     ./deluge.nix
     ./ankisync.nix
-    ./roundcube.nix
+    # ./roundcube.nix
     ./auto-add-torrents.nix
     ./prometheus.nix
     ./grafana.nix

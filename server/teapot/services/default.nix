@@ -8,5 +8,6 @@
     ./netdata.nix
     ./virtualisation.nix
     ./ghost.nix
+    ./mailserver.nix
   ];
 }

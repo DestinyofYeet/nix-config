@@ -93,6 +93,11 @@
       url = "github:Mic92/nix-fast-build";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -213,8 +218,10 @@
     nixosConfigurations.teapot = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+        inputs.simple-nixos-mailserver.nixosModule
+      
         ./server/teapot
-      ];
+      ] ++ baseline-modules;
 
       specialArgs = defaultSpecialArgs;
     };
