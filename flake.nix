@@ -215,6 +215,8 @@
       modules = [
         ./server/teapot
       ];
+
+      specialArgs = defaultSpecialArgs;
     };
 
     topology.x86_64-linux = import inputs.nix-topology {
