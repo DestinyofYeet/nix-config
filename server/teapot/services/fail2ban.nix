@@ -21,6 +21,12 @@
           maxretry = 5;
         };
       };
+
+      dovecot = {
+        settings = {
+          maxretry = 5;
+        };
+      };
     };
   };
 }
