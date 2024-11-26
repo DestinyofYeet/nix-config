@@ -25,6 +25,15 @@
       #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       #   mandatoryFeatures = [ ];
       # }
+      {
+        hostName = "teapot";
+        system = "x86_64-linux";
+        protocol = "ssh-ng";
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        mandatoryFeatures = [ ];
+        maxJobs = 6;
+        speedFactor = 4;
+      }
     ];
 
     distributedBuilds = true;
