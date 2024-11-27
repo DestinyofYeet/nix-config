@@ -33,6 +33,9 @@
       alertAddress = "ole@ole.blue";
     };
 
+    # somehow nukes my nameserver entries in /etc/resolv.conf and no more ns lookups are possible
+    localDnsResolver = false;
+
     loginAccounts = {
       "ole@ole.blue" = {
         hashedPasswordFile = "${config.age.secrets.ole-mail.path}";
@@ -46,9 +49,19 @@
             fileinto "INBOX.sonarr";
           } elsif address "From" "prowlarr@uwuwhatsthis.de" {
             fileinto "INBOX.prowlarr";
-          } else {
-            keep;
           }
+
+          if anyof (
+            header :contains "to" "postmaster@ole.blue",
+            header :contains "to" "postmaster@uwuwhatsthis.de"
+          ) {
+            fileinto "INBOX.postmaster";
+          } elsif anyof (
+            header :contains "to" "abuse@ole.blue",
+            header :contains "to" "abuse@uwuwhatsthis.de"
+          ){
+            fileinto  "INBOX.abuse";
+          } 
         '';
         
         aliases = [
@@ -148,6 +161,10 @@
 
   services.roundcube = {
     enable = true;
+
+    plugins = [
+      # "managesieve"
+    ];
 
     hostName = "webmail.ole.blue";
     extraConfig = ''
