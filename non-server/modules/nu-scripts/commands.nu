@@ -15,3 +15,13 @@ def --wrapped rebuild-system [ ...args ] {
 def --wrapped test-system [ ...args ] {
   system-command test ...$args
 }
+
+def get-random-file [path: string] {
+  let files = ls $path;
+  let length = ($files | length) - 1;
+
+  $files | get (random int 0..$length)
+}
+
+
+icat (get-random-file /home/ole/Nextcloud/Images/nyan_cats).name
