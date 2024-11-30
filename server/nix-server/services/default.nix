@@ -46,5 +46,6 @@
     ./grafana.nix
     ./radarr.nix
     ./paperless-ngx.nix
+    # ./immich.nix
   ];
 }

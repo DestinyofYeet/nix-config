@@ -1,7 +1,15 @@
-{ config, ... }:{
+{ stable-pkgs, config, ... }:{
+
+  # needed for sonarr
+  nixpkgs.config.permittedInsecurePackages = [
+    "aspnetcore-runtime-wrapped-6.0.36"
+  ];
+
   services.sonarr = {
     enable = true;
     dataDir = "${config.serviceSettings.paths.configs}/sonarr";
+
+    package = stable-pkgs.sonarr;
 
     inherit (config.serviceSettings) user group;
   };

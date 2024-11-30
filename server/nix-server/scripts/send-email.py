@@ -4,10 +4,10 @@ import smtplib
 from email.mime.text import MIMEText
 
 EMAIL_DATA = {
-    "host": "uwuwhatsthis.de",
-    "smtp": "mx.uwuwhatsthis.de",
+    "host": "ole.blue",
+    "smtp": "mail.ole.blue",
     "port": 587,  # StartTLS 587
-    "receiver_email": "ole@uwuwhatsthis.de",
+    "receiver_email": "ole@ole.blue",
     "user": "scripts@uwuwhatsthis.de",
     "password": "",
 }
