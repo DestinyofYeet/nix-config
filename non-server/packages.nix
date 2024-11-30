@@ -104,7 +104,7 @@ in
     fd
     tree-sitter
     nodePackages.nodejs
-    nerdfonts
+    nerd-fonts.jetbrains-mono
     ungoogled-chromium
     magic-wormhole-rs
     element-desktop
