@@ -92,4 +92,21 @@
   # programs.nix-index = {
   #   enable = true;
   # };
+
+  # age = {
+  #   identityPaths = [
+  #     "/home/ole/.ssh/id_ed25519"      
+  #   ];
+
+  #   secrets = {
+  #     nix-file-config = {
+  #       file = ./secrets/nix-config-file.age;
+  #     };
+  #   };
+  # };
+
+
+  # environment.variables = {
+  #   "NIX_USER_CONF_FILES" = "${config.age.secrets.nix-file-config.path}";
+  # };
 }
