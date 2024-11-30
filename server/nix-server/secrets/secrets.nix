@@ -40,4 +40,6 @@ in {
   "deluge-password-file.age".publicKeys = authed;
 
   "hydra-github-auth.age".publicKeys = authed;
+
+  "paperless-ngx-admin.age".publicKeys = authed;
 }

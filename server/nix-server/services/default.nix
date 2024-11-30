@@ -45,5 +45,6 @@
     ./prometheus.nix
     ./grafana.nix
     ./radarr.nix
+    ./paperless-ngx.nix
   ];
 }
