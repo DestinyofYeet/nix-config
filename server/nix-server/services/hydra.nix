@@ -14,7 +14,7 @@
     package = stable-pkgs.hydra_unstable;
     hydraURL = "http://nix-server.infra.wg:3000";
     notificationSender = "hydra@uwuwhatsthis.de";
-    smtpHost = "mx.uwuwhatsthis.de";
+    smtpHost = "mail.ole.blue";
     # buildMachinesFiles = [ "/etc/nix/machines" ];
     buildMachinesFiles = [];
     useSubstitutes = true;

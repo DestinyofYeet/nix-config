@@ -20,4 +20,5 @@ in {
   "prowlarr-uwuwhatsthis.de.age".publicKeys = authed;
   "uptime-kuma-uwuwhatsthis.de.age".publicKeys = authed;
   "zed-uwuwhatsthis.de.age".publicKeys = authed;
+  "hydra-uwuwhatsthis.de.age".publicKeys = authed;
 }
