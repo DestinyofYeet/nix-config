@@ -186,6 +186,8 @@
     pueue
     colmena
     poppler
-  ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs ++ nerd-fontsPkgs;
+  ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs 
+    ++ nerd-fontsPkgs
+  ;
 }
 

@@ -12,6 +12,8 @@
 
     extraConfig = ''
       font_family         Comic Code Ligatures
+      # font_family         JetbrainsMono Nerd Font
+      # font_family         auto
       bold_font           auto
       italic_font         auto
       bolit_italic_font   auto
@@ -25,7 +27,9 @@
       background_opacity  0.6
 
       enable_audio_bell   false
+
       cursor_shape        block
+      cursor_blink_interval 0.5 ease-in-out
 
       map ctrl+space>1 goto_tab 1
       map ctrl+space>2 goto_tab 2

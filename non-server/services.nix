@@ -23,6 +23,7 @@ in
         rm_file_if_exists "/home/ole/.gtkrc-2.0.backup"
         rm_file_if_exists "/home/ole/.config/xsettingsd/xsettingsd.conf.backup"
         rm_file_if_exists "/home/ole/.config/mimeapps.list.backup"
+        rm_file_if_exists "/home/ole/.config/fontconfig/conf.d/10-hm-fonts.conf.backup"
       '';
       };  
     };
