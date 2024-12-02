@@ -16,7 +16,7 @@
       # font_family         auto
       bold_font           auto
       italic_font         auto
-      bolit_italic_font   auto
+      bold_italic_font   auto
 
       shell ${pkgs.nushell}/bin/nu
       editor vim

@@ -38,6 +38,12 @@
     plasma-browser-integration
   ];
 
+  fonts = {
+    packages = [
+      
+    ] ++ nerd-fontsPkgs;
+  };
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -186,8 +192,6 @@
     pueue
     colmena
     poppler
-  ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs 
-    ++ nerd-fontsPkgs
-  ;
+  ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
