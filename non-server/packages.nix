@@ -1,5 +1,5 @@
 
-{ config, pkgs, stable-pkgs, ... }: let
+{ config, pkgs, stable-pkgs, lib, ... }: let
 
   luaPkgs = with pkgs; [
     luajitPackages.luarocks
@@ -26,8 +26,10 @@
     python-lsp-server
     pyclip
   ];
-in
-  {
+
+  nerd-fontsPkgs = builtins.filter lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  
+  in {
 
   # zsh config
   environment.pathsToLink = [ "/share/zsh" ];
@@ -104,7 +106,6 @@ in
     fd
     tree-sitter
     nodePackages.nodejs
-    nerd-fonts.jetbrains-mono
     ungoogled-chromium
     magic-wormhole-rs
     element-desktop
@@ -184,6 +185,7 @@ in
     nvtopPackages.full
     pueue
     colmena
-  ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
+    poppler
+  ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs ++ nerd-fontsPkgs;
 }
 

@@ -9,6 +9,9 @@
     sonarr-uwuwhatsthis-de.file = ../secrets/sonarr-uwuwhatsthis.de.age;
     prowlarr-uwuwhatsthis-de.file = ../secrets/prowlarr-uwuwhatsthis.de.age;
     uptime-kuma-uwuwhatsthis-de.file = ../secrets/prowlarr-uwuwhatsthis.de.age;
+
+    firefly-iii-ole-blue.file = ../secrets/firefly-email-credentials.age;
+    zed-uwuwhatsthis-de.file = ../secrets/zed-uwuwhatsthis.de.age;
   };
 
   mailserver = {
@@ -36,6 +39,7 @@
     # somehow nukes my nameserver entries in /etc/resolv.conf and no more ns lookups are possible
     localDnsResolver = false;
 
+    # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     loginAccounts = {
       "ole@ole.blue" = {
         hashedPasswordFile = "${config.age.secrets.ole-mail.path}";
@@ -152,6 +156,16 @@
 
       "uptime-kuma@uwuwhatsthis.de" = {
         hashedPasswordFile = "${config.age.secrets.uptime-kuma-uwuwhatsthis-de.path}";
+        sendOnly = true;
+      };
+
+      "firefly-iii@ole.blue" = {
+        hashedPasswordFile = "${config.age.secrets.firefly-iii-ole-blue.path}";
+        sendOnly = true;
+      };
+
+      "zed@ole.blue" = {
+        hashedPasswordFile = "${config.age.secrets.zed-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
     };

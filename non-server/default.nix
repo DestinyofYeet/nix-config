@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, stable-pkgs, ... }: {
 
   home-manager = {
     useGlobalPkgs = true;
@@ -6,7 +6,7 @@
     backupFileExtension = "backup";
 
     extraSpecialArgs = {
-      inherit inputs;
+      inherit inputs stable-pkgs;
     };
 
     sharedModules = [ 

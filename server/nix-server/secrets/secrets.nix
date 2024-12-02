@@ -42,4 +42,6 @@ in {
   "hydra-github-auth.age".publicKeys = authed;
 
   "paperless-ngx-admin.age".publicKeys = authed;
+
+  "firefly-email-credentials.age".publicKeys = authed;
 }

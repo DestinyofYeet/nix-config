@@ -47,5 +47,6 @@
     ./radarr.nix
     ./paperless-ngx.nix
     # ./immich.nix
+    ./msmtp.nix
   ];
 }
