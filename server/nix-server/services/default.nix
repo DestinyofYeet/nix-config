@@ -48,5 +48,6 @@
     ./paperless-ngx.nix
     # ./immich.nix
     ./msmtp.nix
+    ./wiki-js.nix
   ];
 }

@@ -27,7 +27,7 @@ in {
 
   "ankisync-users-ole.age".publicKeys = authed;
 
-  "porkbun-api-env.age".publicKeys = authed;
+  "cloudflare-api-env.age".publicKeys = authed;
 
   "airvpn-deluge.age".publicKeys = authed;
 
