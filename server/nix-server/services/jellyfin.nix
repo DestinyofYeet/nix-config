@@ -1,18 +1,18 @@
 { config, pkgs, ... }:{
   services.jellyfin = {
     enable = true;
-    package = config.serviceSettings.stable-pkgs.jellyfin;
+    package = pkgs.jellyfin;
     dataDir = "${config.serviceSettings.paths.configs}/jellyfin";
     cacheDir = "/var/cache/jellyfin";
     inherit (config.serviceSettings) user group;
   };
 
   # intro-skipper patch
-  nixpkgs.overlays = with pkgs; [
+  nixpkgs.overlays = [
     (
       final: prev:
         {
-          jellyfin-web = config.serviceSettings.stable-pkgs.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
+          jellyfin-web = prev.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
             installPhase = ''
               runHook preInstall
 

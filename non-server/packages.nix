@@ -192,6 +192,7 @@
     pueue
     colmena
     poppler
+    recyclarr
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

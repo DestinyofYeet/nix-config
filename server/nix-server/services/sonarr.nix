@@ -2,14 +2,17 @@
 
   # needed for sonarr
   nixpkgs.config.permittedInsecurePackages = [
+    "aspnetcore-runtime-6.0.36"
     "aspnetcore-runtime-wrapped-6.0.36"
+    "dotnet-sdk-6.0.428"
+    "dotnet-sdk-wrapped-6.0.428"
   ];
 
   services.sonarr = {
     enable = true;
     dataDir = "${config.serviceSettings.paths.configs}/sonarr";
 
-    package = stable-pkgs.sonarr;
+    # package = stable-pkgs.sonarr;
 
     inherit (config.serviceSettings) user group;
   };
