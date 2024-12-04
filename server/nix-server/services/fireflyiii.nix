@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, stable-pkgs, pkgs, ... }:
 let
 
 in {
@@ -14,7 +14,7 @@ in {
   services.firefly-iii = {
     enable = true;
 
-    package = config.serviceSettings.stable-pkgs.firefly-iii;
+    package = pkgs.firefly-iii;
 
     settings = {
       APP_KEY_FILE = config.age.secrets.app-key-file.path;
