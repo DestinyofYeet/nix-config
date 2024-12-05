@@ -21,4 +21,7 @@ in {
   "uptime-kuma-uwuwhatsthis.de.age".publicKeys = authed;
   "zed-uwuwhatsthis.de.age".publicKeys = authed;
   "hydra-uwuwhatsthis.de.age".publicKeys = authed;
+
+  "conduit-env-file.age".publicKeys = authed;
+  "sliding-sync-secret.age".publicKeys = authed;
 }

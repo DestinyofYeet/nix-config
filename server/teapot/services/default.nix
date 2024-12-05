@@ -9,5 +9,6 @@
     ./virtualisation.nix
     ./ghost.nix
     ./mailserver.nix
+    ./conduit.nix
   ];
 }
