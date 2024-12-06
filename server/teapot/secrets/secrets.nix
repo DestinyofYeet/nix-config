@@ -24,4 +24,6 @@ in {
 
   "conduit-env-file.age".publicKeys = authed;
   "sliding-sync-secret.age".publicKeys = authed;
+
+  "nextcloud-uwuwhatsthis.de.age".publicKeys = authed;
 }

@@ -13,6 +13,8 @@
     firefly-iii-ole-blue.file = ../secrets/firefly-email-credentials.age;
     zed-uwuwhatsthis-de.file = ../secrets/zed-uwuwhatsthis.de.age;
     hydra-uwuwhatsthis-de.file = ../secrets/hydra-uwuwhatsthis.de.age;
+
+    nextcloud-uwuwhatsthis-de.file = ../secrets/nextcloud-uwuwhatsthis.de.age;
   };
 
   mailserver = {
@@ -172,6 +174,11 @@
 
       "hydra@uwuwhatsthis.de" = {
         hashedPasswordFile = "${config.age.secrets.hydra-uwuwhatsthis-de.path}";
+        sendOnly = true;
+      };
+
+      "nextcloud@uwuwhatsthis.de" = {
+        hashedPasswordFile = "${config.age.secrets.nextcloud-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
     };

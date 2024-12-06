@@ -238,10 +238,10 @@
     };
 
     hydraJobs.system-builds =  makeConfigurations [
-        "main"
-        "wattson"
-#         "nix-server" # doesn't work, because to fetch the secrets repository, it needs access to /root/.ssh/config, which it doesn't do
-      ];
+      "main"
+      "wattson"
+      # "nix-server" # doesn't work, because to fetch the secrets repository, it needs access to /root/.ssh/config, which it doesn't do
+    ];
   };
 
 }
