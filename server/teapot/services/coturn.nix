@@ -71,6 +71,8 @@
 
   # security.acme.defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
   # get a certificate
+
+  # theorie: teapot does not have an ipv6 address, but 'denver.ns.cloudflare.com' does not respond over ipv4
   security.acme.certs.${config.services.coturn.realm} = {
     email = "ole@ole.blue";
     dnsProvider = "cloudflare";
