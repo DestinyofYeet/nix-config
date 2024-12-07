@@ -26,4 +26,6 @@ in {
   "sliding-sync-secret.age".publicKeys = authed;
 
   "nextcloud-uwuwhatsthis.de.age".publicKeys = authed;
+
+  "coturn-static-auth-secret.age".publicKeys = authed;
 }

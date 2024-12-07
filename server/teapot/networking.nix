@@ -5,6 +5,8 @@
   networking = {
     hostName = "teapot";
 
+    # firewall.enable = false;
+
     useDHCP = false;
 
     interfaces.enp6s18 = {
