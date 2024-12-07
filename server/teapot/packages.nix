@@ -14,5 +14,10 @@
 
   environment.systemPackages = with pkgs; [
     helix vim
+
+    traceroute
+    nmap
+
+    python3
   ];
 }

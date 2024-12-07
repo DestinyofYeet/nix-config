@@ -21,5 +21,7 @@
   time.timeZone = "Europe/Berlin";
 
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  services.qemuGuest.enable = true;
 }
 
