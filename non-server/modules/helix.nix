@@ -34,6 +34,22 @@
 
     defaultEditor = true;
 
+    # languages = {
+    #   language = [
+    #     # {
+    #     #   name = "markdown";
+    #     #   language-server.command = "mdpls";
+
+    #     #   config = {
+    #     #     markdown.preview = {
+    #     #       auto = true;
+    #     #       browser = "firefox";
+    #     #     };
+    #     #   };
+    #     # }
+    #   ];
+    # };
+
     settings = {
       theme = "material_deep_ocean";
 

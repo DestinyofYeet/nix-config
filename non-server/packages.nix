@@ -1,5 +1,5 @@
 
-{ config, pkgs, stable-pkgs, lib, ... }: let
+{ config, pkgs, stable-pkgs, lib, inputs, ... }: let
 
   luaPkgs = with pkgs; [
     luajitPackages.luarocks
@@ -193,6 +193,7 @@
     colmena
     poppler
     recyclarr
+    inputs.mdpls-nix.packages.x86_64-linux.default
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

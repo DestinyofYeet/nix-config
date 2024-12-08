@@ -450,6 +450,26 @@
         "type": "github"
       }
     },
+    "mdpls-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733699336,
+        "narHash": "sha256-pu3HX5zof7DKKecMixkh1TbEVUzQQnTMM9BQxkutmMY=",
+        "owner": "DestinyofYeet",
+        "repo": "mdpls.nix",
+        "rev": "4c2dba5d51381284c55722e336b1080c09ca32ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "mdpls.nix",
+        "type": "github"
+      }
+    },
     "networkNamespaces": {
       "inputs": {
         "nixpkgs": [
@@ -659,6 +679,7 @@
         "clean-unused-files": "clean-unused-files",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager_2",
+        "mdpls-nix": "mdpls-nix",
         "networkNamespaces": "networkNamespaces",
         "nix-fast-build": "nix-fast-build",
         "nix-topology": "nix-topology",
