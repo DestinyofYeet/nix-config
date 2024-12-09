@@ -31,6 +31,7 @@ in
 
     hyprland.enable = false;
     hyprpaper.enable = false;
+    hyprlock.enable = false;
 
     helix.enable = false;
   };

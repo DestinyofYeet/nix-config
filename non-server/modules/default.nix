@@ -37,5 +37,11 @@
     ./mailcap.nix
     ./environment.nix
     ./hyprland.nix
+    ./waybar.nix
+    ./rofi.nix
+    ./hyprlock.nix
+    ./hypridle.nix
+    ./hyprpaper.nix
+    ./gnome-keyring.nix
   ];
 }

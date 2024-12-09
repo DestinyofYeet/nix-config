@@ -94,6 +94,8 @@
 
   programs.hyprland.enable = true;
 
+  programs.hyprlock.enable = true;
+
   environment.systemPackages = with pkgs; [
     neovim
     asciiquarium
@@ -196,6 +198,9 @@
     poppler
     recyclarr
     inputs.mdpls-nix.packages.x86_64-linux.default
+    playerctl
+    pavucontrol
+    blueman
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
