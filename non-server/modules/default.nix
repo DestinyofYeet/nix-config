@@ -43,5 +43,6 @@
     ./hypridle.nix
     ./hyprpaper.nix
     # ./gnome-keyring.nix
+    ./dunst.nix
   ];
 }

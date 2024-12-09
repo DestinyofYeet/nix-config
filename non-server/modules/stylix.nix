@@ -34,5 +34,7 @@ in
     hyprlock.enable = false;
 
     helix.enable = false;
+
+    waybar.enable = false;
   };
 }

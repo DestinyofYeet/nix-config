@@ -5,7 +5,7 @@
   programs.waybar = {
     enable = true;
 
-    style = lib.mkForce ./waybar-themes/style.css;
+    style = ./waybar-themes/style.css;
 
     settings = [{
       layer = "top";
@@ -41,7 +41,7 @@
       "battery" = {
         format = "{capacity}% {icon} ({power}W)";
         format-icons = [ ""  ""  ""  ""  "" ];
-        interval = 20;
+        interval = 10;
       };
 
       "temperature" = {
@@ -53,7 +53,7 @@
         "format-alt" = "{temperatureF}°F {icon}";
         "format-icons" = [ "" "" "" ];
         "tooltip" = false;
-        interval = 20;
+        interval = 10;
       };
 
       "bluetooth" = {
@@ -99,8 +99,8 @@
       };
 
       "clock" = {
-        "format-alt" =  "{:%H:%M}";
-        "format" = "{:%A, %B %d, %Y (%H:%M)}";
+        "format" =  "{:%d.%m %H:%M}";
+        "format-alt" = "{:%A, %B %d, %Y (%H:%M)}";
         # //"format" = "<span color='#bf616a'> </span>{:%I:%M %p}";
         # //"format-alt" = "<span color='#bf616a'> </span>{:%A, %B %d, %Y (%I:%M %p)}";
         # // "format" = "{: %R   %d/%m}";

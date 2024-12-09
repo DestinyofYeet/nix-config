@@ -12,6 +12,6 @@
 
     package = pkgs.rofi-wayland;
 
-    theme = lib.mkForce ./rofi-themes/tokyo-night.rasi;
+    # theme = lib.mkForce ./rofi-themes/tokyo-night.rasi;
   };
 }

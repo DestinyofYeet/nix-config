@@ -205,6 +205,7 @@
     blueman
     libsecret
     networkmanagerapplet
+    libnotify
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
