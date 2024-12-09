@@ -53,6 +53,7 @@
         "format-alt" = "{temperatureF}°F {icon}";
         "format-icons" = [ "" "" "" ];
         "tooltip" = false;
+        interval = 20;
       };
 
       "bluetooth" = {
@@ -98,8 +99,8 @@
       };
 
       "clock" = {
-        "format" =  "{:%H:%M}";
-        "format-alt" = "📅{:%A, %B %d, %Y (%H:%M)}";
+        "format-alt" =  "{:%H:%M}";
+        "format" = "{:%A, %B %d, %Y (%H:%M)}";
         # //"format" = "<span color='#bf616a'> </span>{:%I:%M %p}";
         # //"format-alt" = "<span color='#bf616a'> </span>{:%A, %B %d, %Y (%I:%M %p)}";
         # // "format" = "{: %R   %d/%m}";

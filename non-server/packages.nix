@@ -201,6 +201,8 @@
     playerctl
     pavucontrol
     blueman
+    libsecret
+    networkmanagerapplet
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

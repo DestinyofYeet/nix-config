@@ -5,80 +5,71 @@
     enable = true;
 
     settings = {
+      general = {
+        disable_loading_bar = true;
+        immediate_render = true;
+        hide_cursor = false;
+        no_fade_in = true;        
+      };
+
       background = [
         {
           path = "${../../images/wallhaven-lighthouse-snow.jpg}";
         }
       ];
 
-      # # LAYOUT
-      # label = {
-      #   monitor = "";
-      #   text = Layout: $LAYOUT
-      #   color = $text
-      #   font_size = 25
-      #   font_family = $font
-      #   position = 30, -30
-      #   halign = left
-      #   valign = top
-      # }
+      input-field = [
+        {
+          monitor = "";
 
-      # # TIME
-      # label {
-      #   monitor =
-      #   text = $TIME
-      #   color = $text
-      #   font_size = 90
-      #   font_family = $font
-      #   position = -30, 0
-      #   halign = right
-      #   valign = top
-      # }
+          size = "300, 50";
+          outline_thickness = 1;
 
-      # # DATE
-      # label {
-      #   monitor =
-      #   text = cmd[update:43200000] date +"%A, %d %B %Y"
-      #   color = $text
-      #   font_size = 25
-      #   font_family = $font
-      #   position = -30, -150
-      #   halign = right
-      #   valign = top
-      # }
+          font_color = "rgb(b6c4ff)";
+          outer_color = "rgba(180, 180, 180, 0.5)";
+          inner_color = "rgba(200, 200, 200, 0.1)";
+          check_color = "rgba(247, 193, 19, 0.5)";
+          fail_color = "rgba(255, 106, 134, 0.5)";
 
-      # # USER AVATAR
-      # image {
-      #   monitor =
-      #   path = $HOME/.face
-      #   size = 100
-      #   border_color = $accent
-      #   position = 0, 75
-      #   halign = center
-      #   valign = center
-      # }
+          fade_on_empty = false;
+          placeholder_text = "Enter Password";
 
-      # input-field = [
-      #   {
-      #     monitor = "";
-      #     size = "300, 60";
-      #     outline_thickness = 4;
-      #     dots_size = 0.2;
-      #     dots_spacing = 0.2;
-      #     dots_center = true;
-      #     font_color = "$text";
-      #     fade_on_empty = false;
-      #     placeholder_text = "<span foreground=\"##$textAlpha\"><i>󰌾 Logged in as </i><span foreground=\"##$accentAlpha\">$USER</span></span>";
-      #     hide_input = false;
-      #     # check_color = $accent;
-      #     fail_color = "$red";
-      #     fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
-      #     capslock_color = "$yellow";
-      #     position = "0, -47";
-      #     halign = "center";
-      #     valign = "center";
-      #   }
-      # ];
+          dots_spacing = 0.2;
+          dots_center = true;
+          dots_fade_time = 100;
+
+          shadow_color = "rgba(0, 0, 0, 0.1)";
+          shadow_size = 7;
+          shadow_passes = 1;
+
+          valign = "center";
+          halign = "center";
+        }
+      ];
+
+      label = [
+         {
+          monitor = "";
+          text = "$TIME";
+          font_size = 150;
+          color = "rgb(b6c4ff)";
+
+          position = "0%, -100%";
+
+          halign = "center";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = "cmd[update:3600000] date +'%a %b %d'";
+          font_size = 20;
+          color = "rgb(b6c4ff)";
+
+          position = "0%, -110%";
+          halign = "center";
+          valign = "top";
+        }
+      ];
     };
   };
 }

@@ -6,9 +6,11 @@
   programs.rofi = {
     enable = true;
 
-    location = "center";
+    location = "top";
 
     terminal = "${pkgs.kitty}/bin/kitty";
+
+    package = pkgs.rofi-wayland;
 
     theme = lib.mkForce ./rofi-themes/tokyo-night.rasi;
   };
