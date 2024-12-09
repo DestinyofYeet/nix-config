@@ -36,5 +36,6 @@
     ./emails.nix
     ./mailcap.nix
     ./environment.nix
+    ./hyprland.nix
   ];
 }
