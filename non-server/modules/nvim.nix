@@ -9,7 +9,7 @@
     nix
   ];
 
-  mkPlugin = name: file : {
+  mkPlugin = name : file : {
     plugin = name;
     type = "lua";
     config = builtins.readFile file;

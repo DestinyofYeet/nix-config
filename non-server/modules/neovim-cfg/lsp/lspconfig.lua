@@ -20,8 +20,7 @@ local on_attach = function(client, bufnr)
   opts.desc = "Show LSP definitions"
   keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
 
-  opts.desc = "Show LSP implementations"
-  keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+  opts.desc = "Show LSP implementations" keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
 
   opts.desc = "Show LSP type definitions"
   keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
@@ -69,7 +68,7 @@ lspconfig["html"].setup({
 })
 
 -- configure typescript server with plugin
-lspconfig["tsserver"].setup({
+lspconfig["ts_ls"].setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
