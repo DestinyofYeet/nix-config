@@ -206,6 +206,7 @@
     libsecret
     networkmanagerapplet
     libnotify
+    hyprpaper
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

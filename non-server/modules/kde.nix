@@ -249,12 +249,12 @@ in {
     };
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = lib.mkForce "adw-gtk3-dark";
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     name = lib.mkForce "adw-gtk3-dark";
+  #   };
+  # };
 
 
   home.activation = {
