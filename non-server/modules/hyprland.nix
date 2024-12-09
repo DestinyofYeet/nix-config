@@ -39,6 +39,8 @@ in {
       input = {
         accel_profile = "flat";
 
+        numlock_by_default = true;
+
         touchpad = {
           natural_scroll = true;
           disable_while_typing = true;

@@ -42,6 +42,6 @@
     ./hyprlock.nix
     ./hypridle.nix
     ./hyprpaper.nix
-    ./gnome-keyring.nix
+    # ./gnome-keyring.nix
   ];
 }
