@@ -207,6 +207,7 @@
     networkmanagerapplet
     libnotify
     hyprpaper
+    hyprshot
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

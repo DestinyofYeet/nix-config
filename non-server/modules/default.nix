@@ -44,6 +44,6 @@
     ./hyprpaper.nix
     # ./gnome-keyring.nix
     ./dunst.nix
-    ./gtk.nix
+    ./application-theming.nix
   ];
 }

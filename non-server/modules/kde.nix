@@ -14,7 +14,7 @@
 in {
   services.kdeconnect = {
     enable = true;
-    indicator = false;
+    indicator = true;
   };
 
   programs.plasma = {

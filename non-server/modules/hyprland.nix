@@ -31,6 +31,14 @@ in {
         rounding = 10;
       };
 
+      env = [
+        "QT_QPA_PLATFORM,wayland"
+        "QT_QPA_PLATFORMTHEME,qt5ct"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+        "QT_STYLE_OVERRIDE,kvantum"
+      ];
+
       exec-once = [
         "waybar"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
@@ -76,6 +84,7 @@ in {
         "$mainMod, d, exec, $demu"
         "$mainMod, l, exec, loginctl lock-session"
         "$mainMod, f, fullscreen"
+        "$mainMod Shift, S, exec, ${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only"
 
         "$mainMod, h, hy3:movefocus, l"
         "$mainMod, j, hy3:movefocus, d"
