@@ -208,6 +208,7 @@
     libnotify
     hyprpaper
     hyprshot
+    hyprsunset
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
