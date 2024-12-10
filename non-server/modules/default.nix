@@ -45,5 +45,6 @@
     # ./gnome-keyring.nix
     ./dunst.nix
     ./application-theming.nix
+    ./cava.nix
   ];
 }
