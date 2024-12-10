@@ -22,4 +22,5 @@ let
 
 in {
   "cloudflare-api-env.age".publicKeys = authed;
+  "nix-serve-priv-key.age".publicKeys = authed;
 }

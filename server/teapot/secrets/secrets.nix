@@ -28,4 +28,10 @@ in {
   "nextcloud-uwuwhatsthis.de.age".publicKeys = authed;
 
   "coturn-static-auth-secret.age".publicKeys = authed;
+
+  "hydra-github-auth.age".publicKeys = authed;
+
+  "hydra-email-credentials.age".publicKeys = authed;
+
+  "nix-serve-priv-key.age".publicKeys = authed;
 }

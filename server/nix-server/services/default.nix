@@ -15,7 +15,7 @@
     ./navidrome.nix
     ./netdata.nix
     ./openssh.nix
-    ./hydra.nix
+    # ./hydra.nix
     ./innernet.nix
     ./prowlarr.nix
     ./syncthing.nix

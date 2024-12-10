@@ -11,5 +11,7 @@
     ./mailserver.nix
     ./conduit.nix
     # ./coturn.nix
+    ./hydra.nix
+    ./nix-serve.nix
   ];
 }
