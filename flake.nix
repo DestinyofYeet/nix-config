@@ -112,6 +112,14 @@
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
     inherit self;
+
+    lib = nixpkgs.lib.extend (self: super: {
+      custom = import ./lib {
+        inherit inputs;
+        lib = self;
+      };
+    });
+
     baseline-modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
@@ -147,7 +155,7 @@
     stable-pkgs = import inputs.stable-nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
 
     defaultSpecialArgs = {
-      inherit inputs stable-pkgs;
+      inherit inputs stable-pkgs lib;
     };
 
     

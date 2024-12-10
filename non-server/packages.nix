@@ -210,6 +210,7 @@
     hyprshot
     hyprsunset
     sbctl
+    lm_sensors
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

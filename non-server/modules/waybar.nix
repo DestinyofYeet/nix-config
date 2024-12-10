@@ -1,5 +1,6 @@
 {
   lib,
+  osConfig,
   ...
 }:{
   programs.waybar = {
@@ -18,16 +19,17 @@
 
       modules-left  = [ "hyprland/workspaces" "wlr/taskbar" ];
       modules-center = [ "clock" ];
+
+      # memory and temtemperature are still broken
       modules-right = [ 
-        "battery" 
+        (lib.custom.mkIfLaptop osConfig "battery")
         "wireplumber"
-        "backlight"
+        (lib.custom.mkIfLaptop osConfig "backlight")
         "temperature"
-        "group/cpu-load"
+        # "group/cpu-load"
         "memory"
-        "idle_inhibitor"
-        "group/power"
-        "bluetooth"
+        # "group/power"
+        (lib.custom.mkIfLaptop osConfig "bluetooth")
         "network"
         "tray" 
       ];
@@ -46,7 +48,9 @@
 
       "temperature" = {
         # "thermal-zone" = 2;
-        # "hwmon-path" = "/sys/class/hwmon/hwmon2/temp1_input";
+        # "hwmon-path" = "/sys/class/hwmon/hwmon4/temp1_input";
+        # "hwmon-path-abs" = "/sys/devices/platfrom/coretemp.0/hwmon";
+        # "input-filename" = "temp2_input";
         "critical-threshold" = 80;
         # "format-critical" = "{temperatureC}°C {icon}";
         "format" = "{icon} {temperatureC}°C";
