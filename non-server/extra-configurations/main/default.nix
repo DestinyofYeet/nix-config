@@ -13,15 +13,15 @@ let
   ];
 in
 {
-  nix.settings = {
-      substituters = [
-        "http://cache.nix-server.infra.wg:5000?priority=30"
-      ];
+  # nix.settings = {
+  #     substituters = [
+  #       "http://cache.nix-server.infra.wg:5000?priority=30"
+  #     ];
 
-      trusted-public-keys = [
-        "cache.nix-server.infra.wg:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
-      ];
-  };
+  #     trusted-public-keys = [
+  #       "cache.nix-server.infra.wg:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
+  #     ];
+  # };
 
   programs.steam.extraPackages = gaming-pkgs;
 
