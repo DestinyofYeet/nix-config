@@ -1,10 +1,10 @@
-{ config, ... }:{
+{ config, lib, ... }:{
   services.syncthing = {
     enable = true;
     settings = {
       folders = {
         camera = {
-          path = "${config.serviceSettings.paths.data}/photos/handy/Camera";
+          path = "${lib.custom.settings.${config.networking.hostName}.paths.data}/photos/handy/Camera";
           label = "Camera";
           id = "camera";
 
@@ -12,7 +12,7 @@
         };
 
         default = {
-          path = "${config.serviceSettings.paths.data}/syncthing/default-folder";
+          path = "${lib.custom.settings.${config.networking.hostName}.paths.data}/syncthing/default-folder";
           label = "Default Folder";
           id = "default";
         };
@@ -21,7 +21,7 @@
       devices = {
         handy = {
           name = "Handy";
-          id = config.serviceSettings.secrets.syncthing.handy.id;
+          id = lib.custom.settings.${config.networking.hostName}.secrets.syncthing.handy.id;
         };
       };
 
@@ -33,9 +33,9 @@
 
     guiAddress = "127.0.0.1:8384";
 
-    dataDir = "${config.serviceSettings.paths.data}/syncthing";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/syncthing";
 
-    inherit (config.serviceSettings) user group;
+    inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
   services.nginx = let 
@@ -47,7 +47,7 @@
   in {
     virtualHosts = {
       "syncthing.nix-server.infra.wg" = {} // default-config;    
-      "syncthing.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+      "syncthing.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
     }; 
   };
 }

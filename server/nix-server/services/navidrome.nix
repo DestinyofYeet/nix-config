@@ -1,17 +1,17 @@
-{ config, pkgs, ... }:{
+{ config, pkgs, lib, ... }:{
   services.navidrome = {
     enable = true;
     settings = {
       Port = 4533;
       Address = "0.0.0.0";
 
-      MusicFolder = "${config.serviceSettings.paths.data}/media/navidrome";
-      DataFolder = "${config.serviceSettings.paths.configs}/navidrome";
+      MusicFolder = "${lib.custom.settings.${config.networking.hostName}.paths.data}/media/navidrome";
+      DataFolder = "${lib.custom.settings.${config.networking.hostName}.paths.configs}/navidrome";
       FFmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
       EnableSharing = true; 
     };
 
-    inherit (config.serviceSettings) user group;
+    inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
   services.nginx = let
@@ -24,7 +24,7 @@
     virtualHosts = {
       "navidrome.nix-server.infra.wg" = {} // default-config;
 
-      "navidrome.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+      "navidrome.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
     };
   };
 }

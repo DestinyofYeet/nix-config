@@ -1,15 +1,15 @@
-{ config, ... }:{
+{ config, lib, ... }:{
   virtualisation.oci-containers = {
     containers."shokoserver" = {
       image = "shokoanime/server:v5.0.0";
       volumes = [
-        "${config.serviceSettings.paths.configs}/shoko:/home/shoko/.shoko"
-        "${config.serviceSettings.paths.data}/media/jellyfin/animes:${config.serviceSettings.paths.data}/media/jellyfin/animes"
+        "${lib.custom.settings.${config.networking.hostName}.paths.configs}/shoko:/home/shoko/.shoko"
+        "${lib.custom.settings.${config.networking.hostName}.paths.data}/media/jellyfin/animes:${lib.custom.settings.${config.networking.hostName}.paths.data}/media/jellyfin/animes"
       ];
       ports = [ "8111:8111" ];
       environment = {
-        PUID = "${config.serviceSettings.uid}";
-        PGID = "${config.serviceSettings.gid}";
+        PUID = "${lib.custom.settings.${config.networking.hostName}.uid}";
+        PGID = "${lib.custom.settings.${config.networking.hostName}.gid}";
         TZ = "Europe/Berlin";
       };
     };
@@ -23,7 +23,7 @@
     };
   in {
     virtualHosts = {
-      "shoko.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+      "shoko.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
     };
   };
 }

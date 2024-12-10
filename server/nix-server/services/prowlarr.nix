@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:{
+{ pkgs, config, lib, ... }:{
 
   systemd.services.prowlarr = {
     description = "Prowlarr";
@@ -8,10 +8,10 @@
     serviceConfig = {
       Type = "simple";
       Restart = "always";
-      User = config.serviceSettings.user;
-      Group = config.serviceSettings.group;
+      User = lib.custom.settings.${config.networking.hostName}.user;
+      Group = lib.custom.settings.${config.networking.hostName}.group;
       ExecStart =
-        "${pkgs.prowlarr}/bin/Prowlarr -nobrowser -data=${config.serviceSettings.paths.configs}/prowlarr";
+        "${pkgs.prowlarr}/bin/Prowlarr -nobrowser -data=${lib.custom.settings.${config.networking.hostName}.paths.configs}/prowlarr";
     };
   };
 
@@ -30,7 +30,7 @@
     
     virtualHosts = {
       "prowlarr.nix-server.infra.wg" = {} // default-config;
-      "prowlarr.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+      "prowlarr.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
     };
   };
 }

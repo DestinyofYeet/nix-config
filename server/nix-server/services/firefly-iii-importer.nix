@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:{
+{ config, pkgs, lib, ... }:{
   virtualisation.oci-containers.containers."firefly-iii-fints-importer" = {
     image = "benkl/firefly-iii-fints-importer";
     volumes = [
-      "${config.serviceSettings.paths.configs}/firefly-iii-fints-importer:/data/configurations" 
+      "${lib.custom.settings.${config.networking.hostName}.paths.configs}/firefly-iii-fints-importer:/data/configurations" 
     ];
     ports = [
       "7070:8080"
@@ -28,7 +28,7 @@
     };
   };
 
-  services.nginx.virtualHosts."firefly-importer.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
+  services.nginx.virtualHosts."firefly-importer.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
     locations."/" = {
       proxyPass = "http://localhost:7070";
     };

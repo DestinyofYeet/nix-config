@@ -1,16 +1,17 @@
 {
   config,
+  lib,
   ...
 }:{
   services.radarr = {
     enable = true;
 
-    dataDir = "${config.serviceSettings.paths.configs}/radarr";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.configs}/radarr";
 
-    inherit (config.serviceSettings) user group;
+    inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
-  services.nginx.virtualHosts."radarr.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
+  services.nginx.virtualHosts."radarr.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
     locations."/" = {
       proxyPass = "http://localhost:7878";
       extraConfig = ''

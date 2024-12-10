@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   ...
 }:{
   services.grafana = {
@@ -25,7 +26,7 @@
     };
   };
 
-  services.nginx.virtualHosts."dashboard.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
+  services.nginx.virtualHosts."dashboard.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
     locations."/" = {
       proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
       proxyWebsockets = true;

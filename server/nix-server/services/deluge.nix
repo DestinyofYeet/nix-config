@@ -20,7 +20,7 @@
     web.enable = true;
     dataDir = "/mnt/data/configs/deluge";
 
-    inherit (config.serviceSettings) user group;
+    inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
   systemd.services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/deluge";
@@ -45,7 +45,7 @@
   };
 
   services.nginx.virtualHosts = {
-    "deluge.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
+    "deluge.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
       locations."/" = {
         proxyPass = "http://localhost:8112";
 

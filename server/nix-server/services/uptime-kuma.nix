@@ -1,4 +1,4 @@
-{ config, ... }:{
+{ config, lib, ... }:{
   services.uptime-kuma = {
     enable = true;
     settings = {
@@ -16,7 +16,7 @@
 
   in {
     virtualHosts = {
-      "uptime.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-conf;
+      "uptime.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-conf;
     };
   };
 }

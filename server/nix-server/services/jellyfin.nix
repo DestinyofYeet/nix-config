@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:{
+{ config, pkgs, lib ,... }:{
   services.jellyfin = {
     enable = true;
     package = pkgs.jellyfin;
-    dataDir = "${config.serviceSettings.paths.configs}/jellyfin";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.configs}/jellyfin";
     cacheDir = "/var/cache/jellyfin";
-    inherit (config.serviceSettings) user group;
+    inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
   # intro-skipper patch
@@ -43,7 +43,7 @@
   in { 
     virtualHosts = {    
       "jellyfin.nix-server.infra.wg" = {} // default-config;
-      "jellyfin.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+      "jellyfin.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
     };
   }; 
   hardware.graphics = {

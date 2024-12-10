@@ -1,6 +1,6 @@
-{ config, ... }:
+{ config, lib, ... }:
 let 
-  secrets = config.serviceSettings.secrets; 
+  secrets = lib.custom.settings.${config.networking.hostName}.secrets; 
 in {
   
   services.cleanUnusedFiles = {
@@ -17,12 +17,12 @@ in {
       recipient = "ole@uwuwhatsthis.de";
     };
 
-    dataFile = "${config.serviceSettings.paths.data}/programs/clean_unused_files/data.json";
+    dataFile = "${lib.custom.settings.${config.networking.hostName}.paths.data}/programs/clean_unused_files/data.json";
 
     timerConfig = {
       OnCalendar = "weekly";
     };
 
-    inherit (config.serviceSettings) user group;
+    inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 }

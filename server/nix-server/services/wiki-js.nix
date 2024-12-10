@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   ...
 }:{
   services.wiki-js = {
@@ -15,7 +16,7 @@
     };
   };
 
-  services.nginx.virtualHosts."wiki.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
+  services.nginx.virtualHosts."wiki.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
     locations."/".proxyPass = "http://${config.services.wiki-js.settings.bindIP}:${toString config.services.wiki-js.settings.port}";
   };
 }

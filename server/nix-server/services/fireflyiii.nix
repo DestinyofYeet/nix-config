@@ -1,7 +1,4 @@
-{ config, stable-pkgs, pkgs, ... }:
-let
-
-in {
+{ config, stable-pkgs, pkgs, lib, ... }:{
   
   age.secrets = {
     app-key-file = { 
@@ -23,7 +20,7 @@ in {
       DEFAULT_LOCALE = "de_DE";
     };
 
-    dataDir = "${config.serviceSettings.paths.configs}/fireflyiii";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.configs}/fireflyiii";
 
     # virtualHost = "firefly.nix-server.infra.wg";
     virtualHost = "firefly.local.ole.blue";
@@ -35,7 +32,7 @@ in {
 
   services.nginx.virtualHosts.${config.services.firefly-iii.virtualHost} = {
     enableACME = false;
-    useACMEHost = config.serviceSettings.nginx-local-ssl.useACMEHost;
+    useACMEHost = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl.useACMEHost;
     forceSSL = true;
   };
 }

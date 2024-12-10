@@ -1,4 +1,8 @@
-{ config, ... }:{
+{ 
+  config,
+  lib,
+  ... 
+}:{
 
   # containers.postgresql = {
   #   autoStart = false;
@@ -27,7 +31,7 @@
   services.postgresql = {
     enable = true;
 
-    dataDir = "${config.serviceSettings.paths.data}/postgresql";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/postgresql";
 
     ensureUsers = [
       {

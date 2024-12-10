@@ -1,9 +1,9 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 let
   namespace = "qbit";
 
   qbit = {
-    dataDir = "${config.serviceSettings.paths.configs}";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.configs}";
     enable = true;
   };
 in {
@@ -45,8 +45,8 @@ in {
       Type = "simple";
       Restart = "always";
       NetworkNamespacePath="/var/run/netns/${namespace}";
-      User = config.serviceSettings.user;
-      Group = config.serviceSettings.group;
+      User = lib.custom.settings.${config.networking.hostName}.user;
+      Group = lib.custom.settings.${config.networking.hostName}.group;
       ExecStart =
         "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit.dataDir}";
 
@@ -76,7 +76,7 @@ in {
     virtualHosts = {
       "qbittorrent.nix-server.infra.wg" = {} // default-config;
 
-      "qbittorrent.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+      "qbittorrent.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
     };
   };
 

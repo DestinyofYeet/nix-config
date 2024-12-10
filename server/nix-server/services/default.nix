@@ -3,7 +3,7 @@
     ./settings.nix
     ./nfs.nix
     ./add-replay-gain.nix
-    ./matrix-conduit.nix
+    # ./matrix-conduit.nix
     ./qbittorrent.nix
     ./jellyfin.nix
     ./surrealdb.nix
@@ -29,7 +29,7 @@
     ./engelsystem.nix
     ./postgresql.nix
     ./firefly-iii-importer.nix
-    ./passbolt.nix
+    # ./passbolt.nix
     ./unbound.nix
     ./ups.nix
     ./strichliste.nix

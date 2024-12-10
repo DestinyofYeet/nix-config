@@ -1,4 +1,4 @@
-{ stable-pkgs, config, ... }:{
+{ stable-pkgs, config, lib, ... }:{
 
   # needed for sonarr
   nixpkgs.config.permittedInsecurePackages = [
@@ -10,11 +10,11 @@
 
   services.sonarr = {
     enable = true;
-    dataDir = "${config.serviceSettings.paths.configs}/sonarr";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.configs}/sonarr";
 
     # package = stable-pkgs.sonarr;
 
-    inherit (config.serviceSettings) user group;
+    inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
   services.nginx = let 
@@ -41,7 +41,7 @@
     
     virtualHosts = { 
       "sonarr.nix-server.infra.wg" = {} // default-config;
-      "sonarr.local.ole.blue" = config.serviceSettings.nginx-local-ssl // default-config;
+      "sonarr.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
     };
   };
 }

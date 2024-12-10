@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:{
   age.secrets = {
@@ -10,7 +11,7 @@
   services.paperless = {
     enable = true;
 
-    dataDir = "${config.serviceSettings.paths.data}/paperless-ngx";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/paperless-ngx";
 
     settings = {
       PAPERLESS_URL = "https://paperless.local.ole.blue";
@@ -19,10 +20,10 @@
 
     passwordFile = config.age.secrets.paperless-ngx-admin.path;
 
-    inherit (config.serviceSettings) user;
+    inherit (lib.custom.settings.${config.networking.hostName}) user;
   };
 
-  services.nginx.virtualHosts."paperless.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
+  services.nginx.virtualHosts."paperless.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
     locations."/".proxyPass = "http://${config.services.paperless.address}:${builtins.toString config.services.paperless.port}";
   };
 }

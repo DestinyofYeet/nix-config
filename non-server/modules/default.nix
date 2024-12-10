@@ -22,7 +22,6 @@
     ./git.nix
     ./nix.nix
     ./helix.nix
-    ./settings.nix
     ./xdg-open.nix
     ./yazi.nix
     ./fuck.nix
