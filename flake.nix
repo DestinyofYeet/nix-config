@@ -103,6 +103,11 @@
       url = "github:DestinyofYeet/mdpls.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -122,11 +127,12 @@
     non-server-modules = [ 
       { 
         nixpkgs.overlays = [ 
-          nur.overlay
+          nur.overlays.default
         ]; 
       }
 
-      nur.nixosModules.nur
+      nur.modules.nixos.default
+      inputs.lanzaboote.nixosModules.lanzaboote
 
       (
         {...}:{

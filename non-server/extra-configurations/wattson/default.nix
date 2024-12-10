@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   nix = {
@@ -107,35 +107,42 @@
     };    
   };
 
-  services.nginx = {
-    enable = true;
+  # services.nginx = {
+  #   enable = true;
 
-    upstreams."nix_server" = {
-      extraConfig = ''
-        server 192.168.0.250:5000 max_fails=1 fail_timeout=10m;
-        server 10.42.5.3:5000 backup;
-      '';
-    };
+  #   upstreams."nix_server" = {
+  #     extraConfig = ''
+  #       server 192.168.0.250:5000 max_fails=1 fail_timeout=10m;
+  #       server 10.42.5.3:5000 backup;
+  #     '';
+  #   };
 
-    virtualHosts."cache.nix-server.infra.wg" = {
-      serverName = "cache.nix-server.infra.wg";
-      listen = [
-        {
-          addr = "127.0.0.1";
-          port = 80;
-        }
-      ];
+  #   virtualHosts."cache.nix-server.infra.wg" = {
+  #     serverName = "cache.nix-server.infra.wg";
+  #     listen = [
+  #       {
+  #         addr = "127.0.0.1";
+  #         port = 80;
+  #       }
+  #     ];
 
-      locations = {
-        "/" = {
-          proxyPass = "http://nix_server";
-          extraConfig = ''
-            proxy_connect_timeout 2s;
-          '';
-        };
-      };
-    };
-  };
+  #     locations = {
+  #       "/" = {
+  #         proxyPass = "http://nix_server";
+  #         extraConfig = ''
+  #           proxy_connect_timeout 2s;
+  #         '';
+  #       };
+  #     };
+  #   };
+  # };
 
   services.fwupd.enable = true;
+
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 }

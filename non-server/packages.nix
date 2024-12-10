@@ -209,6 +209,7 @@
     hyprpaper
     hyprshot
     hyprsunset
+    sbctl
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
