@@ -38,6 +38,7 @@
   nix.settings.allowed-uris = [
     "https://"
     "github:"
+    "gitlab:"
     "git+https://github.com/"
     "git+ssh://github.com/"
     "git+ssh://git@github.com/"
