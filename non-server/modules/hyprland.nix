@@ -62,7 +62,13 @@ in {
       };
 
       monitor = [
+        # wattson
         "eDP-1, 1920x1200@60, 0x0, 1"
+
+        # main
+        "desc:Philips Consumer Electronics Company Philips FTV 0x01010101, disable"
+        "desc:Ancor Communications Inc VG248 J5LMQS185620, 1920x1080@144, 0x0, 1"
+        "desc:Samsung Electric Company C27R50x H1AK500000, 1920x1080@60, 1920x0, 1"
       ];
 
       # dwindle = {
