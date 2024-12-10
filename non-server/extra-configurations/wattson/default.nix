@@ -6,16 +6,16 @@
 
 {
   nix = {
-    settings = {
-      substituters = [
-        "https://cache.nixos.org/"
-        "http://cache.nix-server.infra.wg?priority=50"
-      ];
+    # settings = {
+      # substituters = [
+      #   "https://cache.nixos.org/"
+      #   "http://cache.nix-server.infra.wg?priority=50"
+      # ];
 
-      trusted-public-keys = [
-        "cache.nix-server.infra.wg:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
-      ];
-    };
+      # trusted-public-keys = [
+      #   "cache.nix-server.infra.wg:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
+      # ];
+    # };
 
     buildMachines = [
       # {

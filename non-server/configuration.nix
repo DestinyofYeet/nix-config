@@ -47,6 +47,13 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "ole" ];
+    substituters = [
+      "https://cache.ole.blue?priority=20"
+    ];
+
+    trusted-public-keys = [
+      "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
+    ];
   };
 
   # This value determines the NixOS release from which the default
