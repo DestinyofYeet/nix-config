@@ -36,5 +36,7 @@ in
     helix.enable = false;
 
     waybar.enable = false;
+
+    rofi.enable = false;
   };
 }
