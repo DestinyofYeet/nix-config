@@ -30,5 +30,6 @@
     deploy-rs
     helix
     dig
+    glances
   ];
 }
