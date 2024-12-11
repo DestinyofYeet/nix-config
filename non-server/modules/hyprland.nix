@@ -101,7 +101,9 @@ in {
         layout = "hy3";
       };
 
-      bind = [
+      bind = let
+        screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
+      in  [
         "$mainMod SHIFT, m, exit"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, RETURN, exec, $terminal"
@@ -111,7 +113,8 @@ in {
         "$mainMod, d, exec, $demu"
         "$mainMod, l, exec, loginctl lock-session"
         "$mainMod, f, fullscreen"
-        "$mainMod Shift, S, exec, ${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only"
+        "$mainMod Shift, S, exec, ${screenshot-cmd}"
+        ", Print, exec, ${screenshot-cmd}"
 
         "$mainMod SHIFT, h, hy3:movefocus, l"
         "$mainMod SHIFT, j, hy3:movefocus, d"
