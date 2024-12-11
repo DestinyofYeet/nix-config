@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 let
@@ -12,6 +13,13 @@ let
 
   mkGenericWorkSpaceBinds = list : 
     (lib.concatLists (map (number: [ (mkWorkSpaceBind number number) (mkMoveWorkSpaceBind number number) ]) list));
+
+  monitors = {
+    tv = "desc:Philips Consumer Electronics Company Philips FTV 0x01010101";
+    primary = "desc:Ancor Communications Inc VG248 J5LMQS185620";
+    secondary = "desc:Samsung Electric Company C27R50x H1AK500000";
+
+  };
 
 in {
   wayland.windowManager.hyprland = {
@@ -69,7 +77,18 @@ in {
         "desc:Philips Consumer Electronics Company Philips FTV 0x01010101, disable"
         "desc:Ancor Communications Inc VG248 J5LMQS185620, 1920x1080@144, 0x0, 1"
         "desc:Samsung Electric Company C27R50x H1AK500000, 1920x1080@60, 1920x0, 1"
+
+        # for other monitors
+        ", preferred, auto, 1"
       ];
+
+      workspace = [
+
+      ] ++ (lib.custom.mkIfMainElse osConfig [
+        "1, monitor:${monitors.primary}, default:true"
+        "2, monitor:${monitors.secondary}, default:true"
+      ] [])
+      ;
 
       # dwindle = {
       #   permanent_direction_override = true;

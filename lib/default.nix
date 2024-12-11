@@ -11,6 +11,9 @@ in {
   mkIfLaptop = config : attr : 
     lib.mkIf (config.networking.hostName == "wattson") attr;
 
+  mkIfMainElse = config : attr : default : 
+    if (config.networking.hostName == "main") then attr else default;
+
   settings = {
     editor = "hx";
 
