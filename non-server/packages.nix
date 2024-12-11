@@ -214,6 +214,7 @@
     hyprsunset
     sbctl
     lm_sensors
+    hyprpanel
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

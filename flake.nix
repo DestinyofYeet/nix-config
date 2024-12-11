@@ -108,6 +108,11 @@
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprpanel = {
+      url = "github:Jas-SinghFSU/HyprPanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
@@ -136,6 +141,7 @@
       { 
         nixpkgs.overlays = [ 
           nur.overlays.default
+          inputs.hyprpanel.overlay
         ]; 
       }
 
