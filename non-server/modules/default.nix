@@ -45,5 +45,6 @@
     ./dunst.nix
     ./application-theming.nix
     ./cava.nix
+    ./hyprsunset.nix
   ];
 }
