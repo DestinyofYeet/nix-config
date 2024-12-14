@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   gaming-pkgs = with pkgs; [
     gamescope
@@ -26,6 +26,13 @@ in
   programs.steam.extraPackages = gaming-pkgs;
 
   programs.gamemode.enable = true;
+
+  programs.alvr = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  # programs.immersed.enable = true;
 
   networking.extraHosts = ''
     192.168.0.250 nix-server.infra.wg
@@ -67,4 +74,28 @@ in
   nix.extraOptions = ''
     builders-use-substitutes = true
   '';
+
+  # needed for SteamVR
+  # boot.kernelPatches = [
+  #   {
+  #   name = "amdgpu-ignore-ctx-privileges";
+  #   patch = pkgs.fetchpatch {
+  #     name = "cap_sys_nice_begone.patch";
+  #     url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+  #     hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+  #   };
+  # }
+  # ];
+
+  boot.extraModulePackages = [
+    (pkgs.callPackage ./amdgpu.nix {
+      inherit (config.boot.kernelPackages) kernel;
+      patches = [
+        (pkgs.fetchpatch {
+          url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+          hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+        })
+      ];
+    })
+  ];
 }

@@ -18,12 +18,12 @@
         }
       ];
 
-      ipv6.addresses = [
-        {
-          address = "2a06:de00:403:9d7c::";
-          prefixLength = 64;
-        }
-      ];
+      # ipv6.addresses = [
+      #   {
+      #     address = "2a06:de00:403:9d7c::";
+      #     prefixLength = 64;
+      #   }
+      # ];
     };
 
     defaultGateway = {
@@ -31,10 +31,10 @@
       interface = "enp6s18";
     };
 
-    defaultGateway6 = {
-      address = "2a06:de00:403:9d7c::1";
-      interface = "enp6s18";
-    };
+    # defaultGateway6 = {
+    #   address = "2a06:de00:403:9d7c::1";
+    #   interface = "enp6s18";
+    # };
 
     nameservers = lib.mkForce [
       "1.1.1.1"
