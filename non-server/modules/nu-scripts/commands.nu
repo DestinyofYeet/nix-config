@@ -23,5 +23,10 @@ def get-random-file [path: string] {
   $files | get (random int 0..$length)
 }
 
+def restart-waybar [] {
+  pkill waybar
+  task spawn { waybar }
+}
+
 
 icat (get-random-file /home/ole/Nextcloud/Images/nyan_cats).name

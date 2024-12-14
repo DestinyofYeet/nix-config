@@ -20,12 +20,12 @@
     '';
   };
 
+  # nushell doesn't include symlinks
   home.activation = let
       source = builtins.fetchurl {
         url = "https://raw.githubusercontent.com/nushell/nu_scripts/refs/heads/main/modules/background_task/task.nu";
         sha256 = "1k94wifbbg78lplcrww6s2bmblknm5jxzyk26qca3w215g7q85d5";
       };
-
       scripts = import ./scripts.nix { inherit pkgs config; };
   in {
     write-task-file = ''
