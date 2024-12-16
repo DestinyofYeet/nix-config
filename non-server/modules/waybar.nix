@@ -40,6 +40,11 @@
         on-scroll-down = "hyprctl dispatch workspace e-1";
       };
 
+      "wlr/taskbar" = {
+        # active-first = true;
+        on-click = "activate";
+      };
+
       "battery" = {
         format = "{capacity}% {icon} ({power}W)";
         format-icons = [ ""  ""  ""  ""  "" ];
