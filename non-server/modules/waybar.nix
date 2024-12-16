@@ -19,8 +19,8 @@
 
       modules-left  = [ "hyprland/workspaces" "wlr/taskbar" ];
       modules-center = [ 
-        "custom/screenshot" 
-        (lib.custom.mkIfLaptop osConfig "clock")
+        (lib.custom.mkIfLaptop osConfig "custom/screenshot")
+        "clock"
       ];
 
       # memory and temtemperature are still broken
