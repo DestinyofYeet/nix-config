@@ -33,8 +33,11 @@
       "kssh" = "kitten ssh";
       "icat" = "kitten icat";
 
-      # "generate-email-alias" = "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
+      "generate-email-alias" = {
+        default = "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
 
+        bash = null;
+      };
     };
   };
 }
