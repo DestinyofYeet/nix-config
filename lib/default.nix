@@ -14,8 +14,12 @@ in {
   mkIfMainElse = config : attr : default : 
     if (config.networking.hostName == "main") then attr else default;
 
-  settings = {
+  settings = rec {
     editor = "hx";
+
+    system = "x86_64-linux";
+
+    screenshot-cmd = "${inputs.nixpkgs.legacyPackages.${system}.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
 
     nix-server = {
 

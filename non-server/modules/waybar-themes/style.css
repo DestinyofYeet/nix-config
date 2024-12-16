@@ -125,6 +125,7 @@ window#waybar.empty {
 }
 
 /* Specific Module Styles */
+#custom-screenshot,
 #backlight,
 #cpu,
 #idle_inhibitor,

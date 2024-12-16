@@ -215,6 +215,7 @@
     sbctl
     lm_sensors
     hyprpanel
+    saber
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 

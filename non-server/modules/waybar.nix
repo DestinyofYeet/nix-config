@@ -18,7 +18,7 @@
       # ];
 
       modules-left  = [ "hyprland/workspaces" "wlr/taskbar" ];
-      modules-center = [ "clock" ];
+      modules-center = [ "custom/screenshot" "clock" ];
 
       # memory and temtemperature are still broken
       modules-right = [ 
@@ -33,6 +33,12 @@
         "network"
         "tray" 
       ];
+
+      "custom/screenshot" = {
+        "format" = "📸 Screenshot";
+        "tooltip" = false;
+        "on-click" = lib.custom.settings.screenshot-cmd;
+      };
 
       "hyprland/workspaces" = {
         format = "{icon}";

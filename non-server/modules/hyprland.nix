@@ -102,7 +102,8 @@ in {
       };
 
       bind = let
-        screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
+        # screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
+        inherit (lib.custom.settings) screenshot-cmd;
       in  [
         "$mainMod SHIFT, m, exit"
         "$mainMod, E, exec, $fileManager"
