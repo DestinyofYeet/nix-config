@@ -1,7 +1,5 @@
-{ pkgs, config, lib, ... }:
-let
-  scripts = import ./scripts.nix { inherit config pkgs;};
-in {
+{ config, lib, ... }:
+{
   age.secrets = {
     nix-file-config = {
       file = ../secrets/nix-config-file.age;
@@ -14,7 +12,7 @@ in {
   # };
 
   home.activation.nix-config = ''
-    ${scripts.update-needed-content-file}/bin/update-needed-content-file ${config.age.secrets.nix-file-config.path} $HOME/.config/nix/nix.conf
+    ${lib.custom.update-needed-content-file}/bin/update-needed-content-file ${config.age.secrets.nix-file-config.path} $HOME/.config/nix/nix.conf
   '';
 
 }

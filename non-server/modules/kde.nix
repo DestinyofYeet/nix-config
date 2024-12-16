@@ -1,16 +1,5 @@
-{ lib, config, pkgs, osConfig, ... }: let
+{ lib, config, osConfig, ... }: let
   dirs = import ./dirs.nix { inherit config;  };
-
-  scripts = import ./scripts.nix { inherit pkgs config; };
-
-  gen-activation = src : dst : ''
-      ${pkgs.bash}/bin/bash ${scripts.update-needed-content}/bin/update-needed-content ${src} ${dst}
-    '';
-
-  gen-activation-file = src : dst : ''
-    ${pkgs.bash}/bin/bash ${scripts.update-needed-content-file}/bin/update-needed-content-file ${src} ${dst} 
-  '';
-
 in {
   services.kdeconnect = {
     enable = true;
@@ -257,7 +246,9 @@ in {
   # };
 
 
-  home.activation = {
+  home.activation = let
+    inherit (lib.custom) gen-activation gen-activation-file;
+  in {
 
     updateIcons = gen-activation ../needed-content/Icons/BeautySolar "${dirs.home.local.share.icons.path}/BeautySolar";
 

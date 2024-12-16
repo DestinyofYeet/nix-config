@@ -7,19 +7,55 @@ let
     rev = "0ee6b577a3159cd252ad59a3a652dd5cedc3b7f0";
     ref = "main";
   };
-in {
+
+  pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+in rec {
+  scripts = import ./scripts { inherit inputs pkgs lib; };
+
   mkIfLaptop = config : attr : 
     lib.mkIf (config.networking.hostName == "wattson") attr;
 
   mkIfMainElse = config : attr : default : 
     if (config.networking.hostName == "main") then attr else default;
 
-  settings = rec {
+    update-needed-content = pkgs.writeShellScriptBin "update-needed-content" ''
+    set -e
+
+    SOURCE_DIR="$1"
+    DEST_DIR="$2"
+
+    mkdir -p "$DEST_DIR"
+
+    ${pkgs.rsync}/bin/rsync -a --delete "$SOURCE_DIR/" "$DEST_DIR"
+  '';
+
+  update-needed-content-file = pkgs.writeShellScriptBin "update-needed-content-file" ''
+    set -e
+
+    SOURCE_FILE="$1"
+    DEST_FILE="$2"
+
+    mkdir -p $(dirname "$DEST_FILE")
+
+    if [ ! -f "$DEST_FILE" ]; then
+      cp "$SOURCE_FILE" "$DEST_FILE"
+    fi
+  '';
+
+  gen-activation = src : dst : ''
+    ${pkgs.bash}/bin/bash ${update-needed-content}/bin/update-needed-content ${src} ${dst}
+  '';
+
+  gen-activation-file = src : dst : ''
+    ${pkgs.bash}/bin/bash ${update-needed-content-file}/bin/update-needed-content-file ${src} ${dst} 
+  '';
+
+
+
+  settings = {
     editor = "hx";
 
-    system = "x86_64-linux";
-
-    screenshot-cmd = "${inputs.nixpkgs.legacyPackages.${system}.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
+    screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
 
     nix-server = {
 

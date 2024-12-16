@@ -1,4 +1,4 @@
-{ pkgs, config, osConfig, ... }:
+{ pkgs, config, osConfig, lib, ... }:
 let  
     rebuild-system = pkgs.writeShellScriptBin "rebuild-system" ''
       set -e
@@ -43,8 +43,6 @@ let
     gitui-proper = pkgs.writeShellScriptBin "gitui-proper" ''
       ${pkgs.bash}/bin/bash -c 'eval $(ssh-agent) && ssh-add ${config.age.secrets.ssh-key-github.path} && gitui && eval $(ssh-agent -k)'
     '';
-
-    scripts = import ./scripts.nix { inherit pkgs config; };
 in {
 
   programs.zsh = {
@@ -64,8 +62,6 @@ in {
       icat = "kitten icat";
 
       yz = "yazi";
-
-      generate-email-alias = "${scripts.generate-email-alias}/bin/generate-email-alias";
     };
 
     sessionVariables = {

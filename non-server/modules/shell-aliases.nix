@@ -1,4 +1,5 @@
 {
+  lib,
   ...
 }:{
   programs.shell-aliases = {
@@ -31,6 +32,9 @@
 
       "kssh" = "kitten ssh";
       "icat" = "kitten icat";
+
+      # "generate-email-alias" = "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
+
     };
   };
 }
