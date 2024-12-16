@@ -28,19 +28,27 @@ in {
       };
     };
 
-    timers = {
+    timers = rec {
       hyprsunset-start = {
         Timer = {
+          Persistent = true;
           # not needed, is default
           # Unit = [ "hyprsunset-start.service" ];
           OnCalendar = "*-*-* ${start-time}";
+        };
+
+        Install = {
+          WantedBy = [ "hyprland-session.target" ];
         };
       };
 
       hyprsunset-stop = {
         Timer = {
+          Persistent = true;
           OnCalendar = "*-*-* ${stop-time}";
         };
+
+        inherit (hyprsunset-start) Install;
       };
     };
   };
