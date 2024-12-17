@@ -46,5 +46,6 @@
     ./application-theming.nix
     ./cava.nix
     ./hyprsunset.nix
+    ./taskwarrior.nix
   ];
 }

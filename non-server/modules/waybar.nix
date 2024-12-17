@@ -1,6 +1,7 @@
 {
   lib,
   osConfig,
+  pkgs,
   ...
 }:{
   programs.waybar = {
@@ -17,7 +18,12 @@
       #   "eDP-1"
       # ];
 
-      modules-left  = [ "hyprland/workspaces" "wlr/taskbar" ];
+      modules-left  = [ 
+        "hyprland/workspaces" 
+        "wlr/taskbar"
+        "custom/taskwarrior"
+      ];
+
       modules-center = [ 
         (lib.custom.mkIfLaptop osConfig "custom/screenshot")
         "clock"
@@ -43,10 +49,17 @@
         "on-click" = lib.custom.settings.screenshot-cmd;
       };
 
+      "custom/taskwarrior" = {
+        format = "Most urgent task: {}";
+        # exec = "${pkgs.nushell}/bin/nu ${pkgs.substituteAll { src = ../modules/nu-scripts/taskwarrior.nu; task = "${pkgs.taskwarrior3}/bin/task";}}";
+        exec = "${pkgs.nushell}/bin/nu ${../modules/nu-scripts/taskwarrior.nu}";
+        interval = 30;
+        return-type = "json";
+      };
+
       "hyprland/workspaces" = {
         format = "{icon}";
-        on-scroll-up = "hyprctl dispatch workspace e+1";
-        on-scroll-down = "hyprctl dispatch workspace e-1";
+        on-scroll-up = "hyprctl dispatch workspace e+1"; on-scroll-down = "hyprctl dispatch workspace e-1";
       };
 
       "wlr/taskbar" = {

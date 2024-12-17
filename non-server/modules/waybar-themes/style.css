@@ -126,6 +126,7 @@ window#waybar.empty {
 
 /* Specific Module Styles */
 #custom-screenshot,
+#custom-taskwarrior,
 #backlight,
 #cpu,
 #idle_inhibitor,

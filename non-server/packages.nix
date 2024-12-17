@@ -217,6 +217,8 @@
     lm_sensors
     hyprpanel
     saber
+    taskwarrior3
+    timewarrior
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
