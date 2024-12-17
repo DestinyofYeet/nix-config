@@ -32,6 +32,20 @@ def get_running_tasks [tasks: list] -> list {
   }
 }
 
+def format_entry [entry] -> str {
+  let strings = [
+    $"\(($entry.urgency)\) "
+    $"(if "tags" in $entry { [($entry.tags | str join ', ')]}) ",
+    $"\'($entry.description)\' "
+    $"\(ID: ($entry.id)\) "
+    $"(if "due" in $entry { 'due ' + (format_date $entry.due) + ' '})",
+    $"(if "scheduled" in $entry { 'scheduled ' + (format_date $entry.scheduled) + ' '})",
+    $"(if "start" in $entry { 'running since ' + (format_date $entry.start) + ' '})",
+  ]
+
+  $strings | str join
+}
+
 def format_rest [tasks: list] -> json {
   let length = $tasks | length
 
@@ -43,7 +57,8 @@ def format_rest [tasks: list] -> json {
 
   for index in 1..$length {
     let entry = $tasks | get ($index - 1)
-    let string = $"- \(($entry.urgency)\) (if "tags" in $entry { [($entry.tags | str join ', ')] }) \'($entry.description)\' (if "due" in $entry { 'due ' + ($entry.due | date humanize) + ' '})(if "scheduled" in $entry { 'scheduled ' + (format_date $entry.scheduled) + ' '})(if "start" in $entry { 'running since ' + (format_date $entry.start) + ' '})"
+    # let string = $"- \(($entry.urgency)\) (if "tags" in $entry { [($entry.tags | str join ', ')] }) \'($entry.description)\' (if "due" in $entry { 'due ' + ($entry.due | date humanize) + ' '})(if "scheduled" in $entry { 'scheduled ' + (format_date $entry.scheduled) + ' '})(if "start" in $entry { 'running since ' + (format_date $entry.start) + ' '})"
+    let string = $"- (format_entry $entry)"
     $big_list = ($big_list | append $string)
   }
 
@@ -71,7 +86,7 @@ def main [] {
   if ($all_tasks | length) > 0 {
     let most_urgent = $all_tasks.0
     $all_tasks = $all_tasks | skip 1
-    $string = $"Most urgent task: \'($most_urgent.description)\' (if "due" in $most_urgent { $most_urgent.due | date humanize })"
+    $string = $"Most urgent task: (format_entry $most_urgent)"
   }
 
   { 
