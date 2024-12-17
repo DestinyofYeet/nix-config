@@ -52,7 +52,7 @@
         
           if address "From" "scripts@uwuwhatsthis.de" {
             fileinto "INBOX.scripts";
-          } elsif address "From" "sonarr@uwuwhatsthis.de" {
+          } elsif address "From" "sonarr@ole.blue" {
             fileinto "INBOX.sonarr";
           } elsif address "From" "prowlarr@uwuwhatsthis.de" {
             fileinto "INBOX.prowlarr";
@@ -148,7 +148,7 @@
         sendOnly = true;
       };
 
-      "sonarr@uwuwhatsthis.de" = {
+      "sonarr@ole.blue" = {
         hashedPasswordFile = "${config.age.secrets.sonarr-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
@@ -194,7 +194,7 @@
       # "managesieve"
     ];
 
-    hostName = "webmail.ole.blue";
+    hostName = "mail.ole.blue";
     extraConfig = ''
       $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
       $config['smtp_user'] = "%u";
