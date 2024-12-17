@@ -8,7 +8,7 @@ def main [] {
 
   if ($most_urgent_list | length) > 0 {
     let most_urgent = $most_urgent_list.0
-    $string = $"($most_urgent.description) (if "due" in $most_urgent { $most_urgent.due | date humanize })"
+    $string = $"\'($most_urgent.description)\' (if "due" in $most_urgent { $most_urgent.due | date humanize })"
   }   
 
   { 
@@ -32,7 +32,7 @@ def "main extended" [] {
 
   for index in 1..($length - 1) {
     let entry = $list | get ($index)
-    let string = $"- ($entry.description) (if "due" in $entry { $entry.due | date humanize})"
+    let string = $"- \(($entry.urgency)\) (if "tags" in $entry { [($entry.tags | str join ', ')] })  \'($entry.description)\' (if "due" in $entry { $entry.due | date humanize})"
     $big_list = ($big_list | append $string)
   }
 
