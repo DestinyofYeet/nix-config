@@ -17,10 +17,13 @@ def get_running_tasks [tasks: list] -> list {
     }
   }
 
-  for index in 0..(($list | length) - 1) {
-    let entry = $list | get $index
+  if ($list | length) != 0 {
+    
+    for index in 0..(($list | length) - 1) {
+      let entry = $list | get $index
 
-    $tasks = $tasks | drop nth $entry.index
+      $tasks = $tasks | drop nth $entry.index
+    }
   }
 
   {
