@@ -32,7 +32,7 @@ def "main extended" [] {
 
   for index in 1..($length - 1) {
     let entry = $list | get ($index)
-    let string = $"- \(($entry.urgency)\) (if "tags" in $entry { [($entry.tags | str join ', ')] })  \'($entry.description)\' (if "due" in $entry { $entry.due | date humanize})"
+    let string = $"- \(($entry.urgency)\) (if "tags" in $entry { [($entry.tags | str join ', ')] }) \'($entry.description)\' (if "due" in $entry { 'due ' + ($entry.due | date humanize) + ' '})(if "scheduled" in $entry { 'scheduled ' + ($entry.scheduled | date humanize) + ' '})(if "start" in $entry { 'running since ' + ($entry.start | date humanize) + ' '})"
     $big_list = ($big_list | append $string)
   }
 
