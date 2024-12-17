@@ -32,15 +32,66 @@ def get_running_tasks [tasks: list] -> list {
   }
 }
 
-def format_entry [entry] -> str {
+def get_format_settings [default: bool = true] -> settings {
+  {
+    urgency: $default
+    tags: $default
+    description: $default
+    id: $default
+    due: $default
+    scheduled: $default
+    running: $default
+  }
+}
+
+def format_entry [
+    entry
+    settings?
+  ] -> str {
+
+  let $settings = match $settings {
+    null => (get_format_settings true)
+    _ => $settings
+  }
+
+  # print $"format_entry: settings = ($settings)\nformat_entry: entry = ($entry)"
+
   let strings = [
-    $"\(($entry.urgency)\) "
-    $"(if "tags" in $entry { [($entry.tags | str join ', ')]}) ",
-    $"\'($entry.description)\' "
-    $"\(ID: ($entry.id)\) "
-    $"(if "due" in $entry { 'due ' + (format_date $entry.due) + ' '})",
-    $"(if "scheduled" in $entry { 'scheduled ' + (format_date $entry.scheduled) + ' '})",
-    $"(if "start" in $entry { 'running since ' + (format_date $entry.start) + ' '})",
+    (
+      if $settings.urgency {
+        $"\(($entry.urgency)\) "
+      }
+    )
+    (
+      if $settings.tags and "tags" in $entry {
+        $"[($entry.tags | str join ', ')] "
+      }
+    )
+    (
+      if $settings.description {
+        $"\'($entry.description)\' "
+      }
+    )
+    (
+      if $settings.id {
+        $"\(ID: ($entry.id)\) "
+      }
+    )
+    (      
+      if $settings.due and "due" in $entry {
+        $"due (format_date $entry.due) "
+      }
+    )
+    (
+      if $settings.scheduled and "scheduled" in $entry {
+        $"scheduled (format_date $entry.scheduled) "
+      }
+    )
+    (      
+      if $settings.running and "start" in $entry {
+        $"running since (format_date $entry.start) "
+      }  
+    )
   ]
 
   $strings | str join
@@ -74,9 +125,15 @@ def main [] {
   $all_tasks = $result.all
   if ($running_tasks | length) > 0 {
     let entry = $running_tasks.0
+
+    mut formatting = get_format_settings false
+
+    $formatting.description = true
+    $formatting.id = true
+    $formatting.running = true
    
     return ({
-      text: $"Current running task: \'($entry.description)\' running since (format_date $entry.start)",
+      text: $"Current running task: (format_entry $entry $formatting)",
       tooltip: (format_rest $all_tasks | str join "\n")
     } | to json -r)
   }
@@ -92,7 +149,5 @@ def main [] {
   { 
     text: $string, 
     tooltip: (format_rest $all_tasks | str join "\n"),
-    class: "main",
-    percentage: 100,
   } | to json -r
 }
