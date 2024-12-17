@@ -36,6 +36,7 @@ def get_format_settings [default: bool = true] -> settings {
   {
     urgency: $default
     tags: $default
+    project: $default
     description: $default
     id: $default
     due: $default
@@ -59,42 +60,47 @@ def format_entry [
   let strings = [
     (
       if $settings.urgency {
-        $"\(($entry.urgency)\) "
+        $"\(Prio: ($entry.urgency)\)"
       }
     )
     (
       if $settings.tags and "tags" in $entry {
-        $"[($entry.tags | str join ', ')] "
+        $"[($entry.tags | str join ', ')]"
+      }
+    )
+    (
+      if $settings.project and "project" in $entry {
+        $"[($entry.project)]"
       }
     )
     (
       if $settings.description {
-        $"\'($entry.description)\' "
+        $"\'($entry.description)\'"
       }
     )
     (
       if $settings.id {
-        $"\(ID: ($entry.id)\) "
+        $"\(ID: ($entry.id)\)"
       }
     )
     (      
       if $settings.due and "due" in $entry {
-        $"due (format_date $entry.due) "
+        $"| due (format_date $entry.due)"
       }
     )
     (
       if $settings.scheduled and "scheduled" in $entry {
-        $"scheduled (format_date $entry.scheduled) "
+        $"| scheduled (format_date $entry.scheduled)"
       }
     )
     (      
       if $settings.running and "start" in $entry {
-        $"running since (format_date $entry.start) "
+        $"| running since (format_date $entry.start)"
       }  
     )
   ]
 
-  $strings | str join
+  $strings | compact | str join ' '
 }
 
 def format_rest [tasks: list] -> json {
@@ -142,8 +148,13 @@ def main [] {
 
   if ($all_tasks | length) > 0 {
     let most_urgent = $all_tasks.0
+
+    mut formatting = get_format_settings true
+
+    $formatting.id = false
+    
     $all_tasks = $all_tasks | skip 1
-    $string = $"Most urgent task: (format_entry $most_urgent)"
+    $string = $"Most urgent task: (format_entry $most_urgent $formatting)"
   }
 
   { 
