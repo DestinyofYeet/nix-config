@@ -13,5 +13,6 @@
     # ./coturn.nix
     ./hydra.nix
     ./nix-serve.nix
+    ./taskchampion-server.nix
   ];
 }

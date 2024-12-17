@@ -15,4 +15,6 @@ in {
   "oth-regensburg-email-pw.age".publicKeys = authed;
 
   "email-uwuwhatsthis-pw.age".publicKeys = authed;
+
+  "taskwarrior-config.age".publicKeys = authed;
 }
