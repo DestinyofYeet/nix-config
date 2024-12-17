@@ -2,14 +2,39 @@ def get_most_urgent_list [] {
   return (task export | from json | where status != "deleted" and status != "completed" | sort-by urgency | reverse)
 }
 
+def "main running" [] {
+  let complete_list = get_most_urgent_list
+  mut list = []
+
+  for index in 0..(($complete_list | length) - 1) {
+    let entry = $complete_list | get $index
+
+    if "start" in $entry {
+      $list = $list | append $entry
+    }
+  }
+
+  $list
+}
+
 def main [] {
+  let running_tasks = main running
+  if ($running_tasks | length) > 0 {
+    let entry = $running_tasks.0
+   
+    return ({
+      text: $"Current running task: \'($entry.description)\' running since ($entry.start | date humanize)",
+      tooltip: (main extended true | str join "\n")
+    } | to json -r)
+  }
+
   let most_urgent_list = get_most_urgent_list
   mut string = "No task found"
 
   if ($most_urgent_list | length) > 0 {
     let most_urgent = $most_urgent_list.0
-    $string = $"\'($most_urgent.description)\' (if "due" in $most_urgent { $most_urgent.due | date humanize })"
-  }   
+    $string = $"Most urgent task: \'($most_urgent.description)\' (if "due" in $most_urgent { $most_urgent.due | date humanize })"
+  }
 
   { 
     text: $string, 
@@ -19,19 +44,18 @@ def main [] {
   } | to json -r
 }
 
-def "main extended" [] {
+def "main extended" [all: bool = false] {
   let list = get_most_urgent_list
   let length = $list | length
 
-  if $length < 1 {
-    print "No more tasks!"
-    return
+  if not $all and $length < 2 {
+    return [ "No more tasks!" ]
   }
 
   mut big_list = []
 
-  for index in 1..($length - 1) {
-    let entry = $list | get ($index)
+  for index in 1..($length - (if not $all { 1 } else { 0 })) {
+    let entry = $list | get ($index - 1)
     let string = $"- \(($entry.urgency)\) (if "tags" in $entry { [($entry.tags | str join ', ')] }) \'($entry.description)\' (if "due" in $entry { 'due ' + ($entry.due | date humanize) + ' '})(if "scheduled" in $entry { 'scheduled ' + ($entry.scheduled | date humanize) + ' '})(if "start" in $entry { 'running since ' + ($entry.start | date humanize) + ' '})"
     $big_list = ($big_list | append $string)
   }
