@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -48,10 +53,12 @@
       "nix-command"
       "flakes"
     ];
-    trusted-users = [ "ole" ];
+
+    # use lib.mkForce to only use these substituters
     substituters = [ "https://cache.ole.blue?priority=20" ];
 
     trusted-public-keys = [ "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg=" ];
+    trusted-users = [ "ole" ];
   };
 
   # This value determines the NixOS release from which the default
