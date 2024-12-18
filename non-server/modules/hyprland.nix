@@ -83,11 +83,15 @@ in
         "desc:Ancor Communications Inc VG248 J5LMQS185620, 1920x1080@144, 0x0, 1"
         "desc:Samsung Electric Company C27R50x H1AK500000, 1920x1080@60, 1920x0, 1"
 
+        # fsim
+        "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000844, preferred, auto, 1"
+        "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000852, preferred, auto, 1"
+
         # extends current workspace to other screens
         # ", preferred, auto, 1"
 
         # mirrors current workspace to other screens
-        ", preferred, auto, 1, mirror, DP-1"
+        ", preferred, auto, 1, mirror, eDP-1"
       ];
 
       workspace =

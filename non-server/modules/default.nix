@@ -39,7 +39,7 @@
     ./hyprland.nix
     ./waybar.nix
     ./rofi.nix
-    ./hyprlock.nix
+    # ./hyprlock.nix
     ./hypridle.nix
     ./hyprpaper.nix
     # ./gnome-keyring.nix
@@ -48,5 +48,6 @@
     ./cava.nix
     ./hyprsunset.nix
     ./taskwarrior.nix
+    ./swaylock.nix
   ];
 }

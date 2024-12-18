@@ -39,5 +39,7 @@ in
     waybar.enable = false;
 
     rofi.enable = false;
+
+    swaylock.enable = false;
   };
 }

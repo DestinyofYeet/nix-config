@@ -96,8 +96,10 @@ in
     withUWSM = true;
   };
 
-  programs.hyprlock.enable = true;
-  security.pam.services.hyprlock = { };
+  # programs.hyprlock.enable = true;
+  # security.pam.services.hyprlock = { };
+
+  security.pam.services.swaylock = {};
 
   services.gnome.gnome-keyring.enable = true;
 
