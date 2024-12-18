@@ -24,16 +24,20 @@
 
   services.qemuGuest.enable = true;
 
-  nix.buildMachines = [
-    {
-      hostName = "uwuwhatsthis";
-      system = "x86_64-linux";
-      protocol = "ssh";
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      mandatoryFeatures = [ ];
-      maxJobs = 6;
-      speedFactor = 1;
-    }
-  ];
+  nix = {
+    buildMachines = [
+      {
+        hostName = "uwuwhatsthis";
+        system = "x86_64-linux";
+        protocol = "ssh";
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        mandatoryFeatures = [ ];
+        maxJobs = 6;
+        speedFactor = 1;
+      }
+    ];
+
+    distributedBuilds = true;
+  };
 }
 
