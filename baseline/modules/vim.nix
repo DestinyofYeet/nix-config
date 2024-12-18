@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
 
   programs.vim = {
     enable = true;
@@ -9,6 +10,6 @@
       set number
       xnoremap > >gv
       xnoremap < <gv
-      '';
+    '';
   };
 }

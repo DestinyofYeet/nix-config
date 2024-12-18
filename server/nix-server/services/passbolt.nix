@@ -3,12 +3,15 @@
   ...
 }:
 
-let 
+let
   passbolt-dir = "${config.serviceSettings.paths.data}/passbolt";
-in {
+in
+{
 
   age.secrets = {
-    passbolt-env = { file = ../secrets/passbolt-env-file.age; };
+    passbolt-env = {
+      file = ../secrets/passbolt-env-file.age;
+    };
   };
 
   virtualisation.oci-containers.containers = {
@@ -21,7 +24,7 @@ in {
       environmentFiles = [
         "${config.age.secrets.passbolt-env.path}"
       ];
-      
+
       # needs to be owned by uid 33
       volumes = [
         "${passbolt-dir}/passbolt/gpg:/etc/passbolt/gpg"

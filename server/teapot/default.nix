@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   imports = [
     ./configuration.nix
     ../../baseline

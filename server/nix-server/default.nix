@@ -1,4 +1,5 @@
-{ home-manager, inputs, ... }: {
+{ home-manager, inputs, ... }:
+{
   imports = [
     ../../baseline
     ./configuration.nix

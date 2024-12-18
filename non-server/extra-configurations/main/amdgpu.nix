@@ -1,15 +1,20 @@
-{ pkgs
-, lib
-, kernel ? pkgs.linuxPackages_latest.kernel
-, patches ? []
-,
+{
+  pkgs,
+  lib,
+  kernel ? pkgs.linuxPackages_latest.kernel,
+  patches ? [ ],
 }:
 
 pkgs.stdenv.mkDerivation {
   pname = "amdgpu-kernel-module";
-  inherit (kernel) src version postPatch nativeBuildInputs;
+  inherit (kernel)
+    src
+    version
+    postPatch
+    nativeBuildInputs
+    ;
 
-  patches = kernel.patches or [] ++ patches;
+  patches = kernel.patches or [ ] ++ patches;
 
   kernel_dev = kernel.dev;
   kernelVersion = kernel.modDirVersion;

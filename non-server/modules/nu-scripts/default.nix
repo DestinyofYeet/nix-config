@@ -3,12 +3,20 @@
   lib,
   config,
   ...
-}:let 
-  make-option = file-names:  (lib.genAttrs file-names (name: lib.mkOption { type = lib.types.package; }));
+}:
+let
+  make-option =
+    file-names: (lib.genAttrs file-names (name: lib.mkOption { type = lib.types.package; }));
 
-  make-config = file-names: (lib.genAttrs file-names (name: pkgs.writeText "${name}.nu" (builtins.readFile ./${name}.nu)));
+  make-config =
+    file-names:
+    (lib.genAttrs file-names (name: pkgs.writeText "${name}.nu" (builtins.readFile ./${name}.nu)));
 
-  make-extra-conf = file-names: lib.strings.concatMapStrings (name: "source ${config.nuScripts.${name}}\n") file-names;
+  make-extra-conf =
+    file-names:
+    lib.strings.concatMapStrings (name: ''
+      source ${config.nuScripts.${name}}
+    '') file-names;
 
   scripts = [
     "deploy-node"
@@ -16,8 +24,9 @@
     "commands"
     "oth-mensa"
   ];
-  
-in {
+
+in
+{
   options.nuScripts = make-option scripts;
 
   config.nuScripts = make-config scripts;

@@ -1,4 +1,5 @@
-{config, ... }: rec {
+{ config, ... }:
+rec {
   home = {
     path = "${config.home.homeDirectory}";
 

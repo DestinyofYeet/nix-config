@@ -5,15 +5,14 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./packages.nix
-      ./desktop_environment.nix
-      ./system_users.nix
-      ./services.nix
-      ./scripts
-    ];
-
+  imports = [
+    # Include the results of the hardware scan.
+    ./packages.nix
+    ./desktop_environment.nix
+    ./system_users.nix
+    ./services.nix
+    ./scripts
+  ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -45,15 +44,14 @@
   # $ nix search wget
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     trusted-users = [ "ole" ];
-    substituters = [
-      "https://cache.ole.blue?priority=20"
-    ];
+    substituters = [ "https://cache.ole.blue?priority=20" ];
 
-    trusted-public-keys = [
-      "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
-    ];
+    trusted-public-keys = [ "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg=" ];
   };
 
   # This value determines the NixOS release from which the default
@@ -70,7 +68,7 @@
       sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
       formatted = builtins.concatStringsSep "\n" sortedUnique;
     in
-      formatted;
+    formatted;
 
   boot.supportedFilesystems = [ "nfs" ];
   services.rpcbind.enable = true;
@@ -78,8 +76,8 @@
   hardware.keyboard.zsa.enable = true;
 
   # hardware.graphics.extraPackages = with pkgs.rocmPackages; [
-    # rocm-runtime
-    # rocm-smi
+  # rocm-runtime
+  # rocm-smi
   # ];
 
   services.printing = {
@@ -95,14 +93,14 @@
   };
 
   # programs.command-not-found.enable = false;
-  
+
   # programs.nix-index = {
   #   enable = true;
   # };
 
   # age = {
   #   identityPaths = [
-  #     "/home/ole/.ssh/id_ed25519"      
+  #     "/home/ole/.ssh/id_ed25519"
   #   ];
 
   #   secrets = {
@@ -111,7 +109,6 @@
   #     };
   #   };
   # };
-
 
   # environment.variables = {
   #   "NIX_USER_CONF_FILES" = "${config.age.secrets.nix-file-config.path}";

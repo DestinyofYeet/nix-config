@@ -1,10 +1,9 @@
-{
-  ...
-}:
+{ ... }:
 
 let
   wallpaperPrimary = ../../images/wallhaven-nightsky.jpg;
-in {
+in
+{
   services.hyprpaper = {
     enable = true;
 
@@ -12,13 +11,9 @@ in {
       ipc = "on";
       splash = false;
 
-      preload = [
-        (toString wallpaperPrimary)
-      ];
+      preload = [ (toString wallpaperPrimary) ];
 
-      wallpaper = [
-        ",${toString wallpaperPrimary}"
-      ];
+      wallpaper = [ ",${toString wallpaperPrimary}" ];
     };
   };
 }

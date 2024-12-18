@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}:{
+}:
+{
   age.secrets = {
     mysql-init = {
       file = ../secrets/mysql-init-setup.age;

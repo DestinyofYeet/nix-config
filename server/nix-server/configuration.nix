@@ -2,11 +2,17 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
-    ./hardware-configuration.nix 
+    ./hardware-configuration.nix
 
     ./system_networking.nix
     ./system_packages.nix
@@ -18,17 +24,19 @@
 
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  nix = { 
-    settings = { 
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "ole" "root" ];
-      substituters = [
-        "https://cache.ole.blue?priority=20"
+  nix = {
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
       ];
+      trusted-users = [
+        "ole"
+        "root"
+      ];
+      substituters = [ "https://cache.ole.blue?priority=20" ];
 
-      trusted-public-keys = [
-        "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
-      ];
+      trusted-public-keys = [ "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg=" ];
     };
   };
 
@@ -58,11 +66,11 @@
 
   networking.hostName = "nix-server";
 
-   environment.etc."current-system-packages".text =
+  environment.etc."current-system-packages".text =
     let
       packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
       sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
       formatted = builtins.concatStringsSep "\n" sortedUnique;
     in
-      formatted;
+    formatted;
 }

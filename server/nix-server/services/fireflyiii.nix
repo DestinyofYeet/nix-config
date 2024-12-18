@@ -1,8 +1,15 @@
-{ config, stable-pkgs, pkgs, lib, ... }:{
-  
+{
+  config,
+  stable-pkgs,
+  pkgs,
+  lib,
+  ...
+}:
+{
+
   age.secrets = {
-    app-key-file = { 
-      file = ../secrets/fireflyiii-appkey.age; 
+    app-key-file = {
+      file = ../secrets/fireflyiii-appkey.age;
       owner = config.services.firefly-iii.user;
       group = config.services.firefly-iii.group;
     };

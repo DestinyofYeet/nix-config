@@ -1,4 +1,5 @@
-{ config, lib, ... }:{
+{ config, lib, ... }:
+{
   services.syncthing = {
     enable = true;
     settings = {
@@ -38,16 +39,19 @@
     inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
-  services.nginx = let 
-    default-config = {
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8384";
+  services.nginx =
+    let
+      default-config = {
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8384";
+        };
+      };
+    in
+    {
+      virtualHosts = {
+        "syncthing.nix-server.infra.wg" = { } // default-config;
+        "syncthing.local.ole.blue" =
+          lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };
     };
-  in {
-    virtualHosts = {
-      "syncthing.nix-server.infra.wg" = {} // default-config;    
-      "syncthing.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
-    }; 
-  };
 }

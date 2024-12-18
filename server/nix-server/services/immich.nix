@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}:{
+}:
+{
   services.immich = {
     enable = true;
 
@@ -27,7 +28,8 @@
   # };
 
   services.nginx.virtualHosts."images.local.ole.blue" = config.serviceSettings.nginx-local-ssl // {
-    locations."/".proxyPass = "http://${config.services.immich.host}:${builtins.toString config.services.immich.port}";
+    locations."/".proxyPass =
+      "http://${config.services.immich.host}:${builtins.toString config.services.immich.port}";
 
     extraConfig = ''
       proxy_set_header Host              $host;

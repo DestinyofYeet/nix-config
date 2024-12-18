@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   services.znapzend = {
     enable = true;
     pure = true;

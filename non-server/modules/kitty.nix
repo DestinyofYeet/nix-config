@@ -1,14 +1,10 @@
-{ 
-  pkgs, 
-  ... 
-}:
+{ pkgs, ... }:
 {
   programs.kitty = {
     enable = true;
 
     shellIntegration.enableBashIntegration = true;
     shellIntegration.enableZshIntegration = true;
-
 
     extraConfig = ''
       font_family         Comic Code Ligatures

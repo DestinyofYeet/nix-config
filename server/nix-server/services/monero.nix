@@ -1,8 +1,9 @@
-{ 
+{
   config,
   lib,
-  ... 
-}:{
+  ...
+}:
+{
   services.monero = {
     enable = true;
     dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/monero-node";

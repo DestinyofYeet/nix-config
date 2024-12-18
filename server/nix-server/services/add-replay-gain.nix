@@ -1,4 +1,5 @@
-{ config, lib, ... }:{
+{ config, lib, ... }:
+{
 
   services.addReplayGain = {
     enable = true;

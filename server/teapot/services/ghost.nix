@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   virtualisation.oci-containers.containers = {
     "ghost-server" = {
       image = "ghost:5.101.4";

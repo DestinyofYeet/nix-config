@@ -1,5 +1,6 @@
-{ config, ... }:{
-  
+{ config, ... }:
+{
+
   services.surrealdb = {
     enable = false;
     host = "0.0.0.0";

@@ -1,7 +1,8 @@
 {
   config,
   ...
-}:{
+}:
+{
   services.roundcube = {
     enable = true;
     hostName = "webmail.local.ole.blue";

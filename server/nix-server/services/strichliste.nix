@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   # services.strichliste = {
   #   enable = false;
   # };

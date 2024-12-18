@@ -1,8 +1,5 @@
+{ pkgs, config, ... }:
 {
-  pkgs,
-  config,
-  ...
-}:{
   age.secrets = {
     taskwarrior-config.file = ../secrets/taskwarrior-config.age;
   };
@@ -20,7 +17,9 @@
   };
 
   systemd.user.services.taskwarrior-sync = {
-    Unit = { Description = "Taskwarrior sync"; };
+    Unit = {
+      Description = "Taskwarrior sync";
+    };
     Service = {
       CPUSchedulingPolicy = "idle";
       IOSchedulingClass = "idle";
@@ -29,11 +28,15 @@
   };
 
   systemd.user.timers.taskwarrior-sync = {
-    Unit = { Description = "Taskwarrior periodic sync"; };
+    Unit = {
+      Description = "Taskwarrior periodic sync";
+    };
     Timer = {
       Unit = "taskwarrior-sync.service";
       OnCalendar = "*:0/5";
     };
-    Install = { WantedBy = [ "timers.target" ]; };
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
   };
 }

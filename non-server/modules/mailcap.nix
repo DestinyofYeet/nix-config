@@ -1,8 +1,5 @@
+{ pkgs, inputs, ... }:
 {
-  pkgs,
-  inputs,
-  ...
-}:{
   home.file.".mailcap".text = ''
     text/html; ${pkgs.lynx}/bin/lynx '%s';i description=HTML Text; nametemplate=%s.html
 

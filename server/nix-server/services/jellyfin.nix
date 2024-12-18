@@ -1,4 +1,10 @@
-{ config, pkgs, lib ,... }:{
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   services.jellyfin = {
     enable = true;
     package = pkgs.jellyfin;
@@ -9,43 +15,44 @@
 
   # intro-skipper patch
   nixpkgs.overlays = [
-    (
-      final: prev:
-        {
-          jellyfin-web = prev.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
-            installPhase = ''
-              runHook preInstall
+    (final: prev: {
+      jellyfin-web = prev.jellyfin-web.overrideAttrs (
+        finalAttrs: previousAttrs: {
+          installPhase = ''
+            runHook preInstall
 
-              # this is the important line
-              sed -i "s#</head>#<script src=\"configurationpage?name=skip-intro-button.js\"></script></head>#" dist/index.html
+            # this is the important line
+            sed -i "s#</head>#<script src=\"configurationpage?name=skip-intro-button.js\"></script></head>#" dist/index.html
 
-              mkdir -p $out/share
-              cp -a dist $out/share/jellyfin-web
+            mkdir -p $out/share
+            cp -a dist $out/share/jellyfin-web
 
-              runHook postInstall
-            '';
-          });
+            runHook postInstall
+          '';
         }
-    )
+      );
+    })
   ];
 
-  services.nginx = 
-  let
-    default-config = {
-      locations."/" = {
-        proxyPass = "http://localhost:8096";
-        extraConfig = ''
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-        '';
+  services.nginx =
+    let
+      default-config = {
+        locations."/" = {
+          proxyPass = "http://localhost:8096";
+          extraConfig = ''
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+          '';
+        };
+      };
+    in
+    {
+      virtualHosts = {
+        "jellyfin.nix-server.infra.wg" = { } // default-config;
+        "jellyfin.local.ole.blue" =
+          lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };
     };
-  in { 
-    virtualHosts = {    
-      "jellyfin.nix-server.infra.wg" = {} // default-config;
-      "jellyfin.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
-    };
-  }; 
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [

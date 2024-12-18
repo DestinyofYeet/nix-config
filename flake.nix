@@ -116,159 +116,197 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur, ... }@inputs: let 
-    inherit self;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      agenix,
+      plasma-manager,
+      stylix,
+      nur,
+      ...
+    }@inputs:
+    let
+      inherit self;
 
-    lib = nixpkgs.lib.extend (self: super: {
-      custom = import ./lib {
-        inherit inputs;
-        lib = self;
-      };
-    });
+      lib = nixpkgs.lib.extend (
+        self: super: {
+          custom = import ./lib {
+            inherit inputs;
+            lib = self;
+          };
+        }
+      );
 
-    baseline-modules = [
+      baseline-modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         inputs.nix-topology.nixosModules.default
 
-        ({ ... }: {
-          environment.systemPackages = [ 
-            agenix.packages.x86_64-linux.default 
-          ];
-        })
+        (
+          { ... }:
+          {
+            environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
+          }
+        )
       ];
 
-    non-server-modules = [ 
-      { 
-        nixpkgs.overlays = [ 
-          nur.overlays.default
-          inputs.hyprpanel.overlay
-        ]; 
-      }
-
-      nur.modules.nixos.default
-      inputs.lanzaboote.nixosModules.lanzaboote
-
-      (
-        {...}:{
-          environment.systemPackages = [ 
-            inputs.zen-browser.packages.x86_64-linux.specific 
-            inputs.nix-fast-build.packages.x86_64-linux.default
+      non-server-modules = [
+        {
+          nixpkgs.overlays = [
+            nur.overlays.default
+            inputs.hyprpanel.overlay
           ];
         }
-      )
-    ] ++ baseline-modules;
 
-    stable-pkgs = import inputs.stable-nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
-    old-pkgs = import inputs.old-nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
+        nur.modules.nixos.default
+        inputs.lanzaboote.nixosModules.lanzaboote
 
-    defaultSpecialArgs = {
-      inherit inputs stable-pkgs old-pkgs lib;
-    };
-
-    
-    makeConfigurations = configurations:
-      builtins.listToAttrs (map (configuration: { name = configuration; value = self.nixosConfigurations.${configuration}.config.system.build.toplevel; }) configurations);
-  in
-  {
-    nixpkgs.config.rocmSupport = true;
-    
-    nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = defaultSpecialArgs // { inherit home-manager inputs stable-pkgs; };
-      modules = [
-        inputs.add-replay-gain.nixosModules.add-replay-gain
-        inputs.clean-unused-files.nixosModules.clean-unused-files
-        # inputs.strichliste.nixosModules.strichliste
-        inputs.networkNamespaces.nixosModules.networkNamespaces
-        inputs.auto-add-torrents.nixosModules.auto-add-torrents
-        inputs.prometheus-qbit.nixosModules.default
-        ./server/nix-server
-      ] ++ baseline-modules;
-    };
-
-    deploy.nodes = {
-      nix-server = {
-        hostname = "nix-server.infra.wg";
-        profiles.system = {
-          sshUser = "ole";
-          user = "root";
-          interactiveSudo = true;
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nix-server;
-        };
-      };
-
-      teapot = {
-        hostname = "teapot";
-        profiles.system = {
-          sshUser = "ole";
-          user = "root";
-          interactiveSudo = true;
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.teapot;
-        };
-      };
-    };
-
-    # This is highly advised, and will prevent many possible mistakes
-    checks = makeConfigurations [ "main" "wattson" ] // builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
-
-    nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = defaultSpecialArgs;
-      modules = [
-        ./non-server/hardware/kartoffelkiste.nix
-				./non-server
-			] ++ non-server-modules;
-		};
-
-    nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = defaultSpecialArgs;
-      modules = [
-        ./non-server/hardware/wattson.nix
-        ./non-server/extra-configurations/wattson
-				./non-server
-        # inputs.strichliste.nixosModules.strichliste
-			] ++ non-server-modules;
-		};
-
-    nixosConfigurations.main = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = defaultSpecialArgs;
-      modules = [
-        ./non-server/hardware/main.nix
-        ./non-server/extra-configurations/main
-        ./non-server
-      ] ++ non-server-modules;
-    };
-
-    nixosConfigurations.teapot = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        inputs.simple-nixos-mailserver.nixosModule
-      
-        ./server/teapot
+        (
+          { ... }:
+          {
+            environment.systemPackages = [
+              inputs.zen-browser.packages.x86_64-linux.specific
+              inputs.nix-fast-build.packages.x86_64-linux.default
+            ];
+          }
+        )
       ] ++ baseline-modules;
 
-      specialArgs = defaultSpecialArgs;
-    };
-
-    topology.x86_64-linux = import inputs.nix-topology {
-      pkgs = import nixpkgs {
+      stable-pkgs = import inputs.stable-nixpkgs {
         system = "x86_64-linux";
-        overlays = [ inputs.nix-topology.overlays.default ];
+        config.allowUnfree = true;
+      };
+      old-pkgs = import inputs.old-nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
       };
 
-      modules = [
-        { nixosConfigurations = self.nixosConfigurations; }
-      ];
-    };
+      defaultSpecialArgs = {
+        inherit
+          inputs
+          stable-pkgs
+          old-pkgs
+          lib
+          ;
+      };
 
-    hydraJobs.system-builds =  makeConfigurations [
-      "main"
-      "wattson"
-      # "nix-server" # doesn't work, because to fetch the secrets repository, it needs access to /root/.ssh/config, which it doesn't do
-    ];
-  };
+      makeConfigurations =
+        configurations:
+        builtins.listToAttrs (
+          map (configuration: {
+            name = configuration;
+            value = self.nixosConfigurations.${configuration}.config.system.build.toplevel;
+          }) configurations
+        );
+    in
+    {
+      nixpkgs.config.rocmSupport = true;
+
+      nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = defaultSpecialArgs // {
+          inherit home-manager inputs stable-pkgs;
+        };
+        modules = [
+          inputs.add-replay-gain.nixosModules.add-replay-gain
+          inputs.clean-unused-files.nixosModules.clean-unused-files
+          # inputs.strichliste.nixosModules.strichliste
+          inputs.networkNamespaces.nixosModules.networkNamespaces
+          inputs.auto-add-torrents.nixosModules.auto-add-torrents
+          inputs.prometheus-qbit.nixosModules.default
+          ./server/nix-server
+        ] ++ baseline-modules;
+      };
+
+      deploy.nodes = {
+        nix-server = {
+          hostname = "nix-server.infra.wg";
+          profiles.system = {
+            sshUser = "ole";
+            user = "root";
+            interactiveSudo = true;
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nix-server;
+          };
+        };
+
+        teapot = {
+          hostname = "teapot";
+          profiles.system = {
+            sshUser = "ole";
+            user = "root";
+            interactiveSudo = true;
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.teapot;
+          };
+        };
+      };
+
+      # This is highly advised, and will prevent many possible mistakes
+      checks =
+        makeConfigurations [
+          "main"
+          "wattson"
+        ]
+        // builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
+
+      nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = defaultSpecialArgs;
+        modules = [
+          ./non-server/hardware/kartoffelkiste.nix
+          ./non-server
+        ] ++ non-server-modules;
+      };
+
+      nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = defaultSpecialArgs;
+        modules = [
+          ./non-server/hardware/wattson.nix
+          ./non-server/extra-configurations/wattson
+          ./non-server
+          # inputs.strichliste.nixosModules.strichliste
+        ] ++ non-server-modules;
+      };
+
+      nixosConfigurations.main = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = defaultSpecialArgs;
+        modules = [
+          ./non-server/hardware/main.nix
+          ./non-server/extra-configurations/main
+          ./non-server
+        ] ++ non-server-modules;
+      };
+
+      nixosConfigurations.teapot = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          inputs.simple-nixos-mailserver.nixosModule
+
+          ./server/teapot
+        ] ++ baseline-modules;
+
+        specialArgs = defaultSpecialArgs;
+      };
+
+      topology.x86_64-linux = import inputs.nix-topology {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          overlays = [ inputs.nix-topology.overlays.default ];
+        };
+
+        modules = [ { nixosConfigurations = self.nixosConfigurations; } ];
+      };
+
+      hydraJobs.system-builds = makeConfigurations [
+        "main"
+        "wattson"
+        # "nix-server" # doesn't work, because to fetch the secrets repository, it needs access to /root/.ssh/config, which it doesn't do
+      ];
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+    };
 
 }

@@ -25,9 +25,7 @@ in
 
   programs.steam = {
     extraPackages = gaming-pkgs;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
 
   programs.gamemode.enable = true;
@@ -59,25 +57,26 @@ in
 
   services.flatpak.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    vulkan-tools
-    goverlay
-    sidequest
-    # beatsabermodmanager
-    protonup-qt
-  ] ++ gaming-pkgs;
+  environment.systemPackages =
+    with pkgs;
+    [
+      vulkan-tools
+      goverlay
+      sidequest
+      # beatsabermodmanager
+      protonup-qt
+    ]
+    ++ gaming-pkgs;
 
   services.postgresql = {
     enable = false;
-    ensureDatabases = [
-      "strichliste-rs"
-    ];
+    ensureDatabases = [ "strichliste-rs" ];
 
     ensureUsers = [
-        {
-          name = "strichliste-rs";
-          ensureDBOwnership = true;
-        }
+      {
+        name = "strichliste-rs";
+        ensureDBOwnership = true;
+      }
     ];
   };
 
@@ -88,7 +87,12 @@ in
       protocol = "ssh";
       maxJobs = 4;
       speedFactor = 1;
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
       mandatoryFeatures = [ ];
     }
   ];
@@ -124,37 +128,37 @@ in
   ];
 
   services.wivrn = {
-  enable = false;
-  openFirewall = true;
+    enable = false;
+    openFirewall = true;
 
-  # Write information to /etc/xdg/openxr/1/active_runtime.json, VR applications
-  # will automatically read this and work with WiVRn (Note: This does not currently
-  # apply for games run in Valve's Proton)
-  defaultRuntime = true;
+    # Write information to /etc/xdg/openxr/1/active_runtime.json, VR applications
+    # will automatically read this and work with WiVRn (Note: This does not currently
+    # apply for games run in Valve's Proton)
+    defaultRuntime = true;
 
-  # Run WiVRn as a systemd service on startup
-  autoStart = true;
+    # Run WiVRn as a systemd service on startup
+    autoStart = true;
 
-  # Config for WiVRn (https://github.com/WiVRn/WiVRn/blob/master/docs/configuration.md)
-  config = {
-    enable = true;
-    json = {
-      # 1.0x foveation scaling
-      scale = 1.0;
-      # 100 Mb/s
-      bitrate = 50000000;
-      encoders = [
-        {
-          encoder = "vaapi";
-          codec = "h265";
-          # 1.0 x 1.0 scaling
-          width = 1.0;
-          height = 1.0;
-          offset_x = 0.0;
-          offset_y = 0.0;
-        }
-      ];
+    # Config for WiVRn (https://github.com/WiVRn/WiVRn/blob/master/docs/configuration.md)
+    config = {
+      enable = true;
+      json = {
+        # 1.0x foveation scaling
+        scale = 1.0;
+        # 100 Mb/s
+        bitrate = 50000000;
+        encoders = [
+          {
+            encoder = "vaapi";
+            codec = "h265";
+            # 1.0 x 1.0 scaling
+            width = 1.0;
+            height = 1.0;
+            offset_x = 0.0;
+            offset_y = 0.0;
+          }
+        ];
+      };
     };
   };
-};
 }

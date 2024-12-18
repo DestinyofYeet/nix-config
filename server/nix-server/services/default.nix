@@ -1,4 +1,5 @@
-{ ... }:{
+{ ... }:
+{
   imports = [
     ./settings.nix
     ./nfs.nix

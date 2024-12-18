@@ -1,49 +1,56 @@
-{ pkgs, config, osConfig, lib, ... }:
-let  
-    rebuild-system = pkgs.writeShellScriptBin "rebuild-system" ''
-      set -e
+{
+  pkgs,
+  config,
+  osConfig,
+  lib,
+  ...
+}:
+let
+  rebuild-system = pkgs.writeShellScriptBin "rebuild-system" ''
+    set -e
 
-      cd /home/ole/nixos
-      ./build.sh $@
-      cd - > /dev/null
-    '';
+    cd /home/ole/nixos
+    ./build.sh $@
+    cd - > /dev/null
+  '';
 
-    deploy-node = pkgs.writeShellScriptBin "deploy-node" ''
-      set -e
-      cd /home/ole/nixos
-      deploy -s ".#$1" ''${@:2}
-      cd - > /dev/null
-    '';
+  deploy-node = pkgs.writeShellScriptBin "deploy-node" ''
+    set -e
+    cd /home/ole/nixos
+    deploy -s ".#$1" ''${@:2}
+    cd - > /dev/null
+  '';
 
-    stylix-color-picker = pkgs.writeShellScriptBin "stylix-color-picker" ''
-      set -e 
+  stylix-color-picker = pkgs.writeShellScriptBin "stylix-color-picker" ''
+    set -e 
 
-      color_picked=$(ls ${pkgs.base16-schemes}/share/themes | ${pkgs.fzf}/bin/fzf)
+    color_picked=$(ls ${pkgs.base16-schemes}/share/themes | ${pkgs.fzf}/bin/fzf)
 
-      if [ -z $color_picked ]; then
-        echo "No color selected!"
-        exit 1
-      fi
+    if [ -z $color_picked ]; then
+      echo "No color selected!"
+      exit 1
+    fi
 
-      echo $color_picked > /home/ole/nixos/laptop/modules/current_color.txt
+    echo $color_picked > /home/ole/nixos/laptop/modules/current_color.txt
 
-      echo "Picked color $color_picked"
+    echo "Picked color $color_picked"
 
-      read -p "Update the system? (y/n)" yes_no
+    read -p "Update the system? (y/n)" yes_no
 
-      case $yes_no in 
-        y ) echo Updating...;;
-        n ) exit 0;;
-        * ) exit 1;;
-      esac
+    case $yes_no in 
+      y ) echo Updating...;;
+      n ) exit 0;;
+      * ) exit 1;;
+    esac
 
-      ${rebuild-system}/bin/rebuild-system
-    '';
+    ${rebuild-system}/bin/rebuild-system
+  '';
 
-    gitui-proper = pkgs.writeShellScriptBin "gitui-proper" ''
-      ${pkgs.bash}/bin/bash -c 'eval $(ssh-agent) && ssh-add ${config.age.secrets.ssh-key-github.path} && gitui && eval $(ssh-agent -k)'
-    '';
-in {
+  gitui-proper = pkgs.writeShellScriptBin "gitui-proper" ''
+    ${pkgs.bash}/bin/bash -c 'eval $(ssh-agent) && ssh-add ${config.age.secrets.ssh-key-github.path} && gitui && eval $(ssh-agent -k)'
+  '';
+in
+{
 
   programs.zsh = {
     enable = true;

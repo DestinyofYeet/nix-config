@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }:{
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   services.navidrome = {
     enable = true;
     settings = {
@@ -8,23 +14,26 @@
       MusicFolder = "${lib.custom.settings.${config.networking.hostName}.paths.data}/media/navidrome";
       DataFolder = "${lib.custom.settings.${config.networking.hostName}.paths.configs}/navidrome";
       FFmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
-      EnableSharing = true; 
+      EnableSharing = true;
     };
 
     inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
-  services.nginx = let
-    default-config = {
-      locations."/" = {
-        proxyPass = "http://localhost:4533";
+  services.nginx =
+    let
+      default-config = {
+        locations."/" = {
+          proxyPass = "http://localhost:4533";
+        };
+      };
+    in
+    {
+      virtualHosts = {
+        "navidrome.nix-server.infra.wg" = { } // default-config;
+
+        "navidrome.local.ole.blue" =
+          lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };
     };
-  in {
-    virtualHosts = {
-      "navidrome.nix-server.infra.wg" = {} // default-config;
-
-      "navidrome.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
-    };
-  };
 }

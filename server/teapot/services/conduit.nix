@@ -1,7 +1,8 @@
 {
   config,
   ...
-}:{
+}:
+{
 
   imports = [
     ./conduit_service_patch.nix
@@ -18,7 +19,7 @@
 
     settings = {
       global = {
-      
+
         address = "127.0.0.1";
         port = 8000;
 
@@ -74,8 +75,6 @@
       extraOptions = [ "--network=container:syncv3-pg" ];
     };
   };
-
-  
 
   services.nginx.virtualHosts = {
     "matrix.ole.blue" = {

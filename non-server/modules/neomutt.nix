@@ -1,6 +1,5 @@
+{ ... }:
 {
-  ...
-}:{
   programs.neomutt = {
     enable = true;
 
@@ -35,6 +34,6 @@
 
     extraConfig = ''
       set sig_on_top = yes
-    '';    
+    '';
   };
 }

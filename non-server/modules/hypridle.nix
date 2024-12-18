@@ -1,8 +1,5 @@
+{ osConfig, lib, ... }:
 {
-  osConfig,
-  lib,
-  ...
-}:{
   services.hypridle = {
     enable = true;
 
@@ -17,9 +14,9 @@
 
       listener = [
         (lib.mkIf (osConfig.networking.hostName == "wattson") {
-            timeout = 30;
-            on-timeout = "brightnessctl -sd rgb:kbd_backlight set 0";
-            on-resume = "brightnessctl -rd rgb:kbd_backlight";
+          timeout = 30;
+          on-timeout = "brightnessctl -sd rgb:kbd_backlight set 0";
+          on-resume = "brightnessctl -rd rgb:kbd_backlight";
         })
         {
           timeout = 60;
@@ -28,5 +25,5 @@
         }
       ];
     };
-  };  
+  };
 }

@@ -1,7 +1,5 @@
+{ lib, ... }:
 {
-  lib,
-  ...
-}:{
   programs.shell-aliases = {
     enable = true;
     aliases = {
@@ -12,7 +10,7 @@
       };
 
       "rebuild-system" = {
-        default = "sudo nixos-rebuild switch --flake /home/ole/nixos#";      
+        default = "sudo nixos-rebuild switch --flake /home/ole/nixos#";
 
         # nushell = "'sudo -v; sudo nixos-rebuild build --flake /home/ole/nixos# --log-format internal-json -v o+e>| nom --json'";
         nushell = null;

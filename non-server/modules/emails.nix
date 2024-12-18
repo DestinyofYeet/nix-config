@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}:{
   age.secrets = {
     oth-regensburg-email-pw.file = ../secrets/oth-regensburg-email-pw.age;
     email-uwuwhatsthis-pw.file = ../secrets/email-uwuwhatsthis-pw.age;
@@ -23,7 +20,7 @@
     oth-stud-email = rec {
       primary = true;
       address = "ole.bendixen@st.oth-regensburg.de";
- 
+
       # userName = "hs-regensburg.de\\beo45216";
       userName = "beo45216@hs-regensburg.de";
 
@@ -69,18 +66,18 @@
       signature = {
         showSignature = "append";
         text = ''
-------------------------------------------------------------------------------------------
-Ostbayerische Technische Hochschule Regensburg
-Fakultät Informatik und Mathematik (IM)
-Galgenbergstr. 32
-93053 Regensburg
+          ------------------------------------------------------------------------------------------
+          Ostbayerische Technische Hochschule Regensburg
+          Fakultät Informatik und Mathematik (IM)
+          Galgenbergstr. 32
+          93053 Regensburg
 
-Fachschaftssprecher / Studierendenvertreter
-Ole Bendixen
-Telefon: +49 941 943 1276
-E-Mail: ole.bendixen@st.oth-regensburg.de
-Internet: https://www.fsim-ev.de/
----------------------------------------------------------------------------
+          Fachschaftssprecher / Studierendenvertreter
+          Ole Bendixen
+          Telefon: +49 941 943 1276
+          E-Mail: ole.bendixen@st.oth-regensburg.de
+          Internet: https://www.fsim-ev.de/
+          ---------------------------------------------------------------------------
         '';
       };
     };

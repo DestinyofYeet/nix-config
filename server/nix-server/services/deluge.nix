@@ -1,8 +1,5 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}:{
 
   age.secrets = {
     airvpn-deluge = {
@@ -25,7 +22,8 @@
 
   systemd.services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/deluge";
 
-  systemd.services.deluged.serviceConfig.ExecStart = lib.mkForce "${config.services.deluge.package}/bin/deluged --do-not-daemonize --config /mnt/data/configs/deluge/.config/deluge --ui-interface 10.1.2.1";
+  systemd.services.deluged.serviceConfig.ExecStart =
+    lib.mkForce "${config.services.deluge.package}/bin/deluged --do-not-daemonize --config /mnt/data/configs/deluge/.config/deluge --ui-interface 10.1.2.1";
 
   customLibs.networkNamespaces = {
     enable = true;
@@ -40,7 +38,7 @@
           "PREROUTING -p tcp --dport 58846 -j DNAT --to-destination 10.1.2.1:58846"
           "POSTROUTING -j MASQUERADE"
         ];
-      }; 
+      };
     };
   };
 
@@ -60,7 +58,7 @@
 
           # If necessary, disable buffer to get immediate response from upstream
           proxy_buffering off;
-        '';              
+        '';
       };
     };
   };

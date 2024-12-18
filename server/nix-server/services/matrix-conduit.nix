@@ -1,4 +1,5 @@
-{ config, ... }:{
+{ config, ... }:
+{
 
   # matrix conduit server, default port 6167
   services.matrix-conduit = {

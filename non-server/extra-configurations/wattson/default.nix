@@ -2,19 +2,24 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   nix = {
     # settings = {
-      # substituters = [
-      #   "https://cache.nixos.org/"
-      #   "http://cache.nix-server.infra.wg?priority=50"
-      # ];
+    # substituters = [
+    #   "https://cache.nixos.org/"
+    #   "http://cache.nix-server.infra.wg?priority=50"
+    # ];
 
-      # trusted-public-keys = [
-      #   "cache.nix-server.infra.wg:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
-      # ];
+    # trusted-public-keys = [
+    #   "cache.nix-server.infra.wg:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
+    # ];
     # };
 
     buildMachines = [
@@ -29,7 +34,12 @@
         hostName = "teapot";
         system = "x86_64-linux";
         protocol = "ssh";
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
         mandatoryFeatures = [ ];
         maxJobs = 6;
         speedFactor = 4;
@@ -53,8 +63,8 @@
   '';
 
   # disable baloo
-   environment = {
-    etc."xdg/baloofilerc".source = (pkgs.formats.ini {}).generate "baloorc" {
+  environment = {
+    etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
       "Basic Settings" = {
         "Indexing-Enabled" = false;
       };
@@ -103,8 +113,8 @@
       RADEON_POWER_PROFILE_ON_AC = "high";
       RADEON_POWER_PROFILE_ON_BAT = "low";
 
-      WOL_DISABLE= "Y";
-    };    
+      WOL_DISABLE = "Y";
+    };
   };
 
   # services.nginx = {

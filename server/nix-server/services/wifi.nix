@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   services.create_ap = {
     enable = false;
     # performance sucks with this adpater ~500KB/s max
@@ -24,12 +25,12 @@
       IEEE80211N = "1";
       IEEE80211AC = "1";
       IEEE80211AX = "1";
-      HT_CAPAB  = "[HT40+][SHORT-GI-20][SHORT-GI-40][TX-STBC][RX-STBC12][NO-HT40-DSSS/CCK]";
-      DRIVER    = "nl80211";
+      HT_CAPAB = "[HT40+][SHORT-GI-20][SHORT-GI-40][TX-STBC][RX-STBC12][NO-HT40-DSSS/CCK]";
+      DRIVER = "nl80211";
       FREQ_BAND = "5";
       COUNTRY = "GERMANY";
       DAEMONIZE = "0";
-      NO_HAVEGED= "0";
+      NO_HAVEGED = "0";
       USE_PSK = "0";
       NO_VIRT = "1";
     };

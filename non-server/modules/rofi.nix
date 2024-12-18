@@ -1,8 +1,5 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}:{
   programs.rofi = {
     enable = true;
 

@@ -1,10 +1,13 @@
-{ 
-  config, 
-  stable-pkgs, 
-  ... 
-}:{
+{
+  config,
+  stable-pkgs,
+  ...
+}:
+{
   age.secrets = {
-    hydra-email-credentials = { file = ../secrets/hydra-email-credentials.age; };
+    hydra-email-credentials = {
+      file = ../secrets/hydra-email-credentials.age;
+    };
     hydra-github-credentials = {
       file = ../secrets/hydra-github-auth.age;
       # path = "/var/lib/hydra/github-auth";
@@ -21,8 +24,8 @@
     notificationSender = "hydra@uwuwhatsthis.de";
     smtpHost = "mail.ole.blue";
     listenHost = "127.0.0.1";
-    buildMachinesFiles = [ "/etc/nix/machines" ];
-    # buildMachinesFiles = [];
+    # buildMachinesFiles = [ "/etc/nix/machines" ];
+    buildMachinesFiles = [ ];
     useSubstitutes = true;
     extraConfig = ''
       email_notification = 1
@@ -33,7 +36,7 @@
 
   systemd.services.hydra-notify = {
     serviceConfig.EnvironmentFile = "${config.age.secrets.hydra-email-credentials.path}";
-  };  
+  };
 
   nix.settings.allowed-uris = [
     "https://"

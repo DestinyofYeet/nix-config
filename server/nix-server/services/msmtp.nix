@@ -1,11 +1,14 @@
 {
   config,
   ...
-}:{
+}:
+{
 
   age.secrets = {
     email-firefly-iii-credentials.file = ../secrets/firefly-email-credentials.age;
-    zed-email-credentials = { file = ../secrets/zed-email-credentials.age; };
+    zed-email-credentials = {
+      file = ../secrets/zed-email-credentials.age;
+    };
   };
 
   programs.msmtp = {

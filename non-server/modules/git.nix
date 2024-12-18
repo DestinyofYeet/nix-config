@@ -1,11 +1,13 @@
-{ pkgs, config, ... }: let
+{ pkgs, config, ... }:
+let
   public-signing-key-path = ../secrets/ssh-key-github-signing-public;
 
   allowed-signers = pkgs.writeText "allowed_signers" ''
     * ${builtins.readFile public-signing-key-path}
   '';
 
-in {
+in
+{
 
   age.secrets = {
     ssh-key-github-signing.file = ../secrets/ssh-key-github-signing.age;

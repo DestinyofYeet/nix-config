@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}:let
+}:
+let
 
   upssched-cmd = pkgs.writeShellScriptBin "upssched-cmd" ''
     case $1 in 
@@ -25,10 +26,13 @@
     AT ONLINE * CANCEL-TIMER onbattwarn
     AT ONLINE * EXECUTE ups-back-on-power
   '';
-in {
+in
+{
 
   age.secrets = {
-    password-file = { file = ../secrets/upsmon-password-file.age; };
+    password-file = {
+      file = ../secrets/upsmon-password-file.age;
+    };
   };
 
   power.ups = {
@@ -49,7 +53,16 @@ in {
 
         SHUTDOWNCMD = "/run/current-system/sw/bin/shutdown -h 1";
 
-        NOTIFYFLAG = [ [ "ONLINE" "SYSLOG+EXEC" ] [ "ONBATT" "SYSLOG+EXEC"]];
+        NOTIFYFLAG = [
+          [
+            "ONLINE"
+            "SYSLOG+EXEC"
+          ]
+          [
+            "ONBATT"
+            "SYSLOG+EXEC"
+          ]
+        ];
 
         SHUTDOWNEXIT = true;
       };

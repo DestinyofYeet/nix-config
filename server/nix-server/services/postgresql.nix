@@ -1,21 +1,22 @@
-{ 
+{
   config,
   lib,
-  ... 
-}:{
+  ...
+}:
+{
 
   # containers.postgresql = {
   #   autoStart = false;
 
   #   bindMounts = {
   #     "/var/lib/postgresql-custom" = {
-  #       hostPath = "${config.serviceSettings.paths.data}/postgresql"; 
+  #       hostPath = "${config.serviceSettings.paths.data}/postgresql";
   #       isReadOnly = false;
   #     };
   #   };
 
   #   config = { config, pkgs, lib, ...} : {
-    
+
   #     services.postgresql = {
   #       enable = true;
 

@@ -1,12 +1,7 @@
+{ pkgs, lib, ... }:
 {
-  pkgs,
-  lib,
-  ...
-}:{
   options.customScripts = with lib; {
-    setup-env = mkOption {
-      type = types.package;
-    };
+    setup-env = mkOption { type = types.package; };
   };
 
   config.customScripts = {

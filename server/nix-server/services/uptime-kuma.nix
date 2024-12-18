@@ -1,4 +1,5 @@
-{ config, lib, ... }:{
+{ config, lib, ... }:
+{
   services.uptime-kuma = {
     enable = true;
     settings = {
@@ -6,17 +7,20 @@
     };
   };
 
-  services.nginx = let 
+  services.nginx =
+    let
 
-    default-conf = {
-      locations."/" = {
-        proxyPass = "http://localhost:3001";
+      default-conf = {
+        locations."/" = {
+          proxyPass = "http://localhost:3001";
+        };
+      };
+
+    in
+    {
+      virtualHosts = {
+        "uptime.local.ole.blue" =
+          lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-conf;
       };
     };
-
-  in {
-    virtualHosts = {
-      "uptime.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-conf;
-    };
-  };
 }

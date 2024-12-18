@@ -1,4 +1,10 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   networking = {
@@ -12,7 +18,10 @@
     nat = {
       enable = true;
       externalInterface = "host0";
-      internalInterfaces = [ "infra" "veth" ];
+      internalInterfaces = [
+        "infra"
+        "veth"
+      ];
     };
 
     ## no touchey end
@@ -34,7 +43,7 @@
         #useDomains = false;
         #multicastDNS = false;
         #dnsOverTls = "no";
-        #dnssec = "no"; 
+        #dnssec = "no";
       };
       linkConfig.RequiredForOnline = "routable";
     };

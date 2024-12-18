@@ -1,6 +1,4 @@
-{
-  inputs, lib
-}:
+{ inputs, lib }:
 let
   git-secrets = builtins.fetchGit {
     url = "git@github.com:DestinyofYeet/nix-secrets.git";
@@ -9,16 +7,17 @@ let
   };
 
   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-in rec {
+in
+rec {
   scripts = import ./scripts { inherit inputs pkgs lib; };
 
-  mkIfLaptop = config : attr : 
-    lib.mkIf (config.networking.hostName == "wattson") attr;
+  mkIfLaptop = config: attr: lib.mkIf (config.networking.hostName == "wattson") attr;
 
-  mkIfMainElse = config : attr : default : 
+  mkIfMainElse =
+    config: attr: default:
     if (config.networking.hostName == "main") then attr else default;
 
-    update-needed-content = pkgs.writeShellScriptBin "update-needed-content" ''
+  update-needed-content = pkgs.writeShellScriptBin "update-needed-content" ''
     set -e
 
     SOURCE_DIR="$1"
@@ -42,15 +41,13 @@ in rec {
     fi
   '';
 
-  gen-activation = src : dst : ''
+  gen-activation = src: dst: ''
     ${pkgs.bash}/bin/bash ${update-needed-content}/bin/update-needed-content ${src} ${dst}
   '';
 
-  gen-activation-file = src : dst : ''
+  gen-activation-file = src: dst: ''
     ${pkgs.bash}/bin/bash ${update-needed-content-file}/bin/update-needed-content-file ${src} ${dst} 
   '';
-
-
 
   settings = {
     editor = "hx";
@@ -59,17 +56,17 @@ in rec {
 
     nix-server = {
 
-      secrets = import "${git-secrets}/secrets.nix" {};
+      secrets = import "${git-secrets}/secrets.nix" { };
 
       paths.data = "/mnt/data/data";
       paths.configs = "/mnt/data/configs";
-      
+
       user = "apps";
       group = "apps";
 
       uid = "568";
       gid = "568";
-      
+
       nginx-local-ssl = {
         forceSSL = true;
         useACMEHost = "wildcard.local.ole.blue";

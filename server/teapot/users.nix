@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   nix.settings.trusted-users = [
     "ole"
   ];

@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}:{
+}:
+{
   age.secrets = {
     ole-mail.file = ../secrets/ole-ole.blue.age;
     scripts-uwuwhatsthis-de.file = ../secrets/scripts-uwuwhatsthis.de.age;
@@ -20,8 +21,8 @@
   mailserver = {
     enable = true;
     fqdn = "mail.ole.blue";
-    domains = [ 
-      "ole.blue" 
+    domains = [
+      "ole.blue"
       "uwuwhatsthis.de"
     ];
 
@@ -49,7 +50,7 @@
 
         sieveScript = ''
           require ["fileinto"];
-        
+
           if address "From" "scripts@uwuwhatsthis.de" {
             fileinto "INBOX.scripts";
           } elsif address "From" "sonarr@ole.blue" {
@@ -70,7 +71,7 @@
             fileinto  "INBOX.abuse";
           } 
         '';
-        
+
         aliases = [
           "euZvDRPCYpZe05KB2KVx@ole.blue"
           "ole@uwuwhatsthis.de"

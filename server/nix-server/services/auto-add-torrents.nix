@@ -1,7 +1,5 @@
+{ config, ... }:
 {
-  config,
-  ...
-}:{
 
   # age.secrets = {
   #   auto-add-torrents-conf = {
@@ -10,7 +8,7 @@
   #     group = config.services.auto-add-torrents.group;
   #   };
   # };
-  
+
   # services.auto-add-torrents = {
   #   enable = false;
   #   configFile = config.age.secrets.auto-add-torrents-conf.path;

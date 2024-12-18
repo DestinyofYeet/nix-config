@@ -1,4 +1,5 @@
-{ ... }:{
+{ ... }:
+{
   services.netdata = {
     enable = true;
   };

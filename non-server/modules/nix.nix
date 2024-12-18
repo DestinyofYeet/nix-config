@@ -6,7 +6,6 @@
     };
   };
 
-
   # home.file.".config/nix/nix.conf" = {
   #   source = config.age.secrets.nix-file-config.path;
   # };

@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}:{
+}:
+{
   age.secrets = {
     paperless-ngx-admin.file = ../secrets/paperless-ngx-admin.age;
   };
@@ -23,7 +24,10 @@
     inherit (lib.custom.settings.${config.networking.hostName}) user;
   };
 
-  services.nginx.virtualHosts."paperless.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
-    locations."/".proxyPass = "http://${config.services.paperless.address}:${builtins.toString config.services.paperless.port}";
-  };
+  services.nginx.virtualHosts."paperless.local.ole.blue" =
+    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
+    // {
+      locations."/".proxyPass =
+        "http://${config.services.paperless.address}:${builtins.toString config.services.paperless.port}";
+    };
 }

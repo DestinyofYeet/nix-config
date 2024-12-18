@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
 
   update-needed-content = pkgs.writeShellScriptBin "update-needed-content" ''
     set -e
@@ -24,26 +25,35 @@
     fi
   '';
 
-  generate-email-alias = pkgs.writers.writePython3Bin "generate-email-alias" {
-    flakeIgnore = [ "W291" "E305" "E501" "E111" "E302" ];
-  } ''
-    import random
-    import string
+  generate-email-alias =
+    pkgs.writers.writePython3Bin "generate-email-alias"
+      {
+        flakeIgnore = [
+          "W291"
+          "E305"
+          "E501"
+          "E111"
+          "E302"
+        ];
+      }
+      ''
+        import random
+        import string
 
-    def generate_alias(length: int, chars_to_use: list[str]) -> str:
-      password = ""
-      for _ in range(length):
-          password += random.choice(random.choice(chars_to_use))
+        def generate_alias(length: int, chars_to_use: list[str]) -> str:
+          password = ""
+          for _ in range(length):
+              password += random.choice(random.choice(chars_to_use))
 
-      return password
+          return password
 
 
-    def main():
-      alias = generate_alias(20, [string.ascii_letters + string.digits])
+        def main():
+          alias = generate_alias(20, [string.ascii_letters + string.digits])
 
-      print(f"Alias: {alias}@uwuwhatsthis.de")  # if stalwarts breaks again, use config.customSettings.stable-pkgs.stalwart-mail
+          print(f"Alias: {alias}@uwuwhatsthis.de")  # if stalwarts breaks again, use config.customSettings.stable-pkgs.stalwart-mail
 
-    if __name__ == '__main__':
-      main()
-  '';
+        if __name__ == '__main__':
+          main()
+      '';
 }

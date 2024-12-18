@@ -1,4 +1,10 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   environment.systemPackages = with pkgs; [
@@ -39,8 +45,14 @@
     nvtopPackages.full
   ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "surrealdb" "elasticsearch" ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "surrealdb"
+      "elasticsearch"
+    ];
 
-  environment.variables = { EDITOR = "vim"; };
+  environment.variables = {
+    EDITOR = "vim";
+  };
 }

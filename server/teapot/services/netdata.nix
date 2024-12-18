@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   services.netdata.enable = true;
 
   services.nginx.virtualHosts."netdata.ole.blue" = {

@@ -1,9 +1,9 @@
+{ config, ... }:
 {
-  config,
-  ...
-}:{
   age.secrets = {
-    cloudflare-api-env = { file = ../secrets/cloudflare-api-env.age; };
+    cloudflare-api-env = {
+      file = ../secrets/cloudflare-api-env.age;
+    };
   };
 
   # on the basis of https://www.youtube.com/watch?v=qlcVx-k-02E
@@ -18,7 +18,6 @@
       environmentFile = config.age.secrets.cloudflare-api-env.path;
     };
 
-    
     certs = {
       "wildcard.local.ole.blue" = {
         domain = "*.local.ole.blue";

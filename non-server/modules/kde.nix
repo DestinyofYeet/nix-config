@@ -1,6 +1,13 @@
-{ lib, config, osConfig, ... }: let
-  dirs = import ./dirs.nix { inherit config;  };
-in {
+{
+  lib,
+  config,
+  osConfig,
+  ...
+}:
+let
+  dirs = import ./dirs.nix { inherit config; };
+in
+{
   services.kdeconnect = {
     enable = true;
     indicator = true;
@@ -36,7 +43,7 @@ in {
 
       windowDecorations = {
         library = "org.kde.kwin.aurorae";
-        theme  = "__aurorae__svg__Sweet-ambar-blue";
+        theme = "__aurorae__svg__Sweet-ambar-blue";
       };
 
       cursor = {
@@ -48,14 +55,9 @@ in {
         theme = "Aretha-Splash-6";
       };
     };
-    
 
     input.keyboard = {
-      layouts = [
-        {
-          layout = "de";
-        }
-      ];
+      layouts = [ { layout = "de"; } ];
       numlockOnStartup = "on";
     };
 
@@ -92,69 +94,70 @@ in {
       }
     ];
 
+    panels = [
+      {
+        location = "bottom";
+        height = 48;
+        screen = "all";
+        widgets = [
+          {
+            kickoff = {
+              sortAlphabetically = true;
+              compactDisplayStyle = true;
+              icon = "${../../images/nyan_cat_home.png}";
+            };
+          }
+          {
+            iconTasks = {
+              launchers = [
+                "applications:firefox.desktop"
+                "applications:org.kde.dolphin.desktop"
+                "applications:kitty.desktop"
+                "applications:com.github.xournalpp.xournalpp.desktop"
+                "applications:org.kde.spectacle.desktop"
+              ];
+            };
+          }
 
-    panels = [{
-      location = "bottom";
-      height = 48;
-      screen = "all";
-      widgets = [
-        {
-          kickoff = {
-            sortAlphabetically = true;
-            compactDisplayStyle = true;
-            icon = "${../../images/nyan_cat_home.png}";
-          };
-        }
-        {
-          iconTasks = {
-            launchers = [ 
-              "applications:firefox.desktop" 
-              "applications:org.kde.dolphin.desktop"
-              "applications:kitty.desktop"
-              "applications:com.github.xournalpp.xournalpp.desktop"
-              "applications:org.kde.spectacle.desktop"
-            ];
-          };
-        }
-        
-        (lib.mkIf (osConfig.networking.hostName == "wattson") {
-          systemMonitor = {
-            showLegend = false;
-            displayStyle = "org.kde.ksysguard.textonly";
-            sensors = [ 
-              {
-                name = "cpu/all/averageTemperature";
-                color = "13,0,255";
-                label = "CPU Temp";
-              }
-              {
-                name = "power/1451/chargeRate";
-                color = "183,0,255";
-                label = "Charging Rate";
-              }
-            ];
-          };
-        })
+          (lib.mkIf (osConfig.networking.hostName == "wattson") {
+            systemMonitor = {
+              showLegend = false;
+              displayStyle = "org.kde.ksysguard.textonly";
+              sensors = [
+                {
+                  name = "cpu/all/averageTemperature";
+                  color = "13,0,255";
+                  label = "CPU Temp";
+                }
+                {
+                  name = "power/1451/chargeRate";
+                  color = "183,0,255";
+                  label = "Charging Rate";
+                }
+              ];
+            };
+          })
 
-        "org.kde.plasma.marginsseparator"
+          "org.kde.plasma.marginsseparator"
 
-        {
-          systemTray.items = {
-            shown = [
-              "org.kde.plasma.battery"
-              "org.kde.plasma.bluetooth"
-              "org.kde.plasma.volume"
-            ];
-          };
-        }
-        {
-          digitalClock = {
-            calendar.firstDayOfWeek = "monday";
-            time.format = "24h";
-          };
-        }
-      ];
-    }];
+          {
+            systemTray.items = {
+              shown = [
+                "org.kde.plasma.battery"
+                "org.kde.plasma.bluetooth"
+                "org.kde.plasma.volume"
+              ];
+            };
+          }
+          {
+            digitalClock = {
+              calendar.firstDayOfWeek = "monday";
+              time.format = "24h";
+            };
+          }
+        ];
+      }
+    ];
 
     powerdevil.AC = {
       powerButtonAction = "lockScreen";
@@ -179,7 +182,7 @@ in {
           "minimize"
         ];
 
-        right = [];
+        right = [ ];
       };
 
       nightLight = {
@@ -209,7 +212,7 @@ in {
         "Effect-overview"."BorderActivate" = 9;
 
         # virtual keyboard
-        "Wayland" = lib.mkIf (osConfig.networking.hostName == "wattson") { 
+        "Wayland" = lib.mkIf (osConfig.networking.hostName == "wattson") {
           "InputMethod" = "/run/current-system/sw/share/applications/com.github.maliit.keyboard.desktop";
           "VirtualKeyboardEnabled" = false;
         };
@@ -245,22 +248,23 @@ in {
   #   };
   # };
 
+  home.activation =
+    let
+      inherit (lib.custom) gen-activation gen-activation-file;
+    in
+    {
 
-  home.activation = let
-    inherit (lib.custom) gen-activation gen-activation-file;
-  in {
+      updateIcons = gen-activation ../needed-content/Icons/BeautySolar "${dirs.home.local.share.icons.path}/BeautySolar";
 
-    updateIcons = gen-activation ../needed-content/Icons/BeautySolar "${dirs.home.local.share.icons.path}/BeautySolar";
+      updateTheme = gen-activation ../needed-content/Themes/Sweet-Ambar-Blue "${dirs.home.local.share.plasma.desktoptheme.path}/Sweet-Ambar-Blue";
 
-    updateTheme = gen-activation ../needed-content/Themes/Sweet-Ambar-Blue "${dirs.home.local.share.plasma.desktoptheme.path}/Sweet-Ambar-Blue";
+      updateWindowDecors = gen-activation ../needed-content/WindowDecors/Sweet-ambar-blue "${dirs.home.local.share.aurorae.themes.path}/Sweet-ambar-blue";
 
-    updateWindowDecors = gen-activation ../needed-content/WindowDecors/Sweet-ambar-blue "${dirs.home.local.share.aurorae.themes.path}/Sweet-ambar-blue";
+      updateSplashScreen = gen-activation ../needed-content/Splashscreens/Aretha-Splash-6 "${dirs.home.local.share.plasma.look-and-feel.path}/Aretha-Splash-6";
 
-    updateSplashScreen = gen-activation ../needed-content/Splashscreens/Aretha-Splash-6 "${dirs.home.local.share.plasma.look-and-feel.path}/Aretha-Splash-6";
+      updateCursor = gen-activation ../needed-content/Cursors/Posy_Cursor_Black_125_175 "${dirs.home.icons.path}/Posy_Cursor_Black_125_175";
 
-    updateCursor = gen-activation ../needed-content/Cursors/Posy_Cursor_Black_125_175 "${dirs.home.icons.path}/Posy_Cursor_Black_125_175";
+      updateColorSchemes = gen-activation-file ../needed-content/color-schemes/SweetAmbarBlue.colors "${dirs.home.local.share.color-schemes.path}/SweetAmbarBlue.colors";
 
-    updateColorSchemes = gen-activation-file ../needed-content/color-schemes/SweetAmbarBlue.colors "${dirs.home.local.share.color-schemes.path}/SweetAmbarBlue.colors";
-
-  };
+    };
 }

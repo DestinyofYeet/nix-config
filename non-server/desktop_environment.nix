@@ -1,21 +1,22 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 
 let
-sddm-theme = pkgs.stdenv.mkDerivation {
+  sddm-theme = pkgs.stdenv.mkDerivation {
     name = "sddm-theme";
     src = pkgs.fetchFromGitHub {
-        owner = "gpskwlkr";
-        repo = "sddm-astronaut-theme";
-        rev = "468a100460d5feaa701c2215c737b55789cba0fc";
-        sha256 = "1h20b7n6a4pbqnrj22y8v5gc01zxs58lck3bipmgkpyp52ip3vig";
+      owner = "gpskwlkr";
+      repo = "sddm-astronaut-theme";
+      rev = "468a100460d5feaa701c2215c737b55789cba0fc";
+      sha256 = "1h20b7n6a4pbqnrj22y8v5gc01zxs58lck3bipmgkpyp52ip3vig";
     };
     installPhase = ''
-        mkdir -p $out
-        cp -R ./* $out/
+      mkdir -p $out
+      cp -R ./* $out/
     '';
-};
+  };
 
-in {
+in
+{
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -34,15 +35,15 @@ in {
 
   services.desktopManager.plasma6.enable = true;
 
-  environment.systemPackages = [(
-    pkgs.catppuccin-sddm.override {
+  environment.systemPackages = [
+    (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
       #font  = "Noto Sans";
       #fontSize = "9";
       background = "${../images/forest.png}";
       loginBackground = true;
-    }
-  )];
+    })
+  ];
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;

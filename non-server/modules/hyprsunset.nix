@@ -1,14 +1,13 @@
-{
-  pkgs,
-  ...
-}:let
+{ pkgs, ... }:
+let
 
   temperature = 3000;
 
   start-time = "21:00";
   stop-time = "06:00";
 
-in {
+in
+{
   systemd.user = {
     services = {
       hyprsunset-stop = {

@@ -1,8 +1,9 @@
 { config, lib, ... }:
-let 
-  secrets = lib.custom.settings.${config.networking.hostName}.secrets; 
-in {
-  
+let
+  secrets = lib.custom.settings.${config.networking.hostName}.secrets;
+in
+{
+
   services.cleanUnusedFiles = {
     enable = false;
 
@@ -17,7 +18,9 @@ in {
       recipient = "ole@uwuwhatsthis.de";
     };
 
-    dataFile = "${lib.custom.settings.${config.networking.hostName}.paths.data}/programs/clean_unused_files/data.json";
+    dataFile = "${
+      lib.custom.settings.${config.networking.hostName}.paths.data
+    }/programs/clean_unused_files/data.json";
 
     timerConfig = {
       OnCalendar = "weekly";

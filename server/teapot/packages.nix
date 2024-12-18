@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}:{
+}:
+{
   security = {
     sudo.enable = true;
     doas.enable = true;
@@ -13,7 +14,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    helix vim
+    helix
+    vim
 
     traceroute
     nmap

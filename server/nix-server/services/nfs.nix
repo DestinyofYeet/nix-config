@@ -2,7 +2,8 @@
 let
   apps-id = config.serviceSettings.uid;
   apps-gid = config.serviceSettings.gid;
-in {
+in
+{
   # fileSystems = {
   #   "/export/navidrome" = {
   #     depends = [

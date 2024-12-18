@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}:{
+}:
+{
   age.secrets = {
     cloudflare-api-env.file = ../../secrets/cloudflare-api-env.age;
     coturn-static-auth-secret = {
@@ -53,21 +54,30 @@
     '';
   };
   # open the firewall
-  networking.firewall = let
-    inherit (config.services.coturn) min-port max-port;
-    range = [ {
-    from = min-port;
-    to = max-port;
-  } ];
+  networking.firewall =
+    let
+      inherit (config.services.coturn) min-port max-port;
+      range = [
+        {
+          from = min-port;
+          to = max-port;
+        }
+      ];
 
-  in
+    in
 
-  {
-    allowedUDPPortRanges = range;
-    allowedUDPPorts = [ 3478 5349 ];
-    allowedTCPPortRanges = range;
-    allowedTCPPorts = [ 3478 5349 ];
-  };
+    {
+      allowedUDPPortRanges = range;
+      allowedUDPPorts = [
+        3478
+        5349
+      ];
+      allowedTCPPortRanges = range;
+      allowedTCPPorts = [
+        3478
+        5349
+      ];
+    };
 
   # security.acme.defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
   # get a certificate
@@ -80,17 +90,27 @@
     dnsResolver = "1.1.1.1:53";
     environmentFile = config.age.secrets.cloudflare-api-env.path;
 
-    extraLegoFlags = [ "--dns-timeout" "60" ];
+    extraLegoFlags = [
+      "--dns-timeout"
+      "60"
+    ];
 
     # dnsPropagationCheck = false;
-    
+
     postRun = "systemctl restart coturn.service";
     group = "turnserver";
   };
 
   services.matrix-conduit = lib.mkIf config.services.matrix-conduit.enable {
-    settings.global = let inherit (config.services.coturn) realm; in {
-      turn_uris = [ "turn:${realm}?transport=udp" "turn:${realm}?transport=tcp" ];
-    };
+    settings.global =
+      let
+        inherit (config.services.coturn) realm;
+      in
+      {
+        turn_uris = [
+          "turn:${realm}?transport=udp"
+          "turn:${realm}?transport=tcp"
+        ];
+      };
   };
 }

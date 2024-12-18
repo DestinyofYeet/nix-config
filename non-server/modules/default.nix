@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   home.stateVersion = "24.05";
 
   # needed for agenix service to start properly
@@ -7,7 +8,7 @@
   imports = [
     ../../baseline/modules
     ./nu-scripts
-    
+
     ./kde.nix
     ./bash.nix
     ./stylix.nix

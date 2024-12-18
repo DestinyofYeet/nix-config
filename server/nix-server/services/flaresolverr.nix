@@ -1,4 +1,5 @@
-{ config, ... }:{
+{ config, ... }:
+{
   virtualisation.oci-containers.containers = {
     flaresolverr = {
       image = "ghcr.io/flaresolverr/flaresolverr:latest";

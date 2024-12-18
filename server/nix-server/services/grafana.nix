@@ -1,8 +1,5 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}:{
   services.grafana = {
     enable = true;
 
@@ -26,11 +23,13 @@
     };
   };
 
-  services.nginx.virtualHosts."dashboard.local.ole.blue" = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
-    locations."/" = {
-      proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
-      proxyWebsockets = true;
-      recommendedProxySettings = true;
+  services.nginx.virtualHosts."dashboard.local.ole.blue" =
+    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
+    // {
+      locations."/" = {
+        proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+      };
     };
-  };
 }

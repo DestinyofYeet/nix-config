@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}:{
+}:
+{
   networking = {
     hostName = "teapot";
 

@@ -1,6 +1,5 @@
+{ ... }:
 {
-  ...
-}:{
   programs.hyprlock = {
     enable = true;
 
@@ -9,14 +8,10 @@
         disable_loading_bar = true;
         immediate_render = true;
         hide_cursor = false;
-        no_fade_in = true;        
+        no_fade_in = true;
       };
 
-      background = [
-        {
-          path = "${../../images/wallhaven-lighthouse-snow.jpg}";
-        }
-      ];
+      background = [ { path = "${../../images/wallhaven-lighthouse-snow.jpg}"; } ];
 
       input-field = [
         {
@@ -48,7 +43,7 @@
       ];
 
       label = [
-         {
+        {
           monitor = "";
           text = "$TIME";
           font_size = 150;

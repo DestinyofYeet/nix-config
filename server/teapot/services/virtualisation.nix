@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   virtualisation.docker.enable = true;
 
   virtualisation.oci-containers = {

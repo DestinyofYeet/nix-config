@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}:{
+}:
+{
   environment.etc."aliases" = {
     text = ''
       root: ole@ole.blue

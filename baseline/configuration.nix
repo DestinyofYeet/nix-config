@@ -1,4 +1,10 @@
-{ lib, config, pkgs, ... }: {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
 
   # automatically collect garbage
   config = {
@@ -6,7 +12,7 @@
       automatic = true;
       persistent = true;
       options = "10";
-      dates = "05:00:00"; 
+      dates = "05:00:00";
     };
 
     # optimise nix-store with deduplication
@@ -21,4 +27,3 @@
     '';
   };
 }
-

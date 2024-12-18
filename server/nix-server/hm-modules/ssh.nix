@@ -1,10 +1,13 @@
-{ config, ...}:{
+{ config, ... }:
+{
   services.ssh-agent.enable = true;
 
   programs.ssh.addKeysToAgent = true;
 
   age.secrets = {
-    ssh-github = { file = ../secrets/ssh-github-nixos.age; };
+    ssh-github = {
+      file = ../secrets/ssh-github-nixos.age;
+    };
   };
 
   home.file = {
