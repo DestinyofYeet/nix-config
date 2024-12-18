@@ -155,4 +155,6 @@
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
+
+  services.logind.powerKey = "suspend";
 }

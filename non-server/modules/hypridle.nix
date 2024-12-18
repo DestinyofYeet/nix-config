@@ -27,6 +27,14 @@ in {
           on-timeout = "${brightnessctl} -s set 10";
           on-resume = "${brightnessctl} -r";
         }
+        {
+          timeout = 150;
+          on-timeout = "loginctl lock-session";
+        }
+        # {
+        #   timeout = 300;
+        #   on-timeout = "systemctl suspend";
+        # }
       ];
     };
   };
