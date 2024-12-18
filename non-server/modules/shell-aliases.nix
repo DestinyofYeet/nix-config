@@ -36,8 +36,10 @@
       "generate-email-alias" = {
         default = "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
 
-        bash = null;
+        # bash = null;
       };
+
+      # "generate-email-alias" = "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
     };
   };
 }
