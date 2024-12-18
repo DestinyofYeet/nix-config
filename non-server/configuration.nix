@@ -46,7 +46,7 @@
   # services.xserver.xkb.layout = "de";
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget  
+  # $ nix search wget
 
   nix.settings = {
     experimental-features = [

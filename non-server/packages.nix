@@ -99,7 +99,7 @@ in
   # programs.hyprlock.enable = true;
   # security.pam.services.hyprlock = { };
 
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
 
   services.gnome.gnome-keyring.enable = true;
 
