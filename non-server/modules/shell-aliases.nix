@@ -29,6 +29,7 @@
 
       "yz" = "yazi";
       "lg" = "lazygit";
+      "tt" = "taskwarrior-tui";
 
       "kssh" = "kitten ssh";
       "icat" = "kitten icat";
@@ -39,7 +40,6 @@
         # bash = null;
       };
 
-      # "generate-email-alias" = "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
     };
   };
 }

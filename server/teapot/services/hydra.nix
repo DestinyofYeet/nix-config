@@ -21,8 +21,8 @@
     notificationSender = "hydra@uwuwhatsthis.de";
     smtpHost = "mail.ole.blue";
     listenHost = "127.0.0.1";
-    # buildMachinesFiles = [ "/etc/nix/machines" ];
-    buildMachinesFiles = [];
+    buildMachinesFiles = [ "/etc/nix/machines" ];
+    # buildMachinesFiles = [];
     useSubstitutes = true;
     extraConfig = ''
       email_notification = 1

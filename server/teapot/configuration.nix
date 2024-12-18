@@ -23,5 +23,17 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   services.qemuGuest.enable = true;
+
+  nix.buildMachines = [
+    {
+      hostName = "uwuwhatsthis";
+      system = "x86_64-linux";
+      protocol = "ssh";
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      mandatoryFeatures = [ ];
+      maxJobs = 6;
+      speedFactor = 1;
+    }
+  ];
 }
 
