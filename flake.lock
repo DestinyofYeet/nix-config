@@ -807,16 +807,32 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1734471964,
-        "narHash": "sha256-OPTk9OEU4Yd7KswuQuPKtJtpdGdzDe+aIMb2a5oIVaw=",
+        "lastModified": 1734518983,
+        "narHash": "sha256-MC8jGT4Q45JnuME2HnptwAJ8TnBc2Mz+IEP9SrIE82Q=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "41b5fcf5d5f4fb1286663987b3813f43a160aa4b",
+        "rev": "f084b98a5ea7bf830197f41119441d30e7ef1c66",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "old-nixpkgs": {
+      "locked": {
+        "lastModified": 1734202038,
+        "narHash": "sha256-LwcGIkORU8zfQ/8jAgptgPY8Zf9lGKB0vtNdQyEkaN8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bcba2fbf6963bf6bed3a749f9f4cf5bff4adb96d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -953,6 +969,7 @@
         "nix-topology": "nix-topology",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
+        "old-nixpkgs": "old-nixpkgs",
         "plasma-manager": "plasma-manager",
         "prometheus-qbit": "prometheus-qbit",
         "prpr-muttkalendar": "prpr-muttkalendar",

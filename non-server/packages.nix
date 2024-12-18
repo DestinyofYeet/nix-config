@@ -1,5 +1,13 @@
 
-{ config, pkgs, stable-pkgs, lib, inputs, ... }: let
+{ 
+  config, 
+  pkgs, 
+  stable-pkgs, 
+  old-pkgs,
+  lib, 
+  inputs, 
+  ... 
+}: let
 
   luaPkgs = with pkgs; [
     luajitPackages.luarocks
@@ -155,7 +163,7 @@
     ventoy-full
     qbittorrent
     dig
-    stable-pkgs.freerdp3
+    old-pkgs.freerdp3
     cifs-utils
     samba
     keyutils
