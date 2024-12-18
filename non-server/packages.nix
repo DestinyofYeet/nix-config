@@ -227,6 +227,7 @@
     saber
     taskwarrior3
     timewarrior
+    taskwarrior-tui
   ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
 
