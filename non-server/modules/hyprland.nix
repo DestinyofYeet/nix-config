@@ -71,9 +71,11 @@ in
       ];
 
       exec-once = [
-        "waybar"
+        "${pkgs.waybar}/bin/waybar"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
-      ];
+      ] ++ (lib.optionals (lib.custom.isMain osConfig) [
+        "[workspace 2 silent] ${pkgs.vesktop}/bin/vesktop"
+      ]);
 
       input = {
         accel_profile = "flat";

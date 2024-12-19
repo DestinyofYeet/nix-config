@@ -39,7 +39,12 @@
             proxy_set_header   Connection $http_connection;
 
             proxy_redirect     off;
-            proxy_http_version 1.1;
+
+            # needed, otherwise results won't load
+            send_timeout 100m;
+            proxy_connect_timeout 1800;
+            proxy_send_timeout 1800;
+            proxy_read_timeout 100m;
           '';
         };
 
