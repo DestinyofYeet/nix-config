@@ -53,16 +53,12 @@ in
         blur = {
           enabled = true;
           xray = true;
-          special = false;
           new_optimizations = true;
           size = 6;
           passes = 3;
-          vibrancy = 0.169;
           ignore_opacity = true;
           noise = 0.01;
           contrast = 1;
-          popups = true;
-          # popups_ignorealpha = 0.6;
         };
       };
 
@@ -192,8 +188,16 @@ in
       ];
 
       layerrule = [
-        "blur,rofi"
-        "ignorezero,rofi"
+        "dimaround, rofi"
+      ];
+
+      windowrule = [
+        "float,title:^(Open File)(.*)$"
+        "float,title:^(Select a File)(.*)$"
+        "float,title:^(Choose wallpaper)(.*)$"
+        "float,title:^(Open Folder)(.*)$"
+        "float,title:^(Save As)(.*)$"
+        "float,title:^(Library)(.*)$"
       ];
     };
   };
