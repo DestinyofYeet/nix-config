@@ -13,6 +13,14 @@ rec {
 
   mkIfLaptop = config: attr: lib.mkIf (config.networking.hostName == "wattson") attr;
 
+  isLaptop = config: config.networking.hostName == "wattson";
+
+  isMain = config: config.networking.hostName == "main";
+
+  mkIfLaptopElse =
+    config: attr: default:
+    if (config.networking.hostName == "wattson") then attr else default;
+
   mkIfMainElse =
     config: attr: default:
     if (config.networking.hostName == "main") then attr else default;

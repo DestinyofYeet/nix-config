@@ -20,11 +20,18 @@ let
       ]) list
     ));
 
-  monitors = {
+  monitors_main = {
     tv = "desc:Philips Consumer Electronics Company Philips FTV 0x01010101";
     primary = "desc:Ancor Communications Inc VG248 J5LMQS185620";
     secondary = "desc:Samsung Electric Company C27R50x H1AK500000";
+  };
 
+  monitors_laptop = {
+    builtin = "eDP-1";
+    fsim = {
+      left = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000844";
+      right = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000852";
+    };
   };
 
 in
@@ -42,6 +49,21 @@ in
 
       decoration = {
         rounding = 10;
+
+        blur = {
+          enabled = true;
+          xray = true;
+          special = false;
+          new_optimizations = true;
+          size = 6;
+          passes = 3;
+          vibrancy = 0.169;
+          ignore_opacity = true;
+          noise = 0.01;
+          contrast = 1;
+          popups = true;
+          # popups_ignorealpha = 0.6;
+        };
       };
 
       env = [
@@ -74,44 +96,36 @@ in
         kb_layout = "de";
       };
 
-      monitor = [
-        # wattson
-        "eDP-1, 1920x1200@60, 0x0, 1"
+      monitor =
+        [ ]
+        ++ (lib.optionals (lib.custom.isLaptop osConfig) [
+          "${monitors_laptop.builtin}, 1920x1200@60, 0x0, 1"
 
-        # main
-        "desc:Philips Consumer Electronics Company Philips FTV 0x01010101, disable"
-        "desc:Ancor Communications Inc VG248 J5LMQS185620, 1920x1080@144, 0x0, 1"
-        "desc:Samsung Electric Company C27R50x H1AK500000, 1920x1080@60, 1920x0, 1"
+          # fsim
+          "${monitors_laptop.fsim.left}, preferred, auto, 1"
+          "${monitors_laptop.fsim.right}, preferred, auto, 1"
+          # extends current workspace to other screens
+          # ", preferred, auto, 1"
 
-        # fsim
-        "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000844, preferred, auto, 1"
-        "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000852, preferred, auto, 1"
-
-        # extends current workspace to other screens
-        # ", preferred, auto, 1"
-
-        # mirrors current workspace to other screens
-        ", preferred, auto, 1, mirror, eDP-1"
-      ];
+          # mirrors current workspace to other screens
+          ", preferred, auto, 1, mirror, ${monitors_laptop.builtin}"
+        ])
+        ++ (lib.optionals (lib.custom.isMain osConfig) [
+          "${monitors_main.tv}, disable"
+          "${monitors_main.primary}, 1920x1080@144, 0x0, 1"
+          "${monitors_main.secondary}, 1920x1080@60, 1920x0, 1"
+        ]);
 
       workspace =
         [
 
         ]
-        ++ (lib.custom.mkIfMainElse osConfig
-          [
-            "1, monitor:${monitors.primary}, default:true"
-            "2, monitor:${monitors.secondary}, default:true"
-          ]
-          [ ]
-        );
+        ++ (lib.optionals (lib.custom.isMain osConfig) [
+          "1, monitor:${monitors_main.primary}, default:true"
+          "2, monitor:${monitors_main.secondary}, default:true"
+        ]);
 
-      # dwindle = {
-      #   permanent_direction_override = true;
-      #   preserve_split = true;
-      # };
-
-      debug.disable_logs = false;
+      # debug.disable_logs = false;
 
       general = {
         layout = "hy3";
@@ -171,6 +185,16 @@ in
           ",XF86MonBrightnessUp, exec, ${brightnessctl} s 10%+"
           ",XF86MonBrightnessDown, exec, ${brightnessctl} s 10%-"
         ];
+
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
+      ];
+
+      layerrule = [
+        "blur,rofi"
+        "ignorezero,rofi"
+      ];
     };
   };
 }
