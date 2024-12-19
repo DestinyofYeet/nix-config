@@ -28,6 +28,7 @@
       default-config = {
         locations."/" = {
           proxyPass = "http://localhost:8989";
+          proxyWebsockets = true;
           extraConfig = ''
             # Headers for WebSocket support
             proxy_set_header   Host $host;
