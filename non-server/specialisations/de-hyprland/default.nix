@@ -18,9 +18,19 @@
 
   qt.platformTheme = "qt5ct";
 
-  xdg.portal.extraPortals = lib.mkForce [
-    pkgs.xdg-desktop-portal-hyprland
-  ];
+  # xdg.portal = {
+  #   xdgOpenUsePortal = true;
+
+  #   config.common.default = [
+  #     "gtk"
+  #     "hyprland"
+  #   ];
+
+  #   extraPortals = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #     pkgs.xdg-desktop-portal-hyprland
+  #   ];
+  # };
 
   home-manager.extraSpecialArgs.current-specialisation = "de-hyprland";
   home-manager.users.ole =

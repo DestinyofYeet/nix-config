@@ -65,6 +65,19 @@ in
       sidequest
       # beatsabermodmanager
       protonup-qt
+      glslang
+      gst_all_1.gstreamer
+      # Common plugins like "filesrc" to combine within e.g. gst-launch
+      gst_all_1.gst-plugins-base
+      # Specialized plugins separated by quality
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-ugly
+      # Plugins to reuse ffmpeg to play almost every video format
+      gst_all_1.gst-libav
+      # Support the Video Audio (Hardware) Acceleration API
+      gst_all_1.gst-vaapi
+      libdrm
     ]
     ++ gaming-pkgs;
 
@@ -127,6 +140,10 @@ in
     })
   ];
 
+  programs.envision = {
+    enable = false;
+  };
+
   services.wivrn = {
     enable = false;
     openFirewall = true;
@@ -146,7 +163,7 @@ in
         # 1.0x foveation scaling
         scale = 1.0;
         # 100 Mb/s
-        bitrate = 50000000;
+        bitrate = 100000000;
         encoders = [
           {
             encoder = "vaapi";

@@ -23,6 +23,7 @@ let
     konversation
     krdc
     krdp
+    dolphin
   ];
 
   jetbrainsPkgs = with pkgs.jetbrains; [
@@ -62,6 +63,10 @@ in
   virtualisation.waydroid.enable = true;
 
   # programs.ssh.startAgent = true;
+
+  programs.corectrl = {
+    enable = true;
+  };
 
   programs.wireshark = {
     enable = true;
