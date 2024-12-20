@@ -49,5 +49,6 @@
     # ./hyprsunset.nix
     ./taskwarrior.nix
     # ./swaylock.nix
+    ./kdeconnect.nix
   ];
 }

@@ -54,7 +54,7 @@
         "custom/taskwarrior" = {
           # format = "Most urgent task: {}";
           # exec = "${pkgs.nushell}/bin/nu ${pkgs.substituteAll { src = ../modules/nu-scripts/taskwarrior.nu; task = "${pkgs.taskwarrior3}/bin/task";}}";
-          exec = "${pkgs.nushell}/bin/nu ${../../nu-scripts/taskwarrior.nu}";
+          exec = "${pkgs.nushell}/bin/nu ${../../../modules/nu-scripts/taskwarrior.nu}";
           interval = 10;
           return-type = "json";
         };

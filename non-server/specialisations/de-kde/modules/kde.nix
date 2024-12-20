@@ -5,7 +5,7 @@
   ...
 }:
 let
-  dirs = import ../../dirs.nix { inherit config; };
+  dirs = import ../../../modules/dirs.nix { inherit config; };
 in
 {
   services.kdeconnect = {
