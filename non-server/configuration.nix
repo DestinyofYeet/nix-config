@@ -108,6 +108,27 @@
     config.common.default = "*";
   };
 
+  
+  services.displayManager.sddm = {
+    enable = true;
+    # catppuccin-mocha is a qt6 theme
+    package = lib.mkDefault pkgs.kdePackages.sddm;
+    theme = "catppuccin-mocha";
+    # theme = "${sddm-theme}";
+
+    wayland.enable = true;
+  };
+
+  environment.systemPackages = [
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      #font  = "Noto Sans";
+      #fontSize = "9";
+      background = "${../images/forest.png}";
+      loginBackground = true;
+    })
+  ];
+
 
   # programs.command-not-found.enable = false;
 
