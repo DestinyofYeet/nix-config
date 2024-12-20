@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}:{
+}:
+{
   system.nixos.tags = [ "de-hyprland" ];
   security.pam.services.swaylock = { };
   services.gnome.gnome-keyring.enable = true;
@@ -22,10 +23,12 @@
   ];
 
   home-manager.extraSpecialArgs.current-specialisation = "de-hyprland";
-  home-manager.users.ole = {...}:{
-    imports = [
-      ../../modules
-      ./modules
+  home-manager.users.ole =
+    { ... }:
+    {
+      imports = [
+        ../../modules
+        ./modules
       ];
-  };
+    };
 }

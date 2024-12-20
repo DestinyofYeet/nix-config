@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   imports = [
     ./hyprpaper.nix
     ./hyprsunset.nix

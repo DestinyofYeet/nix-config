@@ -24,7 +24,6 @@ in
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = false;
 
-
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;

@@ -108,7 +108,6 @@
     config.common.default = "*";
   };
 
-  
   services.displayManager.sddm = {
     enable = true;
     # catppuccin-mocha is a qt6 theme
@@ -128,7 +127,6 @@
       loginBackground = true;
     })
   ];
-
 
   # programs.command-not-found.enable = false;
 

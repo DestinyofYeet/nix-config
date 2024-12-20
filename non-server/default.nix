@@ -1,4 +1,10 @@
-{ inputs, stable-pkgs, pkgs, lib, ... }:
+{
+  inputs,
+  stable-pkgs,
+  pkgs,
+  lib,
+  ...
+}:
 {
 
   home-manager = {
@@ -16,7 +22,6 @@
     ];
   };
 
-  
   specialisation = {
     "de-kde" = {
       configuration = import ./specialisations/de-kde;
@@ -26,7 +31,6 @@
       configuration = import ./specialisations/de-hyprland;
     };
   };
-
 
   imports = [
     ../baseline

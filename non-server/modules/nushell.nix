@@ -1,4 +1,9 @@
-{ lib, pkgs, current-specialisation, ... }:
+{
+  lib,
+  pkgs,
+  current-specialisation,
+  ...
+}:
 {
   programs.nushell = {
     enable = true;
