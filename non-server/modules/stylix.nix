@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 let
 
   read_color = builtins.readFile ./current_color.txt;
@@ -21,7 +21,7 @@ in
   # };
 
   # Set the same image as in kde, to avoid some wierd background behaviour
-  stylix.image = config.programs.plasma.workspace.wallpaper;
+  stylix.image = lib.custom.settings.non-server.background;
 
   stylix.targets = {
     kde.enable = false;

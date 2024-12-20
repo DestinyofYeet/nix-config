@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   programs.shell-aliases = {
     enable = true;
@@ -25,9 +25,17 @@
 
       "l" = "ls";
 
-      "yz" = "yazi";
-      "lg" = "lazygit";
-      "tt" = "taskwarrior-tui";
+      "yz" = {
+        default = "${pkgs.yazi}/bin/yazi";
+      };
+
+      "lg" = {
+        default = "${pkgs.lazygit}/bin/lazygit";
+      };
+
+      "tt" = {
+        default = "${pkgs.taskwarrior-tui}/bin/taskwarrior-tui";
+      };
 
       "kssh" = "kitten ssh";
       "icat" = "kitten icat";

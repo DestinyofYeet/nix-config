@@ -67,8 +67,6 @@ in
 
       kssh = "kitten ssh";
       icat = "kitten icat";
-
-      yz = "yazi";
     };
 
     sessionVariables = {

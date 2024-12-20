@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, ... }:
 
 let
-  wallpaperPrimary = ../../images/wallhaven-nightsky.jpg;
+  wallpaperPrimary = lib.custom.settings.non-server.background;
 in
 {
   services.hyprpaper = {

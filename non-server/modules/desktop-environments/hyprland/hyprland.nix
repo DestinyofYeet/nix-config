@@ -39,6 +39,9 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
 
+    systemd.enableXdgAutostart = true;
+    xwayland.enable = true;
+
     plugins = with pkgs.hyprlandPlugins; [ hy3 ];
 
     settings = {

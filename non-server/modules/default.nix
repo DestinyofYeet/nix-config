@@ -9,7 +9,7 @@
     ../../baseline/modules
     ./nu-scripts
 
-    ./kde.nix
+    # ./kde.nix
     ./bash.nix
     ./stylix.nix
     ./firefox.nix
@@ -36,18 +36,18 @@
     ./emails.nix
     ./mailcap.nix
     ./environment.nix
-    ./hyprland.nix
-    ./waybar.nix
+    # ./hyprland.nix
+    # ./waybar.nix
     ./rofi.nix
     # ./hyprlock.nix
-    ./hypridle.nix
-    ./hyprpaper.nix
+    # ./hypridle.nix
+    # ./hyprpaper.nix
     # ./gnome-keyring.nix
-    ./dunst.nix
+    # ./dunst.nix
     ./application-theming.nix
     ./cava.nix
-    ./hyprsunset.nix
+    # ./hyprsunset.nix
     ./taskwarrior.nix
-    ./swaylock.nix
+    # ./swaylock.nix
   ];
 }

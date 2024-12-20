@@ -5,7 +5,7 @@
   ...
 }:
 let
-  dirs = import ./dirs.nix { inherit config; };
+  dirs = import ../../dirs.nix { inherit config; };
 in
 {
   services.kdeconnect = {
@@ -18,7 +18,7 @@ in
     overrideConfig = true;
 
     kscreenlocker = {
-      appearance.wallpaper = ../../images/wallhaven-lighthouse-snow.jpg;
+      appearance.wallpaper = lib.custom.settings.non-server.lock-screen;
       autoLock = true;
       lockOnResume = true;
       passwordRequired = true;
@@ -35,7 +35,7 @@ in
     workspace = {
       clickItemTo = "select";
 
-      wallpaper = ../../images/wallhaven-nightsky.jpg;
+      wallpaper = lib.custom.settings.non-server.background;
 
       colorScheme = "";
       theme = "Sweet-Ambar-Blue";
@@ -104,7 +104,7 @@ in
             kickoff = {
               sortAlphabetically = true;
               compactDisplayStyle = true;
-              icon = "${../../images/nyan_cat_home.png}";
+              icon = "${../../../../images/nyan_cat_home.png}";
             };
           }
           {
@@ -254,17 +254,17 @@ in
     in
     {
 
-      updateIcons = gen-activation ../needed-content/Icons/BeautySolar "${dirs.home.local.share.icons.path}/BeautySolar";
+      updateIcons = gen-activation ./needed-content/Icons/BeautySolar "${dirs.home.local.share.icons.path}/BeautySolar";
 
-      updateTheme = gen-activation ../needed-content/Themes/Sweet-Ambar-Blue "${dirs.home.local.share.plasma.desktoptheme.path}/Sweet-Ambar-Blue";
+      updateTheme = gen-activation ./needed-content/Themes/Sweet-Ambar-Blue "${dirs.home.local.share.plasma.desktoptheme.path}/Sweet-Ambar-Blue";
 
-      updateWindowDecors = gen-activation ../needed-content/WindowDecors/Sweet-ambar-blue "${dirs.home.local.share.aurorae.themes.path}/Sweet-ambar-blue";
+      updateWindowDecors = gen-activation ./needed-content/WindowDecors/Sweet-ambar-blue "${dirs.home.local.share.aurorae.themes.path}/Sweet-ambar-blue";
 
-      updateSplashScreen = gen-activation ../needed-content/Splashscreens/Aretha-Splash-6 "${dirs.home.local.share.plasma.look-and-feel.path}/Aretha-Splash-6";
+      updateSplashScreen = gen-activation ./needed-content/Splashscreens/Aretha-Splash-6 "${dirs.home.local.share.plasma.look-and-feel.path}/Aretha-Splash-6";
 
-      updateCursor = gen-activation ../needed-content/Cursors/Posy_Cursor_Black_125_175 "${dirs.home.icons.path}/Posy_Cursor_Black_125_175";
+      updateCursor = gen-activation ./needed-content/Cursors/Posy_Cursor_Black_125_175 "${dirs.home.icons.path}/Posy_Cursor_Black_125_175";
 
-      updateColorSchemes = gen-activation-file ../needed-content/color-schemes/SweetAmbarBlue.colors "${dirs.home.local.share.color-schemes.path}/SweetAmbarBlue.colors";
+      updateColorSchemes = gen-activation-file ./needed-content/color-schemes/SweetAmbarBlue.colors "${dirs.home.local.share.color-schemes.path}/SweetAmbarBlue.colors";
 
     };
 }

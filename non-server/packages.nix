@@ -43,7 +43,7 @@ in
   # zsh config
   environment.pathsToLink = [ "/share/zsh" ];
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [ plasma-browser-integration ];
+  # environment.plasma6.excludePackages = with pkgs.kdePackages; [ plasma-browser-integration ];
 
   fonts = {
     packages = [
@@ -91,17 +91,17 @@ in
 
   programs.adb.enable = true;
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-  };
+  # programs.hyprland = {
+  #   enable = true;
+  #   withUWSM = true;
+  # };
 
   # programs.hyprlock.enable = true;
   # security.pam.services.hyprlock = { };
 
-  security.pam.services.swaylock = { };
+  # security.pam.services.swaylock = { };
 
-  services.gnome.gnome-keyring.enable = true;
+  # services.gnome.gnome-keyring.enable = true;
 
   environment.systemPackages =
     with pkgs;

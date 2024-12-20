@@ -80,5 +80,10 @@ rec {
         useACMEHost = "wildcard.local.ole.blue";
       };
     };
+
+    non-server = {
+      background = ../images/wallhaven-nightsky.jpg;
+      lock-screen = ../images/wallhaven-lighthouse-snow.jpg;
+    };
   };
 }

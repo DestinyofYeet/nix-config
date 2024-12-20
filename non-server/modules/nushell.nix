@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, current-specialisation, ... }:
 {
   programs.nushell = {
     enable = true;
@@ -11,6 +11,20 @@
       $env.config = {
         show_banner: false
       }
+
+      def --wrapped build-system [ function: string, ...args ] {
+        sudo -v
+        sudo nixos-rebuild $function ...$args --flake /home/ole/nixos# --log-format internal-json -v o+e>| nom --json
+      }
+
+      def --wrapped rebuild-system [ ...args ] {
+        build-system switch ...$args --specialisation ${current-specialisation}
+      }
+
+      def --wrapped test-system [ ...args ] {
+        build-system test ...$args --specialisation ${current-specialisation}
+      }
+
 
       use task.nu
     '';
