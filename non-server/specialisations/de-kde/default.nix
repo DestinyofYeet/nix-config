@@ -12,6 +12,27 @@
     pkgs.xdg-desktop-portal-kde
   ];
 
+  programs.dconf.enable = true;
+
+  
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "catppuccin-mocha";
+    # theme = "${sddm-theme}";
+
+    wayland.enable = true;
+  };
+
+  environment.systemPackages = [
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      #font  = "Noto Sans";
+      #fontSize = "9";
+      background = "${../../../images/forest.png}";
+      loginBackground = true;
+    })
+  ];
+
   home-manager.extraSpecialArgs.current-specialisation = "de-kde";
   home-manager.users.ole = {...}:{
     imports = [

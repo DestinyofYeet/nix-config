@@ -24,26 +24,6 @@ in
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = false;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm = {
-    enable = true;
-    theme = "catppuccin-mocha";
-    # theme = "${sddm-theme}";
-
-    wayland.enable = true;
-  };
-
-  # services.desktopManager.plasma6.enable = true;
-
-  environment.systemPackages = [
-    (pkgs.catppuccin-sddm.override {
-      flavor = "mocha";
-      #font  = "Noto Sans";
-      #fontSize = "9";
-      background = "${../images/forest.png}";
-      loginBackground = true;
-    })
-  ];
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -69,13 +49,10 @@ in
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # make window decorations work properly
-  programs.dconf.enable = true;
 
   # disable mouse accel
   services.libinput.mouse.accelProfile = "flat";

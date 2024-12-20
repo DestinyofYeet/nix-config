@@ -15,9 +15,15 @@
   programs.uwsm.enable = true;
   programs.iio-hyprland.enable = true;
 
+  qt.platformTheme = "qt5ct";
+
   xdg.portal.extraPortals = lib.mkForce [
     pkgs.xdg-desktop-portal-hyprland
   ];
+
+  # services.displayManager.ly = {
+  #   enable = true;
+  # };
 
   home-manager.extraSpecialArgs.current-specialisation = "de-hyprland";
   home-manager.users.ole = {...}:{
