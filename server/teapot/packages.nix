@@ -11,6 +11,7 @@
   programs = {
     zsh.enable = true;
     fish.enable = true;
+    starship.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

@@ -55,4 +55,6 @@
   environment.variables = {
     EDITOR = "vim";
   };
+
+  programs.starship.enable = true;
 }

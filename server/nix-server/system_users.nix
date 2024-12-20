@@ -12,7 +12,7 @@
 
   users.users.ole = {
     isNormalUser = true;
-    shell = pkgs.nushell;
+    shell = pkgs.bashInteractive;
     home = "/home/ole";
     description = "me";
     extraGroups = [
