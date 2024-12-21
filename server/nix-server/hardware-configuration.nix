@@ -47,6 +47,7 @@
     device = "data/nix";
     neededForBoot = true;
     fsType = "zfs";
+    options = [ "noatime" ];
   };
 
   services.zfs = {

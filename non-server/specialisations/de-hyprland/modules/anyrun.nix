@@ -3,10 +3,7 @@
   pkgs,
   ...
 }:{
-  programs.anyrun =
-  let
-    plugin-pkg = inputs.anyrun.packages.${pkgs.system};
-  in {
+  programs.anyrun = {
     enable = true;
 
     # package = inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins;
@@ -23,10 +20,12 @@
       showResultsImmediately = false;
       maxEntries = null;
 
-      plugins = [
-        plugin-pkg.applications
-        plugin-pkg.shell
-        plugin-pkg.rink
+      plugins = with inputs.anyrun.packages.${pkgs.system}; [
+        applications
+        shell
+        rink
+        stdin
+        symbols
       ];
     };
   };
