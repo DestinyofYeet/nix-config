@@ -2,6 +2,7 @@
   lib,
   pkgs,
   osConfig,
+  stable-pkgs,
   ...
 }:
 let
@@ -39,10 +40,12 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
 
+    # package = osConfig.programs.hyprland.package;
+
     systemd.enableXdgAutostart = true;
     xwayland.enable = true;
 
-    plugins = with pkgs.hyprlandPlugins; [ hy3 ];
+    plugins = with stable-pkgs.hyprlandPlugins; [ hy3 ];
 
     settings = {
       "$mainMod" = "SUPER";

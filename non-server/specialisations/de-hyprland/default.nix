@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  stable-pkgs,
   ...
 }:
 {
@@ -9,6 +10,7 @@
   services.gnome.gnome-keyring.enable = true;
 
   programs.hyprland = {
+    # package = stable-pkgs.hyprland;
     enable = true;
     withUWSM = true;
   };
