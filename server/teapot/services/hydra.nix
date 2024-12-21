@@ -19,13 +19,14 @@
 
   services.hydra = {
     enable = true;
-    # package = stable-pkgs.hydra_unstable;
+    # package = stable-pkgs.hydra;
+    # needs to be http:// since hydra expects http for some reason
     hydraURL = "http://hydra.ole.blue";
     notificationSender = "hydra@uwuwhatsthis.de";
     smtpHost = "mail.ole.blue";
     listenHost = "127.0.0.1";
     # buildMachinesFiles = [ "/etc/nix/machines" ];
-    buildMachinesFiles = [ ];
+    buildMachinesFiles = [];
     useSubstitutes = true;
     extraConfig = ''
       email_notification = 1
@@ -43,6 +44,7 @@
     "github:"
     "gitlab:"
     "git+https://github.com/"
+    "git+https://gitlab.com/"
     "git+ssh://github.com/"
     "git+ssh://git@github.com/"
   ];

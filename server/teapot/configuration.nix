@@ -48,5 +48,9 @@
     ];
 
     distributedBuilds = true;
+
+    settings = {
+      builders-use-substitutes = true;
+    };
   };
 }
