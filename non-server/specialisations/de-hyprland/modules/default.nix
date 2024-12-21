@@ -12,5 +12,6 @@
     ./hypridle.nix
     # ./hyprlock.nix
     ./gnome-keyring.nix
+    ./anyrun.nix
   ];
 }

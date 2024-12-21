@@ -2,6 +2,7 @@
   lib,
   pkgs,
   osConfig,
+  config,
   stable-pkgs,
   ...
 }:
@@ -51,7 +52,8 @@ in
       "$mainMod" = "SUPER";
       "$fileManager" = "dolphin";
       "$terminal" = "${pkgs.kitty}/bin/kitty";
-      "$demu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
+      # "$dmenu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
+      "$dmenu" = "${config.programs.anyrun.package}/bin/anyrun";
 
       decoration = {
         rounding = 10;
@@ -149,7 +151,7 @@ in
           "$mainMod, h, hy3:makegroup, h"
           "$mainMod, v, hy3:makegroup, v"
           "$mainMod SHIFT, q, hy3:killactive"
-          "$mainMod, d, exec, $demu"
+          "$mainMod, d, exec, $dmenu"
           "$mainMod, l, exec, loginctl lock-session"
           "$mainMod, f, fullscreen"
           "$mainMod Shift, S, exec, ${screenshot-cmd}"
