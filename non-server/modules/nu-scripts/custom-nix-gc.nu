@@ -5,7 +5,7 @@ def cleanup_profiles [name: string, systems, amount_to_keep: int] {
 
   if $deletion_amount < 1 {
     print $"($name): Not enough systems to delete. Found ($amount_of_systems) but need to delete ($amount_to_keep)"
-    exit 0
+    return
   }
 
   print $"($name): Found ($amount_of_systems) generations. Keeping ($amount_to_keep), need to delete ($deletion_amount)"
