@@ -14,5 +14,6 @@
     ./gnome-keyring.nix
     ./anyrun.nix
     ./gtk.nix
+    ./nushell.nix
   ];
 }
