@@ -26,6 +26,7 @@
         rink
         stdin
         symbols
+        randr
       ];
     };
   };

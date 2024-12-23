@@ -120,6 +120,7 @@ in
         ])
         ++ (lib.optionals (lib.custom.isMain osConfig) [
           "${monitors_main.tv}, disable"
+          # "${monitors_main.tv}, 1280x720@60, 0x1080, 1"
           "${monitors_main.primary}, 1920x1080@144, 0x0, 1"
           "${monitors_main.secondary}, 1920x1080@60, 1920x0, 1"
         ]);
