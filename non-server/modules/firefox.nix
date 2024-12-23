@@ -259,7 +259,6 @@ in
         skip-redirect
         keepassxc-browser
         tree-style-tab
-        container-tab-groups
         terms-of-service-didnt-read
       ];
 
