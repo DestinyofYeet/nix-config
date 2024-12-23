@@ -111,7 +111,7 @@ in
 
           # fsim
           "${monitors_laptop.fsim.left}, preferred, auto, 1"
-          "${monitors_laptop.fsim.right}, preferred, auto, 1"
+          "${monitors_laptop.fsim.right}, disable"
           # extends current workspace to other screens
           # ", preferred, auto, 1"
 
