@@ -104,6 +104,18 @@ in
         kb_layout = "de";
       };
 
+      device = [
+        
+      ] ++ (lib.optionals (lib.custom.isMain osConfig) [
+        {
+          name = "wlxoverlay-s-keyboard-mouse-hybrid-thing";
+          output = "DP-3";
+          region_size = "1920, 1080";
+          region_position = "960, 540";
+          # absolute_region_position = "0, 0";
+        }
+      ]);
+
       monitor =
         [ ]
         ++ (lib.optionals (lib.custom.isLaptop osConfig) [

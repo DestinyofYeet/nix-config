@@ -124,6 +124,11 @@
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lemonake = {
+      url = "github:PassiveLemon/lemonake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
