@@ -73,6 +73,7 @@
         '';
 
         aliases = [
+          "BorJJYeqqlJbq5G6EQ9L@ole.blue"
           "tAKr6Lm0hNqTh9OELx4c@ole.blue"
           "euZvDRPCYpZe05KB2KVx@ole.blue"
           "ole@uwuwhatsthis.de"

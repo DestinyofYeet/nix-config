@@ -50,5 +50,6 @@
     ./taskwarrior.nix
     # ./swaylock.nix
     ./kdeconnect.nix
+    ./zathura.nix
   ];
 }

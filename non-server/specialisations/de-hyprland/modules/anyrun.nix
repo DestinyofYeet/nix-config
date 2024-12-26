@@ -29,5 +29,13 @@
         randr
       ];
     };
+
+    extraConfigFiles = {
+      "symbols.ron".text = ''
+        Config(
+          prefix: ":sym",
+        )
+      '';
+    };
   };
 }
