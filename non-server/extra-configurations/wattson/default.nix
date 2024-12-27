@@ -7,9 +7,12 @@
   pkgs,
   lib,
   ...
-}:
+}:{
 
-{
+  imports = [
+    ./38C3.nix    
+  ];
+
   nix = {
     # settings = {
     # substituters = [
