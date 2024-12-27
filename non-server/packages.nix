@@ -230,6 +230,7 @@ in
       taskwarrior-tui
       nixfmt-rfc-style
       filezilla
+      mpv
     ]
     ++ luaPkgs
     ++ kdePkgs
