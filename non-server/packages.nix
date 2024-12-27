@@ -229,6 +229,7 @@ in
       timewarrior
       taskwarrior-tui
       nixfmt-rfc-style
+      filezilla
     ]
     ++ luaPkgs
     ++ kdePkgs
