@@ -231,6 +231,7 @@ in
       nixfmt-rfc-style
       filezilla
       mpv
+      wirelesstools
     ]
     ++ luaPkgs
     ++ kdePkgs
