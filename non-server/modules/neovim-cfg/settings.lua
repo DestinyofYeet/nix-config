@@ -71,3 +71,5 @@ vim.keymap.set('n', '<leader>8', "<cmd>BufferGoto 8<cr>", {})
 vim.keymap.set('n', '<leader>9', "<cmd>BufferGoto 9<cr>", {})
 
 vim.keymap.set("n", "<leader>qb", "<cmd>BufferClose<cr>", {})
+
+opt.mouse = ""

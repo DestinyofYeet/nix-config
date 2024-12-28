@@ -43,6 +43,7 @@ in
         (mkPlugin nvim-lspconfig ./neovim-cfg/lsp/lspconfig.lua)
         (mkPlugin trouble-nvim ./neovim-cfg/trouble.lua)
         (mkPlugin barbar-nvim ./neovim-cfg/barbar.lua)
+        which-key-nvim
         telescope-zf-native-nvim
         nvim-web-devicons
         mason-lspconfig-nvim
@@ -51,6 +52,8 @@ in
         dressing-nvim
         luasnip
         cmp-nvim-lsp
+        nvim-nu
+        none-ls-nvim
       ]
       ++ treesitter-parsers;
   };

@@ -58,7 +58,7 @@ rec {
   '';
 
   settings = {
-    editor = "hx";
+    editor = "nvim";
 
     screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
 
