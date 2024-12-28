@@ -8,6 +8,7 @@ let
     lua
     vimdoc
     nix
+    # nu
   ];
 
   mkPlugin = name: file: {
@@ -53,7 +54,7 @@ in
         luasnip
         cmp-nvim-lsp
         nvim-nu
-        none-ls-nvim
+        # none-ls-nvim
       ]
       ++ treesitter-parsers;
   };

@@ -232,6 +232,7 @@ in
       filezilla
       mpv
       wirelesstools
+      # cargo-udeps # only available on nightly rust + requires cargo to be in system path. Will be installed even if cargo is not in the system path yet. 
     ]
     ++ luaPkgs
     ++ kdePkgs
