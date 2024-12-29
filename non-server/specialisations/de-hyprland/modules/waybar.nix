@@ -2,6 +2,7 @@
   lib,
   osConfig,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -54,7 +55,8 @@
         "custom/taskwarrior" = {
           # format = "Most urgent task: {}";
           # exec = "${pkgs.nushell}/bin/nu ${pkgs.substituteAll { src = ../modules/nu-scripts/taskwarrior.nu; task = "${pkgs.taskwarrior3}/bin/task";}}";
-          exec = "${pkgs.nushell}/bin/nu ${../../../modules/nu-scripts/taskwarrior.nu}";
+          # exec = "${pkgs.nushell}/bin/nu ${../../../modules/nu-scripts/taskwarrior.nu}";
+          exec = "${inputs.waybar-taskwarrior.packages.x86_64-linux.default}/bin/waybar-taskwarrior";
           interval = 10;
           return-type = "json";
         };

@@ -1143,6 +1143,7 @@
         "simple-nixos-mailserver": "simple-nixos-mailserver",
         "stable-nixpkgs": "stable-nixpkgs",
         "stylix": "stylix",
+        "waybar-taskwarrior": "waybar-taskwarrior",
         "zen-browser": "zen-browser"
       }
     },
@@ -1547,6 +1548,26 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "waybar-taskwarrior": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735425067,
+        "narHash": "sha256-1gwrxmqISFcYKVI92fYmNwPPq7I/P0hQihnbVJB2DBA=",
+        "owner": "DestinyofYeet",
+        "repo": "waybar-taskwarrior.rs",
+        "rev": "5cfdaa19f3231979ed9421b60a9ebca24b169e17",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "waybar-taskwarrior.rs",
         "type": "github"
       }
     },
