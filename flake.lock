@@ -1558,11 +1558,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735425067,
-        "narHash": "sha256-1gwrxmqISFcYKVI92fYmNwPPq7I/P0hQihnbVJB2DBA=",
+        "lastModified": 1735438224,
+        "narHash": "sha256-Sj7gltc3vPzzUd3ftXXSpBm2akzbXh30isTA4V6NUV0=",
         "owner": "DestinyofYeet",
         "repo": "waybar-taskwarrior.rs",
-        "rev": "5cfdaa19f3231979ed9421b60a9ebca24b169e17",
+        "rev": "da67e945f87520381c74182bcb9b057b4f17e82e",
         "type": "github"
       },
       "original": {
