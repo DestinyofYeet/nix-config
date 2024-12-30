@@ -235,6 +235,7 @@ in
       inetutils
       krita
       aseprite
+      # pyprland
     ]
     ++ luaPkgs
     ++ kdePkgs

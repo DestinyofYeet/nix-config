@@ -15,5 +15,6 @@
     ./anyrun.nix
     ./gtk.nix
     ./nushell.nix
+    ./pyprland.nix
   ];
 }
