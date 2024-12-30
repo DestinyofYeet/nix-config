@@ -233,7 +233,8 @@ in
       mpv
       wirelesstools
       inetutils
-      # cargo-udeps # only available on nightly rust + requires cargo to be in system path. Will be installed even if cargo is not in the system path yet. 
+      krita
+      aseprite
     ]
     ++ luaPkgs
     ++ kdePkgs
