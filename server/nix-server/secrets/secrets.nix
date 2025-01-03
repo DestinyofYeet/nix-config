@@ -46,4 +46,6 @@ in
   "paperless-ngx-admin.age".publicKeys = authed;
 
   "firefly-email-credentials.age".publicKeys = authed;
+
+  "email-uptime-kuma.age".publicKeys = authed;
 }

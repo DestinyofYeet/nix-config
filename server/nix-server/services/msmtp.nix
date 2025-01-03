@@ -6,6 +6,7 @@
 
   age.secrets = {
     email-firefly-iii-credentials.file = ../secrets/firefly-email-credentials.age;
+    email-uptime-kuma.file = ../secrets/email-uptime-kuma.age;
     zed-email-credentials = {
       file = ../secrets/zed-email-credentials.age;
     };
@@ -26,17 +27,16 @@
     };
 
     accounts = {
-      firefly = {
-        auth = true;
+      firefly = rec {
         passwordeval = "cat ${config.age.secrets.email-firefly-iii-credentials.path}";
         user = "firefly-iii@ole.blue";
-        from = "firefly-iii@ole.blue";
+        from = user;
       };
 
-      default = {
+      default = rec {
         passwordeval = "cat ${config.age.secrets.zed-email-credentials.path}";
         user = "zed@ole.blue";
-        from = "zed@ole.blue";
+        from = user;
       };
     };
   };

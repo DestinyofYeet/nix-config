@@ -73,6 +73,7 @@
         '';
 
         aliases = [
+          "2cgIIVYfX7Kk5Asx8awZ@ole.blue"
           "OTIqJBpXpka3lwiJLTsD@ole.blue"
           "BorJJYeqqlJbq5G6EQ9L@ole.blue"
           "tAKr6Lm0hNqTh9OELx4c@ole.blue"
@@ -162,7 +163,7 @@
         sendOnly = true;
       };
 
-      "uptime-kuma@uwuwhatsthis.de" = {
+      "uptime-kuma@ole.blue" = {
         hashedPasswordFile = "${config.age.secrets.uptime-kuma-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
