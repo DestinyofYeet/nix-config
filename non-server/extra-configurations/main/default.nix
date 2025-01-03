@@ -56,7 +56,7 @@
       system = "x86_64-linux";
       protocol = "ssh";
       maxJobs = 4;
-      speedFactor = 1;
+      speedFactor = 0;
       supportedFeatures = [
         "nixos-test"
         "benchmark"
