@@ -9,7 +9,6 @@
     ../../baseline/modules
     ./nu-scripts
 
-    # ./kde.nix
     ./bash.nix
     ./stylix.nix
     ./firefox.nix
@@ -36,19 +35,10 @@
     ./emails.nix
     ./mailcap.nix
     ./environment.nix
-    # ./hyprland.nix
-    # ./waybar.nix
     ./rofi.nix
-    # ./hyprlock.nix
-    # ./hypridle.nix
-    # ./hyprpaper.nix
-    # ./gnome-keyring.nix
-    # ./dunst.nix
     ./application-theming.nix
     ./cava.nix
-    # ./hyprsunset.nix
     ./taskwarrior.nix
-    # ./swaylock.nix
     ./kdeconnect.nix
     ./zathura.nix
   ];
