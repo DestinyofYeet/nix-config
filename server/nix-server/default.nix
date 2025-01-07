@@ -4,5 +4,6 @@
     ../../baseline
     ./configuration.nix
     ./home_manager.nix
+    ./acls.nix
   ];
 }
