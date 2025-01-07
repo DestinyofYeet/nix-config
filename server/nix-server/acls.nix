@@ -2,7 +2,7 @@
   ...
 }:{
   systemd.tmpfiles.rules = [
-    "A+ /mnt/data/data/Programming-Stuff/ - - - - user:apps:rwx"
-    "A+ /mnt/data/data/Programming-Stuff/ - - - - other::x"
+    "A+ /mnt/data/data/programmingStuff/ - - - - user:apps:rwx"
+    "A+ /mnt/data/data/programmingStuff/ - - - - other::x"
   ];
 }
