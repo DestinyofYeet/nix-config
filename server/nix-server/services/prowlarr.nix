@@ -38,7 +38,6 @@
     {
 
       virtualHosts = {
-        "prowlarr.nix-server.infra.wg" = { } // default-config;
         "prowlarr.local.ole.blue" =
           lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };

@@ -2,11 +2,13 @@
   pkgs,
   config,
   ...
-}:let
+}:
+let
   vpn_port = 53;
-in {
+in
+{
   age.secrets = {
-    wireguard-vpn-setup.file = ./secrets/wireguard-vpn-priv-key.age;  
+    wireguard-vpn-setup.file = ./secrets/wireguard-vpn-priv-key.age;
   };
 
   networking.firewall = {
@@ -14,7 +16,7 @@ in {
   };
 
   networking.wireguard.interfaces = {
-    wg0 = {      
+    wg0 = {
       ips = [ "10.100.0.2/24" ];
       listenPort = vpn_port;
 

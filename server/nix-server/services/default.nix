@@ -50,5 +50,6 @@
     # ./immich.nix
     ./msmtp.nix
     ./wiki-js.nix
+    ./vpn.nix
   ];
 }

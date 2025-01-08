@@ -16,5 +16,6 @@
     ./nix-serve.nix
     ./taskchampion-server.nix
     ./vpn.nix
+    ./home-proxy.nix
   ];
 }

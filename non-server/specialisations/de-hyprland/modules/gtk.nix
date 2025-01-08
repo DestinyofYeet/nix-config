@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   gtk = rec {
     gtk2.extraConfig = ''
       gtk-im-module="fcitx"

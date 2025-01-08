@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}:{
+}:
+{
   networking.networkmanager.ensureProfiles.profiles = {
     "38C3" = {
       connection = {
@@ -40,8 +41,8 @@
 
   networking.firewall.enable = lib.mkForce true;
 
-  networking.firewall.allowedTCPPortRanges = lib.mkForce [];
-  networking.firewall.allowedUDPPortRanges = lib.mkForce [];
-  networking.firewall.allowedTCPPorts = lib.mkForce [];
-  networking.firewall.allowedUDPPorts = lib.mkForce [];
+  networking.firewall.allowedTCPPortRanges = lib.mkForce [ ];
+  networking.firewall.allowedUDPPortRanges = lib.mkForce [ ];
+  networking.firewall.allowedTCPPorts = lib.mkForce [ ];
+  networking.firewall.allowedUDPPorts = lib.mkForce [ ];
 }

@@ -10,7 +10,7 @@
   imports = [
     ./japanese-keyboard.nix
   ];
-  
+
   security.pam.services.swaylock = { };
   services.gnome.gnome-keyring.enable = true;
 

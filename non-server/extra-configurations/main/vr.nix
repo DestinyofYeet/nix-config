@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}:{
+}:
+{
   environment.systemPackages = with pkgs; [
     opencomposite
     wlx-overlay-s

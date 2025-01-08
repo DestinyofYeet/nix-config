@@ -48,4 +48,6 @@ in
   "firefly-email-credentials.age".publicKeys = authed;
 
   "email-uptime-kuma.age".publicKeys = authed;
+
+  "wireguard-vpn-priv-key.age".publicKeys = authed;
 }

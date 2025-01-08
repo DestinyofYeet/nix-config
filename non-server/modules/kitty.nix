@@ -1,9 +1,11 @@
 { pkgs, lib, ... }:
 let
-  mkMapBind = numbers:
+  mkMapBind =
+    numbers:
     # lib.mapAttrs' (name: value: lib.nameValuePair ("ctrl+space>1") (value)) (lib.genAttrs numbers (name: "goto_tab ${toString name}"));
-    lib.mkMerge (map (num: {"ctrl+space>${toString num}" = "goto_tab ${toString num}";}) numbers);
-in {
+    lib.mkMerge (map (num: { "ctrl+space>${toString num}" = "goto_tab ${toString num}"; }) numbers);
+in
+{
   programs.kitty = {
     enable = true;
 
@@ -32,9 +34,21 @@ in {
       tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ' '}";
     };
 
-    keybindings = mkMapBind [ 1 2 3 4 5 6 7 8 9 ] // {
-      "ctrl+space>c" = "new_tab_with_cwd";
-    };
+    keybindings =
+      mkMapBind [
+        1
+        2
+        3
+        4
+        5
+        6
+        7
+        8
+        9
+      ]
+      // {
+        "ctrl+space>c" = "new_tab_with_cwd";
+      };
 
     extraConfig = ''
       map ctrl+space>1 goto_tab 1

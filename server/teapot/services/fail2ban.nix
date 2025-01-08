@@ -9,28 +9,30 @@
       "37.4.229.171"
     ];
 
-    jails = let
-      default-settings = {
-        maxretry = 5;
-      };
-    in {
-      nginx-http-auth = {
-        settings = default-settings // {
-          port = "http,https";
+    jails =
+      let
+        default-settings = {
+          maxretry = 5;
+        };
+      in
+      {
+        nginx-http-auth = {
+          settings = default-settings // {
+            port = "http,https";
+          };
+        };
+
+        sshd = {
+          settings = default-settings;
+        };
+
+        dovecot = {
+          settings = default-settings;
+        };
+
+        postfix = {
+          settings = default-settings;
         };
       };
-
-      sshd = {
-        settings = default-settings;
-      };
-
-      dovecot = {
-        settings = default-settings;
-      };
-
-      postfix = {
-        settings = default-settings;
-      };
-    };
   };
 }

@@ -30,8 +30,6 @@
     in
     {
       virtualHosts = {
-        "navidrome.nix-server.infra.wg" = { } // default-config;
-
         "navidrome.local.ole.blue" =
           lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };

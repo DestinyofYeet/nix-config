@@ -53,7 +53,6 @@
     {
 
       virtualHosts = {
-        "sonarr.nix-server.infra.wg" = { } // default-config;
         "sonarr.local.ole.blue" =
           lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };

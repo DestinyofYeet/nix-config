@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}:{
+}:
+{
   home.file = {
     ".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland.toml" {
       pyprland = {

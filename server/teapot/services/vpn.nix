@@ -2,15 +2,17 @@
   pkgs,
   config,
   ...
-}:let
+}:
+let
   vpn_port = 53;
   interface_ext = "enp6s18";
-in rec {
+in
+rec {
 
   age.secrets = {
     wireguard-vpn-priv-key.file = ../secrets/wireguard-vpn-priv-key.age;
   };
-  
+
   networking.nat.enable = true;
   networking.nat.externalInterface = interface_ext;
   networking.nat.internalInterfaces = [ "wg0" ];
@@ -38,6 +40,11 @@ in rec {
           # main
           publicKey = "CU76SCOQ1hmapZG2TWMhh/cgfjNviYUZcdbUEplW3n0=";
           allowedIPs = [ "10.100.0.3/32" ];
+        }
+        {
+          # nix-server
+          publicKey = "6o6D4EVq3qvyu2r90tp+dtstwtXID8QRnd8oyKYKtxc=";
+          allowedIPs = [ "10.100.0.4/32" ];
         }
       ];
     };

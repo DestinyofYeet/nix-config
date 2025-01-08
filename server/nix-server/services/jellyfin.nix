@@ -48,7 +48,6 @@
     in
     {
       virtualHosts = {
-        "jellyfin.nix-server.infra.wg" = { } // default-config;
         "jellyfin.local.ole.blue" =
           lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };

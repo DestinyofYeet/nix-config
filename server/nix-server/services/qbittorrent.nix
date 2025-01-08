@@ -80,8 +80,6 @@ in
     in
     {
       virtualHosts = {
-        "qbittorrent.nix-server.infra.wg" = { } // default-config;
-
         "qbittorrent.local.ole.blue" =
           lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };

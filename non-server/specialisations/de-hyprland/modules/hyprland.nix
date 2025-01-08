@@ -31,7 +31,7 @@ let
   monitors_laptop = {
     builtin = "eDP-1";
     fsim = {
-      table-right = {        
+      table-right = {
         left = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000844";
         right = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000852";
       };
@@ -111,17 +111,19 @@ in
         kb_layout = "de";
       };
 
-      device = [
-        
-      ] ++ (lib.optionals (lib.custom.isMain osConfig) [
-        {
-          name = "wlxoverlay-s-keyboard-mouse-hybrid-thing";
-          output = "DP-3";
-          region_size = "1920, 1080";
-          region_position = "960, 540";
-          # absolute_region_position = "0, 0";
-        }
-      ]);
+      device =
+        [
+
+        ]
+        ++ (lib.optionals (lib.custom.isMain osConfig) [
+          {
+            name = "wlxoverlay-s-keyboard-mouse-hybrid-thing";
+            output = "DP-3";
+            region_size = "1920, 1080";
+            region_position = "960, 540";
+            # absolute_region_position = "0, 0";
+          }
+        ]);
 
       monitor =
         [ ]
@@ -134,7 +136,7 @@ in
 
           # "${monitors_laptop.fsim.table-left.right}, preferred, auto, 1"
           "${monitors_laptop.fsim.table-left.right}, disable"
-          
+
           # extends current workspace to other screens
           ", preferred, auto, 1"
 

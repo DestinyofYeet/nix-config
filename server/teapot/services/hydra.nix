@@ -26,7 +26,7 @@
     smtpHost = "mail.ole.blue";
     listenHost = "127.0.0.1";
     # buildMachinesFiles = [ "/etc/nix/machines" ];
-    buildMachinesFiles = [];
+    buildMachinesFiles = [ ];
     useSubstitutes = true;
     extraConfig = ''
       email_notification = 1

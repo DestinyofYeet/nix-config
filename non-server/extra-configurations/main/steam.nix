@@ -23,6 +23,6 @@ in
   };
 
   environment.systemPackages = [
-    
+
   ] ++ gaming-pkgs;
 }

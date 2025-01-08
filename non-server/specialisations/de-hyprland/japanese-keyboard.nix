@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}:{
+}:
+{
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
@@ -16,7 +17,7 @@
   # environment.systemPackages = with pkgs; [
   #   fcitx5-config-qt
   # ];
-  
+
   environment.variables = {
     GLFW_IM_MODULE = "ibus";
     QT_IM_MODULE = "fcitx";

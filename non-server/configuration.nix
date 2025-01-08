@@ -101,9 +101,12 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = lib.mkDefault (with pkgs; [
-      xdg-desktop-portal-wlr
-    ]);
+    extraPortals = lib.mkDefault (
+      with pkgs;
+      [
+        xdg-desktop-portal-wlr
+      ]
+    );
 
     config.common.default = "*";
   };

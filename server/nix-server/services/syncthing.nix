@@ -49,7 +49,6 @@
     in
     {
       virtualHosts = {
-        "syncthing.nix-server.infra.wg" = { } // default-config;
         "syncthing.local.ole.blue" =
           lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };

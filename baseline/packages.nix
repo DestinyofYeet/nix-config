@@ -31,5 +31,6 @@
     helix
     dig
     glances
+    wireguard-tools
   ];
 }
