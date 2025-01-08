@@ -8,6 +8,8 @@
   imports = [
     ./steam.nix
     ./vr.nix
+    ./vpn.nix
+    ./agenix.nix
   ];
 
   networking.extraHosts = ''

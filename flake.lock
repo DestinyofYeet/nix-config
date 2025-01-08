@@ -1139,6 +1139,7 @@
         "plasma-manager": "plasma-manager",
         "prometheus-qbit": "prometheus-qbit",
         "prpr-muttkalendar": "prpr-muttkalendar",
+        "setup-env-rs": "setup-env-rs",
         "shell-aliases": "shell-aliases",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
         "stable-nixpkgs": "stable-nixpkgs",
@@ -1190,6 +1191,26 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "setup-env-rs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735493396,
+        "narHash": "sha256-bkyld5YN73bTGe44GzyyJGc0/+gTyw+nN/6q7f3V2is=",
+        "owner": "DestinyofYeet",
+        "repo": "setup-env.rs",
+        "rev": "92306bf18964eaf8faff6ba1a191dc959548ced1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "setup-env.rs",
         "type": "github"
       }
     },

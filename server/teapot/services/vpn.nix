@@ -40,6 +40,11 @@ in {
           publicKey = "k6JnjO2BpghnwIgmDdARgi06LIHlPyQhoco6kjk6MT8=";
           allowedIPs = [ "10.100.0.2/32" ];
         }
+        {
+          # main
+          publicKey = "CU76SCOQ1hmapZG2TWMhh/cgfjNviYUZcdbUEplW3n0=";
+          allowedIPs = [ "10.100.0.3/32 "];
+        }
       ];
     };
   };

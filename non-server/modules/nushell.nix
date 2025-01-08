@@ -39,8 +39,8 @@
   home.activation =
     let
       source = builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/nushell/nu_scripts/refs/heads/main/modules/background_task/task.nu";
-        sha256 = "1k94wifbbg78lplcrww6s2bmblknm5jxzyk26qca3w215g7q85d5";
+        url = "https://raw.githubusercontent.com/nushell/nu_scripts/a9b829115ff3c77981616ae777379fc0bd4dc998/modules/background_task/task.nu";
+        sha256 = "05lafp08fvv22kb6k2npg0g25jpwdz1myz3aaqwslxcab4ivfbgw";
       };
     in
     {

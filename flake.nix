@@ -135,6 +135,11 @@
       # url = "path:///home/ole/github/waybar-taskwarrior.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    setup-env-rs = {
+      url = "github:DestinyofYeet/setup-env.rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -191,6 +196,7 @@
             environment.systemPackages = [
               inputs.zen-browser.packages.x86_64-linux.specific
               inputs.nix-fast-build.packages.x86_64-linux.default
+              inputs.setup-env-rs.packages.x86_64-linux.default
             ];
           }
         )
