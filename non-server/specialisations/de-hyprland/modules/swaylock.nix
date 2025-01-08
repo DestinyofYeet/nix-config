@@ -20,8 +20,8 @@
       font = "JetBrains Mono";
       indicator-radius = 80;
       indicator-thickness = 8;
-      timestr = "%I:%M %p";
-      datestr = "%F";
+      timestr = "%H:%M";
+      datestr = "%a %d.%m.%Y";
 
       inside-color = "#181926";
       ring-color = "#8bd5ca";

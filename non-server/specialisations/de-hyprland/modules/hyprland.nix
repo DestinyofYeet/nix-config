@@ -37,8 +37,8 @@ let
       };
 
       table-left = {
-        left = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000842";
-        right = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000850";
+        left = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000850";
+        right = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000842";
       };
     };
   };
@@ -133,7 +133,7 @@ in
           # "${monitors_laptop.fsim.table-right.right}, disable"
 
           # "${monitors_laptop.fsim.table-left.right}, preferred, auto, 1"
-          # "${monitors_laptop.fsim.table-left.left}, disable"
+          "${monitors_laptop.fsim.table-left.right}, disable"
           
           # extends current workspace to other screens
           ", preferred, auto, 1"
