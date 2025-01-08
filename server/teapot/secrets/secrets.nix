@@ -36,4 +36,6 @@ in
   "hydra-email-credentials.age".publicKeys = authed;
 
   "nix-serve-priv-key.age".publicKeys = authed;
+
+  "wireguard-vpn-priv-key.age".publicKeys = authed;
 }

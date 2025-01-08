@@ -15,5 +15,6 @@
     ./hydra.nix
     ./nix-serve.nix
     ./taskchampion-server.nix
+    ./vpn.nix
   ];
 }

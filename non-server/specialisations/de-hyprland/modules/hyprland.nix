@@ -235,6 +235,10 @@ in
         "float,title:^(Save As)(.*)$"
         "float,title:^(Library)(.*)$"
       ];
+
+      animation = [
+        "workspaces, 0"
+      ];
     };
   };
 }
