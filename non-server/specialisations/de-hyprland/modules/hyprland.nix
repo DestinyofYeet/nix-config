@@ -216,6 +216,9 @@ in
           ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
           ",XF86MonBrightnessUp, exec, ${brightnessctl} s 10%+"
           ",XF86MonBrightnessDown, exec, ${brightnessctl} s 10%-"
+          ",XF86AudioPlay, exec, playerctl play-pause"
+          ",XF86AudioNext, exec, playerctl next"
+          ",XF86AudioPrev, exec, playerctl previous"
         ];
 
       bindm = [

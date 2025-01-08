@@ -24,13 +24,13 @@ in {
 
       listenPort = vpn_port;
 
-      postSetup = ''
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ${interface_ext} -j MASQUERADE
-      '';
+      # postSetup = ''
+      #   ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ${interface_ext} -j MASQUERADE
+      # '';
 
-      postShutdown = ''
-        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ${interface_ext} -j MASQUERADE
-      '';
+      # postShutdown = ''
+      #   ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ${interface_ext} -j MASQUERADE
+      # '';
 
       privateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
 

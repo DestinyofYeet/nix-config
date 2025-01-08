@@ -12,6 +12,7 @@
   imports = [
     ./38C3.nix
     # ./vpn.nix
+    ./agenix.nix
   ];
 
   nix = {

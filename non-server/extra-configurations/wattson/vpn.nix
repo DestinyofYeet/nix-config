@@ -1,11 +1,12 @@
 {
+  pkgs,
   config,
   ...
 }:let
   vpn_port = 53;
 in {
   age.secrets = {
-    wireguard-vpn-setup.file = ../../secrets/wattson/wireguard-vpn-priv-key.age;  
+    wireguard-vpn-setup.file = ./secrets/wireguard-vpn-priv-key.age;  
   };
 
   networking.firewall = {
@@ -24,7 +25,7 @@ in {
           # teapot
           publicKey = "cLPAuu+Pu0nTBenl+ezZyjtVNqP3WYBzKM8BPYQ4Jh8=";
 
-          allowedIPs = [ "0.0.0.0/0" ];
+          allowedIPs = [ "10.100.0.0/0" ];
 
           endpoint = "5.83.152.153:${toString vpn_port}";
 
