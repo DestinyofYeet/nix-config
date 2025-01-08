@@ -31,8 +31,15 @@ let
   monitors_laptop = {
     builtin = "eDP-1";
     fsim = {
-      left = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000844";
-      right = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000852";
+      table-right = {        
+        left = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000844";
+        right = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000852";
+      };
+
+      table-left = {
+        left = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000842";
+        right = "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000850";
+      };
     };
   };
 
@@ -122,13 +129,17 @@ in
           "${monitors_laptop.builtin}, 1920x1200@60, 0x0, 1"
 
           # fsim
-          "${monitors_laptop.fsim.left}, preferred, auto, 1"
-          "${monitors_laptop.fsim.right}, disable"
+          # "${monitors_laptop.fsim.table-right.left}, preferred, auto, 1"
+          # "${monitors_laptop.fsim.table-right.right}, disable"
+
+          # "${monitors_laptop.fsim.table-left.right}, preferred, auto, 1"
+          # "${monitors_laptop.fsim.table-left.left}, disable"
+          
           # extends current workspace to other screens
-          # ", preferred, auto, 1"
+          ", preferred, auto, 1"
 
           # mirrors current workspace to other screens
-          ", preferred, auto, 1, mirror, ${monitors_laptop.builtin}"
+          # ", preferred, auto, 1, mirror, ${monitors_laptop.builtin}"
         ])
         ++ (lib.optionals (lib.custom.isMain osConfig) [
           "${monitors_main.tv}, disable"
