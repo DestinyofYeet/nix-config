@@ -5,7 +5,7 @@
 }:let
   vpn_port = 53;
   interface_ext = "enp6s18";
-in {
+in rec {
 
   age.secrets = {
     wireguard-vpn-priv-key.file = ../secrets/wireguard-vpn-priv-key.age;
@@ -16,6 +16,8 @@ in {
   networking.nat.internalInterfaces = [ "wg0" ];
   networking.firewall = {
     allowedUDPPorts = [ vpn_port ];
+
+    trustedInterfaces = networking.nat.internalInterfaces;
   };
 
   networking.wireguard.interfaces = {
@@ -23,14 +25,6 @@ in {
       ips = [ "10.100.0.1/24" ];
 
       listenPort = vpn_port;
-
-      # postSetup = ''
-      #   ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ${interface_ext} -j MASQUERADE
-      # '';
-
-      # postShutdown = ''
-      #   ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ${interface_ext} -j MASQUERADE
-      # '';
 
       privateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
 
@@ -43,7 +37,7 @@ in {
         {
           # main
           publicKey = "CU76SCOQ1hmapZG2TWMhh/cgfjNviYUZcdbUEplW3n0=";
-          allowedIPs = [ "10.100.0.3/32 "];
+          allowedIPs = [ "10.100.0.3/32" ];
         }
       ];
     };

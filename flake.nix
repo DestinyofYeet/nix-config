@@ -218,6 +218,7 @@
           old-pkgs
           lib
           ;
+        flake = self;
       };
 
       makeConfigurations =
