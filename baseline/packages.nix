@@ -32,5 +32,6 @@
     dig
     glances
     wireguard-tools
+    nix-output-monitor
   ];
 }

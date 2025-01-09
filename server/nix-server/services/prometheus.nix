@@ -58,16 +58,16 @@
           }
         ];
       }
-      # {
-      #   job_name = "nginx-teapot";
-      #   static_configs = [
-      #     {
-      #       targets = [
-      #         "10.100.0.1:9113"
-      #       ];
-      #     }
-      #   ];
-      # }
+      {
+        job_name = "nginx-teapot";
+        static_configs = [
+          {
+            targets = [
+              "10.100.0.1:9113"
+            ];
+          }
+        ];
+      }
       {
         job_name = "unbound";
         static_configs = [
