@@ -53,7 +53,7 @@ in
     systemd.enableXdgAutostart = true;
     xwayland.enable = true;
 
-    plugins = with stable-pkgs.hyprlandPlugins; [ hy3 ];
+    plugins = with pkgs.hyprlandPlugins; [ hy3 ];
 
     settings = {
       "$mainMod" = "SUPER";
@@ -132,7 +132,7 @@ in
 
           # fsim
           # "${monitors_laptop.fsim.table-right.left}, preferred, auto, 1"
-          # "${monitors_laptop.fsim.table-right.right}, disable"
+          "${monitors_laptop.fsim.table-right.right}, disable"
 
           # "${monitors_laptop.fsim.table-left.right}, preferred, auto, 1"
           "${monitors_laptop.fsim.table-left.right}, disable"
