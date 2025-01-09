@@ -1,10 +1,11 @@
 {
   pkgs,
   config,
+  custom,
   ...
 }:
 let
-  vpn_port = 53;
+  vpn_port = custom.wireguard.server.port;
 in
 {
   age.secrets = {
@@ -23,16 +24,7 @@ in
       privateKeyFile = config.age.secrets.wireguard-vpn-setup.path;
 
       peers = [
-        {
-          # teapot
-          publicKey = "cLPAuu+Pu0nTBenl+ezZyjtVNqP3WYBzKM8BPYQ4Jh8=";
-
-          allowedIPs = [ "10.100.0.0/0" ];
-
-          endpoint = "5.83.152.153:${toString vpn_port}";
-
-          persistentKeepalive = 25;
-        }
+        custom.wireguard.server.peer
       ];
     };
   };

@@ -165,6 +165,8 @@
         }
       );
 
+      custom = import ./custom {};
+
       baseline-modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
@@ -217,6 +219,7 @@
           stable-pkgs
           old-pkgs
           lib
+          custom
           ;
         flake = self;
       };

@@ -1,10 +1,11 @@
 {
   config,
   flake,
+  custom,
   ...
 }:
 let
-  vpn_port = flake.nixosConfigurations.teapot.config.networking.wireguard.interfaces.wg0.listenPort;
+  vpn_port = custom.wireguard.server.port;
 in
 {
   age.secrets = {
@@ -23,16 +24,7 @@ in
       privateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
 
       peers = [
-        {
-          # teapot
-          publicKey = "cLPAuu+Pu0nTBenl+ezZyjtVNqP3WYBzKM8BPYQ4Jh8=";
-
-          allowedIPs = [ "10.100.0.0/24" ];
-
-          endpoint = "5.83.152.153:${toString vpn_port}";
-
-          persistentKeepalive = 25;
-        }
+        custom.wireguard.server.peer
       ];
     };
   };

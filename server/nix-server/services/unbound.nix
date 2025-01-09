@@ -35,8 +35,11 @@ in
     enable = true;
     checkconf = true;
     resolveLocalQueries = true;
-    localControlSocketPath = "/run/unbound/unbound.ctl";
+    # localControlSocketPath = "/run/unbound/unbound.ctl";
     settings = {
+      # remote-control = {
+      #   control-enable = true;
+      # };
       server = {
         interface = [
           "0.0.0.0@53"
@@ -115,10 +118,11 @@ in
 
   # services.prometheus.exporters.unbound = {
   #   enable = true;
-  #   # listenAddress = "localhost";
-  #   unbound = {
-  #     host = config.services.unbound.localControlSocketPath;
-  #   };
+  #   listenAddress = "localhost";
+  #   # unbound = {
+  #   #   host = config.services.unbound.localControlSocketPath;
+  #   # };
+  #   #
 
   #   # inherit (config.services.unbound) user group;
   # };

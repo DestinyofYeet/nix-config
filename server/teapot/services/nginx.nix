@@ -8,12 +8,11 @@
     recommendedOptimisation = true;
     recommendedTlsSettings = true;
     recommendedProxySettings = true;
+
     clientMaxBodySize = "256m";
 
-    httpConfig = ''
-      proxy_headers_hash_max_size 1024;
-      proxy_headers_hash_bucket_size 128;
-    '';
+    mapHashBucketSize = 128;
+    mapHashMaxSize = 1024;
   };
 
   security.acme = {
@@ -26,5 +25,9 @@
       80
       443
     ];
+  };
+
+  services.prometheus.exporters.nginx = {
+    enable = true;
   };
 }

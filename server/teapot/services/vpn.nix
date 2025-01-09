@@ -1,10 +1,11 @@
 {
   pkgs,
   config,
+  custom,
   ...
 }:
 let
-  vpn_port = 53;
+  vpn_port = custom.wireguard.server.port;
   interface_ext = "enp6s18";
 in
 rec {
@@ -34,23 +35,7 @@ rec {
 
       privateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
 
-      peers = [
-        {
-          # wattson
-          publicKey = "k6JnjO2BpghnwIgmDdARgi06LIHlPyQhoco6kjk6MT8=";
-          allowedIPs = [ "10.100.0.2/32" ];
-        }
-        {
-          # main
-          publicKey = "CU76SCOQ1hmapZG2TWMhh/cgfjNviYUZcdbUEplW3n0=";
-          allowedIPs = [ "10.100.0.3/32" ];
-        }
-        {
-          # nix-server
-          publicKey = "6o6D4EVq3qvyu2r90tp+dtstwtXID8QRnd8oyKYKtxc=";
-          allowedIPs = [ "10.100.0.4/32" ];
-        }
-      ];
+      peers = custom.wireguard.peers;
     };
   };
 }

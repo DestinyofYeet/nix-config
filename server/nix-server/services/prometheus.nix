@@ -58,6 +58,26 @@
           }
         ];
       }
+      # {
+      #   job_name = "nginx-teapot";
+      #   static_configs = [
+      #     {
+      #       targets = [
+      #         "10.100.0.1:9113"
+      #       ];
+      #     }
+      #   ];
+      # }
+      {
+        job_name = "unbound";
+        static_configs = [
+          {
+            targets = [
+              "localhost:9167" 
+            ];
+          }
+        ];
+      }
     ];
 
     exporters.systemd = {
