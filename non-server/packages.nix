@@ -182,7 +182,7 @@ in
       maliit-keyboard
       thunderbird
       d2
-      gimp-with-plugins
+      stable-pkgs.gimp-with-plugins
       rpi-imager
       zoom-us
       texliveFull
