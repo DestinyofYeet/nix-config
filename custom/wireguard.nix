@@ -8,6 +8,8 @@
 
     ip = "10.100.0.0/24";
 
+    mtu = 1000;
+
     peer = {
       inherit publicKey;
 

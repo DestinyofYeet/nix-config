@@ -12,6 +12,8 @@
     wg0 = {
       ips = [ "10.100.0.4/32" ];
 
+      mtu = custom.wireguard.server.mtu;
+
       privateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
 
       peers = [
