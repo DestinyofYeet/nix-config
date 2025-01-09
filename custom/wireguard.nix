@@ -1,6 +1,7 @@
 {
   ...
-}:{
+}:
+{
   server = rec {
     host = "ole.blue";
     port = 53;

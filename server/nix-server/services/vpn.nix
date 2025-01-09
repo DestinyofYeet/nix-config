@@ -3,7 +3,8 @@
   config,
   custom,
   ...
-}:{
+}:
+{
   age.secrets = {
     wireguard-vpn-priv-key.file = ../secrets/wireguard-vpn-priv-key.age;
   };

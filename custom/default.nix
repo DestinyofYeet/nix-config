@@ -1,5 +1,6 @@
 {
   ...
-}:{
-  wireguard = import ./wireguard.nix {};
+}:
+{
+  wireguard = import ./wireguard.nix { };
 }

@@ -73,7 +73,7 @@
         static_configs = [
           {
             targets = [
-              "localhost:9167" 
+              "localhost:9167"
             ];
           }
         ];
