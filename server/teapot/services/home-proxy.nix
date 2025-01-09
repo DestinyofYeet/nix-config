@@ -17,20 +17,26 @@ let
     "bazarr.local.ole.blue"
   ];
 
+  getPort = url: (builtins.elemAt (lib.splitString ":" (lib.last (lib.splitString "://" url))) 1);
+
   filteredHosts = lib.filterAttrs (name: value: !(lib.elem name blacklistedHosts)) (
     lib.filterAttrs (name: value: (lib.hasSuffix ".local.ole.blue" name)) hosts
   );
 
+  nginxExtraConf = ''
+    proxy_read_timeout 5m;
+  '';
+
+  # extremely slow
   transformedHosts = builtins.mapAttrs (name: value: {
     forceSSL = true;
     enableACME = true;
-    locations."/".proxyPass = "https://10.100.0.4";
-    extraConfig = ''
-      proxy_set_header X-Real-IP $remote_addr;
-    	proxy_set_header Host $host;
-    	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    	proxy_set_header X-Forwarded-Proto $scheme;
-    '';
+    locations."/" = {
+      # proxyPass = "http://10.100.0.4:${getPort value.locations."/".proxyPass}";
+      proxyPass = "https://local.ole.blue";
+      extraConfig = nginxExtraConf + value.locations."/".extraConfig;
+    };
+    extraConfig = nginxExtraConf + value.extraConfig;
   }) filteredHosts;
 
 in

@@ -18,7 +18,7 @@
           # teapot
           publicKey = "cLPAuu+Pu0nTBenl+ezZyjtVNqP3WYBzKM8BPYQ4Jh8=";
 
-          allowedIPs = [ "10.100.0.0/24" "10.100.0.1" ];
+          allowedIPs = [ "10.100.0.0/24" ];
 
           endpoint = "5.83.152.153:53";
 

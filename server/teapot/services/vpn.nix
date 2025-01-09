@@ -13,6 +13,10 @@ rec {
     wireguard-vpn-priv-key.file = ../secrets/wireguard-vpn-priv-key.age;
   };
 
+  networking.hosts = {
+    "10.100.0.4" = [ "local.ole.blue" ];
+  };
+
   networking.nat.enable = true;
   networking.nat.externalInterface = interface_ext;
   networking.nat.internalInterfaces = [ "wg0" ];

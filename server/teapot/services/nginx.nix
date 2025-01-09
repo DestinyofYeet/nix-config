@@ -10,13 +10,10 @@
     recommendedProxySettings = true;
     clientMaxBodySize = "256m";
 
-    # virtualHosts."ole.blue" = {
-    #   enableACME = true;
-    #   forceSSL = true;
-    #   locations."/" = {
-    #     # for the basic nginx hello page
-    #   };
-    # };
+    httpConfig = ''
+      proxy_headers_hash_max_size 1024;
+      proxy_headers_hash_bucket_size 128;
+    '';
   };
 
   security.acme = {
