@@ -41,6 +41,8 @@ let
 in
 {
 
+  hardware.flipperzero.enable = true;
+
   # zsh config
   environment.pathsToLink = [ "/share/zsh" ];
 
@@ -236,7 +238,7 @@ in
       krita
       aseprite
       # pyprland
-      stable-pkgs.qFlipper
+      qFlipper
     ]
     ++ luaPkgs
     ++ kdePkgs
