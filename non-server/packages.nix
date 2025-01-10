@@ -236,7 +236,7 @@ in
       krita
       aseprite
       # pyprland
-      qFlipper
+      stable-pkgs.qFlipper
     ]
     ++ luaPkgs
     ++ kdePkgs
