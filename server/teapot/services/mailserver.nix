@@ -24,6 +24,7 @@
     domains = [
       "ole.blue"
       "uwuwhatsthis.de"
+      "drogen.gratis"
     ];
 
     fullTextSearch = {
@@ -73,6 +74,7 @@
         '';
 
         aliases = [
+          "ole@drogen.gratis"
           "6tvz1ov2vj2r5mtfvsvf@ole.blue"
           "2cgIIVYfX7Kk5Asx8awZ@ole.blue"
           "OTIqJBpXpka3lwiJLTsD@ole.blue"
