@@ -60,7 +60,7 @@ rec {
   settings = {
     editor = "hx";
 
-    screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
+    screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -z -m region -o /tmp";
 
     nix-server = {
 
