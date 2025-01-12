@@ -6,7 +6,7 @@
 
 let
   root-domain = "nix-server.infra.wg";
-  ip = "192.168.0.250";
+  ip = "192.168.1.250";
   build-subdomains =
     build-domain: build-ip: sub-domains:
     (map (sub-domain: (wrap-string "${sub-domain}.${build-domain}. IN A ${build-ip}")) sub-domains);
@@ -24,9 +24,9 @@ let
       86400        ; Minimum TTL
     ) IN NS ns.local.ole.blue.
 
-    ns.local.ole.blue.   IN A 192.168.0.250
-    local.ole.blue.      IN A 192.168.0.250
-    *.local.ole.blue.    IN A 192.168.0.250
+    ns.local.ole.blue.   IN A ${ip}
+    local.ole.blue.      IN A ${ip}
+    *.local.ole.blue.    IN A ${ip}
   '';
 in
 {
@@ -80,17 +80,18 @@ in
           [
             "\"${root-domain}. IN A ${ip}\""
           ]
-          ++ build-subdomains "nix-server.infra.wg" "192.168.0.250" [
-            "jellyfin"
-            "firefly"
-            "cache"
-            "hydra"
-            "qbittorrent"
-            "sonarr"
-            "prowlarr"
-            "navidrome"
-            "syncthing"
-          ];
+          # ++ build-subdomains "nix-server.infra.wg" "${ip}" [
+          #   "jellyfin"
+          #   "firefly"
+          #   "cache"
+          #   "hydra"
+          #   "qbittorrent"
+          #   "sonarr"
+          #   "prowlarr"
+          #   "navidrome"
+          #   "syncthing"
+          # ];
+          ;
       };
 
       # I want the unbound server to have a local storage of the zone data incase the internet goes out
