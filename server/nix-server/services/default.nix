@@ -51,5 +51,8 @@
     ./msmtp.nix
     ./wiki-js.nix
     ./vpn.nix
+    ./nextcloud.nix
+    # ./minio.nix
+    ./garage.nix
   ];
 }

@@ -50,4 +50,10 @@ in
   "email-uptime-kuma.age".publicKeys = authed;
 
   "wireguard-vpn-priv-key.age".publicKeys = authed;
+
+  "garage-rpc-secret.age".publicKeys = authed;
+  "garage-admin-token.age".publicKeys = authed;
+
+  "nextcloud-bucket-secret-key.age".publicKeys = authed;
+  "nextcloud-admin-pass.age".publicKeys = authed;
 }
