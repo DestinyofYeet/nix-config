@@ -275,6 +275,8 @@
         };
       };
 
+      # test
+
       # This is highly advised, and will prevent many possible mistakes
       checks =
         makeConfigurations [
