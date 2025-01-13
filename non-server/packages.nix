@@ -180,7 +180,7 @@ in
       tree
       mutt
       whois
-      # rnote
+      rnote
       maliit-keyboard
       thunderbird
       d2

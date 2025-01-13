@@ -43,16 +43,16 @@
         name = "${config.services.wiki-js.settings.db.user}";
         ensureDBOwnership = true;
       }
-      # {
-      #   name = config.services.nextcloud.config.dbuser;
-      #   ensureDBOwnership = true;
-      # }
+      {
+        name = config.services.nextcloud.config.dbuser;
+        ensureDBOwnership = true;
+      }
     ];
 
     ensureDatabases = [
       "hydra"
       config.services.wiki-js.settings.db.db
-      # config.services.nextcloud.config.dbname
+      config.services.nextcloud.config.dbname
     ];
   };
 }
