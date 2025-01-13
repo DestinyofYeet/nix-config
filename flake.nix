@@ -345,6 +345,7 @@
         no-build-confs = [
           "main"
           "wattson"
+          "kartoffelkiste"
         ];
         configurations = lib.filterAttrs (name: value: !(lib.elem name no-build-confs)) self.nixosConfigurations;
       in {
