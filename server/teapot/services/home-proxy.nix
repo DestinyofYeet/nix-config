@@ -49,15 +49,13 @@ in
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Content-Type-Options nosniff;
 
-        # HTTP response headers borrowed from Nextcloud `.htaccess`
-        add_header Referrer-Policy                   "no-referrer"       always;
-        add_header X-Content-Type-Options            "nosniff"           always;
-        add_header X-Frame-Options                   "SAMEORIGIN"        always;
-        add_header X-Permitted-Cross-Domain-Policies "none"              always;
-        add_header X-Robots-Tag                      "noindex, nofollow" always;
-        add_header X-XSS-Protection                  "1; mode=block"     always;
+        add_header X-Content-Type-Options nosniff;
+        add_header Strict-Transport-Security "max-age=15552000; includeSubDomains";
+        add_header X-XSS-Protection "1; mode=block";
+        add_header X-Robots-Tag "noindex, nofollow";
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header Referrer-Policy "no-referrer";
       '';
     };
   };

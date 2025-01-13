@@ -16,6 +16,7 @@
     hydra-uwuwhatsthis-de.file = ../secrets/hydra-uwuwhatsthis.de.age;
 
     nextcloud-uwuwhatsthis-de.file = ../secrets/nextcloud-uwuwhatsthis.de.age;
+    nextcloud-ole-blue.file = ../secrets/nextcloud-ole-blue.age;
   };
 
   mailserver = {
@@ -189,6 +190,11 @@
 
       "nextcloud@uwuwhatsthis.de" = {
         hashedPasswordFile = "${config.age.secrets.nextcloud-uwuwhatsthis-de.path}";
+        sendOnly = true;
+      };
+
+      "nextcloud@ole.blue" = {
+        hashedPasswordFile = config.age.secrets.nextcloud-ole-blue.path;
         sendOnly = true;
       };
     };
