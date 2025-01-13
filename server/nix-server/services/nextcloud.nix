@@ -67,8 +67,6 @@ in
         region = "eu-de-south-1";
       };
 
-
-      
     };
 
     settings = {
