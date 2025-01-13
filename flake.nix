@@ -350,9 +350,8 @@
         configurations = lib.filterAttrs (name: value: !(lib.elem name no-build-confs)) self.nixosConfigurations;
 
         build-host = name: settingsAttr: {
-          deployment = settingsAttr.deployment;
           imports = configurations.${name}._module.args.modules;
-        };
+        } // settingsAttr;
       in {
         meta = {
           nixpkgs = import nixpkgs { system = "x86_64-linux"; };
