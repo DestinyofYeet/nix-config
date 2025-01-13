@@ -354,7 +354,7 @@
             targetUser = "ole";
             buildOnTarget = true;
           };
-          import = [
+          imports = [
             inputs.simple-nixos-mailserver.nixosModule
 
             ./server/teapot
