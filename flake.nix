@@ -348,6 +348,11 @@
           "kartoffelkiste"
         ];
         configurations = lib.filterAttrs (name: value: !(lib.elem name no-build-confs)) self.nixosConfigurations;
+
+        build-host = name: deployAttr: {
+          deployment = deployAttr;
+          imports = configurations.${name}._module.args.modules;
+        };
       in {
         meta = {
           nixpkgs = import nixpkgs { system = "x86_64-linux"; };
@@ -358,7 +363,7 @@
           nodeSpecialArgs = builtins.mapAttrs (name: value: value._module.specialArgs) configurations;
         };
 
-        teapot = {
+        teapot = build-host "teapot" {
           deployment = {
             targetHost = "teapot";
             targetUser = "root";
@@ -367,14 +372,14 @@
         };
 
         
-        nix-server = {
+        nix-server = build-host "nix-server" {
           deployment = {
             targetHost = "nix-server.infra.wg";
             targetUser = "root";
             buildOnTarget = true;
           };
         };
-      } // builtins.mapAttrs (name: value: { imports = value._module.args.modules; }) configurations;
+      };
     };
 
 }
