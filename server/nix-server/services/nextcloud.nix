@@ -62,7 +62,9 @@ in
         autocreate = true;
         region = "eu-de-south-1";
       };
+    };
 
+    settings = {
       trusted_proxies = [
         "10.100.0.1"
         "127.0.0.1"
