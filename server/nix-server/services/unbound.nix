@@ -76,22 +76,21 @@ in
         ];
 
         # needs quotes
-        local-data =
-          [
-            "\"${root-domain}. IN A ${ip}\""
-          ]
-          # ++ build-subdomains "nix-server.infra.wg" "${ip}" [
-          #   "jellyfin"
-          #   "firefly"
-          #   "cache"
-          #   "hydra"
-          #   "qbittorrent"
-          #   "sonarr"
-          #   "prowlarr"
-          #   "navidrome"
-          #   "syncthing"
-          # ];
-          ;
+        local-data = [
+          "\"${root-domain}. IN A ${ip}\""
+        ]
+        # ++ build-subdomains "nix-server.infra.wg" "${ip}" [
+        #   "jellyfin"
+        #   "firefly"
+        #   "cache"
+        #   "hydra"
+        #   "qbittorrent"
+        #   "sonarr"
+        #   "prowlarr"
+        #   "navidrome"
+        #   "syncthing"
+        # ];
+        ;
       };
 
       # I want the unbound server to have a local storage of the zone data incase the internet goes out

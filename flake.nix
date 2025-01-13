@@ -341,44 +341,50 @@
 
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-      colmena = let
-        no-build-confs = [
-          "main"
-          "wattson"
-          "kartoffelkiste"
-        ];
-        configurations = lib.filterAttrs (name: value: !(lib.elem name no-build-confs)) self.nixosConfigurations;
+      colmena =
+        let
+          no-build-confs = [
+            "main"
+            "wattson"
+            "kartoffelkiste"
+          ];
+          configurations = lib.filterAttrs (
+            name: value: !(lib.elem name no-build-confs)
+          ) self.nixosConfigurations;
 
-        build-host = name: settingsAttr: {
-          imports = configurations.${name}._module.args.modules;
-        } // settingsAttr;
-      in {
-        meta = {
-          nixpkgs = import nixpkgs { system = "x86_64-linux"; };
+          build-host =
+            name: settingsAttr:
+            {
+              imports = configurations.${name}._module.args.modules;
+            }
+            // settingsAttr;
+        in
+        {
+          meta = {
+            nixpkgs = import nixpkgs { system = "x86_64-linux"; };
 
-          specialArgs = defaultSpecialArgs;
+            specialArgs = defaultSpecialArgs;
 
-          nodeNixpkgs = builtins.mapAttrs (name: value: value.pkgs) configurations;
-          nodeSpecialArgs = builtins.mapAttrs (name: value: value._module.specialArgs) configurations;
-        };
+            nodeNixpkgs = builtins.mapAttrs (name: value: value.pkgs) configurations;
+            nodeSpecialArgs = builtins.mapAttrs (name: value: value._module.specialArgs) configurations;
+          };
 
-        teapot = build-host "teapot" {
-          deployment = {
-            targetHost = "teapot";
-            targetUser = "root";
-            buildOnTarget = true;
+          teapot = build-host "teapot" {
+            deployment = {
+              targetHost = "teapot";
+              targetUser = "root";
+              buildOnTarget = true;
+            };
+          };
+
+          nix-server = build-host "nix-server" {
+            deployment = {
+              targetHost = "nix-server.infra.wg";
+              targetUser = "root";
+              buildOnTarget = true;
+            };
           };
         };
-
-        
-        nix-server = build-host "nix-server" {
-          deployment = {
-            targetHost = "nix-server.infra.wg";
-            targetUser = "root";
-            buildOnTarget = true;
-          };
-        };
-      };
     };
 
 }

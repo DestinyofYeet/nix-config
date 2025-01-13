@@ -3,9 +3,11 @@
   config,
   lib,
   ...
-}:let
+}:
+let
   hostname = "cloud.local.ole.blue";
-in {
+in
+{
 
   age.secrets = {
     nextcloud-bucket-secret-key = {
@@ -44,7 +46,7 @@ in {
       dbtype = "sqlite";
 
       adminpassFile = config.age.secrets.nextcloud-admin-pass.path;
-      
+
       objectstore.s3 = {
         enable = true;
         key = "GKcf3e40dcbf161ac18889096f";
@@ -62,5 +64,6 @@ in {
     };
   };
 
-  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl;
+  services.nginx.virtualHosts.${config.services.nextcloud.hostName} =
+    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl;
 }

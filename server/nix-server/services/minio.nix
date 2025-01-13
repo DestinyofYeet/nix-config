@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}:{
+}:
+{
   services.minio = {
     # I dunno currently broken? -> yes: https://github.com/NixOS/nixpkgs/pull/288183
     enable = false;

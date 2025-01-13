@@ -35,6 +35,6 @@
       enable = true;
       extraArgs = "--keep 10";
       dates = "daily";
-    };    
+    };
   };
 }
