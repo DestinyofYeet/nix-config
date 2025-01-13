@@ -349,8 +349,8 @@
         ];
         configurations = lib.filterAttrs (name: value: !(lib.elem name no-build-confs)) self.nixosConfigurations;
 
-        build-host = name: deployAttr: {
-          deployment = deployAttr;
+        build-host = name: settingsAttr: {
+          deployment = settingsAttr.deployment;
           imports = configurations.${name}._module.args.modules;
         };
       in {
