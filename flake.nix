@@ -257,9 +257,9 @@
         nix-server = {
           hostname = "nix-server.infra.wg";
           profiles.system = {
-            sshUser = "ole";
-            user = "root";
-            interactiveSudo = true;
+            sshUser = "root";
+            # user = "root";
+            # interactiveSudo = true;
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nix-server;
           };
         };
@@ -267,9 +267,9 @@
         teapot = {
           hostname = "teapot";
           profiles.system = {
-            sshUser = "ole";
-            user = "root";
-            interactiveSudo = true;
+            sshUser = "root";
+            # user = "root";
+            # interactiveSudo = true;
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.teapot;
           };
         };

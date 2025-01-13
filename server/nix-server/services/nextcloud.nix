@@ -37,13 +37,14 @@ in
     };
 
     config = {
-      # dbhost = "localhost";
-      # dbtype = "pgsql";
+      # # dbhost = "localhost";
+      dbhost = "/run/postgresql";
+      dbtype = "pgsql";
 
-      # dbname = "nextcloud";
-      # dbuser = "nextcloud";
+      dbname = "nextcloud";
+      dbuser = "nextcloud";
       #
-      dbtype = "sqlite";
+      # dbtype = "sqlite";
 
       adminpassFile = config.age.secrets.nextcloud-admin-pass.path;
 
@@ -61,6 +62,11 @@ in
         autocreate = true;
         region = "eu-de-south-1";
       };
+
+      trusted_proxies = [
+        "10.100.0.1"
+        "127.0.0.1"
+      ];
     };
   };
 
