@@ -15,6 +15,7 @@ let
     "shoko.local.ole.blue"
     "firefly-importer.local.ole.blue"
     "bazarr.local.ole.blue"
+    "cloud.local.ole.blue"
   ];
 
   getPort = url: (builtins.elemAt (lib.splitString ":" (lib.last (lib.splitString "://" url))) 1);
@@ -23,10 +24,6 @@ let
     lib.filterAttrs (name: value: (lib.hasSuffix ".local.ole.blue" name)) hosts
   );
 
-  nginxExtraConf = ''
-    proxy_read_timeout 5m;
-  '';
-
   # extremely slow
   transformedHosts = builtins.mapAttrs (name: value: {
     forceSSL = true;
@@ -34,12 +31,25 @@ let
     locations."/" = {
       # proxyPass = "http://10.100.0.4:${getPort value.locations."/".proxyPass}";
       proxyPass = "https://local.ole.blue";
-      extraConfig = nginxExtraConf + value.locations."/".extraConfig;
+      extraConfig = value.locations."/".extraConfig;
     };
-    extraConfig = nginxExtraConf + value.extraConfig;
+    extraConfig = value.extraConfig;
   }) filteredHosts;
 
 in
 {
-  services.nginx.virtualHosts = transformedHosts;
+  services.nginx.virtualHosts = transformedHosts // {
+    "cloud.local.ole.blue" = {
+      locations."/".proxyPass = "https://local.ole.blue";
+      forceSSL = true;
+      enableACME = true;
+
+      extraConfig = ''
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+      '';
+    };
+  };
 }
