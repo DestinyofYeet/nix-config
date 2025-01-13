@@ -349,7 +349,7 @@
 
         teapot = {
           deployment = {
-            targetHost = "ole.blue";
+            targetHost = "teapot";
             targetPort = 22;
             targetUser = "ole";
             buildOnTarget = true;
