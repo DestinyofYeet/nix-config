@@ -63,7 +63,7 @@ in
         # useSsl = true;
         useSsl = false;
         port = 3900;
-        autocreate = true;
+        autocreate = false;
         region = "eu-de-south-1";
       };
     };
@@ -83,8 +83,8 @@ in
   services.nginx.virtualHosts.${config.services.nextcloud.hostName} =
     lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
     // {
-      extraConfig = ''
-        client_max_body_size ${config.services.nextcloud.maxUploadSize};
-      '';
+      # extraConfig = ''
+      #   client_max_body_size ${config.services.nextcloud.maxUploadSize};
+      # '';
     };
 }
