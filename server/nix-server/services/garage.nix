@@ -29,7 +29,7 @@ in
     settings = {
       data_dir = "/mnt/data/data/garage";
 
-      db_engine = "sqlite";
+      db_engine = "lmdb";
 
       replication_factor = 1;
 
@@ -84,22 +84,27 @@ in
   services.nginx.virtualHosts =
     let
       ssl-conf = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl;
+
+      defaultExtraConf = ''
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_max_temp_file_size 0;
+        client_max_body_size 0;
+      '';
     in
     {
 
       "${config.services.garage.settings.s3_api.root_domain}" = ssl-conf // {
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString apiPort}";
-          extraConfig = ''
-            proxy_max_temp_file_size 0;
-            client_max_body_size 5G;
-          '';
+          extraConfig = defaultExtraConf;
         };
       };
 
       "${config.services.garage.settings.s3_web.root_domain}" = ssl-conf // {
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString webPort}";
+          extraConfig = defaultExtraConf;
         };
       };
     };

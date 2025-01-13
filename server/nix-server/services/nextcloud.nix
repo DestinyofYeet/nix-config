@@ -54,15 +54,15 @@ in
 
       objectstore.s3 = {
         enable = true;
-        key = "GKcf3e40dcbf161ac18889096f";
-        # hostname = "s3.local.ole.blue";
-        hostname = "localhost";
+        key = "GK9329cf0d4cce8846eec0e796";
+        hostname = "s3.local.ole.blue";
+        # hostname = "localhost";
         bucket = "nextcloud-bucket";
         secretFile = config.age.secrets.nextcloud-bucket-secret-key.path;
         usePathStyle = true;
-        # useSsl = true;
-        useSsl = false;
-        port = 3900;
+        useSsl = true;
+        # useSsl = false;
+        # port = 3900;
         autocreate = false;
         region = "eu-de-south-1";
       };
