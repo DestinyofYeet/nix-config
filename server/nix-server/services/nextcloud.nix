@@ -75,7 +75,8 @@ in
   };
 
   services.nginx.virtualHosts.${config.services.nextcloud.hostName} =
-    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
+    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
+    // {
       extraConfig = ''
         # HTTP response headers borrowed from Nextcloud `.htaccess`
         add_header Referrer-Policy                   "no-referrer"       always;
