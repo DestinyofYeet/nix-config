@@ -239,6 +239,7 @@ in
       aseprite
       # pyprland
       qFlipper
+      colmena
     ]
     ++ luaPkgs
     ++ kdePkgs

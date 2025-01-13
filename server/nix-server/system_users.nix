@@ -7,8 +7,8 @@
 }:
 
 {
-  # users.users.root.openssh.authorizedKeys.keys = [
-  # ] ++ config.users.users.ole.openssh.authorizedKeys.keys;
+  users.users.root.openssh.authorizedKeys.keys = [
+  ] ++ config.users.users.ole.openssh.authorizedKeys.keys;
 
   users.users.ole = {
     isNormalUser = true;

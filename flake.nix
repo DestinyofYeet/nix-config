@@ -220,6 +220,7 @@
           old-pkgs
           lib
           custom
+          home-manager
           ;
         flake = self;
       };
@@ -350,7 +351,6 @@
         teapot = {
           deployment = {
             targetHost = "teapot";
-            targetPort = 22;
             targetUser = "root";
             buildOnTarget = true;
           };
@@ -358,6 +358,24 @@
             inputs.simple-nixos-mailserver.nixosModule
 
             ./server/teapot
+          ] ++ baseline-modules;
+        };
+
+        
+        nix-server = {
+          deployment = {
+            targetHost = "nix-server.infra.wg";
+            targetUser = "root";
+            buildOnTarget = true;
+          };
+          imports = [
+            inputs.add-replay-gain.nixosModules.add-replay-gain
+            inputs.clean-unused-files.nixosModules.clean-unused-files
+            # inputs.strichliste.nixosModules.strichliste
+            inputs.networkNamespaces.nixosModules.networkNamespaces
+            inputs.auto-add-torrents.nixosModules.auto-add-torrents
+            inputs.prometheus-qbit.nixosModules.default
+            ./server/nix-server
           ] ++ baseline-modules;
         };
       };
