@@ -9,7 +9,7 @@
 
     ip = "10.100.0.0/24";
 
-    mtu = 1250;
+    mtu = 1300;
 
     peer = {
       inherit publicKey;
