@@ -351,7 +351,7 @@
           deployment = {
             targetHost = "teapot";
             targetPort = 22;
-            targetUser = "ole";
+            targetUser = "root";
             buildOnTarget = true;
           };
           imports = [
