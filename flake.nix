@@ -358,36 +358,22 @@
           nodeSpecialArgs = builtins.mapAttrs (name: value: value._module.specialArgs) configurations;
         };
 
-        # teapot = {
-        #   deployment = {
-        #     targetHost = "teapot";
-        #     targetUser = "root";
-        #     buildOnTarget = true;
-        #   };
-        #   imports = [
-        #     inputs.simple-nixos-mailserver.nixosModule
-
-        #     ./server/teapot
-        #   ] ++ baseline-modules;
-        # };
+        teapot = {
+          deployment = {
+            targetHost = "teapot";
+            targetUser = "root";
+            buildOnTarget = true;
+          };
+        };
 
         
-        # nix-server = {
-        #   deployment = {
-        #     targetHost = "nix-server.infra.wg";
-        #     targetUser = "root";
-        #     buildOnTarget = true;
-        #   };
-        #   imports = [
-        #     inputs.add-replay-gain.nixosModules.add-replay-gain
-        #     inputs.clean-unused-files.nixosModules.clean-unused-files
-        #     # inputs.strichliste.nixosModules.strichliste
-        #     inputs.networkNamespaces.nixosModules.networkNamespaces
-        #     inputs.auto-add-torrents.nixosModules.auto-add-torrents
-        #     inputs.prometheus-qbit.nixosModules.default
-        #     ./server/nix-server
-        #   ] ++ baseline-modules;
-        # };
+        nix-server = {
+          deployment = {
+            targetHost = "nix-server.infra.wg";
+            targetUser = "root";
+            buildOnTarget = true;
+          };
+        };
       } // builtins.mapAttrs (name: value: { imports = value._module.args.modules; }) configurations;
     };
 
