@@ -56,6 +56,8 @@ in
         add_header X-Robots-Tag "noindex, nofollow";
         add_header X-Frame-Options "SAMEORIGIN";
         add_header Referrer-Policy "no-referrer";
+
+        client_max_body_size ${flake.nixosConfigurations.nix-server.config.services.nextcloud.maxUploadSize};
       '';
     };
   };
