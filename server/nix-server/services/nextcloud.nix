@@ -69,9 +69,21 @@ in
         "10.100.0.1"
         "127.0.0.1"
       ];
+
+      default_phone_region = "DE";
     };
   };
 
   services.nginx.virtualHosts.${config.services.nextcloud.hostName} =
-    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl;
+    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
+      extraConfig = ''
+        # HTTP response headers borrowed from Nextcloud `.htaccess`
+        add_header Referrer-Policy                   "no-referrer"       always;
+        add_header X-Content-Type-Options            "nosniff"           always;
+        add_header X-Frame-Options                   "SAMEORIGIN"        always;
+        add_header X-Permitted-Cross-Domain-Policies "none"              always;
+        add_header X-Robots-Tag                      "noindex, nofollow" always;
+        add_header X-XSS-Protection                  "1; mode=block"     always;
+      '';
+    };
 }
