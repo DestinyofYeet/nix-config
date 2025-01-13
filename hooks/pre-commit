@@ -1,0 +1,2 @@
+echo "Running nix fmt"
+nix fmt
