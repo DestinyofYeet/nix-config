@@ -7,7 +7,10 @@
 }:
 {
   age.secrets = {
-    postgresql-init.file = ../secrets/postgresql-init.age;
+    postgresql-init = {
+      file = ../secrets/postgresql-init.age;
+      owner = "postgres";
+    };
   };
 
   services.postgresql = {
@@ -50,7 +53,7 @@
     ];
 
     authentication = ''
-      host all all 10.100.0.1/32 password
+      host all all 10.100.0.1/32 md5
     '';
   
     ensureDatabases = [
@@ -63,6 +66,20 @@
 
     enableTCPIP = true;
 
-    initialScript = config.age.secrets.postgresql-init.path;
+    # initialScript = config.age.secrets.postgresql-init.path;
+  };
+
+  systemd.services."postgresql-user-fixup" = lib.mkIf config.services.postgresql.enable {
+    serviceConfig = {
+      Type = "oneshot";
+      User = "postgres";
+    };
+
+    wantedBy = [ "postgresql.service" ];
+    after = [ "postgresql.service" ];
+
+    script = ''
+      echo ${config.age.secrets.postgresql-init.path} | ${pkgs.postgresql}/bin/psql
+    '';
   };
 }
