@@ -1,10 +1,11 @@
 {
   config,
+  lib,
   ...
 }:
 {
   age.secrets = {
-    postgresql-gitea-password = {
+    postgresql-gitea-password = lib.mkIf config.services.gitea.enable {
       file = ../secrets/postgresql-gitea-password.age;
       owner = "gitea";
     };
@@ -17,12 +18,13 @@
 
     database = {
       type = "postgres";
-      # socket = "/run/postgresql";
-      passwordFile = config.age.secrets.postgresql-gitea-password.path;
-      host = "10.100.0.4";
-      user = "gitea";
-      name = "gitea";
-      createDatabase = false;
+      socket = "/run/postgresql";
+
+      # passwordFile = config.age.secrets.postgresql-gitea-password.path;
+      # host = "10.100.0.4";
+      # user = "gitea";
+      # name = "gitea";
+      # createDatabase = false;
     };
 
     settings = {
