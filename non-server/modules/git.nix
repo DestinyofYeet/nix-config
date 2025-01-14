@@ -25,7 +25,7 @@ in
       };
 
       commit.gpgsign = true;
-      user.signingKey = config.age.secrets.ssh-key-github-signing.path;
+      user.signingKey = config.age.secrets.ssh-key-gitea.path;
     };
   };
 
