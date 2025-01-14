@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, ...
+
+
+
+}:
 {
   xdg.mimeApps = rec {
     enable = true;
