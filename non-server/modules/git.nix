@@ -15,6 +15,10 @@ in
 {
 
   programs.git = {
+
+    userEmail = "ole@ole.blue";
+    userName = "DestinyofYeet";
+
     extraConfig = {
       safe = {
         directory = "*";
