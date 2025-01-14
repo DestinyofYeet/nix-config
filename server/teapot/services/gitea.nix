@@ -10,15 +10,11 @@
   services.gitea = {
     enable = true;
 
-    useWizard = true;
-
     appName = "git.ole.blue";
 
     database = {
       type = "postgres";
-      # socket = "/run/postgresql";
-      passwordFile = config.age.secrets.postgresql-gitea-password.path;
-      host = "10.100.0.4";
+      socket = "/run/postgresql";
     };
 
     settings = {
