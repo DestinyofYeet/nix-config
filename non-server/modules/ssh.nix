@@ -47,6 +47,7 @@ let
   config-fsim-backup = mkConfigEntry "fsim.backup" "wiki.fsim" "ole" "ssh-key-fsim-backup";
   config-fsim-pedro = mkConfigEntry "fsim.pedro" "195.37.211.44" "beo45216" "ssh-key-fsim-pedro";
   config-vps-teapot = mkConfigEntry "teapot" "ole.blue" "ole" "ssh-key-vps-teapot";
+  config-gitea = mkConfigEntry "git.ole.blue" "git.ole.blue" "gitea" "ssh-key-gitea";
 in
 {
   age.secrets = mkSecrets [
@@ -58,6 +59,7 @@ in
     "ssh-key-fsim-backup"
     "ssh-key-fsim-pedro"
     "ssh-key-vps-teapot"
+    "ssh-key-gitea"
   ];
 
   home.file = {
@@ -72,6 +74,7 @@ in
         ${config-fsim-backup}
         ${config-fsim-pedro}
         ${config-vps-teapot}
+        ${config-gitea}
       '';
     };
   };

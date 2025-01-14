@@ -17,5 +17,7 @@
     ./taskchampion-server.nix
     ./vpn.nix
     ./home-proxy.nix
+    ./postgresql.nix
+    ./gitea.nix
   ];
 }
