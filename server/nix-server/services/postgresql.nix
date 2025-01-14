@@ -50,7 +50,7 @@
     ];
 
     authentication = ''
-      host all all 10.100.0.4/32 md5
+      host all all 10.100.0.1/32 password
     '';
   
     ensureDatabases = [
