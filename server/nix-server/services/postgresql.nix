@@ -46,10 +46,10 @@
         name = flake.nixosConfigurations.teapot.config.services.gitea.database.user;
         ensureDBOwnership = true;
       }
-      {
-        name = flake.nixosConfigurations.teapot.config.services.roundcube.database.username;
-        ensureDBOwnership = true;
-      }
+      # {
+      #   name = flake.nixosConfigurations.teapot.config.services.roundcube.database.username;
+      #   ensureDBOwnership = true;
+      # }
     ];
 
     authentication = ''
@@ -61,7 +61,7 @@
       config.services.wiki-js.settings.db.db
       config.services.nextcloud.config.dbname
       flake.nixosConfigurations.teapot.config.services.gitea.database.name
-      flake.nixosConfigurations.teapot.config.services.roundcube.database.dbname
+      # flake.nixosConfigurations.teapot.config.services.roundcube.database.dbname
     ];
 
     enableTCPIP = true;
@@ -79,7 +79,7 @@
     after = [ "postgresql.service" ];
 
     script = ''
-      echo ${config.age.secrets.postgresql-init.path} | ${pkgs.postgresql}/bin/psql
+      cat ${config.age.secrets.postgresql-init.path} | ${pkgs.postgresql}/bin/psql
     '';
   };
 }

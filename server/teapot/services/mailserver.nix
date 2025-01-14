@@ -225,11 +225,12 @@
 
     configureNginx = true;
 
-    database = {
-      host = "10.100.0.4";
-      passwordFile = config.age.secrets.postgresql-roundcube-password.path;
-      username = "roundcube";
-      dbname = "roundcube";
-    };
+    # database = {
+    #   host = "loalhost";
+    #   # host = "10.100.0.4";
+    #   # passwordFile = config.age.secrets.postgresql-roundcube-password.path;
+    #   # username = "roundcube";
+    #   # dbname = "roundcube";
+    # };
   };
 }
