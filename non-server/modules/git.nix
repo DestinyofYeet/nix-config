@@ -1,6 +1,6 @@
-{ pkgs, config, ... }:
+{ pkgs, config, osConfig, ... }:
 let
-  public-signing-key-path = ../secrets/ssh-key-github-signing-public;
+  public-signing-key-path = ../secrets/${osConfig.networking.hostName}/ssh-key-signing-key;
 
   allowed-signers = pkgs.writeText "allowed_signers" ''
     * ${builtins.readFile public-signing-key-path}
