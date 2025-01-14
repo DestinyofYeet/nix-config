@@ -56,4 +56,6 @@ in
 
   "nextcloud-bucket-secret-key.age".publicKeys = authed;
   "nextcloud-admin-pass.age".publicKeys = authed;
+
+  "postgresql-init.age".publicKeys = authed;
 }

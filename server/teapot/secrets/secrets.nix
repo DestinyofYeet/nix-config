@@ -41,4 +41,5 @@ in
   "wireguard-vpn-priv-key.age".publicKeys = authed;
 
   "postgresql-gitea-password.age".publicKeys = authed;
+  "postgresql-roundcube-password.age".publicKeys = authed;
 }

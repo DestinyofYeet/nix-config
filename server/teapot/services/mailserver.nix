@@ -17,6 +17,8 @@
 
     nextcloud-uwuwhatsthis-de.file = ../secrets/nextcloud-uwuwhatsthis.de.age;
     nextcloud-ole-blue.file = ../secrets/nextcloud-ole-blue.age;
+
+    postgresql-roundcube-password.file = ../secrets/postgresql-roundcube-password.age;
   };
 
   mailserver = {
@@ -222,5 +224,12 @@
     '';
 
     configureNginx = true;
+
+    database = {
+      host = "10.100.0.4";
+      passwordFile = config.age.secrets.postgresql-roundcube-password.path;
+      username = "roundcube";
+      dbname = "roundcube";
+    };
   };
 }

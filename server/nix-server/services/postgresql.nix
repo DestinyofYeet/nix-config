@@ -6,37 +6,27 @@
   ...
 }:
 {
-
-  # containers.postgresql = {
-  #   autoStart = false;
-
-  #   bindMounts = {
-  #     "/var/lib/postgresql-custom" = {
-  #       hostPath = "${config.serviceSettings.paths.data}/postgresql";
-  #       isReadOnly = false;
-  #     };
-  #   };
-
-  #   config = { config, pkgs, lib, ...} : {
-
-  #     services.postgresql = {
-  #       enable = true;
-
-  #       dataDir = "/var/lib/postgresql-custom";
-
-  #       settings.port = 54321;
-  #     };
-
-  #     system.stateVersion = "24.05";
-  #   };
-  # };
+  age.secrets = {
+    postgresql-init.file = ../secrets/postgresql-init.age;
+  };
 
   services.postgresql = {
     enable = true;
 
     dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/postgresql";
 
-    ensureUsers = [
+    ensureUsers = let
+      build-ensureUsers = names: [
+        (map (x: {name = x; ensureDBOwnership = true;}) names)
+      ];
+    in
+    # build-ensureUsers [
+    #   "hydra"
+    #   # config.services.wiki-js.settings.db.user
+    #   # config.services.nextcloud.config.dbuser
+    #   # flake.nixosConfigurations.teapot.config.services.gitea.database.user
+    # ];
+    [
       {
         name = "hydra";
         ensureDBOwnership = true;
@@ -53,20 +43,26 @@
         name = flake.nixosConfigurations.teapot.config.services.gitea.database.user;
         ensureDBOwnership = true;
       }
+      {
+        name = flake.nixosConfigurations.teapot.config.services.roundcube.database.username;
+        ensureDBOwnership = true;
+      }
     ];
 
+    authentication = ''
+      host all all 10.100.0.4/32 md5
+    '';
+  
     ensureDatabases = [
       "hydra"
       config.services.wiki-js.settings.db.db
       config.services.nextcloud.config.dbname
       flake.nixosConfigurations.teapot.config.services.gitea.database.name
+      flake.nixosConfigurations.teapot.config.services.roundcube.database.dbname
     ];
 
     enableTCPIP = true;
 
-    # https://github.com/DenisMedeiros/scram-sha-256-generator
-    initialScript = pkgs.writeText "postgresql-init" ''
-      alter user gitea with password 'SCRAM-SHA-256$4096:HOR5ZDmEZL0ywsp45Mnl4g==$6tBn2I9ZbZrKYrrYtf2PJIulS88zVSfuBBMFI12YRpM=:Hlc+vSFDC0V19mtC1cdIi++qGcvEb9vLu+D41fbqIXw=';
-    '';
+    initialScript = config.age.secrets.postgresql-init.path;
   };
 }
