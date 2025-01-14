@@ -7,7 +7,7 @@
   services.monero = {
     enable = true;
     dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/monero-node";
-    rpc.address = "0.0.0.0";  # use an ssh-tunnel instead
+    rpc.address = "0.0.0.0"; # use an ssh-tunnel instead
 
     extraConfig = ''
       confirm-external-bind=1

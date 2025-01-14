@@ -43,7 +43,8 @@ in
       forceSSL = true;
       enableACME = true;
 
-      extraConfig = flake.nixosConfigurations.nix-server.config.services.nginx.virtualHosts."cloud.local.ole.blue".extraConfig;
+      extraConfig =
+        flake.nixosConfigurations.nix-server.config.services.nginx.virtualHosts."cloud.local.ole.blue".extraConfig;
 
       # extraConfig = ''
       #   proxy_set_header Host $host;
