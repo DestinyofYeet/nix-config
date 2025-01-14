@@ -13,7 +13,7 @@ let
 
 in
 {
-
+  # name and email is set in baseline
   programs.git = {
     extraConfig = {
       safe = {
