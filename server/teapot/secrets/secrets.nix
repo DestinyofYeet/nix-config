@@ -39,4 +39,6 @@ in
   "nix-serve-priv-key.age".publicKeys = authed;
 
   "wireguard-vpn-priv-key.age".publicKeys = authed;
+
+  "postgresql-gitea-password.age".publicKeys = authed;
 }

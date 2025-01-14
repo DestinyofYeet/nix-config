@@ -3,6 +3,10 @@
   ...
 }:
 {
+  age.secrets = {
+    postgresql-gitea-password.file = ../secrets/postgresql-gitea-password.age;
+  };
+
   services.gitea = {
     enable = true;
 
@@ -12,8 +16,9 @@
 
     database = {
       type = "postgres";
-      socket = "/run/postgresql";
-      host = "localhost";
+      # socket = "/run/postgresql";
+      passwordFile = config.age.secrets.postgresql-gitea-password.path;
+      host = "10.100.0.4";
     };
 
     settings = {
