@@ -1152,6 +1152,26 @@
         "type": "github"
       }
     },
+    "prost": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1736883890,
+        "narHash": "sha256-hlnW5YZXcqHLYaj7GGCzEuT4BlXtGH2BSBd57GaNDFs=",
+        "owner": "haennes",
+        "repo": "prost",
+        "rev": "cd068deeb4e408932f6be8aa687840974920f156",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haennes",
+        "repo": "prost",
+        "type": "github"
+      }
+    },
     "prpr-muttkalendar": {
       "inputs": {
         "nixpkgs": [
@@ -1194,6 +1214,7 @@
         "old-nixpkgs": "old-nixpkgs",
         "plasma-manager": "plasma-manager",
         "prometheus-qbit": "prometheus-qbit",
+        "prost": "prost",
         "prpr-muttkalendar": "prpr-muttkalendar",
         "setup-env-rs": "setup-env-rs",
         "shell-aliases": "shell-aliases",

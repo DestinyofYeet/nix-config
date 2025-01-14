@@ -140,6 +140,11 @@
       url = "github:DestinyofYeet/setup-env.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    prost = {
+      url = "github:haennes/prost";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -171,6 +176,7 @@
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         inputs.nix-topology.nixosModules.default
+        inputs.prost.nixosModules.default
 
         (
           { ... }:
