@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  osConfig,
-  ...
-}:
+{ pkgs, config, osConfig, ... }:
 let
   public-signing-key-path = ../secrets/${osConfig.networking.hostName}/ssh-key-signing-key;
 
@@ -13,10 +8,6 @@ let
 
 in
 {
-
-  age.secrets = {
-    ssh-key-github-signing.file = ../secrets/ssh-key-github-signing.age;
-  };
 
   programs.git = {
     extraConfig = {
