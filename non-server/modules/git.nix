@@ -1,4 +1,9 @@
-{ pkgs, config, osConfig, ... }:
+{
+  pkgs,
+  config,
+  osConfig,
+  ...
+}:
 let
   public-signing-key-path = ../secrets/${osConfig.networking.hostName}/ssh-key-signing-key;
 
