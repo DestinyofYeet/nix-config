@@ -17,7 +17,7 @@
     # ./prost.nix
     # ./postgres.nix
     # ./docker-compose.nix
-    ./strichliste.nix
+    # ./strichliste.nix
   ];
 
   nix = {
