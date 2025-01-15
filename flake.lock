@@ -1406,14 +1406,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1736919299,
-        "narHash": "sha256-DAX6hLZwbbk95sm+gQvQq4VXO1ETu3l9QAlhrLXwOQ8=",
-        "path": "/home/ole/github/strichliste.nix",
-        "type": "path"
+        "lastModified": 1726751166,
+        "narHash": "sha256-ERJmxUDPGnEPr1NSrSDm8ur5tBdZMt8Jz6rVMieTuw0=",
+        "owner": "DestinyofYeet",
+        "repo": "nix-strichliste",
+        "rev": "5f24e0c5dc4eecdfa18a9540778ba1e05043dec2",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ole/github/strichliste.nix",
-        "type": "path"
+        "owner": "DestinyofYeet",
+        "repo": "nix-strichliste",
+        "type": "github"
       }
     },
     "stylix": {
