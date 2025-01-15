@@ -1406,8 +1406,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1736917300,
-        "narHash": "sha256-AvcsJUsJLP4rTfBdlUc91YfzM+1It5WOJqUQCXokI5Y=",
+        "lastModified": 1736919299,
+        "narHash": "sha256-DAX6hLZwbbk95sm+gQvQq4VXO1ETu3l9QAlhrLXwOQ8=",
         "path": "/home/ole/github/strichliste.nix",
         "type": "path"
       },
