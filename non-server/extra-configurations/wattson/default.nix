@@ -15,6 +15,9 @@
     ./vpn.nix
     ./agenix.nix
     # ./prost.nix
+    # ./postgres.nix
+    # ./docker-compose.nix
+    ./strichliste.nix
   ];
 
   nix = {

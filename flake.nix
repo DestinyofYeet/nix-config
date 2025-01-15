@@ -57,11 +57,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # strichliste = {
-    #   url = "github:DestinyofYeet/nix-strichliste";
-    #   # url = "path:///home/ole/github/nix-strichliste";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    strichliste = {
+      # url = "github:DestinyofYeet/nix-strichliste";
+      url = "path:///home/ole/github/strichliste.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     auto-add-torrents = {
       # url = "path:///drives/programming-Stuff/python/auto-add-torrents-clean";
@@ -141,8 +141,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    prost = {
-      url = "github:haennes/prost";
+    # prost = {
+    #   url = "github:haennes/prost";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    
+    nuscht-search = {
+      url = "github:NuschtOS/search";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -176,8 +181,8 @@
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         inputs.nix-topology.nixosModules.default
-        inputs.prost.nixosModules.default
-
+        # inputs.prost.nixosModules.default
+        inputs.strichliste.nixosModules.strichliste
         (
           { ... }:
           {
