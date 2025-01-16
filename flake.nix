@@ -17,8 +17,7 @@
 
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs"; inputs.home-manager.follows = "home-manager";
     };
 
     stylix = {
@@ -58,7 +57,7 @@
     };
 
     strichliste = {
-      url = "github:DestinyofYeet/nix-strichliste";
+      url = "git+https://git.ole.blue/ole/strichliste.nix?ref=docker";
       # url = "path:///home/ole/github/strichliste.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };

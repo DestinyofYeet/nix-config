@@ -1,16 +1,25 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
-}:{
+}:let
+  build-scope = modules: name: prefix: {
+    modules = [ {_module.args = { inherit pkgs; }; }] ++ (lib.lists.toList modules);
+    name = name;
+    urlPrefix = prefix;
+  };
+in {
   services.nginx.virtualHosts."search.ole.blue" = {
     forceSSL = true;
     enableACME = true;
     locations."/".root = inputs.nuscht-search.packages.${pkgs.stdenv.system}.mkMultiSearch {
       scopes = [
-        {
-          modules = [ inputs.strichliste.nixosModules.strichliste ]; name = "strichliste"; urlPrefix = "https://git.ole.blue/ole/strichliste.nix/src/branch/docker";
-        }
+        (build-scope inputs.strichliste.nixosModules.strichliste "strichliste" "https://git.ole.blue/ole/strichliste.nix/src/branch/docker")
+        (build-scope inputs.auto-add-torrents.nixosModules.auto-add-torrents "auto-add-torrents" "https://github.com/DestinyofYeet/auto_add_torrents/tree/main")
+        (build-scope inputs.agenix.nixosModules.default "agenix" "https://github.com/ryantm/agenix/tree/main")
+        (build-scope inputs.lanzaboote.nixosModules.lanzaboote "lanzaboote" "https://github.com/nix-community/lanzaboote/tree/main")
+        (build-scope inputs.networkNamespaces.nixosModules.networkNamespaces "networkNamespaces" "https://github.com/DestinyofYeet/namespaces.nix/tree/main")
       ];
     };
   };

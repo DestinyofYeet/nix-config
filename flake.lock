@@ -1406,17 +1406,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1726751166,
-        "narHash": "sha256-ERJmxUDPGnEPr1NSrSDm8ur5tBdZMt8Jz6rVMieTuw0=",
-        "owner": "DestinyofYeet",
-        "repo": "nix-strichliste",
-        "rev": "5f24e0c5dc4eecdfa18a9540778ba1e05043dec2",
-        "type": "github"
+        "lastModified": 1737038719,
+        "narHash": "sha256-eouBkQYA1EtLPj+AbO6GJWYGcLDU/94vZhz6coKe8x8=",
+        "ref": "docker",
+        "rev": "f67ed3a3b8b01f2b530bf3fe992e6db01f90e322",
+        "revCount": 13,
+        "type": "git",
+        "url": "https://git.ole.blue/ole/strichliste.nix"
       },
       "original": {
-        "owner": "DestinyofYeet",
-        "repo": "nix-strichliste",
-        "type": "github"
+        "ref": "docker",
+        "type": "git",
+        "url": "https://git.ole.blue/ole/strichliste.nix"
       }
     },
     "stylix": {
