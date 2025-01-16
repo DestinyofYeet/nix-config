@@ -45,6 +45,7 @@
     "gitlab:"
     "git+https://github.com/"
     "git+https://gitlab.com/"
+    "git+https://git.ole.blue/"
     "git+ssh://github.com/"
     "git+ssh://git@github.com/"
   ];

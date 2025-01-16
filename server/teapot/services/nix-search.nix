@@ -20,6 +20,11 @@ in {
         (build-scope inputs.agenix.nixosModules.default "agenix" "https://github.com/ryantm/agenix/tree/main")
         (build-scope inputs.lanzaboote.nixosModules.lanzaboote "lanzaboote" "https://github.com/nix-community/lanzaboote/tree/main")
         (build-scope inputs.networkNamespaces.nixosModules.networkNamespaces "networkNamespaces" "https://github.com/DestinyofYeet/namespaces.nix/tree/main")
+        {
+          optionsJSON = (import "${inputs.nixpkgs}/nixos/release.nix" { }).options + /share/doc/nixos/options.json;
+          name = "NixOS";
+          urlPrefix = "https://github.com/NixOS/nixpkgs/tree/master/";
+        }
       ];
     };
   };

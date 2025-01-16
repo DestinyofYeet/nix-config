@@ -141,6 +141,22 @@ in
             definedAliases = [ "@nms" ];
           };
 
+          "custom nüschst search" = {
+            urls = [
+              {
+                template = "https://search.ole.blue/";
+                params = [
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+
+            definedAliases = [ "@nüs" ];
+          };
+
           "Bing".metaData.hidden = true;
           "Google".metaData.hidden = true;
           "DuckDuckGo".metaData.hidden = true;
