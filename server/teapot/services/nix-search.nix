@@ -15,7 +15,7 @@ in {
     enableACME = true;
     locations."/".root = inputs.nuscht-search.packages.${pkgs.stdenv.system}.mkMultiSearch {
       scopes = [
-        (build-scope inputs.strichliste-docker.nixosModules.strichliste "strichliste-docker" "https://git.ole.blue/ole/strichliste.nix/src/branch/docker")
+        (build-scope inputs.strichliste.nixosModules.strichliste "strichliste" "https://git.ole.blue/ole/strichliste.nix/src/branch/no-docker")
         (build-scope inputs.auto-add-torrents.nixosModules.auto-add-torrents "auto-add-torrents" "https://github.com/DestinyofYeet/auto_add_torrents/tree/main")
         (build-scope inputs.agenix.nixosModules.default "agenix" "https://github.com/ryantm/agenix/tree/main")
         (build-scope inputs.lanzaboote.nixosModules.lanzaboote "lanzaboote" "https://github.com/nix-community/lanzaboote/tree/main")
