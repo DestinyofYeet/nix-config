@@ -19,7 +19,7 @@ in
   # synth-midnight-dark
   # tokyo-city-dark
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
-
+  #
   # stylix.image = pkgs.fetchurl {
   #   url = "https://w.wallhaven.cc/full/qz/wallhaven-qzq1p5.jpg";
   #   sha256 = "sha256-iGVndavzet3G3NgpT8XGSDW6wi5eRD2SrwnJwsQqAUs=";
@@ -46,5 +46,7 @@ in
     rofi.enable = false;
 
     swaylock.enable = false;
+
+    vim.enable = false;
   };
 }

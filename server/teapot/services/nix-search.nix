@@ -44,6 +44,8 @@ in {
           "simple-nixos-mailserver"
           "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/blob/master/"
         )
+        (build-scope [ inputs.plasma-manager.homeManagerModules.plasma-manager ] "plasma-manager" "https://example.com")
+        (build-scope [ inputs.stylix.homeManagerModules.stylix ] "stylix" "https://example.com")
       ];
     };
   };
