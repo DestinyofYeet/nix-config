@@ -46,7 +46,8 @@ let
       "ssh-key-nix-server";
   config-fsim-backup = mkConfigEntry "fsim.backup" "wiki.fsim" "ole" "ssh-key-fsim-backup";
   config-fsim-pedro = mkConfigEntry "fsim.pedro" "195.37.211.44" "beo45216" "ssh-key-fsim-pedro";
-  config-vps-teapot = mkConfigEntry "teapot" "10.100.0.1" "ole" "ssh-key-vps-teapot";
+  config-vps-teapot = mkConfigEntry "teapot" "ole.blue" "ole" "ssh-key-vps-teapot";
+  config-vps-teapot-wg = mkConfigEntry "teapot-wg" "10.100.0.1" "ole" "ssh-key-vps-teapot";
   config-gitea = mkConfigEntry "git.ole.blue" "10.100.0.1" "forgejo" "ssh-key-gitea";
 in
 {
@@ -74,6 +75,7 @@ in
         ${config-fsim-backup}
         ${config-fsim-pedro}
         ${config-vps-teapot}
+        ${config-vps-teapot-wg}
         ${config-gitea}
       '';
     };

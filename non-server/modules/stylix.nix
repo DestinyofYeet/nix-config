@@ -18,7 +18,7 @@ in
   # tokyo-night-terminal-dark
   # synth-midnight-dark
   # tokyo-city-dark
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${current_color}";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
 
   # stylix.image = pkgs.fetchurl {
   #   url = "https://w.wallhaven.cc/full/qz/wallhaven-qzq1p5.jpg";
