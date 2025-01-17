@@ -48,5 +48,10 @@
       publicKey = "3rQIsDLdxWZf0H4Kf41JNOynpP1WqMSqPSm+BgdN41g=";
       allowedIPs = [ "10.100.0.5/32" ];
     }
+    {
+      name = "pedro";
+      publicKey = "7R4ogUcruPQvxxNoPp4P+sbLz47HDoY2anDvcvWnWQk=";
+      allowedIPs = [ "10.100.0.6/32" ];
+    }
   ];
 }

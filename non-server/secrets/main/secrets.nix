@@ -11,4 +11,5 @@ in
   "ssh-key-vps-main.age".publicKeys = authed;
   "ssh-key-vps-teapot.age".publicKeys = authed;
   "ssh-key-gitea.age".publicKeys = authed;
+  "ssh-key-fsim-pedro.age".publicKeys = authed;
 }
