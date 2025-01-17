@@ -1262,7 +1262,6 @@
         "simple-nixos-mailserver": "simple-nixos-mailserver",
         "stable-nixpkgs": "stable-nixpkgs",
         "strichliste": "strichliste",
-        "strichliste-docker": "strichliste-docker",
         "stylix": "stylix",
         "waybar-taskwarrior": "waybar-taskwarrior",
         "zen-browser": "zen-browser"
@@ -1402,36 +1401,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1737054655,
-        "narHash": "sha256-6nr2/ulwBnn+enWEqmVFzQAOaaTCsmk7qrqJsuR1Gls=",
-        "ref": "refs/heads/main",
-        "rev": "920674bfd1b560f8f2dd8e760d93d9a6ab2eed89",
-        "revCount": 6,
+        "lastModified": 1737074179,
+        "narHash": "sha256-fV95a70IQNKEsBFhsXTxvA7bwCcT51Y/Fg0G3zJgutk=",
+        "ref": "no-docker",
+        "rev": "563d8d0c8f436f66f3f3758ee49df2167db55db8",
+        "revCount": 14,
         "type": "git",
         "url": "https://git.ole.blue/ole/strichliste.nix"
       },
       "original": {
-        "type": "git",
-        "url": "https://git.ole.blue/ole/strichliste.nix"
-      }
-    },
-    "strichliste-docker": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1737038719,
-        "narHash": "sha256-eouBkQYA1EtLPj+AbO6GJWYGcLDU/94vZhz6coKe8x8=",
-        "ref": "docker",
-        "rev": "f67ed3a3b8b01f2b530bf3fe992e6db01f90e322",
-        "revCount": 13,
-        "type": "git",
-        "url": "https://git.ole.blue/ole/strichliste.nix"
-      },
-      "original": {
-        "ref": "docker",
+        "ref": "no-docker",
         "type": "git",
         "url": "https://git.ole.blue/ole/strichliste.nix"
       }
