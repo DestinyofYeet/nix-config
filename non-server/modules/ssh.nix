@@ -51,7 +51,7 @@ in
         (rec { host = "nix-server.infra.wg"; hostname = host; user = "ole"; ident = "ssh-key-nix-server"; })
         (rec { host = "nix-server.infra.wg"; hostname = host; user = "root"; ident = "ssh-key-nix-server"; })
         { host = "fsim.ori"; hostname = "fsim.othr.de"; user = "beo45216"; ident = "ssh-key-fsim-ori"; }
-
+        { host = "nix-server"; hostname = "10.100.0.4"; user = "ole"; ident = "ssh-key-nix-server"; }
         { host = "fsim.backup"; hostname = "wiki.fsim"; user = "ole"; ident = "ssh-key-fsim-backup";}
         { host = "fsim.pedro"; hostname = "195.37.211.44"; user = "beo45216"; ident = "ssh-key-fsim-pedro";}
         { host = "fsim.pedro-wg"; hostname = "10.100.0.1"; user = "beo45216"; ident = "ssh-key-fsim-pedro"; port = 2222; }

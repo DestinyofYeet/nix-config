@@ -23,11 +23,6 @@
     '';
   };
 
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "ole@uwuwhatsthis.de";
-  };
-
   networking.firewall = {
     allowedTCPPorts = [
       80

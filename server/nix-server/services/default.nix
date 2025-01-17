@@ -54,5 +54,6 @@
     ./nextcloud.nix
     # ./minio.nix
     ./garage.nix
+    ./nginx.nix
   ];
 }
