@@ -23,6 +23,11 @@
     '';
   };
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "ole@ole.blue";
+  };
+
   networking.firewall = {
     allowedTCPPorts = [
       80
