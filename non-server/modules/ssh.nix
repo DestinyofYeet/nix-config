@@ -57,7 +57,7 @@ in
         { host = "fsim.pedro-wg"; hostname = "10.100.0.1"; user = "beo45216"; ident = "ssh-key-fsim-pedro"; port = 2222; }
         { host = "teapot"; hostname = "ole.blue"; user = "ole"; ident = "ssh-key-vps-teapot"; }
         { host = "teapot-wg"; hostname = "10.100.0.1"; user = "ole"; ident = "ssh-key-vps-teapot"; }
-        { host = "git.ole.blue"; hostname = "10.100.0.1"; user = "forgejo"; ident = "ssh-key-gitea"; }
+        { host = "git.ole.blue"; hostname = "ole.blue"; user = "forgejo"; ident = "ssh-key-gitea"; }
       ];
     };
   };
