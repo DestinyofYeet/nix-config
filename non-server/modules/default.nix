@@ -41,5 +41,6 @@
     ./taskwarrior.nix
     ./kdeconnect.nix
     ./zathura.nix
+    ./carapace.nix
   ];
 }

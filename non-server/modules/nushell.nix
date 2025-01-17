@@ -4,7 +4,7 @@
   current-specialisation,
   ...
 }:
-{
+{ 
   programs.nushell = {
     enable = true;
 
