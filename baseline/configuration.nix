@@ -37,4 +37,6 @@
       dates = "daily";
     };
   };
+
+  boot.tmp.cleanOnBoot = true;
 }

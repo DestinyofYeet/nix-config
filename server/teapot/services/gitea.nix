@@ -4,14 +4,7 @@
   ...
 }:
 {
-  age.secrets = {
-    postgresql-gitea-password = lib.mkIf config.services.gitea.enable {
-      file = ../secrets/postgresql-gitea-password.age;
-      owner = "gitea";
-    };
-  };
-
-  services.gitea = {
+  services.forgejo = {
     enable = true;
 
     appName = "git.ole.blue";
@@ -19,15 +12,13 @@
     database = {
       type = "postgres";
       socket = "/run/postgresql";
-
-      # passwordFile = config.age.secrets.postgresql-gitea-password.path;
-      # host = "10.100.0.4";
-      # user = "gitea";
-      # name = "gitea";
-      # createDatabase = false;
     };
 
     settings = {
+      DEFAULT = {
+        APP_NAME = "git.ole.blue";
+      };
+
       session = {
         COOKIE_SECURE = true;
       };
@@ -53,7 +44,7 @@
     forceSSL = true;
     enableACME = true;
     locations."/" = {
-      proxyPass = "http://${config.services.gitea.settings.server.HTTP_ADDR}:${toString config.services.gitea.settings.server.HTTP_PORT}";
+      proxyPass = "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${toString config.services.forgejo.settings.server.HTTP_PORT}";
       proxyWebsockets = true;
       extraConfig = ''
         proxy_set_header Connection $http_connection;

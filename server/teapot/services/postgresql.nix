@@ -7,14 +7,14 @@
     enable = true;
 
     ensureUsers = [
-      # {
-      #   name = config.services.gitea.database.user;
-      #   ensureDBOwnership = true;
-      # }
+      {
+        name = config.services.forgejo.database.user;
+        ensureDBOwnership = true;
+      }
     ];
 
     ensureDatabases = [
-      # config.services.gitea.database.name
+      config.services.forgejo.database.name
     ];
   };
 }

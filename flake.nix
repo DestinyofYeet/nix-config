@@ -56,11 +56,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    strichliste = {
+    strichliste-docker = {
       url = "git+https://git.ole.blue/ole/strichliste.nix?ref=docker";
       # url = "path:///home/ole/github/strichliste.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    strichliste = {
+      # url = "git+https://git.ole.blue/ole/strichliste.nix";
+      url = "path:///home/ole/github/strichliste.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
 
     auto-add-torrents = {
       # url = "path:///drives/programming-Stuff/python/auto-add-torrents-clean";
@@ -309,7 +316,6 @@
           ./non-server/hardware/wattson.nix
           ./non-server/extra-configurations/wattson
           ./non-server
-          # inputs.strichliste.nixosModules.strichliste
         ] ++ non-server-modules;
       };
 

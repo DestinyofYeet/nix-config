@@ -14,6 +14,8 @@
     peer = {
       inherit publicKey;
 
+      name = "teapot";
+
       allowedIPs = [ ip ];
 
       endpoint = "${host}:${toString port}";
@@ -25,18 +27,26 @@
   peers = [
     {
       # wattson
-      publicKey = "k6JnjO2BpghnwIgmDdARgi06LIHlPyQhoco6kjk6MT8=";
+      name = "wattson";
+      publicKey = "Fh7Su7jqjglibebuH/gen31wWwQWZWx+QcLSESVo1FY=";
       allowedIPs = [ "10.100.0.2/32" ];
     }
     {
       # main
+      name = "main";
       publicKey = "CU76SCOQ1hmapZG2TWMhh/cgfjNviYUZcdbUEplW3n0=";
       allowedIPs = [ "10.100.0.3/32" ];
     }
     {
       # nix-server
+      name = "nix-server";
       publicKey = "6o6D4EVq3qvyu2r90tp+dtstwtXID8QRnd8oyKYKtxc=";
       allowedIPs = [ "10.100.0.4/32" ];
+    }
+    {
+      name = "handy";
+      publicKey = "3rQIsDLdxWZf0H4Kf41JNOynpP1WqMSqPSm+BgdN41g=";
+      allowedIPs = [ "10.100.0.5/32" ];
     }
   ];
 }

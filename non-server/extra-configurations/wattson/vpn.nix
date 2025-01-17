@@ -3,27 +3,16 @@
   config,
   custom,
   ...
-}:
-let
-  vpn_port = custom.wireguard.server.port;
-in
-{
+}:{
   age.secrets = {
-    wireguard-vpn-setup.file = ./secrets/wireguard-vpn-priv-key.age;
-  };
-
-  networking.firewall = {
-    allowedUDPPorts = vpn_port;
+    wireguard-vpn-priv-key.file = ./secrets/wireguard-vpn-priv-key.age;
   };
 
   networking.wireguard.interfaces = {
     wg0 = {
-      ips = [ "10.100.0.2/24" ];
-      listenPort = vpn_port;
+      ips = [ "10.100.0.2/32" ];
 
-      mtu = custom.wireguard.server.mtu;
-
-      privateKeyFile = config.age.secrets.wireguard-vpn-setup.path;
+      privateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
 
       peers = [
         custom.wireguard.server.peer

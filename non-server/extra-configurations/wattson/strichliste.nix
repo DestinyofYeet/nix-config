@@ -1,14 +1,39 @@
 {
+  pkgs,
   ...
 }:
 {
   services.strichliste = {
     enable = true;
 
-    databaseDir = "/var/lib/strichliste/db";
+    nginxSettings = {
+      domain = "localhost";
+      configure = true;
+    };
+
+    databaseUrl = "mysql://strichliste@localhost/strichliste";
+
+    settings = {
+      payment.boundary.lower = -50000;
+    };
   };
 
-  virtualisation.oci-containers.backend = "docker";
+  services.mysql = {
+    enable = true;
 
-  virtualisation.docker.enable = true;
+    package = pkgs.mariadb;
+
+    ensureUsers = [
+      {
+        name = "strichliste";
+        ensurePermissions = {
+          "strichliste.*" = "ALL PRIVILEGES";
+        };
+      }
+    ];
+
+    ensureDatabases = [
+      "strichliste"
+    ];
+  };
 }

@@ -1267,6 +1267,7 @@
         "simple-nixos-mailserver": "simple-nixos-mailserver",
         "stable-nixpkgs": "stable-nixpkgs",
         "strichliste": "strichliste",
+        "strichliste-docker": "strichliste-docker",
         "stylix": "stylix",
         "waybar-taskwarrior": "waybar-taskwarrior",
         "zen-browser": "zen-browser"
@@ -1400,6 +1401,23 @@
       }
     },
     "strichliste": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737060882,
+        "narHash": "sha256-A++vkUn+PO0AjteArxRUlwVnPw53nj/FwHSE5jLLT0Y=",
+        "path": "/home/ole/github/strichliste.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/ole/github/strichliste.nix",
+        "type": "path"
+      }
+    },
+    "strichliste-docker": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"

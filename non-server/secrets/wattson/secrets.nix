@@ -14,6 +14,4 @@ in
   "ssh-key-fsim-pedro.age".publicKeys = authed;
   "ssh-key-vps-teapot.age".publicKeys = authed;
   "ssh-key-gitea.age".publicKeys = authed;
-
-  "wireguard-vpn-priv-key.age".publicKeys = authed;
 }
