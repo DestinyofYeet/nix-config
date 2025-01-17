@@ -4,7 +4,7 @@
 {
   server = rec {
     host = "ole.blue";
-    port = 53;
+    port = 51820;
     publicKey = "cLPAuu+Pu0nTBenl+ezZyjtVNqP3WYBzKM8BPYQ4Jh8=";
 
     ip = "10.100.0.0/24";
