@@ -24,7 +24,13 @@
   };
 
   
-  services.nginx.virtualHosts.${config.services.strichliste.nginxSettings.domain} = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl;
+  services.nginx.virtualHosts.${config.services.strichliste.nginxSettings.domain} = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
+    locations."/api/metrics" = {
+      extraConfig = ''
+        deny all;
+      ''; 
+    };
+  };
 
   services.mysql = {
 
