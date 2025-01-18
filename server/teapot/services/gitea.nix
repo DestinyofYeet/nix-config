@@ -7,8 +7,6 @@
   services.forgejo = {
     enable = true;
 
-    appName = "git.ole.blue";
-
     database = {
       type = "postgres";
       socket = "/run/postgresql";
@@ -18,6 +16,11 @@
       DEFAULT = {
         APP_NAME = "git.ole.blue";
       };
+
+      indexer = {
+        REPO_INDEXER_ENABLED = true;
+      };
+
 
       session = {
         COOKIE_SECURE = true;

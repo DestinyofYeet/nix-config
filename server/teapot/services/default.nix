@@ -16,9 +16,9 @@
     ./nix-serve.nix
     ./taskchampion-server.nix
     ./vpn.nix
-    ./home-proxy.nix
+    # ./home-proxy.nix
     ./postgresql.nix
     ./gitea.nix
-    ./nix-search.nix
+    # ./nix-search.nix
   ];
 }

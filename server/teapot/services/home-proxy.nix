@@ -26,8 +26,8 @@ let
 
   # extremely slow
   transformedHosts = builtins.mapAttrs (name: value: {
-    forceSSL = true;
-    enableACME = true;
+    # forceSSL = true;
+    # enableACME = true;
     locations."/" = {
       proxyPass = "https://local.ole.blue";
       extraConfig = value.locations."/".extraConfig;

@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   ...
 }:
 {
@@ -12,7 +13,9 @@
       domain = "strichliste.local.ole.blue";
     };
 
-    databaseUrl = "mysql://strichliste@localhost/strichliste";
+    # databaseUrl = "mysql://strichliste@localhost/strichliste";
+
+    database.configure = true;
 
     settings = {
       payment.boundary.upper = 200000;
@@ -21,24 +24,17 @@
   };
 
   
-  services.nginx.virtualHosts.${config.services.strichliste.nginxSettings.domain} = {
-    forceSSL = true;
-    enableACME = true;
-  };
+  services.nginx.virtualHosts.${config.services.strichliste.nginxSettings.domain} = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl;
 
   services.mysql = {
 
     ensureUsers = [
       {
-        name = "strichliste";
+        name = "grafana";
         ensurePermissions = {
-          "strichliste.*" = "ALL PRIVILEGES";
+          "strichliste.*" = "select";
         };
       }
-    ];
-
-    ensureDatabases = [
-      "strichliste"
     ];
   };
 }
