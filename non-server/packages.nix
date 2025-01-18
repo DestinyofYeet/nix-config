@@ -54,9 +54,16 @@ in
     ] ++ nerd-fontsPkgs;
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.nvidia.acceptLicense = true;
+  nixpkgs = {
+    config = {
+      permittedInsecurePackages = [
+        "electron-31.7.7"
+      ];
+
+      allowUnfree = true;
+      nvidia.acceptLicense = true;
+    };
+  };
 
   programs.zsh.enable = true;
   programs.firefox.enable = true;
