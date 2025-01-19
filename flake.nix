@@ -57,8 +57,8 @@
     };
 
     strichliste = {
-      # url = "git+https://git.ole.blue/ole/strichliste.nix?ref=custom-frontend";
-      url = "path:///home/ole/github/strichliste.nix";
+      url = "git+https://git.ole.blue/ole/strichliste.nix";
+      # url = "path:///home/ole/github/strichliste.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
