@@ -247,6 +247,7 @@ in
       # pyprland
       qFlipper
       colmena
+      yt-dlp
     ]
     ++ luaPkgs
     ++ kdePkgs

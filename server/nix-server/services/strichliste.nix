@@ -20,6 +20,8 @@
     settings = {
       payment.boundary.upper = 200000;
       account.boundary.upper = 200000;
+
+      article.autoOpen = true;
     };
   };
 

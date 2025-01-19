@@ -7,33 +7,39 @@
     enable = true;
 
     nginxSettings = {
-      domain = "localhost";
+      domain = "strichliste.local";
       configure = true;
     };
 
-    databaseUrl = "mysql://strichliste@localhost/strichliste";
+    # databaseUrl = "mysql://strichliste@localhost/strichliste";
+
+    database.configure = true;
 
     settings = {
       payment.boundary.lower = -50000;
+
+      article.autoOpen = true;
     };
+  };
+
+  networking.hosts = {
+    "127.0.0.1" = [ "strichliste.local" ];
   };
 
   services.mysql = {
     enable = true;
 
-    package = pkgs.mariadb;
-
     ensureUsers = [
       {
-        name = "strichliste";
+        name = "ole";
         ensurePermissions = {
-          "strichliste.*" = "ALL PRIVILEGES";
+          "ole.*" = "ALL PRIVILEGES";
         };
       }
     ];
 
     ensureDatabases = [
-      "strichliste"
+      "ole"
     ];
   };
 }
