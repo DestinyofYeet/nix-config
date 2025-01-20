@@ -69,13 +69,13 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  environment.etc."current-system-packages".text =
-    let
-      packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
-      sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
-      formatted = builtins.concatStringsSep "\n" sortedUnique;
-    in
-    formatted;
+  # environment.etc."current-system-packages".text =
+  #   let
+  #     packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+  #     sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
+  #     formatted = builtins.concatStringsSep "\n" sortedUnique;
+  #   in
+  #   formatted;
 
   boot.supportedFilesystems = [ "nfs" ];
   services.rpcbind.enable = true;
