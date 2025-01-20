@@ -11,9 +11,7 @@
   };
 
   services.nginx.virtualHosts."task-sync.ole.blue" = {
-    enableACME = true;
-    forceSSL = true;
-
+    listenAddresses = [ "10.100.0.1" ];
     locations."/".proxyPass =
       "http://127.0.0.1:${toString config.services.taskchampion-sync-server.port}";
   };

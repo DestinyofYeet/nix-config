@@ -37,9 +37,9 @@ in
     resolveLocalQueries = true;
     # localControlSocketPath = "/run/unbound/unbound.ctl";
     settings = {
-      # remote-control = {
-      #   control-enable = true;
-      # };
+      remote-control = {
+        # control-enable = true;
+      };
       server = {
         interface = [
           "0.0.0.0@53"
