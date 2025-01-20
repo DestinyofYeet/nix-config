@@ -77,6 +77,7 @@
         '';
 
         aliases = [
+          "OvfGj2qjvkTzIfeKRXpA@ole.blue"
           "bestellung@ole.blue"
           "N1kAH4s3k3q6yxAiauVH@ole.blue"
           "ole@drogen.gratis"
