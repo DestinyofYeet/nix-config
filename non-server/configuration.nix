@@ -17,6 +17,7 @@
     ./system_users.nix
     ./services.nix
     ./scripts
+    ./yubikey.nix
   ];
 
   # Configure network proxy if necessary

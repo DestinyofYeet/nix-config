@@ -51,12 +51,7 @@ in
 
   # services.fwupd.enable = true;
 
-  # needed for yubikey to work in keepass
-  services.udev.packages = with pkgs; [ yubikey-personalization ];
-
   services.pcscd.enable = true;
-
-  environment.systemPackages = with pkgs; [ yubikey-personalization ];
 
   # ipfs
   # services.kubo.enable = true;

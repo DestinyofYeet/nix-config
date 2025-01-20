@@ -164,6 +164,7 @@ in
       yubioath-flutter
       yubikey-manager-qt
       yubikey-personalization-gui
+      yubikey-personalization
       nextcloud-client
       traceroute
       discord
