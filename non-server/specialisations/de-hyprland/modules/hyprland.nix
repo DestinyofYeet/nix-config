@@ -105,7 +105,7 @@ in
         };
 
         tablet = {
-          output = "current";
+          output = monitors_laptop.builtin;
         };
 
         kb_layout = "de";
