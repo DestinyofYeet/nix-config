@@ -41,31 +41,28 @@ in
     };
 
     config = {
-      # # dbhost = "localhost";
       dbhost = "/run/postgresql";
       dbtype = "pgsql";
 
       dbname = "nextcloud";
       dbuser = "nextcloud";
-      #
-      # dbtype = "sqlite";
 
-      adminpassFile = config.age.secrets.nextcloud-admin-pass.path;
+     adminpassFile = config.age.secrets.nextcloud-admin-pass.path;
 
-      objectstore.s3 = {
-        enable = true;
-        key = "GK9329cf0d4cce8846eec0e796";
-        hostname = "s3.local.ole.blue";
-        # hostname = "localhost";
-        bucket = "nextcloud-bucket";
-        secretFile = config.age.secrets.nextcloud-bucket-secret-key.path;
-        usePathStyle = true;
-        useSsl = true;
-        # useSsl = false;
-        # port = 3900;
-        autocreate = false;
-        region = "eu-de-south-1";
-      };
+      # objectstore.s3 = {
+      #   enable = true;
+      #   key = "GK9329cf0d4cce8846eec0e796";
+      #   hostname = "s3.local.ole.blue";
+      #   # hostname = "localhost";
+      #   bucket = "nextcloud-bucket";
+      #   secretFile = config.age.secrets.nextcloud-bucket-secret-key.path;
+      #   usePathStyle = true;
+      #   useSsl = true;
+      #   # useSsl = false;
+      #   # port = 3900;
+      #   autocreate = false;
+      #   region = "eu-de-south-1";
+      # };
 
     };
 
@@ -77,7 +74,7 @@ in
 
       default_phone_region = "DE";
 
-      maintenance_window_start = 1;
+      # maintenance_window_start = 1;
     };
   };
 
