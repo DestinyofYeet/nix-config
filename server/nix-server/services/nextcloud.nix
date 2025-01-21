@@ -9,7 +9,7 @@ let
 in
 {
 
-  age.secrets = {
+  age.secrets = lib.mkIf config.services.nextcloud.enable {
     nextcloud-bucket-secret-key = {
       file = ../secrets/nextcloud-bucket-secret-key.age;
       owner = "nextcloud";
