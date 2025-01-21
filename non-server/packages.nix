@@ -249,6 +249,7 @@ in
       qFlipper
       colmena
       yt-dlp
+      typescript-language-server
     ]
     ++ luaPkgs
     ++ kdePkgs
