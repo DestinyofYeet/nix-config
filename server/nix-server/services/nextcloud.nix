@@ -84,8 +84,15 @@ in
   services.nginx.virtualHosts.${config.services.nextcloud.hostName} =
     lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
     // {
-      # extraConfig = ''
-      #   client_max_body_size ${config.services.nextcloud.maxUploadSize};
-      # '';
+      extraConfig = ''
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_set_header X-Forwarded-Proto http;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_redirect off;
+        client_max_body_size ${config.services.nextcloud.maxUploadSize};
+      '';
     };
 }

@@ -46,14 +46,6 @@
           name = config.services.nextcloud.config.dbuser;
           ensureDBOwnership = true;
         }
-        {
-          name = flake.nixosConfigurations.teapot.config.services.gitea.database.user;
-          ensureDBOwnership = true;
-        }
-        # {
-        #   name = flake.nixosConfigurations.teapot.config.services.roundcube.database.username;
-        #   ensureDBOwnership = true;
-        # }
       ];
 
     authentication = ''
@@ -64,8 +56,6 @@
       "hydra"
       config.services.wiki-js.settings.db.db
       config.services.nextcloud.config.dbname
-      flake.nixosConfigurations.teapot.config.services.gitea.database.name
-      # flake.nixosConfigurations.teapot.config.services.roundcube.database.dbname
     ];
 
     enableTCPIP = true;

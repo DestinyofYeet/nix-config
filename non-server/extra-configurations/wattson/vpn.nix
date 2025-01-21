@@ -11,6 +11,7 @@
 
   networking.wireguard.interfaces = {
     wg0 = {
+      dynamicEndpointRefreshSeconds = 60;
       ips = [ "10.100.0.2/32" ];
 
       privateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
