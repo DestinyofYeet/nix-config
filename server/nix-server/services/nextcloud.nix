@@ -22,7 +22,7 @@ in
   };
 
   services.nextcloud = {
-    enable = false;
+    enable = true;
 
     package = pkgs.nextcloud30;
 
