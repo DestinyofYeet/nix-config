@@ -49,21 +49,20 @@ in
 
      adminpassFile = config.age.secrets.nextcloud-admin-pass.path;
 
-      # objectstore.s3 = {
-      #   enable = true;
-      #   key = "GK9329cf0d4cce8846eec0e796";
-      #   hostname = "s3.local.ole.blue";
-      #   # hostname = "localhost";
-      #   bucket = "nextcloud-bucket";
-      #   secretFile = config.age.secrets.nextcloud-bucket-secret-key.path;
-      #   usePathStyle = true;
-      #   useSsl = true;
-      #   # useSsl = false;
-      #   # port = 3900;
-      #   autocreate = false;
-      #   region = "eu-de-south-1";
-      # };
-
+      objectstore.s3 = {
+        enable = true;
+        key = "GK9329cf0d4cce8846eec0e796";
+        hostname = "s3.local.ole.blue";
+        # hostname = "localhost";
+        bucket = "nextcloud-bucket";
+        secretFile = config.age.secrets.nextcloud-bucket-secret-key.path;
+        usePathStyle = true;
+        useSsl = true;
+        # useSsl = false;
+        # port = 3900;
+        autocreate = false;
+        region = "eu-de-south-1";
+      };
     };
 
     settings = {
@@ -74,7 +73,7 @@ in
 
       default_phone_region = "DE";
 
-      # maintenance_window_start = 1;
+      maintenance_window_start = 1;
     };
   };
 
@@ -89,7 +88,6 @@ in
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
         proxy_redirect off;
-        client_max_body_size ${config.services.nextcloud.maxUploadSize};
       '';
     };
 }
