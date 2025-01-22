@@ -69,7 +69,7 @@
 
   fileSystems = {
     "/drives/navidrome" = {
-      device = "192.168.1.250:/mnt/data/data/media/navidrome";
+      device = "192.168.1.1:/mnt/data/data/media/navidrome";
       fsType = "nfs";
       options = [
         "hard"
@@ -85,7 +85,7 @@
     };
 
     "/drives/programming-Stuff" = {
-      device = "192.168.1.250:/mnt/data/data/programmingStuff";
+      device = "192.168.1.1:/mnt/data/data/programmingStuff";
       fsType = "nfs";
       options = [
         "hard"

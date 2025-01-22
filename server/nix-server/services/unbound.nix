@@ -6,7 +6,7 @@
 
 let
   root-domain = "nix-server.infra.wg";
-  ip = "192.168.1.250";
+  ip = "192.168.1.1";
   build-subdomains =
     build-domain: build-ip: sub-domains:
     (map (sub-domain: (wrap-string "${sub-domain}.${build-domain}. IN A ${build-ip}")) sub-domains);

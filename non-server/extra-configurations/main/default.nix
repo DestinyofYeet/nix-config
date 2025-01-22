@@ -13,7 +13,7 @@
   ];
 
   networking.extraHosts = ''
-    192.168.1.250 nix-server.infra.wg
+    192.168.1.1 nix-server.infra.wg
   '';
   services.flatpak.enable = true;
 
