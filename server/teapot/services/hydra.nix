@@ -23,7 +23,7 @@
     # needs to be http:// since hydra expects http for some reason
     hydraURL = "http://hydra.ole.blue";
     notificationSender = "hydra@uwuwhatsthis.de";
-    smtpHost = "mail.ole.blue";
+    smtpHost = "localhost";
     listenHost = "127.0.0.1";
     # buildMachinesFiles = [ "/etc/nix/machines" ];
     buildMachinesFiles = [ ];
