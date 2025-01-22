@@ -77,6 +77,7 @@
         '';
 
         aliases = [
+          "BR09q6rAxWMg0kOHkwA5@ole.blue"
           "OvfGj2qjvkTzIfeKRXpA@ole.blue"
           "bestellung@ole.blue"
           "N1kAH4s3k3q6yxAiauVH@ole.blue"
