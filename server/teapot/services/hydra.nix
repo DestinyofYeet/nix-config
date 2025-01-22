@@ -48,6 +48,7 @@
     "git+https://git.ole.blue/"
     "git+ssh://github.com/"
     "git+ssh://git@github.com/"
+    "git+https://git.sr.ht/"
   ];
 
   services.nginx.virtualHosts."hydra.ole.blue" = {
