@@ -14,7 +14,7 @@
   imports = [
     ./hardware-configuration.nix
 
-    ./system_networking.nix
+    ./networking.nix
     ./system_packages.nix
     ./system_users.nix
     ./nvidia.nix

@@ -15,6 +15,17 @@ let
       dhcp-end = "${base}.200";
     };
   };
+
+  deviceList = {
+    tp-link-router = {
+      mac = "00:31:92:38:B3:CF";
+      ip = "192.168.1.10";
+    };
+    main = {
+      mac = "74:56:3c:6f:b8:8a";
+      ip = "192.168.1.18";
+    };
+  };
 in {
   networking = {
     dhcpcd.enable = false;
@@ -39,13 +50,22 @@ in {
     };
 
     interfaces = {
-      enp37s0= {
+      enp37s0 = {
         useDHCP = true;
       };
 
       ${homeRouter.interface} = {
         useDHCP = false;
-        ipv4.addresses = [{ address = "${homeRouter.ip.router}"; prefixLength = 24; }];
+        ipv4 = {
+          addresses = [{ address = "${homeRouter.ip.router}"; prefixLength = 24; }];
+          routes = [
+            {
+              address = "192.168.2.0";
+              prefixLength = 24;
+              via = "${deviceList.tp-link-router.ip}";
+            }
+          ];
+        };
       };
     };
 
@@ -74,30 +94,17 @@ in {
       dhcp-option = [
         "6,${homeRouter.ip.router},8.8.8.8"
       ];
+
+      dhcp-host = [
+        "${deviceList.tp-link-router.mac},TP-Link-Router,${deviceList.tp-link-router.ip}"
+        "${deviceList.main.mac},main,${deviceList.main.ip}"
+      ];
     };
   };
 
   services.resolved.enable = false;
 
   systemd.network.wait-online.enable = false;
-
-  # systemd.network = {
-  #   enable = true;
-  #   networks."50-eth0" = {
-  #     matchConfig.Name = "eth0";
-  #     networkConfig = {
-  #       DHCP = "ipv4";
-  #       IPv6AcceptRA = true;
-  #       DNS = [ ];
-  #       #LLMNR = false;
-  #       #useDomains = false;
-  #       #multicastDNS = false;
-  #       #dnsOverTls = "no";
-  #       #dnssec = "no";
-  #     };
-  #     linkConfig.RequiredForOnline = "routable";
-  #   };
-  # };
 
   environment.etc."resolv.conf" = {
     source = pkgs.writeText "resolv.conf" ''
