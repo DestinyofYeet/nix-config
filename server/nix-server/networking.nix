@@ -33,8 +33,6 @@ in {
     useHostResolvConf = false;
     networkmanager.enable = true;
 
-    # no touchey !!!!!
-    # this is needed to see the qbit webinterface
     nat = {
       enable = true;
       externalInterface = "enp37s0";
@@ -68,8 +66,6 @@ in {
         };
       };
     };
-
-    ## no touchey end
   };
 
   services.dnsmasq = {
