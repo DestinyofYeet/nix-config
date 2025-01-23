@@ -2,12 +2,6 @@
   services.strichliste = {
     enable = false;
 
-    # frontEnd = builtins.fetchTarball {
-    #   url = "https://git.ole.blue/ole/strichliste-frontend/raw/commit/6e5f68c0f5f28ff9024ff3af5ef0e64a96b2c948/build.tar";
-    #   sha256 = "1527pdg2y1saj2n13zlnjl8sqcnh3lr702v6x761nag11nagdgqz";
-    # };
-    #
-
     customSounds = {
       enable = true;
       depositSounds = [
@@ -150,7 +144,8 @@
     database.configure = true;
 
     settings = {
-      payment.boundary.lower = -50000;
+      payment.boundary.lower = -5000;
+      account.boundary.lower = -1000;
 
       article.autoOpen = true;
     };
