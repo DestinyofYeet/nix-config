@@ -19,6 +19,6 @@
     # ./home-proxy.nix
     ./postgresql.nix
     ./gitea.nix
-    # ./nix-search.nix
+    ./nix-search.nix
   ];
 }
