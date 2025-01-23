@@ -1,52 +1,33 @@
-{ pkgs, ... }:
-{
-  # home.file = {
-  #   ".config/helix/config.toml" = {
-  #     source = (pkgs.formats.toml { }).generate "config.toml" {
-  #       theme = "material_deep_ocean";
-
-  #       editor = {
-  #         mouse = false;
-  #       };
-  #     };
-  #   };
-
-  #   ".config/helix/languages.toml" = {
-  #     source = (pkgs.formats.toml {}).generate "languages.toml" {
-  #       language-server = {
-  #         rust-analyzer = {
-  #           config = {
-  #             procMacro.ignored.leptos_macro = [
-  #               # "server"
-  #               # "component"
-  #             ];
-  #           };
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
-
+{pkgs, ...}: {
   programs.helix = {
     enable = true;
 
     defaultEditor = true;
 
-    # languages = {
-    #   language = [
-    #     # {
-    #     #   name = "markdown";
-    #     #   language-server.command = "mdpls";
+    languages = {
+      language = [
+        {
+          name = "nix";
+          auto-format = true;
+        }
+      ];
 
-    #     #   config = {
-    #     #     markdown.preview = {
-    #     #       auto = true;
-    #     #       browser = "firefox";
-    #     #     };
-    #     #   };
-    #     # }
-    #   ];
-    # };
+      language-server = {
+        nil = {
+          config.nil = {
+            formatting.command = ["${pkgs.alejandra}/bin/alejandra" "-q"];
+
+            nix = {
+              maxMemoryMB = 10000;
+              flake = {
+                autoArchive = true;
+                autoEvalInputs = false;
+              };
+            };
+          };
+        };
+      };
+    };
 
     settings = {
       theme = "material_deep_ocean";
