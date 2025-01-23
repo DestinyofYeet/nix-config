@@ -24,6 +24,15 @@
   mailserver = {
     enable = true;
     fqdn = "mail.ole.blue";
+
+    useUTF8FolderNames = true;
+
+    dmarcReporting = {
+      enable = true;
+      domain = "ole.blue";
+      organizationName = "ole";
+    };
+
     domains = [
       "ole.blue"
       "uwuwhatsthis.de"
