@@ -3,12 +3,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   hostname = "cloud.local.ole.blue";
-in
-{
-
+in {
   age.secrets = lib.mkIf config.services.nextcloud.enable {
     nextcloud-bucket-secret-key = {
       file = ../secrets/nextcloud-bucket-secret-key.age;
@@ -37,7 +34,13 @@ in
 
     extraAppsEnable = true;
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) contacts calendar tasks;
+      inherit (config.services.nextcloud.package.packages.apps) contacts calendar tasks notes notify_push cookbook;
+
+      fulltextsearch = pkgs.fetchNextcloudApp {
+        url = "https://github.com/nextcloud-releases/fulltextsearch/releases/download/30.0.0/fulltextsearch-30.0.0.tar.gz";
+        sha256 = "sha256-7ThkhEKMGEIyAjC7qHHfZR8dlNBE5Zhnl06xQRCH6fU=";
+        license = "agpl3Plus";
+      };
     };
 
     config = {
@@ -47,7 +50,7 @@ in
       dbname = "nextcloud";
       dbuser = "nextcloud";
 
-     adminpassFile = config.age.secrets.nextcloud-admin-pass.path;
+      adminpassFile = config.age.secrets.nextcloud-admin-pass.path;
 
       objectstore.s3 = {
         enable = true;
