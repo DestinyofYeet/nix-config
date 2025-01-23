@@ -1401,17 +1401,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1737300775,
-        "narHash": "sha256-MMv3+ZPG2rhvZkTYEQ8N8qxVhThova28y1ZPCb2MhiM=",
-        "ref": "refs/heads/main",
-        "rev": "cf1a712449eab408d618fbd4685face2bd3fa969",
-        "revCount": 23,
-        "type": "git",
-        "url": "https://git.ole.blue/ole/strichliste.nix"
+        "lastModified": 1737623236,
+        "narHash": "sha256-QNemLpQCwyHQwgGHc35Z+6EhYeWgwNjfiRMuFcbWgB4=",
+        "path": "/home/ole/github/strichliste.nix",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "https://git.ole.blue/ole/strichliste.nix"
+        "path": "/home/ole/github/strichliste.nix",
+        "type": "path"
       }
     },
     "stylix": {
