@@ -150,6 +150,14 @@
       url = "github:NuschtOS/search";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # hyprgrass = {
+    #   url = "github:horriblename/hyprgrass";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     hyprland.follows = "hyprland";
+    #   };
+    # };
   };
 
   outputs =

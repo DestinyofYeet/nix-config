@@ -7,8 +7,9 @@
 {
   system.nixos.tags = [ "de-hyprland" ];
 
-  imports = [
+  imports = [  
     ./japanese-keyboard.nix
+    ./programs.nix
   ];
 
   security.pam.services.swaylock = { };

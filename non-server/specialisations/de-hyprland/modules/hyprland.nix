@@ -53,7 +53,10 @@ in
     systemd.enableXdgAutostart = true;
     xwayland.enable = true;
 
-    plugins = with pkgs.hyprlandPlugins; [ hy3 ];
+    plugins = with pkgs.hyprlandPlugins; [
+      hy3
+      hyprgrass
+    ];
 
     settings = {
       "$mainMod" = "SUPER";
@@ -244,6 +247,13 @@ in
       animation = [
         "workspaces, 0"
       ];
+
+      plugin = {
+        touch_gestures = {
+          sensitivity = "1.0";
+          workspace_swipe_fingers = "3";
+        };
+      };
     };
   };
 }
