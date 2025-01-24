@@ -2,8 +2,7 @@
   pkgs,
   config,
   ...
-}:
-{
+}: {
   age.secrets = {
     ole-mail.file = ../secrets/ole-ole.blue.age;
     scripts-uwuwhatsthis-de.file = ../secrets/scripts-uwuwhatsthis.de.age;
@@ -82,10 +81,11 @@
             header :contains "to" "abuse@uwuwhatsthis.de"
           ){
             fileinto  "INBOX.abuse";
-          } 
+          }
         '';
 
         aliases = [
+          "0wmgydMvJugr9o7ZSbHx@ole.blue"
           "BR09q6rAxWMg0kOHkwA5@ole.blue"
           "OvfGj2qjvkTzIfeKRXpA@ole.blue"
           "bestellung@ole.blue"
