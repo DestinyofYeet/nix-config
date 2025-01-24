@@ -4,14 +4,12 @@
   ...
 }: {
   services.strichliste = {
-    enable = true;
+    enable = false;
 
     nginxSettings = {
       configure = true;
       domain = "strichliste.local.ole.blue";
     };
-
-    # databaseUrl = "mysql://strichliste@localhost/strichliste";
 
     database.configure = true;
 
