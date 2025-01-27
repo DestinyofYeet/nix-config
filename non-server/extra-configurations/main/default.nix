@@ -53,6 +53,19 @@
 
   nix.buildMachines = [
     {
+      hostName = "nix-server";
+      system = "x86_64-linux";
+      protocol = "ssh";
+      maxJobs = 8;
+      speedFactor = 1;
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
+    }
+    {
       hostName = "teapot";
       system = "x86_64-linux";
       protocol = "ssh";
@@ -65,19 +78,6 @@
         "kvm"
       ];
       mandatoryFeatures = [];
-    }
-    {
-      hostName = "nix-server";
-      system = "x86_64-linux";
-      protocol = "ssh";
-      maxJobs = 8;
-      speedFactor = 1;
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
     }
   ];
 
