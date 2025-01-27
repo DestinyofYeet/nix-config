@@ -1692,17 +1692,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1735450909,
-        "narHash": "sha256-atpAz/Xz8EjsyadTwUURv1KjvbKN5AIyUYeJagHQCbg=",
-        "owner": "DestinyofYeet",
-        "repo": "waybar-taskwarrior.rs",
-        "rev": "3b37985889922053e3743a6bb99114bb2c5ae650",
-        "type": "github"
+        "lastModified": 1738019223,
+        "narHash": "sha256-K8N6xVg6bZWIt04Q4ZCaJx5VoHXKbkVCw4/kZ6RBAYw=",
+        "ref": "refs/heads/main",
+        "rev": "70861ee6ffe58ddb2fc76a51b477d80216ae3561",
+        "revCount": 12,
+        "type": "git",
+        "url": "https://git.ole.blue/ole/waybar-taskwarrior.rs"
       },
       "original": {
-        "owner": "DestinyofYeet",
-        "repo": "waybar-taskwarrior.rs",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.ole.blue/ole/waybar-taskwarrior.rs"
       }
     },
     "zen-browser": {

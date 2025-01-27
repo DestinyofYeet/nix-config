@@ -131,7 +131,7 @@
     };
 
     waybar-taskwarrior = {
-      url = "github:DestinyofYeet/waybar-taskwarrior.rs";
+      url = "git+https://git.ole.blue/ole/waybar-taskwarrior.rs";
       # url = "path:///home/ole/github/waybar-taskwarrior.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };

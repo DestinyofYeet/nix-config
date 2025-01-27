@@ -1,10 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, config, ... }:
 {
-
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./steam.nix
     ./vr.nix
@@ -40,7 +41,7 @@
 
   services.postgresql = {
     enable = false;
-    ensureDatabases = [ "strichliste-rs" ];
+    ensureDatabases = ["strichliste-rs"];
 
     ensureUsers = [
       {
@@ -63,7 +64,20 @@
         "big-parallel"
         "kvm"
       ];
-      mandatoryFeatures = [ ];
+      mandatoryFeatures = [];
+    }
+    {
+      hostName = "nix-server";
+      system = "x86_64-linux";
+      protocol = "ssh";
+      maxJobs = 8;
+      speedFactor = 1;
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
     }
   ];
 
@@ -72,5 +86,4 @@
   nix.extraOptions = ''
     builders-use-substitutes = true
   '';
-
 }
