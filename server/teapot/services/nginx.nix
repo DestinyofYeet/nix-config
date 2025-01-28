@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{...}: {
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
@@ -32,6 +29,7 @@
     allowedTCPPorts = [
       80
       443
+      2222
     ];
   };
 
