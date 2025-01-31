@@ -1,15 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   config,
   pkgs,
   lib,
   ...
-}:
-{
-
+}: {
   imports = [
     ./38C3.nix
     ./vpn.nix
@@ -18,6 +15,7 @@
     # ./postgres.nix
     # ./docker-compose.nix
     ./strichliste.nix
+    ./swap.nix
   ];
 
   nix = {
@@ -49,7 +47,7 @@
           "big-parallel"
           "kvm"
         ];
-        mandatoryFeatures = [ ];
+        mandatoryFeatures = [];
         maxJobs = 6;
         speedFactor = 4;
       }
@@ -73,7 +71,7 @@
 
   # disable baloo
   environment = {
-    etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
+    etc."xdg/baloofilerc".source = (pkgs.formats.ini {}).generate "baloorc" {
       "Basic Settings" = {
         "Indexing-Enabled" = false;
       };
