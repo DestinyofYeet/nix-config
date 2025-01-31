@@ -44,8 +44,9 @@ in {
   # environment.plasma6.excludePackages = with pkgs.kdePackages; [ plasma-browser-integration ];
 
   fonts = {
-    packages =
+    packages = with pkgs;
       [
+        noto-fonts-cjk-serif
       ]
       ++ nerd-fontsPkgs;
   };

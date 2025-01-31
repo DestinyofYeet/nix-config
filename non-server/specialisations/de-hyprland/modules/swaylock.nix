@@ -39,9 +39,9 @@
       ring-wrong-color = "#ed8796";
       text-wrong-color = "#1e2030";
 
-      grace-no-mouse = true;
-      grace-no-touch = true;
-      grace = 10;
+      # grace-no-mouse = true;
+      # grace-no-touch = true;
+      # grace = 1;
     };
   };
 
