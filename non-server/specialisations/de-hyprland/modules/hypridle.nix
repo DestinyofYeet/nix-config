@@ -3,13 +3,11 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   locker = "swaylock";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   keyboard-backlight = "platform::kbd_backlight";
-in
-{
+in {
   services.hypridle = {
     enable = true;
 
@@ -34,13 +32,14 @@ in
           on-resume = "${brightnessctl} -r";
         }
         {
-          timeout = 150;
+          timeout = 180;
           on-timeout = "loginctl lock-session";
         }
-        # {
-        #   timeout = 300;
-        #   on-timeout = "systemctl suspend";
-        # }
+        {
+          timeout = 300;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
       ];
     };
   };
