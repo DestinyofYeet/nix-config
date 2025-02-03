@@ -248,6 +248,7 @@ in {
       colmena
       yt-dlp
       typescript-language-server
+      obsidian
     ]
     ++ luaPkgs
     ++ kdePkgs
