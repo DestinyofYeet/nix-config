@@ -15,5 +15,9 @@ def restart-waybar [] {
   task spawn { waybar }
 }
 
+def "launch obsidian" [] {
+  task spawn { obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3 }
+}
 
-icat (get-random-file /home/ole/Nextcloud/Images/nyan_cats).name
+icat (get-random-file /home/ole/Nextcloud/Images/nyan_cats).name;
+
