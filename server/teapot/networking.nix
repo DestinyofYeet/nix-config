@@ -1,8 +1,6 @@
-{
-  lib,
-  ...
-}:
-{
+{lib, ...}: let
+  interface = "ens18";
+in {
   networking = {
     hostName = "teapot";
 
@@ -10,7 +8,7 @@
 
     useDHCP = false;
 
-    interfaces.enp6s18 = {
+    interfaces.${interface} = {
       useDHCP = false;
       ipv4.addresses = [
         {
@@ -29,7 +27,7 @@
 
     defaultGateway = {
       address = "5.83.152.129";
-      interface = "enp6s18";
+      interface = interface;
     };
 
     # defaultGateway6 = {
