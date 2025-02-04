@@ -26,7 +26,7 @@ in {
 
           (defalias
             sr ${buildAlias "s" "lctl"}
-            lr ${buildAlias "l" "rctl"}
+            lr ${buildAlias "l" "lctl"}
             dr ${buildAlias "d" "lsft"}
             kr ${buildAlias "k" "rsft"}
             fr ${buildAlias "f" "lmet"}
