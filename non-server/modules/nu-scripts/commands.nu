@@ -19,5 +19,9 @@ def "launch obsidian" [] {
   task spawn { LANG=DE obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3 }
 }
 
+def "launch anki" [] {
+  task spawn { ANKI_WAYLAND=1 anki }
+}
+
 icat (get-random-file /home/ole/Nextcloud/Images/nyan_cats).name;
 
