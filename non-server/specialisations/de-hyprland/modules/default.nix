@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{...}: {
   imports = [
     ./hyprpaper.nix
     ./hyprsunset.nix
@@ -16,5 +13,6 @@
     ./gtk.nix
     ./nushell.nix
     ./pyprland.nix
+    ./cursor.nix
   ];
 }
