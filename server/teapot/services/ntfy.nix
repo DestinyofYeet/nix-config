@@ -4,8 +4,8 @@
     settings = {
       base-url = "https://ntfy.ole.blue";
       listen-http = ":2586";
-      cache-file = "/var/cache/ntfy/cache.db";
-      attachment-cache-dir = "/var/cache/ntfy/attachments";
+      cache-file = "/var/lib/ntfy-sh/cache.db";
+      attachment-cache-dir = "/var/lib/ntfy-sh/attachments";
       auth-default-access = "deny-all";
       behind-proxy = true;
     };
