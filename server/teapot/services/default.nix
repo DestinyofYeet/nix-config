@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{...}: {
   imports = [
     ./sshd.nix
     ./nginx.nix
@@ -20,5 +17,6 @@
     ./postgresql.nix
     ./gitea.nix
     ./nix-search.nix
+    ./ntfy.nix
   ];
 }
