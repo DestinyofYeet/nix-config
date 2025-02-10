@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -34,5 +32,6 @@
     wireguard-tools
     nix-output-monitor
     openssl
+    ffmpeg
   ];
 }
