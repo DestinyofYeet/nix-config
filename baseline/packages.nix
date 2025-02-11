@@ -33,5 +33,6 @@
     nix-output-monitor
     openssl
     ffmpeg
+    iperf
   ];
 }
