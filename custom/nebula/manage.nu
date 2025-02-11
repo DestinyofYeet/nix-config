@@ -13,5 +13,5 @@ def "main rekey" [] {
 }
 
 def main [] {
-  print Possible subcommands: gen-ca
+  print "Possible subcommands: gen-ca, create-host, rekey"
 }
