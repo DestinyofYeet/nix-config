@@ -7,7 +7,7 @@
     ./hyprland.nix
     ./dunst.nix
     ./hypridle.nix
-    # ./hyprlock.nix
+    ./hyprlock.nix
     ./gnome-keyring.nix
     ./anyrun.nix
     ./gtk.nix

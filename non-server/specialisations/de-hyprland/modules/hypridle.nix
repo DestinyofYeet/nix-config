@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  locker = "swaylock";
+  locker = "hyprlock";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   keyboard-backlight = "platform::kbd_backlight";
 in {
