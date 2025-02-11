@@ -18,5 +18,6 @@
     ./gitea.nix
     ./nix-search.nix
     ./ntfy.nix
+    ./nebula.nix
   ];
 }

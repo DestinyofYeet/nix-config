@@ -250,6 +250,7 @@ in {
       typescript-language-server
       obsidian
       cavalier
+      nebula
     ]
     ++ luaPkgs
     ++ kdePkgs
