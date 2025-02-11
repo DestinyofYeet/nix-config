@@ -3,8 +3,11 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
+  imports = [
+    ./packages.nix
+    ./nebula.nix
+  ];
 
   # automatically collect garbage
   # config = {

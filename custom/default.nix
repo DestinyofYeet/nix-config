@@ -1,4 +1,4 @@
 {...}: {
   wireguard = import ./wireguard.nix {};
-  nebula = import ./nebula;
+  nebula = import ./nebula {};
 }

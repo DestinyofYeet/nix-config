@@ -18,6 +18,6 @@
     ./gitea.nix
     ./nix-search.nix
     ./ntfy.nix
-    ./nebula.nix
+    # ./nebula.nix # now in baseline
   ];
 }

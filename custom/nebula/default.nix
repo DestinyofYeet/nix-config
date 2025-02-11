@@ -4,7 +4,7 @@ in rec {
   yeet = {
     staticHostMap = {
       "10.10.0.1" = [
-        "5.83.152.153"
+        "5.83.152.153:4242"
       ];
     };
 
@@ -36,30 +36,53 @@ in rec {
     };
   };
 
-  getConfig = lib: config: options: let
+  getConfig = lib: config: let
     currentName = config.networking.hostName;
     currentNode = yeet.hosts.${currentName};
+    isLightHouse = currentNode.lighthouse or false;
   in {
-    options = {
-      age.secrets = lib.mkIf (config.services.networks.${networkName}.enable) {
-        "nebula-${currentName}-priv" = rec {
-          file = currentNode.privKeyFile;
-          owner = "nebula-${networkName}";
-          group = owner;
-        };
+    age.secrets = {
+      "nebula-${currentName}-priv" = rec {
+        file = currentNode.privKeyFile;
+        owner = "nebula-${networkName}";
+        group = owner;
+      };
+    };
+
+    services.nebula.networks.${networkName} = {
+      enable = true;
+      key = config.age.secrets."nebula-${currentName}-priv".path;
+      cert = currentNode.publicKeyFile;
+      ca = ./ca.crt;
+
+      staticHostMap = lib.mkIf (!(isLightHouse)) yeet.staticHostMap;
+      lighthouses = lib.mkIf (!(isLightHouse)) yeet.ligthHouses;
+
+      isLighthouse = isLightHouse;
+      listen = lib.mkIf isLightHouse {
+        host = "0.0.0.0";
+        port = 4242;
       };
 
-      services.nebula.networks.${networkName} = {
-        enable = true;
-        cert = config.age.secrets."nebula-${currentName}-priv".path;
-        key = currentNode.privKeyFile;
-        ca = ./ca.crt;
-
-        staticHostMap = lib.mkIf (!(currentNode.lighthouse or false)) yeet.staticHostMap;
-        lighthouses = lib.mkIf (!(currentNode.lighthouse or false)) yeet.ligthHouses;
-
-        isLighthouse = currentNode.lighthouse or false;
+      settings = {
+        punchy.punch = lib.mkIf (!isLightHouse) true;
       };
+
+      firewall = rec {
+        inbound = [
+          {
+            host = "any";
+            port = "any";
+            proto = "any";
+          }
+        ];
+
+        outbound = inbound;
+      };
+    };
+
+    networking.firewall = lib.mkIf isLightHouse {
+      allowedUDPPorts = [4242];
     };
   };
 }
