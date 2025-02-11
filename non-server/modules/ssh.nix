@@ -2,14 +2,12 @@
   config,
   osConfig,
   lib,
+  custom,
   ...
-}:
-
-let
+}: let
   per-device-secrets = ../secrets/${osConfig.networking.hostName};
 
-  mkSecrets =
-    names:
+  mkSecrets = names:
     builtins.listToAttrs (
       map (name: {
         inherit name;
@@ -19,26 +17,24 @@ let
       }) (builtins.filter (name: builtins.pathExists "${per-device-secrets}/${name}.age") names)
     );
 
-  mkHosts =
-    entryList:
+  mkHosts = entryList:
     builtins.concatStringsSep "\n" (
       lib.filter (x: x != "") (
         map (
           host:
-          lib.optionalString (builtins.hasAttr "${host.ident}" config.age.secrets) ''
-            Host ${host.host}
-              Hostname ${host.hostname}
-              User ${host.user}
-              IdentityFile ${config.age.secrets.${host.ident}.path}
-              AddKeysToAgent yes
-              Port ${toString (host.port or 22)}
-          ''
-        ) entryList
+            lib.optionalString (builtins.hasAttr "${host.ident}" config.age.secrets) ''
+              Host ${host.host}
+                Hostname ${host.hostname}
+                User ${host.user}
+                IdentityFile ${config.age.secrets.${host.ident}.path}
+                AddKeysToAgent yes
+                Port ${toString (host.port or 22)}
+            ''
+        )
+        entryList
       )
     );
-
-in
-{
+in {
   age.secrets = mkSecrets [
     "ssh-key-oth-gitlab"
     "ssh-key-github"
@@ -54,36 +50,36 @@ in
   home.file = {
     "/home/ole/.ssh/config" = {
       text = mkHosts [
-        (rec {
+        rec {
           host = "github.com";
           hostname = host;
           user = "git";
           ident = "ssh-key-github";
-        })
-        (rec {
+        }
+        rec {
           host = "gitlab.oth-regensburg.de";
           hostname = host;
           user = "git";
           ident = "ssh-key-oth-gitlab";
-        })
-        (rec {
+        }
+        rec {
           host = "uwuwhatsthis.de";
           hostname = host;
           user = "ole";
           ident = "ssh-key-vps-main";
-        })
-        (rec {
+        }
+        rec {
           host = "nix-server.infra.wg";
           hostname = host;
           user = "ole";
           ident = "ssh-key-nix-server";
-        })
-        (rec {
+        }
+        rec {
           host = "nix-server.infra.wg";
           hostname = host;
           user = "root";
           ident = "ssh-key-nix-server";
-        })
+        }
         {
           host = "fsim.ori";
           hostname = "fsim.othr.de";
@@ -92,8 +88,14 @@ in
         }
         {
           host = "nix-server";
-          hostname = "10.100.0.4";
+          hostname = custom.nebula.yeet.hosts.nix-server.ip;
           user = "ole";
+          ident = "ssh-key-nix-server";
+        }
+        {
+          host = "nix-server";
+          hostname = custom.nebula.yeet.hosts.nix-server.ip;
+          user = "root";
           ident = "ssh-key-nix-server";
         }
         {
@@ -123,7 +125,7 @@ in
         }
         {
           host = "teapot-wg";
-          hostname = "10.100.0.1";
+          hostname = custom.nebula.yeet.hosts.teapot.ip;
           user = "ole";
           ident = "ssh-key-vps-teapot";
         }

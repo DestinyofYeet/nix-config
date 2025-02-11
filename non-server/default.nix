@@ -3,16 +3,15 @@
   stable-pkgs,
   pkgs,
   lib,
+  custom,
   ...
-}:
-{
-
+}: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
 
-    extraSpecialArgs = { inherit inputs stable-pkgs; };
+    extraSpecialArgs = {inherit inputs stable-pkgs custom;};
 
     sharedModules = [
       inputs.plasma-manager.homeManagerModules.plasma-manager
