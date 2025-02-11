@@ -81,8 +81,9 @@ in rec {
       };
     };
 
-    networking.firewall = lib.mkIf isLightHouse {
-      allowedUDPPorts = [4242];
+    networking.firewall = {
+      allowedUDPPorts = lib.mkIf isLightHouse [4242];
+      trustedInterfaces = ["nebula.${networkName}"];
     };
   };
 }
