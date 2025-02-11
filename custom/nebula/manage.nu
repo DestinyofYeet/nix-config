@@ -8,10 +8,14 @@ def "main create-host" [name: string, ip: string, groups: string] {
   nebula-cert sign -name $name -ip $ip -groups $groups
 }
 
+def "main sign-pub" [pub: path, name: string, ip: string, groups: string]{
+  nebula-cert sign -in-pub $pub -name $name -ip $ip --groups $groups
+}
+
 def "main rekey" [] {
   ls | where type == dir | each { cd $in.name; agenix -r; cd ..}
 }
 
 def main [] {
-  print "Possible subcommands: gen-ca, create-host, rekey"
+  print "Possible subcommands: gen-ca, create-host, rekey, sign-pub"
 }

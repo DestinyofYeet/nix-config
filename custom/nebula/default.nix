@@ -14,22 +14,26 @@ in rec {
 
     hosts = {
       teapot = {
+        ip = "172.27.255.1";
         lighthouse = true;
         privKeyFile = ./teapot/teapot.key.age;
         publicKeyFile = ./teapot/teapot.crt;
       };
 
       nix-server = {
+        ip = "172.27.255.2";
         privKeyFile = ./nix-server/nix-server.key.age;
         publicKeyFile = ./nix-server/nix-server.crt;
       };
 
       wattson = {
+        ip = "172.27.255.3";
         privKeyFile = ./wattson/wattson.key.age;
         publicKeyFile = ./wattson/wattson.crt;
       };
 
       main = {
+        ip = "172.27.255.4";
         privKeyFile = ./main/main.key.age;
         publicKeyFile = ./main/main.crt;
       };
