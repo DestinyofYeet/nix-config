@@ -1,5 +1,8 @@
-{ config, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   age.secrets = {
     users-ole-password = {
       file = ./../secrets/ankisync-users-ole.age;
@@ -8,7 +11,7 @@
 
   services.anki-sync-server = {
     enable = true;
-    address = "0.0.0.0";
+    address = "127.0.0.1";
 
     users = [
       {
@@ -17,4 +20,10 @@
       }
     ];
   };
+
+  services.nginx.virtualHosts."ankisync.local.ole.blue" =
+    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
+    // {
+      locations."/".proxyPass = "http://${config.services.anki-sync-server.address}:${toString config.services.anki-sync-server.port}";
+    };
 }
