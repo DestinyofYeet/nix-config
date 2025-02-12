@@ -63,12 +63,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    auto-add-torrents = {
-      # url = "path:///drives/programming-Stuff/python/auto-add-torrents-clean";
-      url = "github:DestinyofYeet/auto-add-torrents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     prometheus-qbit = {
       url = "github:DestinyofYeet/prometheus-qbitorrent.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -158,6 +152,12 @@
     #     hyprland.follows = "hyprland";
     #   };
     # };
+
+    auto-add-torrents = {
+      url = "git+https://git.ole.blue/ole/auto-add-torrents-python";
+      # url = "path:///home/ole/github/auto-add-torrents-python";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -266,8 +266,8 @@
           inputs.clean-unused-files.nixosModules.clean-unused-files
           # inputs.strichliste.nixosModules.strichliste
           inputs.networkNamespaces.nixosModules.networkNamespaces
-          inputs.auto-add-torrents.nixosModules.auto-add-torrents
           inputs.prometheus-qbit.nixosModules.default
+          inputs.auto-add-torrents.nixosModules.default
           ./server/nix-server
         ]
         ++ baseline-modules;

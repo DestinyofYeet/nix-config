@@ -1,22 +1,17 @@
-{ config, ... }:
-{
+{config, ...}: {
+  age.secrets = {
+    auto-add-torrents-conf = {
+      file = ../secrets/auto-add-torrents.conf.age;
+    };
+  };
 
-  # age.secrets = {
-  #   auto-add-torrents-conf = {
-  #     file = ../secrets/auto-add-torrents.conf.age;
-  #     owner = config.services.auto-add-torrents.user;
-  #     group = config.services.auto-add-torrents.group;
-  #   };
-  # };
+  systemd.services.auto-add-torrents = {
+    after = ["prowlarr.service"];
+    requires = ["prowlarr.service"];
+  };
 
-  # services.auto-add-torrents = {
-  #   enable = false;
-  #   configFile = config.age.secrets.auto-add-torrents-conf.path;
-  #   developerMode = false;
-  # };
-
-  # systemd.services.auto-add-torrents = {
-  #   after = [ "prowlarr.service" ];
-  #   requires = [ "prowlarr.service" ];
-  # };
+  services.auto-add-torrents = {
+    enable = true;
+    configFile = config.age.secrets.auto-add-torrents-conf.path;
+  };
 }

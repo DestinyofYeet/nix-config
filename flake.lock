@@ -116,17 +116,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1730844846,
-        "narHash": "sha256-K51E/WV1cLeRFEz6KVeHTFEJAJM0RgjBLNhBaPQdlmQ=",
-        "owner": "DestinyofYeet",
-        "repo": "auto-add-torrents.nix",
-        "rev": "27ad5d017a4cb877dfbd83159f58df7765f844e5",
-        "type": "github"
+        "lastModified": 1739394222,
+        "narHash": "sha256-RGl97Dx8vC56AJG29QCcJVpR/DdY0+QLhSx39iBB5HE=",
+        "ref": "refs/heads/main",
+        "rev": "cfc858cf499b0d7076e5506eb2108dff2e97ba0c",
+        "revCount": 7,
+        "type": "git",
+        "url": "https://git.ole.blue/ole/auto-add-torrents-python"
       },
       "original": {
-        "owner": "DestinyofYeet",
-        "repo": "auto-add-torrents.nix",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.ole.blue/ole/auto-add-torrents-python"
       }
     },
     "base16": {
