@@ -10,6 +10,10 @@
           name = "nix";
           auto-format = true;
         }
+        {
+          name = "rust";
+          auto-format = true;
+        }
       ];
 
       language-server = {
@@ -25,6 +29,12 @@
               };
             };
           };
+        };
+      };
+
+      rust-anaylzer = {
+        config.rust-analyzer = {
+          formatting.command = ["${pkgs.rustfmt}/bin/rustfmt"];
         };
       };
     };
