@@ -1291,11 +1291,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736713100,
-        "narHash": "sha256-nVywNPZcI2FtE3wxjMR0hAsjepHW1Ne3tdFmCRD1tzo=",
+        "lastModified": 1739466378,
+        "narHash": "sha256-SE/BcvS5G71WpbBOnUjuR+fMuEcCAPxSbyhrPUi2KiM=",
         "owner": "DestinyofYeet",
         "repo": "setup-env.rs",
-        "rev": "9d604536afae56a70eb25a5c4ace25785698e38d",
+        "rev": "4b17d0858c9528fac045a15de711adc20bd31521",
         "type": "github"
       },
       "original": {
