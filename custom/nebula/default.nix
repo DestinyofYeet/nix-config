@@ -37,6 +37,14 @@ in rec {
         privKeyFile = ./main/main.key.age;
         publicKeyFile = ./main/main.crt;
       };
+
+      # android = 172.27.255.5;
+
+      kartoffelkiste = {
+        ip = "172.27.255.6";
+        privKeyFile = ./kartoffelkiste/kartoffelkiste.key.age;
+        publicKeyFile = ./kartoffelkiste/kartoffelkiste.crt;
+      };
     };
   };
 
