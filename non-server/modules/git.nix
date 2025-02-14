@@ -14,18 +14,18 @@
 in {
   # name and email is set in baseline
   programs.git = {
-    extraConfig = lib.mkIf (osConfig.networking.hostName != "kartoffelkiste") {
+    extraConfig = {
       safe = {
         directory = "*";
       };
 
-      gpg = {
-        format = "ssh";
-        ssh.allowedSignersFile = builtins.toString allowed-signers;
-      };
+      # gpg = {
+      #   format = "ssh";
+      #   ssh.allowedSignersFile = builtins.toString allowed-signers;
+      # };
 
-      commit.gpgsign = true;
-      user.signingKey = config.age.secrets.ssh-key-gitea.path;
+      # commit.gpgsign = true;
+      # user.signingKey = config.age.secrets.ssh-key-gitea.path;
     };
   };
 
