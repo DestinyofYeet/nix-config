@@ -9,8 +9,11 @@ def "main create-host" [name: string, ip: string, groups: string] {
 }
 
 def "main create-hosts" [] {
-  for host in (open ./ip_map.json) {    
-    main create-host $host.name $"($host.ip)/24" $host.groups
+  for host in (nix eval --json -f ./machines.nix | from json | transpose "key" "value") {
+    let name = $host.key;
+    let value = $host.value;
+    main create-host $name $"($value.ip)/24" ($value.groups | str join ",")
+    # print $"Would create host ($name) with ip ($value.ip)/24 and groups ($value.groups | str join ",")"
   }
 }
 

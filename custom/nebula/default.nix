@@ -1,51 +1,21 @@
-{...}: let
+{lib, ...}: let
   networkName = "yeet";
+
+  machines = import ./machines.nix;
+
+  genStaticHostMap = machines:
+    builtins.listToAttrs (map (entry: {
+      name = entry.value.ip;
+      value = entry.value.external_ips;
+    }) (builtins.filter (attr: attr.value.lighthouse or false) (lib.attrsToList machines)));
+
+  getLighthouses = machines: lib.mapAttrsToList (_v: v: v.ip) (lib.filterAttrs (name: value: value.lighthouse or false) machines);
 in rec {
   yeet = {
-    staticHostMap = {
-      "172.27.255.1" = [
-        "ole.blue:4242"
-      ];
-    };
+    staticHostMap = genStaticHostMap machines;
+    lightHouses = getLighthouses machines;
 
-    ligthHouses = [
-      "172.27.255.1"
-    ];
-
-    hosts = {
-      teapot = {
-        ip = "172.27.255.1";
-        lighthouse = true;
-        privKeyFile = ./teapot/teapot.key.age;
-        publicKeyFile = ./teapot/teapot.crt;
-      };
-
-      nix-server = {
-        ip = "172.27.255.2";
-        privKeyFile = ./nix-server/nix-server.key.age;
-        publicKeyFile = ./nix-server/nix-server.crt;
-      };
-
-      wattson = {
-        ip = "172.27.255.3";
-        privKeyFile = ./wattson/wattson.key.age;
-        publicKeyFile = ./wattson/wattson.crt;
-      };
-
-      main = {
-        ip = "172.27.255.4";
-        privKeyFile = ./main/main.key.age;
-        publicKeyFile = ./main/main.crt;
-      };
-
-      # android = 172.27.255.5;
-
-      kartoffelkiste = {
-        ip = "172.27.255.6";
-        privKeyFile = ./kartoffelkiste/kartoffelkiste.key.age;
-        publicKeyFile = ./kartoffelkiste/kartoffelkiste.crt;
-      };
-    };
+    hosts = import ./machines.nix;
   };
 
   getConfig = lib: config: let
@@ -68,7 +38,7 @@ in rec {
       ca = ./ca.crt;
 
       staticHostMap = lib.mkIf (!(isLightHouse)) yeet.staticHostMap;
-      lighthouses = lib.mkIf (!(isLightHouse)) yeet.ligthHouses;
+      lighthouses = lib.mkIf (!(isLightHouse)) yeet.lightHouses;
 
       isLighthouse = isLightHouse;
       listen = lib.mkIf isLightHouse {

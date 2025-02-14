@@ -181,7 +181,7 @@
       }
     );
 
-    custom = import ./custom {};
+    custom = import ./custom {inherit lib;};
 
     baseline-modules = [
       home-manager.nixosModules.home-manager
