@@ -2,10 +2,11 @@
   pkgs,
   config,
   custom,
+  secretStore,
   ...
 }: {
   age.secrets = {
-    wireguard-vpn-priv-key.file = ./secrets/wireguard-vpn-priv-key.age;
+    wireguard-vpn-priv-key.file = secretStore.secrets + /non-server/wattson/wireguard-vpn-priv-key.age;
   };
 
   networking.wireguard.interfaces = {

@@ -3,9 +3,10 @@
   osConfig,
   lib,
   custom,
+  secretStore,
   ...
 }: let
-  per-device-secrets = ../secrets/${osConfig.networking.hostName};
+  per-device-secrets = secretStore.secrets + "/non-server/${osConfig.networking.hostName}";
 
   mkSecrets = names:
     builtins.listToAttrs (

@@ -16,7 +16,7 @@
     # ./docker-compose.nix
     ./strichliste.nix
     ./swap.nix
-    ./kanata.nix
+    ../kanata.nix
   ];
 
   nix = {

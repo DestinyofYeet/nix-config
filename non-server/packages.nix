@@ -242,7 +242,7 @@ in {
       wirelesstools
       inetutils
       krita
-      aseprite
+      (lib.mkIf (config.networking.hostName != "kartoffelkiste") aseprite)
       # pyprland
       qFlipper
       colmena

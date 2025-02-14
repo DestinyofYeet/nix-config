@@ -4,6 +4,7 @@
   pkgs,
   lib,
   custom,
+  secretStore,
   ...
 }: {
   home-manager = {
@@ -11,7 +12,7 @@
     useUserPackages = true;
     backupFileExtension = "backup";
 
-    extraSpecialArgs = {inherit inputs stable-pkgs custom;};
+    extraSpecialArgs = {inherit inputs stable-pkgs custom secretStore;};
 
     sharedModules = [
       inputs.plasma-manager.homeManagerModules.plasma-manager

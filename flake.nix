@@ -230,6 +230,8 @@
       config.allowUnfree = true;
     };
 
+    secretStore = import ./secretStore {};
+
     defaultSpecialArgs = {
       inherit
         inputs
@@ -238,6 +240,7 @@
         lib
         custom
         home-manager
+        secretStore
         ;
       flake = self;
     };

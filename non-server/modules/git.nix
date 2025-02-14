@@ -3,9 +3,10 @@
   config,
   lib,
   osConfig,
+  secretStore,
   ...
 }: let
-  public-signing-key-path = ../secrets/${osConfig.networking.hostName}/ssh-key-signing-key;
+  public-signing-key-path = secretStore.secrets + "/non-server/${osConfig.networking.hostName}/ssh-key-signing-key";
 
   allowed-signers = pkgs.writeText "allowed_signers" ''
     * ${builtins.readFile public-signing-key-path}

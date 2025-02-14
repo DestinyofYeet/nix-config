@@ -1,5 +1,7 @@
-{ inputs, lib }:
-let
+{
+  inputs,
+  lib,
+}: let
   git-secrets = builtins.fetchGit {
     url = "git@github.com:DestinyofYeet/nix-secrets.git";
     rev = "0ee6b577a3159cd252ad59a3a652dd5cedc3b7f0";
@@ -7,23 +9,24 @@ let
   };
 
   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-in
-rec {
-  scripts = import ./scripts { inherit inputs pkgs lib; };
+in rec {
+  scripts = import ./scripts {inherit inputs pkgs lib;};
 
   mkIfLaptop = config: attr: lib.mkIf (config.networking.hostName == "wattson") attr;
 
-  isLaptop = config: config.networking.hostName == "wattson";
+  isLaptop = config: config.networking.hostName == "wattson" || config.networking.hostName == "kartoffelkiste";
 
   isMain = config: config.networking.hostName == "main";
 
-  mkIfLaptopElse =
-    config: attr: default:
-    if (config.networking.hostName == "wattson") then attr else default;
+  mkIfLaptopElse = config: attr: default:
+    if (config.networking.hostName == "wattson")
+    then attr
+    else default;
 
-  mkIfMainElse =
-    config: attr: default:
-    if (config.networking.hostName == "main") then attr else default;
+  mkIfMainElse = config: attr: default:
+    if (config.networking.hostName == "main")
+    then attr
+    else default;
 
   update-needed-content = pkgs.writeShellScriptBin "update-needed-content" ''
     set -e
@@ -54,7 +57,7 @@ rec {
   '';
 
   gen-activation-file = src: dst: ''
-    ${pkgs.bash}/bin/bash ${update-needed-content-file}/bin/update-needed-content-file ${src} ${dst} 
+    ${pkgs.bash}/bin/bash ${update-needed-content-file}/bin/update-needed-content-file ${src} ${dst}
   '';
 
   settings = {
@@ -63,8 +66,7 @@ rec {
     screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -z -m region -o /tmp";
 
     nix-server = {
-
-      secrets = import "${git-secrets}/secrets.nix" { };
+      secrets = import "${git-secrets}/secrets.nix" {};
 
       paths.data = "/mnt/data/data";
       paths.configs = "/mnt/data/configs";

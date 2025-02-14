@@ -1,7 +1,11 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  secretStore,
+  ...
+}: {
   age.secrets = {
-    taskwarrior-config.file = ../secrets/taskwarrior-config.age;
+    taskwarrior-config.file = secretStore.secrets + /non-server/taskwarrior-config.age;
   };
 
   programs.taskwarrior = {
@@ -36,7 +40,7 @@
       OnCalendar = "*:0/5";
     };
     Install = {
-      WantedBy = [ "timers.target" ];
+      WantedBy = ["timers.target"];
     };
   };
 }

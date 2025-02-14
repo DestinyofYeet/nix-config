@@ -1,0 +1,3 @@
+{keys}: let
+  functions = import ../functions.nix {path = ./.;};
+in (functions.importFolder "nix-server/" {inherit keys;})
