@@ -7,10 +7,8 @@
   pkgs,
   modulesPath,
   ...
-}:
-
-{
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
@@ -21,45 +19,33 @@
     "sr_mod"
     "sdhci_pci"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/9a07c655-7426-403d-a954-560d890e8695";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-dee51788-373b-40a0-ac17-7a45a17f3fab".device =
-    "/dev/disk/by-uuid/dee51788-373b-40a0-ac17-7a45a17f3fab";
+  boot.initrd.luks.devices."luks-dee51788-373b-40a0-ac17-7a45a17f3fab".device = "/dev/disk/by-uuid/dee51788-373b-40a0-ac17-7a45a17f3fab";
 
-  swapDevices = [ ];
+  swapDevices = [];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s25.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
+  # # Setup keyfile
+  # boot.initrd.secrets = {
+  #   "/crypto_keyfile.bin" = null;
+  # };
 
-  boot.loader.grub.enableCryptodisk = true;
+  # boot.loader.grub.enableCryptodisk = true;
 
-  boot.initrd.luks.devices."luks-dee51788-373b-40a0-ac17-7a45a17f3fab".keyFile =
-    "/crypto_keyfile.bin";
+  boot.initrd.luks.devices."luks-dee51788-373b-40a0-ac17-7a45a17f3fab".keyFile = "/crypto_keyfile.bin";
   networking.hostName = "kartoffelkiste"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 }
