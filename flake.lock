@@ -116,11 +116,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739394222,
-        "narHash": "sha256-RGl97Dx8vC56AJG29QCcJVpR/DdY0+QLhSx39iBB5HE=",
+        "lastModified": 1739542386,
+        "narHash": "sha256-HEzNwivrEkSd1Ec+qoLmFU5avzy5qDSoRLzH1nX2lLo=",
         "ref": "refs/heads/main",
-        "rev": "cfc858cf499b0d7076e5506eb2108dff2e97ba0c",
-        "revCount": 7,
+        "rev": "796c86c265cdb8f31a93928beb3015c09fbbda78",
+        "revCount": 9,
         "type": "git",
         "url": "https://git.ole.blue/ole/auto-add-torrents-python"
       },
