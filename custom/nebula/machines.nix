@@ -12,12 +12,6 @@
     publicKeyFile = ./teapot/teapot.crt;
   };
 
-  "test" = {
-    ip = "172.27.255.10";
-    external_ips = ["uwuwhatsthis.de:4242"];
-    lighthouse = true;
-  };
-
   "nix-server" = {
     ip = "172.27.255.2";
     groups = [
