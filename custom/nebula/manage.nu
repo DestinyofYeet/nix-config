@@ -8,6 +8,12 @@ def "main create-host" [name: string, ip: string, groups: string] {
   nebula-cert sign -name $name -ip $ip -groups $groups
 }
 
+def "main create-hosts" [] {
+  for host in (open ./ip_map.json) {    
+    main create-host $host.name $"($host.ip)/24" $host.groups
+  }
+}
+
 def "main sign-pub" [pub: path, name: string, ip: string, groups: string] {
   nebula-cert sign -in-pub $pub -name $name -ip $ip --groups $groups
 }
@@ -17,17 +23,23 @@ def "main rekey" [] {
 }
 
 def "main re-encrypt-keys" [] {
-  ls | where type == dir | each {
-    let name = $in.name;
+  for host in (ls | where type == dir) {
+    let name = $host.name;
     cp ./ca.crt $"($name)/";
-    mv $"./($name).crt" $"($name)/";
+    cp $"./($name).crt" $"($name)/";
     cd $name;
     open $"../($name).key" | agenix -e $"($name).key.age";
-    rm $"../($name).key"
     cd ..;
   }
 }
 
+def "main clean" [] {
+  for dir in (ls | where type == dir) {
+    let name = $dir.name;
+    rm $"($name).key" $"($name).crt";
+  }
+}
+
 def main [] {
-  print "Possible subcommands: gen-ca, create-host, rekey, sign-pub, re-encrypt-keys"
+  print "Possible subcommands: gen-ca, create-host, create-hosts, rekey, sign-pub, re-encrypt-keys, clean"
 }

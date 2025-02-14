@@ -1,0 +1,27 @@
+[
+  {
+    "name": "teapot",
+    "ip": "172.27.255.1",
+    "groups": "lighthouse,server"
+  },
+  {
+    "name": "nix-server",
+    "ip": "172.27.255.2",
+    "groups": "server"
+  },
+  {
+    "name": "main",
+    "ip": "172.27.255.3",
+    "groups": "end-user,desktop"
+  },
+  {
+    "name": "wattson",
+    "ip": "172.27.255.4",
+    "groups": "end-user,laptop"
+  },
+  {
+    "name": "kartoffelkiste",
+    "ip": "172.27.255.6",
+    "groups": "end-user,laptop"
+  }
+]
