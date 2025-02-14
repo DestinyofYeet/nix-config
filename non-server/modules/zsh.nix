@@ -4,8 +4,7 @@
   osConfig,
   lib,
   ...
-}:
-let
+}: let
   rebuild-system = pkgs.writeShellScriptBin "rebuild-system" ''
     set -e
 
@@ -22,7 +21,7 @@ let
   '';
 
   stylix-color-picker = pkgs.writeShellScriptBin "stylix-color-picker" ''
-    set -e 
+    set -e
 
     color_picked=$(ls ${pkgs.base16-schemes}/share/themes | ${pkgs.fzf}/bin/fzf)
 
@@ -37,7 +36,7 @@ let
 
     read -p "Update the system? (y/n)" yes_no
 
-    case $yes_no in 
+    case $yes_no in
       y ) echo Updating...;;
       n ) exit 0;;
       * ) exit 1;;
@@ -45,13 +44,7 @@ let
 
     ${rebuild-system}/bin/rebuild-system
   '';
-
-  gitui-proper = pkgs.writeShellScriptBin "gitui-proper" ''
-    ${pkgs.bash}/bin/bash -c 'eval $(ssh-agent) && ssh-add ${config.age.secrets.ssh-key-github.path} && gitui && eval $(ssh-agent -k)'
-  '';
-in
-{
-
+in {
   programs.zsh = {
     enable = true;
 
@@ -61,7 +54,6 @@ in
       # rebuild-system = "${rebuild-system}/bin/rebuild-system";
       deploy-node = "${deploy-node}/bin/deploy-node";
       stylix-color-picker = "${stylix-color-picker}/bin/stylix-color-picker";
-      gitui = "${gitui-proper}/bin/gitui-proper";
 
       setup-env = "${osConfig.customScripts.setup-env}";
 

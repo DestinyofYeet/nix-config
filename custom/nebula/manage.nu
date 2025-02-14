@@ -8,7 +8,7 @@ def "main create-host" [name: string, ip: string, groups: string] {
   nebula-cert sign -name $name -ip $ip -groups $groups
 }
 
-def "main sign-pub" [pub: path, name: string, ip: string, groups: string]{
+def "main sign-pub" [pub: path, name: string, ip: string, groups: string] {
   nebula-cert sign -in-pub $pub -name $name -ip $ip --groups $groups
 }
 
@@ -16,6 +16,18 @@ def "main rekey" [] {
   ls | where type == dir | each { cd $in.name; agenix -r; cd ..}
 }
 
+def "main re-encrypt-keys" [] {
+  ls | where type == dir | each {
+    let name = $in.name;
+    cp ./ca.crt $"($name)/";
+    mv $"./($name).crt" $"($name)/";
+    cd $name;
+    open $"../($name).key" | agenix -e $"($name).key.age";
+    rm $"../($name).key"
+    cd ..;
+  }
+}
+
 def main [] {
-  print "Possible subcommands: gen-ca, create-host, rekey, sign-pub"
+  print "Possible subcommands: gen-ca, create-host, rekey, sign-pub, re-encrypt-keys"
 }

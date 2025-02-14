@@ -309,6 +309,7 @@
       modules =
         [
           ./non-server/hardware/kartoffelkiste.nix
+          ./non-server/extra-configurations/kartoffelkiste
           ./non-server
         ]
         ++ non-server-modules;
