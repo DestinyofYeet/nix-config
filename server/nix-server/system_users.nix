@@ -25,6 +25,7 @@
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQWyDZw1M7t47nJ0vu7EvAd6wfN0yrdDBnT7RaWILN5 ole@wattson"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhLrbWc/gopTJ2ZZW4ZfCzGhjhV9fKb1wdvFLQpmP3y ole@main"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAmcqiqtEiaahiJGQeeQDRaWJAdVN1A04RcBfeWFyL/l ole@kartoffelkiste"
       ];
       packages = with pkgs; [neovim];
     };
