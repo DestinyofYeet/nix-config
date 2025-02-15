@@ -1,11 +1,9 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   service_dependency = "home-manager-ole.service";
-in
-{
+in {
   systemd.services.home-manager-ole-pre = {
-    before = [ service_dependency ];
-    requiredBy = [ service_dependency ];
+    before = [service_dependency];
+    requiredBy = [service_dependency];
 
     serviceConfig = {
       Type = "oneshot";
@@ -30,24 +28,24 @@ in
     enable = false;
   };
 
-  # for connecting to my innernet network
-  systemd.services.innernet-infra = {
-    enable = true;
-    description = "innernet client for infra";
-    wantedBy = [ "multi-user.target" ];
-    after = [
-      "network-online.target"
-      "nss-lookup.target"
-    ];
-    wants = [
-      "network-online.target"
-      "nss-lookup.target"
-    ];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "${pkgs.innernet}/bin/innernet up infra --daemon --interval 60 --no-write-hosts";
-    };
-  };
+  # # for connecting to my innernet network
+  # systemd.services.innernet-infra = {
+  #   enable = true;
+  #   description = "innernet client for infra";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [
+  #     "network-online.target"
+  #     "nss-lookup.target"
+  #   ];
+  #   wants = [
+  #     "network-online.target"
+  #     "nss-lookup.target"
+  #   ];
+  #   serviceConfig = {
+  #     Restart = "always";
+  #     ExecStart = "${pkgs.innernet}/bin/innernet up infra --daemon --interval 60 --no-write-hosts";
+  #   };
+  # };
 
   # services.fwupd.enable = true;
 
