@@ -14,13 +14,13 @@
 in {
   # name and email is set in baseline
   programs.git = {
-    extraConfig =
+    extraConfig = lib.mkMerge [
       {
         safe = {
           directory = "*";
         };
       }
-      // lib.mkIf (builtins.hasAttr "ssh-key-gitea" config.age.secrets) {
+      (lib.mkIf (builtins.hasAttr "ssh-key-gitea" config.age.secrets) {
         gpg = {
           format = "ssh";
           ssh.allowedSignersFile = builtins.toString allowed-signers;
@@ -28,7 +28,8 @@ in {
 
         commit.gpgsign = true;
         user.signingKey = config.age.secrets.ssh-key-gitea.path;
-      };
+      })
+    ];
   };
 
   programs.lazygit = {
