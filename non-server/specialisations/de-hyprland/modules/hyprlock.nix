@@ -48,18 +48,18 @@
           font_size = 150;
           color = "rgb(b6c4ff)";
 
-          position = "0%, -100%";
+          position = "0, -200";
 
           halign = "center";
           valign = "top";
         }
         {
           monitor = "";
-          text = "cmd[update:3600000] date +'%a %b %d'";
+          text = "cmd[update:3600000] date +'%A %d.%b %Y'";
           font_size = 20;
           color = "rgb(b6c4ff)";
 
-          position = "0%, -110%";
+          position = "0, -200";
           halign = "center";
           valign = "top";
         }
