@@ -132,7 +132,7 @@ in {
         }
         {
           host = "git.ole.blue";
-          hostname = "ole.blue";
+          hostname = custom.nebula.yeet.hosts.teapot.ip;
           user = "forgejo";
           ident = "ssh-key-gitea";
         }
