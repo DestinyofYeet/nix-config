@@ -251,6 +251,7 @@ in {
       obsidian
       cavalier
       nebula
+      prismlauncher
     ]
     ++ luaPkgs
     ++ kdePkgs
