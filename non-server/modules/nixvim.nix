@@ -11,6 +11,7 @@
       smarttab = true;
       smartindent = false;
       number = true;
+      termguicolors = true;
 
       clipboard.register = "unnamedplus";
       undofile = true;
@@ -25,6 +26,9 @@
       foldlevel = 99;
       foldlevelstart = 99;
       foldnestmax = 4;
+
+      wildmenu = true;
+      wildmode = "list:longest";
     };
 
     colorschemes = {
@@ -73,6 +77,11 @@
       {
         mode = [ "n" ];
         key = "<leader>nh";
+        action = "<cmd>nohl<cr>";
+      }
+      {
+        mode = [ "n" ];
+        key = "<esc><esc>";
         action = "<cmd>nohl<cr>";
       }
       {
@@ -160,7 +169,7 @@
           {
             mode = [ "n" ];
             key = "<leader>dD";
-            action = "<cmd>Telescope diagnostics bufnr=0<cr>";
+            action = "<cmd>FzfLua diagnostics_document<cr>";
             options.desc = "Show buffer diagnostics";
           }
           {
@@ -174,6 +183,12 @@
             key = "<leader>k";
             action.__raw = "vim.lsp.buf.hover";
             options.desc = "Show documentation";
+          }
+          {
+            mode = [ "n" ];
+            key = "<leader>a";
+            action = "<cmd>FzfLua lsp_code_actions<cr>";
+            options.desc = "Performs code action";
           }
         ];
 
@@ -305,6 +320,15 @@
       };
 
       yazi = { enable = true; };
+
+      cmp = {
+        enable = true;
+        autoEnableSources = true;
+        settings.sources =
+          [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
+      };
+
+      fzf-lua = { enable = true; };
     };
 
     extraConfigLua = ''
