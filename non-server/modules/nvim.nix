@@ -16,7 +16,6 @@ let
     type = "lua";
     config = builtins.readFile file;
   };
-
 in
 {
   programs.neovim = {
@@ -31,6 +30,7 @@ in
       clang-tools
       ast-grep
       pyright
+      rust-analyzer
     ];
 
     plugins =
@@ -54,7 +54,7 @@ in
         luasnip
         cmp-nvim-lsp
         nvim-nu
-        # none-ls-nvim
+        none-ls-nvim
       ]
       ++ treesitter-parsers;
   };

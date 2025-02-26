@@ -26,7 +26,8 @@ let
       ip = "192.168.1.18";
     };
   };
-in {
+in
+{
   networking = {
     dhcpcd.enable = false;
     useDHCP = false;
@@ -55,7 +56,12 @@ in {
       ${homeRouter.interface} = {
         useDHCP = false;
         ipv4 = {
-          addresses = [{ address = "${homeRouter.ip.router}"; prefixLength = 24; }];
+          addresses = [
+            {
+              address = "${homeRouter.ip.router}";
+              prefixLength = 24;
+            }
+          ];
           routes = [
             {
               address = "192.168.2.0";

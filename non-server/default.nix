@@ -6,13 +6,21 @@
   custom,
   secretStore,
   ...
-}: {
+}:
+{
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
 
-    extraSpecialArgs = {inherit inputs stable-pkgs custom secretStore;};
+    extraSpecialArgs = {
+      inherit
+        inputs
+        stable-pkgs
+        custom
+        secretStore
+        ;
+    };
 
     sharedModules = [
       inputs.plasma-manager.homeManagerModules.plasma-manager
@@ -20,6 +28,7 @@
       inputs.agenix.homeManagerModules.age
       inputs.shell-aliases.homeManagerModules.default
       inputs.anyrun.homeManagerModules.default
+      inputs.nixvim.homeManagerModules.nixvim
     ];
   };
 

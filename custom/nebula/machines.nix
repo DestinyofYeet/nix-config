@@ -1,7 +1,7 @@
 {
   "teapot" = {
     ip = "172.27.255.1";
-    external_ips = ["ole.blue:4242"];
+    external_ips = [ "ole.blue:4242" ];
     lighthouse = true;
     groups = [
       "ligthouse"

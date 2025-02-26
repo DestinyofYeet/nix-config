@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   virtualisation.oci-containers = {
     containers."shokoserver" = {
       image = "shokoanime/server:v5.1.0";
@@ -12,7 +13,7 @@
           lib.custom.settings.${config.networking.hostName}.paths.data
         }/media/jellyfin/animes"
       ];
-      ports = ["8111:8111"];
+      ports = [ "8111:8111" ];
       environment = {
         PUID = "${lib.custom.settings.${config.networking.hostName}.uid}";
         PGID = "${lib.custom.settings.${config.networking.hostName}.gid}";
@@ -21,16 +22,18 @@
     };
   };
 
-  services.nginx = let
-    default-config = {
-      locations."/" = {
-        proxyPass = "http://localhost:8111";
+  services.nginx =
+    let
+      default-config = {
+        locations."/" = {
+          proxyPass = "http://localhost:8111";
+        };
+      };
+    in
+    {
+      virtualHosts = {
+        "shoko.local.ole.blue" =
+          lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
       };
     };
-  in {
-    virtualHosts = {
-      "shoko.local.ole.blue" =
-        lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
-    };
-  };
 }

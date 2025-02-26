@@ -5,18 +5,22 @@
   config,
   stable-pkgs,
   ...
-}: let
-  mkWorkSpaceBind = number: workspace: "$mainMod, ${toString number}, workspace, ${toString workspace}";
+}:
+let
+  mkWorkSpaceBind =
+    number: workspace: "$mainMod, ${toString number}, workspace, ${toString workspace}";
 
-  mkMoveWorkSpaceBind = number: workspace: "$mainMod SHIFT, ${toString number}, movetoworkspace, ${toString workspace}";
+  mkMoveWorkSpaceBind =
+    number: workspace: "$mainMod SHIFT, ${toString number}, movetoworkspace, ${toString workspace}";
 
-  mkGenericWorkSpaceBinds = list: (lib.concatLists (
-    map (number: [
-      (mkWorkSpaceBind number number)
-      (mkMoveWorkSpaceBind number number)
-    ])
-    list
-  ));
+  mkGenericWorkSpaceBinds =
+    list:
+    (lib.concatLists (
+      map (number: [
+        (mkWorkSpaceBind number number)
+        (mkMoveWorkSpaceBind number number)
+      ]) list
+    ));
 
   monitors_main = {
     tv = "desc:Philips Consumer Electronics Company Philips FTV 0x01010101";
@@ -38,7 +42,8 @@
       };
     };
   };
-in {
+in
+{
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -125,7 +130,7 @@ in {
         ]);
 
       monitor =
-        []
+        [ ]
         ++ (lib.optionals (lib.custom.isLaptop osConfig) [
           "${monitors_laptop.builtin}, 1920x1200@60, 0x0, 1"
 
@@ -163,10 +168,11 @@ in {
         layout = "hy3";
       };
 
-      bind = let
-        # screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
-        inherit (lib.custom.settings) screenshot-cmd;
-      in
+      bind =
+        let
+          # screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
+          inherit (lib.custom.settings) screenshot-cmd;
+        in
         [
           "$mainMod SHIFT, m, exit"
           "$mainMod, E, exec, $fileManager"
@@ -204,19 +210,21 @@ in {
           9
         ]);
 
-      bindl = let
-        brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-      in [
-        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ",XF86MonBrightnessUp, exec, ${brightnessctl} s 10%+"
-        ",XF86MonBrightnessDown, exec, ${brightnessctl} s 10%-"
-        ",XF86AudioPlay, exec, playerctl play-pause"
-        ",XF86AudioNext, exec, playerctl next"
-        ",XF86AudioPrev, exec, playerctl previous"
-      ];
+      bindl =
+        let
+          brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+        in
+        [
+          ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+          ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+          ",XF86MonBrightnessUp, exec, ${brightnessctl} s 10%+"
+          ",XF86MonBrightnessDown, exec, ${brightnessctl} s 10%-"
+          ",XF86AudioPlay, exec, playerctl play-pause"
+          ",XF86AudioNext, exec, playerctl next"
+          ",XF86AudioPrev, exec, playerctl previous"
+        ];
 
       bindm = [
         "$mainMod, mouse:272, movewindow"

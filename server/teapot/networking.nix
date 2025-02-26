@@ -1,6 +1,8 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   interface = "ens18";
-in {
+in
+{
   networking = {
     hostName = "teapot";
 

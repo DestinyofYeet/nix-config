@@ -3,7 +3,8 @@
   lib,
   secretStore,
   ...
-}: {
+}:
+{
   age.secrets = {
     nix-file-config = {
       file = secretStore.secrets + /non-server/nix-config-file.age;

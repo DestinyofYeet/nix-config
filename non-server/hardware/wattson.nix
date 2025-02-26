@@ -7,8 +7,9 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   networking.hostName = "wattson";
 
@@ -19,16 +20,17 @@
     "sd_mod"
     "rtsx_pci_sdmmc"
   ];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/18232595-bda3-4af4-9f78-7beaf07da4d0";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-0cb9bbd0-84e0-4859-ba81-495e1de77d5a".device = "/dev/disk/by-uuid/0cb9bbd0-84e0-4859-ba81-495e1de77d5a";
+  boot.initrd.luks.devices."luks-0cb9bbd0-84e0-4859-ba81-495e1de77d5a".device =
+    "/dev/disk/by-uuid/0cb9bbd0-84e0-4859-ba81-495e1de77d5a";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/EA03-5661";
@@ -39,7 +41,7 @@
     ];
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 

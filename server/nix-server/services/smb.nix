@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.samba = {
     enable = true;
 

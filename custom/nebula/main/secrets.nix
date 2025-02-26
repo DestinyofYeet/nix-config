@@ -1,1 +1,1 @@
-import ../secrets_template.nix {system = "main";}
+import ../secrets_template.nix { system = "main"; }

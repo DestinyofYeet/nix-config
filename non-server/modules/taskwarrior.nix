@@ -3,7 +3,8 @@
   config,
   secretStore,
   ...
-}: {
+}:
+{
   age.secrets = {
     taskwarrior-config.file = secretStore.secrets + /non-server/taskwarrior-config.age;
   };
@@ -40,7 +41,7 @@
       OnCalendar = "*:0/5";
     };
     Install = {
-      WantedBy = ["timers.target"];
+      WantedBy = [ "timers.target" ];
     };
   };
 }

@@ -4,11 +4,10 @@
   lib,
   modulesPath,
   ...
-}: {
-  users.users.root.openssh.authorizedKeys.keys =
-    [
-    ]
-    ++ config.users.users.ole.openssh.authorizedKeys.keys;
+}:
+{
+  users.users.root.openssh.authorizedKeys.keys = [
+  ] ++ config.users.users.ole.openssh.authorizedKeys.keys;
 
   users.users = {
     ole = {
@@ -27,7 +26,7 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhLrbWc/gopTJ2ZZW4ZfCzGhjhV9fKb1wdvFLQpmP3y ole@main"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAmcqiqtEiaahiJGQeeQDRaWJAdVN1A04RcBfeWFyL/l ole@kartoffelkiste"
       ];
-      packages = with pkgs; [neovim];
+      packages = with pkgs; [ neovim ];
     };
 
     nixremote = {
@@ -62,7 +61,7 @@
     isSystemUser = true;
     uid = 992;
     group = "monero";
-    extraGroups = ["apps"];
+    extraGroups = [ "apps" ];
   };
 
   users.groups.monero = {
@@ -74,5 +73,5 @@
     group = "nix-serve";
   };
 
-  users.groups.nix-serve = {};
+  users.groups.nix-serve = { };
 }

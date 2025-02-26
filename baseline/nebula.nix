@@ -3,4 +3,5 @@
   lib,
   custom,
   ...
-}: (custom.nebula.getConfig lib config)
+}:
+(custom.nebula.getConfig lib config)

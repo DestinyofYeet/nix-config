@@ -1,4 +1,7 @@
 { ... }:
+let
+  a = "something cool";
+in
 {
   home.stateVersion = "24.05";
 
@@ -18,7 +21,7 @@
     ./btop.nix
     ./ssh.nix
     ./agenix.nix
-    ./nvim.nix
+    # ./nvim.nix
     ./git.nix
     ./nix.nix
     ./helix.nix
@@ -42,5 +45,6 @@
     ./kdeconnect.nix
     ./zathura.nix
     ./carapace.nix
+    ./nixvim.nix
   ];
 }

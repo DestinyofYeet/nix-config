@@ -13,5 +13,9 @@ rec {
     teapot = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEqmDnGXPNc+Z1DRHVRRqik2WpeGjVoSOdKi1baXafH root@teapot";
   };
 
-  authed = with users; [wattson main kartoffelkiste];
+  authed = with users; [
+    wattson
+    main
+    kartoffelkiste
+  ];
 }

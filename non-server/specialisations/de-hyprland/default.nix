@@ -3,15 +3,16 @@
   lib,
   stable-pkgs,
   ...
-}: {
-  system.nixos.tags = ["de-hyprland"];
+}:
+{
+  system.nixos.tags = [ "de-hyprland" ];
 
   imports = [
     ./japanese-keyboard.nix
     ./programs.nix
   ];
 
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
   services.gnome.gnome-keyring.enable = true;
 
   programs.hyprland = {
@@ -24,10 +25,12 @@
   programs.iio-hyprland.enable = true;
 
   home-manager.extraSpecialArgs.current-specialisation = "de-hyprland";
-  home-manager.users.ole = {...}: {
-    imports = [
-      ../../modules
-      ./modules
-    ];
-  };
+  home-manager.users.ole =
+    { ... }:
+    {
+      imports = [
+        ../../modules
+        ./modules
+      ];
+    };
 }

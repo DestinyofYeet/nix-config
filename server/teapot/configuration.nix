@@ -6,7 +6,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -38,7 +39,7 @@
           "big-parallel"
           "kvm"
         ];
-        mandatoryFeatures = [];
+        mandatoryFeatures = [ ];
         maxJobs = 6;
         speedFactor = 1;
       }

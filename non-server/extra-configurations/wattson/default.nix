@@ -6,7 +6,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./38C3.nix
     ./vpn.nix
@@ -48,7 +49,7 @@
           "big-parallel"
           "kvm"
         ];
-        mandatoryFeatures = [];
+        mandatoryFeatures = [ ];
         maxJobs = 6;
         speedFactor = 4;
       }
@@ -72,7 +73,7 @@
 
   # disable baloo
   environment = {
-    etc."xdg/baloofilerc".source = (pkgs.formats.ini {}).generate "baloorc" {
+    etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
       "Basic Settings" = {
         "Indexing-Enabled" = false;
       };

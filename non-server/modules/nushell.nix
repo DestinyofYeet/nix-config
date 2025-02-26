@@ -3,14 +3,15 @@
   pkgs,
   current-specialisation,
   ...
-}: {
+}:
+{
   programs.nushell = {
     enable = true;
 
     envFile.text = "";
 
     configFile.text = ''
-      $env.EDITOR = 'hx'
+      $env.EDITOR = '${lib.custom.settings.editor}'
 
       $env.config = {
         show_banner: false
@@ -41,16 +42,18 @@
   };
 
   # nushell doesn't include symlinks
-  home.activation = let
-    source = builtins.fetchurl {
-      url = "https://raw.githubusercontent.com/nushell/nu_scripts/ba13f5ca600ee537880674e065ad237a89161e97/modules/background_task/task.nu";
-      sha256 = "05lafp08fvv22kb6k2npg0g25jpwdz1myz3aaqwslxcab4ivfbgw";
+  home.activation =
+    let
+      source = builtins.fetchurl {
+        url = "https://raw.githubusercontent.com/nushell/nu_scripts/ba13f5ca600ee537880674e065ad237a89161e97/modules/background_task/task.nu";
+        sha256 = "05lafp08fvv22kb6k2npg0g25jpwdz1myz3aaqwslxcab4ivfbgw";
+      };
+    in
+    {
+      write-task-file = ''
+        ${lib.custom.update-needed-content-file}/bin/update-needed-content-file "${source}" "/home/ole/.config/nushell/scripts/task.nu"
+      '';
     };
-  in {
-    write-task-file = ''
-      ${lib.custom.update-needed-content-file}/bin/update-needed-content-file "${source}" "/home/ole/.config/nushell/scripts/task.nu"
-    '';
-  };
 
   systemd.user.services = {
     pueued = {
@@ -59,7 +62,7 @@
       };
 
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
 
       Service = {

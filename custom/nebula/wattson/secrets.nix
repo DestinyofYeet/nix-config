@@ -1,1 +1,1 @@
-import ../secrets_template.nix {system = "wattson";}
+import ../secrets_template.nix { system = "wattson"; }

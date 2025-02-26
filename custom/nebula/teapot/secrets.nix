@@ -1,1 +1,1 @@
-import ../secrets_template.nix {system = "teapot";}
+import ../secrets_template.nix { system = "teapot"; }

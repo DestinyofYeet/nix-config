@@ -1,7 +1,9 @@
-{...}: let
+{ ... }:
+let
   # buildAlias = key: remap: "${key} (multi f24 (tap-hold $tap-time $hold-time ${key} ${remap}))";
   buildAlias = key: remap: "(tap-hold $tap-time $hold-time ${key} ${remap})";
-in {
+in
+{
   services.kanata = {
     enable = true;
 
@@ -42,7 +44,7 @@ in {
   };
 
   # Enable the uinput module
-  boot.kernelModules = ["uinput"];
+  boot.kernelModules = [ "uinput" ];
 
   # Enable uinput
   hardware.uinput.enable = true;
@@ -53,7 +55,7 @@ in {
   '';
 
   # Ensure the uinput group exists
-  users.groups.uinput = {};
+  users.groups.uinput = { };
 
   # Add the Kanata service user to necessary groups
   systemd.services.kanata-internalKeyboard.serviceConfig = {

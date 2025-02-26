@@ -4,9 +4,11 @@
   custom,
   secretStore,
   ...
-}: let
+}:
+let
   vpn_port = custom.wireguard.server.port;
-in {
+in
+{
   age.secrets = {
     wireguard-vpn-priv-key.file = secretStore.secrets + /non-server/main/wireguard-vpn-priv-key.age;
   };
@@ -17,7 +19,7 @@ in {
 
   networking.wireguard.interfaces = {
     wg0 = {
-      ips = ["10.100.0.3/32"];
+      ips = [ "10.100.0.3/32" ];
       listenPort = vpn_port;
 
       mtu = custom.wireguard.server.mtu;

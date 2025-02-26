@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}:{
+}:
+{
   # services.udev.extraRules = ''
   #     ACTION=="remove",\
   #      ENV{ID_BUS}=="usb",\

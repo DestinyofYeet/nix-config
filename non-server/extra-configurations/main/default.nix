@@ -5,7 +5,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./steam.nix
     ./vr.nix
@@ -41,7 +42,7 @@
 
   services.postgresql = {
     enable = false;
-    ensureDatabases = ["strichliste-rs"];
+    ensureDatabases = [ "strichliste-rs" ];
 
     ensureUsers = [
       {
@@ -77,7 +78,7 @@
         "big-parallel"
         "kvm"
       ];
-      mandatoryFeatures = [];
+      mandatoryFeatures = [ ];
     }
   ];
 

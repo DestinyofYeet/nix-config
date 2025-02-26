@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   services.strichliste = {
     enable = false;
 
@@ -15,15 +16,18 @@
 
       specificSounds = {
         "1" = {
-          sounds = [./strichliste/mate_01.wav];
+          sounds = [ ./strichliste/mate_01.wav ];
         };
 
         "3" = {
-          sounds = [./strichliste/wasser_1.wav];
+          sounds = [ ./strichliste/wasser_1.wav ];
         };
 
         "4" = {
-          sounds = [./strichliste/club_mate_1.wav ./strichliste/mate_01.wav];
+          sounds = [
+            ./strichliste/club_mate_1.wav
+            ./strichliste/mate_01.wav
+          ];
         };
       };
     };
@@ -46,7 +50,7 @@
   };
 
   networking.hosts = {
-    "127.0.0.1" = ["strichliste.local"];
+    "127.0.0.1" = [ "strichliste.local" ];
   };
 
   services.mysql = {

@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./packages.nix
     ./nebula.nix
@@ -45,6 +46,10 @@
   boot.tmp.cleanOnBoot = true;
 
   # match nix-channels (nix-shell) with nix flake input
-  nix.nixPath = ["nixpkgs=/etc/channels/nixpkgs" "nixos-config=/etc/nixos/configuration.nix" "/nix/var/nix/profiles/per-user/root/channels"];
+  nix.nixPath = [
+    "nixpkgs=/etc/channels/nixpkgs"
+    "nixos-config=/etc/nixos/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
   environment.etc."channels/nixpkgs".source = inputs.nixpkgs.outPath;
 }

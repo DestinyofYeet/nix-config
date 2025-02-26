@@ -4,7 +4,8 @@
   osConfig,
   lib,
   ...
-}: let
+}:
+let
   rebuild-system = pkgs.writeShellScriptBin "rebuild-system" ''
     set -e
 
@@ -44,7 +45,8 @@
 
     ${rebuild-system}/bin/rebuild-system
   '';
-in {
+in
+{
   programs.zsh = {
     enable = true;
 

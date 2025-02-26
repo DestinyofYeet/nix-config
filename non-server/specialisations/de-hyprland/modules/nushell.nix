@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.nushell = {
     configFile.text = ''
       def tv-enable [] {

@@ -5,7 +5,6 @@
   ...
 }:
 let
-
   read_color = builtins.readFile ./current_color.txt;
   current_color = pkgs.lib.removeSuffix "\n" read_color;
 in
@@ -48,5 +47,7 @@ in
     swaylock.enable = false;
 
     vim.enable = false;
+    neovim.enable = false;
+    nixvim.enable = false;
   };
 }

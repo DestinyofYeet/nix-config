@@ -21,7 +21,6 @@
         REPO_INDEXER_ENABLED = true;
       };
 
-
       session = {
         COOKIE_SECURE = true;
       };

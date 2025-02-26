@@ -5,13 +5,16 @@
   osConfig,
   secretStore,
   ...
-}: let
-  public-signing-key-path = secretStore.secrets + "/non-server/${osConfig.networking.hostName}/ssh-key-signing-key";
+}:
+let
+  public-signing-key-path =
+    secretStore.secrets + "/non-server/${osConfig.networking.hostName}/ssh-key-signing-key";
 
   allowed-signers = pkgs.writeText "allowed_signers" ''
     * ${builtins.readFile public-signing-key-path}
   '';
-in {
+in
+{
   # name and email is set in baseline
   programs.git = {
     extraConfig = lib.mkMerge [

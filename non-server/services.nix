@@ -1,9 +1,11 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   service_dependency = "home-manager-ole.service";
-in {
+in
+{
   systemd.services.home-manager-ole-pre = {
-    before = [service_dependency];
-    requiredBy = [service_dependency];
+    before = [ service_dependency ];
+    requiredBy = [ service_dependency ];
 
     serviceConfig = {
       Type = "oneshot";

@@ -3,7 +3,8 @@
   pkgs,
   secretStore,
   ...
-}: {
+}:
+{
   age.secrets = {
     oth-regensburg-email-pw.file = secretStore.secrets + /non-server/oth-regensburg-email-pw.age;
     email-uwuwhatsthis-pw.file = secretStore.secrets + /non-server/email-uwuwhatsthis-pw.age;

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.helix = {
     enable = true;
 
@@ -19,7 +20,10 @@
       language-server = {
         nil = {
           config.nil = {
-            formatting.command = ["${pkgs.alejandra}/bin/alejandra" "-q"];
+            formatting.command = [
+              "${pkgs.alejandra}/bin/alejandra"
+              "-q"
+            ];
 
             nix = {
               maxMemoryMB = 10000;
@@ -34,7 +38,7 @@
 
       rust-anaylzer = {
         config.rust-analyzer = {
-          formatting.command = ["${pkgs.rustfmt}/bin/rustfmt"];
+          formatting.command = [ "${pkgs.rustfmt}/bin/rustfmt" ];
         };
       };
     };

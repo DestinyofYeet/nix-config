@@ -5,10 +5,12 @@
   custom,
   secretStore,
   ...
-}: let
+}:
+let
   per-device-secrets = secretStore.secrets + "/non-server/${osConfig.networking.hostName}";
 
-  mkSecrets = names:
+  mkSecrets =
+    names:
     builtins.listToAttrs (
       map (name: {
         inherit name;
@@ -18,24 +20,25 @@
       }) (builtins.filter (name: builtins.pathExists "${per-device-secrets}/${name}.age") names)
     );
 
-  mkHosts = entryList:
+  mkHosts =
+    entryList:
     builtins.concatStringsSep "\n" (
       lib.filter (x: x != "") (
         map (
           host:
-            lib.optionalString (builtins.hasAttr "${host.ident}" config.age.secrets) ''
-              Host ${host.host}
-                Hostname ${host.hostname}
-                User ${host.user}
-                IdentityFile ${config.age.secrets.${host.ident}.path}
-                AddKeysToAgent yes
-                Port ${toString (host.port or 22)}
-            ''
-        )
-        entryList
+          lib.optionalString (builtins.hasAttr "${host.ident}" config.age.secrets) ''
+            Host ${host.host}
+              Hostname ${host.hostname}
+              User ${host.user}
+              IdentityFile ${config.age.secrets.${host.ident}.path}
+              AddKeysToAgent yes
+              Port ${toString (host.port or 22)}
+          ''
+        ) entryList
       )
     );
-in {
+in
+{
   age.secrets = mkSecrets [
     "ssh-key-oth-gitlab"
     "ssh-key-github"

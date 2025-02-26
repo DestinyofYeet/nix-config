@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   programs.hyprlock = {
     enable = true;
 
@@ -10,7 +11,7 @@
         no_fade_in = true;
       };
 
-      background = [{path = "${lib.custom.settings.non-server.lock-screen}";}];
+      background = [ { path = "${lib.custom.settings.non-server.lock-screen}"; } ];
 
       input-field = [
         {

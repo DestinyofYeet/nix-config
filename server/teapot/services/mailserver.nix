@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   age.secrets = {
     ole-mail.file = ../secrets/ole-ole.blue.age;
     scripts-uwuwhatsthis-de.file = ../secrets/scripts-uwuwhatsthis.de.age;
