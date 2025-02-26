@@ -326,8 +326,17 @@
       cmp = {
         enable = true;
         autoEnableSources = true;
-        settings.sources =
-          [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
+        settings = {
+          sources =
+            [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
+          mapping = {
+            "<cr>" = "cmp.mapping.confirm({ select = true})";
+            "<tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+            "<s-tab>" =
+              "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+            "<esc>" = "cmp.mapping.close()";
+          };
+        };
       };
 
       fzf-lua = { enable = true; };
