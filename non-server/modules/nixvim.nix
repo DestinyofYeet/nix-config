@@ -1,13 +1,10 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.nixvim = {
     enable = true;
 
     extraPlugins = with pkgs.vimPlugins; [ material-nvim ];
 
-    globals = {
-      mapleader = " ";
-    };
+    globals = { mapleader = " "; };
 
     opts = {
       shiftwidth = 2;
@@ -20,6 +17,14 @@
       guicursor = "";
       mouse = "";
       scrolloff = 10;
+
+      foldmethod = "expr";
+      foldexpr = "v:lua.vim.treesitter.foldexpr()";
+      foldcolumn = "0"; # might change later
+      foldtext = "";
+      foldlevel = 99;
+      foldlevelstart = 99;
+      foldnestmax = 4;
     };
 
     colorschemes = {
@@ -40,9 +45,7 @@
 
       tokyonight = {
         enable = false;
-        settings = {
-          style = "night";
-        };
+        settings = { style = "night"; };
       };
     };
 
@@ -65,9 +68,7 @@
         mode = [ "v" ];
         key = "<leader>c";
         action = "<esc>:normal gvgc<CR>";
-        options = {
-          desc = "Comments out block";
-        };
+        options = { desc = "Comments out block"; };
       }
       {
         mode = [ "n" ];
@@ -92,7 +93,8 @@
       {
         mode = [ "n" ];
         key = "<leader>err";
-        action.__raw = ''function() require("trouble").open("diagnostics") end'';
+        action.__raw =
+          ''function() require("trouble").open("diagnostics") end'';
         options.desc = "Trouble: Diagnostics";
       }
       {
@@ -101,14 +103,21 @@
         action = "<cmd>Yazi<cr>";
         options.desc = "Yazi: Open";
       }
+      {
+        mode = [ "n" ];
+        key = "<leader>fc";
+        action = "za";
+        options = {
+          remap = true;
+          desc = "Folds the code";
+        };
+      }
     ];
 
     plugins = {
       autoclose = {
         enable = true;
-        settings.options = {
-          auto_indent = false;
-        };
+        settings.options = { auto_indent = false; };
       };
 
       leap = {
@@ -116,13 +125,9 @@
         addDefaultMappings = false;
       };
 
-      treesitter = {
-        enable = true;
-      };
+      treesitter = { enable = true; };
 
-      which-key = {
-        enable = true;
-      };
+      which-key = { enable = true; };
 
       lsp = {
         enable = true;
@@ -130,17 +135,45 @@
         keymaps.extra = [
           {
             mode = [ "n" ];
-            key = "<leader>gR";
+            key = "gr";
             action = "<cmd>Telescope lsp_references<cr>";
-            options = {
-              desc = "Show LSP references";
-            };
+            options = { desc = "Show references"; };
           }
           {
             mode = [ "n" ];
-            key = "<leader>gD";
+            key = "gD";
             action.__raw = "vim.lsp.buf.declaration";
             options.desc = "Goto declaration";
+          }
+          {
+            mode = [ "n" ];
+            key = "gd";
+            action = "<cmd>Telescope lsp_definitions<cr>";
+            options.desc = "Show definitions";
+          }
+          {
+            mode = [ "n" ];
+            key = "<leader>rn";
+            action.__raw = "vim.lsp.buf.rename";
+            options.desc = "Rename symbol";
+          }
+          {
+            mode = [ "n" ];
+            key = "<leader>dD";
+            action = "<cmd>Telescope diagnostics bufnr=0<cr>";
+            options.desc = "Show buffer diagnostics";
+          }
+          {
+            mode = [ "n" ];
+            key = "<leader>dd";
+            action.__raw = "vim.diagnostic.open_float";
+            options.desc = "Show line diagnostics";
+          }
+          {
+            mode = [ "n" ];
+            key = "<leader>k";
+            action.__raw = "vim.lsp.buf.hover";
+            options.desc = "Show documentation";
           }
         ];
 
@@ -153,9 +186,7 @@
           };
           nil_ls = {
             enable = true;
-            extraOptions = {
-              nix.flake.autoArchive = true;
-            };
+            extraOptions = { nix.flake.autoArchive = true; };
           };
         };
       };
@@ -178,9 +209,7 @@
 
       web-devicons = {
         enable = true;
-        settings = {
-          color_icons = true;
-        };
+        settings = { color_icons = true; };
       };
 
       telescope = {
@@ -199,25 +228,18 @@
 
         settings = {
           defaults = {
-            file_ignore_patterns = [
-              "^.git/"
-              "^.mypy_cache"
-              "^__pycache__/"
-            ];
+            file_ignore_patterns = [ "^.git/" "^.mypy_cache" "^__pycache__/" ];
 
-            layout_config = {
-              prompt_position = "top";
-            };
+            layout_config = { prompt_position = "top"; };
           };
         };
       };
 
-      guess-indent = {
-        enable = true;
-      };
+      guess-indent = { enable = true; };
 
       lualine = {
         enable = true;
+        settings = { options = { theme = "nightfly"; }; };
       };
 
       # trouble = {
@@ -225,9 +247,7 @@
       # };
       barbar = {
         enable = true;
-        settings = {
-          animations = true;
-        };
+        settings = { animations = true; };
 
         luaConfig.post = ''
           vim.api.nvim_create_autocmd('WinClosed', {
@@ -284,9 +304,7 @@
         };
       };
 
-      yazi = {
-        enable = true;
-      };
+      yazi = { enable = true; };
     };
 
     extraConfigLua = ''
