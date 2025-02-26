@@ -12,6 +12,7 @@
       smartindent = false;
       number = true;
       termguicolors = true;
+      laststatus = 0;
 
       clipboard.register = "unnamedplus";
       undofile = true;
@@ -31,6 +32,7 @@
       wildmode = "list:longest";
     };
 
+    # defined at bottom
     colorschemes = {
       onedark = {
         enable = false;
