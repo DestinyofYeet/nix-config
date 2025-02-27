@@ -207,6 +207,8 @@
             enable = true;
             extraOptions = { nix.flake.autoArchive = true; };
           };
+
+          cssls = { enable = true; };
         };
       };
 
