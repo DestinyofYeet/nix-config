@@ -6,8 +6,7 @@
   lib,
   inputs,
   ...
-}:
-let
+}: let
   luaPkgs = with pkgs; [
     luajitPackages.luarocks
     lua
@@ -36,18 +35,16 @@ let
   ];
 
   nerd-fontsPkgs = builtins.filter lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
-in
-{
+in {
   hardware.flipperzero.enable = true;
 
   # zsh config
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = ["/share/zsh"];
 
   # environment.plasma6.excludePackages = with pkgs.kdePackages; [ plasma-browser-integration ];
 
   fonts = {
-    packages =
-      with pkgs;
+    packages = with pkgs;
       [
         noto-fonts-cjk-serif
       ]
@@ -87,15 +84,15 @@ in
     # package = pkgs.steam.override {
     #   extraPkgs = pkgs: with pkgs; [ bumblebee glxinfo ];
     # };
-    extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    extraCompatPackages = with pkgs; [proton-ge-bin];
   };
 
   programs.obs-studio = {
     enable = true;
-    plugins = with pkgs.obs-studio-plugins; [ obs-backgroundremoval ];
+    plugins = with pkgs.obs-studio-plugins; [obs-backgroundremoval];
   };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
 
   boot.extraModprobeConfig = ''
     options v4l2loopback video_nr=10 card_label=Video-Loopback exclusive_caps=1
@@ -119,8 +116,7 @@ in
 
   # services.gnome.gnome-keyring.enable = true;
 
-  environment.systemPackages =
-    with pkgs;
+  environment.systemPackages = with pkgs;
     [
       neovim
       asciiquarium
@@ -257,6 +253,8 @@ in
       nebula
       prismlauncher
       alejandra
+      hunspell
+      hunspellDicts.de_DE
     ]
     ++ luaPkgs
     ++ kdePkgs
