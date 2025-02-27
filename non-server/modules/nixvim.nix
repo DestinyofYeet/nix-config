@@ -103,13 +103,13 @@
         key = "U";
         action = "<cmd>redo<cr>";
       }
-      {
-        mode = [ "n" ];
-        key = "<leader>err";
-        action.__raw =
-          ''function() require("trouble").open("diagnostics") end'';
-        options.desc = "Trouble: Diagnostics";
-      }
+      # {
+      #   mode = [ "n" ];
+      #   key = "<leader>err";
+      #   action.__raw =
+      #     ''function() require("trouble").open("diagnostics") end'';
+      #   options.desc = "Trouble: Diagnostics";
+      # }
       {
         mode = [ "n" ];
         key = "<leader>yz";
@@ -194,7 +194,24 @@
             action = "<cmd>FzfLua lsp_code_actions<cr>";
             options.desc = "Performs code action";
           }
-        ];
+        ] ++ (let
+          mkBufferLine = number: {
+            mode = [ "n" ];
+            key = "<leader>${toString number}";
+            action = "<cmd>BufferLineGoToBuffer ${toString number}<cr>";
+            options.desc = "BufferLine: Goto Buffer ${toString number}";
+          };
+        in [
+          (mkBufferLine 1)
+          (mkBufferLine 2)
+          (mkBufferLine 3)
+          (mkBufferLine 4)
+          (mkBufferLine 5)
+          (mkBufferLine 6)
+          (mkBufferLine 7)
+          (mkBufferLine 8)
+          (mkBufferLine 9)
+        ]);
 
         servers = {
           rust_analyzer = {
@@ -269,7 +286,7 @@
       #   enable = true;
       # };
       barbar = {
-        enable = true;
+        enable = false;
         settings = { animations = true; };
 
         luaConfig.post = ''
@@ -356,6 +373,12 @@
       };
 
       fzf-lua = { enable = true; };
+
+      bufferline = {
+        enable = true;
+        settings.options = { numbers = "ordinal"; };
+      };
+
     };
 
     extraConfigLua = ''
