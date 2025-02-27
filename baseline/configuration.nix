@@ -1,15 +1,5 @@
-{
-  lib,
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
-{
-  imports = [
-    ./packages.nix
-    ./nebula.nix
-  ];
+{ lib, config, pkgs, inputs, ... }: {
+  imports = [ ./packages.nix ./nebula.nix ];
 
   # automatically collect garbage
   # config = {
@@ -44,6 +34,10 @@
   };
 
   boot.tmp.cleanOnBoot = true;
+
+  nix.extraOptions = ''
+    download-buffer-size = 500000000
+  '';
 
   # match nix-channels (nix-shell) with nix flake input
   nix.nixPath = [

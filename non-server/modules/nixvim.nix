@@ -30,6 +30,8 @@
 
       wildmenu = true;
       wildmode = "list:longest";
+
+      timeoutlen = 200;
     };
 
     # defined at bottom

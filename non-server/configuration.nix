@@ -1,13 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
+{ config, pkgs, lib, ... }: {
   imports = [
     # Include the results of the hardware scan.
     ./packages.nix
@@ -48,15 +42,13 @@
   # $ nix search wget
 
   nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    experimental-features = [ "nix-command" "flakes" ];
 
     # use lib.mkForce to only use these substituters
     substituters = [ "https://cache.ole.blue?priority=20" ];
 
-    trusted-public-keys = [ "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg=" ];
+    trusted-public-keys =
+      [ "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg=" ];
     trusted-users = [ "ole" ];
   };
 
@@ -100,13 +92,10 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = lib.mkDefault (
-      with pkgs;
-      [
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal-kde
-      ]
-    );
+    extraPortals = lib.mkDefault (with pkgs; [
+      xdg-desktop-portal-wlr
+      kdePackages.xdg-desktop-portal-kde
+    ]);
 
     config.common.default = "*";
   };
@@ -138,7 +127,5 @@
   # };
   #
   #
-  boot.binfmt.emulatedSystems = [
-    "aarch64-linux"
-  ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

@@ -2,21 +2,15 @@
 let
   addons = pkgs.nur.repos.rycee.firefox-addons;
 
-  build-containers =
-    container-list:
-    lib.mkMerge (
-      lib.imap1 (
-        i: v:
-        builtins.mapAttrs (name: value: {
-          color = value.color or "toolbar";
-          icon = value.icon or "circle";
-          id = i;
-        }) v
-      ) container-list
-    );
+  build-containers = container-list:
+    lib.mkMerge (lib.imap1 (i: v:
+      builtins.mapAttrs (name: value: {
+        color = value.color or "toolbar";
+        icon = value.icon or "circle";
+        id = i;
+      }) v) container-list);
 
-in
-{
+in {
   programs.firefox.enable = true;
 
   home.sessionVariables = {
@@ -40,63 +34,51 @@ in
 
         engines = {
           "Startpage" = {
-            urls = [
-              {
-                template = "https://www.startpage.com/sp/search";
-                params = [
-                  {
-                    name = "q";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
+            urls = [{
+              template = "https://www.startpage.com/sp/search";
+              params = [{
+                name = "q";
+                value = "{searchTerms}";
+              }];
+            }];
           };
 
           "Home-manager Option" = {
-            urls = [
-              {
-                template = "https://home-manager-options.extranix.com";
-                params = [
-                  {
-                    name = "release";
-                    value = "release-24.05";
-                  }
-                  {
-                    name = "channel";
-                    value = "unstable";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
+            urls = [{
+              template = "https://home-manager-options.extranix.com";
+              params = [
+                {
+                  name = "release";
+                  value = "master";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }];
 
             definedAliases = [ "@hmo" ];
           };
 
           "Nix Packages" = {
-            urls = [
-              {
-                template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "type";
-                    value = "packages";
-                  }
-                  {
-                    name = "channel";
-                    value = "unstable";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
+            urls = [{
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "channel";
+                  value = "unstable";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }];
 
             icon = ../../images/nix-logo.png;
 
@@ -104,21 +86,19 @@ in
           };
 
           "Nix Options" = {
-            urls = [
-              {
-                template = "https://search.nixos.org/options";
-                params = [
-                  {
-                    name = "channel";
-                    value = "unstable";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
+            urls = [{
+              template = "https://search.nixos.org/options";
+              params = [
+                {
+                  name = "channel";
+                  value = "unstable";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }];
 
             icon = ../../images/nix-logo.png;
 
@@ -126,33 +106,25 @@ in
           };
 
           "Nix manual search" = {
-            urls = [
-              {
-                template = "https://noogle.dev/";
-                params = [
-                  {
-                    name = "term";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
+            urls = [{
+              template = "https://noogle.dev/";
+              params = [{
+                name = "term";
+                value = "{searchTerms}";
+              }];
+            }];
 
             definedAliases = [ "@nms" ];
           };
 
           "custom nüschst search" = {
-            urls = [
-              {
-                template = "https://search.ole.blue/";
-                params = [
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
+            urls = [{
+              template = "https://search.ole.blue/";
+              params = [{
+                name = "query";
+                value = "{searchTerms}";
+              }];
+            }];
 
             definedAliases = [ "@nüs" ];
           };
@@ -166,48 +138,24 @@ in
       containersForce = true;
 
       containers = build-containers [
-        {
-          google = {
-            color = "red";
-          };
-        }
-        {
-          oth = {
-            color = "turquoise";
-          };
-        }
-        {
-          ai = {
-            color = "red";
-          };
-        }
+        { google = { color = "red"; }; }
+        { oth = { color = "turquoise"; }; }
+        { ai = { color = "red"; }; }
         {
           amazon = {
             icon = "cart";
             color = "purple";
           };
         }
-        {
-          coding = {
-            color = "blue";
-          };
-        }
-        {
-          infra = {
-            color = "blue";
-          };
-        }
+        { coding = { color = "blue"; }; }
+        { infra = { color = "blue"; }; }
         {
           personal = {
             color = "blue";
             icon = "fingerprint";
           };
         }
-        {
-          reddit = {
-            color = "red";
-          };
-        }
+        { reddit = { color = "red"; }; }
       ];
 
       settings = {
@@ -223,7 +171,8 @@ in
         "signon.rememberSignons" = false;
         "widget.use-xdg-desktop-portal.file-picker" = 1;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        "browser.fixup.domainsuffixwhitelist.wg" = true; # make nix-server.infra.wg not result in a search
+        "browser.fixup.domainsuffixwhitelist.wg" =
+          true; # make nix-server.infra.wg not result in a search
 
         # telemetry
         "datareporting.policy.dataSubmissionEnabled" = false;
@@ -254,7 +203,7 @@ in
 
       search.default = "Startpage";
 
-      extensions = with addons; [
+      extensions.packages = with addons; [
         darkreader
         ublock-origin
         bitwarden
