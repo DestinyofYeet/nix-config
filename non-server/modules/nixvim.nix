@@ -202,10 +202,12 @@
             installCargo = false;
             installRustc = false;
             installRustfmt = false;
+
+            settings = { cargo = { features = "all"; }; };
           };
           nil_ls = {
             enable = true;
-            extraOptions = { nix.flake.autoArchive = true; };
+            extraOptions = { nix = { flake = { autoArchive = true; }; }; };
           };
 
           cssls = { enable = true; };
@@ -321,6 +323,16 @@
           goTo9 = {
             key = "<leader>9";
             options.desc = "BarBar: Goto 9 tab";
+          };
+
+          moveNext = {
+            key = "<leader>.";
+            options.desc = "BarBar: Moves tab right";
+          };
+
+          movePrevious = {
+            key = "<leader>,";
+            options.desc = "BarBar: Moves tab left";
           };
         };
       };
