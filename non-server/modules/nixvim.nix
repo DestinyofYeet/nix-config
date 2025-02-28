@@ -125,7 +125,36 @@
           desc = "Folds the code";
         };
       }
-    ];
+    ] ++ (let
+      mkBufferLine = number: {
+        mode = [ "n" ];
+        key = "<leader>${toString number}";
+        action = "<cmd>BufferLineGoToBuffer ${toString number}<cr>";
+        options.desc = "BufferLine: Goto Buffer ${toString number}";
+      };
+    in [
+      (mkBufferLine 1)
+      (mkBufferLine 2)
+      (mkBufferLine 3)
+      (mkBufferLine 4)
+      (mkBufferLine 5)
+      (mkBufferLine 6)
+      (mkBufferLine 7)
+      (mkBufferLine 8)
+      (mkBufferLine 9)
+      {
+        mode = [ "n" ];
+        key = "<leader>,";
+        action = "<cmd>BufferLineMovePrev<cr>";
+        options.desc = "BufferLine: Moves buffer left";
+      }
+      {
+        mode = [ "n" ];
+        key = "<leader>.";
+        action = "<cmd>BufferLineMoveNext<cr>";
+        options.desc = "BufferLine: Moves buffer right";
+      }
+    ]);
 
     plugins = {
       autoclose = {
@@ -194,36 +223,7 @@
             action = "<cmd>FzfLua lsp_code_actions<cr>";
             options.desc = "Performs code action";
           }
-        ] ++ (let
-          mkBufferLine = number: {
-            mode = [ "n" ];
-            key = "<leader>${toString number}";
-            action = "<cmd>BufferLineGoToBuffer ${toString number}<cr>";
-            options.desc = "BufferLine: Goto Buffer ${toString number}";
-          };
-        in [
-          (mkBufferLine 1)
-          (mkBufferLine 2)
-          (mkBufferLine 3)
-          (mkBufferLine 4)
-          (mkBufferLine 5)
-          (mkBufferLine 6)
-          (mkBufferLine 7)
-          (mkBufferLine 8)
-          (mkBufferLine 9)
-          {
-            mode = [ "n" ];
-            key = "<leader>,";
-            action = "<cmd>BufferLineMovePrev<cr>";
-            options.desc = "BufferLine: Moves buffer left";
-          }
-          {
-            mode = [ "n" ];
-            key = "<leader>.";
-            action = "<cmd>BufferLineMoveNext<cr>";
-            options.desc = "BufferLine: Moves buffer right";
-          }
-        ]);
+        ];
 
         servers = {
           rust_analyzer = {
