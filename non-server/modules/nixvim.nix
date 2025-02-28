@@ -211,6 +211,18 @@
           (mkBufferLine 7)
           (mkBufferLine 8)
           (mkBufferLine 9)
+          {
+            mode = [ "n" ];
+            key = "<leader>,";
+            action = "<cmd>BufferLineMovePrev<cr>";
+            options.desc = "BufferLine: Moves buffer left";
+          }
+          {
+            mode = [ "n" ];
+            key = "<leader>.";
+            action = "<cmd>BufferLineMoveNext<cr>";
+            options.desc = "BufferLine: Moves buffer right";
+          }
         ]);
 
         servers = {
@@ -359,6 +371,9 @@
       cmp = {
         enable = true;
         autoEnableSources = true;
+        luaConfig.pre = ''
+          function closeMappingAndExit() require("cmp").mapping.close(); vim.api.nvim_input("<esc>") end
+        '';
         settings = {
           sources =
             [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
@@ -367,7 +382,7 @@
             "<tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
             "<s-tab>" =
               "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-            "<esc>" = "cmp.mapping.close()";
+            "<esc>" = "closeMappingAndExit()";
           };
         };
       };
