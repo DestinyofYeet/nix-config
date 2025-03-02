@@ -125,36 +125,36 @@
           desc = "Folds the code";
         };
       }
-    ] ++ (let
-      mkBufferLine = number: {
-        mode = [ "n" ];
-        key = "<leader>${toString number}";
-        action = "<cmd>BufferLineGoToBuffer ${toString number}<cr>";
-        options.desc = "BufferLine: Goto Buffer ${toString number}";
-      };
-    in [
-      (mkBufferLine 1)
-      (mkBufferLine 2)
-      (mkBufferLine 3)
-      (mkBufferLine 4)
-      (mkBufferLine 5)
-      (mkBufferLine 6)
-      (mkBufferLine 7)
-      (mkBufferLine 8)
-      (mkBufferLine 9)
-      {
-        mode = [ "n" ];
-        key = "<leader>,";
-        action = "<cmd>BufferLineMovePrev<cr>";
-        options.desc = "BufferLine: Moves buffer left";
-      }
-      {
-        mode = [ "n" ];
-        key = "<leader>.";
-        action = "<cmd>BufferLineMoveNext<cr>";
-        options.desc = "BufferLine: Moves buffer right";
-      }
-    ]);
+    ]; # ++ (let
+    #   mkBufferLine = number: {
+    #     mode = [ "n" ];
+    #     key = "<leader>${toString number}";
+    #     action = "<cmd>BufferLineGoToBuffer ${toString number}<cr>";
+    #     options.desc = "BufferLine: Goto Buffer ${toString number}";
+    #   };
+    # in [
+    #   (mkBufferLine 1)
+    #   (mkBufferLine 2)
+    #   (mkBufferLine 3)
+    #   (mkBufferLine 4)
+    #   (mkBufferLine 5)
+    #   (mkBufferLine 6)
+    #   (mkBufferLine 7)
+    #   (mkBufferLine 8)
+    #   (mkBufferLine 9)
+    #   {
+    #     mode = [ "n" ];
+    #     key = "<leader>,";
+    #     action = "<cmd>BufferLineMovePrev<cr>";
+    #     options.desc = "BufferLine: Moves buffer left";
+    #   }
+    #   {
+    #     mode = [ "n" ];
+    #     key = "<leader>.";
+    #     action = "<cmd>BufferLineMoveNext<cr>";
+    #     options.desc = "BufferLine: Moves buffer right";
+    #   }
+    # ]);
 
     plugins = {
       autoclose = {
@@ -298,8 +298,11 @@
       #   enable = true;
       # };
       barbar = {
-        enable = false;
-        settings = { animations = true; };
+        enable = true;
+        settings = {
+          animations = true;
+          icons = { buffer_index = true; };
+        };
 
         luaConfig.post = ''
           vim.api.nvim_create_autocmd('WinClosed', {
@@ -390,7 +393,7 @@
       fzf-lua = { enable = true; };
 
       bufferline = {
-        enable = true;
+        enable = false;
         settings.options = { numbers = "ordinal"; };
       };
 
