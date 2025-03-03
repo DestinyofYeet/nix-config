@@ -90,6 +90,8 @@ in {
 
   # services.gnome.gnome-keyring.enable = true;
 
+  programs.wshowkeys = { enable = true; };
+
   environment.systemPackages = with pkgs;
     [
       neovim
@@ -232,5 +234,6 @@ in {
       satty
       grim
       slurp
+      shotcut
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }

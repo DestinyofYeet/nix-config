@@ -2,7 +2,7 @@
   programs.nixvim = {
     enable = true;
 
-    extraPlugins = with pkgs.vimPlugins; [ material-nvim ];
+    extraPlugins = with pkgs.vimPlugins; [ material-nvim plenary-nvim ];
 
     globals = { mapleader = " "; };
 
@@ -248,7 +248,7 @@
           };
           nil_ls = {
             enable = true;
-            extraOptions = { nix = { flake = { autoArchive = true; }; }; };
+            settings = { nix.flake.autoArchive = true; };
           };
 
           cssls = { enable = true; };
@@ -408,6 +408,8 @@
         enable = false;
         settings.options = { numbers = "ordinal"; };
       };
+
+      snacks = { enable = true; };
 
     };
 
