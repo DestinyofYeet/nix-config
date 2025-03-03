@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}:
-{
+{ pkgs, config, ... }: {
   age.secrets = {
     ole-mail.file = ../secrets/ole-ole.blue.age;
     scripts-uwuwhatsthis-de.file = ../secrets/scripts-uwuwhatsthis.de.age;
@@ -18,7 +13,8 @@
     nextcloud-uwuwhatsthis-de.file = ../secrets/nextcloud-uwuwhatsthis.de.age;
     nextcloud-ole-blue.file = ../secrets/nextcloud-ole-blue.age;
 
-    postgresql-roundcube-password.file = ../secrets/postgresql-roundcube-password.age;
+    postgresql-roundcube-password.file =
+      ../secrets/postgresql-roundcube-password.age;
   };
 
   mailserver = {
@@ -33,11 +29,7 @@
       organizationName = "ole";
     };
 
-    domains = [
-      "ole.blue"
-      "uwuwhatsthis.de"
-      "drogen.gratis"
-    ];
+    domains = [ "ole.blue" "uwuwhatsthis.de" "drogen.gratis" ];
 
     fullTextSearch = {
       enable = true;
@@ -86,6 +78,7 @@
         '';
 
         aliases = [
+          "fCYPExKAaBvxmXY8gL4h@ole.blue"
           "k2qWxFkzDjrE3VSZ1C8X@ole.blue"
           "0wmgydMvJugr9o7ZSbHx@ole.blue"
           "BR09q6rAxWMg0kOHkwA5@ole.blue"
@@ -170,22 +163,26 @@
       };
 
       "scripts@uwuwhatsthis.de" = {
-        hashedPasswordFile = "${config.age.secrets.scripts-uwuwhatsthis-de.path}";
+        hashedPasswordFile =
+          "${config.age.secrets.scripts-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
       "sonarr@ole.blue" = {
-        hashedPasswordFile = "${config.age.secrets.sonarr-uwuwhatsthis-de.path}";
+        hashedPasswordFile =
+          "${config.age.secrets.sonarr-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
       "prowlarr@uwuwhatsthis.de" = {
-        hashedPasswordFile = "${config.age.secrets.prowlarr-uwuwhatsthis-de.path}";
+        hashedPasswordFile =
+          "${config.age.secrets.prowlarr-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
       "uptime-kuma@ole.blue" = {
-        hashedPasswordFile = "${config.age.secrets.uptime-kuma-uwuwhatsthis-de.path}";
+        hashedPasswordFile =
+          "${config.age.secrets.uptime-kuma-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
@@ -205,7 +202,8 @@
       };
 
       "nextcloud@uwuwhatsthis.de" = {
-        hashedPasswordFile = "${config.age.secrets.nextcloud-uwuwhatsthis-de.path}";
+        hashedPasswordFile =
+          "${config.age.secrets.nextcloud-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
