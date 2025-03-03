@@ -1,7 +1,4 @@
-{
-  inputs,
-  lib,
-}:
+{ inputs, lib, }:
 let
   git-secrets = builtins.fetchGit {
     url = "git@github.com:DestinyofYeet/nix-secrets.git";
@@ -10,23 +7,22 @@ let
   };
 
   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-in
-rec {
+in rec {
   scripts = import ./scripts { inherit inputs pkgs lib; };
 
-  mkIfLaptop = config: attr: lib.mkIf (config.networking.hostName == "wattson") attr;
+  mkIfLaptop = config: attr:
+    lib.mkIf (config.networking.hostName == "wattson") attr;
 
-  isLaptop =
-    config: (config.networking.hostName == "wattson" || config.networking.hostName == "kartoffelkiste");
+  isLaptop = config:
+    (config.networking.hostName == "wattson" || config.networking.hostName
+      == "kartoffelkiste");
 
   isMain = config: config.networking.hostName == "main";
 
-  mkIfLaptopElse =
-    config: attr: default:
+  mkIfLaptopElse = config: attr: default:
     if (isLaptop config) then attr else default;
 
-  mkIfMainElse =
-    config: attr: default:
+  mkIfMainElse = config: attr: default:
     if (config.networking.hostName == "main") then attr else default;
 
   update-needed-content = pkgs.writeShellScriptBin "update-needed-content" ''
@@ -40,18 +36,19 @@ rec {
     ${pkgs.rsync}/bin/rsync -a --delete "$SOURCE_DIR/" "$DEST_DIR"
   '';
 
-  update-needed-content-file = pkgs.writeShellScriptBin "update-needed-content-file" ''
-    set -e
+  update-needed-content-file =
+    pkgs.writeShellScriptBin "update-needed-content-file" ''
+      set -e
 
-    SOURCE_FILE="$1"
-    DEST_FILE="$2"
+      SOURCE_FILE="$1"
+      DEST_FILE="$2"
 
-    mkdir -p $(dirname "$DEST_FILE")
+      mkdir -p $(dirname "$DEST_FILE")
 
-    if [ ! -f "$DEST_FILE" ]; then
-      cp "$SOURCE_FILE" "$DEST_FILE"
-    fi
-  '';
+      if [ ! -f "$DEST_FILE" ]; then
+        cp "$SOURCE_FILE" "$DEST_FILE"
+      fi
+    '';
 
   gen-activation = src: dst: ''
     ${pkgs.bash}/bin/bash ${update-needed-content}/bin/update-needed-content ${src} ${dst}
@@ -64,7 +61,9 @@ rec {
   settings = {
     editor = "nvim";
 
-    screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -z -m region -o /tmp";
+    # screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -z -m region -o /tmp";
+    screenshot-cmd = ''
+      ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -w 0)" - | ${pkgs.satty}/bin/satty -f - -o /tmp/screenshot.png'';
 
     nix-server = {
       secrets = import "${git-secrets}/secrets.nix" { };

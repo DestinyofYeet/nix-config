@@ -1,8 +1,7 @@
-{ ... }:
-{
+{ ... }: {
   imports = [
     ./hyprpaper.nix
-    ./hyprsunset.nix
+    # ./hyprsunset.nix
     ./swaylock.nix
     ./waybar.nix
     ./hyprland.nix

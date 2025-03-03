@@ -1,8 +1,6 @@
 { ... }:
-let
-  a = "something cool";
-in
-{
+let a = "something cool";
+in {
   home.stateVersion = "24.05";
 
   # needed for agenix service to start properly
@@ -46,5 +44,6 @@ in
     ./zathura.nix
     ./carapace.nix
     ./nixvim.nix
+    ./redshift.nix
   ];
 }

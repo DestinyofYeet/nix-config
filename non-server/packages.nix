@@ -1,17 +1,6 @@
-{
-  config,
-  pkgs,
-  stable-pkgs,
-  old-pkgs,
-  lib,
-  inputs,
-  ...
-}: let
-  luaPkgs = with pkgs; [
-    luajitPackages.luarocks
-    lua
-    luajit
-  ];
+{ config, pkgs, stable-pkgs, old-pkgs, lib, inputs, ... }:
+let
+  luaPkgs = with pkgs; [ luajitPackages.luarocks lua luajit ];
 
   kdePkgs = with pkgs.kdePackages; [
     kcalc
@@ -24,38 +13,25 @@
     dolphin
   ];
 
-  jetbrainsPkgs = with pkgs.jetbrains; [
-    rust-rover
-    pycharm-professional
-  ];
+  jetbrainsPkgs = with pkgs.jetbrains; [ rust-rover pycharm-professional ];
 
-  pythonPkgs = with pkgs.python312Packages; [
-    python-lsp-server
-    pyclip
-  ];
+  pythonPkgs = with pkgs.python312Packages; [ python-lsp-server pyclip ];
 
-  nerd-fontsPkgs = builtins.filter lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  nerd-fontsPkgs =
+    builtins.filter lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 in {
   hardware.flipperzero.enable = true;
 
   # zsh config
-  environment.pathsToLink = ["/share/zsh"];
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # environment.plasma6.excludePackages = with pkgs.kdePackages; [ plasma-browser-integration ];
 
-  fonts = {
-    packages = with pkgs;
-      [
-        noto-fonts-cjk-serif
-      ]
-      ++ nerd-fontsPkgs;
-  };
+  fonts = { packages = with pkgs; [ noto-fonts-cjk-serif ] ++ nerd-fontsPkgs; };
 
   nixpkgs = {
     config = {
-      permittedInsecurePackages = [
-        "electron-31.7.7"
-      ];
+      permittedInsecurePackages = [ "electron-31.7.7" ];
 
       allowUnfree = true;
       nvidia.acceptLicense = true;
@@ -70,9 +46,7 @@ in {
 
   # programs.ssh.startAgent = true;
 
-  programs.corectrl = {
-    enable = true;
-  };
+  programs.corectrl = { enable = true; };
 
   programs.wireshark = {
     enable = true;
@@ -84,15 +58,15 @@ in {
     # package = pkgs.steam.override {
     #   extraPkgs = pkgs: with pkgs; [ bumblebee glxinfo ];
     # };
-    extraCompatPackages = with pkgs; [proton-ge-bin];
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
 
   programs.obs-studio = {
     enable = true;
-    plugins = with pkgs.obs-studio-plugins; [obs-backgroundremoval];
+    plugins = with pkgs.obs-studio-plugins; [ obs-backgroundremoval ];
   };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
   boot.extraModprobeConfig = ''
     options v4l2loopback video_nr=10 card_label=Video-Loopback exclusive_caps=1
@@ -255,9 +229,8 @@ in {
       alejandra
       hunspell
       hunspellDicts.de_DE
-    ]
-    ++ luaPkgs
-    ++ kdePkgs
-    ++ jetbrainsPkgs
-    ++ pythonPkgs;
+      satty
+      grim
+      slurp
+    ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
