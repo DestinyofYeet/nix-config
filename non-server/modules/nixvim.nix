@@ -14,7 +14,7 @@
       termguicolors = true;
       laststatus = 0;
 
-      clipboard.register = "unnamedplus";
+      # clipboard.register = "unnamedplus";
       undofile = true;
       guicursor = "";
       mouse = "";
@@ -110,6 +110,18 @@
       #     ''function() require("trouble").open("diagnostics") end'';
       #   options.desc = "Trouble: Diagnostics";
       # }
+      {
+        mode = [ "n" "v" ];
+        key = "<leader>y";
+        action = "+y";
+        options.desc = "Copy: System clipboard";
+      }
+      {
+        mode = [ "n" "v" ];
+        key = "<leader>p";
+        action = "+p";
+        options.desc = "Paste: System clipboard";
+      }
       {
         mode = [ "n" ];
         key = "<leader>yz";
