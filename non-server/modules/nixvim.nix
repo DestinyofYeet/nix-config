@@ -6,7 +6,7 @@
 
     globals = { mapleader = " "; };
 
-    clipboard.providers = { wl-copy.enable = true; };
+    clipboard = { providers = { wl-copy.enable = true; }; };
 
     opts = {
       shiftwidth = 2;
@@ -20,8 +20,6 @@
       guicursor = "";
       mouse = "";
       scrolloff = 10;
-
-      clipboard = "unnamedplus";
 
       foldmethod = "expr";
       foldexpr = "v:lua.vim.treesitter.foldexpr()";
@@ -119,7 +117,7 @@
       {
         mode = [ "v" ];
         key = "<leader>y";
-        action = "+y";
+        action = ''"+y'';
         options = {
           desc = "Copy: System clipboard";
           remap = true;
@@ -128,7 +126,7 @@
       {
         mode = [ "v" ];
         key = "<leader>p";
-        action = "+p";
+        action = ''"+p'';
         options = {
           desc = "Paste: System clipboard";
           remap = true;
