@@ -1,18 +1,8 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  pkgs,
-  config,
-  ...
-}:
-{
-  imports = [
-    ./steam.nix
-    ./vr.nix
-    ./vpn.nix
-    ./agenix.nix
-  ];
+{ pkgs, config, ... }: {
+  imports = [ ./steam.nix ./vr.nix ./vpn.nix ./agenix.nix ./swap.nix ];
 
   networking.extraHosts = ''
     192.168.1.1 nix-server.infra.wg
@@ -44,12 +34,10 @@
     enable = false;
     ensureDatabases = [ "strichliste-rs" ];
 
-    ensureUsers = [
-      {
-        name = "strichliste-rs";
-        ensureDBOwnership = true;
-      }
-    ];
+    ensureUsers = [{
+      name = "strichliste-rs";
+      ensureDBOwnership = true;
+    }];
   };
 
   nix.buildMachines = [
@@ -59,12 +47,7 @@
       protocol = "ssh";
       maxJobs = 8;
       speedFactor = 1;
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
     }
     {
       hostName = "teapot";
@@ -72,12 +55,7 @@
       protocol = "ssh";
       maxJobs = 4;
       speedFactor = 0;
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       mandatoryFeatures = [ ];
     }
   ];
