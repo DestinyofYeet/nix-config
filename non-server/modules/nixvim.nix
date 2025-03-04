@@ -6,6 +6,8 @@
 
     globals = { mapleader = " "; };
 
+    clipboard.providers = { wl-copy.enable = true; };
+
     opts = {
       shiftwidth = 2;
       smarttab = true;
@@ -14,11 +16,12 @@
       termguicolors = true;
       laststatus = 0;
 
-      # clipboard.register = "unnamedplus";
       undofile = true;
       guicursor = "";
       mouse = "";
       scrolloff = 10;
+
+      clipboard = "unnamedplus";
 
       foldmethod = "expr";
       foldexpr = "v:lua.vim.treesitter.foldexpr()";
@@ -32,6 +35,9 @@
       wildmode = "list:longest";
 
       timeoutlen = 200;
+
+      sessionoptions =
+        "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions";
     };
 
     # defined at bottom
@@ -111,16 +117,23 @@
       #   options.desc = "Trouble: Diagnostics";
       # }
       {
-        mode = [ "n" "v" ];
+        mode = [ "v" ];
         key = "<leader>y";
         action = "+y";
-        options.desc = "Copy: System clipboard";
+        options = {
+          desc = "Copy: System clipboard";
+          remap = true;
+        };
       }
       {
-        mode = [ "n" "v" ];
+        mode = [ "v" ];
         key = "<leader>p";
         action = "+p";
-        options.desc = "Paste: System clipboard";
+        options = {
+          desc = "Paste: System clipboard";
+          remap = true;
+
+        };
       }
       {
         mode = [ "n" ];
@@ -410,6 +423,8 @@
       };
 
       snacks = { enable = true; };
+
+      auto-session = { enable = true; };
 
     };
 
