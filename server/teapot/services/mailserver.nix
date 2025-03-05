@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, secretStore, ... }: {
   age.secrets = {
     ole-mail.file = ../secrets/ole-ole.blue.age;
     scripts-uwuwhatsthis-de.file = ../secrets/scripts-uwuwhatsthis.de.age;
@@ -15,6 +15,9 @@
 
     postgresql-roundcube-password.file =
       ../secrets/postgresql-roundcube-password.age;
+
+    forgejo-email-ole-blue.file = secretStore.secrets
+      + "/servers/teapot/forgejo_email_password.age";
   };
 
   mailserver = {
@@ -210,6 +213,10 @@
       "nextcloud@ole.blue" = {
         hashedPasswordFile = config.age.secrets.nextcloud-ole-blue.path;
         sendOnly = true;
+      };
+
+      "forgejo@ole.blue" = {
+        hashedPasswordFile = config.age.secrets.forgejo-email-ole-blue.path;
       };
     };
 
