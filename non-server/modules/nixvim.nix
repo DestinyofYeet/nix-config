@@ -8,6 +8,14 @@
 
     clipboard = { providers = { wl-copy.enable = true; }; };
 
+    autoCmd = [{
+      event = [ "TermClose" ];
+
+      command = "bd";
+
+      desc = "Closes the terminal buffer once the command is done";
+    }];
+
     opts = {
       shiftwidth = 2;
       smarttab = true;
@@ -136,7 +144,7 @@
       {
         mode = [ "n" ];
         key = "<leader>yz";
-        action = "<cmd>Yazi<cr>";
+        action = "<cmd>term yazi<cr>i";
         options.desc = "Yazi: Open";
       }
       {
@@ -392,8 +400,6 @@
         };
       };
 
-      yazi = { enable = true; };
-
       cmp = {
         enable = true;
         autoEnableSources = true;
@@ -423,7 +429,6 @@
       snacks = { enable = true; };
 
       auto-session = { enable = true; };
-
     };
 
     extraConfigLua = ''
