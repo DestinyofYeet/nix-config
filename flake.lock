@@ -1905,11 +1905,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740628963,
-        "narHash": "sha256-8sZXUWjc4HEWQw8LNPodc7DClcq6OvqqRKWoinPBcYY=",
+        "lastModified": 1741281997,
+        "narHash": "sha256-Ej4+gg9wS4SS4oainsQOlz4FGq9S3sLB4AkiHwfbZFI=",
         "ref": "refs/heads/main",
-        "rev": "9e59b877bc6dad106d89a0f8afa7078b91d7c948",
-        "revCount": 13,
+        "rev": "7325436792ce45c74ae1b224fae5de8fd23952cc",
+        "revCount": 14,
         "type": "git",
         "url": "https://git.ole.blue/ole/waybar-taskwarrior.rs"
       },
