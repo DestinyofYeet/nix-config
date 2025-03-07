@@ -5,6 +5,8 @@ in {
     hostName = "bonk";
     useDHCP = false;
 
+    useNetworkd = true;
+
     interfaces.${interface} = {
       useDHCP = false;
       ipv4.addresses = [{
@@ -33,5 +35,10 @@ in {
     nameservers = lib.mkForce [ "1.1.1.1" "8.8.8.8" ];
 
     enableIPv6 = false;
+  };
+
+  boot.kernel.sysctl = {
+    # Allow containers to access internet
+    "net.ipv4.ip_forward" = 1;
   };
 }
