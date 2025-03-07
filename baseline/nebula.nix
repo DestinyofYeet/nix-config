@@ -1,7 +1,3 @@
-{
-  config,
-  lib,
-  custom,
-  ...
-}:
-(custom.nebula.getConfig lib config)
+{ config, lib, custom, ... }:
+{ }
+# (custom.nebula.getConfig lib config)

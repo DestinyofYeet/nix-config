@@ -274,6 +274,16 @@
               self.nixosConfigurations.teapot;
           };
         };
+
+        bonk = {
+          hostname = "bonk";
+          profiles.system = {
+            sshUser = "root";
+
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+              self.nixosConfigurations.bonk;
+          };
+        };
       };
 
       # This is highly advised, and will prevent many possible mistakes
@@ -318,6 +328,13 @@
 
           ./server/teapot
         ] ++ baseline-modules;
+
+        specialArgs = defaultSpecialArgs;
+      };
+
+      nixosConfigurations.bonk = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./server/bonk ] ++ baseline-modules;
 
         specialArgs = defaultSpecialArgs;
       };
