@@ -1,1 +1,3 @@
-{ ... }: { imports = [ ./nextcloud.nix ./postgresql.nix ./nginx.nix ]; }
+{ ... }: {
+  imports = [ ./nextcloud.nix ./postgresql.nix ./nginx.nix ./openssh.nix ];
+}
