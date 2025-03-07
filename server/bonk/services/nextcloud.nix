@@ -18,6 +18,8 @@
     hostName = "cloud.ole.blue";
     https = true;
 
+    maxUploadSize = "10G";
+
     config = {
       dbhost = "/run/postgresql";
       dbname = "nextcloud";
