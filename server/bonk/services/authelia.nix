@@ -20,29 +20,18 @@ let
   };
 in {
   age.secrets = {
-    authelia-ldap-pw = {
-      file = secrets + "/authelia-lldap-pw.age";
-    } // authelia-age;
-    authelia-jwt = {
-      file = secrets + "/authelia-jwt.age";
-      path = "${authelia-secrets-dir}/authelia-jwt";
-    } // authelia-age;
-    authelia-oidc-hmac-secret = {
-      file = secrets + "/authelia-oidc-hmac-secret.age";
-      path = "${authelia-secrets-dir}/authelia-oidc-hmac-secret";
-    } // authelia-age;
-    authelia-oidc-private-key = {
-      file = secrets + "/authelia-oidc-private-key.age";
-      path = "${authelia-secrets-dir}/authelia-oidc-private-key";
-    } // authelia-age;
-    authelia-session-secret = {
-      file = secrets + "/authelia-session-secret.age";
-      path = "${authelia-secrets-dir}/authelia-session-secret";
-    } // authelia-age;
-    authelia-storage-encryption-keys = {
-      file = secrets + "/authelia-storage-encryption-keys.age";
-      path = "${authelia-secrets-dir}/authelia-storage-encryption-keys";
-    } // authelia-age;
+    authelia-ldap-pw = gen-secret "authelia-lldap-pw";
+
+    authelia-jwt = gen-secret "authelia-jwt";
+
+    authelia-oidc-hmac-secret = gen-secret "authelia-oidc-hmac-secret";
+
+    authelia-oidc-private-key = gen-secret "authelia-oidc-private-key";
+
+    authelia-session-secret = gen-secret "authelia-session-secret";
+
+    authelia-storage-encryption-keys =
+      gen-secret "authelia-storage-encryption-keys";
 
     authelia-email-ole-blue-pw = gen-secret "authelia-ole-blue-email-pw";
 
