@@ -17,10 +17,26 @@
 
   time.timeZone = "Europe/Berlin";
 
-  users.users.root = {
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFyr6IgLu/ucNhN533GkHyL7DFrzA9CTIFx7wBHY6Ufv ole@main"
-    ];
+  users = {
+
+    users = {
+      root = {
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFyr6IgLu/ucNhN533GkHyL7DFrzA9CTIFx7wBHY6Ufv ole@main"
+        ];
+      };
+
+      nixremote = {
+        isNormalUser = true;
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDcNdn73knzFAD3n1HVCQJq5DcQ9SOD2Yu27ZrlvbYSE root@teapot"
+        ];
+
+        group = "nixremote";
+      };
+    };
+
+    groups = { nixremote = { }; };
   };
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
@@ -30,5 +46,7 @@
     enable = false;
     man.generateCaches = false;
   };
+
+  nix.settings.trusted-users = [ "nixremote" ];
 }
 
