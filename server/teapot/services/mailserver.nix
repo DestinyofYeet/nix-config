@@ -1,4 +1,6 @@
-{ pkgs, config, secretStore, ... }: {
+{ pkgs, config, secretStore, ... }:
+let secrets = secretStore.get-server-secrets "teapot";
+in {
   age.secrets = {
     ole-mail.file = ../secrets/ole-ole.blue.age;
     scripts-uwuwhatsthis-de.file = ../secrets/scripts-uwuwhatsthis.de.age;
@@ -18,6 +20,9 @@
 
     forgejo-email-ole-blue.file = secretStore.secrets
       + "/servers/teapot/forgejo_email_password.age";
+
+    authelia-email-ole-blue.file = secrets
+      + "/authelia-hashed-email-password.age";
   };
 
   mailserver = {
@@ -217,6 +222,10 @@
 
       "forgejo@ole.blue" = {
         hashedPasswordFile = config.age.secrets.forgejo-email-ole-blue.path;
+      };
+
+      "auth@ole.blue" = {
+        hashedPasswordFile = config.age.secrets.authelia-email-ole-blue.path;
       };
     };
 

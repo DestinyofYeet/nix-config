@@ -44,6 +44,8 @@ in {
       path = "${authelia-secrets-dir}/authelia-storage-encryption-keys";
     } // authelia-age;
 
+    authelia-email-ole-blue-pw = gen-secret "authelia-ole-blue-email-pw";
+
     authelia-oidc-client-jellyfin-id = gen-secret "authelia-openid-jellyfin-id";
     authelia-oidc-client-jellyfin-key =
       gen-secret "authelia-openid-jellyfin-key";
@@ -54,7 +56,13 @@ in {
     instances.${authelia-instance} = {
       enable = true;
       settings = {
-        notifier.filesystem.filename = "/tmp/authelia-notification.txt";
+        notifier.smtp = {
+          address = "submissions://mail.ole.blue:465";
+          username = "auth@ole.blue";
+          password = ''
+            {{ secret "${config.age.secrets.authelia-email-ole-blue-pw.path}" }}'';
+          sender = "Authelia <auth@ole.blue>";
+        };
         identity_providers.oidc.clients = [{
           authorization_policy = "one_factor";
           client_id = ''

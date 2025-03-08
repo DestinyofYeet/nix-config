@@ -9,6 +9,7 @@ in {
   "authelia-oidc-private-key.age".publicKeys = authed;
   "authelia-session-secret.age".publicKeys = authed;
   "authelia-storage-encryption-keys.age".publicKeys = authed;
+  "authelia-ole-blue-email-pw.age".publicKeys = authed;
 
   "authelia-openid-jellyfin-id.age".publicKeys = authed;
   "authelia-openid-jellyfin-key.age".publicKeys = authed;

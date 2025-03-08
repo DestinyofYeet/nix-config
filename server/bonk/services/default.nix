@@ -1,4 +1,9 @@
 { ... }: {
-  imports =
-    [ ./nextcloud.nix ./postgresql.nix ./nginx.nix ./openssh.nix ./auth ];
+  imports = [
+    ./nextcloud.nix
+    ./postgresql.nix
+    ./nginx.nix
+    ./openssh.nix
+    ./authelia.nix
+  ];
 }
