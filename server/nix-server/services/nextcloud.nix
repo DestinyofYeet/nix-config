@@ -1,13 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}:
-let
-  hostname = "cloud.local.ole.blue";
-in
-{
+{ pkgs, config, lib, ... }:
+let hostname = "cloud.local.ole.blue";
+in {
   age.secrets = lib.mkIf config.services.nextcloud.enable {
     nextcloud-bucket-secret-key = {
       file = ../secrets/nextcloud-bucket-secret-key.age;
@@ -37,16 +30,11 @@ in
     extraAppsEnable = true;
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps)
-        contacts
-        calendar
-        tasks
-        notes
-        notify_push
-        cookbook
-        ;
+        contacts calendar tasks notes notify_push cookbook;
 
       fulltextsearch = pkgs.fetchNextcloudApp {
-        url = "https://github.com/nextcloud-releases/fulltextsearch/releases/download/30.0.0/fulltextsearch-30.0.0.tar.gz";
+        url =
+          "https://github.com/nextcloud-releases/fulltextsearch/releases/download/30.0.0/fulltextsearch-30.0.0.tar.gz";
         sha256 = "sha256-7ThkhEKMGEIyAjC7qHHfZR8dlNBE5Zhnl06xQRCH6fU=";
         license = "agpl3Plus";
       };
@@ -78,10 +66,7 @@ in
     };
 
     settings = {
-      trusted_proxies = [
-        "10.100.0.1"
-        "127.0.0.1"
-      ];
+      trusted_proxies = [ "10.100.0.1" "127.0.0.1" ];
 
       default_phone_region = "DE";
 
@@ -89,9 +74,14 @@ in
     };
   };
 
+  systemd.services."nextcloud-setup" = let deps = [ "postgresql.service" ];
+  in {
+    after = deps;
+    requires = deps;
+  };
+
   services.nginx.virtualHosts.${config.services.nextcloud.hostName} =
-    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
-    // {
+    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
       extraConfig = ''
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

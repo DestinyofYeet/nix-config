@@ -55,6 +55,6 @@
     ./garage.nix
     ./nginx.nix
     ./smb.nix
-    ./auth
+    ./lldap.nix
   ];
 }
