@@ -1,12 +1,10 @@
 { keys }:
 let
-  system_ole = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBcW4WZw7GhpHkuDBZVY3dpnUfm+8Ww+pyVWAMCB2BuB ole@nix-server";
+  system_ole =
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBcW4WZw7GhpHkuDBZVY3dpnUfm+8Ww+pyVWAMCB2BuB ole@nix-server";
 
-  authed = keys.authed ++ [
-    keys.systems.nix-server
-  ];
-in
-{
+  authed = keys.authed ++ [ keys.systems.nix-server ];
+in {
   "airvpn_config.age".publicKeys = authed;
   "hydra-email-credentials.age".publicKeys = authed;
   "fireflyiii-appkey.age".publicKeys = authed;
@@ -46,4 +44,8 @@ in
   "nextcloud-admin-pass.age".publicKeys = authed;
 
   "postgresql-init.age".publicKeys = authed;
+
+  "lldap-jwt-secret.age".publicKeys = authed;
+  "lldap-key-seed.age".publicKeys = authed;
+  "lldap-user-pass.age".publicKeys = authed;
 }

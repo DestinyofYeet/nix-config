@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   imports = [
     ./settings.nix
     ./nfs.nix
@@ -56,5 +55,6 @@
     ./garage.nix
     ./nginx.nix
     ./smb.nix
+    ./auth
   ];
 }
