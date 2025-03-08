@@ -16,6 +16,8 @@
       desc = "Closes the terminal buffer once the command is done";
     }];
 
+    diagnostics = { virtual_text = false; };
+
     opts = {
       shiftwidth = 2;
       smarttab = true;
@@ -429,6 +431,8 @@
       snacks = { enable = true; };
 
       auto-session = { enable = true; };
+
+      lsp-lines = { enable = true; };
     };
 
     extraConfigLua = ''
