@@ -48,4 +48,6 @@ in {
   "lldap-jwt-secret.age".publicKeys = authed;
   "lldap-key-seed.age".publicKeys = authed;
   "lldap-user-pass.age".publicKeys = authed;
+
+  "paperless-authelia-env-file.age".publicKeys = authed;
 }

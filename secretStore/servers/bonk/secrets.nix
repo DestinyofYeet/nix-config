@@ -19,4 +19,7 @@ in {
 
   "authelia-openid-nextcloud-id.age".publicKeys = authed;
   "authelia-openid-nextcloud-key.age".publicKeys = authed;
+
+  "authelia-openid-paperless-id.age".publicKeys = authed;
+  "authelia-openid-paperless-key.age".publicKeys = authed;
 }

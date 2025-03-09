@@ -47,6 +47,11 @@ in {
     authelia-oidc-client-nextcloud-key =
       gen-secret "authelia-openid-nextcloud-key";
 
+    authelia-oidc-client-paperless-id =
+      gen-secret "authelia-openid-paperless-id";
+    authelia-oidc-client-paperless-key =
+      gen-secret "authelia-openid-paperless-key";
+
   };
 
   services.authelia = {
@@ -62,7 +67,7 @@ in {
         };
         identity_providers.oidc.clients = [
           {
-            authorization_policy = "one_factor";
+            authorization_policy = "two_factor";
             client_name = "jellyfin";
             client_id = ''
               {{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-id.path}" }}'';
@@ -105,6 +110,23 @@ in {
             scopes = [ "openid" "profile" "email" "groups" ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_post";
+          }
+          {
+            client_name = "paperless";
+            client_id = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-paperless-id.path}" }}'';
+            client_secret = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-paperless-key.path}" }}'';
+            public = false;
+            authorization_policy = "two_factor";
+            require_pkce = true;
+            pkce_challenge_method = "S256";
+            redirect_uris = [
+              "https://paperless.local.ole.blue/accounts/oidc/authelia/login/callback/"
+            ];
+            scopes = [ "openid" "profile" "email" "groups" ];
+            userinfo_signed_response_alg = "none";
+            token_endpoint_auth_method = "client_secret_basic";
           }
         ];
         # server.address = "9091"; # default is tcp :9091
