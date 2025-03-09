@@ -1,5 +1,19 @@
-{ secretStore, config, pkgs, ... }: {
+{ secretStore, config, pkgs, ... }:
+let
+
+  nc4nix = let
+    src = pkgs.fetchFromGitHub {
+      owner = "helsinki-systems";
+      repo = "nc4nix";
+      rev = "8afe8a987f1c80a6d90483cf5aff51f418fcf9c8";
+      hash = "sha256-SjF+D0rFiQoNpsGWTw77tmrFDM0IMZJ6qIEB3ocRGuQ=";
+    };
+  in import "${src}/default.nix" {
+    inherit (pkgs) lib recurseIntoAttrs fetchurl runCommand callPackage;
+  };
+in {
   age.secrets = let secrets = secretStore.get-server-secrets "bonk";
+
   in {
     bonk-nextcloud-admin-pw = {
       file = secrets + "/nextcloud-root-pw.age";
@@ -44,10 +58,21 @@
 
     extraAppsEnable = true;
 
+    # info https://github.com/helsinki-systems/nc4nix
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps)
 
         contacts calendar;
+
+      # user_oidc = pkgs.fetchNextcloudApp {
+      #   appVersion = "7.0.0";
+      #   sha256 = "sha256-jhqch6Gup7774P9seExlwhDGbDv0AK9LEzSEtmFW85A=";
+      #   url =
+      #     "https://github.com/nextcloud-releases/user_oidc/releases/download/v7.0.0/user_oidc-v7.0.0.tar.gz";
+      #   license = "agpl3Only";
+      # };
+    } // {
+      inherit (nc4nix.nextcloud-30) user_oidc;
     };
 
   };
