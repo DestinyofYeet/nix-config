@@ -16,4 +16,7 @@ in {
 
   "authelia-openid-forgejo-id.age".publicKeys = authed;
   "authelia-openid-forgejo-key.age".publicKeys = authed;
+
+  "authelia-openid-nextcloud-id.age".publicKeys = authed;
+  "authelia-openid-nextcloud-key.age".publicKeys = authed;
 }

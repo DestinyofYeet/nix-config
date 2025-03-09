@@ -42,6 +42,11 @@ in {
     authelia-oidc-client-forgejo-id = gen-secret "authelia-openid-forgejo-id";
     authelia-oidc-client-forgejo-key = gen-secret "authelia-openid-forgejo-key";
 
+    authelia-oidc-client-nextcloud-id =
+      gen-secret "authelia-openid-nextcloud-id";
+    authelia-oidc-client-nextcloud-key =
+      gen-secret "authelia-openid-nextcloud-key";
+
   };
 
   services.authelia = {
@@ -85,6 +90,21 @@ in {
             scopes = [ "openid" "email" "profile" ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_basic";
+          }
+          {
+            client_name = "nextcloud";
+            client_id = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-nextcloud-id.path}" }}'';
+            client_secret = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-nextcloud-key.path}" }}'';
+            public = false;
+            authorization_policy = "two_factor";
+            require_pkce = true;
+            pkce_challenge_method = "S256";
+            redirect_uris = [ "https://cloud.ole.blue/apps/user_oidc/code" ];
+            scopes = [ "openid" "profile" "email" "groups" ];
+            userinfo_signed_response_alg = "none";
+            token_endpoint_auth_method = "client_secret_post";
           }
         ];
         # server.address = "9091"; # default is tcp :9091
