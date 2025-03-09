@@ -39,6 +39,9 @@ in {
     authelia-oidc-client-jellyfin-key =
       gen-secret "authelia-openid-jellyfin-key";
 
+    authelia-oidc-client-forgejo-id = gen-secret "authelia-openid-forgejo-id";
+    authelia-oidc-client-forgejo-key = gen-secret "authelia-openid-forgejo-key";
+
   };
 
   services.authelia = {
@@ -52,21 +55,38 @@ in {
             {{ secret "${config.age.secrets.authelia-email-ole-blue-pw.path}" }}'';
           sender = "Authelia <auth@ole.blue>";
         };
-        identity_providers.oidc.clients = [{
-          authorization_policy = "one_factor";
-          client_id = ''
-            {{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-id.path}" }}'';
-          client_secret = ''
-            {{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-key.path}" }}'';
-          redirect_uris =
-            [ "https://jellyfin.local.ole.blue/sso/OID/redirect/authelia" ];
-          scopes = [ "openid" "profile" "groups" ];
-          userinfo_signed_response_alg = "none";
-          token_endpoint_auth_method = "client_secret_post";
-          public = false;
-          require_pkce = true;
-          pkce_challenge_method = "S256";
-        }];
+        identity_providers.oidc.clients = [
+          {
+            authorization_policy = "one_factor";
+            client_name = "jellyfin";
+            client_id = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-id.path}" }}'';
+            client_secret = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-key.path}" }}'';
+            redirect_uris =
+              [ "https://jellyfin.local.ole.blue/sso/OID/redirect/authelia" ];
+            scopes = [ "openid" "profile" "groups" ];
+            userinfo_signed_response_alg = "none";
+            token_endpoint_auth_method = "client_secret_post";
+            public = false;
+            require_pkce = true;
+            pkce_challenge_method = "S256";
+          }
+          {
+            client_name = "gitea";
+            client_id = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-forgejo-id.path}" }}'';
+            client_secret = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-forgejo-key.path}" }}'';
+            public = false;
+            authorization_policy = "two_factor";
+            redirect_uris =
+              [ "https://git.ole.blue/user/oauth2/authelia/callback" ];
+            scopes = [ "openid" "email" "profile" ];
+            userinfo_signed_response_alg = "none";
+            token_endpoint_auth_method = "client_secret_basic";
+          }
+        ];
         # server.address = "9091"; # default is tcp :9091
         theme = "dark";
         default_2fa_method = "totp";

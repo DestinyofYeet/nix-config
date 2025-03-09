@@ -24,11 +24,20 @@
 
       service = {
         # DISABLE_REGISTRATION = true; 
-        REGISTER_MANUAL_CONFIRM = true;
+        # REGISTER_MANUAL_CONFIRM = true;
 
-        ENABLE_NOTIFY_MAIL = true;
+        # ENABLE_NOTIFY_MAIL = true;
 
-        ENABLE_CAPTCHA = true;
+        # ENABLE_CAPTCHA = true;
+        DISABLE_REGISTRATION = false;
+        ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
+        SHOW_REGISTRATION_BUTTON = false;
+      };
+
+      openid = {
+        ENABLE_OPENID_SIGNIN = false;
+        ENABLE_OPENID_SIGNUP = true;
+        WHITELISTED_URIS = "auth.ole.blue";
       };
 
       federation = { ENABLED = true; };

@@ -13,4 +13,7 @@ in {
 
   "authelia-openid-jellyfin-id.age".publicKeys = authed;
   "authelia-openid-jellyfin-key.age".publicKeys = authed;
+
+  "authelia-openid-forgejo-id.age".publicKeys = authed;
+  "authelia-openid-forgejo-key.age".publicKeys = authed;
 }
