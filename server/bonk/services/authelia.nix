@@ -23,7 +23,6 @@ in {
     authelia-ldap-pw = gen-secret "authelia-lldap-pw";
 
     authelia-jwt = gen-secret "authelia-jwt";
-
     authelia-oidc-hmac-secret = gen-secret "authelia-oidc-hmac-secret";
 
     authelia-oidc-private-key = gen-secret "authelia-oidc-private-key";
@@ -147,11 +146,15 @@ in {
           rules = lib.mkAfter [
             {
               domain = "*.ole.blue";
-              policy = "one_factor";
+              policy = "two_factor";
             }
             {
               domain = "*.local.ole.blue";
-              policy = "one_factor";
+              policy = "two_factor";
+            }
+            {
+              domain = "auth.ole.blue";
+              policy = "bypass";
             }
           ];
         };
