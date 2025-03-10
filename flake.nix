@@ -254,7 +254,7 @@
 
       deploy.nodes = {
         nix-server = {
-          hostname = "nix-server.infra.wg";
+          hostname = "nix-server";
           profiles.system = {
             sshUser = "root";
             # user = "root";
@@ -390,7 +390,7 @@
 
         nix-server = build-host "nix-server" {
           deployment = {
-            targetHost = "nix-server.infra.wg";
+            targetHost = "nix-server";
             targetUser = "root";
             buildOnTarget = true;
           };
