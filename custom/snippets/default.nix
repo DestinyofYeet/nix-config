@@ -1,0 +1,1 @@
+{ ... }: { nginx = import ./nginx.nix { }; }
