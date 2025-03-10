@@ -190,7 +190,16 @@ in {
           };
         };
 
-        server.endpoints.authz.forward-auth.implementation = "AuthRequest";
+        server.endpoints.authz.auth-request = {
+          implementation = "AuthRequest";
+          authn_strategies = [
+            {
+              name = "HeaderAuthorization";
+              schemes = [ "Basic" ];
+            }
+            { name = "CookieSession"; }
+          ];
+        };
       };
 
       secrets = with config.age.secrets; {
