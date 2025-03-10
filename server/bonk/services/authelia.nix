@@ -200,6 +200,12 @@ in {
             { name = "CookieSession"; }
           ];
         };
+
+        regulation = {
+          max_retries = 5;
+          find_time = "10m";
+          ban_time = "12h";
+        };
       };
 
       secrets = with config.age.secrets; {
