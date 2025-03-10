@@ -44,6 +44,10 @@
         name = "lldap";
         ensureDBOwnership = true;
       }
+      {
+        name = config.services.immich.database.user;
+        ensureDBOwnership = true;
+      }
     ];
 
     authentication = ''
@@ -55,6 +59,7 @@
       config.services.wiki-js.settings.db.db
       config.services.nextcloud.config.dbname
       "lldap"
+      config.services.immich.database.name
     ];
 
     enableTCPIP = true;

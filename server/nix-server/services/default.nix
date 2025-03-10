@@ -46,7 +46,7 @@
     ./grafana.nix
     ./radarr.nix
     ./paperless-ngx.nix
-    # ./immich.nix
+    ./immich.nix
     ./msmtp.nix
     ./wiki-js.nix
     ./vpn.nix

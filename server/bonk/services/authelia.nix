@@ -51,6 +51,9 @@ in {
     authelia-oidc-client-paperless-key =
       gen-secret "authelia-openid-paperless-key";
 
+    authelia-oidc-client-immich-id = gen-secret "authelia-openid-immich-id";
+    authelia-oidc-client-immich-key = gen-secret "authelia-openid-immich-key";
+
   };
 
   services.authelia = {
@@ -126,6 +129,23 @@ in {
             scopes = [ "openid" "profile" "email" "groups" ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_basic";
+          }
+          {
+            client_name = "immich";
+            client_id = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-immich-id.path}" }}'';
+            client_secret = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-immich-key.path}" }}'';
+            public = false;
+            authorization_policy = "two_factor";
+            redirect_uris = [
+              "https://images.local.ole.blue/auth/login"
+              "https://images.local.ole.blue/user-settings"
+              "app.immich:///oauth-callback"
+            ];
+
+            scopes = [ "openid" "profile" "email" ];
+            userinfo_signed_response_alg = "none";
           }
         ];
         # server.address = "9091"; # default is tcp :9091

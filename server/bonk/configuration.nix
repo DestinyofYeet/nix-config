@@ -23,6 +23,7 @@
       root = {
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFyr6IgLu/ucNhN533GkHyL7DFrzA9CTIFx7wBHY6Ufv ole@main"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILJ2++q6nzua4UrHFNjYwO7sGjru4QbY+m2lkciaXDX0 ole@wattson"
         ];
       };
 

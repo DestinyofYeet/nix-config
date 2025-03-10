@@ -22,4 +22,7 @@ in {
 
   "authelia-openid-paperless-id.age".publicKeys = authed;
   "authelia-openid-paperless-key.age".publicKeys = authed;
+
+  "authelia-openid-immich-id.age".publicKeys = authed;
+  "authelia-openid-immich-key.age".publicKeys = authed;
 }
