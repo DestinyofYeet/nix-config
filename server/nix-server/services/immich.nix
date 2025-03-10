@@ -28,21 +28,19 @@
 
   services.nginx.virtualHosts."images.local.ole.blue" =
     config.serviceSettings.nginx-local-ssl // {
-      locations."/".proxyPass = "http://${config.services.immich.host}:${
-          builtins.toString config.services.immich.port
-        }";
+      locations."/" = {
+        proxyPass = "http://${config.services.immich.host}:${
+            builtins.toString config.services.immich.port
+          }";
+
+        proxyWebsockets = true;
+      };
 
       extraConfig = ''
         proxy_set_header Host              $host;
         proxy_set_header X-Real-IP         $remote_addr;
         proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-
-        # enable websockets: http://nginx.org/en/docs/http/websocket.html
-        proxy_http_version 1.1;
-        proxy_set_header   Upgrade    $http_upgrade;
-        proxy_set_header   Connection "upgrade";
-        proxy_redirect     off;
 
         # set timeout
         proxy_read_timeout 600s;

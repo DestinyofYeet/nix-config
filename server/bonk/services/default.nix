@@ -5,5 +5,6 @@
     ./nginx.nix
     ./openssh.nix
     ./authelia.nix
+    ./netdata.nix
   ];
 }
