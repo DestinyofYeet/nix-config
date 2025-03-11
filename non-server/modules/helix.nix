@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.helix = {
     enable = true;
 
@@ -20,10 +19,7 @@
       language-server = {
         nil = {
           config.nil = {
-            formatting.command = [
-              "${pkgs.alejandra}/bin/alejandra"
-              "-q"
-            ];
+            formatting.command = [ "nixfmt" ];
 
             nix = {
               maxMemoryMB = 10000;
@@ -34,21 +30,20 @@
             };
           };
         };
-      };
 
-      rust-anaylzer = {
-        config.rust-analyzer = {
-          formatting.command = [ "${pkgs.rustfmt}/bin/rustfmt" ];
+        rust-analyzer = {
+          config = {
+            formatting.command = [ "${pkgs.rustfmt}/bin/rustfmt" ];
+            cargo = { allFeatures = true; };
+          };
         };
       };
     };
 
     settings = {
-      theme = "material_deep_ocean";
+      theme = "tokyonight_moon";
 
-      editor = {
-        mouse = false;
-      };
+      editor = { mouse = false; };
     };
   };
 }
