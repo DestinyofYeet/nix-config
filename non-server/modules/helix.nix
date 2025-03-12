@@ -4,6 +4,13 @@
 
     defaultEditor = true;
 
+    settings = {
+      editor = {
+        end-of-line-diagnostics = "hint";
+        inline-diagnostics = { cursor-line = "warning"; };
+      };
+    };
+
     languages = {
       language = [
         {
