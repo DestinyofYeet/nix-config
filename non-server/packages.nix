@@ -235,5 +235,6 @@ in {
       grim
       slurp
       shotcut
+      nix-search-cli
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
