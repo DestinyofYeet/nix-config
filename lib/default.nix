@@ -59,7 +59,7 @@ in rec {
   '';
 
   settings = {
-    editor = "nvim";
+    editor = "hx";
 
     # screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -z -m region -o /tmp";
     screenshot-cmd = ''
