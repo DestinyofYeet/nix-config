@@ -62,7 +62,7 @@ in {
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps)
 
-        contacts calendar;
+        contacts calendar tasks;
 
       # user_oidc = pkgs.fetchNextcloudApp {
       #   appVersion = "7.0.0";

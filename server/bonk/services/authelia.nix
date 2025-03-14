@@ -105,7 +105,7 @@ in {
             client_secret = ''
               {{ secret "${config.age.secrets.authelia-oidc-client-nextcloud-key.path}" }}'';
             public = false;
-            authorization_policy = "two_factor";
+            authorization_policy = "one_factor";
             require_pkce = true;
             pkce_challenge_method = "S256";
             redirect_uris = [ "https://cloud.ole.blue/apps/user_oidc/code" ];
