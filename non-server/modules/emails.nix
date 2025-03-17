@@ -1,13 +1,9 @@
-{
-  config,
-  pkgs,
-  secretStore,
-  ...
-}:
-{
+{ config, pkgs, secretStore, ... }: {
   age.secrets = {
-    oth-regensburg-email-pw.file = secretStore.secrets + /non-server/oth-regensburg-email-pw.age;
-    email-uwuwhatsthis-pw.file = secretStore.secrets + /non-server/email-uwuwhatsthis-pw.age;
+    oth-regensburg-email-pw.file = secretStore.secrets
+      + /non-server/oth-regensburg-email-pw.age;
+    email-uwuwhatsthis-pw.file = secretStore.secrets
+      + /non-server/email-uwuwhatsthis-pw.age;
   };
 
   programs = {
@@ -15,16 +11,28 @@
     msmtp.enable = true;
     notmuch = {
       enable = true;
-      hooks = {
-        preNew = "mbsync --all";
-      };
+      hooks = { preNew = "mbsync --all"; };
+    };
+
+    thunderbird = {
+      enable = true;
+      profiles = { "default" = { isDefault = true; }; };
     };
   };
 
   accounts.email.accounts = {
-    oth-stud-email = rec {
+    oth-stud-email = {
       primary = true;
       address = "ole.bendixen@st.oth-regensburg.de";
+
+      thunderbird = {
+        enable = true;
+
+        settings = id: {
+          "mail.server.server_${id}.authMethod" = 10;
+          "mail.smtpserver.smtp_${id}.authMethod" = 10;
+        };
+      };
 
       # userName = "hs-regensburg.de\\beo45216";
       userName = "beo45216@hs-regensburg.de";
@@ -39,14 +47,13 @@
       notmuch.enable = true;
 
       imap = {
-        host = "exchange.hs-regensburg.de";
-        tls = {
-          enable = true;
-        };
+        host = "outlook.office365.com";
+        port = 993;
+        tls = { enable = true; };
       };
 
       smtp = {
-        inherit (imap) host;
+        host = "smtp.office365.com";
         port = 587;
         tls = {
           enable = true;
@@ -54,7 +61,8 @@
         };
       };
 
-      passwordCommand = "cat ${config.age.secrets.oth-regensburg-email-pw.path}";
+      passwordCommand =
+        "cat ${config.age.secrets.oth-regensburg-email-pw.path}";
 
       realName = "Ole Bendixen";
 
@@ -89,7 +97,8 @@
 
     uwuwhatsthis = rec {
       # primary = true;
-      address = "ole@uwuwhatsthis.de";
+      address = "ole@ole.blue";
+      thunderbird.enable = true;
       userName = "ole";
       msmtp.enable = true;
       mbsync = {
@@ -99,16 +108,12 @@
       notmuch.enable = true;
 
       imap = {
-        host = "mx.uwuwhatsthis.de";
-        tls = {
-          enable = true;
-        };
+        host = "mail.ole.blue";
+        tls = { enable = true; };
       };
       smtp = {
         inherit (imap) host;
-        tls = {
-          enable = true;
-        };
+        tls = { enable = true; };
       };
 
       passwordCommand = "cat ${config.age.secrets.email-uwuwhatsthis-pw.path}";
