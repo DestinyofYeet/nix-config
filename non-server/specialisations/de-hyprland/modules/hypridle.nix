@@ -32,7 +32,7 @@ in {
           on-timeout = "loginctl lock-session";
         }
         {
-          timeout = 6 * 5;
+          timeout = 60 * 5;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }
