@@ -1,4 +1,18 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  typst-watch-script = pkgs.writeShellScript "watch-typst.sh" ''
+    dir=$(mktemp -d)
+    _=$(typst watch "$1" "$dir/tmp.pdf" & echo $! > "$dir/pid")&
+    until [ -f "$dir/tmp.pdf" ]
+    do
+      sleep 0.5
+    done
+    pid=$(cat "$dir/pid")
+    zathura "$dir/tmp.pdf"
+    kill "$pid"
+    rm -fr "$dir"
+  '';
+in {
   programs.helix = {
     enable = true;
 
@@ -8,6 +22,10 @@
       editor = {
         end-of-line-diagnostics = "hint";
         inline-diagnostics = { cursor-line = "warning"; };
+      };
+
+      keys.normal = {
+        space.t.y = ":sh ${typst-watch-script} %{buffer_name} 2>/dev/null &";
       };
     };
 
