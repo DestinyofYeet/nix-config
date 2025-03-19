@@ -1,15 +1,9 @@
-{
-  osConfig,
-  lib,
-  pkgs,
-  ...
-}:
+{ osConfig, lib, pkgs, ... }:
 let
   locker = "hyprlock";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   keyboard-backlight = "platform::kbd_backlight";
-in
-{
+in {
   services.hypridle = {
     enable = true;
 
@@ -29,16 +23,16 @@ in
           on-resume = "${brightnessctl} -rd ${keyboard-backlight}";
         })
         {
-          timeout = 120;
+          timeout = 60 * 1.5;
           on-timeout = "${brightnessctl} -s set 10";
           on-resume = "${brightnessctl} -r";
         }
         {
-          timeout = 180;
+          timeout = 60 * 3;
           on-timeout = "loginctl lock-session";
         }
         {
-          timeout = 300;
+          timeout = 6 * 5;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }
