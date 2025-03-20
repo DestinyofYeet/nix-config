@@ -1,26 +1,10 @@
-{
-  inputs,
-  stable-pkgs,
-  pkgs,
-  lib,
-  custom,
-  secretStore,
-  ...
-}:
-{
+{ inputs, stable-pkgs, pkgs, lib, custom, secretStore, flake, ... }: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
 
-    extraSpecialArgs = {
-      inherit
-        inputs
-        stable-pkgs
-        custom
-        secretStore
-        ;
-    };
+    extraSpecialArgs = { inherit inputs stable-pkgs custom secretStore flake; };
 
     sharedModules = [
       inputs.plasma-manager.homeManagerModules.plasma-manager
@@ -33,17 +17,10 @@
   };
 
   specialisation = {
-    "de-kde" = {
-      configuration = import ./specialisations/de-kde;
-    };
+    "de-kde" = { configuration = import ./specialisations/de-kde; };
 
-    "de-hyprland" = {
-      configuration = import ./specialisations/de-hyprland;
-    };
+    "de-hyprland" = { configuration = import ./specialisations/de-hyprland; };
   };
 
-  imports = [
-    ../baseline
-    ./configuration.nix
-  ];
+  imports = [ ../baseline ./configuration.nix ];
 }

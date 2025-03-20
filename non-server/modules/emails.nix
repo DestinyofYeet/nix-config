@@ -1,19 +1,12 @@
-{ config, pkgs, secretStore, ... }: {
+{ config, pkgs, secretStore, flake, ... }: {
   age.secrets = {
     oth-regensburg-email-pw.file = secretStore.secrets
       + /non-server/oth-regensburg-email-pw.age;
-    email-uwuwhatsthis-pw.file = secretStore.secrets
-      + /non-server/email-uwuwhatsthis-pw.age;
+    email-ole-blue-pw.file = secretStore.secrets
+      + /non-server/email-ole-blue-pw.age;
   };
 
   programs = {
-    mbsync.enable = true;
-    msmtp.enable = true;
-    notmuch = {
-      enable = true;
-      hooks = { preNew = "mbsync --all"; };
-    };
-
     thunderbird = {
       enable = true;
       profiles = { "default" = { isDefault = true; }; };
@@ -37,15 +30,6 @@
       # userName = "hs-regensburg.de\\beo45216";
       userName = "beo45216@hs-regensburg.de";
 
-      msmtp.enable = true;
-
-      mbsync = {
-        enable = true;
-        create = "maildir";
-      };
-
-      notmuch.enable = true;
-
       imap = {
         host = "outlook.office365.com";
         port = 993;
@@ -61,21 +45,7 @@
         };
       };
 
-      passwordCommand =
-        "cat ${config.age.secrets.oth-regensburg-email-pw.path}";
-
       realName = "Ole Bendixen";
-
-      neomutt = {
-        enable = true;
-        mailboxType = "imap";
-      };
-
-      folders = {
-        sent = "Sent Items";
-        trash = "Deleted Items";
-      };
-
       signature = {
         showSignature = "append";
         text = ''
@@ -95,34 +65,55 @@
       };
     };
 
-    uwuwhatsthis = rec {
-      # primary = true;
+    ole-blue = rec {
       address = "ole@ole.blue";
       thunderbird.enable = true;
-      userName = "ole";
-      msmtp.enable = true;
-      mbsync = {
-        enable = true;
-        create = "maildir";
-      };
-      notmuch.enable = true;
-
+      userName = "ole@ole.blue";
+      realName = "Ole";
       imap = {
         host = "mail.ole.blue";
         tls = { enable = true; };
+        port = 993;
       };
+
       smtp = {
         inherit (imap) host;
-        tls = { enable = true; };
+        tls.enable = true;
+        port = 587;
       };
 
-      passwordCommand = "cat ${config.age.secrets.email-uwuwhatsthis-pw.path}";
-
-      realName = "ole";
-      neomutt = {
-        enable = true;
-        mailboxType = "imap";
-      };
+      aliases =
+        flake.nixosConfigurations."teapot".config.mailserver.loginAccounts."ole@ole.blue".aliases;
     };
+
+    # uwuwhatsthis = rec {
+    #   # primary = true;
+    #   address = "ole@ole.blue";
+    #   thunderbird.enable = true;
+    #   userName = "ole";
+    #   msmtp.enable = true;
+    #   mbsync = {
+    #     enable = true;
+    #     create = "maildir";
+    #   };
+    #   notmuch.enable = true;
+
+    #   imap = {
+    #     host = "mail.ole.blue";
+    #     tls = { enable = true; };
+    #   };
+    #   smtp = {
+    #     inherit (imap) host;
+    #     tls = { enable = true; };
+    #   };
+
+    #   passwordCommand = "cat ${config.age.secrets.email-uwuwhatsthis-pw.path}";
+
+    #   realName = "ole";
+    #   neomutt = {
+    #     enable = true;
+    #     mailboxType = "imap";
+    #   };
+    # };
   };
 }
