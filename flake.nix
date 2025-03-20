@@ -164,6 +164,11 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    yazi = {
+      url = "github:sxyazi/yazi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -197,6 +202,7 @@
             nur.overlays.default
             inputs.hyprpanel.overlay
             inputs.helix.overlays.default
+            inputs.yazi.overlays.default
           ];
         }
 

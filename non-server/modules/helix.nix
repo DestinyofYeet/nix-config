@@ -22,10 +22,21 @@ in {
       editor = {
         end-of-line-diagnostics = "hint";
         inline-diagnostics = { cursor-line = "warning"; };
+
+        mouse = false;
       };
+
+      theme = "tokyonight_moon";
 
       keys.normal = {
         space.t.y = ":sh ${typst-watch-script} %{buffer_name} 2>/dev/null &";
+        space.y.z = [
+          ":sh rm -f /tmp/unique-file"
+          ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
+          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
+          ":open %sh{cat /tmp/unique-file}"
+          ":redraw"
+        ];
       };
     };
 
@@ -63,12 +74,6 @@ in {
           };
         };
       };
-    };
-
-    settings = {
-      theme = "tokyonight_moon";
-
-      editor = { mouse = false; };
     };
   };
 }
