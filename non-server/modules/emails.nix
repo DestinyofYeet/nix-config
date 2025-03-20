@@ -85,35 +85,5 @@
       aliases =
         flake.nixosConfigurations."teapot".config.mailserver.loginAccounts."ole@ole.blue".aliases;
     };
-
-    # uwuwhatsthis = rec {
-    #   # primary = true;
-    #   address = "ole@ole.blue";
-    #   thunderbird.enable = true;
-    #   userName = "ole";
-    #   msmtp.enable = true;
-    #   mbsync = {
-    #     enable = true;
-    #     create = "maildir";
-    #   };
-    #   notmuch.enable = true;
-
-    #   imap = {
-    #     host = "mail.ole.blue";
-    #     tls = { enable = true; };
-    #   };
-    #   smtp = {
-    #     inherit (imap) host;
-    #     tls = { enable = true; };
-    #   };
-
-    #   passwordCommand = "cat ${config.age.secrets.email-uwuwhatsthis-pw.path}";
-
-    #   realName = "ole";
-    #   neomutt = {
-    #     enable = true;
-    #     mailboxType = "imap";
-    #   };
-    # };
   };
 }
