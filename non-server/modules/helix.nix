@@ -37,6 +37,7 @@ in {
           ":open %sh{cat /tmp/unique-file}"
           ":redraw"
         ];
+        space.y.y = ":clipboard-yank";
       };
     };
 
