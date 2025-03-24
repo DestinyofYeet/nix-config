@@ -236,7 +236,5 @@ in {
       slurp
       shotcut
       nix-search-cli
-      bisq2
-      tor
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
