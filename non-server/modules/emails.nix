@@ -49,7 +49,7 @@
       signature = {
         showSignature = "append";
         text = ''
-          ------------------------------------------------------------------------------------------
+          --------------------------------------------------------------------------
           Ostbayerische Technische Hochschule Regensburg
           Fakultät Informatik und Mathematik (IM)
           Galgenbergstr. 32
@@ -60,7 +60,7 @@
           Telefon: +49 941 943 1276
           E-Mail: ole.bendixen@st.oth-regensburg.de
           Internet: https://www.fsim-ev.de/
-          ---------------------------------------------------------------------------
+          --------------------------------------------------------------------------
         '';
       };
     };
