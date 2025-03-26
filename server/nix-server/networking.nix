@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  modulesPath,
-  ...
-}:
+{ config, pkgs, lib, modulesPath, ... }:
 let
   homeRouter = {
     interface = "enp42s0f3u1";
@@ -26,8 +20,7 @@ let
       ip = "192.168.1.18";
     };
   };
-in
-{
+in {
   networking = {
     dhcpcd.enable = false;
     useDHCP = false;
@@ -37,38 +30,26 @@ in
     nat = {
       enable = true;
       externalInterface = "enp37s0";
-      internalInterfaces = [
-        "infra"
-        "veth"
-        "${homeRouter.interface}"
-      ];
+      internalInterfaces = [ "infra" "veth" "${homeRouter.interface}" ];
 
-      internalIPs = [
-        "${homeRouter.ip.base}.0/24"
-      ];
+      internalIPs = [ "${homeRouter.ip.base}.0/24" ];
     };
 
     interfaces = {
-      enp37s0 = {
-        useDHCP = true;
-      };
+      enp37s0 = { useDHCP = true; };
 
       ${homeRouter.interface} = {
         useDHCP = false;
         ipv4 = {
-          addresses = [
-            {
-              address = "${homeRouter.ip.router}";
-              prefixLength = 24;
-            }
-          ];
-          routes = [
-            {
-              address = "192.168.2.0";
-              prefixLength = 24;
-              via = "${deviceList.tp-link-router.ip}";
-            }
-          ];
+          addresses = [{
+            address = "${homeRouter.ip.router}";
+            prefixLength = 24;
+          }];
+          routes = [{
+            address = "192.168.2.0";
+            prefixLength = 24;
+            via = "${deviceList.tp-link-router.ip}";
+          }];
         };
       };
     };
@@ -85,17 +66,14 @@ in
 
       interface = homeRouter.interface;
       dhcp-authoritative = true;
-      dhcp-range = [
-        "${homeRouter.ip.dhcp-start}, ${homeRouter.ip.dhcp-end}, 30d"
-      ];
+      dhcp-range =
+        [ "${homeRouter.ip.dhcp-start}, ${homeRouter.ip.dhcp-end}, 30d" ];
 
       enable-ra = true;
       ra-param = "en,0,0";
       quiet-ra = true;
 
-      dhcp-option = [
-        "6,${homeRouter.ip.router},8.8.8.8"
-      ];
+      dhcp-option = [ "6,${homeRouter.ip.router},8.8.8.8" ];
 
       dhcp-host = [
         "${deviceList.tp-link-router.mac},TP-Link-Router,${deviceList.tp-link-router.ip}"

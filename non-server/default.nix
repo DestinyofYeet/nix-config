@@ -22,5 +22,5 @@
     "de-hyprland" = { configuration = import ./specialisations/de-hyprland; };
   };
 
-  imports = [ ../baseline ./configuration.nix ];
+  imports = [ ../baseline ./configuration.nix ./vm.nix ];
 }

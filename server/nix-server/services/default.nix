@@ -16,7 +16,7 @@
     ./netdata.nix
     ./openssh.nix
     # ./hydra.nix
-    ./innernet.nix
+    # ./innernet.nix
     ./prowlarr.nix
     ./syncthing.nix
     ./clean-unused-files.nix

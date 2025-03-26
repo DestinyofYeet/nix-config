@@ -169,6 +169,11 @@
       url = "github:sxyazi/yazi";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    microvim-nix = {
+      url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -194,6 +199,8 @@
         ({ ... }: {
           environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
         })
+
+        inputs.microvim-nix.nixosModules.host
       ];
 
       non-server-modules = [
