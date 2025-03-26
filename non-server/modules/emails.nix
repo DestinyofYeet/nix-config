@@ -22,6 +22,7 @@
         enable = true;
 
         settings = id: {
+          # sets method to oauth2
           "mail.server.server_${id}.authMethod" = 10;
           "mail.smtpserver.smtp_${id}.authMethod" = 10;
         };
