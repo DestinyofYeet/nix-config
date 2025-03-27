@@ -136,7 +136,7 @@ in {
       ffmpeg
       noto-fonts
       yubioath-flutter
-      yubikey-manager-qt
+      yubikey-manager
       yubikey-personalization-gui
       yubikey-personalization
       nextcloud-client
