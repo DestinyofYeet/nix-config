@@ -1,14 +1,8 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}:
+{ pkgs, config, lib, ... }:
 let
   read_color = builtins.readFile ./current_color.txt;
   current_color = pkgs.lib.removeSuffix "\n" read_color;
-in
-{
+in {
   stylix.enable = true;
 
   # me likey
@@ -17,7 +11,8 @@ in
   # tokyo-night-terminal-dark
   # synth-midnight-dark
   # tokyo-city-dark
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+  stylix.base16Scheme =
+    "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
   #
   # stylix.image = pkgs.fetchurl {
   #   url = "https://w.wallhaven.cc/full/qz/wallhaven-qzq1p5.jpg";
@@ -49,5 +44,6 @@ in
     vim.enable = false;
     neovim.enable = false;
     nixvim.enable = false;
+    firefox.enable = false;
   };
 }

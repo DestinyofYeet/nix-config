@@ -129,9 +129,9 @@ in {
             definedAliases = [ "@nüs" ];
           };
 
-          "Bing".metaData.hidden = true;
-          "Google".metaData.hidden = true;
-          "DuckDuckGo".metaData.hidden = true;
+          "bing".metaData.hidden = true;
+          "google".metaData.hidden = true;
+          "ddg".metaData.hidden = true;
         };
       };
 
@@ -199,6 +199,13 @@ in {
         "app.normandy.api_url" = "";
 
         "browser.contentblocking.category" = "strict";
+
+        # sidebar
+        "browser.engagement.sidebar-button.has-used" = true;
+        "sidebar.backupState" = ''
+          sidebar.backupState	{"width":"224px","command":"treestyletab_piro_sakura_ne_jp-sidebar-action","expanded":false,"hidden":true}'';
+        "sidebar.revamp" = true;
+        "sidebar.verticalTabs" = true;
       };
 
       search.default = "Startpage";
@@ -223,7 +230,7 @@ in {
         enhancer-for-youtube
         skip-redirect
         keepassxc-browser
-        tree-style-tab
+        # tree-style-tab
         terms-of-service-didnt-read
       ];
 
