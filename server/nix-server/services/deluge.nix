@@ -23,6 +23,10 @@
   systemd.services.deluged.serviceConfig.ExecStart = lib.mkForce
     "${config.services.deluge.package}/bin/deluged --do-not-daemonize --config /mnt/data/configs/deluge/.config/deluge --ui-interface 10.1.2.1";
 
+  systemd.services.deluged.requires = [ "namespace-deluge.service" ];
+
+  systemd.services.deluged.after = [ "namespace-deluge.service" ];
+
   customLibs.networkNamespaces = {
     enable = true;
     spaces = {

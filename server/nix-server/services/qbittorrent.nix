@@ -1,18 +1,13 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}:
+{ pkgs, config, lib, ... }:
 let
   namespace = "qbit";
 
   qbit = {
-    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.configs}";
+    dataDir =
+      "${lib.custom.settings.${config.networking.hostName}.paths.configs}";
     enable = true;
   };
-in
-{
+in {
 
   age.secrets = {
     airvpn-config = {
@@ -38,12 +33,15 @@ in
     };
   };
 
-  systemd.services.qbittorrent-nox = {
+  systemd.services.qbittorrent-nox = rec {
     description = "Run Qbittorrent-nox";
     wantedBy = [ "multi-user.target" ];
     requires = [ "namespace-${namespace}.service" ];
+    after = requires;
 
-    partOf = [ "namespace-${namespace}.service" ]; # qbit stops if the vpn-namespace service stops
+    partOf = [
+      "namespace-${namespace}.service"
+    ]; # qbit stops if the vpn-namespace service stops
 
     enable = qbit.enable;
     serviceConfig = {
@@ -52,38 +50,39 @@ in
       NetworkNamespacePath = "/var/run/netns/${namespace}";
       User = lib.custom.settings.${config.networking.hostName}.user;
       Group = lib.custom.settings.${config.networking.hostName}.group;
-      ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit.dataDir}";
+      ExecStart =
+        "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --profile=${qbit.dataDir}";
 
-      TimeoutStopSec = 30; # takes the full 90 seconds when trying to stop this service, dunno why
+      TimeoutStopSec =
+        30; # takes the full 90 seconds when trying to stop this service, dunno why
     };
   };
 
-  services.nginx =
-    let
-      default-config = {
-        locations."/" = {
-          proxyPass = "http://10.1.1.1:8080";
-          extraConfig = ''
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
+  services.nginx = let
+    default-config = {
+      locations."/" = {
+        proxyPass = "http://10.1.1.1:8080";
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
 
-            # Prevent gzip encoding issues
-            proxy_set_header Accept-Encoding "";
+          # Prevent gzip encoding issues
+          proxy_set_header Accept-Encoding "";
 
-            # If necessary, disable buffer to get immediate response from upstream
-            proxy_buffering off;
-          '';
-        };
-      };
-    in
-    {
-      virtualHosts = {
-        "qbittorrent.local.ole.blue" =
-          lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
+          # If necessary, disable buffer to get immediate response from upstream
+          proxy_buffering off;
+        '';
       };
     };
+  in {
+    virtualHosts = {
+      "qbittorrent.local.ole.blue" =
+        lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
+        // default-config;
+    };
+  };
 
   services.qbittorrent-prometheus-exporter = {
     enable = true;
