@@ -25,7 +25,7 @@ in {
     dhcpcd.enable = false;
     useDHCP = false;
     useHostResolvConf = false;
-    networkmanager.enable = true;
+    networkmanager.enable = false;
 
     nat = {
       enable = true;
@@ -34,57 +34,61 @@ in {
 
       internalIPs = [ "${homeRouter.ip.base}.0/24" ];
     };
+  };
 
-    interfaces = {
-      enp37s0 = { useDHCP = true; };
+  systemd.network = {
+    enable = true;
+    networks = {
+      "10-external" = {
+        matchConfig.Name = "enp37s0";
+        networkConfig.DHCP = "yes";
+        linkConfig.RequiredForOnline = "routable";
+      };
 
-      ${homeRouter.interface} = {
-        useDHCP = false;
-        ipv4 = {
-          addresses = [{
-            address = "${homeRouter.ip.router}";
-            prefixLength = 24;
-          }];
-          routes = [{
-            address = "192.168.2.0";
-            prefixLength = 24;
-            via = "${deviceList.tp-link-router.ip}";
-          }];
+      "20-internal" = {
+        matchConfig.Name = homeRouter.interface;
+        networkConfig = {
+          Address = "${homeRouter.ip.router}/24";
+          DHCPServer = true;
+          DNS = [ "127.0.0.1" ];
         };
+
+        routes = [{
+          Destination = "192.168.2.0/24";
+          Gateway = deviceList.tp-link-router.ip;
+        }];
+
+        dhcpServerConfig = {
+          EmitDNS = true;
+          DNS = [ homeRouter.ip.router ];
+          EmitRouter = true;
+        };
+
+        dhcpServerStaticLeases = [
+          {
+            MACAddress = deviceList.tp-link-router.mac;
+            Address = deviceList.tp-link-router.ip;
+          }
+          {
+            MACAddress = deviceList.main.mac;
+            Address = deviceList.main.ip;
+          }
+        ];
       };
     };
   };
 
-  services.dnsmasq = {
-    enable = true;
-
-    resolveLocalQueries = false;
-
-    settings = {
-      # disables dns
-      port = 0;
-
-      interface = homeRouter.interface;
-      dhcp-authoritative = true;
-      dhcp-range =
-        [ "${homeRouter.ip.dhcp-start}, ${homeRouter.ip.dhcp-end}, 30d" ];
-
-      enable-ra = true;
-      ra-param = "en,0,0";
-      quiet-ra = true;
-
-      dhcp-option = [ "6,${homeRouter.ip.router},8.8.8.8" ];
-
-      dhcp-host = [
-        "${deviceList.tp-link-router.mac},TP-Link-Router,${deviceList.tp-link-router.ip}"
-        "${deviceList.main.mac},main,${deviceList.main.ip}"
-      ];
-    };
-  };
+  # services.resolved = {
+  #   enable = true;
+  #   dnssec = "false";
+  #   domains = [ "~." ];
+  #   fallbackDns = [ "9.9.9.9" ];
+  #   extraConfig = ''
+  #     DNS=127.0.0.1
+  #   '';
+  # };
 
   services.resolved.enable = false;
-
-  systemd.network.wait-online.enable = false;
 
   environment.etc."resolv.conf" = {
     source = pkgs.writeText "resolv.conf" ''

@@ -1,17 +1,14 @@
-{
-  config,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 
 let
   root-domain = "nix-server.infra.wg";
   ip = "192.168.1.1";
-  build-subdomains =
-    build-domain: build-ip: sub-domains:
-    (map (sub-domain: (wrap-string "${sub-domain}.${build-domain}. IN A ${build-ip}")) sub-domains);
+  build-subdomains = build-domain: build-ip: sub-domains:
+    (map (sub-domain:
+      (wrap-string "${sub-domain}.${build-domain}. IN A ${build-ip}"))
+      sub-domains);
 
-  wrap-string = string: "\"${string}\"";
+  wrap-string = string: ''"${string}"'';
 
   zone-file = pkgs.writeText "local.ole.blue.zone" ''
     $TTL 86400
@@ -28,8 +25,7 @@ let
     local.ole.blue.      IN A ${ip}
     *.local.ole.blue.    IN A ${ip}
   '';
-in
-{
+in {
   services.unbound = {
     user = "nginx";
     enable = true;
@@ -49,11 +45,8 @@ in
           "127.0.0.1@53"
           "127.0.0.1@853"
         ];
-        access-control = [
-          "0.0.0.0/0 allow"
-          "::0/0 allow"
-          "127.0.0.1/0 allow"
-        ];
+        access-control =
+          [ "0.0.0.0/0 allow" "::0/0 allow" "127.0.0.1/0 allow" ];
 
         tls-service-key = "/var/lib/acme/local.ole.blue/key.pem";
         tls-service-pem = "/var/lib/acme/local.ole.blue/fullchain.pem";
@@ -71,13 +64,11 @@ in
         hide-version = true;
 
         # no quotes
-        local-zone = [
-          "${root-domain}. static"
-        ];
+        local-zone = [ "${root-domain}. static" ];
 
         # needs quotes
         local-data = [
-          "\"${root-domain}. IN A ${ip}\""
+          ''"${root-domain}. IN A ${ip}"''
         ]
         # ++ build-subdomains "nix-server.infra.wg" "${ip}" [
         #   "jellyfin"
@@ -94,25 +85,21 @@ in
       };
 
       # I want the unbound server to have a local storage of the zone data incase the internet goes out
-      auth-zone = [
-        {
-          name = wrap-string "local.ole.blue";
-          zonefile = wrap-string "${zone-file}";
-        }
-      ];
+      auth-zone = [{
+        name = wrap-string "local.ole.blue";
+        zonefile = wrap-string "${zone-file}";
+      }];
 
-      forward-zone = [
-        {
-          name = ".";
-          forward-addr = [
-            # 853 for tls
-            "9.9.9.9@853"
-            "8.8.8.8@853"
-            "1.1.1.1@853"
-          ];
-          forward-tls-upstream = true;
-        }
-      ];
+      forward-zone = [{
+        name = ".";
+        forward-addr = [
+          # 853 for tls
+          "9.9.9.9@853"
+          "8.8.8.8@853"
+          "1.1.1.1@853"
+        ];
+        forward-tls-upstream = true;
+      }];
     };
   };
 
