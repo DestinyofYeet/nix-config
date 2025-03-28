@@ -132,7 +132,7 @@
     };
 
     setup-env-rs = {
-      url = "github:DestinyofYeet/setup-env.rs";
+      url = "git+https://git.ole.blue/ole/setup-env.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -247,13 +247,13 @@
             self.nixosConfigurations.${configuration}.config.system.build.toplevel;
         }) configurations);
     in {
+      # pfusch, used for micro-vms
+      inherit defaultSpecialArgs;
       nixpkgs.config.rocmSupport = true;
 
       nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultSpecialArgs // {
-          inherit home-manager inputs stable-pkgs;
-        };
+        specialArgs = defaultSpecialArgs;
         modules = [
           inputs.add-replay-gain.nixosModules.add-replay-gain
           inputs.clean-unused-files.nixosModules.clean-unused-files

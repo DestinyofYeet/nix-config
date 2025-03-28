@@ -1498,15 +1498,15 @@
       "locked": {
         "lastModified": 1740628871,
         "narHash": "sha256-QiBqTRr+Q3UnJR82954u3xsH5lXusqU9M7xx+4r9/R4=",
-        "owner": "DestinyofYeet",
-        "repo": "setup-env.rs",
+        "ref": "refs/heads/main",
         "rev": "72940cd5c8c112657ec580a0c17b30d16198b4b1",
-        "type": "github"
+        "revCount": 11,
+        "type": "git",
+        "url": "https://git.ole.blue/ole/setup-env.rs"
       },
       "original": {
-        "owner": "DestinyofYeet",
-        "repo": "setup-env.rs",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.ole.blue/ole/setup-env.rs"
       }
     },
     "shell-aliases": {
