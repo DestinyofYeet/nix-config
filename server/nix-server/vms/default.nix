@@ -2,7 +2,7 @@
 let
   mkVM = name: settings: {
     "${name}" = {
-      inherit pkgs;
+      pkgs = settings.pkgs ? pkgs;
       specialArgs = flake.defaultSpecialArgs;
       config = lib.mkMerge [
         {

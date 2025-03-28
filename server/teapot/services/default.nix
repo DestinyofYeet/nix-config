@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   imports = [
     ./sshd.nix
     ./nginx.nix
@@ -12,7 +11,7 @@
     # ./coturn.nix
     ./hydra.nix
     ./nix-serve.nix
-    ./taskchampion-server.nix
+    # ./taskchampion-server.nix
     ./vpn.nix
     # ./home-proxy.nix
     ./postgresql.nix

@@ -170,7 +170,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    microvim-nix = {
+    microvm-nix = {
       url = "github:astro/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -200,7 +200,7 @@
           environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
         })
 
-        inputs.microvim-nix.nixosModules.host
+        inputs.microvm-nix.nixosModules.host
       ];
 
       non-server-modules = [
