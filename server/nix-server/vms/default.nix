@@ -3,6 +3,7 @@ let
   mkVM = name: settings: {
     "${name}" = {
       inherit pkgs;
+      specialArgs = flake.defaultSpecialArgs;
       config = lib.mkMerge [
         {
           microvm = {
@@ -43,7 +44,7 @@ in {
       (mkVM "rofl" {
         ip = "192.168.3.10";
         mac = "02:00:00:00:00:01";
-        config = { imports = [ ./rofl ]; };
+        config = { imports = [ ./rofl ./baseline ]; };
       })
     ];
   };

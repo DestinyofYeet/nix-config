@@ -23,5 +23,10 @@ rec {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILDH4DwddDZwmIIDsP5kO+FkcrfMKPc9KbAzet5jxhmy root@bonk";
   };
 
+  root = {
+    nix-server =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAzr6fAow9E19rsmJdMXA3kJvhzPPCmnH5hD2UhuufEq root@nixos";
+  };
+
   authed = with users; [ wattson main kartoffelkiste ];
 }
