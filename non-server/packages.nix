@@ -236,5 +236,6 @@ in {
       slurp
       shotcut
       nix-search-cli
+      udiskie
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }

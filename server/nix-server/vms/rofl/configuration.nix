@@ -1,4 +1,7 @@
 { secretStore, ... }: {
+
+  imports = [ ./services ];
+
   microvm = {
     shares = [{
       source = "/nix/store";
@@ -15,6 +18,8 @@
       PasswordAuthentication = false;
     };
   };
+
+  networking.firewall.enable = false;
 
   users.users.root.openssh.authorizedKeys.keys =
     [ secretStore.keys.root.nix-server ];

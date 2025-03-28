@@ -32,12 +32,14 @@ let
           };
           networking.useDHCP = lib.mkForce false;
         }
+
         settings.config
       ];
     };
   };
 
 in {
+  imports = [ ./nginx.nix ];
   microvm = {
     host.enable = true;
     vms = lib.mkMerge [

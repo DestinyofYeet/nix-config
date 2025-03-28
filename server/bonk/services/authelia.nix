@@ -54,6 +54,9 @@ in {
     authelia-oidc-client-immich-id = gen-secret "authelia-openid-immich-id";
     authelia-oidc-client-immich-key = gen-secret "authelia-openid-immich-key";
 
+    authelia-oidc-client-wikijs-id = gen-secret "authelia-openid-wikijs-id";
+    authelia-oidc-client-wikijs-key = gen-secret "authelia-openid-wikijs-key";
+
   };
 
   services.authelia = {
@@ -146,6 +149,21 @@ in {
 
             scopes = [ "openid" "profile" "email" ];
             userinfo_signed_response_alg = "none";
+          }
+          {
+            client_name = "Wiki JS";
+            client_id = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-wikijs-id.path}" }}'';
+            client_secret = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-wikijs-key.path}" }}'';
+            public = false;
+            authorization_policy = "two_factor";
+            redirect_uris = [
+              "https://wiki.local.ole.blue/login/e2c196dd-6667-46af-8517-d09e846afa82/callback"
+            ];
+            scopes = [ "openid" "email" "profile" "groups" ];
+            userinfo_signed_response_alg = "none";
+            token_endpoint_auth_method = "client_secret_post";
           }
         ];
         # server.address = "9091"; # default is tcp :9091

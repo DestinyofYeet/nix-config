@@ -1,11 +1,6 @@
-{
-  config,
-  lib,
-  ...
-}:
-{
+{ config, lib, ... }: {
   services.wiki-js = {
-    enable = true;
+    enable = false;
 
     settings = {
       bindIP = "127.0.0.1";
@@ -16,11 +11,4 @@
       db.user = "wiki-js";
     };
   };
-
-  services.nginx.virtualHosts."wiki.local.ole.blue" =
-    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
-    // {
-      locations."/".proxyPass =
-        "http://${config.services.wiki-js.settings.bindIP}:${toString config.services.wiki-js.settings.port}";
-    };
 }
