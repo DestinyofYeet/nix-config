@@ -30,19 +30,36 @@ in {
     nat = {
       enable = true;
       externalInterface = "enp37s0";
-      internalInterfaces = [ "infra" "veth" "${homeRouter.interface}" ];
+      internalInterfaces =
+        [ "infra" "veth" "${homeRouter.interface}" "microvm-bridge" ];
 
       internalIPs = [ "${homeRouter.ip.base}.0/24" ];
     };
   };
 
-  systemd.network = {
+  systemd.network = let microvm-name = "microvm-bridge";
+  in {
     enable = true;
+    netdevs."10-microvm".netdevConfig = {
+      Kind = "bridge";
+      Name = microvm-name;
+    };
+
     networks = {
       "10-external" = {
-        matchConfig.Name = "enp37s0";
+        matchConfig.Name = [ "enp37s0" ];
         networkConfig.DHCP = "yes";
         linkConfig.RequiredForOnline = "routable";
+      };
+
+      "10-microvm" = {
+        matchConfig.Name = microvm-name;
+        addresses = [{ Address = "192.168.3.1/24"; }];
+      };
+
+      "11-microvm" = {
+        matchConfig.Name = "vm-*";
+        networkConfig.Bridge = microvm-name;
       };
 
       "20-internal" = {
@@ -78,23 +95,13 @@ in {
     };
   };
 
-  # services.resolved = {
-  #   enable = true;
-  #   dnssec = "false";
-  #   domains = [ "~." ];
-  #   fallbackDns = [ "9.9.9.9" ];
-  #   extraConfig = ''
-  #     DNS=127.0.0.1
-  #   '';
-  # };
-
   services.resolved.enable = false;
 
   environment.etc."resolv.conf" = {
     source = pkgs.writeText "resolv.conf" ''
       # Set in /etc/nixos/system_networking.nix
       nameserver 127.0.0.1
-      nameserver 8.8.8.8
+      nameserver 9.9.9.9
     '';
   };
 
