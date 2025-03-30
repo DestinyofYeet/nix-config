@@ -84,8 +84,8 @@ in rec {
     };
 
     non-server = {
-      background = ../images/wallhaven-nightsky.jpg;
-      lock-screen = ../images/wallhaven-lighthouse-snow.jpg;
+      background = "/etc/backgrounds/background.jpg";
+      lock-screen = "/etc/backgrounds/lockscreen.jpg";
     };
   };
 }

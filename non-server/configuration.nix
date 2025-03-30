@@ -10,6 +10,7 @@
     ./services.nix
     ./scripts
     ./yubikey.nix
+    ./background.nix
   ];
 
   # Configure network proxy if necessary

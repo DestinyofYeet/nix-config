@@ -1,9 +1,4 @@
-{
-  config,
-  stable-pkgs,
-  ...
-}:
-{
+{ config, stable-pkgs, ... }: {
   age.secrets = {
     hydra-email-credentials = {
       file = ../secrets/hydra-email-credentials.age;
@@ -19,7 +14,7 @@
 
   services.hydra = {
     enable = true;
-    # package = stable-pkgs.hydra;
+    package = stable-pkgs.hydra;
     # needs to be http:// since hydra expects http for some reason
     hydraURL = "http://hydra.ole.blue";
     notificationSender = "hydra@uwuwhatsthis.de";
@@ -36,7 +31,8 @@
   };
 
   systemd.services.hydra-notify = {
-    serviceConfig.EnvironmentFile = "${config.age.secrets.hydra-email-credentials.path}";
+    serviceConfig.EnvironmentFile =
+      "${config.age.secrets.hydra-email-credentials.path}";
   };
 
   nix.settings.allowed-uris = [
