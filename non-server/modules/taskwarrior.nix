@@ -1,12 +1,7 @@
-{
-  pkgs,
-  config,
-  secretStore,
-  ...
-}:
-{
+{ pkgs, config, secretStore, ... }: {
   age.secrets = {
-    taskwarrior-config.file = secretStore.secrets + /non-server/taskwarrior-config.age;
+    taskwarrior-config.file = secretStore.secrets
+      + /non-server/taskwarrior-config.age;
   };
 
   programs.taskwarrior = {
@@ -21,27 +16,21 @@
     '';
   };
 
-  systemd.user.services.taskwarrior-sync = {
-    Unit = {
-      Description = "Taskwarrior sync";
-    };
-    Service = {
-      CPUSchedulingPolicy = "idle";
-      IOSchedulingClass = "idle";
-      ExecStart = "${config.programs.taskwarrior.package}/bin/task sync";
-    };
-  };
+  # systemd.user.services.taskwarrior-sync = {
+  #   Unit = { Description = "Taskwarrior sync"; };
+  #   Service = {
+  #     CPUSchedulingPolicy = "idle";
+  #     IOSchedulingClass = "idle";
+  #     ExecStart = "${config.programs.taskwarrior.package}/bin/task sync";
+  #   };
+  # };
 
-  systemd.user.timers.taskwarrior-sync = {
-    Unit = {
-      Description = "Taskwarrior periodic sync";
-    };
-    Timer = {
-      Unit = "taskwarrior-sync.service";
-      OnCalendar = "*:0/5";
-    };
-    Install = {
-      WantedBy = [ "timers.target" ];
-    };
-  };
+  # systemd.user.timers.taskwarrior-sync = {
+  #   Unit = { Description = "Taskwarrior periodic sync"; };
+  #   Timer = {
+  #     Unit = "taskwarrior-sync.service";
+  #     OnCalendar = "*:0/5";
+  #   };
+  #   Install = { WantedBy = [ "timers.target" ]; };
+  # };
 }
