@@ -42,7 +42,7 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
 
-    # package = osConfig.programs.hyprland.package;
+    package = osConfig.programs.hyprland.package;
     # package = pkgs.hyprland;
 
     systemd.enableXdgAutostart = true;
