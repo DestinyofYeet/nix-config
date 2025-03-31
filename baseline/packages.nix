@@ -1,9 +1,5 @@
-{ pkgs, ... }:
-{
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+{ pkgs, ... }: {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = with pkgs; [
     zsh
@@ -35,5 +31,6 @@
     openssl
     ffmpeg
     iperf
+    smartmontools
   ];
 }
