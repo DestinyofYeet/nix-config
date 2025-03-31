@@ -1,15 +1,12 @@
-{
-  config,
-  ...
-}:
-{
+{ config, pkgs, ... }:
+let cat = "${pkgs.coreutils}/bin/cat";
+in {
 
   age.secrets = {
-    email-firefly-iii-credentials.file = ../secrets/firefly-email-credentials.age;
+    email-firefly-iii-credentials.file =
+      ../secrets/firefly-email-credentials.age;
     email-uptime-kuma.file = ../secrets/email-uptime-kuma.age;
-    zed-email-credentials = {
-      file = ../secrets/zed-email-credentials.age;
-    };
+    zed-email-credentials = { file = ../secrets/zed-email-credentials.age; };
   };
 
   programs.msmtp = {
@@ -28,13 +25,15 @@
 
     accounts = {
       firefly = rec {
-        passwordeval = "cat ${config.age.secrets.email-firefly-iii-credentials.path}";
+        passwordeval =
+          "${cat} ${config.age.secrets.email-firefly-iii-credentials.path}";
         user = "firefly-iii@ole.blue";
         from = user;
       };
 
       default = rec {
-        passwordeval = "cat ${config.age.secrets.zed-email-credentials.path}";
+        passwordeval =
+          "${cat} ${config.age.secrets.zed-email-credentials.path}";
         user = "zed@ole.blue";
         from = user;
       };
