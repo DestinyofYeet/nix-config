@@ -5,8 +5,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "helsinki-systems";
       repo = "nc4nix";
-      rev = "8afe8a987f1c80a6d90483cf5aff51f418fcf9c8";
-      hash = "sha256-SjF+D0rFiQoNpsGWTw77tmrFDM0IMZJ6qIEB3ocRGuQ=";
+      rev = "89b29ff991dfaf72240a12963502d9efeb4e69f8";
+      hash = "sha256-QzYHmAlhzBag5UDW39bn8kEWbdB7Ala69Dcrq/Xhu+M=";
     };
   in import "${src}/default.nix" {
     inherit (pkgs) lib recurseIntoAttrs fetchurl runCommand callPackage;
@@ -27,7 +27,7 @@ in {
   services.nextcloud = {
     enable = true;
 
-    package = pkgs.nextcloud30;
+    package = pkgs.nextcloud31;
 
     hostName = "cloud.ole.blue";
     https = true;
@@ -72,7 +72,7 @@ in {
       #   license = "agpl3Only";
       # };
     } // {
-      inherit (nc4nix.nextcloud-30) user_oidc;
+      inherit (nc4nix.nextcloud-31) user_oidc;
     };
 
   };
@@ -81,4 +81,10 @@ in {
     enableACME = true;
     forceSSL = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    cifs-utils
+    samba
+    php84Extensions.smbclient
+  ];
 }
