@@ -88,7 +88,7 @@ in {
             pkce_challenge_method = "S256";
           }
           {
-            client_name = "gitea";
+            client_name = "Forgejo";
             client_id = ''
               {{ secret "${config.age.secrets.authelia-oidc-client-forgejo-id.path}" }}'';
             client_secret = ''
@@ -96,7 +96,7 @@ in {
             public = false;
             authorization_policy = "two_factor";
             redirect_uris =
-              [ "https://git.ole.blue/user/oauth2/authelia/callback" ];
+              [ "https://code.ole.blue/user/oauth2/authelia/callback" ];
             scopes = [ "openid" "email" "profile" "groups" ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_basic";

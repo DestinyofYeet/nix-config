@@ -7,7 +7,7 @@ let
     urlPrefix = prefix;
   };
 in {
-  services.nginx.virtualHosts."search.ole.blue" = {
+  services.nginx.virtualHosts."options.ole.blue" = {
     forceSSL = true;
     enableACME = true;
     locations."/".root =

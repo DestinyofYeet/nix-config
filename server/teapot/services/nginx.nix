@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
@@ -23,18 +22,13 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "ole@ole.blue";
+    defaults = {
+      email = "ole@ole.blue";
+      dnsResolver = "1.1.1.1";
+    };
   };
 
-  networking.firewall = {
-    allowedTCPPorts = [
-      80
-      443
-      2222
-    ];
-  };
+  networking.firewall = { allowedTCPPorts = [ 80 443 2222 ]; };
 
-  services.prometheus.exporters.nginx = {
-    enable = true;
-  };
+  services.prometheus.exporters.nginx = { enable = true; };
 }

@@ -5,7 +5,7 @@
       + "/servers/teapot/forgejo_env_file.age";
   };
 
-  services.forgejo = {
+  services.forgejo = rec {
     enable = true;
 
     package = pkgs.forgejo;
@@ -16,7 +16,7 @@
     };
 
     settings = {
-      DEFAULT = { APP_NAME = "git.ole.blue"; };
+      DEFAULT = { APP_NAME = "code.ole.blue"; };
 
       indexer = { REPO_INDEXER_ENABLED = true; };
 
@@ -59,10 +59,10 @@
       };
 
       server = {
-        ROOT_URL = "https://git.ole.blue";
+        ROOT_URL = "https://${settings.DEFAULT.APP_NAME}";
         HTTP_ADDR = "127.0.0.1";
         HTTP_PORT = 3005;
-        DOMAIN = "git.ole.blue";
+        DOMAIN = settings.DEFAULT.APP_NAME;
       };
 
       log = { LEVEL = "Debug"; };
@@ -72,9 +72,10 @@
   systemd.services."forgejo".serviceConfig.EnvironmentFile =
     config.age.secrets.forgejo-env-file.path;
 
-  services.nginx.virtualHosts."git.ole.blue" = {
+  services.nginx.virtualHosts."code.ole.blue" = {
     forceSSL = true;
     enableACME = true;
+
     locations."/" = {
       proxyPass =
         "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${
