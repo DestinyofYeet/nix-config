@@ -16,7 +16,7 @@
     # ./home-proxy.nix
     ./postgresql.nix
     ./gitea.nix
-    # ./nix-search.nix
+    ./nix-search.nix
     ./ntfy.nix
     # ./nebula.nix # now in baseline
   ];

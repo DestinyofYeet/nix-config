@@ -29,8 +29,8 @@ in {
             name = "NixOS";
             urlPrefix = "https://github.com/NixOS/nixpkgs/tree/master/";
           }
-          (build-scope inputs.home-manager.nixosModules.home-manager
-            "HomeManager" "https://example.com")
+          # (build-scope inputs.home-manager.nixosModules.home-manager
+          #   "HomeManager" "https://example.com")
           (build-scope [
             inputs.simple-nixos-mailserver.nixosModules.default
             {

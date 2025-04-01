@@ -233,11 +233,16 @@ in {
     certificateScheme = "acme-nginx";
   };
 
-  services.roundcube = {
+  services.roundcube = let
+    virtuser_file = pkgs.writeText "virtuser_file" ''
+      ole@ole.blue     roflroflrofl@ole.blue
+    '';
+  in {
     enable = true;
 
     plugins = [
       # "managesieve"
+      "virtuser_file"
     ];
 
     hostName = "mail.ole.blue";
@@ -250,6 +255,8 @@ in {
       $config['managesieve_host'] = '127.0.0.1';
       $config['managesieve_auth_type'] = 'PLAIN';
       $config['managesieve_usetls'] = false;
+
+      $config['virtuser_file'] = "${virtuser_file}";
     '';
 
     configureNginx = true;
