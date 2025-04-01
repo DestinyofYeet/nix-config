@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
   imports = [
     ./sshd.nix
     ./nginx.nix
@@ -20,4 +20,6 @@
     ./ntfy.nix
     # ./nebula.nix # now in baseline
   ];
+
+  services.smartd.enable = lib.mkForce false;
 }
