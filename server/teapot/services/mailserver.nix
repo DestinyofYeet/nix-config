@@ -168,6 +168,7 @@ in {
           "postmaster@uwuwhatsthis.de"
           "abuse@ole.blue"
           "abuse@uwuwhatsthis.de"
+          "roflrofl@ole.blue"
         ];
       };
 
@@ -234,15 +235,15 @@ in {
   };
 
   services.roundcube = let
-    virtuser_file = pkgs.writeText "virtuser_file" ''
-      ole@ole.blue     roflroflrofl@ole.blue
-    '';
+    # virtuser_file = pkgs.writeText "virtuser_file" ''
+    #   ole@ole.blue roflrofl@ole.blue
+    # '';
   in {
     enable = true;
 
     plugins = [
       # "managesieve"
-      "virtuser_file"
+      # "virtuser_file"
     ];
 
     hostName = "mail.ole.blue";
@@ -256,8 +257,8 @@ in {
       $config['managesieve_auth_type'] = 'PLAIN';
       $config['managesieve_usetls'] = false;
 
-      $config['virtuser_file'] = "${virtuser_file}";
     '';
+    # $config['virtuser_file'] = "${virtuser_file}";
 
     configureNginx = true;
 
