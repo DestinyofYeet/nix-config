@@ -2,16 +2,13 @@
 let
   # buildAlias = key: remap: "${key} (multi f24 (tap-hold $tap-time $hold-time ${key} ${remap}))";
   buildAlias = key: remap: "(tap-hold $tap-time $hold-time ${key} ${remap})";
-in
-{
+in {
   services.kanata = {
     enable = true;
 
     keyboards = {
       laptop-kbd = {
-        devices = [
-          "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-        ];
+        devices = [ "/dev/input/by-path/platform-i8042-serio-0-event-kbd" ];
         extraDefCfg = ''
           process-unmapped-keys yes
         '';
@@ -59,9 +56,6 @@ in
 
   # Add the Kanata service user to necessary groups
   systemd.services.kanata-internalKeyboard.serviceConfig = {
-    SupplementaryGroups = [
-      "input"
-      "uinput"
-    ];
+    SupplementaryGroups = [ "input" "uinput" ];
   };
 }

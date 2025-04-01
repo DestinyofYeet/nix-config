@@ -106,6 +106,7 @@ in {
         tablet = { output = monitors_laptop.builtin; };
 
         kb_layout = "de";
+        kb_options = [ "caps:escape" ];
       };
 
       device = [ ] ++ (lib.optionals (lib.custom.isMain osConfig) [{
