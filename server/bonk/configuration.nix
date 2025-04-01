@@ -31,6 +31,7 @@
         isNormalUser = true;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDcNdn73knzFAD3n1HVCQJq5DcQ9SOD2Yu27ZrlvbYSE root@teapot"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOvtzIO9VDeJHgugOut5XWoUn6dQsEuxMXzQJfF+pe2M root@wattson"
         ];
 
         group = "nixremote";

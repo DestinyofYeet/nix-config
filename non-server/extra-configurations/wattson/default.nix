@@ -1,13 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
+{ config, pkgs, lib, ... }: {
   imports = [
     ./38C3.nix
     ./vpn.nix
@@ -22,9 +16,7 @@
 
   nix = {
     settings = {
-      substituters = [
-        "https://nix-community.cachix.org"
-      ];
+      substituters = [ "https://nix-community.cachix.org" ];
 
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -43,15 +35,19 @@
         hostName = "teapot";
         system = "x86_64-linux";
         protocol = "ssh";
-        supportedFeatures = [
-          "nixos-test"
-          "benchmark"
-          "big-parallel"
-          "kvm"
-        ];
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         mandatoryFeatures = [ ];
         maxJobs = 6;
-        speedFactor = 4;
+        speedFactor = 2;
+      }
+      {
+        hostName = "bonk";
+        system = "x86_64-linux";
+        protocol = "ssh";
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        mandatoryFeatures = [ ];
+        maxJobs = 6;
+        speedFactor = 2;
       }
     ];
 
@@ -74,15 +70,14 @@
   # disable baloo
   environment = {
     etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
-      "Basic Settings" = {
-        "Indexing-Enabled" = false;
-      };
+      "Basic Settings" = { "Indexing-Enabled" = false; };
     };
   };
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    baloo # fuck this shit
-  ];
+  environment.plasma6.excludePackages = with pkgs.kdePackages;
+    [
+      baloo # fuck this shit
+    ];
 
   services.power-profiles-daemon.enable = false;
 

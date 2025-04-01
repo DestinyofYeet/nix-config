@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
   imports = [
     ./nextcloud.nix
     ./postgresql.nix
@@ -7,4 +7,6 @@
     ./authelia.nix
     ./netdata.nix
   ];
+
+  services.smartd.enable = lib.mkForce false;
 }
