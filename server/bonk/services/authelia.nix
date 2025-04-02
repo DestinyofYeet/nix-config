@@ -172,10 +172,10 @@ in {
             client_name = "Mealie";
             client_id = ''
               {{ secret "${config.age.secrets.authelia-oidc-client-mealie-id.path}" }}'';
-            # client_secret = ''
-            #   {{ secret "${config.age.secrets.authelia-oidc-client-mealie-key.path}" }}'';
-            client_secret = "";
-            public = true;
+            client_secret = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-mealie-key.path}" }}'';
+            # client_secret = "";
+            public = false;
             authorization_policy = "one_factor";
             scopes = [ "openid" "email" "profile" "groups" ];
             require_pkce = true;
@@ -185,8 +185,8 @@ in {
               "https://recipes.ole.blue/login?direct=1"
             ];
             userinfo_signed_response_alg = "none";
-            # token_endpoint_auth_method = "client_secret_basic";
-            token_endpoint_auth_method = "none";
+            token_endpoint_auth_method = "client_secret_basic";
+            # token_endpoint_auth_method = "none";
           }
         ];
         # server.address = "9091"; # default is tcp :9091
