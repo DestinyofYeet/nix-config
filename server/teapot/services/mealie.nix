@@ -1,16 +1,46 @@
-{ config, ... }: {
+{ config, secretStore, ... }:
+let secrets = secretStore.get-server-secrets "teapot";
+in {
+
+  age.secrets = { mealie-env-file.file = secrets + "/mealie_env_file.age"; };
+
   services.mealie = {
     enable = true;
-    settings = { ALLOW_SIGNUP = "false"; };
+    settings = {
+      ALLOW_SIGNUP = "false";
+      OIDC_AUTH_ENABLED = "true";
+      OIDC_SIGNUP_ENABLED = "true";
+      OIDC_CONFIGURATION_URL =
+        "https://auth.ole.blue/.well-known/openid-configuration";
+      OIDC_PROVIDER_NAME = "Authelia";
+      OIDC_USER_GROUP = "mealie-user";
+      OIDC_ADMIN_GROUP = "mealie-admin";
+      OIDC_AUTO_REDIRECT = "false";
+      OIDC_GROUPS_CLAIM = "groups";
+      BASE_URL = "https://recipes.ole.blue";
+      LOG_LEVEL = "debug";
+    };
     listenAddress = "127.0.0.1";
+    credentialsFile = config.age.secrets.mealie-env-file.path;
   };
 
   services.nginx.virtualHosts."recipes.ole.blue" = {
     forceSSL = true;
     enableACME = true;
 
-    locations."/".proxyPass = "http://${config.services.mealie.listenAddress}:${
-        toString config.services.mealie.port
-      }";
+    locations."/" = {
+      proxyPass = "http://${config.services.mealie.listenAddress}:${
+          toString config.services.mealie.port
+        }";
+
+      extraConfig = ''
+        proxy_set_header X-Original-URL $scheme://$http_host$request_uri;
+        proxy_set_header X-Forwarded-Host $http_host;
+        proxy_set_header X-Forwarded-URI $request_uri;
+        proxy_set_header X-Forwarded-Ssl on;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Real-IP $remote_addr;
+      '';
+    };
   };
 }

@@ -57,6 +57,9 @@ in {
     authelia-oidc-client-wikijs-id = gen-secret "authelia-openid-wikijs-id";
     authelia-oidc-client-wikijs-key = gen-secret "authelia-openid-wikijs-key";
 
+    authelia-oidc-client-mealie-id = gen-secret "authelia-openid-mealie-id";
+    authelia-oidc-client-mealie-key = gen-secret "authelia-openid-mealie-key";
+
   };
 
   services.authelia = {
@@ -164,6 +167,26 @@ in {
             scopes = [ "openid" "email" "profile" "groups" ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_post";
+          }
+          {
+            client_name = "Mealie";
+            client_id = ''
+              {{ secret "${config.age.secrets.authelia-oidc-client-mealie-id.path}" }}'';
+            # client_secret = ''
+            #   {{ secret "${config.age.secrets.authelia-oidc-client-mealie-key.path}" }}'';
+            client_secret = "";
+            public = true;
+            authorization_policy = "one_factor";
+            scopes = [ "openid" "email" "profile" "groups" ];
+            require_pkce = true;
+            pkce_challenge_method = "S256";
+            redirect_uris = [
+              "https://recipes.ole.blue/login"
+              "https://recipes.ole.blue/login?direct=1"
+            ];
+            userinfo_signed_response_alg = "none";
+            # token_endpoint_auth_method = "client_secret_basic";
+            token_endpoint_auth_method = "none";
           }
         ];
         # server.address = "9091"; # default is tcp :9091

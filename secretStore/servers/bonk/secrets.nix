@@ -28,4 +28,7 @@ in {
 
   "authelia-openid-wikijs-id.age".publicKeys = authed;
   "authelia-openid-wikijs-key.age".publicKeys = authed;
+
+  "authelia-openid-mealie-id.age".publicKeys = authed;
+  "authelia-openid-mealie-key.age".publicKeys = authed;
 }
