@@ -1,9 +1,13 @@
-{ config, secretStore, ... }:
+{ config, secretStore, lib, ... }:
 let secrets = secretStore.get-server-secrets "nix-server";
 in {
   age.secrets = {
     dmarc-ole-blue-email-pw.file = secrets + "/dmarc-ole-blue-password.age";
-    maxmind-license-key.file = secrets + "/maxmind-license-key.age";
+    maxmind-license-key = rec {
+      file = secrets + "/maxmind-license-key.age";
+      owner = "geoip";
+      group = owner;
+    };
   };
   services.parsedmarc = {
     enable = true;
@@ -40,6 +44,19 @@ in {
     settings = {
       AccountID = 1149846;
       LicenseKey = config.age.secrets.maxmind-license-key.path;
+      EditionIDs = [ "GeoLite2-ASN" "GeoLite2-City" "GeoLite2-Country" ];
     };
+  };
+
+  systemd.services."geoipupdate".serviceConfig.DynamicUser = lib.mkForce false;
+  systemd.services."geoipupdate".serviceConfig.User = "geoip";
+
+  users = {
+    users."geoip" = {
+      isSystemUser = true;
+      group = "geoip";
+    };
+
+    groups.geoip = { };
   };
 }
