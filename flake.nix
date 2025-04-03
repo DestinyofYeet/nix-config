@@ -59,7 +59,7 @@
     };
 
     strichliste = {
-      url = "git+https://git.ole.blue/ole/strichliste.nix";
+      url = "git+https://code.ole.blue/ole/strichliste.nix";
       # url = "path:///home/ole/github/strichliste.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -126,13 +126,13 @@
     };
 
     waybar-taskwarrior = {
-      url = "git+https://git.ole.blue/ole/waybar-taskwarrior.rs";
+      url = "git+https://code.ole.blue/ole/waybar-taskwarrior.rs";
       # url = "path:///home/ole/github/waybar-taskwarrior.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     setup-env-rs = {
-      url = "git+https://git.ole.blue/ole/setup-env.rs";
+      url = "git+https://code.ole.blue/ole/setup-env.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -155,7 +155,7 @@
     # };
 
     auto-add-torrents = {
-      url = "git+https://git.ole.blue/ole/auto-add-torrents-python";
+      url = "git+https://code.ole.blue/ole/auto-add-torrents-python";
       # url = "path:///home/ole/github/auto-add-torrents-python";
       inputs.nixpkgs.follows = "nixpkgs";
     };

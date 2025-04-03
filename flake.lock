@@ -122,11 +122,11 @@
         "rev": "796c86c265cdb8f31a93928beb3015c09fbbda78",
         "revCount": 9,
         "type": "git",
-        "url": "https://git.ole.blue/ole/auto-add-torrents-python"
+        "url": "https://code.ole.blue/ole/auto-add-torrents-python"
       },
       "original": {
         "type": "git",
-        "url": "https://git.ole.blue/ole/auto-add-torrents-python"
+        "url": "https://code.ole.blue/ole/auto-add-torrents-python"
       }
     },
     "base16": {
@@ -1502,11 +1502,11 @@
         "rev": "72940cd5c8c112657ec580a0c17b30d16198b4b1",
         "revCount": 11,
         "type": "git",
-        "url": "https://git.ole.blue/ole/setup-env.rs"
+        "url": "https://code.ole.blue/ole/setup-env.rs"
       },
       "original": {
         "type": "git",
-        "url": "https://git.ole.blue/ole/setup-env.rs"
+        "url": "https://code.ole.blue/ole/setup-env.rs"
       }
     },
     "shell-aliases": {
@@ -1598,11 +1598,11 @@
         "rev": "0172c8e76571ecb99bacd2d0d3deffda68599d14",
         "revCount": 29,
         "type": "git",
-        "url": "https://git.ole.blue/ole/strichliste.nix"
+        "url": "https://code.ole.blue/ole/strichliste.nix"
       },
       "original": {
         "type": "git",
-        "url": "https://git.ole.blue/ole/strichliste.nix"
+        "url": "https://code.ole.blue/ole/strichliste.nix"
       }
     },
     "stylix": {
@@ -1971,11 +1971,11 @@
         "rev": "7325436792ce45c74ae1b224fae5de8fd23952cc",
         "revCount": 14,
         "type": "git",
-        "url": "https://git.ole.blue/ole/waybar-taskwarrior.rs"
+        "url": "https://code.ole.blue/ole/waybar-taskwarrior.rs"
       },
       "original": {
         "type": "git",
-        "url": "https://git.ole.blue/ole/waybar-taskwarrior.rs"
+        "url": "https://code.ole.blue/ole/waybar-taskwarrior.rs"
       }
     },
     "yazi": {

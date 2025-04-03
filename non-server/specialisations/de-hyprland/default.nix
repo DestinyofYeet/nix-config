@@ -17,6 +17,18 @@
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland
+    ];
+
+    xdgOpenUsePortal = true;
+  };
+
   home-manager.extraSpecialArgs.current-specialisation = "de-hyprland";
   home-manager.users.ole = { ... }: { imports = [ ../../modules ./modules ]; };
 }

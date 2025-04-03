@@ -14,5 +14,6 @@
     ./nushell.nix
     ./pyprland.nix
     ./cursor.nix
+    ./xdg.nix
   ];
 }
