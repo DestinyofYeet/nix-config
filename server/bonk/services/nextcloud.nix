@@ -72,7 +72,7 @@ in {
       #   license = "agpl3Only";
       # };
     } // {
-      inherit (nc4nix.nextcloud-31) user_oidc;
+      inherit (nc4nix.nextcloud-31) user_oidc phonetrack;
     };
 
   };
