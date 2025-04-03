@@ -8,7 +8,6 @@
     ./jellyfin.nix
     ./surrealdb.nix
     ./monero.nix
-    ./elasticsearch.nix
     ./uptime-kuma.nix
     ./nix-serve.nix
     ./netdata.nix
@@ -56,5 +55,7 @@
     ./nginx.nix
     ./smb.nix
     ./lldap.nix
+    ./parsedmarc.nix
+    # ./elasticsearch.nix
   ];
 }

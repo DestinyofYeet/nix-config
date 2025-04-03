@@ -1,7 +1,7 @@
-{ ... }:
-{
+{ ... }: {
   services.elasticsearch = {
-    enable = false;
-    listenAddress = "0.0.0.0";
+    enable = true;
+    listenAddress = "127.0.0.1";
+    dataDir = "/mnt/data/data/elasticsearch";
   };
 }

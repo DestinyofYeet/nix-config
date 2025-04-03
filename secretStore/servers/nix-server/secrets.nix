@@ -50,4 +50,8 @@ in {
   "lldap-user-pass.age".publicKeys = authed;
 
   "paperless-authelia-env-file.age".publicKeys = authed;
+
+  "dmarc-ole-blue-password.age".publicKeys = authed;
+
+  "maxmind-license-key.age".publicKeys = authed;
 }

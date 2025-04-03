@@ -5,6 +5,7 @@ in {
   "forgejo_env_file.age".publicKeys = authed;
 
   "authelia-hashed-email-password.age".publicKeys = authed;
+  "dmarc-hashed-email-password.age".publicKeys = authed;
 
   "mealie_env_file.age".publicKeys = authed;
 }

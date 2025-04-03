@@ -23,6 +23,8 @@ in {
 
     authelia-email-ole-blue.file = secrets
       + "/authelia-hashed-email-password.age";
+
+    dmarc-email-ole-blue.file = secrets + "/dmarc-hashed-email-password.age";
   };
 
   mailserver = {
@@ -85,6 +87,7 @@ in {
         '';
 
         aliases = [
+          "zkVJ2tnuohYj0RDYpZTh@ole.blue"
           "r5k7LrdJkUIcSnd8F79h@ole.blue"
           "HpvBfL5udRAY71pHPTTL@ole.blue"
           "fCYPExKAaBvxmXY8gL4h@ole.blue"
@@ -228,6 +231,11 @@ in {
 
       "auth@ole.blue" = {
         hashedPasswordFile = config.age.secrets.authelia-email-ole-blue.path;
+      };
+
+      "dmarc@ole.blue" = {
+        hashedPasswordFile = config.age.secrets.dmarc-email-ole-blue.path;
+        aliases = [ "dmarc@uwuwhatsthis.de" ];
       };
     };
 
