@@ -25,6 +25,8 @@ in {
       + "/authelia-hashed-email-password.age";
 
     dmarc-email-ole-blue.file = secrets + "/dmarc-hashed-email-password.age";
+
+    msmtp-email-ole-blue.file = secrets + "/msmtp-ole-blue.age";
   };
 
   mailserver = {
@@ -236,6 +238,11 @@ in {
       "dmarc@ole.blue" = {
         hashedPasswordFile = config.age.secrets.dmarc-email-ole-blue.path;
         aliases = [ "dmarc@uwuwhatsthis.de" ];
+      };
+
+      "msmtp@ole.blue" = {
+        hashedPasswordFile = config.age.secrets.msmtp-email-ole-blue.path;
+        aliases = [ "smartd@ole.blue" ];
       };
     };
 

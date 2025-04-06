@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
-let cat = "${pkgs.coreutils}/bin/cat";
+{ config, pkgs, secretStore, ... }:
+let
+  cat = "${pkgs.coreutils}/bin/cat";
+  secrets = secretStore.get-server-secrets "nix-server";
 in {
 
   age.secrets = {
@@ -7,6 +9,8 @@ in {
       ../secrets/firefly-email-credentials.age;
     email-uptime-kuma.file = ../secrets/email-uptime-kuma.age;
     zed-email-credentials = { file = ../secrets/zed-email-credentials.age; };
+
+    msmtp-ole-blue.file = secrets + "/msmtp-ole-blue.age";
   };
 
   programs.msmtp = {
@@ -29,6 +33,12 @@ in {
           "${cat} ${config.age.secrets.email-firefly-iii-credentials.path}";
         user = "firefly-iii@ole.blue";
         from = user;
+      };
+
+      smartd = {
+        passwordeval = "${cat} ${config.age.secrets.msmtp-ole-blue.path}";
+        user = "msmtp@ole.blue";
+        from = "smartd@ole.blue";
       };
 
       default = rec {

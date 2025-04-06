@@ -8,4 +8,6 @@ in {
   "dmarc-hashed-email-password.age".publicKeys = authed;
 
   "mealie_env_file.age".publicKeys = authed;
+
+  "msmtp-ole-blue.age".publicKeys = authed;
 }

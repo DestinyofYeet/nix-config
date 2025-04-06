@@ -57,5 +57,6 @@
     ./lldap.nix
     ./parsedmarc.nix
     # ./elasticsearch.nix
+    ./smartd.nix
   ];
 }

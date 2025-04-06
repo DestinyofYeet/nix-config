@@ -54,4 +54,6 @@ in {
   "dmarc-ole-blue-password.age".publicKeys = authed;
 
   "maxmind-license-key.age".publicKeys = authed;
+
+  "msmtp-ole-blue.age".publicKeys = authed;
 }
