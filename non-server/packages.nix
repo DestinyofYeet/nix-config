@@ -154,7 +154,8 @@ in {
       lua-language-server
       clang-tools
       rust-analyzer
-      nil
+      # nil
+      nixd
       bash-language-server
       trunk
       vscode-langservers-extracted
