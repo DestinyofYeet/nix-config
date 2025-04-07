@@ -61,6 +61,8 @@ in {
       # "$dmenu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
       "$dmenu" = "${config.programs.anyrun.package}/bin/anyrun";
 
+      ecosystem = { no_update_news = true; };
+
       decoration = {
         rounding = 10;
 
