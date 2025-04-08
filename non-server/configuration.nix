@@ -111,6 +111,8 @@
     wayland.enable = true;
   };
 
+  services.udisks2 = { enable = true; };
+
   environment.systemPackages = [
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
