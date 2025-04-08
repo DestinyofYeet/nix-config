@@ -1,7 +1,8 @@
 { config, pkgs, lib, modulesPath, ... }:
 let
+  externalInterface = "enp35s0";
   homeRouter = {
-    interface = "enp42s0f3u1";
+    interface = "enp42s0";
     ip = rec {
       base = "192.168.1";
       router = "${base}.1";
@@ -29,7 +30,7 @@ in {
 
     nat = {
       enable = true;
-      externalInterface = "enp37s0";
+      externalInterface = externalInterface;
       internalInterfaces =
         [ "infra" "veth" "${homeRouter.interface}" "microvm-bridge" ];
 
@@ -47,7 +48,7 @@ in {
 
     networks = {
       "10-external" = {
-        matchConfig.Name = [ "enp37s0" ];
+        matchConfig.Name = [ externalInterface ];
         networkConfig.DHCP = "yes";
         linkConfig.RequiredForOnline = "routable";
       };
