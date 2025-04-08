@@ -156,6 +156,7 @@ in {
           };
         }
         { reddit = { color = "red"; }; }
+        { anime = { color = "purple"; }; }
       ];
 
       settings = {
