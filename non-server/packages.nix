@@ -239,5 +239,6 @@ in {
       nix-search-cli
       udiskie
       hugo
+      ripgrep-all
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
