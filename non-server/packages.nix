@@ -238,5 +238,6 @@ in {
       shotcut
       nix-search-cli
       udiskie
+      hugo
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
