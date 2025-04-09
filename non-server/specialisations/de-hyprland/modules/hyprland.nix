@@ -89,9 +89,14 @@ in {
         "HYPRCURSOR_SIZE,${toString config.home.pointerCursor.size}"
       ];
 
-      exec-once = [
+      exec-once = let
+        # wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
+        # clipman = "${pkgs.clipman}/bin/clipman";
+      in [
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
+        # "${wl-paste} --type text --watch ${clipman} store --no-no-persist"
+        # "${wl-paste} --type image --watch ${clipman} store --no-no-persist"
       ] ++ (lib.optionals (lib.custom.isMain osConfig)
         [ "[workspace 2 silent] ${pkgs.vesktop}/bin/vesktop" ]);
 
