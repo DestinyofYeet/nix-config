@@ -15,5 +15,6 @@
     ./pyprland.nix
     ./cursor.nix
     ./xdg.nix
+    ./redshift.nix
   ];
 }

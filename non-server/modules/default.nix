@@ -44,6 +44,5 @@ in {
     ./zathura.nix
     ./carapace.nix
     ./nixvim.nix
-    ./redshift.nix
   ];
 }
