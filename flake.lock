@@ -809,6 +809,21 @@
         "type": "github"
       }
     },
+    "hardware": {
+      "locked": {
+        "lastModified": 1744366945,
+        "narHash": "sha256-OuLhysErPHl53BBifhesrRumJNhrlSgQDfYOTXfgIMg=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "1fe3cc2bc5d2dc9c81cb4e63d2f67c1543340df1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "helix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -1397,6 +1412,7 @@
         "auto-add-torrents": "auto-add-torrents",
         "clean-unused-files": "clean-unused-files",
         "deploy-rs": "deploy-rs",
+        "hardware": "hardware",
         "helix": "helix",
         "home-manager": "home-manager_2",
         "hyprpanel": "hyprpanel",
