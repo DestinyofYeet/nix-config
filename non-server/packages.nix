@@ -240,5 +240,6 @@ in {
       udiskie
       hugo
       ripgrep-all
+      teams-for-linux
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
