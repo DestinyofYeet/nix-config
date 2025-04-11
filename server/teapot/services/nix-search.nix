@@ -51,6 +51,10 @@ in {
           (build-scope inputs.microvm-nix.nixosModules.microvm
             "microvm.nix guest"
             "https://github.com/astro/microvm.nix/tree/master")
+
+          (build-scope inputs.nix-minecraft.nixosModules.minecraft-servers
+            "nix-minecraft"
+            "https://github.com/Infinidoge/nix-minecraft/tree/master")
         ];
       };
   };

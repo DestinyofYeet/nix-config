@@ -20,6 +20,7 @@
     ./ntfy.nix
     # ./nebula.nix # now in baseline
     ./mealie.nix
+    ./minecraft-server.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

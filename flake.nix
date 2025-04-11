@@ -176,6 +176,7 @@
     };
 
     hardware = { url = "github:NixOS/nixos-hardware"; };
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -340,6 +341,8 @@
         system = "x86_64-linux";
         modules = [
           inputs.simple-nixos-mailserver.nixosModule
+          inputs.nix-minecraft.nixosModules.minecraft-servers
+          { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }
 
           ./server/teapot
         ] ++ baseline-modules;
