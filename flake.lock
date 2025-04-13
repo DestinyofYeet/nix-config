@@ -858,6 +858,28 @@
         "type": "github"
       }
     },
+    "haumea": {
+      "inputs": {
+        "nixpkgs": [
+          "nix-joint-venture",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1685133229,
+        "narHash": "sha256-FePm/Gi9PBSNwiDFq3N+DWdfxFq0UKsVVTJS3cQPn94=",
+        "owner": "nix-community",
+        "repo": "haumea",
+        "rev": "34dd58385092a23018748b50f9b23de6266dffc2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "v0.2.2",
+        "repo": "haumea",
+        "type": "github"
+      }
+    },
     "helix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -1123,6 +1145,27 @@
       "original": {
         "owner": "Mic92",
         "repo": "nix-fast-build",
+        "type": "github"
+      }
+    },
+    "nix-joint-venture": {
+      "inputs": {
+        "haumea": "haumea",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1744570890,
+        "narHash": "sha256-FzJfYcu7MIeUcAehU7TvKIwu4qn3qoryG7nRv1sEjbg=",
+        "owner": "DestinyofYeet",
+        "repo": "nix-joint-venture",
+        "rev": "b392ee30d7761782a810dcda3209f8349f3ba3a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "nix-joint-venture",
         "type": "github"
       }
     },
@@ -1492,6 +1535,7 @@
         "microvm-nix": "microvm-nix",
         "networkNamespaces": "networkNamespaces",
         "nix-fast-build": "nix-fast-build",
+        "nix-joint-venture": "nix-joint-venture",
         "nix-minecraft": "nix-minecraft",
         "nix-topology": "nix-topology",
         "nixpkgs": "nixpkgs_2",

@@ -177,6 +177,12 @@
 
     hardware = { url = "github:NixOS/nixos-hardware"; };
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    nix-joint-venture = {
+      # url = "github:nix-joint-venture/nix-joint-venture";
+      url = "github:DestinyofYeet/nix-joint-venture";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur

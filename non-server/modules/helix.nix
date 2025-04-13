@@ -1,18 +1,4 @@
-{ pkgs, ... }:
-let
-  typst-watch-script = pkgs.writeShellScript "watch-typst.sh" ''
-    dir=$(${pkgs.mktemp}/bin/mktemp -d)
-    _=$(${pkgs.typst}/bin/typst watch "$1" "$dir/tmp.pdf" & echo $! > "$dir/pid")&
-    until [ -f "$dir/tmp.pdf" ]
-    do
-      sleep 0.5
-    done
-    pid=$(${pkgs.coreutils}/bin/cat "$dir/pid")
-    ${pkgs.zathura}/bin/zathura "$dir/tmp.pdf"
-    kill "$pid"
-    rm -fr "$dir"
-  '';
-in {
+{ pkgs, inputs, ... }: {
   programs.helix = {
     enable = true;
 
@@ -29,7 +15,8 @@ in {
       theme = "tokyonight_moon";
 
       keys.normal = {
-        space.t.y = ":sh ${typst-watch-script} %{buffer_name} 2>/dev/null &";
+        space.t.y =
+          ":sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} %{buffer_name} 2>/dev/null &";
         space.y.z = [
           ":sh rm -f /tmp/unique-file"
           ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
