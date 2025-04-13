@@ -1156,11 +1156,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744570890,
-        "narHash": "sha256-FzJfYcu7MIeUcAehU7TvKIwu4qn3qoryG7nRv1sEjbg=",
+        "lastModified": 1744586681,
+        "narHash": "sha256-Ex0UC/W7vUtoJMhmBwTHWRoXJd/MCdO/cqj/UK8Isyc=",
         "owner": "DestinyofYeet",
         "repo": "nix-joint-venture",
-        "rev": "b392ee30d7761782a810dcda3209f8349f3ba3a3",
+        "rev": "0c9a097ad4ecf6b21753c382776eeb19ebf60ef1",
         "type": "github"
       },
       "original": {
