@@ -241,5 +241,7 @@ in {
       hugo
       ripgrep-all
       teams-for-linux
+      plantuml
+      git-lfs
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
