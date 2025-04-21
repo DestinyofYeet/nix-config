@@ -56,4 +56,7 @@ in {
   "maxmind-license-key.age".publicKeys = authed;
 
   "msmtp-ole-blue.age".publicKeys = authed;
+
+  "restic-repository-configs.age".publicKeys = authed;
+  "restic-repo-configs-pw.age".publicKeys = authed;
 }

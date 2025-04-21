@@ -58,5 +58,6 @@
     ./parsedmarc.nix
     # ./elasticsearch.nix
     ./smartd.nix
+    ./backup.nix
   ];
 }
