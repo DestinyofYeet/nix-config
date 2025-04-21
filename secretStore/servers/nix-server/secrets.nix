@@ -57,6 +57,9 @@ in {
 
   "msmtp-ole-blue.age".publicKeys = authed;
 
-  "restic-repository-configs.age".publicKeys = authed;
+  "restic-repo-configs.age".publicKeys = authed;
   "restic-repo-configs-pw.age".publicKeys = authed;
+
+  "restic-repo-photos.age".publicKeys = authed;
+  "restic-repo-photos-pw.age".publicKeys = authed;
 }

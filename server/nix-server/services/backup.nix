@@ -1,23 +1,35 @@
-{ pkgs, secretStore, config, ... }:
+{ pkgs, secretStore, config, lib, ... }:
 let
   secrets = secretStore.get-server-secrets "nix-server";
 
-  default-opts = { initialize = true; };
-in {
-  age.secrets = {
-    restic-repo-configs.file = secrets + "/restic-repository-configs.age";
-    restic-repo-configs-pw.file = secrets + "/restic-repo-configs-pw.age";
+  default-opts = {
+    initialize = true;
+
+    timerConfig = {
+      OnCalendar = "00:05";
+      Persistent = true;
+    };
   };
+
+  mkRepoSecret = name: {
+    "restic-repo-${name}".file = secrets + "/restic-repo-${name}.age";
+    "restic-repo-${name}-pw".file = secrets + "/restic-repo-${name}-pw.age";
+  };
+in {
+  age.secrets = { }
+    // lib.mkMerge [ (mkRepoSecret "photos") (mkRepoSecret "configs") ];
   environment.systemPackages = with pkgs; [ restic ];
   services.restic.backups = {
     configs = default-opts // {
-      timerConfig = {
-        OnCalendar = "00:05";
-        Persistent = true;
-      };
       repositoryFile = config.age.secrets.restic-repo-configs.path;
       paths = [ "/mnt/data/configs" ];
       passwordFile = config.age.secrets.restic-repo-configs-pw.path;
+    };
+
+    photos = default-opts // {
+      repositoryFile = config.age.secrets.restic-repo-photos.path;
+      paths = [ "/mnt/data/data/photos" ];
+      passwordFile = config.age.secrets.restic-repo-photos-pw.path;
     };
   };
 }
