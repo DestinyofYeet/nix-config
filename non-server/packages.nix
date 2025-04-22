@@ -243,5 +243,6 @@ in {
       teams-for-linux
       plantuml
       git-lfs
+      feh
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
