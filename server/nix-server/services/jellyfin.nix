@@ -31,7 +31,7 @@ in {
             mkdir -p $out/share
             cp -a dist $out/share/jellyfin-web
 
-            cp ${config-json} $out/share/jellyfin-web/config.json
+            # cp ${config-json} $out/share/jellyfin-web/config.json
 
             runHook postInstall
           '';
