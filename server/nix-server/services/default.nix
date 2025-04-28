@@ -7,7 +7,7 @@
     ./qbittorrent.nix
     ./jellyfin.nix
     ./surrealdb.nix
-    ./monero.nix
+    # ./monero.nix
     ./uptime-kuma.nix
     ./nix-serve.nix
     ./netdata.nix
