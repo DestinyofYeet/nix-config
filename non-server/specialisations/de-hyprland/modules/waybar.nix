@@ -24,6 +24,7 @@
 
       # memory and temtemperature are still broken
       modules-right = [
+        "inhibitor"
         (lib.custom.mkIfLaptop osConfig "battery")
         "wireplumber"
         (lib.custom.mkIfLaptop osConfig "backlight")
@@ -165,6 +166,15 @@
           "on-click-backward" = "tz_down";
           "on-scroll-up" = "shift_up";
           "on-scroll-down" = "shift_down";
+        };
+      };
+
+      "inhibitor" = {
+        "what" = "idle";
+        "format" = "{icon}";
+        "format-icons" = {
+          "activated" = "🌝";
+          "deactivated" = "🌚";
         };
       };
     }];
