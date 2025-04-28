@@ -95,10 +95,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    mdpls-nix = {
-      url = "github:DestinyofYeet/mdpls.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # mdpls-nix = {
+    #   url = "github:DestinyofYeet/mdpls.nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";

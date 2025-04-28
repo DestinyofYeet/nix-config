@@ -11,7 +11,6 @@
       inputs.stylix.homeManagerModules.stylix
       inputs.agenix.homeManagerModules.age
       inputs.shell-aliases.homeManagerModules.default
-      inputs.anyrun.homeManagerModules.default
       inputs.nixvim.homeManagerModules.nixvim
     ];
   };

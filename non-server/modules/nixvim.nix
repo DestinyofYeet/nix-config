@@ -16,7 +16,7 @@
       desc = "Closes the terminal buffer once the command is done";
     }];
 
-    diagnostics = { virtual_text = false; };
+    diagnostic.config = { virtual_text = false; };
 
     opts = {
       shiftwidth = 2;

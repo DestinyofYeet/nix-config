@@ -196,7 +196,7 @@ in {
       colmena
       poppler
       recyclarr
-      inputs.mdpls-nix.packages.x86_64-linux.default
+      # inputs.mdpls-nix.packages.x86_64-linux.default
       playerctl
       pavucontrol
       blueman
