@@ -23,5 +23,12 @@ def "launch anki" [] {
   task spawn --immediate --label anki { ANKI_WAYLAND=1 anki }
 }
 
-icat (get-random-file /home/ole/Nextcloud/Images/nyan_cats).name;
+
+let path = (get-random-file /home/ole/Nextcloud/Images/nyan_cats).name;
+
+if 'WEZTERM_EXECUTABLE' in $env {
+  wezterm imgcat $path
+} else {
+  icat $path
+}
 

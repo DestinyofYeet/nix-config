@@ -42,6 +42,7 @@
 
       "fix-store" = "nix-store --verify --check-contents --repair";
 
+      "wicat" = "wezterm imgcat";
     };
   };
 }

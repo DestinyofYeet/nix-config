@@ -1,4 +1,12 @@
-{ ... }: {
+{ flake, lib, ... }:
+let
+  buildSSHDomains = nodes:
+    builtins.concatStringsSep "\n" (map (name: ''
+      { name = "${name}",
+       remote_address = "${nodes.${name}.hostname}",
+       username = "${nodes.${name}.profiles.system.sshUser}",
+       },'') (lib.mapAttrsToList (name: value: name) nodes));
+in {
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -22,14 +30,23 @@
       config.cursor_blink_ease_out = 'EaseOut'
 
       config.ssh_domains = {
+        ${buildSSHDomains flake.deploy.nodes}
+      }
+
+      config.mouse_bindings = {
         {
-          name = "teapot",
-          remote_address = "teapot",
-          username = "root",
+          event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+          mods = 'NONE',
+          action = act.ScrollByLine(-3),
+        },
+        {
+          event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+          mods = 'NONE',
+          action = act.ScrollByLine(3),
         },
       }
 
-      config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 300 }
+      config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 }
 
       config.keys = {
         {
@@ -37,9 +54,19 @@
           mods = 'LEADER',
           action = act.SpawnTab 'CurrentPaneDomain',
         },
+        {
+          key = ",",
+          mods = "SHIFT|CTRL",
+          action = act.MoveTabRelative(-1),
+        },
+        {
+          key = ".",
+          mods = "SHIFT|CTRL",
+          action = act.MoveTabRelative(1),
+        },
       }
 
-      for i = 1, 8 do
+      for i = 1, 9 do
         -- ctrl + space + i -> Tab
         table.insert(config.keys, {
           key = tostring(i),
