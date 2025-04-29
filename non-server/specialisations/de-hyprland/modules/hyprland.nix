@@ -4,7 +4,7 @@ let
     "$mainMod, ${toString number}, workspace, ${toString workspace}";
 
   mkMoveWorkSpaceBind = number: workspace:
-    "$mainMod SHIFT, ${toString number}, movetoworkspace, ${
+    "$mainMod SHIFT, ${toString number}, hy3:movetoworkspace, ${
       toString workspace
     }";
 
@@ -48,11 +48,7 @@ in {
     systemd.enableXdgAutostart = true;
     xwayland.enable = true;
 
-    plugins = with pkgs.hyprlandPlugins;
-      [
-        # hy3
-        hyprgrass
-      ];
+    plugins = with pkgs.hyprlandPlugins; [ hy3 hyprgrass ];
 
     settings = {
       "$mainMod" = "SUPER";
@@ -153,7 +149,7 @@ in {
 
       # debug.disable_logs = false;
 
-      # general = { layout = "hy3"; };
+      general = { layout = "hy3"; };
 
       bind = let
         # screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -m region --clipboard-only";
@@ -162,9 +158,9 @@ in {
         "$mainMod SHIFT, m, exit"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, RETURN, exec, $terminal"
-        # "$mainMod, h, hy3:makegroup, h"
-        # "$mainMod, v, hy3:makegroup, v"
-        "$mainMod SHIFT, q, killactive"
+        "$mainMod, h, hy3:makegroup, h"
+        "$mainMod, v, hy3:makegroup, v"
+        "$mainMod SHIFT, q, hy3:killactive"
         "$mainMod, d, exec, $dmenu"
         "$mainMod, l, exec, loginctl lock-session"
         "$mainMod, f, fullscreen"
@@ -172,14 +168,14 @@ in {
         "$mainMod Shift, S, exec, ${screenshot-cmd}"
         ", Print, exec, ${screenshot-cmd}"
 
-        "$mainMod SHIFT, h, movefocus, l"
-        "$mainMod SHIFT, j, movefocus, d"
-        "$mainMod SHIFT, k, movefocus, u"
-        "$mainMod SHIFT, l, movefocus, r"
-        "$mainMod, left, movefocus, l"
-        "$mainMod, down, movefocus, d"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, r"
+        "$mainMod SHIFT, h, hy3:movefocus, l"
+        "$mainMod SHIFT, j, hy3:movefocus, d"
+        "$mainMod SHIFT, k, hy3:movefocus, u"
+        "$mainMod SHIFT, l, hy3:movefocus, r"
+        "$mainMod, left, hy3:movefocus, l"
+        "$mainMod, down, hy3:movefocus, d"
+        "$mainMod, up, hy3:movefocus, u"
+        "$mainMod, down, hy3:movefocus, r"
 
         (mkWorkSpaceBind 0 10)
         (mkMoveWorkSpaceBind 0 10)
@@ -199,7 +195,7 @@ in {
       ];
 
       bindm = [
-        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:272, hy3:movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
 
