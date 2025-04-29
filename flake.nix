@@ -419,6 +419,14 @@
             buildOnTarget = true;
           };
         };
+
+        bonk = build-host "bonk" {
+          deployment = {
+            targetHost = "bonk";
+            targetUser = "root";
+            buildOnTarget = true;
+          };
+        };
       };
     };
 }
