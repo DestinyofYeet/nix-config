@@ -4,7 +4,7 @@ let
     "$mainMod, ${toString number}, workspace, ${toString workspace}";
 
   mkMoveWorkSpaceBind = number: workspace:
-    "$mainMod SHIFT, ${toString number}, hy3:movetoworkspace, ${
+    "$mainMod SHIFT, ${toString number}, movetoworkspace, ${
       toString workspace
     }";
 
@@ -53,7 +53,7 @@ in {
     settings = {
       "$mainMod" = "SUPER";
       "$fileManager" = "dolphin";
-      "$terminal" = "${lib.getBin pkgs.wezterm}";
+      "$terminal" = "${lib.getExe pkgs.wezterm}";
       # "$dmenu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
       "$dmenu" = "${config.programs.anyrun.package}/bin/anyrun";
 
