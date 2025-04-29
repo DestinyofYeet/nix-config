@@ -44,5 +44,6 @@ in {
     ./zathura.nix
     ./carapace.nix
     ./nixvim.nix
+    ./atuin.nix
   ];
 }

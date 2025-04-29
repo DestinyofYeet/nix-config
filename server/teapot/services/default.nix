@@ -19,8 +19,9 @@
     ./nix-search.nix
     ./ntfy.nix
     # ./nebula.nix # now in baseline
-    # ./mealie.nix
+    # ./mealie.nix # currently broken
     ./minecraft-server.nix
+    ./atuin.nix
   ];
 
   services.smartd.enable = lib.mkForce false;
