@@ -82,7 +82,7 @@
   services.power-profiles-daemon.enable = false;
 
   services.tlp = {
-    enable = true;
+    enable = false;
     settings = {
       DISK_IDLE_SECS_ON_BAT = 2;
       CPU_DRIVER_OPMODE_ON_AC = "active";
