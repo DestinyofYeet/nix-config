@@ -89,7 +89,6 @@ in {
         # wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
         # clipman = "${pkgs.clipman}/bin/clipman";
       in [
-        "${pkgs.waybar}/bin/waybar"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         # "${wl-paste} --type text --watch ${clipman} store --no-no-persist"
         # "${wl-paste} --type image --watch ${clipman} store --no-no-persist"
@@ -128,7 +127,7 @@ in {
         "${monitors_laptop.fsim.table-right.right}, disable"
 
         # "${monitors_laptop.fsim.table-left.right}, preferred, auto, 1"
-        "${monitors_laptop.fsim.table-left.right}, disable"
+        # "${monitors_laptop.fsim.table-left.right}, disable"
 
         # extends current workspace to other screens
         ", preferred, auto, 1"
