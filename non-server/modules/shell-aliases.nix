@@ -1,5 +1,4 @@
-{ lib, pkgs, ... }:
-{
+{ lib, pkgs, ... }: {
   programs.shell-aliases = {
     enable = true;
     aliases = {
@@ -25,26 +24,23 @@
 
       "l" = "ls";
 
-      "yz" = {
-        default = "${pkgs.yazi}/bin/yazi";
-      };
+      "yz" = { default = "${pkgs.yazi}/bin/yazi"; };
 
-      "lg" = {
-        default = "${pkgs.lazygit}/bin/lazygit";
-      };
+      "lg" = { default = "${pkgs.lazygit}/bin/lazygit"; };
 
-      "tt" = {
-        default = "${pkgs.taskwarrior-tui}/bin/taskwarrior-tui";
-      };
+      "tt" = { default = "${pkgs.taskwarrior-tui}/bin/taskwarrior-tui"; };
 
       "kssh" = "kitten ssh";
       "icat" = "kitten icat";
 
       "generate-email-alias" = {
-        default = "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
+        default =
+          "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
 
         # bash = null;
       };
+
+      "fix-store" = "nix-store --verify --check-contents --repair";
 
     };
   };

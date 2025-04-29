@@ -1,11 +1,14 @@
-{ config, secretStore, ... }:
+{ config, secretStore, stable-pkgs, ... }:
 let secrets = secretStore.get-server-secrets "teapot";
 in {
 
   age.secrets = { mealie-env-file.file = secrets + "/mealie_env_file.age"; };
 
+  # nixpkgs.config.allowBroken = true;
+
   services.mealie = {
     enable = true;
+    # package = stable-pkgs.mealie;
     settings = {
       ALLOW_SIGNUP = "false";
       BASE_URL = "https://recipes.ole.blue";

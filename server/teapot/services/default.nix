@@ -19,7 +19,7 @@
     ./nix-search.nix
     ./ntfy.nix
     # ./nebula.nix # now in baseline
-    ./mealie.nix
+    # ./mealie.nix
     ./minecraft-server.nix
   ];
 
