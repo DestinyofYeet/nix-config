@@ -33,5 +33,6 @@
     iperf
     smartmontools
     dmidecode
+    wezterm
   ];
 }

@@ -53,7 +53,7 @@ in {
     settings = {
       "$mainMod" = "SUPER";
       "$fileManager" = "dolphin";
-      "$terminal" = "${pkgs.kitty}/bin/kitty";
+      "$terminal" = "${lib.getBin pkgs.wezterm}";
       # "$dmenu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
       "$dmenu" = "${config.programs.anyrun.package}/bin/anyrun";
 

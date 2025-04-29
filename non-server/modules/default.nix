@@ -45,5 +45,6 @@ in {
     ./carapace.nix
     ./nixvim.nix
     ./atuin.nix
+    ./wezterm.nix
   ];
 }
