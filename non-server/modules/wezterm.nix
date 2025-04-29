@@ -14,56 +14,58 @@ in {
       local config = wezterm.config_builder()
       local act = wezterm.action
 
-      config.font = wezterm.font "Comic Code Ligatures"
-      config.color_scheme = "Tokyo Night Moon"
-      config.window_background_opacity = 0.6
+      config = {
+        font = wezterm.font "Comic Code Ligatures",
+        color_scheme = "Tokyo Night Moon",
+        window_background_opacity = 0.6,
 
-      config.window_padding = {
-        left = 0,
-        right = 0,
-        bottom = 0,
-        top = 0,
-      }
-
-      config.animation_fps = 30
-      config.default_cursor_style = 'BlinkingBlock'
-      config.cursor_blink_ease_in = 'EaseIn'
-      config.cursor_blink_ease_out = 'EaseOut'
-
-      config.ssh_domains = {
-        ${buildSSHDomains flake.deploy.nodes}
-      }
-
-      config.mouse_bindings = {
-        {
-          event = { Down = { streak = 1, button = { WheelUp = 1 } } },
-          mods = 'NONE',
-          action = act.ScrollByLine(-3),
+        window_padding = {
+          left = 0,
+          right = 0,
+          bottom = 0,
+          top = 0,
         },
-        {
-          event = { Down = { streak = 1, button = { WheelDown = 1 } } },
-          mods = 'NONE',
-          action = act.ScrollByLine(3),
-        },
-      }
 
-      config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 }
+        animation_fps = 30,
+        default_cursor_style = 'BlinkingBlock',
+        cursor_blink_ease_in = 'EaseIn',
+        cursor_blink_ease_out = 'EaseOut',
 
-      config.keys = {
-        {
-          key = 'c',
-          mods = 'LEADER',
-          action = act.SpawnTab 'CurrentPaneDomain',
+        ssh_domains = {
+          ${buildSSHDomains flake.deploy.nodes}
         },
-        {
-          key = ",",
-          mods = "SHIFT|CTRL",
-          action = act.MoveTabRelative(-1),
+
+        mouse_bindings = {
+          {
+            event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+            mods = 'NONE',
+            action = act.ScrollByLine(-3),
+          },
+          {
+            event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+            mods = 'NONE',
+            action = act.ScrollByLine(3),
+          },
         },
-        {
-          key = ".",
-          mods = "SHIFT|CTRL",
-          action = act.MoveTabRelative(1),
+
+        leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 },
+
+        keys = {
+          {
+            key = 'c',
+            mods = 'LEADER',
+            action = act.SpawnTab 'CurrentPaneDomain',
+          },
+          {
+            key = ",",
+            mods = "SHIFT|CTRL",
+            action = act.MoveTabRelative(-1),
+          },
+          {
+            key = ".",
+            mods = "SHIFT|CTRL",
+            action = act.MoveTabRelative(1),
+          },
         },
       }
 
