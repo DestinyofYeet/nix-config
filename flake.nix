@@ -183,6 +183,11 @@
       # url = "github:DestinyofYeet/nix-joint-venture";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nc4nix = {
+      url = "github:helsinki-systems/nc4nix";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur

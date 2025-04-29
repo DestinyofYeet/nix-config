@@ -1,14 +1,7 @@
-{ secretStore, config, pkgs, ... }:
+{ inputs, secretStore, config, pkgs, ... }:
 let
 
-  nc4nix = let
-    src = pkgs.fetchFromGitHub {
-      owner = "helsinki-systems";
-      repo = "nc4nix";
-      rev = "89b29ff991dfaf72240a12963502d9efeb4e69f8";
-      hash = "sha256-QzYHmAlhzBag5UDW39bn8kEWbdB7Ala69Dcrq/Xhu+M=";
-    };
-  in import "${src}/default.nix" {
+  nc4nix = import "${inputs.nc4nix}/default.nix" {
     inherit (pkgs) lib recurseIntoAttrs fetchurl runCommand callPackage;
   };
 in {

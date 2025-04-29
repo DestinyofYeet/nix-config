@@ -1086,6 +1086,22 @@
         "type": "github"
       }
     },
+    "nc4nix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1743386677,
+        "narHash": "sha256-QzYHmAlhzBag5UDW39bn8kEWbdB7Ala69Dcrq/Xhu+M=",
+        "owner": "helsinki-systems",
+        "repo": "nc4nix",
+        "rev": "89b29ff991dfaf72240a12963502d9efeb4e69f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "helsinki-systems",
+        "repo": "nc4nix",
+        "type": "github"
+      }
+    },
     "networkNamespaces": {
       "inputs": {
         "nixpkgs": [
@@ -1512,6 +1528,7 @@
         "lanzaboote": "lanzaboote",
         "lemonake": "lemonake",
         "microvm-nix": "microvm-nix",
+        "nc4nix": "nc4nix",
         "networkNamespaces": "networkNamespaces",
         "nix-fast-build": "nix-fast-build",
         "nix-joint-venture": "nix-joint-venture",
