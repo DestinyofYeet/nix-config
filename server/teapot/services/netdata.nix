@@ -1,5 +1,11 @@
-{ custom, ... }: {
-  services.netdata.enable = true;
+{ custom, pkgs, lib, ... }: {
+
+  nixpkgs.config.allowUnfree = true;
+
+  services.netdata = {
+    enable = true;
+    package = pkgs.netdata.override { withCloudUi = true; };
+  };
 
   services.nginx.virtualHosts."netdata.ole.blue" = {
     enableACME = true;

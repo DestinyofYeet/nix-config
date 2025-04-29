@@ -1,1 +1,7 @@
-{ ... }: { services.netdata = { enable = true; }; }
+{ pkgs, ... }: {
+
+  services.netdata = {
+    enable = true;
+    package = pkgs.netdata.override { withCloudUi = true; };
+  };
+}
