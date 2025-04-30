@@ -54,7 +54,7 @@
         }
         {
           monitor = "";
-          text = "cmd[update:3600000] date +'%A %d.%b %Y'";
+          text = "cmd[update:3600000] date +'%A %d. %b %Y'";
           font_size = 20;
           color = "rgb(b6c4ff)";
 
