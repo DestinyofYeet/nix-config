@@ -89,6 +89,7 @@ in {
         '';
 
         aliases = [
+          "nG1TULuBBQn7sIqAXFv@ole.blue"
           "a3RS62ERLYMwAJGbCWqu@ole.blue"
           "A0M0adWle4WGr2TfXRfA@ole.blue"
           "txMuOMD3DXwXoZgNW0d1@ole.blue"
