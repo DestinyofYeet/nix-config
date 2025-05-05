@@ -25,6 +25,7 @@ in {
     locations."/" = {
       proxyPass =
         "http://127.0.0.1:${toString config.services.kavita.settings.Port}";
+      proxyWebsockets = true;
     };
   } // lib.custom.settings.nix-server.nginx-local-ssl;
 }
