@@ -60,7 +60,7 @@ in {
         useSsl = true;
         # useSsl = false;
         # port = 3900;
-        autocreate = false;
+        verify_bucket_exists = false;
         region = "eu-de-south-1";
       };
     };

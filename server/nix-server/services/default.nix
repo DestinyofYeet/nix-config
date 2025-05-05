@@ -59,5 +59,6 @@
     # ./elasticsearch.nix
     ./smartd.nix
     ./backup.nix
+    ./kavita.nix
   ];
 }
