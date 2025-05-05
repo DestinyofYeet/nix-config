@@ -122,6 +122,12 @@ in {
           user = "forgejo";
           ident = "ssh-key-gitea";
         }
+        {
+          host = "code.ole.blue";
+          hostname = custom.nebula.yeet.hosts.teapot.ip;
+          user = "forgejo";
+          ident = "ssh-key-gitea";
+        }
       ];
     };
   };
