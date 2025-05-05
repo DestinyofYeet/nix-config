@@ -244,5 +244,6 @@ in {
       plantuml
       git-lfs
       feh
+      caligula
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
