@@ -1,1 +1,3 @@
-{ ... }: { imports = [ ./services ./system.nix ./hardware.nix ]; }
+{ ... }: {
+  imports = [ ../../baseline ./services ./system.nix ./hardware.nix ];
+}

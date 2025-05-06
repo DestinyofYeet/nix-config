@@ -21,6 +21,8 @@ rec {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEqmDnGXPNc+Z1DRHVRRqik2WpeGjVoSOdKi1baXafH root@teapot";
     bonk =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILDH4DwddDZwmIIDsP5kO+FkcrfMKPc9KbAzet5jxhmy root@bonk";
+    nixie =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIInWaeHa3NaK6z9FIwFDCmWE8ofAlRl9K/k9YJ3lgq7p root@nixos";
   };
 
   root = {

@@ -52,4 +52,12 @@ in {
     privKeyFile = getPrivKey "bonk";
     publicKeyFile = getPublicKey "bonk";
   };
+
+  "nixie" = {
+    ip = "172.27.255.8";
+    groups = [ "end-user" "server" ];
+
+    privKeyFile = getPrivKey "nixie";
+    publicKeyFile = getPublicKey "nixie";
+  };
 }
