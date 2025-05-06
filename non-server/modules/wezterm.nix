@@ -58,12 +58,12 @@ in {
           },
           {
             key = ",",
-            mods = "SHIFT|CTRL",
+            mods = "LEADER",
             action = act.MoveTabRelative(-1),
           },
           {
             key = ".",
-            mods = "SHIFT|CTRL",
+            mods = "LEADER",
             action = act.MoveTabRelative(1),
           },
         },
