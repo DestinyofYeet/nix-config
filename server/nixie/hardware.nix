@@ -30,5 +30,7 @@
     generic-extlinux-compatible.enable = true;
   };
 
+  hardware.raspberry-pi."4".i2c1.enable = true;
+
   networking.hostName = "nixie";
 }

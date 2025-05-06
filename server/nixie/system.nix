@@ -1,5 +1,5 @@
 { ... }: {
-  disabledModules = [ "profiles/base.nix" ];
+  # disabledModules = [ "profiles/base.nix" ];
 
   time.timeZone = "Europe/Berlin";
 

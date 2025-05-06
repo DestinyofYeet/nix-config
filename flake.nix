@@ -386,10 +386,11 @@
         system = "aarch64-linux";
         modules = [
           inputs.argon40-nix.nixosModules.default
+          inputs.hardware.nixosModules.raspberry-pi-4
 
           ./server/nixie
-        ];
-        # specialArgs = defaultSpecialArgs;
+        ] ++ baseline-modules;
+        specialArgs = defaultSpecialArgs;
       };
 
       topology.x86_64-linux = import inputs.nix-topology {

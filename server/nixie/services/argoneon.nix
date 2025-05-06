@@ -13,5 +13,4 @@
 
     eon.enable = true;
   };
-
 }

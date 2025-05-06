@@ -55,6 +55,9 @@ in {
           (build-scope inputs.nix-minecraft.nixosModules.minecraft-servers
             "nix-minecraft"
             "https://github.com/Infinidoge/nix-minecraft/tree/master")
+
+          (build-scope inputs.hardware.nixosModules.raspberry-pi-4 "HW: RP 4"
+            "https://github.com/NixOS/nixos-hardware/tree/master")
         ];
       };
   };
