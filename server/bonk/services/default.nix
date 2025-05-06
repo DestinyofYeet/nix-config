@@ -6,6 +6,7 @@
     ./openssh.nix
     ./authelia.nix
     ./netdata.nix
+    ./zabbix.nix
   ];
 
   services.smartd.enable = lib.mkForce false;
