@@ -188,6 +188,11 @@
       url = "github:helsinki-systems/nc4nix";
       flake = false;
     };
+
+    argon40-nix = {
+      url = "github:guusvanmeerveld/argon40-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -311,6 +316,15 @@
               self.nixosConfigurations.bonk;
           };
         };
+
+        nixie = {
+          hostname = "nixie";
+          profiles.system = {
+            sshUser = "root";
+            path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos
+              self.nixosConfigurations.nixie;
+          };
+        };
       };
 
       # This is highly advised, and will prevent many possible mistakes
@@ -366,6 +380,16 @@
         modules = [ ./server/bonk ] ++ baseline-modules;
 
         specialArgs = defaultSpecialArgs;
+      };
+
+      nixosConfigurations.nixie = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          inputs.argon40-nix.nixosModules.default
+
+          ./server/nixie
+        ];
+        # specialArgs = defaultSpecialArgs;
       };
 
       topology.x86_64-linux = import inputs.nix-topology {

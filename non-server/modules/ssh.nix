@@ -32,6 +32,7 @@ in {
     "ssh-key-fsim-pedro"
     "ssh-key-vps-teapot"
     "ssh-key-gitea"
+    "ssh-key-nixie"
   ];
 
   home.file = {
@@ -127,6 +128,12 @@ in {
           hostname = custom.nebula.yeet.hosts.teapot.ip;
           user = "forgejo";
           ident = "ssh-key-gitea";
+        }
+        {
+          host = "nixie";
+          hostname = "192.168.0.252";
+          user = "root";
+          ident = "ssh-key-nixie";
         }
       ];
     };
