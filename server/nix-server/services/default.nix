@@ -60,5 +60,6 @@
     ./smartd.nix
     ./backup.nix
     ./kavita.nix
+    ./zabbix.nix
   ];
 }
