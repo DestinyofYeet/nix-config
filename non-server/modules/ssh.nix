@@ -131,7 +131,7 @@ in {
         }
         {
           host = "nixie";
-          hostname = "192.168.0.252";
+          hostname = custom.nebula.yeet.hosts.nixie.ip;
           user = "root";
           ident = "ssh-key-nixie";
         }
