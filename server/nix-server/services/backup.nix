@@ -19,6 +19,7 @@ in {
   age.secrets = { }
     // lib.mkMerge [ (mkRepoSecret "photos") (mkRepoSecret "configs") ];
   environment.systemPackages = with pkgs; [ restic ];
+
   services.restic.backups = {
     configs = default-opts // {
       repositoryFile = config.age.secrets.restic-repo-configs.path;
