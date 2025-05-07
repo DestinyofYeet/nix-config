@@ -1,1 +1,1 @@
-{ pkgs, ... }: { environment.systemPackages = with pkgs; [ zfs ]; }
+{ pkgs, ... }: { environment.systemPackages = with pkgs; [ zfs hdparm ]; }
