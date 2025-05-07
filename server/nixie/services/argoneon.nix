@@ -5,7 +5,7 @@
 
       settings = {
         oled = {
-          screenList = [ "temp" "ip" ];
+          screenList = [ "ip" ];
           switchDuration = 30;
         };
       };

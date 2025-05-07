@@ -1,1 +1,7 @@
-{ ... }: { imports = [ ./openssh.nix ./argoneon.nix ./smartd.nix ]; }
+{ ... }: {
+  imports = [
+    ./openssh.nix
+    # ./argoneon.nix
+    ./smartd.nix
+  ];
+}
