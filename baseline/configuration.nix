@@ -24,6 +24,8 @@
   #   '';
   # };
 
+  nix.package = pkgs.lix;
+
   programs.nh = {
     enable = true;
     clean = {
@@ -35,9 +37,9 @@
 
   boot.tmp.cleanOnBoot = true;
 
-  nix.extraOptions = ''
-    download-buffer-size = 500000000
-  '';
+  # nix.extraOptions = ''
+  #   download-buffer-size = 500000000
+  # '';
 
   # match nix-channels (nix-shell) with nix flake input
   nix.nixPath = [
