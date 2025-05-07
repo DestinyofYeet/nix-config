@@ -44,7 +44,7 @@
 
       "wicat" = "wezterm imgcat";
       "wssh" = "wezterm ssh";
-      "wconnect" = "wezterm connnect";
+      "wconnect" = "wezterm connect";
     };
   };
 }
