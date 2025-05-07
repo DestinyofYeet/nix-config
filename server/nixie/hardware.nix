@@ -33,4 +33,7 @@
   hardware.raspberry-pi."4".i2c1.enable = true;
 
   networking.hostName = "nixie";
+  networking.hostId = "c03c0e23";
+
+  boot.supportedFilesystems = [ "zfs" ];
 }

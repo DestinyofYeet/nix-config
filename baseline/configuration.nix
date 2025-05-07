@@ -49,5 +49,5 @@
   ];
   environment.etc."channels/nixpkgs".source = inputs.nixpkgs.outPath;
 
-  services.smartd.enable = true;
+  services.smartd.enable = lib.mkDefault true;
 }
