@@ -245,5 +245,7 @@ in {
       git-lfs
       feh
       caligula
+      presenterm
+      python313Packages.weasyprint
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
