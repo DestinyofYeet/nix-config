@@ -58,6 +58,8 @@ in {
 
           (build-scope inputs.hardware.nixosModules.raspberry-pi-4 "HW: RP 4"
             "https://github.com/NixOS/nixos-hardware/tree/master")
+          (build-scope inputs.hardware.nixosModules.raspberry-pi-3 "HW: RP 3"
+            "https://github.com/NixOS/nixos-hardware/tree/master")
           (build-scope inputs.argon40-nix.nixosModules.default "Argon 40"
             "https://github.com/Guusvanmeerveld/argon40-nix/tree/master")
         ];
