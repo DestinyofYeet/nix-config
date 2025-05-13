@@ -193,6 +193,12 @@
       url = "github:guusvanmeerveld/argon40-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lix = {
+      url =
+        "https://git.lix.systems/lix-project/nixos-module/archive/release-2.93.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -210,6 +216,7 @@
       custom = import ./custom { inherit lib; };
 
       baseline-modules = [
+        inputs.lix.nixosModules.default
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         inputs.nix-topology.nixosModules.default
