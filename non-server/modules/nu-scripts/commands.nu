@@ -11,8 +11,7 @@ def get-random-file [path: string] {
 }
 
 def restart-waybar [] {
-  pkill waybar
-  task spawn { waybar }
+  systemctl --user restart waybar
 }
 
 def "launch obsidian" [] {
