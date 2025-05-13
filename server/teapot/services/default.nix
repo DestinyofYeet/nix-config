@@ -9,7 +9,7 @@
     ./mailserver.nix
     ./conduit.nix
     # ./coturn.nix
-    ./hydra.nix
+    # ./hydra.nix
     ./nix-serve.nix
     # ./taskchampion-server.nix
     ./vpn.nix
