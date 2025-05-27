@@ -37,6 +37,7 @@ let
           "desc:Philips Consumer Electronics Company PHL 240B9 AU12220000842";
       };
     };
+    cc_raum = { tv = "desc:WolfVision GmbH Cynap"; };
   };
 in {
   wayland.windowManager.hyprland = {
@@ -121,6 +122,7 @@ in {
 
       monitor = [ ] ++ (lib.optionals (lib.custom.isLaptop osConfig) [
         "${monitors_laptop.builtin}, 1920x1200@60, 0x0, 1"
+        "${monitors_laptop.cc_raum.tv}, 1920x1080@60hz, 1920x0, 1"
 
         # fsim
         # "${monitors_laptop.fsim.table-right.left}, preferred, auto, 1"
