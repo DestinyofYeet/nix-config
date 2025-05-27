@@ -234,7 +234,7 @@
           nixpkgs.overlays = [
             nur.overlays.default
             inputs.hyprpanel.overlay
-            # inputs.helix.overlays.default
+            inputs.helix.overlays.default
             inputs.yazi.overlays.default
           ];
         }
