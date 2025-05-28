@@ -34,7 +34,7 @@ in {
       }
     ] ++ lib.optionals (lib.custom.isMain osConfig) [{
       path = git-config-other;
-      condition = "gitdir/i:/drives/programming-Stuff";
+      condition = "gitdir/i:/drives/programming-Stuff/";
     }];
     extraConfig = lib.mkMerge [
       {
