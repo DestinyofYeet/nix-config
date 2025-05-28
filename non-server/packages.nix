@@ -31,7 +31,7 @@ in {
 
   nixpkgs = {
     config = {
-      permittedInsecurePackages = [ "electron-31.7.7" ];
+      permittedInsecurePackages = [ "electron-31.7.7" "ventoy-1.1.05" ];
 
       allowUnfree = true;
       nvidia.acceptLicense = true;
