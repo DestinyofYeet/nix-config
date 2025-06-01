@@ -64,4 +64,6 @@ in {
   "restic-repo-photos-pw.age".publicKeys = authed;
 
   "kavita-tokenkey.age".publicKeys = authed;
+
+  "photoprism-admin.age".publicKeys = authed;
 }

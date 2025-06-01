@@ -61,5 +61,6 @@
     ./backup.nix
     ./kavita.nix
     ./zabbix.nix
+    ./photoprism.nix
   ];
 }
