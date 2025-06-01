@@ -1,14 +1,9 @@
-{ ... }:
-{
+{ ... }: {
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
     enableNushellIntegration = true;
 
-    settings = {
-      manager = {
-        show_hidden = true;
-      };
-    };
+    settings = { mgr = { show_hidden = true; }; };
   };
 }
