@@ -62,6 +62,9 @@ in {
             "https://github.com/NixOS/nixos-hardware/tree/master")
           (build-scope inputs.argon40-nix.nixosModules.default "Argon 40"
             "https://github.com/Guusvanmeerveld/argon40-nix/tree/master")
+
+          (build-scope inputs.nix-flatpak.nixosModules.nix-flatpak "nix-flatpak"
+            "https://github.com/gmodena/nix-flatpak/tree/master")
         ];
       };
   };
