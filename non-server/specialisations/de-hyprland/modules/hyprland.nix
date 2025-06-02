@@ -126,7 +126,7 @@ in {
 
         # fsim
         # "${monitors_laptop.fsim.table-right.left}, preferred, auto, 1"
-        "${monitors_laptop.fsim.table-right.right}, disable"
+        # "${monitors_laptop.fsim.table-right.right}, disable"
 
         # "${monitors_laptop.fsim.table-left.right}, preferred, auto, 1"
         # "${monitors_laptop.fsim.table-left.right}, disable"
