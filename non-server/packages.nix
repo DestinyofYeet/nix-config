@@ -92,6 +92,20 @@ in {
 
   programs.wshowkeys = { enable = true; };
 
+  services.flatpak = {
+    enable = true;
+    remotes = [{
+      name = "flathub";
+      location = "https://flathub.org/repo/flathub.flatpakrepo";
+    }];
+
+    packages = [
+      "org.signal.Signal"
+      "com.github.flxzt.rnote"
+      "com.github.tchx84.Flatseal"
+    ];
+  };
+
   environment.systemPackages = with pkgs;
     [
       neovim
@@ -163,7 +177,7 @@ in {
       tree
       mutt
       whois
-      rnote
+      # rnote
       maliit-keyboard
       thunderbird
       d2

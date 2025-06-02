@@ -7,7 +7,6 @@
   networking.extraHosts = ''
     192.168.1.1 nix-server.infra.wg
   '';
-  services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [
     vulkan-tools

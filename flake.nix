@@ -199,6 +199,8 @@
         "https://git.lix.systems/lix-project/nixos-module/archive/release-2.93.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -238,6 +240,8 @@
             inputs.yazi.overlays.default
           ];
         }
+
+        inputs.nix-flatpak.nixosModules.nix-flatpak
 
         nur.modules.nixos.default
         inputs.lanzaboote.nixosModules.lanzaboote
