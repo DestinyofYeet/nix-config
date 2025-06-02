@@ -100,9 +100,21 @@ in {
     }];
 
     packages = [
-      "org.signal.Signal"
-      "com.github.flxzt.rnote"
-      "com.github.tchx84.Flatseal"
+      { # signal
+        flatpakref =
+          "https://dl.flathub.org/repo/appstream/org.signal.Signal.flatpakref";
+        sha256 = "06hi4fpqdq8qkn1bdilsy5h04sg69f25y6l0dj5mcrrxcvhgh5jf";
+      }
+      { # rnote
+        flatpakref =
+          "https://dl.flathub.org/repo/appstream/com.github.flxzt.rnote.flatpakref";
+        sha256 = "0askvqc9i9rnd924gij8d4q5wpdih8c90vqh718sqd94zkv0p5k4";
+      }
+      { # flatseal
+        flatpakref =
+          "https://dl.flathub.org/repo/appstream/com.github.tchx84.Flatseal.flatpakref";
+        sha256 = "00kvi432gdrhyyhz34vs00398c77lzji1qgvchfrs1kxxp84bbbi";
+      }
     ];
   };
 
