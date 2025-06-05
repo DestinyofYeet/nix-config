@@ -131,4 +131,6 @@
   #
   #
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  services.libinput.enable = true;
 }
