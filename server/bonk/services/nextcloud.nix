@@ -1,4 +1,4 @@
-{ inputs, secretStore, config, pkgs, ... }:
+{ inputs, secretStore, config, pkgs, lib, ... }:
 let
 
   nc4nix = import "${inputs.nc4nix}/default.nix" {
@@ -12,6 +12,30 @@ in {
       file = secrets + "/nextcloud-root-pw.age";
       owner = "nextcloud";
       group = "nextcloud";
+    };
+  };
+
+  services.collabora-online = {
+    enable = true;
+    port = 9980;
+    settings = {
+      ssl = {
+        enable = false;
+        termination = true;
+      };
+
+      net = {
+        proto = "IPv4";
+        listen = "loopback";
+        post_allow.host = [ "127\\.0\\.0\\.1" ];
+      };
+
+      storage.wopi = {
+        "@allow" = true;
+        host = [ "cloud.ole.blue" ];
+      };
+
+      server_name = "collabora.ole.blue";
     };
   };
 
@@ -55,7 +79,7 @@ in {
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps)
 
-        contacts calendar tasks;
+        contacts calendar tasks richdocuments;
 
       # user_oidc = pkgs.fetchNextcloudApp {
       #   appVersion = "7.0.0";
@@ -67,12 +91,69 @@ in {
     } // {
       inherit (nc4nix.nextcloud-31) user_oidc phonetrack deck;
     };
-
   };
 
-  services.nginx.virtualHosts."${config.services.nextcloud.hostName}" = {
-    enableACME = true;
-    forceSSL = true;
+  systemd.services.nextcloud-config-collabora = let
+    inherit (config.services.nextcloud) occ;
+
+    wopi_url =
+      "http://localhost:${toString config.services.collabora-online.port}";
+    public_wopi_url = "https://collabora.ole.blue";
+    wopi_allowlist = lib.concatStringsSep "," [ "127.0.0.1" "::1" ];
+  in {
+    wantedBy = [ "multi-user.target" ];
+    after = [ "nextcloud-setup.service" "coolwsd.service" ];
+    requires = [ "coolwsd.service" ];
+    script = ''
+      ${occ}/bin/nextcloud-occ config:app:set richdocuments wopi_url --value ${
+        lib.escapeShellArg wopi_url
+      }
+      ${occ}/bin/nextcloud-occ config:app:set richdocuments public_wopi_url --value ${
+        lib.escapeShellArg public_wopi_url
+      }
+      ${occ}/bin/nextcloud-occ config:app:set richdocuments wopi_allowlist --value ${
+        lib.escapeShellArg wopi_allowlist
+      }
+      ${occ}/bin/nextcloud-occ richdocuments:setup
+    '';
+    serviceConfig = { Type = "oneshot"; };
+  };
+
+  networking.hosts = {
+    "127.0.0.1" = [
+      config.services.nextcloud.hostName
+      config.services.collabora-online.settings.server_name
+    ];
+    # "::1" = ["nextcloud.example.com" "collabora.example.com"];
+  };
+
+  services.nginx.virtualHosts = {
+    "${config.services.nextcloud.hostName}" = {
+      enableACME = true;
+      forceSSL = true;
+    };
+
+    "${config.services.collabora-online.settings.server_name}" = {
+      enableACME = true;
+      forceSSL = true;
+
+      locations."/" = {
+        proxyPass =
+          "http://localhost:${toString config.services.collabora-online.port}";
+        proxyWebsockets = true;
+
+        extraConfig = ''
+            # Headers for WebSocket support
+          proxy_set_header   Host $host;
+          proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header   X-Forwarded-Host $host;
+          proxy_set_header   X-Forwarded-Proto $scheme;
+          proxy_set_header   Upgrade $http_upgrade;
+          proxy_set_header   Connection $http_connection;
+
+        '';
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
