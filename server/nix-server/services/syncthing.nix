@@ -13,6 +13,18 @@
           devices = [ "handy" ];
         };
 
+        whatsapp = {
+          path = "${
+              lib.custom.settings.${config.networking.hostName}.paths.data
+            }/photos/handy/whatsapp_media";
+          label = "WhatsApp Media";
+          id = "whatsapp_media";
+
+          devices = [ "handy" ];
+
+          ignores = [ "Private/" "Sent/" ];
+        };
+
         default = {
           path = "${
               lib.custom.settings.${config.networking.hostName}.paths.data
