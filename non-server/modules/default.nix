@@ -46,5 +46,6 @@ in {
     ./nixvim.nix
     ./atuin.nix
     ./wezterm.nix
+    # ./obs.nix
   ];
 }
