@@ -42,6 +42,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
+  security.pam.loginLimits = [{
+    domain = "@users";
+    item = "rtprio";
+    type = "-";
+    value = 1;
+  }];
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
 
