@@ -161,4 +161,6 @@
   };
 
   services.logind.powerKey = "suspend";
+
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
 }
