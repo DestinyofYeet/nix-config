@@ -63,7 +63,7 @@ in rec {
 
     # screenshot-cmd = "${pkgs.hyprshot}/bin/hyprshot -m window -z -m region -o /tmp";
     screenshot-cmd = ''
-      ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -w 0)" - | ${pkgs.satty}/bin/satty -f - --early-exit --fullscreen -o /tmp/screenshot.png'';
+      ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -w 0)" - | ${pkgs.satty}/bin/satty -f - --early-exit --fullscreen -o /tmp/screenshot.png --copy-command ${pkgs.wl-clipboard}/bin/wl-copy'';
 
     nix-server = {
       secrets = import "${git-secrets}/secrets.nix" { };
