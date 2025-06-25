@@ -10,7 +10,13 @@
     thunderbird = {
       enable = true;
       profiles = { "default" = { isDefault = true; }; };
+
+      settings = {
+        # default use body-text instead of paragraph when writing an e-mail
+        "mail.compose.default_to_paragraph" = false;
+      };
     };
+
   };
 
   accounts.email.accounts = {
