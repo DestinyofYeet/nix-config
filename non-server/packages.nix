@@ -269,5 +269,6 @@ in {
       presenterm
       python313Packages.weasyprint
       clippy # rust check
+      serpl
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }

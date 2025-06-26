@@ -28,6 +28,14 @@
           ":redraw"
         ];
         space.y.y = ":clipboard-yank";
+        ret = {
+          t = [
+            ":write-all"
+            ":insert-output ${pkgs.serpl}/bin/serpl >/dev/tty"
+            ":redraw"
+            ":reload-all"
+          ];
+        };
       };
     };
 
