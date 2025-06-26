@@ -268,5 +268,6 @@ in {
       caligula
       presenterm
       python313Packages.weasyprint
+      clippy # rust check
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }

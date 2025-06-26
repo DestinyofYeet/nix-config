@@ -62,6 +62,7 @@
           config = {
             formatting.command = [ "${pkgs.rustfmt}/bin/rustfmt" ];
             cargo = { allFeatures = true; };
+            check.command = "clippy";
           };
         };
       };
