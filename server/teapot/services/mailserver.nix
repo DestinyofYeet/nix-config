@@ -89,6 +89,7 @@ in {
         '';
 
         aliases = [
+          "paypal@ole.blue"
           "KzEDlTbbJi0vJmCkUXKm@ole.blue"
           "unikat@ole.blue"
           "nG1TULuBBQn7sIqAXFv@ole.blue"
