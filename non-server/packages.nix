@@ -270,5 +270,6 @@ in {
       python313Packages.weasyprint
       clippy # rust check
       serpl
+      cgdb
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
