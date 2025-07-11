@@ -9,7 +9,12 @@
   programs = {
     thunderbird = {
       enable = true;
-      profiles = { "default" = { isDefault = true; }; };
+      profiles = {
+        "default" = {
+          isDefault = true;
+          accountsOrder = [ "oth_stud_email" "fachschaft_im" "ole_blue" ];
+        };
+      };
 
       settings = {
         # default use body-text instead of paragraph when writing an e-mail
@@ -19,10 +24,12 @@
 
   };
 
-  accounts.email.accounts = {
-    oth-stud-email = {
+  accounts.email.accounts = rec {
+    oth_stud_email = {
       primary = true;
       address = "ole.bendixen@st.oth-regensburg.de";
+
+      flavor = "outlook.office365.com";
 
       thunderbird = {
         enable = true;
@@ -72,7 +79,33 @@
       };
     };
 
-    ole-blue = rec {
+    fachschaft_im = oth_stud_email // {
+      primary = false;
+      address = "fachschaft_im@oth-regensburg.de";
+
+      # userName = "hs-regensburg.de\\beo45216";
+      userName = "fachschaft_im@oth-regensburg.de";
+
+      realName = "Fachschaft IM";
+      signature = {
+        showSignature = "append";
+        text = ''
+          ------------------------------------------------------------------------------------------
+          Ostbayerische Technische Hochschule Regensburg
+          Fachschaft Informatik Mathematik (FSIM)
+          K-Gebäude K032
+          Galgenbergstraße 32
+          93053 Regensburg
+
+          Telefon: +49 941 943 1276
+          E-Mail: fachschaft_im@oth-regensburg.de
+          Internet: https://www.fsim-ev.de/
+          ---------------------------------------------------------------------------
+        '';
+      };
+    };
+
+    ole_blue = rec {
       address = "ole@ole.blue";
       thunderbird.enable = true;
       userName = "ole@ole.blue";
