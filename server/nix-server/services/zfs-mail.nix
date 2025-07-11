@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}:
-{
+{ pkgs, config, ... }: {
   environment.etc."aliases" = {
     text = ''
       root: ole@ole.blue
@@ -25,7 +20,5 @@
 
   services.zfs.zed.enableMail = false;
 
-  services.prometheus.exporters.zfs = {
-    enable = true;
-  };
+  services.prometheus.exporters.zfs = { enable = true; };
 }
