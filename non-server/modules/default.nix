@@ -25,7 +25,6 @@ in {
     ./helix.nix
     ./xdg-open.nix
     ./yazi.nix
-    ./fuck.nix
     ./zellij.nix
     ./zoxide.nix
     ./direnv.nix

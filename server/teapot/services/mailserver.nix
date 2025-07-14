@@ -33,11 +33,14 @@ in {
     enable = true;
     fqdn = "mail.ole.blue";
 
+    stateVersion = 3;
+
     useUTF8FolderNames = true;
+
+    systemDomain = "ole.blue";
 
     dmarcReporting = {
       enable = true;
-      domain = "ole.blue";
       organizationName = "ole";
     };
 

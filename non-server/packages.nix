@@ -158,7 +158,7 @@ in {
       noto-fonts
       yubioath-flutter
       yubikey-manager
-      yubikey-personalization-gui
+      # yubikey-personalization-gui // archived upstream
       yubikey-personalization
       nextcloud-client
       traceroute
@@ -229,7 +229,6 @@ in {
       hyprsunset
       sbctl
       lm_sensors
-      hyprpanel
       saber
       taskwarrior3
       timewarrior

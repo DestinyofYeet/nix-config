@@ -1,16 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 let
   apiPort = 3900;
   rpcPort = 3901;
   webPort = 3902;
   adminPort = 3903;
-in
-{
+in {
   age.secrets = {
     garage-rpc-secret.file = ../secrets/garage-rpc-secret.age;
     garage-admin-token.file = ../secrets/garage-admin-token.age;
@@ -19,7 +13,7 @@ in
   services.garage = {
     enable = true;
 
-    package = pkgs.garage_1_x;
+    package = pkgs.garage_1;
 
     # extraEnvironment = {
     #   "GARAGE_RPC_SECRET_FILE" = config.age.secrets.garage-rpc-secret.path;
@@ -47,9 +41,7 @@ in
         root_domain = "s3-web.local.ole.blue";
       };
 
-      admin = {
-        api_bind_addr = "127.0.0.1:${toString adminPort}";
-      };
+      admin = { api_bind_addr = "127.0.0.1:${toString adminPort}"; };
     };
   };
 
@@ -61,55 +53,56 @@ in
     };
   };
 
-  systemd.services.garage.serviceConfig = lib.mkIf config.services.garage.enable {
-    User = "garage";
+  systemd.services.garage.serviceConfig =
+    lib.mkIf config.services.garage.enable {
+      User = "garage";
 
-    ReadWriteDirectories = [ config.services.garage.settings.data_dir ];
+      ReadWriteDirectories = [ config.services.garage.settings.data_dir ];
 
-    LoadCredential = [
-      "rpc_secret_path:${config.age.secrets.garage-rpc-secret.path}"
-      "admin_token_path:${config.age.secrets.garage-admin-token.path}"
-    ];
-    Environment = [
-      "GARAGE_ALLOW_WORLD_READABLE_SECRETS=true"
-      "GARAGE_RPC_SECRET_FILE=%d/rpc_secret_path"
-      "GARAGE_ADMIN_TOKEN_FILE=%d/admin_token_path"
-    ];
-  };
+      LoadCredential = [
+        "rpc_secret_path:${config.age.secrets.garage-rpc-secret.path}"
+        "admin_token_path:${config.age.secrets.garage-admin-token.path}"
+      ];
+      Environment = [
+        "GARAGE_ALLOW_WORLD_READABLE_SECRETS=true"
+        "GARAGE_RPC_SECRET_FILE=%d/rpc_secret_path"
+        "GARAGE_ADMIN_TOKEN_FILE=%d/admin_token_path"
+      ];
+    };
 
   systemd.tmpfiles.rules = lib.mkIf config.services.garage.enable [
     "A+ ${config.services.garage.settings.data_dir} - - - - user:${config.systemd.services.garage.serviceConfig.User}:rwx"
   ];
 
-  services.nginx.virtualHosts =
-    let
-      ssl-conf = lib.custom.settings.${config.networking.hostName}.nginx-local-ssl;
+  services.nginx.virtualHosts = let
+    ssl-conf =
+      lib.custom.settings.${config.networking.hostName}.nginx-local-ssl;
 
-      defaultExtraConf = ''
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $host;
-        proxy_max_temp_file_size 0;
-        client_max_body_size 0;
-      '';
-    in
-    {
+    defaultExtraConf = ''
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $host;
+      proxy_max_temp_file_size 0;
+      client_max_body_size 0;
+    '';
+  in {
 
-      "${config.services.garage.settings.s3_api.root_domain}" = ssl-conf // {
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString apiPort}";
-          extraConfig = defaultExtraConf;
-        };
-      };
-
-      "${config.services.garage.settings.s3_web.root_domain}" = ssl-conf // {
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString webPort}";
-          extraConfig = defaultExtraConf;
-        };
+    "${config.services.garage.settings.s3_api.root_domain}" = ssl-conf // {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString apiPort}";
+        extraConfig = defaultExtraConf;
       };
     };
 
+    "${config.services.garage.settings.s3_web.root_domain}" = ssl-conf // {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString webPort}";
+        extraConfig = defaultExtraConf;
+      };
+    };
+  };
+
   programs.bash.shellAliases = {
-    garage = "${config.services.garage.package}/bin/garage --rpc-secret-file ${config.age.secrets.garage-rpc-secret.path}";
+    garage =
+      "${config.services.garage.package}/bin/garage --rpc-secret-file ${config.age.secrets.garage-rpc-secret.path}";
   };
 }

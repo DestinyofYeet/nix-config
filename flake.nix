@@ -25,7 +25,7 @@
     stylix = {
       # url = "github:danth/stylix/ed91a20c84a80a525780dcb5ea3387dddf6cd2de";
       url = "github:danth/stylix";
-      inputs.home-manager.follows = "home-manager";
+      # inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -102,11 +102,6 @@
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -235,7 +230,6 @@
         {
           nixpkgs.overlays = [
             nur.overlays.default
-            inputs.hyprpanel.overlay
             inputs.helix.overlays.default
             inputs.yazi.overlays.default
           ];
