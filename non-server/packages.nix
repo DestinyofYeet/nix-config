@@ -31,8 +31,12 @@ in {
 
   nixpkgs = {
     config = {
-      permittedInsecurePackages = [ "electron-31.7.7" "ventoy-1.1.05" ];
-
+      permittedInsecurePackages = [
+        "electron-31.7.7"
+        "ventoy-1.1.05"
+        "dotnet-sdk-6.0.428" # eddie
+        "dotnet-runtime-6.0.36" # eddie
+      ];
       allowUnfree = true;
       nvidia.acceptLicense = true;
     };
@@ -270,5 +274,6 @@ in {
       clippy # rust check
       serpl
       cgdb
+      # eddie
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }

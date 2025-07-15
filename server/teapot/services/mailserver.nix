@@ -38,11 +38,9 @@ in {
     useUTF8FolderNames = true;
 
     systemDomain = "ole.blue";
+    systemName = "ole";
 
-    dmarcReporting = {
-      enable = true;
-      organizationName = "ole";
-    };
+    dmarcReporting = { enable = true; };
 
     domains = [ "ole.blue" "uwuwhatsthis.de" "drogen.gratis" ];
 
