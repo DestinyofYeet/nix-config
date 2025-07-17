@@ -1,8 +1,4 @@
-{
-  config,
-  ...
-}:
-{
+{ config, pkgs, ... }: {
   age.secrets = {
     cache-priv-key = {
       file = ../secrets/nix-serve-priv-key.age;
@@ -14,6 +10,7 @@
 
   services.nix-serve = {
     enable = true;
+    package = pkgs.nix-serve-ng;
     bindAddress = "127.0.0.1";
     secretKeyFile = config.age.secrets.cache-priv-key.path;
   };
@@ -32,7 +29,9 @@
     forceSSL = true;
 
     locations."/" = {
-      proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
+      proxyPass = "http://${config.services.nix-serve.bindAddress}:${
+          toString config.services.nix-serve.port
+        }";
     };
   };
 }
