@@ -196,6 +196,8 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
+
+    nix-monitored.url = "github:ners/nix-monitored";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -232,6 +234,12 @@
             nur.overlays.default
             inputs.helix.overlays.default
             inputs.yazi.overlays.default
+
+            inputs.nix-monitored.overlays.default
+            (self: super: {
+              nix-direnv =
+                super.nix-direnv.override { nix = super.nix-monitored; };
+            })
           ];
         }
 
