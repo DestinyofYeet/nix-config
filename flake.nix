@@ -235,11 +235,12 @@
             inputs.helix.overlays.default
             inputs.yazi.overlays.default
 
-            inputs.nix-monitored.overlays.default
-            (self: super: {
-              nix-direnv =
-                super.nix-direnv.override { nix = super.nix-monitored; };
-            })
+            # no-worky
+            # inputs.nix-monitored.overlays.default
+            # (self: super: {
+            #   nix-direnv =
+            #     super.nix-direnv.override { nix = super.nix-monitored; };
+            # })
           ];
         }
 
