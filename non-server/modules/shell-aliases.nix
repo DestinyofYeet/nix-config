@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, inputs, ... }: {
   programs.shell-aliases = {
     enable = true;
     aliases = {
@@ -45,6 +45,11 @@
       "wicat" = "wezterm imgcat";
       "wssh" = "wezterm ssh";
       "wconnect" = "wezterm connect";
+
+      "dl-music" = {
+        default =
+          "${inputs.squid-api.packages.x86_64-linux.default}/bin/squid-api";
+      };
     };
   };
 }

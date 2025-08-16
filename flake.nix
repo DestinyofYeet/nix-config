@@ -198,6 +198,11 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
 
     nix-monitored.url = "github:ners/nix-monitored";
+
+    squid-api = {
+      url = "git+https://code.ole.blue/ole/squid-api";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur

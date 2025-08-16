@@ -1587,6 +1587,7 @@
         "setup-env-rs": "setup-env-rs",
         "shell-aliases": "shell-aliases",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
+        "squid-api": "squid-api",
         "stable-nixpkgs": "stable-nixpkgs",
         "strichliste": "strichliste",
         "stylix": "stylix",
@@ -1737,6 +1738,26 @@
       "original": {
         "type": "git",
         "url": "https://spectrum-os.org/git/spectrum"
+      }
+    },
+    "squid-api": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755302503,
+        "narHash": "sha256-wFDOChQgBdUhvO/U6LD8jkJI4ilEP10O+3LRSGIxLco=",
+        "ref": "refs/heads/main",
+        "rev": "2d457b666c5fd1e6cc24b8302d10172a7e6c9fe0",
+        "revCount": 8,
+        "type": "git",
+        "url": "https://code.ole.blue/ole/squid-api"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://code.ole.blue/ole/squid-api"
       }
     },
     "stable-nixpkgs": {
