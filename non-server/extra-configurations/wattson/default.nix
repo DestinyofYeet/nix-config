@@ -12,6 +12,7 @@
     ./strichliste.nix
     ./swap.nix
     ../kanata.nix
+    ./chromecast.nix
   ];
 
   nix = {
