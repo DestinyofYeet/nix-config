@@ -15,7 +15,7 @@
     ./vpn.nix
     # ./home-proxy.nix
     ./postgresql.nix
-    ./gitea.nix
+    ./forgejo.nix
     ./nix-search.nix
     ./ntfy.nix
     # ./nebula.nix # now in baseline
