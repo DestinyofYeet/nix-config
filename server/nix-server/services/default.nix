@@ -30,7 +30,7 @@
     ./firefly-iii-importer.nix
     # ./passbolt.nix
     ./unbound.nix
-    ./ups.nix
+    # ./ups.nix
     ./strichliste.nix
     ./znapzend.nix
     ./bazarr.nix
