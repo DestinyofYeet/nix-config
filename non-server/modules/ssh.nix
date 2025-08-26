@@ -18,7 +18,6 @@ let
           Hostname ${host.hostname}
           User ${host.user}
           IdentityFile ${config.age.secrets.${host.ident}.path}
-          AddKeysToAgent yes
           Port ${toString (host.port or 22)}
       '') entryList));
 in {

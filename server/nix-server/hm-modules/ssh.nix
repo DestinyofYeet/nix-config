@@ -1,8 +1,7 @@
-{ config, ... }:
-{
+{ config, ... }: {
   services.ssh-agent.enable = true;
 
-  programs.ssh.addKeysToAgent = true;
+  # programs.ssh.addKeysToAgent = true;
 
   # age.secrets = {
   #   ssh-github = {
