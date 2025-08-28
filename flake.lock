@@ -1747,11 +1747,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1756415681,
-        "narHash": "sha256-8Voy3rgnu55iIaSNTz0rXbKzx94Y8JtVwhKKKeViXVY=",
+        "lastModified": 1756416173,
+        "narHash": "sha256-mAdkLVkvYj18OQ5V1BPSzE1lm7wrrtJeSOTw96mJJtg=",
         "ref": "refs/heads/main",
-        "rev": "bbfb8d2f5bb37fad155bc1a15886c2e9e0954c2c",
-        "revCount": 16,
+        "rev": "5ececefb3bc3257a1868cbf5fef2c8d2cb49b06d",
+        "revCount": 17,
         "type": "git",
         "url": "https://code.ole.blue/ole/squid-api"
       },
