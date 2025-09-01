@@ -92,7 +92,7 @@ in {
       inherit (nc4nix.nextcloud-31)
         user_oidc
         # phonetrack
-        deck;
+        deck cospend;
     };
   };
 
