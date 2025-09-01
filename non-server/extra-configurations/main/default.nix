@@ -2,7 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { pkgs, config, ... }: {
-  imports = [ ./steam.nix ./vr.nix ./vpn.nix ./agenix.nix ./swap.nix ];
+  imports =
+    [ ./steam.nix ./vr.nix ./vpn.nix ./agenix.nix ./swap.nix ./sunshine.nix ];
 
   networking.extraHosts = ''
     192.168.1.1 nix-server.infra.wg

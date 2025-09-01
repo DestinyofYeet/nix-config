@@ -275,5 +275,6 @@ in {
       serpl
       cgdb
       # eddie
+      moonlight-qt
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
