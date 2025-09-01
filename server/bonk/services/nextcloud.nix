@@ -71,6 +71,7 @@ in {
       maintenance_window_start = 1;
 
       default_locale = "de_DE";
+      allow_local_remote_servers = true;
     };
 
     extraAppsEnable = true;
