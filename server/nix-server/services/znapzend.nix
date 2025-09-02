@@ -1,9 +1,6 @@
-{
-  ...
-}:
-{
+{ ... }: {
   services.znapzend = {
-    enable = true;
+    enable = false;
     pure = true;
     features.skipIntermediates = true;
     zetup = {

@@ -62,4 +62,11 @@
       builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
     formatted = builtins.concatStringsSep "\n" sortedUnique;
   in formatted;
+
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
+
+  programs.uwsm.enable = true;
 }

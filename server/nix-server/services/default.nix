@@ -32,7 +32,7 @@
     ./unbound.nix
     # ./ups.nix
     ./strichliste.nix
-    ./znapzend.nix
+    # ./znapzend.nix
     ./bazarr.nix
     ./zfs-mail.nix
     ./wifi.nix
@@ -62,5 +62,6 @@
     ./kavita.nix
     ./zabbix.nix
     # ./photoprism.nix
+    ./sunshine.nix
   ];
 }
