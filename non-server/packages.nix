@@ -276,5 +276,6 @@ in {
       cgdb
       # eddie
       moonlight-qt
+      tidal-dl
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
