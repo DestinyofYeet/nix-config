@@ -138,6 +138,7 @@ in {
       containersForce = true;
 
       containers = build-containers [
+        { tidal = { color = "blue"; }; }
         { google = { color = "red"; }; }
         { oth = { color = "turquoise"; }; }
         { ai = { color = "red"; }; }
