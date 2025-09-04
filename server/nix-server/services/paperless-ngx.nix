@@ -7,15 +7,17 @@ in {
       + "/paperless-authelia-env-file.age";
   };
 
-  services.paperless = {
+  services.paperless = rec {
     enable = true;
+
+    domain = "paperless.local.ole.blue";
 
     dataDir = "${
         lib.custom.settings.${config.networking.hostName}.paths.data
       }/paperless-ngx";
 
     settings = {
-      PAPERLESS_URL = "https://paperless.local.ole.blue";
+      PAPERLESS_URL = "https://${domain}";
       PAPERLESS_OCR_USER_ARGS = ''{"continue_on_soft_render_error": true}'';
     };
 
@@ -26,7 +28,7 @@ in {
     inherit (lib.custom.settings.${config.networking.hostName}) user;
   };
 
-  services.nginx.virtualHosts."paperless.local.ole.blue" =
+  services.nginx.virtualHosts."${config.services.paperless.domain}" =
     lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
       locations."/".proxyPass = "http://${config.services.paperless.address}:${
           builtins.toString config.services.paperless.port

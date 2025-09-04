@@ -7,11 +7,11 @@
     extraSpecialArgs = { inherit inputs stable-pkgs custom secretStore flake; };
 
     sharedModules = [
-      inputs.plasma-manager.homeManagerModules.plasma-manager
+      inputs.plasma-manager.homeModules.plasma-manager
       inputs.stylix.homeModules.stylix
       inputs.agenix.homeManagerModules.age
       inputs.shell-aliases.homeManagerModules.default
-      inputs.nixvim.homeManagerModules.nixvim
+      inputs.nixvim.homeModules.nixvim
     ];
   };
 

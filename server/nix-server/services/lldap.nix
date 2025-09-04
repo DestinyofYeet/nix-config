@@ -31,6 +31,7 @@ in {
       ldap_base_dn = "dc=ole,dc=blue";
       ldap_user_email = "postmaster@ole.blue";
       database_url = "postgresql://lldap@localhost/lldap?host=/run/postgresql";
+      force_ldap_user_pass_reset = "always";
     };
     environment = {
       LLDAP_JWT_SECRET_FILE = config.age.secrets.lldap-jwt-secret.path;

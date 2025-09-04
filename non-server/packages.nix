@@ -36,6 +36,7 @@ in {
         "ventoy-1.1.05"
         "dotnet-sdk-6.0.428" # eddie
         "dotnet-runtime-6.0.36" # eddie
+        "qtwebengine-5.15.19" # jellyfin-media-player
       ];
       allowUnfree = true;
       nvidia.acceptLicense = true;

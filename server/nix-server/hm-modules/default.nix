@@ -4,5 +4,10 @@
   # needed for agenix service to start properly
   systemd.user.startServices = "sd-switch";
 
-  imports = [ ./btop.nix ./bash.nix ./agenix.nix ./hyprland.nix ];
+  imports = [
+    ./btop.nix
+    ./bash.nix
+    ./agenix.nix
+    # ./hyprland.nix
+  ];
 }

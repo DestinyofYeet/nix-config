@@ -138,7 +138,7 @@ in {
       containersForce = true;
 
       containers = build-containers [
-        { tidal = { color = "blue"; }; }
+        # add new containers at the bottom
         { google = { color = "red"; }; }
         { oth = { color = "turquoise"; }; }
         { ai = { color = "red"; }; }
@@ -158,6 +158,7 @@ in {
         }
         { reddit = { color = "red"; }; }
         { anime = { color = "purple"; }; }
+        { tidal = { color = "blue"; }; }
       ];
 
       settings = {
@@ -229,7 +230,7 @@ in {
         temporary-containers
         facebook-container
         multi-account-containers
-        enhancer-for-youtube
+        # enhancer-for-youtube # got removed :(
         skip-redirect
         keepassxc-browser
         # tree-style-tab
