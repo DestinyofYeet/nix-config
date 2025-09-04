@@ -164,7 +164,7 @@
     pkiBundle = "/var/lib/sbctl";
   };
 
-  services.logind.powerKey = "suspend";
+  services.logind.settings.Login.HandlePowerKey = "suspend";
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
 }

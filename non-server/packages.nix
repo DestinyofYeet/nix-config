@@ -219,7 +219,7 @@ in {
       nix-output-monitor
       nvtopPackages.full
       pueue
-      colmena
+      # colmena
       poppler
       recyclarr
       # inputs.mdpls-nix.packages.x86_64-linux.default
@@ -247,7 +247,6 @@ in {
       (lib.mkIf (config.networking.hostName != "kartoffelkiste") aseprite)
       # pyprland
       qFlipper
-      colmena
       yt-dlp
       typescript-language-server
       obsidian

@@ -1,24 +1,13 @@
-{
-  inputs,
-  pkgs,
-  ...
-}:
-{
-  programs.anyrun = {
+{ inputs, pkgs, ... }: {
+  programs.anyrun = rec {
     enable = true;
 
-    # package = inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins;
+    package = inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins;
 
     config = {
-      x = {
-        fraction = 0.5;
-      };
-      y = {
-        fraction = 0.3;
-      };
-      width = {
-        fraction = 0.3;
-      };
+      x = { fraction = 0.5; };
+      y = { fraction = 0.3; };
+      width = { fraction = 0.3; };
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
@@ -27,13 +16,20 @@
       showResultsImmediately = false;
       maxEntries = null;
 
-      plugins = with inputs.anyrun.packages.${pkgs.system}; [
-        applications
-        shell
-        rink
-        stdin
-        symbols
-        randr
+      # plugins = with inputs.anyrun.packages.${pkgs.system}; [
+      #   applications
+      #   shell
+      #   rink
+      #   stdin
+      #   symbols
+      #   randr
+      # ];
+
+      plugins = [
+        "${package}/lib/libapplications.so"
+        "${package}/lib/libshell.so"
+        "${package}/lib/libnix_run.so"
+        "${package}/lib/librink.so"
       ];
     };
 
