@@ -189,11 +189,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lix = {
-      url =
-        "https://git.lix.systems/lix-project/nixos-module/archive/release-2.93.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # lix = {
+    #   url =
+    #     "https://git.lix.systems/lix-project/nixos-module/archive/release-2.93.tar.gz";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
 
@@ -220,7 +220,7 @@
       custom = import ./custom { inherit lib; };
 
       baseline-modules = [
-        inputs.lix.nixosModules.default
+        # inputs.lix.nixosModules.default
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         inputs.nix-topology.nixosModules.default
