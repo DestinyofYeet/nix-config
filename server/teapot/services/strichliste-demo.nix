@@ -5,7 +5,7 @@
     port = 8936;
   };
 
-  services.nginx.virtualHosts."strichliste-demo.ole.blue" =
+  services.nginx.virtualHosts."demo.strichliste.rs" =
     let cfg = config.services.strichliste-rs;
     in {
       enableACME = true;
