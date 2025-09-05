@@ -1,8 +1,6 @@
 { lib, config, pkgs, inputs, ... }: {
   imports = [ ./packages.nix ./nebula.nix ];
 
-  nix.package = pkgs.lixPackageSets.latest.lix;
-
   programs.nh = {
     enable = true;
     clean = {
@@ -13,6 +11,11 @@
   };
 
   boot.tmp.cleanOnBoot = true;
+
+  nix.settings = {
+    eval-cores = 0;
+    extra-experimental-features = "parallel-eval";
+  };
 
   # nix.extraOptions = ''
   #   download-buffer-size = 500000000

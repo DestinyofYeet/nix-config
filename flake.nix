@@ -203,6 +203,16 @@
       url = "git+https://code.ole.blue/ole/squid-api";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    strichliste-rs = {
+      url =
+        "github:DestinyofYeet/strichliste/80b8ee749c728ca473fb2efa9aeddbabee6914d3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    determinate-nix = {
+      url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -220,7 +230,6 @@
       custom = import ./custom { inherit lib; };
 
       baseline-modules = [
-        # inputs.lix.nixosModules.default
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         inputs.nix-topology.nixosModules.default
@@ -231,6 +240,8 @@
         })
 
         inputs.microvm-nix.nixosModules.host
+
+        inputs.determinate-nix.nixosModules.default
       ];
 
       non-server-modules = [
@@ -381,11 +392,12 @@
         ] ++ non-server-modules;
       };
 
-      nixosConfigurations.teapot = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.teapot = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
           inputs.simple-nixos-mailserver.nixosModule
           inputs.nix-minecraft.nixosModules.minecraft-servers
+          inputs.strichliste-rs.nixosModules.${system}.default
           { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }
 
           ./server/teapot

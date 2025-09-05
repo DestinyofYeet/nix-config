@@ -1,5 +1,5 @@
 { ... }: {
-  nix.settings.trusted-users = [ "ole" ];
+  nix.settings.trusted-users = [ "ole" "root" "@wheel" ];
 
   users.users = rec {
     ole = {

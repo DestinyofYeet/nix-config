@@ -22,6 +22,7 @@
     ./mealie.nix # currently broken
     ./minecraft-server.nix
     ./atuin.nix
+    ./strichliste-demo.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

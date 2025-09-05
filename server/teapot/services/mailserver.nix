@@ -90,6 +90,7 @@ in {
         '';
 
         aliases = [
+          "whois@ole.blue"
           "tidal@ole.blue"
           "e-vignette-ch@ole.blue"
           "asfinag@ole.blue"

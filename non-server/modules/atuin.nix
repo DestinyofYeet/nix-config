@@ -1,6 +1,7 @@
 { ... }: {
   programs.atuin = {
     enable = true;
+    flags = [ "--disable-up-arrow" ];
     enableNushellIntegration = true;
     settings = {
       auto_sync = true;

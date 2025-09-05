@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, ... }:
+{ inputs, pkgs, lib, config, ... }:
 let
   build-scope = modules: name: prefix: {
     modules = [{ _module.args = { inherit pkgs lib; }; }]
@@ -65,6 +65,10 @@ in {
 
           (build-scope inputs.nix-flatpak.nixosModules.nix-flatpak "nix-flatpak"
             "https://github.com/gmodena/nix-flatpak/tree/master")
+          (build-scope
+            inputs.strichliste-rs.nixosModules.${config.nixpkgs.system}.default
+            "strichliste-rs"
+            "https://github.com/DestinyofYeet/strichliste/tree/master")
         ];
       };
   };
