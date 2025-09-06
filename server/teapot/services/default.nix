@@ -4,8 +4,8 @@
     ./nginx.nix
     ./fail2ban.nix
     ./netdata.nix
-    ./virtualisation.nix
-    ./ghost.nix
+    # ./docker.nix
+    # ./ghost.nix
     ./mailserver.nix
     ./conduit.nix
     # ./coturn.nix

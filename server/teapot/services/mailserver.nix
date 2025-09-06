@@ -299,4 +299,18 @@ in {
     #   # dbname = "roundcube";
     # };
   };
+
+  services.rspamd = {
+    # locals."groups.conf".text = ''
+    #   symbols {
+    #     "FORGED_RECIPIENTS" { weight = 12; }
+    #     "FORGED_SENDER" {weight = 12;}
+    #   }
+    # '';
+    extraConfig = ''
+      actions {
+        reject = 10;
+      }
+    '';
+  };
 }

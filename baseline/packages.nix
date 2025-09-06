@@ -34,5 +34,6 @@
     smartmontools
     dmidecode
     wezterm
+    unixtools.netstat
   ];
 }
