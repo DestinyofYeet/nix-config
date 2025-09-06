@@ -1,4 +1,6 @@
 {
+  # nixConfig = { allow-import-from-derivation = false; }; # stylix base16.nix has IFD
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 

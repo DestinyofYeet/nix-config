@@ -1,8 +1,4 @@
-{ pkgs, config, lib, ... }:
-let
-  read_color = builtins.readFile ./current_color.txt;
-  current_color = pkgs.lib.removeSuffix "\n" read_color;
-in {
+{ pkgs, config, lib, ... }: {
   stylix.enable = true;
 
   # me likey
