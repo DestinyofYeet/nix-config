@@ -29,7 +29,7 @@ in {
     msmtp-email-ole-blue.file = secrets + "/msmtp-ole-blue.age";
   };
 
-  mailserver = {
+  mailserver = rec {
     enable = true;
     fqdn = "mail.ole.blue";
 
@@ -64,6 +64,8 @@ in {
     loginAccounts = {
       "ole@ole.blue" = {
         hashedPasswordFile = "${config.age.secrets.ole-mail.path}";
+
+        catchAll = domains;
 
         sieveScript = ''
           require ["fileinto"];
