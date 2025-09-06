@@ -1976,17 +1976,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1757101287,
-        "narHash": "sha256-E/q5kkmA9M4bZA8KDIeoUCB3Gk49XavJz+1+Sallo74=",
+        "lastModified": 1757174290,
+        "narHash": "sha256-Nq0TD+bhdzFuUGx1vzrXLoEwyIQige2VZu4LTNjz0QI=",
         "owner": "DestinyofYeet",
         "repo": "strichliste",
-        "rev": "80b8ee749c728ca473fb2efa9aeddbabee6914d3",
+        "rev": "ee4a133e7c48d2693c6ce1c1ac927488ff4f8e0e",
         "type": "github"
       },
       "original": {
         "owner": "DestinyofYeet",
         "repo": "strichliste",
-        "rev": "80b8ee749c728ca473fb2efa9aeddbabee6914d3",
         "type": "github"
       }
     },
