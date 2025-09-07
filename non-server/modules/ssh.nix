@@ -99,7 +99,7 @@ in {
         }
         {
           host = "fsim.pedro-wg";
-          hostname = "10.100.0.1";
+          hostname = custom.nebula.yeet.hosts.teapot.ip;
           user = "beo45216";
           ident = "ssh-key-fsim-pedro";
           port = 2222;
