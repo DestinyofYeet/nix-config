@@ -10,4 +10,6 @@ in {
   "mealie_env_file.age".publicKeys = authed;
 
   "msmtp-ole-blue.age".publicKeys = authed;
+
+  "github-runners-strichliste-rs.age".publicKeys = authed;
 }
