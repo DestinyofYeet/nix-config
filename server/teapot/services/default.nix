@@ -22,8 +22,8 @@
     ./mealie.nix # currently broken
     ./minecraft-server.nix
     ./atuin.nix
-    ./strichliste-demo.nix
-    ./github-runner.nix
+    # ./strichliste-demo.nix
+    # ./github-runner.nix
   ];
 
   services.smartd.enable = lib.mkForce false;
