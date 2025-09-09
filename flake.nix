@@ -207,7 +207,8 @@
     };
 
     strichliste-rs = {
-      url = "github:DestinyofYeet/strichliste";
+      url =
+        "github:DestinyofYeet/strichliste/480f91c8ed50914f7884fe84f28f106a1045aef3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

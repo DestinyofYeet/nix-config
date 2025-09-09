@@ -2011,16 +2011,17 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1757277489,
-        "narHash": "sha256-df7ZpAMgr2+pL7674xo952QLXO4o/uCU0DqrIW4Ho4c=",
+        "lastModified": 1757405986,
+        "narHash": "sha256-3NpUNBZ6+baOy47ucR0aa0IQ/CltX/CdR9e26w+GbKA=",
         "owner": "DestinyofYeet",
         "repo": "strichliste",
-        "rev": "cf7733fa8cbd8d7419a9278da5d33646599e5e2b",
+        "rev": "480f91c8ed50914f7884fe84f28f106a1045aef3",
         "type": "github"
       },
       "original": {
         "owner": "DestinyofYeet",
         "repo": "strichliste",
+        "rev": "480f91c8ed50914f7884fe84f28f106a1045aef3",
         "type": "github"
       }
     },
