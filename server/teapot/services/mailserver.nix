@@ -42,7 +42,7 @@ in {
 
     dmarcReporting = { enable = true; };
 
-    domains = [ "ole.blue" "uwuwhatsthis.de" "drogen.gratis" ];
+    domains = [ "ole.blue" "uwuwhatsthis.de" "drogen.gratis" "strichliste.rs" ];
 
     fullTextSearch = {
       enable = true;
@@ -59,6 +59,8 @@ in {
 
     # somehow nukes my nameserver entries in /etc/resolv.conf and no more ns lookups are possible
     localDnsResolver = false;
+
+    forwards = { "security@strichliste.rs" = [ "ole@strichliste.rs" ]; };
 
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     loginAccounts = {
@@ -92,6 +94,7 @@ in {
         '';
 
         aliases = [
+          "ole@strichliste.rs"
           "whois@ole.blue"
           "tidal@ole.blue"
           "e-vignette-ch@ole.blue"
