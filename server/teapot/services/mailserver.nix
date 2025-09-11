@@ -99,6 +99,7 @@ in {
         '';
 
         aliases = [
+          "strichliste-rs@ole.blue"
           # "ole@strichliste.rs"
           "whois@ole.blue"
           "tidal@ole.blue"
