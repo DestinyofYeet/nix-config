@@ -1,4 +1,4 @@
-{ pkgs, config, secretStore, ... }:
+{ pkgs, config, secretStore, custom, ... }:
 let secrets = secretStore.get-server-secrets "teapot";
 in {
   age.secrets = {
@@ -309,17 +309,40 @@ in {
     # };
   };
 
-  services.rspamd = {
-    # locals."groups.conf".text = ''
-    #   symbols {
-    #     "FORGED_RECIPIENTS" { weight = 12; }
-    #     "FORGED_SENDER" {weight = 12;}
-    #   }
-    # '';
+  services.rspamd = let weight_failed = "10000";
+  in {
+    locals."groups.conf".text = ''
+      symbols {
+        "DMARC_POLICY_REJECT" { weight = ${weight_failed}; }
+        "DMARC_POLICY_SOFTFAIL" { weight = ${weight_failed}; }
+
+        # matches hashed bad message
+        "FUZZY_DENIED" { weight = 10; }
+
+        # has no dmarc
+        "DMARC_NA" { weight = ${weight_failed}; }
+
+        # has no dkim
+        "R_DKIM_NA" { weight = ${weight_failed}; }
+      }
+    '';
     extraConfig = ''
       actions {
         reject = 10;
       }
     '';
+
+    workers.controller.extraConfig = ''
+      secure_ip = [ "${custom.nebula.yeet.hosts.teapot.ip}" ];
+      enable_password = "$2$37qhz69pbjmqtoqjrthocz5gkxin5h8a$xwps8cs7hhsrx1ydj85acy9ctxmp1achw8hu6zq6qbe88kj9qery";
+    '';
+  };
+
+  systemd.services.nginx.serviceConfig.protectHome = false;
+  users.groups.nginx.members = [ config.services.rspamd.user ];
+
+  services.nginx.virtualHosts."rspamd.mail.ole.blue" = {
+    listenAddresses = [ custom.nebula.yeet.hosts.teapot.ip ];
+    locations."/".proxyPass = "http://unix:/run/rspamd/worker-controller.sock";
   };
 }
