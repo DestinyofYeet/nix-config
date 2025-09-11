@@ -16,8 +16,11 @@ let
     "restic-repo-${name}-pw".file = secrets + "/restic-repo-${name}-pw.age";
   };
 in {
-  age.secrets = { }
-    // lib.mkMerge [ (mkRepoSecret "photos") (mkRepoSecret "configs") ];
+  age.secrets = { } // lib.mkMerge [
+    (mkRepoSecret "photos")
+    (mkRepoSecret "configs")
+    (mkRepoSecret "documents")
+  ];
   environment.systemPackages = with pkgs; [ restic ];
 
   services.restic.backups = {
@@ -31,6 +34,12 @@ in {
       repositoryFile = config.age.secrets.restic-repo-photos.path;
       paths = [ "/mnt/data/data/photos" ];
       passwordFile = config.age.secrets.restic-repo-photos-pw.path;
+    };
+
+    documents = default-opts // {
+      repositoryFile = config.age.secrets.restic-repo-documents.path;
+      paths = [ "/mnt/data/data/paperless-ngx" ];
+      passwordFile = config.age.secrets.restic-repo-documents-pw.path;
     };
   };
 }
