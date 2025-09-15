@@ -156,7 +156,7 @@ in {
       brightnessctl
       feishin
       android-tools
-      # signal-desktop // need to use flatpak for some reason
+      signal-desktop
       easyeffects
       keepassxc
       ffmpeg
