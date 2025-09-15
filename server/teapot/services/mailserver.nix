@@ -350,6 +350,9 @@ in {
 
           # worst possible spam reputation
           "RBL_MAILSPIKE_WORST" { weight = ${weight_failed}; }
+
+          # from address is listed in botnet
+          "RBL_VIRUSFREE_BOTNET" { weight = ${weight_failed}; }
         }
       '';
     };
