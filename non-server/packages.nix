@@ -100,11 +100,11 @@ in {
     }];
 
     packages = [
-      { # signal
-        flatpakref =
-          "https://dl.flathub.org/repo/appstream/org.signal.Signal.flatpakref";
-        sha256 = "06hi4fpqdq8qkn1bdilsy5h04sg69f25y6l0dj5mcrrxcvhgh5jf";
-      }
+      # { # signal
+      #   flatpakref =
+      #     "https://dl.flathub.org/repo/appstream/org.signal.Signal.flatpakref";
+      #   sha256 = "06hi4fpqdq8qkn1bdilsy5h04sg69f25y6l0dj5mcrrxcvhgh5jf";
+      # }
       { # rnote
         flatpakref =
           "https://dl.flathub.org/repo/appstream/com.github.flxzt.rnote.flatpakref";
