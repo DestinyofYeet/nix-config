@@ -327,7 +327,7 @@ in {
                 filter = "email:domain";
                 map = "${config.age.secrets.rspamd-domain-whitelist.path}";
                 symbol = "WHITELIST_SENDER_DOMAIN";
-                description = "WHITELIST map for SENDERS Domain - Action accept";
+                description = "Manual whitelist for specific domains";
                 # See: https://rspamd.com/doc/modules/multimap.html#pre-filter-maps
                 action = "accept";
         }
