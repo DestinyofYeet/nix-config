@@ -1,5 +1,7 @@
-{ pkgs, lib, stable-pkgs, ... }: {
-  system.nixos.tags = [ "de-hyprland" ];
+{ pkgs, lib, stable-pkgs, ... }:
+let specialisation = "de-hyprland";
+in {
+  system.nixos.tags = [ specialisation ];
 
   imports = [ ./japanese-keyboard.nix ./programs.nix ];
 
@@ -29,6 +31,6 @@
     xdgOpenUsePortal = true;
   };
 
-  home-manager.extraSpecialArgs.current-specialisation = "de-hyprland";
+  home-manager.extraSpecialArgs.current-specialisation = specialisation;
   home-manager.users.ole = { ... }: { imports = [ ../../modules ./modules ]; };
 }

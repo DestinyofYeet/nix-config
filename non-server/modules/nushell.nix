@@ -1,10 +1,4 @@
-{
-  lib,
-  pkgs,
-  current-specialisation,
-  ...
-}:
-{
+{ lib, pkgs, current-specialisation, ... }: {
   programs.nushell = {
     enable = true;
 
@@ -21,6 +15,19 @@
         file_format: "sqlite"
         sync_on_enter: true
         isolation: true
+      }
+
+      def --wrapped build-system-no-nom [ function: string, ...args ] {
+        sudo -v
+        sudo nixos-rebuild $function ...$args --flake /home/ole/nixos#
+      }
+
+      def --wrapped rebuild-system-no-nom [ ...args ] {
+        build-system-no-nom switch ...$args --specialisation ${current-specialisation}
+      }
+
+      def --wrapped test-system-no-nom [ ...args ] {
+        build-system-no-nom test ...$args --specialisation ${current-specialisation}
       }
 
       def --wrapped build-system [ function: string, ...args ] {
@@ -42,32 +49,25 @@
   };
 
   # nushell doesn't include symlinks
-  home.activation =
-    let
-      source = builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/nushell/nu_scripts/ba13f5ca600ee537880674e065ad237a89161e97/modules/background_task/task.nu";
-        sha256 = "05lafp08fvv22kb6k2npg0g25jpwdz1myz3aaqwslxcab4ivfbgw";
-      };
-    in
-    {
-      write-task-file = ''
-        ${lib.custom.update-needed-content-file}/bin/update-needed-content-file "${source}" "/home/ole/.config/nushell/scripts/task.nu"
-      '';
+  home.activation = let
+    source = builtins.fetchurl {
+      url =
+        "https://raw.githubusercontent.com/nushell/nu_scripts/ba13f5ca600ee537880674e065ad237a89161e97/modules/background_task/task.nu";
+      sha256 = "05lafp08fvv22kb6k2npg0g25jpwdz1myz3aaqwslxcab4ivfbgw";
     };
+  in {
+    write-task-file = ''
+      ${lib.custom.update-needed-content-file}/bin/update-needed-content-file "${source}" "/home/ole/.config/nushell/scripts/task.nu"
+    '';
+  };
 
   systemd.user.services = {
     pueued = {
-      Unit = {
-        Description = "Pueued Service";
-      };
+      Unit = { Description = "Pueued Service"; };
 
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
+      Install = { WantedBy = [ "graphical-session.target" ]; };
 
-      Service = {
-        ExecStart = "${pkgs.pueue}/bin/pueued";
-      };
+      Service = { ExecStart = "${pkgs.pueue}/bin/pueued"; };
     };
   };
 }
