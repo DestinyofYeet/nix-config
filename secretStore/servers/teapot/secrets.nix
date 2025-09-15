@@ -12,4 +12,6 @@ in {
   "msmtp-ole-blue.age".publicKeys = authed;
 
   "github-runners-strichliste-rs.age".publicKeys = authed;
+
+  "rspamd-domain-whitelist.age".publicKeys = authed;
 }

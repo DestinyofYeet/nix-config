@@ -27,6 +27,12 @@ in {
     dmarc-email-ole-blue.file = secrets + "/dmarc-hashed-email-password.age";
 
     msmtp-email-ole-blue.file = secrets + "/msmtp-ole-blue.age";
+
+    rspamd-domain-whitelist = {
+      file = secrets + "/rspamd-domain-whitelist.age";
+      owner = config.services.rspamd.user;
+      group = config.services.rspamd.group;
+    };
   };
 
   mailserver = rec {
@@ -311,21 +317,42 @@ in {
 
   services.rspamd = let weight_failed = "10000";
   in {
-    locals."groups.conf".text = ''
-      symbols {
-        "DMARC_POLICY_REJECT" { weight = ${weight_failed}; }
-        "DMARC_POLICY_SOFTFAIL" { weight = ${weight_failed}; }
+    locals = {
+      "multimap.conf".text = ''
+        # yoinked from https://serverfault.com/questions/1124017/rspamd-whitelis-blacklist-per-domain-before-filtering
+        WHITELIST_SENDER_DOMAIN {
+                # See: https://rspamd.com/doc/modules/multimap.html#email-related-types
+                type = "from";
+                # See: https://rspamd.com/doc/modules/multimap.html#from-rcpt-and-header-filters
+                filter = "email:domain";
+                map = "${config.age.secrets.rspamd-domain-whitelist.path}";
+                symbol = "WHITELIST_SENDER_DOMAIN";
+                description = "WHITELIST map for SENDERS Domain - Action accept";
+                # See: https://rspamd.com/doc/modules/multimap.html#pre-filter-maps
+                action = "accept";
+        }
+      '';
 
-        # matches hashed bad message
-        "FUZZY_DENIED" { weight = 10; }
+      "groups.conf".text = ''
 
-        # has no dmarc
-        "DMARC_NA" { weight = ${weight_failed}; }
+        symbols {
+          "DMARC_POLICY_REJECT" { weight = ${weight_failed}; }
+          "DMARC_POLICY_SOFTFAIL" { weight = ${weight_failed}; }
 
-        # has no dkim
-        "R_DKIM_NA" { weight = ${weight_failed}; }
-      }
-    '';
+          # matches hashed bad message
+          "FUZZY_DENIED" { weight = 10; }
+
+          # has no dmarc
+          "DMARC_NA" { weight = ${weight_failed}; }
+
+          # has no dkim
+          "R_DKIM_NA" { weight = ${weight_failed}; }
+
+          # worst possible spam reputation
+          "RBL_MAILSPIKE_WORST" { weight = ${weight_failed}; }
+        }
+      '';
+    };
     extraConfig = ''
       actions {
         reject = 10;
