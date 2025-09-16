@@ -63,5 +63,6 @@
     ./zabbix.nix
     # ./photoprism.nix
     ./sunshine.nix
+    ./beszel.nix
   ];
 }

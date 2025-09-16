@@ -7,6 +7,7 @@
     ./authelia.nix
     ./netdata.nix
     ./zabbix.nix
+    ./beszel-agent.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

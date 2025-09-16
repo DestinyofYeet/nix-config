@@ -24,6 +24,7 @@
     ./atuin.nix
     ./strichliste-demo.nix
     # ./github-runner.nix
+    ./beszel-agent.nix
   ];
 
   services.smartd.enable = lib.mkForce false;
