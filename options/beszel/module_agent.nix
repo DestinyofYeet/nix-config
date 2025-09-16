@@ -21,6 +21,7 @@ in {
 
       port = mkOption {
         description = "The port to bind to";
+        default = 45876;
         type = types.port;
       };
 
