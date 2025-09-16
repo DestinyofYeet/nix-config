@@ -60,7 +60,7 @@
     ./smartd.nix
     ./backup.nix
     ./kavita.nix
-    ./zabbix.nix
+    # ./zabbix.nix
     # ./photoprism.nix
     ./sunshine.nix
     ./beszel.nix

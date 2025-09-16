@@ -97,6 +97,8 @@ in {
     };
   };
 
+  systemd.services.nextcloud-setup.after = [ "postgresql.target" ];
+
   systemd.services.nextcloud-config-collabora = let
     inherit (config.services.nextcloud) occ;
 

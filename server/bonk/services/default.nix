@@ -6,7 +6,7 @@
     ./openssh.nix
     ./authelia.nix
     ./netdata.nix
-    ./zabbix.nix
+    # ./zabbix.nix
     ./beszel-agent.nix
   ];
 
