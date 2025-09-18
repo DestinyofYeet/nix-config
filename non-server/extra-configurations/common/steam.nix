@@ -1,17 +1,6 @@
-{
-  pkgs,
-  ...
-}:
-let
-  gaming-pkgs = with pkgs; [
-    gamescope
-    mangohud
-    amdvlk
-    gamemode
-    vkbasalt
-  ];
-in
-{
+{ pkgs, ... }:
+let gaming-pkgs = with pkgs; [ gamescope mangohud amdvlk gamemode vkbasalt ];
+in {
 
   programs.gamemode.enable = true;
   hardware.steam-hardware.enable = true;
@@ -22,7 +11,9 @@ in
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs;
+    [
 
-  ] ++ gaming-pkgs;
+      goverlay
+    ] ++ gaming-pkgs;
 }

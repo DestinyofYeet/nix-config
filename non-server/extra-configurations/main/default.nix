@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { pkgs, config, ... }: {
   imports =
-    [ ./steam.nix ./vr.nix ./vpn.nix ./agenix.nix ./swap.nix ./sunshine.nix ];
+    [ ../common ./vr.nix ./vpn.nix ./agenix.nix ./swap.nix ./sunshine.nix ];
 
   networking.extraHosts = ''
     192.168.1.1 nix-server.infra.wg
@@ -11,7 +11,6 @@
 
   environment.systemPackages = with pkgs; [
     vulkan-tools
-    goverlay
     sidequest
     # beatsabermodmanager
     protonup-qt

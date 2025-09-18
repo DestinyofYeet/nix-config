@@ -20,7 +20,7 @@
 
     "de-hyprland" = { configuration = import ./specialisations/de-hyprland; };
 
-    "de-sway" = { configuration = import ./specialisations/de-sway; };
+    # "de-sway" = { configuration = import ./specialisations/de-sway; };
   };
 
   imports = [ ../baseline ./configuration.nix ];

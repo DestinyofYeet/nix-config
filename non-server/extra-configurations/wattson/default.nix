@@ -4,6 +4,7 @@
 { config, pkgs, lib, ... }: {
   imports = [
     # ./38C3.nix
+    ../common
     ./vpn.nix
     ./agenix.nix
     # ./prost.nix
