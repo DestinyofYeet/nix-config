@@ -159,6 +159,7 @@ in {
         { reddit = { color = "red"; }; }
         { anime = { color = "purple"; }; }
         { tidal = { color = "blue"; }; }
+        { news = { color = "turquoise"; }; }
       ];
 
       settings = {
