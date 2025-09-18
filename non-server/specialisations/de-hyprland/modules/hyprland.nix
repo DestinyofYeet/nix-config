@@ -206,6 +206,7 @@ in {
 
       windowrule = [
         "float,title:^(Open File)(.*)$"
+        "float,title:^(File Upload)(.*)$"
         "float,title:^(Select a File)(.*)$"
         "float,title:^(Choose wallpaper)(.*)$"
         "float,title:^(Open Folder)(.*)$"
