@@ -217,7 +217,7 @@ in {
       extensions.packages = with addons; [
         darkreader
         ublock-origin
-        bitwarden
+        # bitwarden
         consent-o-matic
         sponsorblock
         dearrow
