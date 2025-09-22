@@ -2,12 +2,16 @@
 let secrets = secretStore.get-server-secrets "teapot";
 in {
   age.secrets = {
-    mastodon-email-password.file = secrets + "/mastodon_email_password.age";
+    mastodon-email-password = {
+      file = secrets + "/mastodon_email_password.age";
+      group = "mastodon";
+      owner = "mastodon";
+    };
   };
 
   services.mastodon = {
     enable = true;
-    localDomain = "social.ole.blue";
+    localDomain = "drogen.gratis";
 
     configureNginx = true;
 
@@ -15,8 +19,8 @@ in {
       createLocally = false;
       authenticate = true;
 
-      host = "127.0.0.1";
-      user = "mastodon@ole.blue";
+      host = "mail.ole.blue";
+      user = "mastodon@drogen.gratis";
       passwordFile = config.age.secrets.mastodon-email-password.path;
 
       fromAddress = user;
@@ -25,6 +29,12 @@ in {
 
     streamingProcesses = 7;
 
-    extraConfig.SINGLE_USER_MODE = "true";
+    extraConfig = {
+      SMTP_SSL = "true";
+      SMTP_TLS = "true";
+      SMTP_ENABLE_STARTTLS_AUTO = "true";
+      SMTP_OPENSSL_VERIFY_MODE = "none";
+      SMTP_DELIVERY_METHOD = "smtp";
+    };
   };
 }

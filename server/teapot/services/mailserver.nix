@@ -277,7 +277,7 @@ in {
         aliases = [ "smartd@ole.blue" ];
       };
 
-      "mastodon@ole.blue" = {
+      "mastodon@drogen.gratis" = {
         sendOnly = true;
         hashedPasswordFile = config.age.secrets.mastodon-email-ole-blue.path;
       };
