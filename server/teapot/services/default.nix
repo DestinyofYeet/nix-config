@@ -25,6 +25,7 @@
     ./strichliste-demo.nix
     # ./github-runner.nix
     ./beszel-agent.nix
+    ./mastdodon.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

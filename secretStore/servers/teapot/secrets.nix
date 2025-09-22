@@ -14,4 +14,7 @@ in {
   "github-runners-strichliste-rs.age".publicKeys = authed;
 
   "rspamd-domain-whitelist.age".publicKeys = authed;
+
+  "mastodon_email_password_hash.age".publicKeys = authed;
+  "mastodon_email_password.age".publicKeys = authed;
 }

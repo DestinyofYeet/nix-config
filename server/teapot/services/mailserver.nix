@@ -33,6 +33,9 @@ in {
       owner = config.services.rspamd.user;
       group = config.services.rspamd.group;
     };
+
+    mastodon-email-ole-blue.file = secrets
+      + "/mastodon_email_password_hash.age";
   };
 
   mailserver = rec {
@@ -272,6 +275,11 @@ in {
       "msmtp@ole.blue" = {
         hashedPasswordFile = config.age.secrets.msmtp-email-ole-blue.path;
         aliases = [ "smartd@ole.blue" ];
+      };
+
+      "mastodon@ole.blue" = {
+        sendOnly = true;
+        hashedPasswordFile = config.age.secrets.mastodon-email-ole-blue.path;
       };
     };
 
