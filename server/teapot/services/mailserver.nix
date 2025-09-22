@@ -333,7 +333,12 @@ in {
         }
       '';
 
-      "groups.conf".text = ''
+      "groups.conf".text = let
+        mkFailedSingle = symbol: ''"${symbol}" { weight = ${weight_failed}; }'';
+        mkFailed = listOfSymbols:
+          (builtins.concatStringsSep "\n"
+            (map (symbol: mkFailedSingle symbol) listOfSymbols));
+      in ''
 
         symbols {
           "DMARC_POLICY_REJECT" { weight = ${weight_failed}; }
@@ -342,17 +347,16 @@ in {
           # matches hashed bad message
           "FUZZY_DENIED" { weight = 10; }
 
-          # has no dmarc
-          "DMARC_NA" { weight = ${weight_failed}; }
-
-          # has no dkim
-          "R_DKIM_NA" { weight = ${weight_failed}; }
-
-          # worst possible spam reputation
-          "RBL_MAILSPIKE_WORST" { weight = ${weight_failed}; }
-
-          # from address is listed in botnet
-          "RBL_VIRUSFREE_BOTNET" { weight = ${weight_failed}; }
+          ${
+            mkFailed [
+              "DMARC_NA" # has no dmarc
+              "R_DKIM_NA" # has no dkim
+              "R_SPF_FAIL" # sfp verification failed
+              "RBL_MAILSPIKE_WORST" # worst possible spam reputation
+              "RBL_VIRUSFREE_BOTNET" # from address is listed in botnet
+              "RBL_SEM" # From address is listed in Spameatingmonkey RBL
+            ]
+          }
         }
       '';
     };
