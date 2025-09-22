@@ -49,7 +49,10 @@ in {
     systemDomain = "ole.blue";
     systemName = "ole";
 
-    dmarcReporting = { enable = true; };
+    dmarcReporting = {
+      enable = true;
+      excludeDomains = [ "jyo333.com" "uwbswd.com" "csxkg.net" "hb-fec.net" ];
+    };
 
     domains = [
       "ole.blue"
