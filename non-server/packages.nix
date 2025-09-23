@@ -277,5 +277,6 @@ in {
       # eddie
       moonlight-qt
       tidal-dl
+      tokei
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }

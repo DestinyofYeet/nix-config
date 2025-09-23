@@ -50,6 +50,8 @@
         default =
           "${inputs.squid-api.packages.x86_64-linux.default}/bin/squid-api";
       };
+
+      "loc".default = "${pkgs.tokei}/bin/tokei";
     };
   };
 }
