@@ -64,5 +64,6 @@
     # ./photoprism.nix
     ./sunshine.nix
     ./beszel.nix
+    ./home-assistant.nix
   ];
 }
