@@ -30,13 +30,29 @@
         "${package}/lib/libshell.so"
         "${package}/lib/libnix_run.so"
         "${package}/lib/librink.so"
+        "${package}/lib/libsymbols.so"
       ];
     };
 
     extraConfigFiles = {
+      # needs to include all config in the config file. Otherwise it failes silently and loads default values
       "symbols.ron".text = ''
         Config(
           prefix: ":sym",
+
+          symbols: {
+              // "name": "text to be copied"
+              "shrug": "¯\\_(ツ)_/¯",
+            },
+            max_entries: 10,
+        )
+      '';
+      "nix-run.ron".text = ''
+        Config(
+          prefix: ":run",
+          allow_unfree: true,
+          channel: "nixpkgs-unstable",
+          max_entries: 10,
         )
       '';
     };
