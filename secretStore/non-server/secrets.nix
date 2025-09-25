@@ -13,6 +13,8 @@ in {
   "email-ole-blue-pw.age".publicKeys = authed;
 
   "taskwarrior-config.age".publicKeys = authed;
+
+  "openfortivpn-config.age".publicKeys = authed;
 } // (functions.importFolder "main/" { inherit keys; })
 // (functions.importFolder "wattson/" { inherit keys; })
 // (functions.importFolder "kartoffelkiste/" { inherit keys; })

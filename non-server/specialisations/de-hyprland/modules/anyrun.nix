@@ -1,4 +1,13 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, secretStore, config, lib, ... }:
+let
+  startVpnScript =
+    lib.custom.scripts.startOpenfortiVpn config.age.secrets.openfortivpn.path;
+  stopVpnScript = lib.custom.scripts.stopOpenfortiVpn;
+in {
+  age.secrets = {
+    openfortivpn.file = secretStore.nonServer + "/openfortivpn-config.age";
+  };
+
   programs.anyrun = rec {
     enable = true;
 
@@ -12,7 +21,7 @@
       ignoreExclusiveZones = false;
       layer = "overlay";
       hidePluginInfo = false;
-      closeOnClick = false;
+      closeOnClick = true;
       showResultsImmediately = false;
       maxEntries = null;
 
@@ -59,6 +68,18 @@
               envs: Some([
                 ("LANG", "DE")
               ]),
+            ),
+
+            "vpn start": Entry(
+              description: "Start openfortivpn",
+              exec: "${startVpnScript}",
+              print_output: Some(true),
+            ),
+
+            "vpn stop": Entry(
+              description: "Stop openfortivpn",
+              exec: "${stopVpnScript}",
+              print_output: Some(true),
             ),
           }
         )

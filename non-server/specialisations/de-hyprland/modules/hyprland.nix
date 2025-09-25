@@ -212,6 +212,7 @@ in {
         "float,title:^(Open Folder)(.*)$"
         "float,title:^(Save As)(.*)$"
         "float,title:^(Library)(.*)$"
+        "stayfocused, title:^(Anyrun)(.*)$"
       ];
 
       animation = [ "workspaces, 0" ];
