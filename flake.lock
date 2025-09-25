@@ -65,6 +65,26 @@
         "type": "github"
       }
     },
+    "anyrun-custom-command": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758762909,
+        "narHash": "sha256-JlvdVaDMH2DEawj8PkGsmjS3LJgSv0C961oNBo/bzY8=",
+        "owner": "DestinyofYeet",
+        "repo": "anyrun-custom-command",
+        "rev": "5afcdbf1ef9baf1ffa206bf6cf6853d00603ccf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "anyrun-custom-command",
+        "type": "github"
+      }
+    },
     "argon40-nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -1759,6 +1779,7 @@
         "add-replay-gain": "add-replay-gain",
         "agenix": "agenix",
         "anyrun": "anyrun",
+        "anyrun-custom-command": "anyrun-custom-command",
         "argon40-nix": "argon40-nix",
         "auto-add-torrents": "auto-add-torrents",
         "clean-unused-files": "clean-unused-files",
@@ -1887,11 +1908,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1746738827,
-        "narHash": "sha256-Uq2tGuHAIv7dN5fi7x/gChRFz/QewLSCd98YItNZhAw=",
+        "lastModified": 1758762028,
+        "narHash": "sha256-JtZg8a7T66riLyrkXggCyZNpdMcqjDCOevK87naehSU=",
         "ref": "refs/heads/main",
-        "rev": "7b66d1b944ae34ece462fad91e919b4de11268eb",
-        "revCount": 12,
+        "rev": "4eceb2d5604c34d42ccecfe7edb0759e2ca2da5e",
+        "revCount": 14,
         "type": "git",
         "url": "https://code.ole.blue/ole/setup-env.rs"
       },

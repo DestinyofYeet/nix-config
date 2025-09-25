@@ -214,6 +214,12 @@
     determinate-nix = {
       url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     };
+
+    anyrun-custom-command = {
+      # url = "git+file:///home/ole/github/rest/anyrun-custom-command";
+      url = "github:DestinyofYeet/anyrun-custom-command";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur

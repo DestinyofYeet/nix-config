@@ -31,6 +31,7 @@
         "${package}/lib/libnix_run.so"
         "${package}/lib/librink.so"
         "${package}/lib/libsymbols.so"
+        "${inputs.anyrun-custom-command.packages.x86_64-linux.default}/lib/libcustom_command.so"
       ];
     };
 
@@ -47,6 +48,22 @@
             max_entries: 10,
         )
       '';
+
+      "custom-command.ron".text = ''
+        Config(
+          prefix: ":cc",
+          map: {
+            "obsidian": Entry(
+              description: "Launch obsidian",
+              exec: "obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3",
+              envs: Some([
+                ("LANG", "DE")
+              ]),
+            ),
+          }
+        )
+      '';
+
       "nix-run.ron".text = ''
         Config(
           prefix: ":run",
@@ -146,7 +163,7 @@
 
       /* ===== Description label ===== */
       label.match.description {
-        font-size: 0rem;
+        font-size: 0.8rem;
         color: var(--fg-color);
       }
 
