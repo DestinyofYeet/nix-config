@@ -61,27 +61,52 @@ in {
       "custom-command.ron".text = ''
         Config(
           prefix: ":cc",
-          map: {
-            "obsidian": Entry(
+          commands: [
+            Entry(
+              title: "obsidian",
               description: "Launch obsidian",
-              exec: "obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3",
+              exec: Some("obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"),
               envs: Some([
                 ("LANG", "DE")
               ]),
             ),
 
-            "vpn start": Entry(
-              description: "Start openfortivpn",
-              exec: "${startVpnScript}",
-              print_output: Some(true),
+            Entry(
+              title: "vpn",
+              description: "Openfortivpn Options",
+              subcommands: Some([
+                Entry(
+                  title: "Start",
+                  description: "Start",
+                  exec: Some("${startVpnScript}"),
+                  print_output: Some(true),
+                ),
+                Entry(     
+                  title: "Stop",
+                  description: "Stop",
+                  exec: Some("${stopVpnScript}"),
+                  print_output: Some(true),
+                )
+              ])
             ),
 
-            "vpn stop": Entry(
-              description: "Stop openfortivpn",
-              exec: "${stopVpnScript}",
-              print_output: Some(true),
-            ),
-          }
+            Entry(
+              title: "testettest",
+              description: "A test",
+              subcommands: Some([
+                Entry(
+                  title: "Test level 1",
+                  description: "test level 1",
+                  subcommands: Some([
+                    Entry(
+                      title: "Test level 2",
+                      description: "Test level 2",
+                    )
+                  ])
+                )
+              ])
+            )
+          ]
         )
       '';
 
