@@ -1,4 +1,22 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, pkgs, secretStore, ... }:
+let
+  haUser = config.systemd.services."home-assistant".serviceConfig.User;
+  haGroup = config.systemd.services."home-assistant".serviceConfig.Group;
+
+  secrets = secretStore.getServerSecrets "nix-server";
+in {
+  age.secrets = {
+    ha_longitude = {
+      file = secrets + "/ha_longitude.age";
+      owner = haUser;
+      group = haGroup;
+    };
+    ha_latitude = {
+      file = secrets + "/ha_latitude.age";
+      owner = haUser;
+      group = haGroup;
+    };
+  };
 
   services.home-assistant = {
     enable = true;
@@ -16,7 +34,11 @@
         time_zone = "Europe/Berlin";
         unit_system = "metric";
         temperature_unit = "C";
+        latitude = "!include ${config.age.secrets.ha_latitude.path}";
+        longitude = "!include ${config.age.secrets.ha_longitude.path}";
       };
+
+      automation = "!include automations.yaml";
     };
   };
 

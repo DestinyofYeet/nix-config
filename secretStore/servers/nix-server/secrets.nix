@@ -69,4 +69,7 @@ in {
 
   "restic-repo-documents.age".publicKeys = authed;
   "restic-repo-documents-pw.age".publicKeys = authed;
+
+  "ha_latitude.age".publicKeys = authed;
+  "ha_longitude.age".publicKeys = authed;
 }
