@@ -22,6 +22,7 @@ in {
     enable = true;
     extraComponents = [
       "zha" # zigbee
+      "mobile_app"
     ];
 
     config = {
@@ -39,6 +40,8 @@ in {
       };
 
       automation = "!include automations.yaml";
+
+      default_config = { };
     };
   };
 
