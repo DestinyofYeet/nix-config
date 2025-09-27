@@ -41,7 +41,21 @@ in {
 
       automation = "!include automations.yaml";
 
-      default_config = { };
+      assist_pipeline = { };
+      config = { };
+      dhcp = { };
+      energy = { };
+      history = { };
+      homeassistant_alerts = { };
+      logbook = { };
+      mobile_app = { };
+      my = { };
+      ssdp = { };
+      stream = { };
+      sun = { };
+      usb = { };
+      webhook = { };
+      zeroconf = { };
     };
   };
 
