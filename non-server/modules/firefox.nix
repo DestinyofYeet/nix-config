@@ -236,6 +236,7 @@ in {
         keepassxc-browser
         # tree-style-tab
         terms-of-service-didnt-read
+        youtube-no-translation
       ];
 
       settings = {
