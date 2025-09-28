@@ -220,6 +220,8 @@
       url = "github:DestinyofYeet/anyrun-custom-command";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -250,6 +252,8 @@
         inputs.microvm-nix.nixosModules.host
 
         inputs.determinate-nix.nixosModules.default
+
+        inputs.chaotic.nixosModules.default
       ];
 
       non-server-modules = [

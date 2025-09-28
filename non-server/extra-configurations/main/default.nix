@@ -2,8 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { pkgs, config, ... }: {
-  imports =
-    [ ../common ./vr.nix ./vpn.nix ./agenix.nix ./swap.nix ./sunshine.nix ];
+  imports = [
+    ../common
+    ./vr.nix
+    ./vpn.nix
+    ./agenix.nix
+    ./swap.nix
+    ./sunshine.nix
+    # ./bore_kernel.nix
+  ];
 
   networking.extraHosts = ''
     192.168.1.1 nix-server.infra.wg
