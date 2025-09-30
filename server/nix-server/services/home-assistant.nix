@@ -23,6 +23,10 @@ in {
     extraComponents = [
       "zha" # zigbee
       "mobile_app"
+      "accuweather"
+      "dwd_weather_warnings"
+      "openweathermap"
+      "weather"
     ];
 
     config = {
