@@ -10,7 +10,7 @@
     # ./monero.nix
     ./uptime-kuma.nix
     ./nix-serve.nix
-    ./netdata.nix
+    # ./netdata.nix
     ./navidrome.nix
     ./netdata.nix
     ./openssh.nix

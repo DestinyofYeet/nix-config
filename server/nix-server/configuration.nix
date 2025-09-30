@@ -63,10 +63,5 @@
     formatted = builtins.concatStringsSep "\n" sortedUnique;
   in formatted;
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-  };
-
-  programs.uwsm.enable = true;
+  programs.sway.enable = true;
 }

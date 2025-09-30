@@ -36,6 +36,7 @@
     zfs
     iotop
     nvtopPackages.full
+    weston
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
