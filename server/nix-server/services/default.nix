@@ -62,7 +62,7 @@
     ./kavita.nix
     # ./zabbix.nix
     # ./photoprism.nix
-    ./sunshine.nix
+    # ./sunshine.nix
     ./beszel.nix
     ./home-assistant.nix
   ];

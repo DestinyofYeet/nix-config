@@ -9,5 +9,6 @@
     ./bash.nix
     ./agenix.nix
     # ./hyprland.nix
+    ./sway.nix
   ];
 }
