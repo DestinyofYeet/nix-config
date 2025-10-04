@@ -2190,11 +2190,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1758145496,
-        "narHash": "sha256-yWQbwOuCLWacz4HLrHHihsHtkOp59CdvQ4WmxLoPWOY=",
+        "lastModified": 1759606286,
+        "narHash": "sha256-gxIB4LQPaxBaAX4e8Ynsdzt/ciRPIbCTYox/JjjYUH4=",
         "owner": "DestinyofYeet",
         "repo": "strichliste",
-        "rev": "2d27d804acac1394ecc63bcd9a7ddfbc24409f46",
+        "rev": "6af9f80ec55a9ab93a5c82e9ee62cd637a77f22b",
         "type": "github"
       },
       "original": {
