@@ -24,6 +24,11 @@ in {
       name = "Blank profile";
     };
 
+    passbolt-admin = {
+      id = 2;
+      name = "Passbolt FS-Admin";
+    };
+
     default-profile = {
       id = 0;
       name = "default-profile";
