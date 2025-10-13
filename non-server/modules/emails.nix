@@ -24,7 +24,7 @@
 
   };
 
-  accounts.email.accounts = rec {
+  accounts.email.accounts = {
     oth_stud_email = {
       primary = true;
       address = "ole.bendixen@st.oth-regensburg.de";
@@ -79,29 +79,54 @@
       };
     };
 
-    fachschaft_im = oth_stud_email // {
-      primary = false;
-      address = "fachschaft_im@oth-regensburg.de";
+    ole_hotmail = {
+      thunderbird = {
+        enable = true;
 
-      # userName = "hs-regensburg.de\\beo45216";
-      userName = "fachschaft_im@oth-regensburg.de";
+        settings = id: {
+          # sets method to oauth2
+          "mail.server.server_${id}.authMethod" = 10;
+          "mail.smtpserver.smtp_${id}.authMethod" = 10;
+        };
+      };
 
-      realName = "Fachschaft IM";
-      signature = {
-        showSignature = "append";
-        text = ''
-          ------------------------------------------------------------------------------------------
-          Ostbayerische Technische Hochschule Regensburg
-          Fachschaft Informatik Mathematik (FSIM)
-          K-Gebäude K032
-          Galgenbergstraße 32
-          93053 Regensburg
+      address = "bendiixeno@hotmail.de";
+      userName = "bendiixeno@hotmail.de";
+      realName = "Ole";
 
-          Telefon: +49 941 943 1276
-          E-Mail: fachschaft_im@oth-regensburg.de
-          Internet: https://www.fsim-ev.de/
-          ---------------------------------------------------------------------------
-        '';
+      imap = {
+        host = "outlook.office365.com";
+        port = 993;
+        tls = { enable = true; };
+      };
+
+      smtp = {
+        host = "smtp-mail.outlook.com";
+        port = 587;
+        tls = {
+          enable = true;
+          useStartTls = true;
+        };
+      };
+    };
+
+    ole_gmail = {
+      flavor = "gmail.com";
+      address = "olebend@gmail.com";
+      thunderbird.enable = true;
+      userName = "olebend@gmail.com";
+      realName = "Ole";
+
+      imap = {
+        host = "imap.gmail.com";
+        tls.enable = true;
+        port = 993;
+      };
+
+      smtp = {
+        host = "smtp.gmail.com";
+        tls.enable = true;
+        port = 465;
       };
     };
 
