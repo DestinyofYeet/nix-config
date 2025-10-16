@@ -278,5 +278,6 @@ in {
       moonlight-qt
       tidal-dl
       tokei
+      eduvpn-client
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
