@@ -2190,15 +2190,16 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1760475712,
-        "narHash": "sha256-8AvixBn9Kj40Urityk/NQp5ZlO+Y4kimPxGkHenKT4A=",
+        "lastModified": 1760600154,
+        "narHash": "sha256-rtnnDfxECO0kK5cATW6lH+vCIRw5pCQSkdRhLUDTE8E=",
         "owner": "DestinyofYeet",
         "repo": "strichliste",
-        "rev": "7d2fe2d3eec17f83273c43fb12db4b16af6f1a69",
+        "rev": "f0a05615e95d0b85199f66155e344101efdfe570",
         "type": "github"
       },
       "original": {
         "owner": "DestinyofYeet",
+        "ref": "nix-option-fix",
         "repo": "strichliste",
         "type": "github"
       }
