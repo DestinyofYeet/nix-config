@@ -45,4 +45,6 @@
 
   hardware.enableAllHardware = true;
   hardware.enableAllFirmware = true;
+
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
 }
