@@ -135,16 +135,19 @@
       thunderbird.enable = true;
       userName = "ole@ole.blue";
       realName = "Ole";
+      passwordCommand = "cat ${config.age.secrets.email-ole-blue-pw.path}";
       imap = {
         host = "mail.ole.blue";
         tls = { enable = true; };
+        authentication = "plain";
         port = 993;
       };
 
       smtp = {
         inherit (imap) host;
         tls.enable = true;
-        port = 587;
+        authentication = "plain";
+        port = 465;
       };
 
       aliases =

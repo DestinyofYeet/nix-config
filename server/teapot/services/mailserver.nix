@@ -111,6 +111,7 @@ in {
         '';
 
         aliases = [
+          "böhmerwaldhof@ole.blue"
           "strichliste-rs@ole.blue"
           # "ole@strichliste.rs"
           "whois@ole.blue"
