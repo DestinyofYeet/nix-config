@@ -52,6 +52,9 @@
       };
 
       "loc".default = "${pkgs.tokei}/bin/tokei";
+
+      "enable-pen" = "sudo systemctl stop disable-pen";
+      "disable-pen" = "sudo systemctl start disable-pen";
     };
   };
 }
