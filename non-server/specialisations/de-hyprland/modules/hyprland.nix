@@ -75,6 +75,8 @@ in {
         };
       };
 
+      cursor = { warp_back_after_non_mouse_input = true; };
+
       env = [
         "QT_QPA_PLATFORM,wayland"
         "QT_QPA_PLATFORMTHEME,qt5ct"
@@ -99,6 +101,7 @@ in {
       ]);
 
       input = {
+        follow_mouse = 2;
         accel_profile = "flat";
 
         numlock_by_default = true;
