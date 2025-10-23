@@ -162,6 +162,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    yazi-flavors = {
+      url = "github:yazi-rs/flavors";
+      flake = false;
+    };
+
     microvm-nix = {
       url = "github:astro/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";

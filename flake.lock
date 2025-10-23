@@ -1894,6 +1894,7 @@
         "stylix": "stylix",
         "waybar-taskwarrior": "waybar-taskwarrior",
         "yazi": "yazi",
+        "yazi-flavors": "yazi-flavors",
         "zen-browser": "zen-browser"
       }
     },
@@ -2552,6 +2553,22 @@
       "original": {
         "owner": "sxyazi",
         "repo": "yazi",
+        "type": "github"
+      }
+    },
+    "yazi-flavors": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1761204921,
+        "narHash": "sha256-bavHcmeGZ49nNeM+0DSdKvxZDPVm3e6eaNmfmwfCid0=",
+        "owner": "yazi-rs",
+        "repo": "flavors",
+        "rev": "f6b425a6d57af39c10ddfd94790759f4d7612332",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yazi-rs",
+        "repo": "flavors",
         "type": "github"
       }
     },
