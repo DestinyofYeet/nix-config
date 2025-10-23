@@ -1,25 +1,15 @@
-{
-  pkgs,
-  config,
-  ...
-}:
-{
-  environment.systemPackages = with pkgs; [
-    opencomposite
-    wlx-overlay-s
-  ];
+{ pkgs, config, ... }: {
+  environment.systemPackages = with pkgs; [ opencomposite wlx-overlay-s ];
 
   programs.alvr = {
     enable = true;
     openFirewall = true;
   };
 
-  programs.envision = {
-    enable = false;
-  };
+  programs.envision = { enable = false; };
 
   services.wivrn = {
-    enable = true;
+    enable = false;
     openFirewall = true;
 
     # package = pkgs.wivrn.overrideAttrs {
@@ -47,19 +37,17 @@
         scale = 1.0;
         # 100 Mb/s
         bitrate = 120000000;
-        encoders = [
-          {
-            # encoder = "vaapi";
-            # codec = "h265";
-            encoder = "x264";
-            codec = "h265";
-            # 1.0 x 1.0 scaling
-            width = 1.0;
-            height = 1.0;
-            offset_x = 0.0;
-            offset_y = 0.0;
-          }
-        ];
+        encoders = [{
+          # encoder = "vaapi";
+          # codec = "h265";
+          encoder = "x264";
+          codec = "h265";
+          # 1.0 x 1.0 scaling
+          width = 1.0;
+          height = 1.0;
+          offset_x = 0.0;
+          offset_y = 0.0;
+        }];
       };
     };
   };
@@ -69,7 +57,8 @@
       inherit (config.boot.kernelPackages) kernel;
       patches = [
         (pkgs.fetchpatch {
-          url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+          url =
+            "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
           hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
         })
       ];

@@ -11,7 +11,7 @@ in {
   programs.anyrun = rec {
     enable = true;
 
-    package = inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins;
+    package = pkgs.anyrun;
 
     config = {
       x = { fraction = 0.5; };
