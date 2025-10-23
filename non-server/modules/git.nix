@@ -36,7 +36,7 @@ in {
       path = git-config-other;
       condition = "gitdir/i:/drives/programming-Stuff/";
     }];
-    extraConfig = lib.mkMerge [
+    settings = lib.mkMerge [
       {
         safe = { directory = "*"; };
         init = { defaultBranch = "main"; };

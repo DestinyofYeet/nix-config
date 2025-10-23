@@ -1,5 +1,5 @@
 { pkgs, ... }:
-let gaming-pkgs = with pkgs; [ gamescope mangohud amdvlk gamemode vkbasalt ];
+let gaming-pkgs = with pkgs; [ gamescope mangohud gamemode vkbasalt ];
 in {
 
   programs.gamemode.enable = true;

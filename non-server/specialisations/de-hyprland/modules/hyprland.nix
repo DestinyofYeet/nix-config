@@ -55,7 +55,6 @@ in {
       "$mainMod" = "SUPER";
       "$fileManager" = "dolphin";
       "$terminal" = "${lib.getExe pkgs.wezterm}";
-      # "$dmenu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
       "$dmenu" = "${config.programs.anyrun.package}/bin/anyrun";
 
       ecosystem = { no_update_news = true; };

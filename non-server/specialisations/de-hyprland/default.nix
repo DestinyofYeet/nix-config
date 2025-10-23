@@ -3,7 +3,10 @@ let specialisation = "de-hyprland";
 in {
   system.nixos.tags = [ specialisation ];
 
-  imports = [ ./japanese-keyboard.nix ./programs.nix ];
+  imports = [
+    # ./japanese-keyboard.nix
+    ./programs.nix
+  ];
 
   security.pam.services.swaylock = { };
   services.gnome.gnome-keyring.enable = true;
