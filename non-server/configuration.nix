@@ -11,6 +11,7 @@
     ./scripts
     ./yubikey.nix
     ./background.nix
+    ./greeter.nix
   ];
 
   # Configure network proxy if necessary
@@ -106,16 +107,6 @@
     ]);
 
     config.common.default = "*";
-  };
-
-  services.displayManager.sddm = {
-    enable = true;
-    # catppuccin-mocha is a qt6 theme
-    package = lib.mkDefault pkgs.kdePackages.sddm;
-    theme = "catppuccin-mocha";
-    # theme = "${sddm-theme}";
-
-    wayland.enable = true;
   };
 
   services.udisks2 = { enable = true; };
