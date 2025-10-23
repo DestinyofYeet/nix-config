@@ -36,7 +36,7 @@ in {
         "ventoy-1.1.05"
         "dotnet-sdk-6.0.428" # eddie
         "dotnet-runtime-6.0.36" # eddie
-        "qtwebengine-5.15.19" # jellyfin-media-player
+        # "qtwebengine-5.15.19" # jellyfin-media-player
         "ventoy-1.1.07"
       ];
       allowUnfree = true;
@@ -134,7 +134,7 @@ in {
       brave
       innernet
       rustup
-      jellyfin-media-player
+      # jellyfin-media-player # depending on qtwebengine, which is broken
       wireguard-tools
       monero-gui
       fd
