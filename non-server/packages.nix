@@ -36,7 +36,8 @@ in {
         "ventoy-1.1.05"
         "dotnet-sdk-6.0.428" # eddie
         "dotnet-runtime-6.0.36" # eddie
-        "qtwebengine-5.15.19" # jellyfin-media-player
+        # "qtwebengine-5.15.19" # jellyfin-media-player
+        "ventoy-1.1.07"
       ];
       allowUnfree = true;
       nvidia.acceptLicense = true;
@@ -133,7 +134,7 @@ in {
       brave
       innernet
       rustup
-      jellyfin-media-player
+      # jellyfin-media-player # depending on qtwebengine, which is broken
       wireguard-tools
       monero-gui
       fd
@@ -165,7 +166,7 @@ in {
       yubikey-manager
       # yubikey-personalization-gui // archived upstream
       yubikey-personalization
-      nextcloud-client
+      stable-pkgs.nextcloud-client
       traceroute
       discord
       audacity
@@ -194,7 +195,7 @@ in {
       thunderbird
       d2
       stable-pkgs.gimp-with-plugins
-      rpi-imager
+      stable-pkgs.rpi-imager
       zoom-us
       texliveFull
       inkscape-with-extensions
@@ -244,7 +245,7 @@ in {
       wirelesstools
       inetutils
       krita
-      (lib.mkIf (config.networking.hostName != "kartoffelkiste") aseprite)
+      (lib.mkIf (config.networking.hostName != "wattson") aseprite)
       # pyprland
       qFlipper
       yt-dlp

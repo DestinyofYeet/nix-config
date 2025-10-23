@@ -2,7 +2,10 @@
 
   systemd.services."disable-pen" = {
     script = ''
-      ${lib.getExe pkgs.evtest} --grab /dev/input/event8 > /dev/null
+      line=$(${
+        lib.getExe pkgs.libinput
+      } list-devices | grep -i "Wacom HID 5365 Pen" -A 1 | grep -i "Kernel")
+      ${lib.getExe pkgs.evtest} --grab ''${line#"Kernel: "} > /dev/null
     '';
     wantedBy = [ "multi-user.target" ];
   };
