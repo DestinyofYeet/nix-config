@@ -24,7 +24,7 @@
 
       "l" = "ls";
 
-      "yz" = { default = "${pkgs.yazi}/bin/yazi"; };
+      # "yz" = { default = "${pkgs.yazi}/bin/yazi"; };
 
       "lg" = { default = "${pkgs.lazygit}/bin/lazygit"; };
 

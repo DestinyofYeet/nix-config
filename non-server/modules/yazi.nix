@@ -4,6 +4,8 @@
     enableZshIntegration = true;
     enableNushellIntegration = true;
 
+    shellWrapperName = "yz";
+
     flavors = let ghFlavors = inputs.yazi-flavors;
     in { catppuccin-mocha = "${ghFlavors}/catppuccin-mocha.yazi/"; };
 
