@@ -9,7 +9,10 @@
     settings = {
       editor = {
         end-of-line-diagnostics = "hint";
-        inline-diagnostics = { cursor-line = "warning"; };
+        inline-diagnostics = {
+          cursor-line = "warning";
+          other-lines = "warning";
+        };
         line-number = "relative";
 
         mouse = false;
