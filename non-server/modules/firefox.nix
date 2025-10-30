@@ -178,7 +178,7 @@ in {
         "trailhead.firstrun.didSeeAboutWelcome" = true;
         "extensions.formautofill.creditCards.enabled" = false;
         "signon.rememberSignons" = false;
-        "widget.use-xdg-desktop-portal.file-picker" = 1;
+        "widget.use-xdg-desktop-portal.file-picker" = true;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.fixup.domainsuffixwhitelist.wg" =
           true; # make nix-server.infra.wg not result in a search

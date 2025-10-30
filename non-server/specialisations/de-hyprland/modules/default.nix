@@ -14,7 +14,7 @@
     ./nushell.nix
     ./pyprland.nix
     ./cursor.nix
-    ./xdg.nix
     ./redshift.nix
+    ./termfilechooser.nix
   ];
 }

@@ -26,12 +26,20 @@ in {
     enable = true;
 
     extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
+      xdg-desktop-portal-termfilechooser
       xdg-desktop-portal-hyprland
     ];
 
     xdgOpenUsePortal = true;
+
+    config = {
+      common = { default = [ "hyprland" ]; };
+      hyprland = {
+        default = [ "hyprland" ];
+        "org.freedesktop.impl.portal.FileChooser" =
+          [ "xdg-desktop-portal-termfilechooser" ];
+      };
+    };
   };
 
   home-manager.extraSpecialArgs.current-specialisation = specialisation;

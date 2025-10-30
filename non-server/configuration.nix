@@ -101,12 +101,9 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = lib.mkDefault (with pkgs; [
-      xdg-desktop-portal-wlr
-      kdePackages.xdg-desktop-portal-kde
-    ]);
 
-    config.common.default = "*";
+    extraPortals = lib.mkDefault (with pkgs; [ xdg-desktop-portal-wlr ]);
+    config.common.default = lib.mkDefault "*";
   };
 
   services.udisks2 = { enable = true; };
