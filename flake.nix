@@ -240,6 +240,15 @@
 
       baseline-modules = [
         ./options/beszel
+        {
+
+          nixpkgs.overlays = [
+            (final: prev: {
+              inherit (prev.lixPackageSets.stable)
+                nixpkgs-review nix-eval-jobs nix-fast-build colmena;
+            })
+          ];
+        }
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         inputs.nix-topology.nixosModules.default
@@ -250,8 +259,6 @@
         })
 
         inputs.microvm-nix.nixosModules.host
-
-        inputs.determinate-nix.nixosModules.default
 
         inputs.chaotic.nixosModules.default
       ];
