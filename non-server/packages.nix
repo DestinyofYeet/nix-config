@@ -280,5 +280,6 @@ in {
       tidal-dl
       tokei
       eduvpn-client
+      inputs.fladder-nix.packages.x86_64-linux.default
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
