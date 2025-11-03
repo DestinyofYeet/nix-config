@@ -15,9 +15,6 @@ in {
     nextcloud-uwuwhatsthis-de.file = ../secrets/nextcloud-uwuwhatsthis.de.age;
     nextcloud-ole-blue.file = ../secrets/nextcloud-ole-blue.age;
 
-    postgresql-roundcube-password.file =
-      ../secrets/postgresql-roundcube-password.age;
-
     forgejo-email-ole-blue.file = secretStore.secrets
       + "/servers/teapot/forgejo_email_password.age";
 
@@ -202,7 +199,9 @@ in {
 
     hostName = "mail.ole.blue";
     extraConfig = ''
-      $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
+      $config['imap_host'] = "ssl://${config.mailserver.fqdn}:993";
+
+      $config['smtp_host'] = "tls://${config.mailserver.fqdn}";
       $config['smtp_user'] = "%u";
       $config['smtp_pass'] = "%p";
 
@@ -215,14 +214,6 @@ in {
     # $config['virtuser_file'] = "${virtuser_file}";
 
     configureNginx = true;
-
-    # database = {
-    #   host = "loalhost";
-    #   # host = "10.100.0.4";
-    #   # passwordFile = config.age.secrets.postgresql-roundcube-password.path;
-    #   # username = "roundcube";
-    #   # dbname = "roundcube";
-    # };
   };
 
   services.rspamd = let weight_failed = "10000";
