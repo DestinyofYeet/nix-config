@@ -273,6 +273,8 @@ in {
       actions {
         reject = null;
         add_header = 15;
+        greylist = null;
+        soft_reject = null;
       }
     '';
 
