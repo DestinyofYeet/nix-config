@@ -281,5 +281,6 @@ in {
       tokei
       eduvpn-client
       inputs.fladder-nix.packages.x86_64-linux.default
+      nb
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
