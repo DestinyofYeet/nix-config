@@ -7,13 +7,6 @@ let
     * ${builtins.readFile public-signing-key-path}
   '';
 
-  git-config-other = (pkgs.formats.toml { }).generate "git-config-other" {
-    user = {
-      name = "DestinyofYeet";
-      email = "ole@ole.blue";
-    };
-  };
-
   git-config-oth = (pkgs.formats.toml { }).generate "git-config-oth" {
     user = {
       name = "beo45216";
@@ -23,23 +16,18 @@ let
 in {
   # name and email is set in baseline
   programs.git = {
-    includes = [
-      {
-        path = git-config-oth;
-        condition = "gitdir/i:~/github/oth/";
-      }
-      {
-        path = git-config-other;
-        condition = "gitdir/i:~/github/rest/";
-      }
-    ] ++ lib.optionals (lib.custom.isMain osConfig) [{
-      path = git-config-other;
-      condition = "gitdir/i:/drives/programming-Stuff/";
+    includes = [{
+      path = git-config-oth;
+      condition = "gitdir/i:~/github/oth/";
     }];
     settings = lib.mkMerge [
       {
         safe = { directory = "*"; };
         init = { defaultBranch = "main"; };
+        user = {
+          name = "DestinyofYeet";
+          email = "ole@ole.blue";
+        };
       }
       (lib.mkIf (builtins.hasAttr "ssh-key-gitea" config.age.secrets) {
         gpg = {
