@@ -282,5 +282,6 @@ in {
       eduvpn-client
       inputs.fladder-nix.packages.x86_64-linux.default
       nb
+      inputs.tiddl-nix.packages.x86_64-linux.default
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }

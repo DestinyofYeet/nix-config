@@ -1517,6 +1517,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_11": {
+      "locked": {
+        "lastModified": 1762111121,
+        "narHash": "sha256-4vhDuZ7OZaZmKKrnDpxLZZpGIJvAeMtK6FKLJYUtAdw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "b3d51a0365f6695e7dd5cdf3e180604530ed33b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1755922037,
@@ -1927,6 +1943,7 @@
         "strichliste": "strichliste",
         "strichliste-rs": "strichliste-rs",
         "stylix": "stylix",
+        "tiddl-nix": "tiddl-nix",
         "waybar-taskwarrior": "waybar-taskwarrior",
         "yazi": "yazi",
         "yazi-flavors": "yazi-flavors",
@@ -2408,6 +2425,24 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tiddl-nix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_11"
+      },
+      "locked": {
+        "lastModified": 1762308841,
+        "narHash": "sha256-ndzr1JatGk0rph5vBNTec+BOfGrBvJaVu6WYP90D/cI=",
+        "owner": "DestinyofYeet",
+        "repo": "tiddl.nix",
+        "rev": "2cf16a1cc1e4fb9049c73c8b386c07553ca3f19a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DestinyofYeet",
+        "repo": "tiddl.nix",
         "type": "github"
       }
     },

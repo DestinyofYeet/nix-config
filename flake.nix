@@ -224,6 +224,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     # fladder-nix.url = "git+file:///home/ole/github/rest/fladder.nix";
     fladder-nix.url = "github:DestinyofYeet/fladder.nix";
+    tiddl-nix.url = "github:DestinyofYeet/tiddl.nix";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
