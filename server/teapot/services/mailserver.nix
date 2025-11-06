@@ -185,12 +185,10 @@ in {
     certificateScheme = "acme-nginx";
   };
 
-  services.roundcube = let
-    # virtuser_file = pkgs.writeText "virtuser_file" ''
-    #   ole@ole.blue roflrofl@ole.blue
-    # '';
-  in {
+  services.roundcube = {
     enable = true;
+
+    dicts = with pkgs.aspellDicts; [ en de ];
 
     plugins = [
       # "managesieve"
@@ -274,7 +272,6 @@ in {
         reject = null;
         add_header = 15;
         greylist = null;
-        soft_reject = null;
       }
     '';
 
