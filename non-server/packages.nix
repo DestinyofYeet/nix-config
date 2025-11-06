@@ -283,5 +283,6 @@ in {
       inputs.fladder-nix.packages.x86_64-linux.default
       nb
       inputs.tiddl-nix.packages.x86_64-linux.default
+      gnome-disk-utility
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
