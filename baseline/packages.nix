@@ -7,7 +7,6 @@
     wget
     btop
     bat
-    gh
     git
     ripgrep
     fzf
