@@ -68,6 +68,12 @@
       fsType = "nfs";
       options = [ "hard" "intr" "nofail" ];
     };
+
+    "/drives/speeeeed" = {
+      device = "/dev/disk/by-uuid/24425f48-25f4-45e1-9928-127e06f4116a";
+      fsType = "ext4";
+      options = [ "nofail" ];
+    };
   };
 
   systemd.services = {

@@ -17,6 +17,8 @@
         isolation: true
       }
 
+      def build_system_completion [] { [ "boot", "switch", "test"]}
+
       def --wrapped build-system-no-nom [ function: string, ...args ] {
         sudo -v
         sudo nixos-rebuild $function ...$args --flake /home/ole/nixos#
@@ -30,7 +32,7 @@
         build-system-no-nom test ...$args --specialisation ${current-specialisation}
       }
 
-      def --wrapped build-system [ function: string, ...args ] {
+      def --wrapped build-system [ function: string@build_system_completion, ...args ] {
         sudo -v
         sudo nixos-rebuild $function ...$args --flake /home/ole/nixos# --log-format internal-json -v o+e>| nom --json
       }
