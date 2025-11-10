@@ -28,6 +28,7 @@ in {
     extraPortals = with pkgs; [
       xdg-desktop-portal-termfilechooser
       xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
     ];
 
     xdgOpenUsePortal = true;
