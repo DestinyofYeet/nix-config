@@ -207,7 +207,7 @@
     };
 
     strichliste-rs = {
-      url = "github:DestinyofYeet/strichliste/nix-option-fix";
+      url = "github:DestinyofYeet/strichliste";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
