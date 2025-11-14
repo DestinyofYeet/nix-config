@@ -284,6 +284,6 @@ in {
       nb
       inputs.tiddl-nix.packages.x86_64-linux.default
       gnome-disk-utility
-      figma-linux
+      bluetui
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
