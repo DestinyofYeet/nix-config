@@ -1,8 +1,6 @@
-{ pkgs, ... }:
-let
-  service_dependency = "home-manager-ole.service";
-in
-{
+{ pkgs, lib, ... }:
+let service_dependency = "home-manager-ole.service";
+in {
   systemd.services.home-manager-ole-pre = {
     before = [ service_dependency ];
     requiredBy = [ service_dependency ];
@@ -26,33 +24,39 @@ in
     };
   };
 
-  networking.firewall = {
-    enable = false;
-  };
-
-  # # for connecting to my innernet network
-  # systemd.services.innernet-infra = {
-  #   enable = true;
-  #   description = "innernet client for infra";
-  #   wantedBy = [ "multi-user.target" ];
-  #   after = [
-  #     "network-online.target"
-  #     "nss-lookup.target"
-  #   ];
-  #   wants = [
-  #     "network-online.target"
-  #     "nss-lookup.target"
-  #   ];
-  #   serviceConfig = {
-  #     Restart = "always";
-  #     ExecStart = "${pkgs.innernet}/bin/innernet up infra --daemon --interval 60 --no-write-hosts";
-  #   };
-  # };
-
-  # services.fwupd.enable = true;
+  networking.firewall = { enable = false; };
 
   services.pcscd.enable = true;
 
-  # ipfs
-  # services.kubo.enable = true;
+  # https://github.com/PixlOne/logiops/issues/520
+  systemd.services."logid" = let
+    cfg = pkgs.writers.writeText "logid.cfg" ''
+          devices: (
+      {
+          name: "MX Master 4 for Mac";
+          dpi: 800;
+          smartshift:
+          {
+              on: true;
+              threshold: 2;
+              torque: 50;
+          };
+          hiresscroll:
+          {
+              hires: true;
+              invert: false;
+          };
+
+          thumbwheel: {
+            invert: true;
+          }
+        })
+    '';
+  in {
+    script = ''
+      ${lib.getExe pkgs.logiops} -c ${cfg}
+    '';
+
+    wantedBy = [ "multi-user.target" ];
+  };
 }

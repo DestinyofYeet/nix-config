@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, osConfig, ... }:
 let
   addons = pkgs.nur.repos.rycee.firefox-addons;
 
@@ -209,13 +209,18 @@ in {
 
         "browser.contentblocking.category" = "strict";
 
+        "extensions.autoDisableScopes" = 0; # automatically enable plugins
         # sidebar
         "browser.engagement.sidebar-button.has-used" = true;
         "sidebar.backupState" = ''
           sidebar.backupState	{"width":"224px","command":"treestyletab_piro_sakura_ne_jp-sidebar-action","expanded":false,"hidden":true}'';
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
-      };
+      } // (lib.mkIf (lib.custom.isLaptop osConfig) {
+
+        "mousewheel.system_scroll_override.enabled" = false;
+        "mousewheel.default.delta_multiplier_y" = 40;
+      });
 
       search.default = "Startpage";
 
@@ -243,10 +248,6 @@ in {
         terms-of-service-didnt-read
         youtube-no-translation
       ];
-
-      settings = {
-        "extensions.autoDisableScopes" = 0; # automatically enable plugins
-      };
 
       userChrome = ''
 

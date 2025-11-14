@@ -285,5 +285,6 @@ in {
       inputs.tiddl-nix.packages.x86_64-linux.default
       gnome-disk-utility
       bluetui
+      logiops
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
