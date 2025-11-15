@@ -43,5 +43,6 @@
     firefox.enable = false;
 
     yazi.enable = false;
+    ashell.enable = false;
   };
 }

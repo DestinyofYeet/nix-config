@@ -14,6 +14,10 @@ def restart-waybar [] {
   systemctl --user restart waybar
 }
 
+def restart-ashell [] {
+  systemctl --user restart ashell
+}
+
 def "launch obsidian" [] {
   task spawn --immediate --label obsidian { LANG=DE obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3 }
 }

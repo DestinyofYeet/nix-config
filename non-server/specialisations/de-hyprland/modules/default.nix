@@ -3,7 +3,7 @@
     ./hyprpaper.nix
     # ./hyprsunset.nix
     ./swaylock.nix
-    ./waybar.nix
+    # ./waybar.nix
     ./hyprland.nix
     ./dunst.nix
     ./hypridle.nix
@@ -16,5 +16,6 @@
     ./cursor.nix
     ./redshift.nix
     ./termfilechooser.nix
+    ./ashell.nix
   ];
 }
