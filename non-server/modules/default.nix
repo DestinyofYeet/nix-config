@@ -1,10 +1,10 @@
-{ ... }:
-let a = "something cool";
-in {
+{ ... }: {
   home.stateVersion = "24.05";
 
   # needed for agenix service to start properly
   systemd.user.startServices = "sd-switch";
+
+  nixpkgs.config.allowUnfree = true;
 
   imports = [
     ../../baseline/modules

@@ -1,7 +1,5 @@
 { inputs, stable-pkgs, pkgs, lib, custom, secretStore, flake, ... }: {
   home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
     backupFileExtension = "backup";
 
     extraSpecialArgs = { inherit inputs stable-pkgs custom secretStore flake; };
@@ -12,6 +10,7 @@
       inputs.agenix.homeManagerModules.age
       inputs.shell-aliases.homeManagerModules.default
       inputs.nixvim.homeModules.nixvim
+      inputs.nur.modules.homeManager.default
     ];
   };
 
