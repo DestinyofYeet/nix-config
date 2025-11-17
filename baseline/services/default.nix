@@ -1,1 +1,1 @@
-{ ... }: { imports = [ ./upower.nix ]; }
+{ ... }: { imports = [ ./upower.nix ./tlp.nix ]; }
