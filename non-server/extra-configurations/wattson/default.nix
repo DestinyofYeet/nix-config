@@ -15,6 +15,7 @@
     ../kanata.nix
     ./chromecast.nix
     ./fix-mouse-warping.nix
+    ./upower.nix
   ];
 
   nix = {
