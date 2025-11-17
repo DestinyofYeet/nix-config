@@ -1,4 +1,4 @@
-{ pkgs, lib, stable-pkgs, ... }:
+{ pkgs, lib, stable-pkgs, capabilities, ... }:
 let specialisation = "de-hyprland";
 in {
   system.nixos.tags = [ specialisation ];
@@ -43,6 +43,9 @@ in {
     };
   };
 
-  home-manager.extraSpecialArgs.current-specialisation = specialisation;
+  home-manager.extraSpecialArgs = {
+    inherit capabilities;
+    current-specialisation = specialisation;
+  };
   home-manager.users.ole = { ... }: { imports = [ ../../modules ./modules ]; };
 }

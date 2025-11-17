@@ -317,23 +317,119 @@
           value =
             self.nixosConfigurations.${configuration}.config.system.build.toplevel;
         }) configurations);
+
+      mkHost = (import ./options/mkHost { inherit nixpkgs; }).mkHost;
     in {
       # pfusch, used for micro-vms
       inherit defaultSpecialArgs;
       nixpkgs.config.rocmSupport = true;
 
-      nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = defaultSpecialArgs;
-        modules = [
-          inputs.add-replay-gain.nixosModules.add-replay-gain
-          inputs.clean-unused-files.nixosModules.clean-unused-files
-          # inputs.strichliste.nixosModules.strichliste
-          inputs.networkNamespaces.nixosModules.networkNamespaces
-          inputs.prometheus-qbit.nixosModules.default
-          inputs.auto-add-torrents.nixosModules.default
-          ./server/nix-server
-        ] ++ baseline-modules;
+      # This is highly advised, and will prevent many possible mistakes
+      checks = makeConfigurations [ "main" "wattson" ] // builtins.mapAttrs
+        (system: deployLib: deployLib.deployChecks self.deploy)
+        inputs.deploy-rs.lib;
+
+      nixosConfigurations = {
+        nix-server = mkHost.mkHost {
+
+          system = "x86_64-linux";
+          specialArgs = defaultSpecialArgs;
+          modules = [
+            inputs.add-replay-gain.nixosModules.add-replay-gain
+            inputs.clean-unused-files.nixosModules.clean-unused-files
+            # inputs.strichliste.nixosModules.strichliste
+            inputs.networkNamespaces.nixosModules.networkNamespaces
+            inputs.prometheus-qbit.nixosModules.default
+            inputs.auto-add-torrents.nixosModules.default
+            ./server/nix-server
+          ] ++ baseline-modules;
+        };
+
+        kartoffelkiste = mkHost {
+          system = "x86_64-linux";
+          specialArgs = defaultSpecialArgs;
+          modules = [
+            ./non-server/hardware/kartoffelkiste.nix
+            ./non-server/extra-configurations/kartoffelkiste
+            ./non-server
+          ] ++ non-server-modules;
+
+          capabilities = {
+            monitor.enable = true;
+            battery.enable = true;
+          };
+        };
+
+        wattson = mkHost {
+          system = "x86_64-linux";
+          specialArgs = defaultSpecialArgs;
+          modules = [
+            ./non-server/hardware/wattson.nix
+            ./non-server/extra-configurations/wattson
+            ./non-server
+          ] ++ non-server-modules;
+
+          capabilities = {
+            touch.enable = true;
+            battery.enable = true;
+            monitor.enable = true;
+            bluetooth.enable = true;
+            wifi.enable = true;
+          };
+        };
+
+        main = mkHost {
+          system = "x86_64-linux";
+          specialArgs = defaultSpecialArgs;
+          modules = [
+            ./non-server/hardware/main.nix
+            ./non-server/extra-configurations/main
+            ./non-server
+          ] ++ non-server-modules;
+
+          capabilities = { monitor.enable = true; };
+
+        };
+
+        teapot = mkHost rec {
+
+          system = "x86_64-linux";
+          modules = [
+            inputs.simple-nixos-mailserver.nixosModule
+            inputs.nix-minecraft.nixosModules.minecraft-servers
+            inputs.strichliste-rs.nixosModules.${system}.default
+            { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }
+
+            ./server/teapot
+          ] ++ baseline-modules;
+
+          specialArgs = defaultSpecialArgs;
+
+          capabilities = { headless.enable = true; };
+        };
+
+        bonk = mkHost {
+
+          system = "x86_64-linux";
+          modules = [ ./server/bonk ] ++ baseline-modules;
+
+          specialArgs = defaultSpecialArgs;
+          capabilities = { headless.enable = true; };
+        };
+
+        nixie = mkHost {
+
+          system = "aarch64-linux";
+          modules = [
+            inputs.argon40-nix.nixosModules.default
+            inputs.hardware.nixosModules.raspberry-pi-4
+
+            ./server/nixie
+          ] ++ baseline-modules;
+          specialArgs = defaultSpecialArgs;
+
+          capabilities = { headless.enable = true; };
+        };
       };
 
       deploy.nodes = {
@@ -377,73 +473,6 @@
               self.nixosConfigurations.nixie;
           };
         };
-      };
-
-      # This is highly advised, and will prevent many possible mistakes
-      checks = makeConfigurations [ "main" "wattson" ] // builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy)
-        inputs.deploy-rs.lib;
-
-      nixosConfigurations.kartoffelkiste = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = defaultSpecialArgs;
-        modules = [
-          ./non-server/hardware/kartoffelkiste.nix
-          ./non-server/extra-configurations/kartoffelkiste
-          ./non-server
-        ] ++ non-server-modules;
-      };
-
-      nixosConfigurations.wattson = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = defaultSpecialArgs;
-        modules = [
-          ./non-server/hardware/wattson.nix
-          ./non-server/extra-configurations/wattson
-          ./non-server
-        ] ++ non-server-modules;
-      };
-
-      nixosConfigurations.main = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = defaultSpecialArgs;
-        modules = [
-          ./non-server/hardware/main.nix
-          ./non-server/extra-configurations/main
-          ./non-server
-        ] ++ non-server-modules;
-      };
-
-      nixosConfigurations.teapot = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        modules = [
-          inputs.simple-nixos-mailserver.nixosModule
-          inputs.nix-minecraft.nixosModules.minecraft-servers
-          inputs.strichliste-rs.nixosModules.${system}.default
-          { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }
-
-          ./server/teapot
-        ] ++ baseline-modules;
-
-        specialArgs = defaultSpecialArgs;
-      };
-
-      nixosConfigurations.bonk = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./server/bonk ] ++ baseline-modules;
-
-        specialArgs = defaultSpecialArgs;
-      };
-
-      nixosConfigurations.nixie = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          inputs.argon40-nix.nixosModules.default
-          inputs.hardware.nixosModules.raspberry-pi-4
-
-          ./server/nixie
-        ] ++ baseline-modules;
-        specialArgs = defaultSpecialArgs;
       };
 
       topology.x86_64-linux = import inputs.nix-topology {
