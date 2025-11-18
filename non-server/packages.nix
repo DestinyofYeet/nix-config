@@ -142,7 +142,7 @@ in {
       nodePackages.nodejs
       ungoogled-chromium
       magic-wormhole-rs
-      stable-pkgs.element-desktop
+      element-desktop
       python3
       helix
       stable-pkgs.libreoffice-qt6-fresh
