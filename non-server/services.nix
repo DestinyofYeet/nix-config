@@ -38,13 +38,24 @@ in {
           smartshift:
           {
               on: true;
-              threshold: 2;
+              threshold: 3;
               torque: 50;
           };
           hiresscroll:
           {
               hires: true;
               invert: false;
+              target: false;
+              up: {
+                  mode: "Axis";
+                  axis: "REL_WHEEL_HI_RES";
+                  axis_multiplier: 0.25;
+              },
+              down: {
+                  mode: "Axis";
+                  axis: "REL_WHEEL_HI_RES";
+                  axis_multiplier: -0.25;
+              },
           };
 
           thumbwheel: {
