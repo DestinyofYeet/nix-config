@@ -69,6 +69,8 @@ in {
             inputs.strichliste-rs.nixosModules.${config.nixpkgs.system}.default
             "strichliste-rs"
             "https://github.com/DestinyofYeet/strichliste/tree/master")
+          (build-scope inputs.authentik-nix.nixosModules.default "authentik-nix"
+            "https://github.com/nix-community/authentik-nix/tree/main")
         ];
       };
   };
