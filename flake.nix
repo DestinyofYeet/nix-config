@@ -343,7 +343,7 @@
         inputs.deploy-rs.lib;
 
       nixosConfigurations = {
-        nix-server = mkHost.mkHost {
+        nix-server = mkHost {
 
           system = "x86_64-linux";
           specialArgs = defaultSpecialArgs;
@@ -354,8 +354,11 @@
             inputs.networkNamespaces.nixosModules.networkNamespaces
             inputs.prometheus-qbit.nixosModules.default
             inputs.auto-add-torrents.nixosModules.default
+            inputs.authentik-nix.nixosModules.default
             ./server/nix-server
           ] ++ baseline-modules;
+
+          capabilities = { headless.enable = true; };
         };
 
         kartoffelkiste = mkHost {

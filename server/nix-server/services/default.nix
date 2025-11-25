@@ -49,7 +49,7 @@
     ./msmtp.nix
     ./wiki-js.nix
     ./vpn.nix
-    ./nextcloud.nix
+    # ./nextcloud.nix
     # ./minio.nix
     ./garage.nix
     ./nginx.nix
@@ -65,5 +65,6 @@
     # ./sunshine.nix
     ./beszel.nix
     ./home-assistant.nix
+    ./authentik.nix
   ];
 }

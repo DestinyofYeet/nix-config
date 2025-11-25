@@ -72,4 +72,6 @@ in {
 
   "ha_latitude.age".publicKeys = authed;
   "ha_longitude.age".publicKeys = authed;
+
+  "authentik-env.age".publicKeys = authed;
 }
