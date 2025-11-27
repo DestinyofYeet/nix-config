@@ -33,6 +33,9 @@ in {
 
     mastodon-email-ole-blue.file = secrets
       + "/mastodon_email_password_hash.age";
+
+    authentik-email-ole-blue.file = secrets
+      + "/authentik_email_password_hash.age";
   };
 
   mailserver = rec {
@@ -179,6 +182,12 @@ in {
       "mastodon@drogen.gratis" = {
         sendOnly = true;
         hashedPasswordFile = config.age.secrets.mastodon-email-ole-blue.path;
+      };
+
+      "authentik@ole.blue" = {
+        sendOnly = true;
+        hashedPasswordFile = config.age.secrets.authentik-email-ole-blue.path;
+        aliases = [ "authentik@ole.blue" ];
       };
     };
 

@@ -17,4 +17,6 @@ in {
 
   "mastodon_email_password_hash.age".publicKeys = authed;
   "mastodon_email_password.age".publicKeys = authed;
+
+  "authentik_email_password_hash.age".publicKeys = authed;
 }

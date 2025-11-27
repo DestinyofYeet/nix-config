@@ -4,6 +4,7 @@ in {
   age.secrets = {
     teapot-authentik-env.file = commonSecrets + "/authentik-env.age";
   };
+  imports = [ ../../parts/idp.nix ];
 
   services.postgresql = {
     ensureDatabases = [ "authentik" ];

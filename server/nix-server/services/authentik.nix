@@ -1,6 +1,8 @@
 { config, secretStore, lib, ... }:
 let commonSecrets = secretStore.getServerSecrets "common";
 in {
+  imports = [ ../../parts/idp.nix ];
+
   age.secrets = {
     nix-authentik-env.file = commonSecrets + "/authentik-env.age";
   };
@@ -8,8 +10,6 @@ in {
   services.authentik = {
     enable = true;
     environmentFile = config.age.secrets.nix-authentik-env.path;
-
-    settings = { cert_discovery_dir = "env://CREDENTIALS_DIRECTORY"; };
   };
 
   # services.nginx.virtualHosts."${authentik-host}" =
