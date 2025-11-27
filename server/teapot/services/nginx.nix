@@ -22,10 +22,7 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults = {
-      email = "ole@ole.blue";
-      dnsResolver = "1.1.1.1";
-    };
+    defaults = { email = "ole@ole.blue"; };
   };
 
   networking.firewall = { allowedTCPPorts = [ 80 443 2222 ]; };

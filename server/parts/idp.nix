@@ -1,4 +1,10 @@
-{ ... }: {
+{ secretStore, config, ... }:
+let commonSecrets = secretStore.getServerSecrets "common";
+in {
+  age.secrets = {
+    authentik-ldap-env.file = commonSecrets + "/authentik-ldap-env.age";
+  };
+
   services.authentik = {
     settings = {
       cert_discovery_dir = "env://CREDENTIALS_DIRECTORY";
@@ -11,5 +17,11 @@
         timeout = 30;
       };
     };
+  };
+
+  services.authentik-ldap = {
+    enable = true;
+
+    environmentFile = config.age.secrets.authentik-ldap-env.path;
   };
 }

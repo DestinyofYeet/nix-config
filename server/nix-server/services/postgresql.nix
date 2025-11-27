@@ -49,9 +49,17 @@
     subscriptionName = "sub_authentik";
     createRoleCommand = ''
       CREATE ROLE ${replicationUser} LOGIN REPLICATION;
+    '';
+    grantPermissionsCommand = ''
       grant all privileges on database authentik to ${replicationUser};
       grant all on schema public to ${replicationUser};
       grant select on all tables in schema public to ${replicationUser};
+      grant usage on schema public to ${replicationUser};
+
+      grant all privileges on database authentik to authentik;
+      grant all on schema public to authentik;
+      grant select on all tables in schema public to authentik;
+      grant usage on schema public to authentik;
     '';
     createSubscriptionCommand = ''
       create subscription ${subscriptionName} connection 'host=172.27.255.2 port=5432 user=authentik_replicator dbname=authentik' publication pub_authentik with (origin = 'none');
@@ -67,6 +75,7 @@
       psql -d authentik -tAc "${createPublicationCommand}"
       echo Please run "${createSubscriptionCommand}" in the authentik database.
     fi
+    psql -d authentik -tAc "${grantPermissionsCommand}"
   '';
 
   services.postgresql = {
