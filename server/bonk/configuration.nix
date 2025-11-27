@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./networking.nix
     ./services
+    ../parts/idpDnsCert.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

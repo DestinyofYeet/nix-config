@@ -14,6 +14,10 @@ let
   getLighthouses = machines:
     lib.mapAttrsToList (_v: v: v.ip)
     (lib.filterAttrs (name: value: value.lighthouse or false) machines);
+
+  genFilteredStaticHostMap = machines: currentNode:
+    lib.attrsets.filterAttrs (key: value: key != currentNode.ip)
+    (genStaticHostMap machines);
 in rec {
   yeet = {
     staticHostMap = genStaticHostMap machines;
@@ -42,7 +46,10 @@ in rec {
         cert = currentNode.publicKeyFile;
         ca = ./ca.crt;
 
-        staticHostMap = lib.mkIf (!isLightHouse) yeet.staticHostMap;
+        staticHostMap = if (!isLightHouse) then
+          yeet.staticHostMap
+        else
+          (genFilteredStaticHostMap machines currentNode);
         lighthouses = lib.mkIf (!isLightHouse) yeet.lightHouses;
 
         isLighthouse = isLightHouse;

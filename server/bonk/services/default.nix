@@ -8,6 +8,7 @@
     ./netdata.nix
     # ./zabbix.nix
     ./beszel-agent.nix
+    ./authentikLoadBalancer.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

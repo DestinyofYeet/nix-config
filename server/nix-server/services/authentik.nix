@@ -1,9 +1,9 @@
 { config, secretStore, lib, ... }:
-let
-  secrets = secretStore.getServerSecrets "nix-server";
-  authentik-host = "idp.local.ole.blue";
+let commonSecrets = secretStore.getServerSecrets "common";
 in {
-  age.secrets = { nix-authentik-env.file = secrets + "/authentik-env.age"; };
+  age.secrets = {
+    nix-authentik-env.file = commonSecrets + "/authentik-env.age";
+  };
 
   services.authentik = {
     enable = true;
@@ -12,21 +12,20 @@ in {
     settings = { cert_discovery_dir = "env://CREDENTIALS_DIRECTORY"; };
   };
 
-  services.nginx.virtualHosts."${authentik-host}" =
-    lib.custom.settings.nix-server.nginx-local-ssl // {
-      locations."/" = {
-        recommendedProxySettings = true;
-        proxyWebsockets = true;
-        proxyPass = "https://localhost:9443";
-      };
-    };
+  # services.nginx.virtualHosts."${authentik-host}" =
+  #   lib.custom.settings.nix-server.nginx-local-ssl // {
+  #     locations."/" = {
+  #       recommendedProxySettings = true;
+  #       proxyWebsockets = true;
+  #       proxyPass = "https://localhost:9443";
+  #     };
+  #   };
 
-  systemd.services."authentik-worker".serviceConfig.LoadCredential = [
-    "${authentik-host}.pem:${
-      config.security.acme.certs."wildcard.local.ole.blue".directory
-    }/fullchain.pem"
-    "${authentik-host}.key:${
-      config.security.acme.certs."wildcard.local.ole.blue".directory
-    }/key.pem"
+  systemd.services."authentik-worker".serviceConfig.LoadCredential = let
+
+    idpCertDir = config.security.acme.certs."idp.ole.blue".directory;
+  in [
+    "idp.ole.blue.pem:${idpCertDir}/fullchain.pem"
+    "idp.ole.blue.key:${idpCertDir}/key.pem"
   ];
 }

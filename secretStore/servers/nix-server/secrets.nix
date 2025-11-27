@@ -17,8 +17,6 @@ in {
 
   "ankisync-users-ole.age".publicKeys = authed;
 
-  "cloudflare-api-env.age".publicKeys = authed;
-
   "airvpn-deluge.age".publicKeys = authed;
 
   "auto-add-torrents.conf.age".publicKeys = authed;
@@ -72,6 +70,4 @@ in {
 
   "ha_latitude.age".publicKeys = authed;
   "ha_longitude.age".publicKeys = authed;
-
-  "authentik-env.age".publicKeys = authed;
 }
