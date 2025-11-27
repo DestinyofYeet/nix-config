@@ -166,7 +166,7 @@ in {
       yubikey-manager
       # yubikey-personalization-gui // archived upstream
       yubikey-personalization
-      stable-pkgs.nextcloud-client
+      # stable-pkgs.nextcloud-client
       traceroute
       discord
       audacity
