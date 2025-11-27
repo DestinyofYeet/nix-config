@@ -415,6 +415,7 @@
             inputs.nix-minecraft.nixosModules.minecraft-servers
             inputs.strichliste-rs.nixosModules.${system}.default
             { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }
+            inputs.authentik-nix.nixosModules.default
 
             ./server/teapot
           ] ++ baseline-modules;

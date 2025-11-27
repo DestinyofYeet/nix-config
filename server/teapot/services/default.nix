@@ -26,6 +26,7 @@
     # ./github-runner.nix
     ./beszel-agent.nix
     ./mastdodon.nix
+    ./authentik.nix
   ];
 
   services.smartd.enable = lib.mkForce false;
