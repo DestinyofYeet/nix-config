@@ -47,7 +47,7 @@ in {
   "lldap-key-seed.age".publicKeys = authed;
   "lldap-user-pass.age".publicKeys = authed;
 
-  "paperless-authelia-env-file.age".publicKeys = authed;
+  "paperless-oidc-env-file.age".publicKeys = authed;
 
   "dmarc-ole-blue-password.age".publicKeys = authed;
 

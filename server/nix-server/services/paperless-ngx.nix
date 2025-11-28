@@ -3,8 +3,7 @@ let secrets = secretStore.get-server-secrets "nix-server";
 in {
   age.secrets = {
     paperless-ngx-admin.file = ../secrets/paperless-ngx-admin.age;
-    paperless-ngx-authelia-env-file.file = secrets
-      + "/paperless-authelia-env-file.age";
+    paperless-ngx-oidc-env-file.file = secrets + "/paperless-oidc-env-file.age";
   };
 
   services.paperless = rec {
@@ -19,11 +18,17 @@ in {
     settings = {
       PAPERLESS_URL = "https://${domain}";
       PAPERLESS_OCR_USER_ARGS = ''{"continue_on_soft_render_error": true}'';
+      PAPERLESS_LOGOUT_REDIRECT_URL =
+        "https://idp.ole.blue/application/o/paperless/end-session/";
+      PAPERLESS_AUTO_LOGIN = true;
+      PAPERLESS_AUTO_CREATE = true;
+      PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
+      PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS = true;
     };
 
     passwordFile = config.age.secrets.paperless-ngx-admin.path;
 
-    environmentFile = config.age.secrets.paperless-ngx-authelia-env-file.path;
+    environmentFile = config.age.secrets.paperless-ngx-oidc-env-file.path;
 
     inherit (lib.custom.settings.${config.networking.hostName}) user;
   };

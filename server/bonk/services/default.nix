@@ -4,7 +4,7 @@
     ./postgresql.nix
     ./nginx.nix
     ./openssh.nix
-    ./authelia.nix
+    # ./authelia.nix
     ./netdata.nix
     # ./zabbix.nix
     ./beszel-agent.nix

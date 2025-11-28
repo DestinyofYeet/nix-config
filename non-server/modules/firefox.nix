@@ -169,7 +169,7 @@ in {
 
       settings = {
         # privacy stuff
-        "privacy.resistFingerprinting" = true;
+        # "privacy.resistFingerprinting" = true;
         # "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
 
         "browser.toolbars.bookmarks.visibility" = "never";
