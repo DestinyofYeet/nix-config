@@ -355,7 +355,7 @@
             inputs.prometheus-qbit.nixosModules.default
             inputs.auto-add-torrents.nixosModules.default
             inputs.authentik-nix.nixosModules.default
-            ./server/nix-server
+            ./hosts/nix-server
           ] ++ baseline-modules;
 
           capabilities = { headless.enable = true; };
@@ -417,7 +417,7 @@
             { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }
             inputs.authentik-nix.nixosModules.default
 
-            ./server/teapot
+            ./hosts/teapot
           ] ++ baseline-modules;
 
           specialArgs = defaultSpecialArgs;
@@ -428,7 +428,7 @@
         bonk = mkHost {
 
           system = "x86_64-linux";
-          modules = [ ./server/bonk ] ++ baseline-modules;
+          modules = [ ./hosts/bonk ] ++ baseline-modules;
 
           specialArgs = defaultSpecialArgs;
           capabilities = { headless.enable = true; };
@@ -441,13 +441,30 @@
             inputs.argon40-nix.nixosModules.default
             inputs.hardware.nixosModules.raspberry-pi-4
 
-            ./server/nixie
+            ./hosts/nixie
           ] ++ baseline-modules;
           specialArgs = defaultSpecialArgs;
 
           capabilities = { headless.enable = true; };
         };
+
+        audioPi = mkHost {
+          system = "aarch64-linux";
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            inputs.hardware.nixosModules.raspberry-pi-4
+
+            ./hosts/audioPi
+          ] ++ baseline-modules;
+
+          capabilities = { headless.enable = true; };
+
+          specialArgs = defaultSpecialArgs;
+        };
       };
+
+      images.audioPi =
+        self.nixosConfigurations.audioPi.config.system.build.sdImage;
 
       deploy.nodes = {
         nix-server = {
