@@ -1,5 +1,7 @@
-{ lib, config, pkgs, inputs, ... }: {
-  imports = [ ./packages.nix ./nebula.nix ];
+{ lib, config, pkgs, inputs, capabilities, ... }: {
+  imports = [ ./packages.nix ]
+    ++ (lib.optionals (capabilities.nebulaVpn.enable) [ ./nebula.nix ])
+    ++ (lib.optionals (capabilities.customNixInterpreter.enable) [ ./lix.nix ]);
 
   programs.nh = {
     enable = true;
@@ -11,8 +13,6 @@
   };
 
   boot.tmp.cleanOnBoot = true;
-
-  nix.package = pkgs.lixPackageSets.stable.lix;
 
   # nix.extraOptions = ''
   #   download-buffer-size = 500000000

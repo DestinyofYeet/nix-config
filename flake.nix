@@ -254,15 +254,6 @@
 
       baseline-modules = [
         ./options/beszel
-        {
-
-          nixpkgs.overlays = [
-            (final: prev: {
-              inherit (prev.lixPackageSets.stable)
-                nixpkgs-review nix-eval-jobs nix-fast-build colmena;
-            })
-          ];
-        }
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         inputs.nix-topology.nixosModules.default
@@ -455,9 +446,14 @@
             inputs.hardware.nixosModules.raspberry-pi-4
 
             ./hosts/audioPi
-          ] ++ baseline-modules;
+          ];
 
-          capabilities = { headless.enable = true; };
+          capabilities = {
+            headless.enable = true;
+            customNixInterpreter.enable = false;
+            agenix.enable = false;
+            nebulaVpn.enable = false;
+          };
 
           specialArgs = defaultSpecialArgs;
         };
