@@ -218,7 +218,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # got nuked
+
     # fladder-nix.url = "git+file:///home/ole/github/rest/fladder.nix";
     fladder-nix.url = "github:DestinyofYeet/fladder.nix";
     tiddl-nix.url = "github:DestinyofYeet/tiddl.nix";
@@ -264,8 +265,6 @@
         })
 
         inputs.microvm-nix.nixosModules.host
-
-        inputs.chaotic.nixosModules.default
 
         inputs.lix-module.nixosModules.default
       ];
