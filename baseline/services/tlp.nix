@@ -1,5 +1,5 @@
-{ capabilities, lib, ... }:
-lib.mkIf (capabilities.battery.enable) {
+{ config, lib, ... }:
+lib.mkIf (config.capabilities.battery.enable) {
 
   services.power-profiles-daemon.enable = false;
   services.tlp = {

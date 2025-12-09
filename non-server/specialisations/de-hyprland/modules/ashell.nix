@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, capabilities, ... }: {
+{ pkgs, lib, osConfig, ... }: {
   programs.ashell = {
     enable = true;
     systemd.enable = true;
@@ -30,13 +30,17 @@
           audio_sinks_more_cmd = "${lib.getExe pkgs.pavucontrol} -t 3";
           audio_sources_more_cmd = "${lib.getExe pkgs.pavucontrol} -t 4";
         }
-        (lib.mkIf (capabilities.bluetooth.enable) {
+        (lib.mkIf (osConfig.capabilities.bluetooth.enable) {
           bluetooth_more_cmd = "${pkgs.blueman}/bin/blueman-manager";
         })
 
-        (lib.mkIf (!capabilities.wifi.enable) { remove_airplane_btn = true; })
+        (lib.mkIf (!osConfig.capabilities.wifi.enable) {
+          remove_airplane_btn = true;
+        })
 
-        (lib.mkIf (capabilities.wifi.enable) { remove_airplane_btn = false; })
+        (lib.mkIf (osConfig.capabilities.wifi.enable) {
+          remove_airplane_btn = false;
+        })
       ];
 
       appearance = {

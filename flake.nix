@@ -264,9 +264,12 @@
           environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
         })
 
+        ./options/capabilities/options.nix
+
         inputs.microvm-nix.nixosModules.host
 
         inputs.lix-module.nixosModules.default
+        ({ ... }: { lix.enable = false; })
       ];
 
       non-server-modules = [
@@ -320,8 +323,6 @@
           value =
             self.nixosConfigurations.${configuration}.config.system.build.toplevel;
         }) configurations);
-
-      mkHost = (import ./options/mkHost { inherit nixpkgs; }).mkHost;
     in {
       # pfusch, used for micro-vms
       inherit defaultSpecialArgs;
@@ -333,7 +334,7 @@
         inputs.deploy-rs.lib;
 
       nixosConfigurations = {
-        nix-server = mkHost {
+        nix-server = nixpkgs.lib.nixosSystem {
 
           system = "x86_64-linux";
           specialArgs = defaultSpecialArgs;
@@ -346,58 +347,62 @@
             inputs.auto-add-torrents.nixosModules.default
             inputs.authentik-nix.nixosModules.default
             ./hosts/nix-server
-          ] ++ baseline-modules;
 
-          capabilities = { headless.enable = true; };
+            ({ ... }: { capabilities = { headless.enable = true; }; })
+          ] ++ baseline-modules;
         };
 
-        kartoffelkiste = mkHost {
+        kartoffelkiste = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = defaultSpecialArgs;
           modules = [
             ./non-server/hardware/kartoffelkiste.nix
             ./non-server/extra-configurations/kartoffelkiste
             ./non-server
-          ] ++ non-server-modules;
 
-          capabilities = {
-            monitor.enable = true;
-            battery.enable = true;
-          };
+            ({ ... }: {
+              capabilities = {
+                battery.enable = true;
+                monitor.enable = true;
+              };
+            })
+          ] ++ non-server-modules;
         };
 
-        wattson = mkHost {
+        wattson = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = defaultSpecialArgs;
           modules = [
             ./non-server/hardware/wattson.nix
             ./non-server/extra-configurations/wattson
             ./non-server
-          ] ++ non-server-modules;
 
-          capabilities = {
-            touch.enable = true;
-            battery.enable = true;
-            monitor.enable = true;
-            bluetooth.enable = true;
-            wifi.enable = true;
-          };
+            ({ ... }: {
+              capabilities = {
+                battery.enable = true;
+                monitor.enable = true;
+                touch.enable = true;
+                wifi.enable = true;
+                bluetooth.enable = true;
+              };
+            })
+          ] ++ non-server-modules;
         };
 
-        main = mkHost {
+        main = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = defaultSpecialArgs;
           modules = [
             ./non-server/hardware/main.nix
             ./non-server/extra-configurations/main
             ./non-server
-          ] ++ non-server-modules;
 
-          capabilities = { monitor.enable = true; };
+            ({ ... }: { capabilities = { monitor.enable = true; }; })
+          ] ++ non-server-modules;
 
         };
 
-        teapot = mkHost rec {
+        teapot = nixpkgs.lib.nixosSystem rec {
 
           system = "x86_64-linux";
           modules = [
@@ -408,23 +413,27 @@
             inputs.authentik-nix.nixosModules.default
 
             ./hosts/teapot
+
+            ({ ... }: { capabilities = { headless.enable = true; }; })
           ] ++ baseline-modules;
 
           specialArgs = defaultSpecialArgs;
 
-          capabilities = { headless.enable = true; };
         };
 
-        bonk = mkHost {
+        bonk = nixpkgs.lib.nixosSystem {
 
           system = "x86_64-linux";
-          modules = [ ./hosts/bonk ] ++ baseline-modules;
+          modules = [
+            ./hosts/bonk
+
+            ({ ... }: { capabilities = { headless.enable = true; }; })
+          ] ++ baseline-modules;
 
           specialArgs = defaultSpecialArgs;
-          capabilities = { headless.enable = true; };
         };
 
-        nixie = mkHost {
+        nixie = nixpkgs.lib.nixosSystem {
 
           system = "aarch64-linux";
           modules = [
@@ -432,27 +441,29 @@
             inputs.hardware.nixosModules.raspberry-pi-4
 
             ./hosts/nixie
+
+            ({ ... }: { capabilities = { headless.enable = true; }; })
           ] ++ baseline-modules;
           specialArgs = defaultSpecialArgs;
-
-          capabilities = { headless.enable = true; };
         };
 
-        audioPi = mkHost {
+        audioPi = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
             inputs.hardware.nixosModules.raspberry-pi-4
 
             ./hosts/audioPi
-          ];
 
-          capabilities = {
-            headless.enable = true;
-            customNixInterpreter.enable = false;
-            agenix.enable = false;
-            nebulaVpn.enable = false;
-          };
+            ({ ... }: {
+              capabilities = {
+                headless.enable = true;
+                customNixInterpreter.enable = false;
+                agenix.enable = false;
+                nebulaVpn.enable = false;
+              };
+            })
+          ] ++ baseline-modules;
 
           specialArgs = defaultSpecialArgs;
         };

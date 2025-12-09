@@ -1,1 +1,3 @@
-{ config, lib, custom, ... }: (custom.nebula.getConfig lib config)
+{ config, lib, custom, ... }:
+lib.mkIf (config.capabilities.nebulaVpn.enable)
+(custom.nebula.getConfig lib config)

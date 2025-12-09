@@ -1,12 +1,13 @@
-{ pkgs, capabilities, lib, ... }: {
+{ pkgs, config, lib, ... }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  nixpkgs.overlays = lib.mkIf (capabilities.customNixInterpreter.enable) [
-    (final: prev: {
-      inherit (prev.lixPackageSets.stable)
-        nixpkgs-review nix-eval-jobs nix-fast-build colmena;
-    })
-  ];
+  # nixpkgs.overlays = lib.mkIf (config.capabilities.customNixInterpreter.enable)
+  #   [
+  #     (final: prev: {
+  #       inherit (prev.lixPackageSets.stable)
+  #         nixpkgs-review nix-eval-jobs nix-fast-build colmena;
+  #     })
+  #   ];
 
   environment.systemPackages = with pkgs; [
     zsh

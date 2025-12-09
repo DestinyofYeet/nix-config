@@ -1,4 +1,4 @@
-{ pkgs, lib, capabilities, ... }: {
+{ pkgs, lib, ... }: {
 
   system.nixos.tags = [ "de-kde" ];
   environment.plasma6.excludePackages = with pkgs.kdePackages;
@@ -12,9 +12,6 @@
 
   programs.dconf.enable = true;
 
-  home-manager.extraSpecialArgs = {
-    inherit capabilities;
-    current-specialisation = "de-kde";
-  };
+  home-manager.extraSpecialArgs = { current-specialisation = "de-kde"; };
   home-manager.users.ole = { ... }: { imports = [ ../../modules ./modules ]; };
 }

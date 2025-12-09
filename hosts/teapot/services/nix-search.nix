@@ -13,6 +13,8 @@ in {
     locations."/".root =
       inputs.nuscht-search.packages.${pkgs.stdenv.system}.mkMultiSearch {
         scopes = [
+          (build-scope ../../../options/capabilities/options.nix "capabilities"
+            "https://code.ole.blue/ole/nix-config/src/branch/main/options/capabilities/options.nix")
           (build-scope inputs.strichliste.nixosModules.strichliste "strichliste"
             "https://git.ole.blue/ole/strichliste.nix/src/branch/no-docker")
           (build-scope inputs.agenix.nixosModules.default "agenix"
