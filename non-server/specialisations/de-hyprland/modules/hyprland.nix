@@ -113,7 +113,13 @@ in {
         kb_options = [ "caps:escape" ];
       };
 
-      device = [ ] ++ (lib.optionals (lib.custom.isMain osConfig) [{
+      device = [
+
+        {
+          name = "mx-master-4-m-mouse";
+          scroll_factor = 0.2;
+        }
+      ] ++ (lib.optionals (lib.custom.isMain osConfig) [{
         name = "wlxoverlay-s-keyboard-mouse-hybrid-thing";
         output = "DP-3";
         region_size = "1920, 1080";

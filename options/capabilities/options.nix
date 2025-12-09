@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   inherit (lib) mkOption types;
   mkBoolOption = default: desc:
@@ -7,6 +7,8 @@ let
       type = types.bool;
       description = "Wether " + desc;
     };
+
+  cfg = config.capabilities;
 in {
   options = {
     capabilities = {
@@ -22,5 +24,12 @@ in {
       nebulaVpn.enable = mkBoolOption true "to use the nebulaVpn";
       agenix.enable = mkBoolOption true "to use agenix";
     };
+
   };
+
+  config.assertions = [{
+    assertion = cfg.headless.enable != cfg.monitor.enable;
+    message = "You cannot have a monitor and be headless at the same time!";
+  }];
+
 }

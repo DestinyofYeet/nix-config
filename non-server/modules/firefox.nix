@@ -219,7 +219,6 @@ in {
       } // (lib.mkIf (lib.custom.isLaptop osConfig) {
 
         "mousewheel.system_scroll_override.enabled" = false;
-        "mousewheel.default.delta_multiplier_y" = 30;
       });
 
       search.default = "Startpage";
