@@ -286,5 +286,6 @@ in {
       gnome-disk-utility
       bluetui
       logiops
+      high-tide
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
