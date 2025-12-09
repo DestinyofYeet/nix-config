@@ -15,7 +15,7 @@
     ./pyprland.nix
     ./cursor.nix
     ./redshift.nix
-    ./termfilechooser.nix
+    # ./termfilechooser.nix
     ./ashell.nix
   ];
 }

@@ -102,7 +102,11 @@
   xdg.portal = {
     enable = true;
 
-    extraPortals = lib.mkDefault (with pkgs; [ xdg-desktop-portal-wlr ]);
+    extraPortals = lib.mkDefault (with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+    ]);
     config.common.default = lib.mkDefault "*";
   };
 
