@@ -16,6 +16,11 @@
         line-number = "relative";
 
         mouse = false;
+        completion-replace = true;
+        word-completion = {
+          enable = true;
+          trigger-length = 2;
+        };
       };
 
       theme = "tokyonight_moon";
