@@ -1,4 +1,4 @@
-{ stable-pkgs, config, lib, custom, ... }: {
+{ pkgs, config, lib, custom, ... }: {
 
   # needed for sonarr
   nixpkgs.config.permittedInsecurePackages = [
@@ -26,15 +26,6 @@
           proxyPass = "http://localhost:8989";
           proxyWebsockets = true;
           extraConfig = ''
-
-            ${custom.snippets.nginx.authelia.root}
-
-            ## Inject the metadata response headers from the variables into the request made to the backend.
-            proxy_set_header Remote-User $user;
-            proxy_set_header Remote-Groups $groups;
-            proxy_set_header Remote-Email $email;
-            proxy_set_header Remote-Name $name;
-
             # Headers for WebSocket support
             proxy_set_header   Host $host;
             proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -52,7 +43,7 @@
             proxy_read_timeout 100m;
           '';
         };
-      } // custom.snippets.nginx.authelia.location;
+      };
     };
   in {
 
