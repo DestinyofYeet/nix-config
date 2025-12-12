@@ -18,8 +18,6 @@
   boot.kernelModules = [ "kvm-amd" "zenpower" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/3b3ee9fb-0791-4926-a9a8-60cb2c2ae817";
     fsType = "ext4";
