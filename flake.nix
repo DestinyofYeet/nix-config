@@ -237,6 +237,7 @@
     };
 
     authentik-nix.url = "github:nix-community/authentik-nix";
+    nb-rs.url = "git+https://code.ole.blue/ole/nb-rs";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
