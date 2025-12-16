@@ -238,6 +238,9 @@
 
     authentik-nix.url = "github:nix-community/authentik-nix";
     nb-rs.url = "git+https://code.ole.blue/ole/nb-rs";
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -271,6 +274,8 @@
 
         inputs.lix-module.nixosModules.default
         ({ ... }: { lix.enable = false; })
+
+        inputs.nix-index-database.nixosModules.default
       ];
 
       non-server-modules = [
