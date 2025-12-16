@@ -26,8 +26,8 @@
       theme = "tokyonight_moon";
 
       keys.normal = {
-        space.t.y =
-          ":sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} %{buffer_name} 2>/dev/null &";
+        space.t.y = ''
+          :sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} "%{file_path_absolute}" 2>/dev/null &'';
         space.y.z = [
           ":sh rm -f /tmp/unique-file"
           ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
