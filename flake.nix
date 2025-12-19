@@ -420,7 +420,12 @@
 
             ./hosts/teapot
 
-            ({ ... }: { capabilities = { headless.enable = true; }; })
+            ({ ... }: {
+              capabilities = {
+                headless.enable = true;
+                customNixInterpreter.enable = false;
+              };
+            })
           ] ++ baseline-modules;
 
           specialArgs = defaultSpecialArgs;
