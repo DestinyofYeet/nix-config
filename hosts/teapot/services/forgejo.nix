@@ -37,8 +37,9 @@
       openid = {
         ENABLE_OPENID_SIGNIN = false;
         ENABLE_OPENID_SIGNUP = true;
-        WHITELISTED_URIS = "auth.ole.blue";
       };
+
+      "repository.pull-request" = { DEFAULT_MERGE_STYLE = "rebase"; };
 
       federation = { ENABLED = true; };
 
@@ -58,11 +59,23 @@
         ENVELOPE_FROM = USER;
       };
 
+      service = {
+        DEFAULT_USER_IS_RESTRICTED = false;
+        DEFAULT_ALLOW_CREATE_ORGANIZATION = false;
+        ENABLE_NOTIFY_MAIL = true;
+      };
+
+      admin = {
+        SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true;
+
+      };
+
       server = {
         ROOT_URL = "https://${settings.DEFAULT.APP_NAME}";
         HTTP_ADDR = "127.0.0.1";
         HTTP_PORT = 3005;
         DOMAIN = settings.DEFAULT.APP_NAME;
+        LANDING_PAGE = "explore";
       };
 
       log = { LEVEL = "Debug"; };
