@@ -1355,11 +1355,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1765899433,
-        "narHash": "sha256-P2pAXD1oDIcWrq6XKU5eVSI9EBkcfvUiHqYcnmR3laM=",
+        "lastModified": 1766510738,
+        "narHash": "sha256-V/Sbdapuw/MprgUVB1d4F9FxbJ3PtiehWJ+lgGtUz5o=",
         "ref": "refs/heads/main",
-        "rev": "104b70d2c27e8286dd30454fe2206094feb6c0ec",
-        "revCount": 8,
+        "rev": "1cf13576ad9e55e8bc92cf95ac9501eba2321bbd",
+        "revCount": 9,
         "type": "git",
         "url": "https://code.ole.blue/ole/nb-rs"
       },
