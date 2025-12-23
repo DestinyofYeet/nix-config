@@ -429,7 +429,7 @@
             ({ ... }: {
               capabilities = {
                 headless.enable = true;
-                customNixInterpreter.enable = false;
+                customNixInterpreter.enable = true;
               };
             })
           ] ++ baseline-modules;

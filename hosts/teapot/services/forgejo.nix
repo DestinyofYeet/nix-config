@@ -23,15 +23,12 @@
       session = { COOKIE_SECURE = true; };
 
       service = {
-        # DISABLE_REGISTRATION = true; 
-        # REGISTER_MANUAL_CONFIRM = true;
-
-        # ENABLE_NOTIFY_MAIL = true;
-
-        # ENABLE_CAPTCHA = true;
         DISABLE_REGISTRATION = false;
         ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
         SHOW_REGISTRATION_BUTTON = false;
+        DEFAULT_USER_IS_RESTRICTED = false;
+        DEFAULT_ALLOW_CREATE_ORGANIZATION = false;
+        ENABLE_NOTIFY_MAIL = true;
       };
 
       openid = {
@@ -59,16 +56,7 @@
         ENVELOPE_FROM = USER;
       };
 
-      service = {
-        DEFAULT_USER_IS_RESTRICTED = false;
-        DEFAULT_ALLOW_CREATE_ORGANIZATION = false;
-        ENABLE_NOTIFY_MAIL = true;
-      };
-
-      admin = {
-        SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true;
-
-      };
+      admin = { SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true; };
 
       server = {
         ROOT_URL = "https://${settings.DEFAULT.APP_NAME}";
