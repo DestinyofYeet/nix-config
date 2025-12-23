@@ -390,6 +390,7 @@
                 touch.enable = true;
                 wifi.enable = true;
                 bluetooth.enable = true;
+                wavesurfer-ld.enable = true;
               };
             })
           ] ++ non-server-modules;
@@ -403,7 +404,12 @@
             ./non-server/extra-configurations/main
             ./non-server
 
-            ({ ... }: { capabilities = { monitor.enable = true; }; })
+            ({ ... }: {
+              capabilities = {
+                monitor.enable = true;
+                wavesurfer-ld.enable = true;
+              };
+            })
           ] ++ non-server-modules;
 
         };

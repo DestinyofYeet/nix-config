@@ -23,6 +23,8 @@ in {
         mkBoolOption true "to use a custom nix interpreter";
       nebulaVpn.enable = mkBoolOption true "to use the nebulaVpn";
       agenix.enable = mkBoolOption true "to use agenix";
+      wavesurfer-ld.enable =
+        mkBoolOption false "to enable nix-ld to use wavesurfer";
     };
 
   };

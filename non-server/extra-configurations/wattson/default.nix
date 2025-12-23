@@ -124,17 +124,4 @@
   services.logind.settings.Login.HandlePowerKey = "suspend";
 
   # boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
-
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      # wavesurfer
-      libxft
-      fontconfig
-      libx11
-      libxscrnsaver
-      libxext
-      alsa-lib
-    ];
-  };
 }
