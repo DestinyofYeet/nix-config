@@ -37,6 +37,7 @@
     iotop
     nvtopPackages.full
     weston
+    tmux
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:

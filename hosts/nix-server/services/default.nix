@@ -66,5 +66,6 @@
     ./beszel.nix
     ./home-assistant.nix
     ./authentik.nix
+    ./minecraft
   ];
 }

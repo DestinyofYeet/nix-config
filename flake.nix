@@ -347,6 +347,7 @@
           modules = [
             inputs.add-replay-gain.nixosModules.add-replay-gain
             inputs.clean-unused-files.nixosModules.clean-unused-files
+            inputs.nix-minecraft.nixosModules.minecraft-servers
             # inputs.strichliste.nixosModules.strichliste
             inputs.networkNamespaces.nixosModules.networkNamespaces
             inputs.prometheus-qbit.nixosModules.default
