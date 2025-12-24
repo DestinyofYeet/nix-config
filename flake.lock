@@ -1355,17 +1355,17 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1766510738,
-        "narHash": "sha256-V/Sbdapuw/MprgUVB1d4F9FxbJ3PtiehWJ+lgGtUz5o=",
+        "lastModified": 1766680624,
+        "narHash": "sha256-/6WP4FB2W2Tw155fH1NWpcJJFtRk0z4bs/jWCCKuvCU=",
         "ref": "refs/heads/main",
-        "rev": "1cf13576ad9e55e8bc92cf95ac9501eba2321bbd",
-        "revCount": 9,
+        "rev": "9014121de9b522f5db68eb0511cab6307572dec5",
+        "revCount": 13,
         "type": "git",
-        "url": "https://code.ole.blue/ole/nb-rs"
+        "url": "https://code.ole.blue/DestinyofYeet/nb-rs"
       },
       "original": {
         "type": "git",
-        "url": "https://code.ole.blue/ole/nb-rs"
+        "url": "https://code.ole.blue/DestinyofYeet/nb-rs"
       }
     },
     "nc4nix": {

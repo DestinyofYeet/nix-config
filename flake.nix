@@ -237,7 +237,7 @@
     };
 
     authentik-nix.url = "github:nix-community/authentik-nix";
-    nb-rs.url = "git+https://code.ole.blue/ole/nb-rs";
+    nb-rs.url = "git+https://code.ole.blue/DestinyofYeet/nb-rs";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
