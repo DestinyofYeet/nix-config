@@ -165,6 +165,7 @@ in {
         { anime = { color = "purple"; }; }
         { tidal = { color = "blue"; }; }
         { news = { color = "turquoise"; }; }
+        { banking = { color = "purple"; }; }
       ];
 
       settings = {
