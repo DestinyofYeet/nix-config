@@ -1,1 +1,1 @@
-{ ... }: { imports = [ ./wavesurfer.nix ]; }
+{ ... }: { imports = [ ./wavesurfer.nix ./lix.nix ]; }

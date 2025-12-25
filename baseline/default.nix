@@ -1,1 +1,1 @@
-{ ... }: { imports = [ ./configuration.nix ./services ]; }
+{ ... }: { imports = [ ./configuration.nix ./services ../optional-includes ]; }

@@ -1,5 +1,5 @@
 { lib, config, pkgs, inputs, ... }: {
-  imports = [ ./packages.nix ./lix.nix ./nebula.nix ];
+  imports = [ ./packages.nix ./nebula.nix ];
 
   programs.nh = {
     enable = true;
