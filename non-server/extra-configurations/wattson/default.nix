@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, lib, ... }: {
   imports = [
-    # ./38C3.nix
     ../common
     ./vpn.nix
     ./agenix.nix

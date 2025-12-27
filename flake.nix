@@ -392,6 +392,7 @@
                 wifi.enable = true;
                 bluetooth.enable = true;
                 wavesurfer-ld.enable = true;
+                strict-networking.enable = true;
               };
             })
           ] ++ non-server-modules;

@@ -25,6 +25,8 @@ in {
       agenix.enable = mkBoolOption true "to use agenix";
       wavesurfer-ld.enable =
         mkBoolOption false "to enable nix-ld to use wavesurfer";
+      strict-networking.enable =
+        mkBoolOption false "to enable strict firewall rules";
     };
 
   };
