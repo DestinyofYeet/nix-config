@@ -2,7 +2,7 @@
   imports = [
     ./sshd.nix
     ./nginx.nix
-    ./fail2ban.nix
+    # ./fail2ban.nix
     ./netdata.nix
     # ./docker.nix
     # ./ghost.nix
