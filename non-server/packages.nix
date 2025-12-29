@@ -288,5 +288,6 @@ in {
       logiops
       tidal-hifi
       inputs.nb-rs.packages.x86_64-linux.default
+      inputs.typ2anki.packages.x86_64-linux.default
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
