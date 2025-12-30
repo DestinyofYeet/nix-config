@@ -40,19 +40,30 @@ let
 
   secrets = secretStore.getServerSecrets "nix-server";
 
+  forgejo-vm-name = "forgejo";
+
 in {
   imports = [ ./nginx.nix ];
 
   age.secrets = {
     forgejo-runner-host-key = {
       file = secrets + "/vm-forgejo-runner-hostkey.age";
-      path = "${config.microvm.stateDir}/forgejo-runner/persistent/hostkey";
+      path = "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey";
+      symlink = false;
+    };
+
+    forgejo-runner-host-key-rsa = {
+      file = secrets + "/vm-forgejo-runner-hostkey-rsa.age";
+      path =
+        "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey-rsa";
+      symlink = false;
     };
   };
 
   microvm = {
     host.enable = true;
     stateDir = "/mnt/data/data/microvms";
+
     vms = lib.mkMerge [
       (mkVM "rofl" {
         ip = "192.168.3.10";
@@ -60,7 +71,7 @@ in {
         config = { imports = [ ./rofl ./baseline ]; };
       })
 
-      (mkVM "forgejo" {
+      (mkVM forgejo-vm-name {
         ip = "192.168.3.11";
         mac = "02:00:00:00:00:02";
         config = {

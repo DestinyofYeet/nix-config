@@ -72,4 +72,5 @@ in {
   "ha_longitude.age".publicKeys = authed;
 
   "vm-forgejo-runner-hostkey.age".publicKeys = authed;
+  "vm-forgejo-runner-hostkey-rsa.age".publicKeys = authed;
 } // (importFolder "vms/" inputs)

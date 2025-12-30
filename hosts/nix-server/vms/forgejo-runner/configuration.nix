@@ -35,17 +35,26 @@ in {
 
   services.openssh = {
     enable = true;
+    openFirewall = true;
 
     settings = {
       PermitRootLogin = "yes";
       PasswordAuthentication = false;
     };
 
-    hostKeys = [{
-      path = "${persistent}/hostkey";
-      type = "ed25519";
-    }];
+    hostKeys = [
+      {
+        path = "${persistent}/hostkey";
+        type = "ed25519";
+      }
+      {
+        path = "${persistent}/hostkey-rsa";
+        type = "rsa";
+      }
+    ];
   };
+
+  # users.users.root.initialPassword = "changeme";
 
   users.users.root.openssh.authorizedKeys.keys =
     [ secretStore.keys.hosts.nix-server.users.root.key ];

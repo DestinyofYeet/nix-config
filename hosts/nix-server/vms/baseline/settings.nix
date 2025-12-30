@@ -8,4 +8,12 @@
     # "/nix/var/nix/profiles/per-user/root/channels"
   ];
   environment.etc."channels/nixpkgs".source = inputs.nixpkgs.outPath;
+
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      dates = "daily";
+    };
+  };
 }
