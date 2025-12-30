@@ -1,4 +1,4 @@
-{ keys }:
+{ keys, ... }@inputs:
 let authed = keys.authed ++ [ keys.systems.teapot ];
 in {
   "forgejo_email_password.age".publicKeys = authed;

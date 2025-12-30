@@ -2,7 +2,7 @@ let
   keys = import ./pubkeys.nix;
   functions = import ./functions.nix { };
 
+  args = { inherit functions keys; };
+
   inherit (functions) importFolder;
-in
-(importFolder "non-server/" { inherit keys; }) // (importFolder "servers/" { inherit keys; })
-# // (functions.addPrefix "test/" (import ./test/secrets.nix {inherit keys;}))
+in (importFolder "non-server/" args) // (importFolder "servers/" args)

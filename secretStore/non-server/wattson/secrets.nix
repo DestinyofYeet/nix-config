@@ -1,4 +1,4 @@
-{ keys }:
+{ keys, ... }@inputs:
 let
   user_authed = keys.authed;
   system_authed = [ keys.systems.wattson ] ++ keys.authed;

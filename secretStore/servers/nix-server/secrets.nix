@@ -1,4 +1,4 @@
-{ keys }:
+{ keys, ... }@inputs:
 let
   system_ole =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBcW4WZw7GhpHkuDBZVY3dpnUfm+8Ww+pyVWAMCB2BuB ole@nix-server";

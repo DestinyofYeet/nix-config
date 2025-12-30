@@ -1,4 +1,4 @@
-{ keys }:
+{ keys, ... }@inputs:
 let
   authed = keys.authed
     ++ [ keys.systems.nix-server keys.systems.teapot keys.systems.bonk ];

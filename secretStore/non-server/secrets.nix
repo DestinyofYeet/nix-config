@@ -1,7 +1,5 @@
-{ keys }:
-let
-  functions = import ../functions.nix { path = ./.; };
-  authed = keys.authed;
+{ keys, functions, ... }@inputs:
+let authed = keys.authed;
 in {
   "stalwart-ole-pw.age".publicKeys = authed;
   "nix-config-file.age".publicKeys = authed;
@@ -15,6 +13,6 @@ in {
   "taskwarrior-config.age".publicKeys = authed;
 
   "openfortivpn-config.age".publicKeys = authed;
-} // (functions.importFolder "main/" { inherit keys; })
-// (functions.importFolder "wattson/" { inherit keys; })
-// (functions.importFolder "kartoffelkiste/" { inherit keys; })
+} // (functions.importFolder "main/" inputs)
+// (functions.importFolder "wattson/" inputs)
+// (functions.importFolder "kartoffelkiste/" inputs)
