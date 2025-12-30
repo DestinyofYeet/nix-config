@@ -1,5 +1,7 @@
-{ keys, functions, ... }@inputs:
-let authed = keys.authed;
+{ keys, functions, lib, ... }@inputs:
+let
+  authed = keys.authed;
+  importFolder = functions.getImportFolder ./.;
 in {
   "stalwart-ole-pw.age".publicKeys = authed;
   "nix-config-file.age".publicKeys = authed;
@@ -13,6 +15,7 @@ in {
   "taskwarrior-config.age".publicKeys = authed;
 
   "openfortivpn-config.age".publicKeys = authed;
-} // (functions.importFolder "main/" inputs)
-// (functions.importFolder "wattson/" inputs)
-// (functions.importFolder "kartoffelkiste/" inputs)
+} //
+
+(importFolder "main/" inputs) // (importFolder "wattson/" inputs)
+// (importFolder "kartoffelkiste/" inputs)

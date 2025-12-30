@@ -1,7 +1,7 @@
-{ keys, ... }@inputs:
+{ keys, lib, functions, ... }@inputs:
 let
-  system_ole =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBcW4WZw7GhpHkuDBZVY3dpnUfm+8Ww+pyVWAMCB2BuB ole@nix-server";
+
+  importFolder = functions.getImportFolder ./.;
 
   authed = keys.authed ++ [ keys.systems.nix-server ];
 in {
@@ -70,4 +70,4 @@ in {
 
   "ha_latitude.age".publicKeys = authed;
   "ha_longitude.age".publicKeys = authed;
-}
+} // (importFolder "vms/" inputs)

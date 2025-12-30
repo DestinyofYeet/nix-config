@@ -1,8 +1,10 @@
 let
   keys = import ./pubkeys.nix;
-  functions = import ./functions.nix { };
+  functions = import ./functions.nix;
 
-  args = { inherit functions keys; };
+  lib = (import <nixpkgs> { }).lib;
 
-  inherit (functions) importFolder;
+  args = { inherit functions keys lib; };
+
+  importFolder = (functions.getImportFolder ./.);
 in (importFolder "non-server/" args) // (importFolder "servers/" args)
