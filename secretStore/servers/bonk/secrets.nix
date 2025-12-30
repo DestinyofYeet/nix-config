@@ -1,5 +1,5 @@
 { keys, ... }@inputs:
-let authed = keys.authed ++ [ keys.systems.bonk ];
+let authed = keys.authed ++ [ keys.hosts.bonk.hostKey ];
 in {
   "nextcloud-root-pw.age".publicKeys = authed;
 

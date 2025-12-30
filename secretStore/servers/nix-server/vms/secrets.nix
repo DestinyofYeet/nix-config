@@ -1,1 +1,3 @@
-{ keys, ... }: { "blub.age".pubkeys = keys.authed; }
+{ functions, ... }@inputs:
+let importFolder = functions.getImportFolder ./.;
+in (importFolder "forgejo-runner/" inputs)

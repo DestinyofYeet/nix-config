@@ -1,7 +1,10 @@
 { keys, ... }@inputs:
 let
-  authed = keys.authed
-    ++ [ keys.systems.nix-server keys.systems.teapot keys.systems.bonk ];
+  authed = keys.authed ++ [
+    keys.hosts.nix-server.hostKey
+    keys.hosts.teapot.hostKey
+    keys.hosts.bonk.hostKey
+  ];
 in {
   "cloudflare-api-env.age".publicKeys = authed;
 

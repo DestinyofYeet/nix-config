@@ -3,7 +3,7 @@ let
 
   importFolder = functions.getImportFolder ./.;
 
-  authed = keys.authed ++ [ keys.systems.nix-server ];
+  authed = keys.authed ++ [ keys.hosts.nix-server.hostKey ];
 in {
   "airvpn_config.age".publicKeys = authed;
   "hydra-email-credentials.age".publicKeys = authed;
@@ -70,4 +70,6 @@ in {
 
   "ha_latitude.age".publicKeys = authed;
   "ha_longitude.age".publicKeys = authed;
+
+  "vm-forgejo-runner-hostkey.age".publicKeys = authed;
 } // (importFolder "vms/" inputs)

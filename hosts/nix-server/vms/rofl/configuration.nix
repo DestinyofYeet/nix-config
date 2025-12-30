@@ -22,5 +22,5 @@
   networking.firewall.enable = false;
 
   users.users.root.openssh.authorizedKeys.keys =
-    [ secretStore.keys.root.nix-server ];
+    [ secretStore.keys.hosts.nix-server.users.root.key ];
 }
