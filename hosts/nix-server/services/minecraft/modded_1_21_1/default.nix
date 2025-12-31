@@ -5,7 +5,7 @@ let
     src = pkgs.fetchurl {
       url =
         "https://cloud.ole.blue/public.php/dav/files/RaxCELdG4bTJoj2/?accept=zip";
-      hash = "sha256-An1JZi81Lxf4kFYwL1NW2eK/IhRozP07rdP2Q8OD03E=";
+      hash = "sha256-FH/ghVA1FR3VhLTvUYoMpukfD3njGP7ztw4VXcw+TU4=";
     };
 
     unpackPhase = ''
