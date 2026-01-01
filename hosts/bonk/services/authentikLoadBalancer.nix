@@ -6,14 +6,14 @@
       "authentik" = {
         servers = {
           "teapot.neb.ole.blue:9443" = { };
-          "nix-server.neb.ole.blue:9443" = { backup = true; };
+          # "nix-server.neb.ole.blue:9443" = { backup = true; };
         };
       };
 
       "authentik-ldap" = {
         servers = {
           "teapot.neb.ole.blue" = { };
-          "nix-server.neb.ole.blue" = { backup = true; };
+          # "nix-server.neb.ole.blue" = { backup = true; };
         };
       };
     };
@@ -33,7 +33,7 @@
     streamConfig = ''
       upstream authentik_ldap {
         server teapot.neb.ole.blue:6636;
-        server nix-server.neb.ole.blue:6636 backup;
+        # server nix-server.neb.ole.blue:6636 backup;
       }
 
       server {

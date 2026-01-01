@@ -65,7 +65,7 @@
     # ./sunshine.nix
     ./beszel.nix
     ./home-assistant.nix
-    ./authentik.nix
+    # ./authentik.nix
     ./minecraft
   ];
 }
