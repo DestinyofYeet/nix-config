@@ -171,7 +171,7 @@ in {
 
       "dmarc@ole.blue" = {
         hashedPasswordFile = config.age.secrets.dmarc-email-ole-blue.path;
-        aliases = [ "dmarc@uwuwhatsthis.de" ];
+        aliases = [ "dmarc@uwuwhatsthis.de" "noreply-dmarc@ole.blue" ];
       };
 
       "msmtp@ole.blue" = {
