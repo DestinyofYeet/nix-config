@@ -289,5 +289,7 @@ in {
       tidal-hifi
       inputs.nb-rs.packages.x86_64-linux.default
       inputs.typ2anki.packages.x86_64-linux.default
+      jujutsu
+      lazyjj
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
