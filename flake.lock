@@ -444,11 +444,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1762125645,
-        "narHash": "sha256-x2M8s1AkA7bk79k2v2QmEXV62hdtIgzYFBz5yQhxisE=",
+        "lastModified": 1767785203,
+        "narHash": "sha256-vWTDUAzLcLdwg9RQiwb4qw6cumYzxuZlZQodqXhA3E8=",
         "owner": "DestinyofYeet",
         "repo": "fladder.nix",
-        "rev": "3039e63bbbfc3e472ec4dffcb6492fc58d49f40b",
+        "rev": "6072715aa7d20b8eb8db85f57e10bc95b1fbb79b",
         "type": "github"
       },
       "original": {
