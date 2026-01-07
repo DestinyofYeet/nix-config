@@ -242,7 +242,7 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    typ2anki.url = "git+https://code.ole.blue/typ2anki/typ2anki";
+    typ2anki.url = "git+https://code.ole.blue/typ2anki/typ2anki?submodules=1";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
