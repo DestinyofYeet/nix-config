@@ -67,5 +67,6 @@
     ./home-assistant.nix
     # ./authentik.nix
     ./minecraft
+    ./jellyseer.nix
   ];
 }
