@@ -44,6 +44,9 @@
         INSTALL_LOCK = true;
         PASSWORD_COMPLEXITY = "spec";
         PASSWORD_CHECK_PWN = true;
+        LOGIN_REMEMBER_DAYS = 30;
+        GLOBAL_TWO_FACTOR_REQUIREMENT = "admin";
+        COOKIE_REMEMBER_NAME = "FORGEJO_REMEMBER_COOKIE";
       };
 
       mailer = rec {
