@@ -48,5 +48,6 @@
     ./atuin.nix
     ./wezterm.nix
     # ./obs.nix
+    ./xdg.nix
   ];
 }

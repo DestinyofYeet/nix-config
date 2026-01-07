@@ -5,11 +5,6 @@
     [ plasma-browser-integration ];
   services.desktopManager.plasma6.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [ kdePackages.xdg-desktop-portal-kde ];
-  };
-
   programs.dconf.enable = true;
 
   home-manager.extraSpecialArgs = { current-specialisation = "de-kde"; };

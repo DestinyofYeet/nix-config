@@ -23,9 +23,8 @@ in {
   hardware.flipperzero.enable = true;
 
   # zsh config
-  environment.pathsToLink = [ "/share/zsh" ];
-
-  # environment.plasma6.excludePackages = with pkgs.kdePackages; [ plasma-browser-integration ];
+  environment.pathsToLink =
+    [ "/share/zsh" "/share/xdg-desktop-portal" "/share/applications" ];
 
   fonts = { packages = with pkgs; [ noto-fonts-cjk-serif ] ++ nerd-fontsPkgs; };
 
@@ -93,31 +92,31 @@ in {
 
   programs.wshowkeys = { enable = true; };
 
-  services.flatpak = {
-    enable = true;
-    remotes = [{
-      name = "flathub";
-      location = "https://flathub.org/repo/flathub.flatpakrepo";
-    }];
+  # services.flatpak = {
+  #   enable = true;
+  #   remotes = [{
+  #     name = "flathub";
+  #     location = "https://flathub.org/repo/flathub.flatpakrepo";
+  #   }];
 
-    packages = [
-      # { # signal
-      #   flatpakref =
-      #     "https://dl.flathub.org/repo/appstream/org.signal.Signal.flatpakref";
-      #   sha256 = "06hi4fpqdq8qkn1bdilsy5h04sg69f25y6l0dj5mcrrxcvhgh5jf";
-      # }
-      { # rnote
-        flatpakref =
-          "https://dl.flathub.org/repo/appstream/com.github.flxzt.rnote.flatpakref";
-        sha256 = "0askvqc9i9rnd924gij8d4q5wpdih8c90vqh718sqd94zkv0p5k4";
-      }
-      { # flatseal
-        flatpakref =
-          "https://dl.flathub.org/repo/appstream/com.github.tchx84.Flatseal.flatpakref";
-        sha256 = "00kvi432gdrhyyhz34vs00398c77lzji1qgvchfrs1kxxp84bbbi";
-      }
-    ];
-  };
+  #   packages = [
+  #     # { # signal
+  #     #   flatpakref =
+  #     #     "https://dl.flathub.org/repo/appstream/org.signal.Signal.flatpakref";
+  #     #   sha256 = "06hi4fpqdq8qkn1bdilsy5h04sg69f25y6l0dj5mcrrxcvhgh5jf";
+  #     # }
+  #     { # rnote
+  #       flatpakref =
+  #         "https://dl.flathub.org/repo/appstream/com.github.flxzt.rnote.flatpakref";
+  #       sha256 = "0askvqc9i9rnd924gij8d4q5wpdih8c90vqh718sqd94zkv0p5k4";
+  #     }
+  #     { # flatseal
+  #       flatpakref =
+  #         "https://dl.flathub.org/repo/appstream/com.github.tchx84.Flatseal.flatpakref";
+  #       sha256 = "00kvi432gdrhyyhz34vs00398c77lzji1qgvchfrs1kxxp84bbbi";
+  #     }
+  #   ];
+  # };
 
   environment.systemPackages = with pkgs;
     [
