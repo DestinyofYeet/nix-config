@@ -68,5 +68,6 @@
     # ./authentik.nix
     ./minecraft
     ./jellyseer.nix
+    ./recyclarr.nix
   ];
 }

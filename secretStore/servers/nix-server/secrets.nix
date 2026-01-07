@@ -73,4 +73,6 @@ in {
 
   "vm-forgejo-runner-hostkey.age".publicKeys = authed;
   "vm-forgejo-runner-hostkey-rsa.age".publicKeys = authed;
+  "recyclarr-sonarr-token.age".publicKeys = authed;
+  "recyclarr-radarr-token.age".publicKeys = authed;
 } // (importFolder "vms/" inputs)
