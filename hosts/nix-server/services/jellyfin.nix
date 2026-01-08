@@ -39,6 +39,11 @@ in {
     })
   ];
 
+  systemd.services.jellyfin = rec {
+    requires = [ "docker-shokoserver.service" ];
+    before = requires;
+  };
+
   services.nginx = let
     default-config = {
       locations."/" = {
