@@ -28,6 +28,7 @@ in {
       "dwd_weather_warnings"
       "openweathermap"
       "weather"
+      "ping"
     ];
 
     config = {
