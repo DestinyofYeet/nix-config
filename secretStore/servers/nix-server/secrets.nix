@@ -75,4 +75,6 @@ in {
   "vm-forgejo-runner-hostkey-rsa.age".publicKeys = authed;
   "recyclarr-sonarr-token.age".publicKeys = authed;
   "recyclarr-radarr-token.age".publicKeys = authed;
+
+  "zigbee2mqtt-secrets.age".publicKeys = authed;
 } // (importFolder "vms/" inputs)

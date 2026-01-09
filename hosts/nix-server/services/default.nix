@@ -69,5 +69,6 @@
     ./minecraft
     ./jellyseer.nix
     ./recyclarr.nix
+    ./zigbee2mqtt.nix
   ];
 }

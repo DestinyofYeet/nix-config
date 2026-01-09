@@ -21,7 +21,8 @@ in {
   services.home-assistant = {
     enable = true;
     extraComponents = [
-      "zha" # zigbee
+      "history"
+      "mqtt"
       "mobile_app"
       "accuweather"
       "dwd_weather_warnings"
