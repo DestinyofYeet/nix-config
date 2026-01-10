@@ -1,31 +1,15 @@
-{ config, lib, ... }:
-let
-  secrets = lib.custom.settings.${config.networking.hostName}.secrets;
-in
-{
+{ config, secretStore, ... }:
+let secrets = secretStore.getServerSecrets "nix-server";
+in {
+  age.secrets = {
+    clean-unused-files-config.file = secrets + "/clean-unused-files.age";
+  };
 
-  services.cleanUnusedFiles = {
-    enable = false;
+  services.clean-unused-files = {
+    enable = true;
 
-    qbit = {
-      url = "http://10.1.1.1:8080";
-      user = secrets.qbit.user;
-      password = secrets.qbit.pw;
-    };
+    configFile = config.age.secrets.clean-unused-files-config.path;
 
-    email = {
-      inherit (secrets.email) server user password;
-      recipient = "ole@uwuwhatsthis.de";
-    };
-
-    dataFile = "${
-      lib.custom.settings.${config.networking.hostName}.paths.data
-    }/programs/clean_unused_files/data.json";
-
-    timerConfig = {
-      OnCalendar = "weekly";
-    };
-
-    inherit (lib.custom.settings.${config.networking.hostName}) user group;
+    dataDir = "/mnt/data/data/clean_unused_files";
   };
 }

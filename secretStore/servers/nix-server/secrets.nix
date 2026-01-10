@@ -77,4 +77,6 @@ in {
   "recyclarr-radarr-token.age".publicKeys = authed;
 
   "zigbee2mqtt-secrets.age".publicKeys = authed;
+
+  "clean-unused-files.age".publicKeys = authed;
 } // (importFolder "vms/" inputs)

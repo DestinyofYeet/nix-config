@@ -41,11 +41,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    clean-unused-files = {
-      url = "github:DestinyofYeet/clean_unused_files";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -243,6 +238,9 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     typ2anki.url = "git+https://code.ole.blue/typ2anki/typ2anki?submodules=1";
+
+    clean-unused-files.url =
+      "git+https://code.ole.blue/DestinyofYeet/clean-qbittorrent-rs";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
@@ -348,13 +346,13 @@
           specialArgs = defaultSpecialArgs;
           modules = [
             inputs.add-replay-gain.nixosModules.add-replay-gain
-            inputs.clean-unused-files.nixosModules.clean-unused-files
             inputs.nix-minecraft.nixosModules.minecraft-servers
             # inputs.strichliste.nixosModules.strichliste
             inputs.networkNamespaces.nixosModules.networkNamespaces
             inputs.prometheus-qbit.nixosModules.default
             inputs.auto-add-torrents.nixosModules.default
             inputs.authentik-nix.nixosModules.default
+            inputs.clean-unused-files.nixosModules.default
             ./hosts/nix-server
 
             ({ ... }: { capabilities = { headless.enable = true; }; })

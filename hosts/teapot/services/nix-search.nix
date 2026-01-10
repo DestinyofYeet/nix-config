@@ -75,6 +75,11 @@ in {
             "https://github.com/DestinyofYeet/strichliste/tree/master/")
           (build-scope inputs.authentik-nix.nixosModules.default "authentik-nix"
             "https://github.com/nix-community/authentik-nix/tree/main/")
+          (build-scope inputs.clean-unused-files.nixosModules.default
+            "clean-qbit"
+            "https://code.ole.blue/DestinyofYeet/clean-qbittorrent-rs/src/branch/master/"
+
+          )
         ];
       };
   };
