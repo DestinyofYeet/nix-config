@@ -2931,11 +2931,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1767806068,
-        "narHash": "sha256-W8PBf+3mJP5/9jtf7mwCO7+Lt+mADiZ7A82TeIbaV9o=",
+        "lastModified": 1768001429,
+        "narHash": "sha256-UY/d6ewNEtQqTLX5Q7mOmTkvhOa5j5e+eZzD3IjMzS4=",
         "ref": "refs/heads/main",
-        "rev": "1c74a3f6d9e1662e9d0b9d5ce9ec2d5724e92c92",
-        "revCount": 60,
+        "rev": "fa7c1b5a7a743dda9f2b31debd2e3a004767054e",
+        "revCount": 61,
         "submodules": true,
         "type": "git",
         "url": "https://code.ole.blue/typ2anki/typ2anki"
