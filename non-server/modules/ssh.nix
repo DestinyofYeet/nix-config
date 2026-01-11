@@ -55,29 +55,11 @@ in {
           user = "root";
           ident = "ssh-key-vps-main";
         }
-        rec {
-          host = "nix-server.infra.wg";
-          hostname = host;
-          user = "ole";
-          ident = "ssh-key-nix-server";
-        }
-        rec {
-          host = "nix-server.infra.wg";
-          hostname = host;
-          user = "root";
-          ident = "ssh-key-nix-server";
-        }
         {
           host = "fsim.ori";
           hostname = "fsim.othr.de";
           user = "beo45216";
           ident = "ssh-key-fsim-ori";
-        }
-        {
-          host = "nix-server";
-          hostname = custom.nebula.yeet.hosts.nix-server.ip;
-          user = "ole";
-          ident = "ssh-key-nix-server";
         }
         {
           host = "nix-server";
