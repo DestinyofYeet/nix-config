@@ -31,4 +31,7 @@ in {
 
   "authelia-openid-mealie-id.age".publicKeys = authed;
   "authelia-openid-mealie-key.age".publicKeys = authed;
+
+  "vm-ha-hostkey-ed25519.age".publicKeys = authed;
+  "vm-ha-hostkey-rsa.age".publicKeys = authed;
 }

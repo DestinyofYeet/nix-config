@@ -38,7 +38,7 @@ let
     };
   };
 
-  secrets = secretStore.getServerSecrets "teapot";
+  secrets = secretStore.getServerSecrets "bonk";
 in {
 
   age.secrets = {
@@ -62,16 +62,8 @@ in {
         ip = "192.168.3.10";
         mac = "02:00:00:00:00:01";
         config = {
-          networking.hostName = "teapot-ha-vm";
-          imports = [
-            ./baseline
-            ./ha-vm
-            inputs.agenix.nixosModules.default
-            ../../../baseline/nebula.nix
-            ../../../options/capabilities/options.nix
-          ];
-
-          capabilities = { headless.enable = true; };
+          networking.hostName = "bonk-ha-vm";
+          imports = [ ./baseline ./ha-vm inputs.agenix.nixosModules.default ];
         };
       })
     ];

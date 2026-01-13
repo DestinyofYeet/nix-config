@@ -31,15 +31,28 @@ rec {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOdiLELKdn6dLl3UMqmHpf4HvKPQYbPYwlaKLT5mVNQi root@teapot";
       hostKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEqmDnGXPNc+Z1DRHVRRqik2WpeGjVoSOdKi1baXafH root@teapot";
-    };
-    vms = {
-      ha-vm = {
-        hostKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINIQofo0QZ4F0jkoKa6n8ZANpbbZsQqzZ9V7GdYqXbvI";
+
+      vms = {
+        ha-vm = {
+          hostKey =
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINIQofo0QZ4F0jkoKa6n8ZANpbbZsQqzZ9V7GdYqXbvI";
+        };
       };
     };
-    bonk.hostKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILDH4DwddDZwmIIDsP5kO+FkcrfMKPc9KbAzet5jxhmy root@bonk";
+    bonk = {
+      hostKey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILDH4DwddDZwmIIDsP5kO+FkcrfMKPc9KbAzet5jxhmy root@bonk";
+
+      users.root.key =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMOvcDuphI+Wa9Dst7QraflSgHEIHMeeDfP6q6bUNcN root@bonk";
+
+      vms = {
+        ha-vm = {
+          hostKey =
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFE0/4heAMyEufC834RBhlKHIxG1dr/t9LiHpdC2ZtDA";
+        };
+      };
+    };
     nixie.hostKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIInWaeHa3NaK6z9FIwFDCmWE8ofAlRl9K/k9YJ3lgq7p root@nixos";
   };

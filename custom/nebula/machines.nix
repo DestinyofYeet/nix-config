@@ -1,6 +1,15 @@
 let
   getPrivKey = name: ./${name}/${name}.key.age;
   getPublicKey = name: ./${name}/${name}.crt;
+
+  mkEntry = name: settings: {
+    "${name}" = {
+      inherit (settings) ip groups;
+
+      privKeyFile = getPrivKey name;
+      publicKeyFile = getPublicKey name;
+    };
+  };
 in {
   "teapot" = {
     ip = "172.27.255.1";
@@ -60,4 +69,12 @@ in {
     privKeyFile = getPrivKey "nixie";
     publicKeyFile = getPublicKey "nixie";
   };
-}
+} // (mkEntry "teapot-ha-vm" {
+
+  ip = "127.27.255.9";
+  groups = [ "end-user" "server" ];
+}) // (mkEntry "bonk-ha-vm" {
+  ip = "127.27.255.10";
+  groups = [ "end-user" "server" ];
+
+})

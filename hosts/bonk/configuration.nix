@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./networking.nix
     ./services
+    ./vms
     ../parts/idpDnsCert.nix
   ];
 

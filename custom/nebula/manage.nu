@@ -1,18 +1,18 @@
-def "main gen-ca" [] {
+  def "main gen-ca" [] {
   # Will generate a ca.key for 99 years
   nebula-cert ca -name "YeetsNetwork" -duration 867800h
   print "DO NOT COMMIT ca.key !!!"
 };
 
 def "main create-host" [name: string, ip: string, groups: string] {
-  nebula-cert sign -name $name -ip $ip -groups $groups
+  nebula-cert sign -name $name -ip $"($ip)/24" -groups $groups
 }
 
 def "main create-hosts" [] {
   for host in (nix eval --json -f ./machines.nix | from json | transpose "key" "value") {
     let name = $host.key;
     let value = $host.value;
-    main create-host $name $"($value.ip)/24" ($value.groups | str join ",")
+    main create-host $name $value.ip ($value.groups | str join ",")
     # print $"Would create host ($name) with ip ($value.ip)/24 and groups ($value.groups | str join ",")"
   }
 }
