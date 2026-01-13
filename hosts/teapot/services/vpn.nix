@@ -23,7 +23,7 @@ in rec {
       matchConfig.Name = "wg0";
       address = [ "10.100.0.1/24" ];
 
-      linkConfig.RequiredForOnline = false;
+      linkConfig.RequiredForOnline = "routable";
     };
 
     netdevs."50-wg0" = {

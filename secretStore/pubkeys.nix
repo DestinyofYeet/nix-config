@@ -26,8 +26,18 @@ rec {
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDYt/UwSc/96eqfzbd4nqbNsAfqfNXSlPClK7Wd6trT1";
       };
     };
-    teapot.hostKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEqmDnGXPNc+Z1DRHVRRqik2WpeGjVoSOdKi1baXafH root@teapot";
+    teapot = {
+      users.root.key =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOdiLELKdn6dLl3UMqmHpf4HvKPQYbPYwlaKLT5mVNQi root@teapot";
+      hostKey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEqmDnGXPNc+Z1DRHVRRqik2WpeGjVoSOdKi1baXafH root@teapot";
+    };
+    vms = {
+      ha-vm = {
+        hostKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINIQofo0QZ4F0jkoKa6n8ZANpbbZsQqzZ9V7GdYqXbvI";
+      };
+    };
     bonk.hostKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILDH4DwddDZwmIIDsP5kO+FkcrfMKPc9KbAzet5jxhmy root@bonk";
     nixie.hostKey =

@@ -10,6 +10,7 @@
     ./services
     ./users.nix
     ../parts/idpDnsCert.nix
+    ./vms
   ];
 
   # Use the systemd-boot EFI boot loader.

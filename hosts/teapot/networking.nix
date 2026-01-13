@@ -18,8 +18,6 @@ in {
         routes = [{ Gateway = "5.83.152.129"; }];
 
         dns = [ "1.1.1.1" "8.8.8.8" ];
-
-        linkConfig.RequiredForOnline = "routable";
       };
 
       "10-microvm" = {
