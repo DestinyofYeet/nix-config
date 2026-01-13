@@ -290,5 +290,7 @@ in {
       inputs.typ2anki.packages.x86_64-linux.default
       jujutsu
       lazyjj
+      libinput
+      evtest
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
