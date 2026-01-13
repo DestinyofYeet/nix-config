@@ -1,24 +1,15 @@
-{
-  pkgs,
-  config,
-  custom,
-  ...
-}:
-let
-  vpn_port = custom.wireguard.server.port;
-  interface_ext = "enp6s18";
-in
-rec {
+{ pkgs, config, custom, ... }:
+let vpn_port = 1337;
+in rec {
   age.secrets = {
-    wireguard-vpn-priv-key.file = ../secrets/wireguard-vpn-priv-key.age;
+    wireguard-vpn-priv-key = {
+      file = ../secrets/wireguard-vpn-priv-key.age;
+      mode = "640";
+      owner = "systemd-network";
+      group = "systemd-network";
+    };
   };
 
-  networking.hosts = {
-    "10.100.0.4" = [ "local.ole.blue" ];
-  };
-
-  networking.nat.enable = true;
-  networking.nat.externalInterface = interface_ext;
   networking.nat.internalInterfaces = [ "wg0" ];
   networking.firewall = {
     allowedUDPPorts = [ vpn_port ];
@@ -26,26 +17,35 @@ rec {
     trustedInterfaces = networking.nat.internalInterfaces;
   };
 
-  networking.wireguard.interfaces = {
-    wg0 = {
-      ips = [ "10.100.0.1/24" ];
+  systemd.network = {
 
-      mtu = custom.wireguard.server.mtu;
+    networks."50-wg0" = {
+      matchConfig.Name = "wg0";
+      address = [ "10.100.0.1/24" ];
 
-      listenPort = vpn_port;
-
-      privateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
-
-      peers = custom.wireguard.peers;
+      linkConfig.RequiredForOnline = false;
     };
-  };
 
-  system.activationScripts = {
-    limitPedroAccess = {
-      text = ''
-        ${pkgs.iptables}/bin/iptables -I INPUT 1 -i wg0 -s 10.100.0.6 -d 10.100.0.1 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -I FORWARD 1 -i wg0 -s 10.100.0.6 -d 10.100.0.0/24 -j DROP
-      '';
+    netdevs."50-wg0" = {
+      netdevConfig = {
+        Kind = "wireguard";
+        Name = "wg0";
+        MTUBytes = "1300";
+      };
+
+      wireguardConfig = {
+        ListenPort = vpn_port;
+
+        PrivateKeyFile = config.age.secrets.wireguard-vpn-priv-key.path;
+        RouteTable = "main";
+        FirewallMark = 42;
+      };
+
+      wireguardPeers = [{
+        # pedro
+        PublicKey = "7R4ogUcruPQvxxNoPp4P+sbLz47HDoY2anDvcvWnWQk=";
+        AllowedIPs = [ "10.100.0.6/32" ];
+      }];
     };
   };
 }

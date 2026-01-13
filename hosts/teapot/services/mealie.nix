@@ -26,6 +26,7 @@ in {
     };
     listenAddress = "127.0.0.1";
     credentialsFile = config.age.secrets.mealie-env-file.path;
+    port = 9002;
   };
 
   services.nginx.virtualHosts."recipes.ole.blue" = {

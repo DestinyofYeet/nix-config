@@ -1,48 +1,53 @@
 { lib, ... }:
 let
   interface = "ens18";
-in
-{
+  microvm-name = "microvm-bridge";
+in {
+  systemd.network = {
+    enable = true;
+    netdevs."10-microvm".netdevConfig = {
+      Kind = "bridge";
+      Name = microvm-name;
+    };
+
+    networks = {
+      "10-external" = {
+        matchConfig.Name = interface;
+        address = [ "5.83.152.153/26" ];
+
+        routes = [{ Gateway = "5.83.152.129"; }];
+
+        dns = [ "1.1.1.1" "8.8.8.8" ];
+
+        linkConfig.RequiredForOnline = "routable";
+      };
+
+      "10-microvm" = {
+        matchConfig.Name = microvm-name;
+        addresses = [{ Address = "192.168.3.1/24"; }];
+      };
+
+      "11-microvm" = {
+        matchConfig.Name = "vm-*";
+        networkConfig.Bridge = microvm-name;
+      };
+    };
+  };
+
   networking = {
+    dhcpcd.enable = false;
+    useDHCP = false;
+    useHostResolvConf = false;
+    networkmanager.enable = false;
+    resolvconf.enable = false;
+
     hostName = "teapot";
 
-    # firewall.enable = false;
-
-    useDHCP = false;
-
-    interfaces.${interface} = {
-      useDHCP = false;
-      ipv4.addresses = [
-        {
-          address = "5.83.152.153";
-          prefixLength = 26;
-        }
-      ];
-
-      # ipv6.addresses = [
-      #   {
-      #     address = "2a06:de00:403:9d7c::";
-      #     prefixLength = 64;
-      #   }
-      # ];
+    nat = {
+      enable = true;
+      externalInterface = interface;
+      internalInterfaces = [ microvm-name ];
     };
-
-    defaultGateway = {
-      address = "5.83.152.129";
-      interface = interface;
-    };
-
-    # defaultGateway6 = {
-    #   address = "2a06:de00:403:9d7c::1";
-    #   interface = "enp6s18";
-    # };
-
-    nameservers = lib.mkForce [
-      "1.1.1.1"
-      "8.8.8.8"
-    ];
-
-    enableIPv6 = false;
   };
 
   boot.kernel.sysctl = {

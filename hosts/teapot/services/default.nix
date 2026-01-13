@@ -19,8 +19,8 @@
     ./nix-search.nix
     ./ntfy.nix
     # ./nebula.nix # now in baseline
-    ./mealie.nix # currently broken
-    ./minecraft-server.nix
+    ./mealie.nix
+    # ./minecraft-server.nix
     ./atuin.nix
     ./strichliste-demo.nix
     # ./github-runner.nix
