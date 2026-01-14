@@ -292,5 +292,6 @@ in {
       lazyjj
       libinput
       evtest
+      rnote
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
