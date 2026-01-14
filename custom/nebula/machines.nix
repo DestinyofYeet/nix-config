@@ -64,17 +64,22 @@ in {
 
   "nixie" = {
     ip = "172.27.255.8";
-    groups = [ "end-user" "server" ];
+    groups = [ "server" ];
 
     privKeyFile = getPrivKey "nixie";
     publicKeyFile = getPublicKey "nixie";
   };
-} // (mkEntry "teapot-ha-vm" {
 
+} // (mkEntry "teapot-ha-vm" {
   ip = "127.27.255.9";
-  groups = [ "end-user" "server" ];
+  groups = [ "server" ];
+
 }) // (mkEntry "bonk-ha-vm" {
   ip = "127.27.255.10";
-  groups = [ "end-user" "server" ];
+  groups = [ "server" ];
 
-})
+} // (mkEntry "nix-server-ha-vm" {
+  ip = "127.27.255.11";
+  groups = [ "server" ];
+
+}))

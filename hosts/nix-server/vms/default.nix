@@ -58,6 +58,18 @@ in {
         "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey-rsa";
       symlink = false;
     };
+
+    ha-hostkey-ed25519 = {
+      file = secrets + "/vm-ha-hostkey-ed25519.age";
+      path = "${config.microvm.stateDir}/ha-vm/root/persistent/hostkey";
+      symlink = false;
+    };
+
+    ha-hostkey-rsa = {
+      file = secrets + "/vm-ha-hostkey-rsa.age";
+      path = "${config.microvm.stateDir}/ha-vm/root/persistent/hostkey-rsa";
+      symlink = false;
+    };
   };
 
   microvm = {
@@ -77,6 +89,15 @@ in {
         config = {
           imports =
             [ ./baseline ./forgejo-runner inputs.agenix.nixosModules.default ];
+        };
+      })
+
+      (mkVM "ha-vm" {
+        ip = "192.168.3.12";
+        mac = "02:00:00:00:00:03";
+        config = {
+          networking.hostName = "nix-server-ha-vm";
+          imports = [ ./baseline ./ha-vm inputs.agenix.nixosModules.default ];
         };
       })
     ];
