@@ -79,4 +79,7 @@ in {
   "zigbee2mqtt-secrets.age".publicKeys = authed;
 
   "clean-unused-files.age".publicKeys = authed;
+
+  "vm-ha-hostkey-ed25519.age".publicKeys = authed;
+  "vm-ha-hostkey-rsa.age".publicKeys = authed;
 } // (importFolder "vms/" inputs)
