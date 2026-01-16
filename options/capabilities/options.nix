@@ -27,6 +27,8 @@ in {
         mkBoolOption false "to enable nix-ld to use wavesurfer";
       strict-networking.enable =
         mkBoolOption false "to enable strict firewall rules";
+      wallpaperEngine.enable =
+        mkBoolOption false "to use the wallpaper engine instead of images";
     };
 
   };

@@ -17,5 +17,6 @@
     ./redshift.nix
     # ./termfilechooser.nix
     ./ashell.nix
+    ./wallpaperengine.nix
   ];
 }

@@ -410,6 +410,7 @@
               capabilities = {
                 monitor.enable = true;
                 wavesurfer-ld.enable = true;
+                wallpaperEngine.enable = true;
               };
             })
           ] ++ non-server-modules;
