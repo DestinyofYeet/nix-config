@@ -94,8 +94,9 @@ in {
 
       (mkVM "ha-vm" {
         ip = "192.168.3.12";
-        mac = "02:00:00:00:00:12";
+        mac = "02:00:00:00:00:03";
         config = {
+          networking.hostName = "nix-server-ha-vm";
           imports = [ ./baseline ./ha-vm inputs.agenix.nixosModules.default ];
         };
       })

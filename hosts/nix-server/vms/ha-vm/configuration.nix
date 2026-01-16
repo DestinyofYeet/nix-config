@@ -22,38 +22,38 @@
       }
     ];
 
-    volumes = [{
-      image = "rw-nix-store.img";
-      mountPoint = config.microvm.writableStoreOverlay;
-      size = 5120;
-    }];
+    #   volumes = [{
+    #     image = "rw-nix-store.img";
+    #     mountPoint = config.microvm.writableStoreOverlay;
+    #     size = 5120;
+    #   }];
 
-    writableStoreOverlay = "/nix/.rw-store";
+    #   writableStoreOverlay = "/nix/.rw-store";
   };
 
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
+  # services.openssh = {
+  #   enable = true;
+  #   openFirewall = true;
 
-    settings = {
-      PermitRootLogin = "yes";
-      PasswordAuthentication = false;
-    };
+  #   settings = {
+  #     PermitRootLogin = "yes";
+  #     PasswordAuthentication = false;
+  #   };
 
-    hostKeys = [
-      {
-        path = "/persistent/hostkey";
-        type = "ed25519";
-      }
-      {
-        path = "/persistent/hostkey-rsa";
-        type = "rsa";
-      }
-    ];
-  };
+  #   hostKeys = [
+  #     {
+  #       path = "/persistent/hostkey";
+  #       type = "ed25519";
+  #     }
+  #     {
+  #       path = "/persistent/hostkey-rsa";
+  #       type = "rsa";
+  #     }
+  #   ];
+  # };
 
-  users.users.root.openssh.authorizedKeys.keys =
-    [ secretStore.keys.hosts.nix-server.users.root.key ];
+  # users.users.root.openssh.authorizedKeys.keys =
+  #   [ secretStore.keys.hosts.nix-server.users.root.key ];
 
-  age.identityPaths = [ "/persistent/hostkey" ];
+  # age.identityPaths = [ "/persistent/hostkey" ];
 }
