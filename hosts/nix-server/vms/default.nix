@@ -97,7 +97,15 @@ in {
         mac = "02:00:00:00:00:03";
         config = {
           networking.hostName = "nix-server-ha-vm";
-          imports = [ ./baseline ./ha-vm inputs.agenix.nixosModules.default ];
+          imports = [
+            ./baseline
+            ./ha-vm
+            inputs.agenix.nixosModules.default
+            ../../../baseline/nebula.nix
+            ../../../options/capabilities/options.nix
+          ];
+
+          capabilities = { headless.enable = true; };
         };
       })
     ];

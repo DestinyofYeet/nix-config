@@ -25,7 +25,7 @@ rec {
         forgejo-runner.hostKey =
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDYt/UwSc/96eqfzbd4nqbNsAfqfNXSlPClK7Wd6trT1";
         ha-vm.hostKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF7XfniR4atQ4bcmPXGvF1k7TJaXnmfoQG9+jeWlYsCm";
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYfIB3qskyNnmxPlFx6TuzyEn5IEgdgBEwVOFhlH+OC";
       };
     };
     teapot = {
