@@ -293,5 +293,6 @@ in {
       libinput
       evtest
       rnote
+      simple-scan
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
