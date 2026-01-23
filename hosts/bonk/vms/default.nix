@@ -63,7 +63,16 @@ in {
         mac = "02:00:00:00:00:01";
         config = {
           networking.hostName = "bonk-ha-vm";
-          imports = [ ./baseline ./ha-vm inputs.agenix.nixosModules.default ];
+          imports = [
+            ./baseline
+            ./ha-vm
+            inputs.agenix.nixosModules.default
+            ../../../baseline/nebula.nix
+            ../../../options/capabilities/options.nix
+            ../../parts/ha-vm
+          ];
+
+          capabilities = { headless.enable = true; };
         };
       })
     ];

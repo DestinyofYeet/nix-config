@@ -103,6 +103,7 @@ in {
             inputs.agenix.nixosModules.default
             ../../../baseline/nebula.nix
             ../../../options/capabilities/options.nix
+            ../../parts/ha-vm
           ];
 
           capabilities = { headless.enable = true; };
