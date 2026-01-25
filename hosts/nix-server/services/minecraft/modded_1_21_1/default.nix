@@ -35,7 +35,7 @@ let
 
 in {
   services.minecraft-servers.servers."modded_1_21_1" = {
-    enable = true;
+    enable = false;
 
     package = (pkgs.writeShellScriptBin "start-server" ''
       if [ ! -d "libraries" ]; then
