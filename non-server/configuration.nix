@@ -89,7 +89,24 @@
 
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint ];
+    drivers = with pkgs; [
+      gutenprint
+      brlaser
+      brgenml1lpr
+      brgenml1cupswrapper
+      (pkgs.callPackage ../options/pkgs/mfcl3750cwd.nix { }).cupswrapper
+    ];
+  };
+
+  hardware.sane = {
+    enable = true;
+    extraBackends = with pkgs; [ brscan4 ];
+    brscan4.netDevices = {
+      zuhause = {
+        ip = "192.168.2.66";
+        model = "MFC-L3750CDW";
+      };
+    };
   };
 
   services.avahi = {
