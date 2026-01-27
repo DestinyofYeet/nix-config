@@ -1,4 +1,12 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, lib, ... }:
+let
+  zathura = lib.getExe pkgs.zathura;
+  getPdfName = pkgs.writeShellScript "get_pdf_name" ''
+    file=$1
+
+    ${zathura} "''${file%.*}.pdf"
+  '';
+in {
   programs.helix = {
     enable = true;
 
@@ -26,8 +34,13 @@
       theme = "tokyonight_moon";
 
       keys.normal = {
-        space.t.y = ''
-          :sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} "%{file_path_absolute}" 2>/dev/null &'';
+        # space.t.y = ''
+        #   :sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} "%{file_path_absolute}" 2>/dev/null &'';
+        space.t.y = [
+          ":lsp-workspace-command tinymist.doStartPreview"
+          '':sh ${getPdfName} "%{file_path_absolute}" 2>/dev/null''
+          ":lsp-workspace-command tinymist.doKillPreview"
+        ];
         space.y.z = [
           ":sh rm -f /tmp/unique-file"
           ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
@@ -71,6 +84,14 @@
                 autoEvalInputs = false;
               };
             };
+          };
+        };
+
+        tinymist = {
+          command = "${lib.getExe pkgs.tinymist}";
+          config = {
+            exportPdf = "onType";
+            outputPath = "$root/$dir/$name";
           };
         };
 
