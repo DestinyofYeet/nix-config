@@ -294,5 +294,6 @@ in {
       evtest
       rnote
       simple-scan
+      naps2
     ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
 }
