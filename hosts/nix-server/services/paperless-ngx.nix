@@ -49,6 +49,7 @@ in {
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header X-Real-IP $remote_addr;
 
+        client_max_body_size 0;
       '';
     };
 }
