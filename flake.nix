@@ -418,8 +418,8 @@
         };
 
         teapot = nixpkgs.lib.nixosSystem rec {
-
           system = "x86_64-linux";
+          specialArgs = defaultSpecialArgs;
           modules = [
             inputs.simple-nixos-mailserver.nixosModule
             inputs.nix-minecraft.nixosModules.minecraft-servers
@@ -436,8 +436,6 @@
               };
             })
           ] ++ baseline-modules;
-
-          specialArgs = defaultSpecialArgs;
 
         };
 

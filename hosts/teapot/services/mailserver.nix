@@ -42,6 +42,9 @@ in {
     enable = true;
     fqdn = "mail.ole.blue";
 
+    # ~50MB
+    messageSizeLimit = 51200000;
+
     stateVersion = 3;
 
     useUTF8FolderNames = true;

@@ -1,6 +1,6 @@
 { lib, pkgs, flake, config, inputs, secretStore, ... }:
 let
-  mkVM = lib.vm.getMkVm {
+  mkVM = lib.custom.vm.getMkVm {
 
     inherit pkgs flake config;
     gateway = "192.168.3.1";

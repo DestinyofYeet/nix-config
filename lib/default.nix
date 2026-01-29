@@ -8,11 +8,10 @@ let
 
   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
-  inherits = { inherit inputs pkgs lib; };
 in rec {
   scripts = import ./scripts { inherit inputs pkgs lib; };
 
-  vm = import ./mkVm { inherit inherits; };
+  vm = import ./vm { inherit inputs pkgs lib; };
 
   mkIfLaptop = config: attr:
     lib.mkIf (config.networking.hostName == "wattson") attr;
