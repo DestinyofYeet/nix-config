@@ -130,6 +130,7 @@ in {
       monitor = [ ] ++ (lib.optionals (lib.custom.isLaptop osConfig) [
         "${monitors_laptop.builtin}, 1920x1200@60, 0x0, 1"
         "${monitors_laptop.cc_raum.tv}, 1920x1080@60hz, 1920x0, 1"
+        "desc:NEC Corporation NP-P451W G54000282, 1920x1080@60hz, auto, 1"
 
         # fsim
         # "${monitors_laptop.fsim.table-right.left}, preferred, auto, 1"
