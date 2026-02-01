@@ -42,5 +42,7 @@
     dmidecode
     wezterm
     unixtools.netstat
+    net-tools
+    nmap
   ];
 }

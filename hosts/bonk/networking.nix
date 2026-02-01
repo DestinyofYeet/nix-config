@@ -34,14 +34,22 @@ in {
 
   networking = {
     hostName = "bonk";
+
+    dhcpcd.enable = false;
     useDHCP = false;
-    useNetworkd = false;
+    useHostResolvConf = false;
     networkmanager.enable = false;
+    resolvconf.enable = false;
 
     nat = {
       enable = true;
       externalInterface = interface;
       internalInterfaces = [ microvm-name ];
     };
+  };
+
+  boot.kernel.sysctl = {
+    # Allow containers to access internet
+    "net.ipv4.ip_forward" = 1;
   };
 }
