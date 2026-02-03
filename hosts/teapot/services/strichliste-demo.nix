@@ -1,6 +1,7 @@
-{ config, ... }: {
+{ config, lib, ... }:
+{
   services.strichliste-rs = {
-    enable = true;
+    enable = false;
     address = "127.0.0.1";
     port = 8936;
     settings = {
@@ -12,8 +13,10 @@
   };
 
   services.nginx.virtualHosts."demo.strichliste.rs" =
-    let cfg = config.services.strichliste-rs;
-    in {
+    let
+      cfg = config.services.strichliste-rs;
+    in
+    lib.mkIf (config.services.strichliste-rs.enable) {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

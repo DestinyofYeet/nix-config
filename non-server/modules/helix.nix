@@ -1,4 +1,9 @@
-{ pkgs, inputs, lib, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 let
   zathura = lib.getExe pkgs.zathura;
   getPdfName = pkgs.writeShellScript "get_pdf_name" ''
@@ -6,7 +11,8 @@ let
 
     ${zathura} "''${file%.*}.pdf"
   '';
-in {
+in
+{
   programs.helix = {
     enable = true;
 
@@ -34,8 +40,7 @@ in {
       theme = "tokyonight_moon";
 
       keys.normal = {
-        space.t.y.l = ''
-          :sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} "%{file_path_absolute}" 2>/dev/null &'';
+        space.t.y.l = '':sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} "%{file_path_absolute}" 2>/dev/null &'';
         space.t.y.r = [
           ":lsp-workspace-command tinymist.doStartPreview"
           '':sh ${getPdfName} "%{file_path_absolute}" 2>/dev/null''
@@ -45,7 +50,7 @@ in {
           ":sh rm -f /tmp/unique-file"
           ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
           '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
-          ":open %sh{cat /tmp/unique-file}"
+          ":open %sh{cat /tmp/unique-file | ${lib.getExe' pkgs.gnused "sed"} -E 's,^.+://[^/]*/,,'}"
           ":redraw"
         ];
         space.y.y = ":clipboard-yank";
@@ -98,7 +103,9 @@ in {
         rust-analyzer = {
           config = {
             formatting.command = [ "${pkgs.rustfmt}/bin/rustfmt" ];
-            cargo = { allFeatures = true; };
+            cargo = {
+              allFeatures = true;
+            };
             check.command = "clippy";
           };
         };

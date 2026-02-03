@@ -1,6 +1,14 @@
-{ pkgs, config, secretStore, custom, ... }:
-let secrets = secretStore.get-server-secrets "teapot";
-in {
+{
+  pkgs,
+  config,
+  secretStore,
+  custom,
+  ...
+}:
+let
+  secrets = secretStore.get-server-secrets "teapot";
+in
+{
   age.secrets = {
     ole-mail.file = ../secrets/ole-ole.blue.age;
     scripts-uwuwhatsthis-de.file = ../secrets/scripts-uwuwhatsthis.de.age;
@@ -15,11 +23,9 @@ in {
     nextcloud-uwuwhatsthis-de.file = ../secrets/nextcloud-uwuwhatsthis.de.age;
     nextcloud-ole-blue.file = ../secrets/nextcloud-ole-blue.age;
 
-    forgejo-email-ole-blue.file = secretStore.secrets
-      + "/servers/teapot/forgejo_email_password.age";
+    forgejo-email-ole-blue.file = secretStore.secrets + "/servers/teapot/forgejo_email_password.age";
 
-    authelia-email-ole-blue.file = secrets
-      + "/authelia-hashed-email-password.age";
+    authelia-email-ole-blue.file = secrets + "/authelia-hashed-email-password.age";
 
     dmarc-email-ole-blue.file = secrets + "/dmarc-hashed-email-password.age";
 
@@ -31,11 +37,9 @@ in {
       group = config.services.rspamd.group;
     };
 
-    mastodon-email-ole-blue.file = secrets
-      + "/mastodon_email_password_hash.age";
+    mastodon-email-ole-blue.file = secrets + "/mastodon_email_password_hash.age";
 
-    authentik-email-ole-blue.file = secrets
-      + "/authentik_email_password_hash.age";
+    authentik-email-ole-blue.file = secrets + "/authentik_email_password_hash.age";
   };
 
   mailserver = rec {
@@ -44,6 +48,8 @@ in {
 
     # ~50MB
     messageSizeLimit = 51200000;
+
+    x509.useACMEHost = "mail.ole.blue";
 
     stateVersion = 3;
 
@@ -54,7 +60,12 @@ in {
 
     dmarcReporting = {
       enable = true;
-      excludeDomains = [ "jyo333.com" "uwbswd.com" "csxkg.net" "hb-fec.net" ];
+      excludeDomains = [
+        "jyo333.com"
+        "uwbswd.com"
+        "csxkg.net"
+        "hb-fec.net"
+      ];
     };
 
     domains = [
@@ -115,26 +126,22 @@ in {
       };
 
       "scripts@uwuwhatsthis.de" = {
-        hashedPasswordFile =
-          "${config.age.secrets.scripts-uwuwhatsthis-de.path}";
+        hashedPasswordFile = "${config.age.secrets.scripts-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
       "sonarr@ole.blue" = {
-        hashedPasswordFile =
-          "${config.age.secrets.sonarr-uwuwhatsthis-de.path}";
+        hashedPasswordFile = "${config.age.secrets.sonarr-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
       "prowlarr@uwuwhatsthis.de" = {
-        hashedPasswordFile =
-          "${config.age.secrets.prowlarr-uwuwhatsthis-de.path}";
+        hashedPasswordFile = "${config.age.secrets.prowlarr-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
       "uptime-kuma@ole.blue" = {
-        hashedPasswordFile =
-          "${config.age.secrets.uptime-kuma-uwuwhatsthis-de.path}";
+        hashedPasswordFile = "${config.age.secrets.uptime-kuma-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
@@ -154,8 +161,7 @@ in {
       };
 
       "nextcloud@uwuwhatsthis.de" = {
-        hashedPasswordFile =
-          "${config.age.secrets.nextcloud-uwuwhatsthis-de.path}";
+        hashedPasswordFile = "${config.age.secrets.nextcloud-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 
@@ -174,7 +180,10 @@ in {
 
       "dmarc@ole.blue" = {
         hashedPasswordFile = config.age.secrets.dmarc-email-ole-blue.path;
-        aliases = [ "dmarc@uwuwhatsthis.de" "noreply-dmarc@ole.blue" ];
+        aliases = [
+          "dmarc@uwuwhatsthis.de"
+          "noreply-dmarc@ole.blue"
+        ];
       };
 
       "msmtp@ole.blue" = {
@@ -193,14 +202,15 @@ in {
         aliases = [ "authentik@ole.blue" ];
       };
     };
-
-    certificateScheme = "acme-nginx";
   };
 
   services.roundcube = {
     enable = true;
 
-    dicts = with pkgs.aspellDicts; [ en de ];
+    dicts = with pkgs.aspellDicts; [
+      en
+      de
+    ];
 
     plugins = [
       # "managesieve"
@@ -226,72 +236,74 @@ in {
     configureNginx = true;
   };
 
-  services.rspamd = let weight_failed = "10000";
-  in {
-    locals = {
-      "multimap.conf".text = ''
-        # yoinked from https://serverfault.com/questions/1124017/rspamd-whitelis-blacklist-per-domain-before-filtering
-        WHITELIST_SENDER_DOMAIN {
-                # See: https://rspamd.com/doc/modules/multimap.html#email-related-types
-                type = "from";
-                # See: https://rspamd.com/doc/modules/multimap.html#from-rcpt-and-header-filters
-                filter = "email:domain";
-                map = "${config.age.secrets.rspamd-domain-whitelist.path}";
-                symbol = "WHITELIST_SENDER_DOMAIN";
-                description = "Manual whitelist for specific domains";
-                # See: https://rspamd.com/doc/modules/multimap.html#pre-filter-maps
-                action = "accept";
-        }
-      '';
-
-      "milter_headers.conf".text = ''
-        extended_spam_headers = true;
-      '';
-
-      # "options.inc".text = ''
-      #   gtube_patterns = "all";
-      # '';
-
-      "groups.conf".text = let
-        mkFailedSingle = symbol: ''"${symbol}" { weight = ${weight_failed}; }'';
-        mkFailed = listOfSymbols:
-          (builtins.concatStringsSep "\n"
-            (map (symbol: mkFailedSingle symbol) listOfSymbols));
-      in ''
-
-        symbols {
-          "DMARC_POLICY_REJECT" { weight = ${weight_failed}; }
-          "DMARC_POLICY_SOFTFAIL" { weight = ${weight_failed}; }
-
-          # matches hashed bad message
-          "FUZZY_DENIED" { weight = 10; }
-
-          ${
-            mkFailed [
-              "DMARC_NA" # has no dmarc
-              "R_DKIM_NA" # has no dkim
-              "R_SPF_FAIL" # sfp verification failed
-              "RBL_MAILSPIKE_WORST" # worst possible spam reputation
-              "RBL_VIRUSFREE_BOTNET" # from address is listed in botnet
-              "RBL_SEM" # From address is listed in Spameatingmonkey RBL
-            ]
+  services.rspamd =
+    let
+      weight_failed = "10000";
+    in
+    {
+      locals = {
+        "multimap.conf".text = ''
+          # yoinked from https://serverfault.com/questions/1124017/rspamd-whitelis-blacklist-per-domain-before-filtering
+          WHITELIST_SENDER_DOMAIN {
+                  # See: https://rspamd.com/doc/modules/multimap.html#email-related-types
+                  type = "from";
+                  # See: https://rspamd.com/doc/modules/multimap.html#from-rcpt-and-header-filters
+                  filter = "email:domain";
+                  map = "${config.age.secrets.rspamd-domain-whitelist.path}";
+                  symbol = "WHITELIST_SENDER_DOMAIN";
+                  description = "Manual whitelist for specific domains";
+                  # See: https://rspamd.com/doc/modules/multimap.html#pre-filter-maps
+                  action = "accept";
           }
+        '';
+
+        "milter_headers.conf".text = ''
+          extended_spam_headers = true;
+        '';
+
+        # "options.inc".text = ''
+        #   gtube_patterns = "all";
+        # '';
+
+        "groups.conf".text =
+          let
+            mkFailedSingle = symbol: ''"${symbol}" { weight = ${weight_failed}; }'';
+            mkFailed =
+              listOfSymbols: (builtins.concatStringsSep "\n" (map (symbol: mkFailedSingle symbol) listOfSymbols));
+          in
+          ''
+
+            symbols {
+              "DMARC_POLICY_REJECT" { weight = ${weight_failed}; }
+              "DMARC_POLICY_SOFTFAIL" { weight = ${weight_failed}; }
+
+              # matches hashed bad message
+              "FUZZY_DENIED" { weight = 10; }
+
+              ${mkFailed [
+                "DMARC_NA" # has no dmarc
+                "R_DKIM_NA" # has no dkim
+                "R_SPF_FAIL" # sfp verification failed
+                "RBL_MAILSPIKE_WORST" # worst possible spam reputation
+                "RBL_VIRUSFREE_BOTNET" # from address is listed in botnet
+                "RBL_SEM" # From address is listed in Spameatingmonkey RBL
+              ]}
+            }
+          '';
+      };
+      extraConfig = ''
+        actions {
+          reject = null;
+          add_header = 15;
+          greylist = null;
         }
+      '';
+
+      workers.controller.extraConfig = ''
+        secure_ip = [ "${custom.nebula.yeet.hosts.teapot.ip}" ];
+        enable_password = "$2$37qhz69pbjmqtoqjrthocz5gkxin5h8a$xwps8cs7hhsrx1ydj85acy9ctxmp1achw8hu6zq6qbe88kj9qery";
       '';
     };
-    extraConfig = ''
-      actions {
-        reject = null;
-        add_header = 15;
-        greylist = null;
-      }
-    '';
-
-    workers.controller.extraConfig = ''
-      secure_ip = [ "${custom.nebula.yeet.hosts.teapot.ip}" ];
-      enable_password = "$2$37qhz69pbjmqtoqjrthocz5gkxin5h8a$xwps8cs7hhsrx1ydj85acy9ctxmp1achw8hu6zq6qbe88kj9qery";
-    '';
-  };
 
   systemd.services.nginx.serviceConfig.protectHome = false;
   users.groups.nginx.members = [ config.services.rspamd.user ];

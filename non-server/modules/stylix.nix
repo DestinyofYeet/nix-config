@@ -15,9 +15,6 @@
   #   sha256 = "sha256-iGVndavzet3G3NgpT8XGSDW6wi5eRD2SrwnJwsQqAUs=";
   # };
 
-  # Set the same image as in kde, to avoid some wierd background behaviour
-  stylix.image = lib.custom.settings.non-server.background;
-
   stylix.targets = {
     kde.enable = false;
     kitty = {

@@ -44,7 +44,7 @@
     ./kdeconnect.nix
     ./zathura.nix
     ./carapace.nix
-    ./nixvim.nix
+    # ./nixvim.nix
     ./atuin.nix
     ./wezterm.nix
     # ./obs.nix

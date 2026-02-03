@@ -1,13 +1,25 @@
-{ pkgs, flake, config, inputs, secretStore, lib, ... }:
+{
+  pkgs,
+  flake,
+  config,
+  inputs,
+  secretStore,
+  lib,
+  ...
+}:
 let
   mkVM = lib.custom.vm.getMkVm {
     inherit pkgs flake config;
     gateway = "192.168.3.1";
-    dns = [ "192.168.3.1" "9.9.9.9" ];
+    dns = [
+      "192.168.3.1"
+      "9.9.9.9"
+    ];
   };
 
   secrets = secretStore.getServerSecrets "teapot";
-in {
+in
+{
 
   age.secrets = {
     # need to create root/persistent folder manually manually
@@ -28,7 +40,7 @@ in {
     vms = lib.mkMerge [
       (mkVM "ha-vm" {
         ip = "192.168.3.10";
-        mac = "02:00:00:00:00:01";
+        mac = "02:00:00:00:00:04";
         config = {
           networking.hostName = "teapot-ha-vm";
           imports = [
@@ -40,7 +52,9 @@ in {
             ../../parts/ha-vm
           ];
 
-          capabilities = { headless.enable = true; };
+          capabilities = {
+            headless.enable = true;
+          };
         };
       })
     ];

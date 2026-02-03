@@ -1,5 +1,5 @@
 { pkgs, config, ... }: {
-  environment.systemPackages = with pkgs; [ opencomposite wlx-overlay-s ];
+  environment.systemPackages = with pkgs; [ opencomposite wayvr ];
 
   programs.alvr = {
     enable = true;

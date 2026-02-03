@@ -1,6 +1,13 @@
-{ secretStore, config, lib, ... }:
-let commonSecrets = secretStore.getServerSecrets "common";
-in {
+{
+  secretStore,
+  config,
+  lib,
+  ...
+}:
+let
+  commonSecrets = secretStore.getServerSecrets "common";
+in
+{
   age.secrets = {
     teapot-authentik-env.file = commonSecrets + "/authentik-env.age";
   };
@@ -8,18 +15,22 @@ in {
 
   services.postgresql = {
     ensureDatabases = [ "authentik" ];
-    ensureUsers = [{
-      name = "authentik";
-      ensureDBOwnership = true;
-    }];
+    ensureUsers = [
+      {
+        name = "authentik";
+        ensureDBOwnership = true;
+      }
+    ];
   };
 
   systemd.services = lib.mkIf (config.services.authentik.enable) {
     "authentik-migrate".enable = false;
     "authentik".requires = lib.mkForce [ "authentik-worker.service" ];
     "authentik-worker".serviceConfig.LoadCredential =
-      let certDir = config.security.acme.certs."idp.ole.blue".directory;
-      in [
+      let
+        certDir = config.security.acme.certs."idp.ole.blue".directory;
+      in
+      [
         "idp.ole.blue.pem:${certDir}/fullchain.pem"
         "idp.ole.blue.key:${certDir}/key.pem"
       ];

@@ -1,6 +1,18 @@
-{ config, pkgs, stable-pkgs, old-pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  stable-pkgs,
+  old-pkgs,
+  lib,
+  inputs,
+  ...
+}:
 let
-  luaPkgs = with pkgs; [ luajitPackages.luarocks lua luajit ];
+  luaPkgs = with pkgs; [
+    luajitPackages.luarocks
+    lua
+    luajit
+  ];
 
   kdePkgs = with pkgs.kdePackages; [
     kcalc
@@ -13,20 +25,31 @@ let
     dolphin
   ];
 
-  jetbrainsPkgs = with pkgs.jetbrains; [ rust-rover pycharm-professional ];
+  jetbrainsPkgs = with pkgs.jetbrains; [
+    rust-rover
+    pycharm
+  ];
 
-  pythonPkgs = with pkgs.python312Packages; [ python-lsp-server pyclip ];
+  pythonPkgs = with pkgs.python312Packages; [
+    python-lsp-server
+    pyclip
+  ];
 
-  nerd-fontsPkgs =
-    builtins.filter lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
-in {
+  nerd-fontsPkgs = builtins.filter lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+in
+{
   hardware.flipperzero.enable = true;
 
   # zsh config
-  environment.pathsToLink =
-    [ "/share/zsh" "/share/xdg-desktop-portal" "/share/applications" ];
+  environment.pathsToLink = [
+    "/share/zsh"
+    "/share/xdg-desktop-portal"
+    "/share/applications"
+  ];
 
-  fonts = { packages = with pkgs; [ noto-fonts-cjk-serif ] ++ nerd-fontsPkgs; };
+  fonts = {
+    packages = with pkgs; [ noto-fonts-cjk-serif ] ++ nerd-fontsPkgs;
+  };
 
   nixpkgs = {
     config = {
@@ -36,7 +59,7 @@ in {
         "dotnet-sdk-6.0.428" # eddie
         "dotnet-runtime-6.0.36" # eddie
         # "qtwebengine-5.15.19" # jellyfin-media-player
-        "ventoy-1.1.07"
+        "ventoy-1.1.10"
       ];
       allowUnfree = true;
       nvidia.acceptLicense = true;
@@ -51,7 +74,9 @@ in {
 
   # programs.ssh.startAgent = true;
 
-  programs.corectrl = { enable = true; };
+  programs.corectrl = {
+    enable = true;
+  };
 
   programs.wireshark = {
     enable = true;
@@ -74,8 +99,6 @@ in {
 
   programs.noisetorch.enable = true;
 
-  programs.adb.enable = true;
-
   services.mysql.package = pkgs.mariadb;
 
   # programs.hyprland = {
@@ -90,7 +113,9 @@ in {
 
   # services.gnome.gnome-keyring.enable = true;
 
-  programs.wshowkeys = { enable = true; };
+  programs.wshowkeys = {
+    enable = true;
+  };
 
   # services.flatpak = {
   #   enable = true;
@@ -118,13 +143,13 @@ in {
   #   ];
   # };
 
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     [
       neovim
       asciiquarium
       cowsay
       zed-editor
-      nixfmt-classic
       tlp
       zoxide
       xournalpp
@@ -144,7 +169,7 @@ in {
       element-desktop
       python3
       helix
-      stable-pkgs.libreoffice-qt6-fresh
+      libreoffice-qt6-fresh
       vlc
       wl-clipboard
       openfortivpn
@@ -173,7 +198,7 @@ in {
       ventoy-full
       qbittorrent
       dig
-      old-pkgs.freerdp3
+      freerdp
       cifs-utils
       samba
       keyutils
@@ -193,8 +218,8 @@ in {
       maliit-keyboard
       thunderbird
       d2
-      stable-pkgs.gimp-with-plugins
-      stable-pkgs.rpi-imager
+      gimp-with-plugins
+      rpi-imager
       zoom-us
       texliveFull
       inkscape-with-extensions
@@ -213,7 +238,7 @@ in {
       nix-diff
       mailcap
       lynx
-      youtube-music
+      pear-desktop
       pdftk
       lldb_19
       nix-output-monitor
@@ -238,7 +263,7 @@ in {
       taskwarrior3
       timewarrior
       taskwarrior-tui
-      nixfmt-rfc-style
+      nixfmt
       filezilla
       mpv
       wirelesstools
@@ -295,5 +320,10 @@ in {
       rnote
       simple-scan
       naps2
-    ] ++ luaPkgs ++ kdePkgs ++ jetbrainsPkgs ++ pythonPkgs;
+      android-tools
+    ]
+    ++ luaPkgs
+    ++ kdePkgs
+    ++ jetbrainsPkgs
+    ++ pythonPkgs;
 }

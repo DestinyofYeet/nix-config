@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    stable-nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    stable-nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     old-nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
 
@@ -50,11 +50,6 @@
       # url = "path:///home/ole/nixos/customLibs/networkNamespaces";
       # url = "path:///home/ole/github/namespaces.nix";
       url = "github:DestinyofYeet/namespaces.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zen-browser = {
-      url = "github:ch4og/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -170,7 +165,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hardware = { url = "github:NixOS/nixos-hardware"; };
+    hardware = {
+      url = "github:NixOS/nixos-hardware";
+    };
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     nix-joint-venture = {
@@ -199,7 +196,7 @@
     };
 
     strichliste-rs = {
-      url = "github:DestinyofYeet/strichliste";
+      url = "git+https://code.ole.blue/strichliste-rs/strichliste-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -225,8 +222,7 @@
     };
 
     lix-module = {
-      url =
-        "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.lix.follows = "lix";
     };
@@ -239,21 +235,31 @@
 
     typ2anki.url = "git+https://code.ole.blue/typ2anki/typ2anki?submodules=1";
 
-    clean-unused-files.url =
-      "git+https://code.ole.blue/DestinyofYeet/clean-qbittorrent-rs";
+    clean-unused-files.url = "git+https://code.ole.blue/DestinyofYeet/clean-qbittorrent-rs";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, plasma-manager, stylix, nur
-    , ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      agenix,
+      plasma-manager,
+      stylix,
+      nur,
+      ...
+    }@inputs:
     let
       inherit self;
 
-      lib = nixpkgs.lib.extend (self: super: {
-        custom = import ./lib {
-          inherit inputs;
-          lib = self;
-        };
-      });
+      lib = nixpkgs.lib.extend (
+        self: super: {
+          custom = import ./lib {
+            inherit inputs;
+            lib = self;
+          };
+        }
+      );
 
       custom = import ./custom { inherit lib; };
 
@@ -264,16 +270,24 @@
         inputs.nix-topology.nixosModules.default
         # inputs.prost.nixosModules.default
         inputs.strichliste.nixosModules.strichliste
-        ({ ... }: {
-          environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
-        })
+        (
+          { ... }:
+          {
+            environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
+          }
+        )
 
         ./options/capabilities/options.nix
 
         inputs.microvm-nix.nixosModules.host
 
         inputs.lix-module.nixosModules.default
-        ({ ... }: { lix.enable = false; })
+        (
+          { ... }:
+          {
+            lix.enable = false;
+          }
+        )
 
         inputs.nix-index-database.nixosModules.default
       ];
@@ -298,14 +312,17 @@
 
         nur.modules.nixos.default
         inputs.lanzaboote.nixosModules.lanzaboote
-        ({ ... }: {
-          environment.systemPackages = [
-            inputs.zen-browser.packages.x86_64-linux.specific
-            inputs.nix-fast-build.packages.x86_64-linux.default
-            inputs.setup-env-rs.packages.x86_64-linux.default
-          ];
-        })
-      ] ++ baseline-modules;
+        (
+          { ... }:
+          {
+            environment.systemPackages = [
+              inputs.nix-fast-build.packages.x86_64-linux.default
+              inputs.setup-env-rs.packages.x86_64-linux.default
+            ];
+          }
+        )
+      ]
+      ++ baseline-modules;
 
       stable-pkgs = import inputs.stable-nixpkgs {
         system = "x86_64-linux";
@@ -319,25 +336,39 @@
       secretStore = import ./secretStore { };
 
       defaultSpecialArgs = {
-        inherit inputs stable-pkgs old-pkgs lib custom home-manager secretStore;
+        inherit
+          inputs
+          stable-pkgs
+          old-pkgs
+          lib
+          custom
+          home-manager
+          secretStore
+          ;
         flake = self;
       };
 
-      makeConfigurations = configurations:
-        builtins.listToAttrs (map (configuration: {
-          name = configuration;
-          value =
-            self.nixosConfigurations.${configuration}.config.system.build.toplevel;
-        }) configurations);
-    in {
+      makeConfigurations =
+        configurations:
+        builtins.listToAttrs (
+          map (configuration: {
+            name = configuration;
+            value = self.nixosConfigurations.${configuration}.config.system.build.toplevel;
+          }) configurations
+        );
+    in
+    {
       # pfusch, used for micro-vms
       inherit defaultSpecialArgs;
       nixpkgs.config.rocmSupport = true;
 
       # This is highly advised, and will prevent many possible mistakes
-      checks = makeConfigurations [ "main" "wattson" ] // builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy)
-        inputs.deploy-rs.lib;
+      checks =
+        makeConfigurations [
+          "main"
+          "wattson"
+        ]
+        // builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
 
       nixosConfigurations = {
         nix-server = nixpkgs.lib.nixosSystem {
@@ -355,8 +386,16 @@
             inputs.clean-unused-files.nixosModules.default
             ./hosts/nix-server
 
-            ({ ... }: { capabilities = { headless.enable = true; }; })
-          ] ++ baseline-modules;
+            (
+              { ... }:
+              {
+                capabilities = {
+                  headless.enable = true;
+                };
+              }
+            )
+          ]
+          ++ baseline-modules;
         };
 
         kartoffelkiste = nixpkgs.lib.nixosSystem {
@@ -367,13 +406,17 @@
             ./non-server/extra-configurations/kartoffelkiste
             ./non-server
 
-            ({ ... }: {
-              capabilities = {
-                battery.enable = true;
-                monitor.enable = true;
-              };
-            })
-          ] ++ non-server-modules;
+            (
+              { ... }:
+              {
+                capabilities = {
+                  battery.enable = true;
+                  monitor.enable = true;
+                };
+              }
+            )
+          ]
+          ++ non-server-modules;
         };
 
         wattson = nixpkgs.lib.nixosSystem {
@@ -384,18 +427,22 @@
             ./non-server/extra-configurations/wattson
             ./non-server
 
-            ({ ... }: {
-              capabilities = {
-                battery.enable = true;
-                monitor.enable = true;
-                touch.enable = true;
-                wifi.enable = true;
-                bluetooth.enable = true;
-                wavesurfer-ld.enable = true;
-                strict-networking.enable = true;
-              };
-            })
-          ] ++ non-server-modules;
+            (
+              { ... }:
+              {
+                capabilities = {
+                  battery.enable = true;
+                  monitor.enable = true;
+                  touch.enable = true;
+                  wifi.enable = true;
+                  bluetooth.enable = true;
+                  wavesurfer-ld.enable = true;
+                  strict-networking.enable = true;
+                };
+              }
+            )
+          ]
+          ++ non-server-modules;
         };
 
         main = nixpkgs.lib.nixosSystem {
@@ -406,14 +453,18 @@
             ./non-server/extra-configurations/main
             ./non-server
 
-            ({ ... }: {
-              capabilities = {
-                monitor.enable = true;
-                wavesurfer-ld.enable = true;
-                wallpaperEngine.enable = true;
-              };
-            })
-          ] ++ non-server-modules;
+            (
+              { ... }:
+              {
+                capabilities = {
+                  monitor.enable = true;
+                  wavesurfer-ld.enable = true;
+                  wallpaperEngine.enable = true;
+                };
+              }
+            )
+          ]
+          ++ non-server-modules;
 
         };
 
@@ -429,13 +480,17 @@
 
             ./hosts/teapot
 
-            ({ ... }: {
-              capabilities = {
-                headless.enable = true;
-                customNixInterpreter.enable = true;
-              };
-            })
-          ] ++ baseline-modules;
+            (
+              { ... }:
+              {
+                capabilities = {
+                  headless.enable = true;
+                  customNixInterpreter.enable = true;
+                };
+              }
+            )
+          ]
+          ++ baseline-modules;
 
         };
 
@@ -445,8 +500,17 @@
           modules = [
             ./hosts/bonk
 
-            ({ ... }: { capabilities = { headless.enable = true; }; })
-          ] ++ baseline-modules;
+            (
+              { ... }:
+              {
+                capabilities = {
+                  headless.enable = true;
+                  customNixInterpreter.enable = true;
+                };
+              }
+            )
+          ]
+          ++ baseline-modules;
 
           specialArgs = defaultSpecialArgs;
         };
@@ -460,8 +524,16 @@
 
             ./hosts/nixie
 
-            ({ ... }: { capabilities = { headless.enable = true; }; })
-          ] ++ baseline-modules;
+            (
+              { ... }:
+              {
+                capabilities = {
+                  headless.enable = true;
+                };
+              }
+            )
+          ]
+          ++ baseline-modules;
           specialArgs = defaultSpecialArgs;
         };
 
@@ -473,22 +545,25 @@
 
             ./hosts/audioPi
 
-            ({ ... }: {
-              capabilities = {
-                headless.enable = true;
-                customNixInterpreter.enable = false;
-                agenix.enable = false;
-                nebulaVpn.enable = false;
-              };
-            })
-          ] ++ baseline-modules;
+            (
+              { ... }:
+              {
+                capabilities = {
+                  headless.enable = true;
+                  customNixInterpreter.enable = false;
+                  agenix.enable = false;
+                  nebulaVpn.enable = false;
+                };
+              }
+            )
+          ]
+          ++ baseline-modules;
 
           specialArgs = defaultSpecialArgs;
         };
       };
 
-      images.audioPi =
-        self.nixosConfigurations.audioPi.config.system.build.sdImage;
+      images.audioPi = self.nixosConfigurations.audioPi.config.system.build.sdImage;
 
       deploy.nodes = {
         nix-server = {
@@ -497,8 +572,7 @@
             sshUser = "root";
             # user = "root";
             # interactiveSudo = true;
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.nix-server;
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nix-server;
           };
         };
 
@@ -508,8 +582,7 @@
             sshUser = "root";
             # user = "root";
             # interactiveSudo = true;
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.teapot;
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.teapot;
           };
         };
 
@@ -518,8 +591,7 @@
           profiles.system = {
             sshUser = "root";
 
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.bonk;
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.bonk;
           };
         };
 
@@ -527,8 +599,7 @@
           hostname = "nixie";
           profiles.system = {
             sshUser = "root";
-            path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos
-              self.nixosConfigurations.nixie;
+            path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.nixie;
           };
         };
       };
@@ -539,7 +610,7 @@
           overlays = [ inputs.nix-topology.overlays.default ];
         };
 
-        modules = [{ nixosConfigurations = self.nixosConfigurations; }];
+        modules = [ { nixosConfigurations = self.nixosConfigurations; } ];
       };
 
       hydraJobs.system-builds = makeConfigurations [
@@ -548,55 +619,59 @@
         # "nix-server" # doesn't work, because to fetch the secrets repository, it needs access to /root/.ssh/config, which it doesn't do
       ];
 
-      formatter.x86_64-linux =
-        nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-      colmena = let
-        no-build-confs = [ "main" "wattson" "kartoffelkiste" ];
-        configurations =
-          lib.filterAttrs (name: value: !(lib.elem name no-build-confs))
-          self.nixosConfigurations;
+      colmena =
+        let
+          no-build-confs = [
+            "main"
+            "wattson"
+            "kartoffelkiste"
+          ];
+          configurations = lib.filterAttrs (
+            name: value: !(lib.elem name no-build-confs)
+          ) self.nixosConfigurations;
 
-        build-host = name: settingsAttr:
-          {
-            imports = configurations.${name}._module.args.modules;
-          } // settingsAttr;
-      in {
-        meta = {
-          nixpkgs = import nixpkgs { system = "x86_64-linux"; };
+          build-host =
+            name: settingsAttr:
+            {
+              imports = configurations.${name}._module.args.modules;
+            }
+            // settingsAttr;
+        in
+        {
+          meta = {
+            nixpkgs = import nixpkgs { system = "x86_64-linux"; };
 
-          specialArgs = defaultSpecialArgs;
+            specialArgs = defaultSpecialArgs;
 
-          nodeNixpkgs =
-            builtins.mapAttrs (name: value: value.pkgs) configurations;
-          nodeSpecialArgs =
-            builtins.mapAttrs (name: value: value._module.specialArgs)
-            configurations;
-        };
+            nodeNixpkgs = builtins.mapAttrs (name: value: value.pkgs) configurations;
+            nodeSpecialArgs = builtins.mapAttrs (name: value: value._module.specialArgs) configurations;
+          };
 
-        teapot = build-host "teapot" {
-          deployment = {
-            targetHost = "teapot";
-            targetUser = "root";
-            buildOnTarget = true;
+          teapot = build-host "teapot" {
+            deployment = {
+              targetHost = "teapot";
+              targetUser = "root";
+              buildOnTarget = true;
+            };
+          };
+
+          nix-server = build-host "nix-server" {
+            deployment = {
+              targetHost = "nix-server";
+              targetUser = "root";
+              buildOnTarget = true;
+            };
+          };
+
+          bonk = build-host "bonk" {
+            deployment = {
+              targetHost = "bonk";
+              targetUser = "root";
+              buildOnTarget = true;
+            };
           };
         };
-
-        nix-server = build-host "nix-server" {
-          deployment = {
-            targetHost = "nix-server";
-            targetUser = "root";
-            buildOnTarget = true;
-          };
-        };
-
-        bonk = build-host "bonk" {
-          deployment = {
-            targetHost = "bonk";
-            targetUser = "root";
-            buildOnTarget = true;
-          };
-        };
-      };
     };
 }

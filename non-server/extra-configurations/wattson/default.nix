@@ -1,10 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     ../common
-    ./vpn.nix
+    # ./vpn.nix
     ./agenix.nix
     # ./prost.nix
     # ./postgres.nix
@@ -37,7 +43,12 @@
         hostName = "teapot";
         system = "x86_64-linux";
         protocol = "ssh";
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
         mandatoryFeatures = [ ];
         maxJobs = 6;
         speedFactor = 2;
@@ -46,7 +57,12 @@
         hostName = "bonk";
         system = "x86_64-linux";
         protocol = "ssh";
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
         mandatoryFeatures = [ ];
         maxJobs = 6;
         speedFactor = 2;
@@ -72,14 +88,15 @@
   # disable baloo
   environment = {
     etc."xdg/baloofilerc".source = (pkgs.formats.ini { }).generate "baloorc" {
-      "Basic Settings" = { "Indexing-Enabled" = false; };
+      "Basic Settings" = {
+        "Indexing-Enabled" = false;
+      };
     };
   };
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages;
-    [
-      baloo # fuck this shit
-    ];
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    baloo # fuck this shit
+  ];
 
   # services.nginx = {
   #   enable = true;
