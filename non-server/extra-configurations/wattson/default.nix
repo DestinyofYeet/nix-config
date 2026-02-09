@@ -53,20 +53,20 @@
         maxJobs = 6;
         speedFactor = 2;
       }
-      {
-        hostName = "bonk";
-        system = "x86_64-linux";
-        protocol = "ssh";
-        supportedFeatures = [
-          "nixos-test"
-          "benchmark"
-          "big-parallel"
-          "kvm"
-        ];
-        mandatoryFeatures = [ ];
-        maxJobs = 6;
-        speedFactor = 2;
-      }
+      # {
+      #   hostName = "bonk";
+      #   system = "x86_64-linux";
+      #   protocol = "ssh";
+      #   supportedFeatures = [
+      #     "nixos-test"
+      #     "benchmark"
+      #     "big-parallel"
+      #     "kvm"
+      #   ];
+      #   mandatoryFeatures = [ ];
+      #   maxJobs = 6;
+      #   speedFactor = 2;
+      # }
     ];
 
     distributedBuilds = true;
