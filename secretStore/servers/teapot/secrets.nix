@@ -28,6 +28,7 @@ in
 
   "matrix-registration-token.age".publicKeys = authed;
   "matrix-turn-secret.age".publicKeys = authed;
+  "matrix-oauth_client_secret.age".publicKeys = authed;
 
   "nix-serve-priv-key.age".publicKeys = authed;
 
@@ -40,5 +41,6 @@ in
   "nextcloud-ole-blue.age".publicKeys = authed;
 
   "wireguard-vpn-priv-key.age".publicKeys = authed;
+
 }
 // (importFolder "vms/" inputs)

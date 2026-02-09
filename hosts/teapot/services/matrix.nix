@@ -9,19 +9,27 @@ in
   age.secrets =
     let
       matrixSettings = config.services.matrix-tuwunel;
+
+      matrixOwner = {
+        owner = matrixSettings.user;
+        group = matrixSettings.group;
+      };
     in
     {
       matrix-registration-token = {
         file = secrets + "/matrix-registration-token.age";
-        owner = matrixSettings.user;
-        group = matrixSettings.group;
-      };
+      }
+      // matrixOwner;
 
       matrix-turn-secret = {
         file = secrets + "/matrix-turn-secret.age";
-        owner = matrixSettings.user;
-        group = matrixSettings.group;
-      };
+      }
+      // matrixOwner;
+
+      matrix-oauth-secret = {
+        file = secrets + "/matrix-oauth_client_secret.age";
+      }
+      // matrixOwner;
     };
 
   services.matrix-tuwunel = {
@@ -35,6 +43,8 @@ in
         port = [ matrixPort ];
 
         server_name = "matrix.ole.blue";
+
+        new_user_displayname_suffix = "";
 
         allow_registration = true;
 
@@ -65,6 +75,19 @@ in
           "turn:turn.ole.blue?transport=udp"
           "turn:turn.ole.blue?transport=tcp"
         ];
+
+        # does not seem to work currently
+        # identity_provider = [
+        #   {
+        #     brand = "Authentik";
+        #     name = "Authentik";
+        #     client_id = "2FNVm2pCGCsdtynQE1gd2l15hIoiPq4L2tvhq86H";
+        #     issuer_url = "https://idp.ole.blue/application/o/matrix/";
+        #     base_path = "/application/o/matrix";
+        #     callback_url = "https://matrix.ole.blue/_matrix/client/unstable/login/sso/callback/2FNVm2pCGCsdtynQE1gd2l15hIoiPq4L2tvhq86H";
+        #     client_secret_file = config.age.secrets.matrix-oauth-secret.path;
+        #   }
+        # ];
       };
     };
   };
