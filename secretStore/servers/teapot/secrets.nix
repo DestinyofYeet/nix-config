@@ -2,7 +2,8 @@
 let
   authed = keys.authed ++ [ keys.hosts.teapot.hostKey ];
   importFolder = functions.getImportFolder ./.;
-in {
+in
+{
   "forgejo_email_password.age".publicKeys = authed;
   "forgejo_env_file.age".publicKeys = authed;
 
@@ -24,4 +25,20 @@ in {
 
   "vm-ha-hostkey-ed25519.age".publicKeys = authed;
   "vm-ha-hostkey-rsa.age".publicKeys = authed;
-} // (importFolder "vms/" inputs)
+
+  "matrix-registration-token.age".publicKeys = authed;
+  "matrix-turn-secret.age".publicKeys = authed;
+
+  "nix-serve-priv-key.age".publicKeys = authed;
+
+  "ole-ole.blue.age".publicKeys = authed;
+  "scripts-uwuwhatsthis.de.age".publicKeys = authed;
+  "sonarr-uwuwhatsthis.de.age".publicKeys = authed;
+  "prowlarr-uwuwhatsthis.de.age".publicKeys = authed;
+  "uptime-kuma-uwuwhatsthis.de.age".publicKeys = authed;
+  "zed-uwuwhatsthis.de.age".publicKeys = authed;
+  "nextcloud-ole-blue.age".publicKeys = authed;
+
+  "wireguard-vpn-priv-key.age".publicKeys = authed;
+}
+// (importFolder "vms/" inputs)

@@ -10,18 +10,17 @@ let
 in
 {
   age.secrets = {
-    ole-mail.file = ../secrets/ole-ole.blue.age;
-    scripts-uwuwhatsthis-de.file = ../secrets/scripts-uwuwhatsthis.de.age;
-    sonarr-uwuwhatsthis-de.file = ../secrets/sonarr-uwuwhatsthis.de.age;
-    prowlarr-uwuwhatsthis-de.file = ../secrets/prowlarr-uwuwhatsthis.de.age;
-    uptime-kuma-uwuwhatsthis-de.file = ../secrets/prowlarr-uwuwhatsthis.de.age;
+    ole-mail.file = secrets + "/ole-ole.blue.age";
+    scripts-uwuwhatsthis-de.file = secrets + "/scripts-uwuwhatsthis.de.age";
+    sonarr-uwuwhatsthis-de.file = secrets + "/sonarr-uwuwhatsthis.de.age";
+    prowlarr-uwuwhatsthis-de.file = secrets + "/prowlarr-uwuwhatsthis.de.age";
+    uptime-kuma-uwuwhatsthis-de.file = secrets + "/prowlarr-uwuwhatsthis.de.age";
 
-    firefly-iii-ole-blue.file = ../secrets/firefly-email-credentials.age;
-    zed-uwuwhatsthis-de.file = ../secrets/zed-uwuwhatsthis.de.age;
-    hydra-uwuwhatsthis-de.file = ../secrets/hydra-uwuwhatsthis.de.age;
+    firefly-iii-ole-blue.file = secrets + "/firefly-email-credentials.age";
+    zed-uwuwhatsthis-de.file = secrets + "/zed-uwuwhatsthis.de.age";
 
-    nextcloud-uwuwhatsthis-de.file = ../secrets/nextcloud-uwuwhatsthis.de.age;
-    nextcloud-ole-blue.file = ../secrets/nextcloud-ole-blue.age;
+    nextcloud-uwuwhatsthis-de.file = secrets + "/nextcloud-uwuwhatsthis.de.age";
+    nextcloud-ole-blue.file = secrets + "/nextcloud-ole-blue.age";
 
     forgejo-email-ole-blue.file = secretStore.secrets + "/servers/teapot/forgejo_email_password.age";
 
@@ -152,11 +151,6 @@ in
 
       "zed@ole.blue" = {
         hashedPasswordFile = "${config.age.secrets.zed-uwuwhatsthis-de.path}";
-        sendOnly = true;
-      };
-
-      "hydra@uwuwhatsthis.de" = {
-        hashedPasswordFile = "${config.age.secrets.hydra-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
 

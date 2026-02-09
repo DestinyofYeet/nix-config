@@ -1,9 +1,18 @@
-{ pkgs, config, custom, ... }:
-let vpn_port = 1337;
-in rec {
+{
+  pkgs,
+  config,
+  custom,
+  secretStore,
+  ...
+}:
+let
+  vpn_port = 1337;
+  secrets = secretStore.getServerSecrets "teapot";
+in
+rec {
   age.secrets = {
     wireguard-vpn-priv-key = {
-      file = ../secrets/wireguard-vpn-priv-key.age;
+      file = secrets + "/wireguard-vpn-priv-key.age";
       mode = "640";
       owner = "systemd-network";
       group = "systemd-network";
@@ -41,11 +50,13 @@ in rec {
         FirewallMark = 42;
       };
 
-      wireguardPeers = [{
-        # pedro
-        PublicKey = "7R4ogUcruPQvxxNoPp4P+sbLz47HDoY2anDvcvWnWQk=";
-        AllowedIPs = [ "10.100.0.6/32" ];
-      }];
+      wireguardPeers = [
+        {
+          # pedro
+          PublicKey = "7R4ogUcruPQvxxNoPp4P+sbLz47HDoY2anDvcvWnWQk=";
+          AllowedIPs = [ "10.100.0.6/32" ];
+        }
+      ];
     };
   };
 }

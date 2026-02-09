@@ -1,7 +1,16 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  secretStore,
+  ...
+}:
+let
+  secrets = secretStore.getServerSecrets "teapot";
+in
+{
   age.secrets = {
     cache-priv-key = {
-      file = ../secrets/nix-serve-priv-key.age;
+      file = secrets + "/nix-serve-priv-key.age";
       mode = "600";
       owner = "nix-serve";
       group = "nix-serve";
@@ -29,9 +38,7 @@
     forceSSL = true;
 
     locations."/" = {
-      proxyPass = "http://${config.services.nix-serve.bindAddress}:${
-          toString config.services.nix-serve.port
-        }";
+      proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
     };
   };
 }

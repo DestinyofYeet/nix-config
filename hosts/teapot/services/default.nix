@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   imports = [
     ./sshd.nix
     ./nginx.nix
@@ -7,8 +8,8 @@
     # ./docker.nix
     # ./ghost.nix
     ./mailserver.nix
-    ./conduit.nix
-    # ./coturn.nix
+    ./matrix.nix
+    ./coturn.nix
     # ./hydra.nix
     ./nix-serve.nix
     # ./taskchampion-server.nix
@@ -27,6 +28,7 @@
     ./beszel-agent.nix
     ./mastdodon.nix
     ./authentik.nix
+    ./livekit.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

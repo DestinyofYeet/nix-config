@@ -1,26 +1,28 @@
 {
   config,
   lib,
+  secretStore,
   ...
 }:
+let
+  secrets = secretStore.getServerSecrets "teapot";
+in
 {
   age.secrets = {
-    cloudflare-api-env.file = ../../secrets/cloudflare-api-env.age;
-    coturn-static-auth-secret = {
-      file = ../secrets/coturn-static-auth-secret.age;
+    coturn-auth-secret = rec {
+      file = secrets + "/matrix-turn-secret.age";
       owner = "turnserver";
-      group = "turnserver";
+      group = owner;
     };
   };
 
   services.coturn = rec {
     enable = true;
     no-cli = true;
-    no-tcp-relay = true;
-    min-port = 49000;
-    max-port = 50000;
+    min-port = 52000;
+    max-port = 65535;
     use-auth-secret = true;
-    static-auth-secret-file = config.age.secrets.coturn-static-auth-secret.path;
+    static-auth-secret-file = config.age.secrets.coturn-auth-secret.path;
     realm = "turn.ole.blue";
     cert = "${config.security.acme.certs.${realm}.directory}/full.pem";
     pkey = "${config.security.acme.certs.${realm}.directory}/key.pem";
@@ -99,18 +101,5 @@
 
     postRun = "systemctl restart coturn.service";
     group = "turnserver";
-  };
-
-  services.matrix-conduit = lib.mkIf config.services.matrix-conduit.enable {
-    settings.global =
-      let
-        inherit (config.services.coturn) realm;
-      in
-      {
-        turn_uris = [
-          "turn:${realm}?transport=udp"
-          "turn:${realm}?transport=tcp"
-        ];
-      };
   };
 }
