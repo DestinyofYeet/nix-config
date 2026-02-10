@@ -1,4 +1,10 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   environment.systemPackages = with pkgs; [
@@ -28,7 +34,6 @@
     nmap
     ripgrep
     tree
-    nixfmt-classic
     wormhole-rs
     docker
     docker-compose
@@ -40,10 +45,16 @@
     tmux
   ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "surrealdb" "elasticsearch" ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "surrealdb"
+      "elasticsearch"
+    ];
 
-  environment.variables = { EDITOR = "vim"; };
+  environment.variables = {
+    EDITOR = "vim";
+  };
 
   programs.starship.enable = true;
 }

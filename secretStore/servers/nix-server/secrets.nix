@@ -1,10 +1,16 @@
-{ keys, lib, functions, ... }@inputs:
+{
+  keys,
+  lib,
+  functions,
+  ...
+}@inputs:
 let
 
   importFolder = functions.getImportFolder ./.;
 
   authed = keys.authed ++ [ keys.hosts.nix-server.hostKey ];
-in {
+in
+{
   "airvpn_config.age".publicKeys = authed;
   "hydra-email-credentials.age".publicKeys = authed;
   "fireflyiii-appkey.age".publicKeys = authed;
@@ -82,4 +88,7 @@ in {
 
   "vm-ha-hostkey-ed25519.age".publicKeys = authed;
   "vm-ha-hostkey-rsa.age".publicKeys = authed;
-} // (importFolder "vms/" inputs)
+
+  "karakeep-env-file.age".publicKeys = authed;
+}
+// (importFolder "vms/" inputs)

@@ -236,6 +236,7 @@
     typ2anki.url = "git+https://code.ole.blue/typ2anki/typ2anki?submodules=1";
 
     clean-unused-files.url = "git+https://code.ole.blue/DestinyofYeet/clean-qbittorrent-rs";
+    nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
   outputs =

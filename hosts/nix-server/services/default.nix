@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./settings.nix
     ./nfs.nix
@@ -70,5 +71,6 @@
     ./jellyseer.nix
     ./recyclarr.nix
     ./zigbee2mqtt.nix
+    ./karakeep.nix
   ];
 }

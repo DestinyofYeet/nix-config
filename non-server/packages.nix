@@ -321,6 +321,7 @@ in
       simple-scan
       naps2
       android-tools
+      inputs.nix-alien.packages.x86_64-linux.nix-alien
     ]
     ++ luaPkgs
     ++ kdePkgs
