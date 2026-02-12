@@ -40,6 +40,7 @@ in
 
   systemd.services.karakeep-setup = rec {
     script = ''
+      chown ${user}:${user} ${dataDir}
       ${setfacl} -d -m u:${user}:rwx ${dataDir}
       ${setfacl} -m u:${user}:rx /mnt/data/data
     '';
