@@ -1,5 +1,6 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
-    # ./etcd.nix
+    ./etcd.nix
   ];
 }

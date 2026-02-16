@@ -10,12 +10,16 @@ let
       publicKeyFile = getPublicKey name;
     };
   };
-in {
+in
+{
   "teapot" = {
     ip = "172.27.255.1";
     external_ips = [ "ole.blue:4242" ];
     lighthouse = true;
-    groups = [ "ligthouse" "server" ];
+    groups = [
+      "ligthouse"
+      "server"
+    ];
 
     privKeyFile = ./teapot/teapot.key.age;
     publicKeyFile = ./teapot/teapot.crt;
@@ -30,7 +34,10 @@ in {
 
   "wattson" = {
     ip = "172.27.255.3";
-    groups = [ "end-user" "laptop" ];
+    groups = [
+      "end-user"
+      "laptop"
+    ];
 
     privKeyFile = ./wattson/wattson.key.age;
     publicKeyFile = ./wattson/wattson.crt;
@@ -38,7 +45,10 @@ in {
 
   "main" = {
     ip = "172.27.255.4";
-    groups = [ "end-user" "desktop" ];
+    groups = [
+      "end-user"
+      "desktop"
+    ];
 
     privKeyFile = ./main/main.key.age;
     publicKeyFile = ./main/main.crt;
@@ -46,7 +56,10 @@ in {
 
   "kartoffelkiste" = {
     ip = "172.27.255.6";
-    groups = [ "end-user" "laptop" ];
+    groups = [
+      "end-user"
+      "laptop"
+    ];
 
     privKeyFile = ./kartoffelkiste/kartoffelkiste.key.age;
     publicKeyFile = ./kartoffelkiste/kartoffelkiste.crt;
@@ -56,7 +69,10 @@ in {
     ip = "172.27.255.7";
     external_ips = [ "uwuwhatsthis.de:4242" ];
     lighthouse = true;
-    groups = [ "lighthouse" "server" ];
+    groups = [
+      "lighthouse"
+      "server"
+    ];
 
     privKeyFile = getPrivKey "bonk";
     publicKeyFile = getPublicKey "bonk";
@@ -70,16 +86,21 @@ in {
     publicKeyFile = getPublicKey "nixie";
   };
 
-} // (mkEntry "teapot-ha-vm" {
-  ip = "127.27.255.9";
+}
+// (mkEntry "teapot-ha-vm" {
+  ip = "172.27.255.9";
   groups = [ "server" ];
 
-}) // (mkEntry "bonk-ha-vm" {
-  ip = "127.27.255.10";
-  groups = [ "server" ];
+})
+// (
+  mkEntry "bonk-ha-vm" {
+    ip = "172.27.255.10";
+    groups = [ "server" ];
 
-} // (mkEntry "nix-server-ha-vm" {
-  ip = "127.27.255.11";
-  groups = [ "server" ];
+  }
+  // (mkEntry "nix-server-ha-vm" {
+    ip = "172.27.255.11";
+    groups = [ "server" ];
 
-}))
+  })
+)
