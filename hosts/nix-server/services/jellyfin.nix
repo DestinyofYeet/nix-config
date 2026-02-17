@@ -50,7 +50,7 @@ in
 
   systemd.services.jellyfin = rec {
     requires = [ "docker-shokoserver.service" ];
-    before = requires;
+    after = requires;
   };
 
   services.nginx =
