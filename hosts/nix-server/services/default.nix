@@ -55,8 +55,8 @@
     ./nginx.nix
     ./smb.nix
     ./lldap.nix
-    ./parsedmarc.nix
-    # ./elasticsearch.nix
+    # ./parsedmarc.nix
+    ./elasticsearch.nix
     ./smartd.nix
     ./backup.nix
     ./kavita.nix
