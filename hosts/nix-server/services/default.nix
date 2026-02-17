@@ -32,11 +32,11 @@
     # ./passbolt.nix
     ./unbound.nix
     # ./ups.nix
-    ./strichliste.nix
+    # ./strichliste.nix
     # ./znapzend.nix
     ./bazarr.nix
     ./zfs-mail.nix
-    ./wifi.nix
+    # ./wifi.nix
     ./acme.nix
     ./deluge.nix
     ./ankisync.nix
