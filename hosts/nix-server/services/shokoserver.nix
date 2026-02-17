@@ -4,22 +4,14 @@
   ...
 }:
 {
-  virtualisation.oci-containers = {
-    containers."shokoserver" = {
-      image = "shokoanime/server:v5.1.0";
-      volumes = [
-        "${lib.custom.settings.${config.networking.hostName}.paths.configs}/shoko:/home/shoko/.shoko"
-        "${lib.custom.settings.${config.networking.hostName}.paths.data}/media/jellyfin/animes:${
-          lib.custom.settings.${config.networking.hostName}.paths.data
-        }/media/jellyfin/animes"
-      ];
-      ports = [ "8111:8111" ];
-      environment = {
-        PUID = "${lib.custom.settings.${config.networking.hostName}.uid}";
-        PGID = "${lib.custom.settings.${config.networking.hostName}.gid}";
-        TZ = "Europe/Berlin";
-      };
-    };
+  services.shoko = {
+    enable = true;
+  };
+
+  systemd.services.shoko.serviceConfig = {
+    DynamicUser = lib.mkForce false;
+    User = "apps";
+    Group = "apps";
   };
 
   services.nginx =

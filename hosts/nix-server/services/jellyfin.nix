@@ -49,7 +49,7 @@ in
   ];
 
   systemd.services.jellyfin = rec {
-    requires = [ "docker-shokoserver.service" ];
+    requires = [ "shoko.service" ];
     after = requires;
   };
 
