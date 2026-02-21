@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 EMAIL_DATA = {
     "host": "ole.blue",
     "smtp": "mail.ole.blue",
-    "port": 587,  # StartTLS 587
+    "port": 465,  # StartTLS 587
     "receiver_email": "ole@ole.blue",
     "user": "scripts@uwuwhatsthis.de",
     "password": "",

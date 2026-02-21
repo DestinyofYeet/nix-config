@@ -22,7 +22,10 @@
 
     script = ''
       output=$(${pkgs.curl}/bin/curl -X GET "http://localhost:7070/?automate=true&config=targobank.json")
-      ${config.serviceScripts.send-email}/bin/send-email --subject "Imported Firefly III data" --content "$output" --password_file ${config.age.secrets.send-email-pw.path}
+      {
+        echo "Subject: Imported Firefly-III data"
+        echo $output
+      } | ${pkgs.msmtp}/bin/msmtp -a firefly ole@ole.blue --set-to-header=on
     '';
   };
 
