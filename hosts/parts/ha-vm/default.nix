@@ -1,7 +1,7 @@
 { config, ... }:
 {
   imports = [
-    # ./services
+    ./services
     ../../../baseline/packages.nix
     ./networking.nix
   ];

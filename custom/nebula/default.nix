@@ -4,21 +4,26 @@ let
 
   machines = import ./machines.nix;
 
-  genStaticHostMap = machines:
-    builtins.listToAttrs (map (entry: {
-      name = entry.value.ip;
-      value = entry.value.external_ips;
-    }) (builtins.filter (attr: attr.value.lighthouse or false)
-      (lib.attrsToList machines)));
+  genStaticHostMap =
+    machines:
+    builtins.listToAttrs (
+      map (entry: {
+        name = entry.value.ip;
+        value = entry.value.external_ips;
+      }) (builtins.filter (attr: attr.value.lighthouse or false) (lib.attrsToList machines))
+    );
 
-  getLighthouses = machines:
-    lib.mapAttrsToList (_v: v: v.ip)
-    (lib.filterAttrs (name: value: value.lighthouse or false) machines);
+  getLighthouses =
+    machines:
+    lib.mapAttrsToList (_v: v: v.ip) (
+      lib.filterAttrs (name: value: value.lighthouse or false) machines
+    );
 
-  genFilteredStaticHostMap = machines: currentNode:
-    lib.attrsets.filterAttrs (key: value: key != currentNode.ip)
-    (genStaticHostMap machines);
-in rec {
+  genFilteredStaticHostMap =
+    machines: currentNode:
+    lib.attrsets.filterAttrs (key: value: key != currentNode.ip) (genStaticHostMap machines);
+in
+rec {
   yeet = {
     staticHostMap = genStaticHostMap machines;
     lightHouses = getLighthouses machines;
@@ -26,12 +31,14 @@ in rec {
     hosts = import ./machines.nix;
   };
 
-  getConfig = lib: config:
+  getConfig =
+    lib: config:
     let
       currentName = config.networking.hostName;
       currentNode = yeet.hosts.${currentName};
       isLightHouse = currentNode.lighthouse or false;
-    in {
+    in
+    {
       age.secrets = {
         "nebula-${currentName}-priv" = rec {
           file = currentNode.privKeyFile;
@@ -46,10 +53,8 @@ in rec {
         cert = currentNode.publicKeyFile;
         ca = ./ca.crt;
 
-        staticHostMap = if (!isLightHouse) then
-          yeet.staticHostMap
-        else
-          (genFilteredStaticHostMap machines currentNode);
+        staticHostMap =
+          if (!isLightHouse) then yeet.staticHostMap else (genFilteredStaticHostMap machines currentNode);
         lighthouses = lib.mkIf (!isLightHouse) yeet.lightHouses;
 
         isLighthouse = isLightHouse;
@@ -58,14 +63,21 @@ in rec {
           port = 4242;
         };
 
-        settings = { punchy.punch = lib.mkIf (!isLightHouse) true; };
+        settings = {
+          punchy.punch = lib.mkIf (!isLightHouse) true;
+          tun = {
+            mtu = currentNode.mtu or 1300;
+          };
+        };
 
         firewall = rec {
-          inbound = [{
-            host = "any";
-            port = "any";
-            proto = "any";
-          }];
+          inbound = [
+            {
+              host = "any";
+              port = "any";
+              proto = "any";
+            }
+          ];
 
           outbound = inbound;
         };

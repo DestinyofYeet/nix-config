@@ -1,5 +1,14 @@
-{ pkgs, config, lib, ... }: {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # nixpkgs.overlays = lib.mkIf (config.capabilities.customNixInterpreter.enable)
   #   [
@@ -44,5 +53,6 @@
     unixtools.netstat
     net-tools
     nmap
+    tcpdump
   ];
 }

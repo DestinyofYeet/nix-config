@@ -1,15 +1,16 @@
 { config, ... }:
-let machines = import ../../../../custom/nebula/machines.nix;
-in {
+let
+  machines = import ../../../../custom/nebula/machines.nix;
+in
+{
   services.etcd = {
     enable = true;
 
-    listenPeerUrls =
-      [ "http://${(machines.${config.networking.hostName}).ip}:2380" ];
+    listenPeerUrls = [ "http://${(machines.${config.networking.hostName}).ip}:2380" ];
 
     listenClientUrls = [
       "http://${(machines.${config.networking.hostName}).ip}:2379"
-      "http://127.0.0.1:2379"
+      "http://localhost:2379"
     ];
 
     initialCluster = [

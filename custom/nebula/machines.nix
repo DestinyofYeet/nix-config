@@ -6,6 +6,8 @@ let
     "${name}" = {
       inherit (settings) ip groups;
 
+      mtu = settings.mtu or null;
+
       privKeyFile = getPrivKey name;
       publicKeyFile = getPublicKey name;
     };
@@ -96,6 +98,7 @@ in
   mkEntry "bonk-ha-vm" {
     ip = "172.27.255.10";
     groups = [ "server" ];
+    mtu = 1200;
 
   }
   // (mkEntry "nix-server-ha-vm" {
