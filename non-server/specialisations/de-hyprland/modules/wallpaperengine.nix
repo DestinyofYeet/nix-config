@@ -17,16 +17,17 @@ lib.mkIf (osConfig.capabilities.wallpaperEngine.enable) {
           extraOptions = [
             ignoredSteamApps
           ];
-          monitor = "DP-3";
+          monitor = "DP-2";
         }
         {
 
           wallpaperId = "876411152";
-          monitor = "DP-2";
+          monitor = "DP-3";
           extraOptions = [
             "--fullscreen-pause-only-active"
             ignoredSteamApps
           ];
+          audio.silent = true;
         }
       ];
     };
