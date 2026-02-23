@@ -55,6 +55,7 @@ rec {
           # pedro
           PublicKey = "7R4ogUcruPQvxxNoPp4P+sbLz47HDoY2anDvcvWnWQk=";
           AllowedIPs = [ "10.100.0.6/32" ];
+          PersistentKeepalive = 10;
         }
       ];
     };
