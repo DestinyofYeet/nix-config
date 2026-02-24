@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   services.strichliste-rs = {
-    enable = false;
+    enable = true;
     address = "127.0.0.1";
     port = 8936;
     settings = {
