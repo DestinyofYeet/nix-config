@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./hyprpaper.nix
     # ./hyprsunset.nix
@@ -13,7 +14,7 @@
     ./gtk.nix
     ./nushell.nix
     ./pyprland.nix
-    ./cursor.nix
+    ../../common/cursor.nix
     ./redshift.nix
     # ./termfilechooser.nix
     ./ashell.nix

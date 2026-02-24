@@ -39,7 +39,9 @@ in
         QT_AUTO_SCREEN_SCALE_FACTOR = "1";
         QT_STYLE_OVERRIDE = "kvantum";
       };
+
       cursor = {
+        theme = "Posy_Cursor_Black";
         size = 8;
       };
 
@@ -137,19 +139,35 @@ in
         }
       ]);
 
-      window-rules =
-        [ ]
-        ++ lib.optionals (lib.custom.isMain osConfig) [
-          {
-            matches = [
-              {
-                app-id = "vesktop";
-              }
-            ];
-            open-on-output = "DP-3";
-            open-maximized = true;
-          }
-        ];
+      window-rules = [
+        {
+          matches = [
+            {
+              app-id = "tidal-hifi";
+            }
+            {
+              app-id = "org.wezfurlong.wezterm";
+            }
+          ];
+
+          open-maximized = true;
+        }
+      ]
+      ++ lib.optionals (lib.custom.isMain osConfig) [
+        {
+          matches = [
+            {
+              app-id = "vesktop";
+            }
+          ];
+          open-on-output = "DP-3";
+          open-maximized = true;
+        }
+      ];
+
+      outputs = lib.mkIf (lib.custom.isMain osConfig) {
+        "DP-2".focus-at-startup = true;
+      };
     };
   };
 }

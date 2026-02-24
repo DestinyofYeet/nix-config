@@ -15,6 +15,7 @@ in
     ./redshift.nix
     ./wallpaperengine.nix
     ./swaylock.nix
+    ../../common/cursor.nix
     waybar
   ];
 }
