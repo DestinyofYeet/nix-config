@@ -8,8 +8,8 @@ module deploy-node-command {
   }
 
   export def --wrapped deploy-nodes [ nodes: string, ...args] {
-    let hosts = nodes | split row "," | each { $in | "/home/ole/nixos#" + $in} | str join " ";
-    deploy -s $hosts ...$args -- --log-format internal-json -v o+e>| nom --json
+    let hosts = $nodes | split row "," | each { $in | "/home/ole/nixos#" + $in} | str join " ";
+    print $"deploy -s --targets $'($hosts)' ...$args -- --log-format internal-json -v o+e>| nom --json"
   }
 }
 
