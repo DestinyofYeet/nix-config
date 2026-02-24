@@ -152,6 +152,20 @@ in
 
           open-maximized = true;
         }
+        {
+          matches = [
+            {
+              app-id = "steam";
+              title = ''^notificationtoasts_\d+_desktop$'';
+            }
+          ];
+
+          default-floating-position = {
+            relative-to = "bottom-right";
+            x = 10;
+            y = 10;
+          };
+        }
       ]
       ++ lib.optionals (lib.custom.isMain osConfig) [
         {
