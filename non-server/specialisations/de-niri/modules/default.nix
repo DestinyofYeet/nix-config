@@ -17,6 +17,7 @@ in
     ./swaylock.nix
     ../../hm-common/cursor.nix
     ../../hm-common/gnome-keyring.nix
+    ./swayidle.nix
     waybar
   ];
 }

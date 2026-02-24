@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.swaylock = {
     enable = true;
@@ -9,10 +9,11 @@
       daemonize = true;
       indicator = true;
       clock = true;
-      screenshots = true;
 
-      effect-blur = "11x11";
-      image = "/etc/backgrounds/lockscreen.jpg";
+      # screenshots = true;
+      # effect-blur = "11x11";
+
+      image = lib.custom.settings.non-server.lock-screen;
       font = "JetBrains Mono";
       indicator-radius = 80;
       indicator-thickness = 8;
@@ -41,7 +42,7 @@
 
       # grace-no-mouse = true;
       # grace-no-touch = true;
-      grace = 5;
+      grace = 2;
     };
   };
 }
