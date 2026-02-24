@@ -1,16 +1,36 @@
-{ config, lib, ... }:
+{
+  secretStore,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   machines = import ../../../../custom/nebula/machines.nix;
 
   otherNodes =
     machines:
     lib.mapAttrsToList (_v: v: v.ip) lib.filterAttrs (
-      name: value: value.ip != (machines.${config.network.hostName}).ip
+      name: value: value.ip != (machines.${config.networking.hostName}).ip
     );
+
+  commonSecrets = secretStore.getServerSecrets "common";
 in
 {
+  age.secrets = {
+    patroni-superuser-pw.file = commonSecrets + "/ha-vm-patroni-superuser-pw.age";
+    patroni-replicationuser-pw.file = commonSecrets + "/ha-vm-patroni-replication-pw.age";
+  };
+
+  # currently broken https://github.com/nixos/nixpkgs/issues/480064
   services.patroni = {
-    nodeIp = "${(machines.${config.network.hostName}).ip}";
+    enable = true;
+
+    name = config.networking.hostName;
+
+    postgresqlPackage = pkgs.postgresql_18;
+
+    nodeIp = "${(machines.${config.networking.hostName}).ip}";
     otherNodesIps = (
       otherNodes [
         machines."nix-server-ha-vm"
@@ -20,6 +40,12 @@ in
     );
 
     scope = "haCluster";
+
+    environmentFiles = {
+      PATRONI_REPLICATION_PASSWORD = config.age.secrets.patroni-replicationuser-pw.path;
+      PATRONI_SUPERUSER_PASSWORD = config.age.secrets.patroni-superuser-pw.path;
+    };
+
     settings = {
       etcd = {
         hosts = [
@@ -47,6 +73,21 @@ in
               wal_keep_size = "256MB";
             };
           };
+        };
+      };
+
+      postgresql = {
+        authentication = {
+          superuser.username = "superuser";
+          replication.username = "replicationuser";
+        };
+        parameters = {
+          unix_socket_directories = "/var/run/postgresql";
+          shared_buffers = "1GB";
+          effective_cache_size = "3GB";
+          maintenance_work_mem = "256MB";
+          max_connections = 200;
+          synchronous_commit = "on";
         };
       };
     };
