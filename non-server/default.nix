@@ -1,8 +1,26 @@
-{ inputs, stable-pkgs, pkgs, lib, custom, secretStore, flake, ... }: {
+{
+  inputs,
+  stable-pkgs,
+  pkgs,
+  lib,
+  custom,
+  secretStore,
+  flake,
+  ...
+}:
+{
   home-manager = {
     backupFileExtension = "backup";
 
-    extraSpecialArgs = { inherit inputs stable-pkgs custom secretStore flake; };
+    extraSpecialArgs = {
+      inherit
+        inputs
+        stable-pkgs
+        custom
+        secretStore
+        flake
+        ;
+    };
 
     sharedModules = [
       inputs.plasma-manager.homeModules.plasma-manager
@@ -11,16 +29,28 @@
       inputs.shell-aliases.homeManagerModules.default
       inputs.nixvim.homeModules.nixvim
       inputs.nur.modules.homeManager.default
+      inputs.niri-flake.homeModules.niri
     ];
   };
 
   specialisation = {
-    "de-kde" = { configuration = import ./specialisations/de-kde; };
+    "de-kde" = {
+      configuration = import ./specialisations/de-kde;
+    };
 
-    "de-hyprland" = { configuration = import ./specialisations/de-hyprland; };
+    "de-hyprland" = {
+      configuration = import ./specialisations/de-hyprland;
+    };
 
     # "de-sway" = { configuration = import ./specialisations/de-sway; };
+
+    "de-niri" = {
+      configuration = import ./specialisations/de-niri;
+    };
   };
 
-  imports = [ ../baseline ./configuration.nix ];
+  imports = [
+    ../baseline
+    ./configuration.nix
+  ];
 }

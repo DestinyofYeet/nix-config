@@ -237,6 +237,8 @@
 
     clean-unused-files.url = "git+https://code.ole.blue/DestinyofYeet/clean-qbittorrent-rs";
     nix-alien.url = "github:thiagokokada/nix-alien";
+
+    niri-flake.url = "github:sodiboo/niri-flake";
   };
 
   outputs =
