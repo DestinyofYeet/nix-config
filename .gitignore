@@ -1,3 +1,5 @@
 result
 secrets/*.txt
 *.swp
+
+**/*ca.key

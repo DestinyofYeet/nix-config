@@ -4,15 +4,30 @@
   print "DO NOT COMMIT ca.key !!!"
 };
 
-def "main create-host" [name: string, ip: string, groups: string] {
-  nebula-cert sign -name $name -ip $"($ip)/24" -groups $groups
+def "main create-host" [name: string] {
+  mut found_host = null;
+
+  for host in (nix eval --json -f ./machines.nix | from json | transpose "key" "value") {
+    let hname = $host.key;
+    let hvalue = $host.value;
+
+    if $name == $hname {
+      $found_host = $hvalue
+    }
+  }
+
+  if $found_host == null {
+    print $"Failed to find host ($name) in machines.nix"
+    return;
+  }
+
+  nebula-cert sign -name $name -ip $"($found_host.ip)/24" -groups $"($found_host.groups | str join ",")"
 }
 
 def "main create-hosts" [] {
   for host in (nix eval --json -f ./machines.nix | from json | transpose "key" "value") {
     let name = $host.key;
-    let value = $host.value;
-    main create-host $name $value.ip ($value.groups | str join ",")
+    main create-host $name 
     # print $"Would create host ($name) with ip ($value.ip)/24 and groups ($value.groups | str join ",")"
   }
 }

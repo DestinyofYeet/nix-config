@@ -19,6 +19,9 @@ let
       lib.filterAttrs (name: value: value.lighthouse or false) machines
     );
 
+  getRelays =
+    machines: lib.mapAttrsToList (_v: v: v.ip) (lib.filterAttrs (name: value: value.relay) machines);
+
   genFilteredStaticHostMap =
     machines: currentNode:
     lib.attrsets.filterAttrs (key: value: key != currentNode.ip) (genStaticHostMap machines);
@@ -58,6 +61,10 @@ rec {
         lighthouses = lib.mkIf (!isLightHouse) yeet.lightHouses;
 
         isLighthouse = isLightHouse;
+        isRelay = currentNode.relay;
+
+        relays = lib.mkIf ((builtins.length currentNode.use_relays) > 0) (getRelays machines);
+
         listen = lib.mkIf isLightHouse {
           host = "0.0.0.0";
           port = 4242;
@@ -68,6 +75,8 @@ rec {
           tun = {
             mtu = currentNode.mtu or 1300;
           };
+
+          relay.use_relays = (builtins.length currentNode.use_relays) > 0;
         };
 
         firewall = rec {

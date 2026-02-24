@@ -166,7 +166,14 @@ in
       ];
 
       outputs = lib.mkIf (lib.custom.isMain osConfig) {
-        "DP-2".focus-at-startup = true;
+        "DP-2" = {
+          focus-at-startup = true;
+          mode = {
+            height = 1080;
+            width = 1920;
+            refresh = 144.001;
+          };
+        };
       };
     };
   };

@@ -2,108 +2,93 @@ let
   getPrivKey = name: ./${name}/${name}.key.age;
   getPublicKey = name: ./${name}/${name}.crt;
 
+  ipPrefix = "172.27.255";
+
   mkEntry = name: settings: {
     "${name}" = {
       inherit (settings) ip groups;
 
-      mtu = settings.mtu or null;
+      lighthouse = settings.lighthouse or false;
+      relay = settings.relay or false;
+      external_ips = settings.external_ips or [ ];
+
+      mtu = settings.mtu or 1300;
+      use_relays = settings.use_relays or [ ];
 
       privKeyFile = getPrivKey name;
       publicKeyFile = getPublicKey name;
     };
   };
 in
-{
-  "teapot" = {
-    ip = "172.27.255.1";
-    external_ips = [ "ole.blue:4242" ];
-    lighthouse = true;
-    groups = [
-      "ligthouse"
-      "server"
-    ];
+(mkEntry "teapot" {
+  ip = "172.27.255.1";
+  external_ips = [ "ole.blue:4242" ];
+  lighthouse = true;
+  relay = true;
+  groups = [
+    "ligthouse"
+    "server"
+  ];
+})
+// (mkEntry "nix-server" {
 
-    privKeyFile = ./teapot/teapot.key.age;
-    publicKeyFile = ./teapot/teapot.crt;
-  };
-
-  "nix-server" = {
-    ip = "172.27.255.2";
-    groups = [ "server" ];
-    privKeyFile = ./nix-server/nix-server.key.age;
-    publicKeyFile = ./nix-server/nix-server.crt;
-  };
-
-  "wattson" = {
-    ip = "172.27.255.3";
-    groups = [
-      "end-user"
-      "laptop"
-    ];
-
-    privKeyFile = ./wattson/wattson.key.age;
-    publicKeyFile = ./wattson/wattson.crt;
-  };
-
-  "main" = {
-    ip = "172.27.255.4";
-    groups = [
-      "end-user"
-      "desktop"
-    ];
-
-    privKeyFile = ./main/main.key.age;
-    publicKeyFile = ./main/main.crt;
-  };
-
-  "kartoffelkiste" = {
-    ip = "172.27.255.6";
-    groups = [
-      "end-user"
-      "laptop"
-    ];
-
-    privKeyFile = ./kartoffelkiste/kartoffelkiste.key.age;
-    publicKeyFile = ./kartoffelkiste/kartoffelkiste.crt;
-  };
-
-  "bonk" = {
-    ip = "172.27.255.7";
-    external_ips = [ "uwuwhatsthis.de:4242" ];
-    lighthouse = true;
-    groups = [
-      "lighthouse"
-      "server"
-    ];
-
-    privKeyFile = getPrivKey "bonk";
-    publicKeyFile = getPublicKey "bonk";
-  };
-
-  "nixie" = {
-    ip = "172.27.255.8";
-    groups = [ "server" ];
-
-    privKeyFile = getPrivKey "nixie";
-    publicKeyFile = getPublicKey "nixie";
-  };
-
-}
-// (mkEntry "teapot-ha-vm" {
-  ip = "172.27.255.9";
+  ip = "172.27.255.2";
   groups = [ "server" ];
+})
+// (mkEntry "wattson" {
 
+  ip = "172.27.255.3";
+  groups = [
+    "end-user"
+    "laptop"
+  ];
+})
+// (mkEntry "main" {
+
+  ip = "172.27.255.4";
+  groups = [
+    "end-user"
+    "desktop"
+  ];
+})
+// (mkEntry "kartoffelkiste" {
+
+  ip = "172.27.255.6";
+  groups = [
+    "end-user"
+    "laptop"
+  ];
+})
+// (mkEntry "bonk" {
+
+  ip = "172.27.255.7";
+  external_ips = [ "uwuwhatsthis.de:4242" ];
+  lighthouse = true;
+  groups = [
+    "lighthouse"
+    "server"
+  ];
+})
+// (mkEntry "nixie" {
+
+  ip = "172.27.255.8";
+  groups = [ "server" ];
+})
+// (mkEntry "teapot-ha-vm" {
+  ip = "${ipPrefix}.9";
+  groups = [ "server" ];
+  use_relays = [ "${ipPrefix}.1" ];
 })
 // (
   mkEntry "bonk-ha-vm" {
-    ip = "172.27.255.10";
+    ip = "${ipPrefix}.10";
     groups = [ "server" ];
-    mtu = 1200;
+    use_relays = [ "${ipPrefix}.1" ];
 
   }
   // (mkEntry "nix-server-ha-vm" {
-    ip = "172.27.255.11";
+    ip = "${ipPrefix}.11";
     groups = [ "server" ];
-
+    use_relays = [ "${ipPrefix}.1" ];
   })
 )
