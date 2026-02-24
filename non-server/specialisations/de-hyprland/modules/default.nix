@@ -14,7 +14,7 @@
     ./gtk.nix
     ./nushell.nix
     ./pyprland.nix
-    ../../common/cursor.nix
+    ../../hm-common/cursor.nix
     ./redshift.nix
     # ./termfilechooser.nix
     ./ashell.nix

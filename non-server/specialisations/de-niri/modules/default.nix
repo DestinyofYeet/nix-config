@@ -2,7 +2,7 @@
   ...
 }:
 let
-  waybar = import ../../common/waybar.nix {
+  waybar = import ../../hm-common/waybar.nix {
     workspaces = "niri/workspaces";
     target = "graphical-session.target";
   };
@@ -15,7 +15,8 @@ in
     ./redshift.nix
     ./wallpaperengine.nix
     ./swaylock.nix
-    ../../common/cursor.nix
+    ../../hm-common/cursor.nix
+    ../../hm-common/gnome-keyring.nix
     waybar
   ];
 }

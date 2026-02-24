@@ -22,11 +22,13 @@
       }
     ];
 
-    volumes = [{
-      image = "rw-nix-store.img";
-      mountPoint = config.microvm.writableStoreOverlay;
-      size = 5120;
-    }];
+    volumes = [
+      {
+        image = "rw-nix-store.img";
+        mountPoint = config.microvm.writableStoreOverlay;
+        size = 5120;
+      }
+    ];
 
     writableStoreOverlay = "/nix/.rw-store";
   };
@@ -52,8 +54,7 @@
     ];
   };
 
-  users.users.root.openssh.authorizedKeys.keys =
-    [ secretStore.keys.hosts.teapot.users.root.key ];
+  users.users.root.openssh.authorizedKeys.keys = [ secretStore.keys.hosts.teapot.users.root.key ];
 
   age.identityPaths = [ "/persistent/hostkey" ];
 }
