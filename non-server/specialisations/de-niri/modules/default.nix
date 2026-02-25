@@ -19,5 +19,6 @@ in
     ../../hm-common/gnome-keyring.nix
     ./swayidle.nix
     waybar
+    ./nushell.nix
   ];
 }
