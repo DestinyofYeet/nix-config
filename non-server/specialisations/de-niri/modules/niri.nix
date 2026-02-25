@@ -169,6 +169,8 @@ in
             x = 10;
             y = 10;
           };
+
+          open-focused = false;
         }
       ]
       ++ lib.optionals (lib.custom.isMain osConfig) [
