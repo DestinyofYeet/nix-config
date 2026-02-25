@@ -40,6 +40,10 @@ in
         QT_STYLE_OVERRIDE = "kvantum";
       };
 
+      hotkey-overlay = {
+        skip-at-startup = true;
+      };
+
       cursor = {
         theme = "Posy_Cursor_Black";
         size = 8;
