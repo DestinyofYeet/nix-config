@@ -1,12 +1,16 @@
 { flake, lib, ... }:
 let
-  buildSSHDomains = nodes:
-    builtins.concatStringsSep "\n" (map (name: ''
-      { name = "${name}",
-       remote_address = "${nodes.${name}.hostname}",
-       username = "${nodes.${name}.profiles.system.sshUser}",
-       },'') (lib.mapAttrsToList (name: value: name) nodes));
-in {
+  buildSSHDomains =
+    nodes:
+    builtins.concatStringsSep "\n" (
+      map (name: ''
+        { name = "${name}",
+         remote_address = "${nodes.${name}.hostname}",
+         username = "${nodes.${name}.profiles.system.sshUser}",
+         },'') (lib.mapAttrsToList (name: value: name) nodes)
+    );
+in
+{
   programs.wezterm = {
     enable = true;
     extraConfig = ''
