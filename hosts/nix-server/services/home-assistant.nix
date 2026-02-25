@@ -1,10 +1,17 @@
-{ lib, config, pkgs, secretStore, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  secretStore,
+  ...
+}:
 let
   haUser = config.systemd.services."home-assistant".serviceConfig.User;
   haGroup = config.systemd.services."home-assistant".serviceConfig.Group;
 
   secrets = secretStore.getServerSecrets "nix-server";
-in {
+in
+{
   age.secrets = {
     ha_longitude = {
       file = secrets + "/ha_longitude.age";
@@ -29,6 +36,15 @@ in {
       "openweathermap"
       "weather"
       "ping"
+
+      "isal"
+
+      # Components required to complete the onboarding
+      "analytics"
+      "google_translate"
+      "met"
+      "radio_browser"
+      "shopping_list"
     ];
 
     config = {
@@ -66,13 +82,16 @@ in {
   };
 
   services.nginx.virtualHosts."automation.local.ole.blue" =
-    lib.custom.settings.nix-server.nginx-local-ssl // {
-      locations."/" = let haConfig = config.services.home-assistant.config.http;
-      in {
-        proxyPass =
-          "http://${haConfig.server_host}:${toString haConfig.server_port}";
-        proxyWebsockets = true;
-      };
+    lib.custom.settings.nix-server.nginx-local-ssl
+    // {
+      locations."/" =
+        let
+          haConfig = config.services.home-assistant.config.http;
+        in
+        {
+          proxyPass = "http://${haConfig.server_host}:${toString haConfig.server_port}";
+          proxyWebsockets = true;
+        };
       extraConfig = ''
         proxy_set_header Host              $host;
         proxy_set_header X-Real-IP         $remote_addr;
