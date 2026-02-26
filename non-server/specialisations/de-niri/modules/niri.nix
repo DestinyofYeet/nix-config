@@ -13,6 +13,7 @@ let
   mkList = string: (lib.flatten (builtins.split " " string));
 
   mkSpawnAction = key: action: { "${key}".action.spawn = (mkList action); };
+  mkSpawnActionSh = key: action: { "${key}".action.spawn-sh = action; };
   mkSpawnActionL = key: action: {
     "${key}" = {
       action.spawn = (mkList action);
@@ -122,8 +123,8 @@ in
         (mkSpawnAction "Mod+Return" "${lib.getExe pkgs.wezterm}")
         (mkSpawnAction "Mod+d" "${lib.getExe config.programs.anyrun.package}")
         (mkSpawnAction "Mod+Ctrl+Shift+l" "loginctl lock-session")
-        (mkSpawnAction "Mod+Shift+S" "${lib.custom.settings.screenshot-cmd}")
-        (mkSpawnAction "Print" "${lib.custom.settings.screenshot-cmd}")
+        (mkSpawnActionSh "Mod+Shift+S" "${lib.custom.settings.screenshot-cmd}")
+        (mkSpawnActionSh "Print" "${lib.custom.settings.screenshot-cmd}")
 
         (mkWorkspace "1" 1)
         (mkWorkspace "2" 2)
