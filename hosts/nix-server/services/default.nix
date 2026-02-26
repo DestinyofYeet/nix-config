@@ -71,5 +71,6 @@
     ./recyclarr.nix
     ./zigbee2mqtt.nix
     ./karakeep.nix
+    ./readeck.nix
   ];
 }

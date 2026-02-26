@@ -1,16 +1,27 @@
-{ pkgs, lib, osConfig, ... }:
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}:
 let
   addons = pkgs.nur.repos.rycee.firefox-addons;
 
-  build-containers = container-list:
-    lib.mkMerge (lib.imap1 (i: v:
-      builtins.mapAttrs (name: value: {
-        color = value.color or "toolbar";
-        icon = value.icon or "circle";
-        id = i;
-      }) v) container-list);
+  build-containers =
+    container-list:
+    lib.mkMerge (
+      lib.imap1 (
+        i: v:
+        builtins.mapAttrs (name: value: {
+          color = value.color or "toolbar";
+          icon = value.icon or "circle";
+          id = i;
+        }) v
+      ) container-list
+    );
 
-in {
+in
+{
   programs.firefox.enable = true;
 
   home.sessionVariables = {
@@ -39,51 +50,59 @@ in {
 
         engines = {
           "Startpage" = {
-            urls = [{
-              template = "https://www.startpage.com/sp/search";
-              params = [{
-                name = "q";
-                value = "{searchTerms}";
-              }];
-            }];
+            urls = [
+              {
+                template = "https://www.startpage.com/sp/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
           };
 
           "Home-manager Option" = {
-            urls = [{
-              template = "https://home-manager-options.extranix.com";
-              params = [
-                {
-                  name = "release";
-                  value = "master";
-                }
-                {
-                  name = "query";
-                  value = "{searchTerms}";
-                }
-              ];
-            }];
+            urls = [
+              {
+                template = "https://home-manager-options.extranix.com";
+                params = [
+                  {
+                    name = "release";
+                    value = "master";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
 
             definedAliases = [ "@hmo" ];
           };
 
           "Nix Packages" = {
-            urls = [{
-              template = "https://search.nixos.org/packages";
-              params = [
-                {
-                  name = "type";
-                  value = "packages";
-                }
-                {
-                  name = "channel";
-                  value = "unstable";
-                }
-                {
-                  name = "query";
-                  value = "{searchTerms}";
-                }
-              ];
-            }];
+            urls = [
+              {
+                template = "https://search.nixos.org/packages";
+                params = [
+                  {
+                    name = "type";
+                    value = "packages";
+                  }
+                  {
+                    name = "channel";
+                    value = "unstable";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
 
             icon = ../../images/nix-logo.png;
 
@@ -91,19 +110,21 @@ in {
           };
 
           "Nix Options" = {
-            urls = [{
-              template = "https://search.nixos.org/options";
-              params = [
-                {
-                  name = "channel";
-                  value = "unstable";
-                }
-                {
-                  name = "query";
-                  value = "{searchTerms}";
-                }
-              ];
-            }];
+            urls = [
+              {
+                template = "https://search.nixos.org/options";
+                params = [
+                  {
+                    name = "channel";
+                    value = "unstable";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
 
             icon = ../../images/nix-logo.png;
 
@@ -111,25 +132,33 @@ in {
           };
 
           "Nix manual search" = {
-            urls = [{
-              template = "https://noogle.dev/";
-              params = [{
-                name = "term";
-                value = "{searchTerms}";
-              }];
-            }];
+            urls = [
+              {
+                template = "https://noogle.dev/";
+                params = [
+                  {
+                    name = "term";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
 
             definedAliases = [ "@nms" ];
           };
 
           "custom nüschst search" = {
-            urls = [{
-              template = "https://search.ole.blue/";
-              params = [{
-                name = "query";
-                value = "{searchTerms}";
-              }];
-            }];
+            urls = [
+              {
+                template = "https://search.ole.blue/";
+                params = [
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
 
             definedAliases = [ "@nüs" ];
           };
@@ -144,28 +173,68 @@ in {
 
       containers = build-containers [
         # add new containers at the bottom
-        { google = { color = "red"; }; }
-        { oth = { color = "turquoise"; }; }
-        { ai = { color = "red"; }; }
+        {
+          google = {
+            color = "red";
+          };
+        }
+        {
+          oth = {
+            color = "turquoise";
+          };
+        }
+        {
+          ai = {
+            color = "red";
+          };
+        }
         {
           amazon = {
             icon = "cart";
             color = "purple";
           };
         }
-        { coding = { color = "blue"; }; }
-        { infra = { color = "blue"; }; }
+        {
+          coding = {
+            color = "blue";
+          };
+        }
+        {
+          infra = {
+            color = "blue";
+          };
+        }
         {
           personal = {
             color = "blue";
             icon = "fingerprint";
           };
         }
-        { reddit = { color = "red"; }; }
-        { anime = { color = "purple"; }; }
-        { tidal = { color = "blue"; }; }
-        { news = { color = "turquoise"; }; }
-        { banking = { color = "purple"; }; }
+        {
+          reddit = {
+            color = "red";
+          };
+        }
+        {
+          anime = {
+            color = "purple";
+          };
+        }
+        {
+          tidal = {
+            color = "blue";
+          };
+        }
+        {
+          news = {
+            color = "turquoise";
+          };
+        }
+        {
+          banking = {
+            color = "purple";
+          };
+        }
       ];
 
       settings = {
@@ -181,8 +250,7 @@ in {
         "signon.rememberSignons" = false;
         "widget.use-xdg-desktop-portal.file-picker" = true;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        "browser.fixup.domainsuffixwhitelist.wg" =
-          true; # make nix-server.infra.wg not result in a search
+        "browser.fixup.domainsuffixwhitelist.wg" = true; # make nix-server.infra.wg not result in a search
 
         # telemetry
         "datareporting.policy.dataSubmissionEnabled" = false;
@@ -213,11 +281,12 @@ in {
         "extensions.autoDisableScopes" = 0; # automatically enable plugins
         # sidebar
         "browser.engagement.sidebar-button.has-used" = true;
-        "sidebar.backupState" = ''
-          sidebar.backupState	{"width":"224px","command":"treestyletab_piro_sakura_ne_jp-sidebar-action","expanded":false,"hidden":true}'';
+        "sidebar.backupState" =
+          ''sidebar.backupState	{"width":"224px","command":"treestyletab_piro_sakura_ne_jp-sidebar-action","expanded":false,"hidden":true}'';
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
-      } // (lib.mkIf (lib.custom.isLaptop osConfig) {
+      }
+      // (lib.mkIf (lib.custom.isLaptop osConfig) {
 
         "mousewheel.system_scroll_override.enabled" = false;
       });
@@ -247,6 +316,7 @@ in {
         # tree-style-tab
         terms-of-service-didnt-read
         youtube-no-translation
+        readeck
       ];
 
       userChrome = ''

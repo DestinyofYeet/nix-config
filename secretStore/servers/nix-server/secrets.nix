@@ -90,5 +90,6 @@ in
   "vm-ha-hostkey-rsa.age".publicKeys = authed;
 
   "karakeep-env-file.age".publicKeys = authed;
+  "readeck-env-file.age".publicKeys = authed;
 }
 // (importFolder "vms/" inputs)
