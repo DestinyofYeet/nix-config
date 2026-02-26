@@ -65,7 +65,10 @@ in
       input = {
         keyboard = {
           numlock = true;
-          xkb.layout = "de(nodeadkeys)";
+          xkb = {
+            layout = "de(nodeadkeys)";
+            options = "caps:escape";
+          };
 
         };
 
