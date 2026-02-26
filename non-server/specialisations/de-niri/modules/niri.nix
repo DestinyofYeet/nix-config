@@ -86,8 +86,8 @@ in
           "Mod+Shift+q".action.close-window = { };
 
           "Mod+h".action.focus-column-left = { };
-          "Mod+j".action.focus-window-down = { };
-          "Mod+k".action.focus-window-up = { };
+          "Mod+j".action.focus-workspace-down = { };
+          "Mod+k".action.focus-workspace-up = { };
           "Mod+l".action.focus-column-right = { };
 
           "Mod+Shift+h".action.move-column-left-or-to-monitor-left = { };
