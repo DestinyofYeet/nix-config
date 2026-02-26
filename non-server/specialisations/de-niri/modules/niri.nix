@@ -68,11 +68,16 @@ in
           xkb.layout = "de(nodeadkeys)";
 
         };
-        mouse.accel-profile = "flat";
+
+        mouse = {
+          accel-profile = "flat";
+        };
 
         touchpad = {
           dwt = true;
           dwtp = true;
+
+          accel-profile = "flat";
         };
 
         mod-key = "super";

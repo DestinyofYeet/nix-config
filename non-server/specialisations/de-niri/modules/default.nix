@@ -20,5 +20,6 @@ in
     ./swayidle.nix
     waybar
     ./nushell.nix
+    ./swaybg.nix
   ];
 }
