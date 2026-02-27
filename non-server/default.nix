@@ -30,6 +30,7 @@
       inputs.nixvim.homeModules.nixvim
       inputs.nur.modules.homeManager.default
       inputs.niri-flake.homeModules.niri
+      inputs.noctalia.homeModules.default
     ];
   };
 

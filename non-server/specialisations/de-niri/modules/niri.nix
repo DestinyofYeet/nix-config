@@ -12,7 +12,17 @@ let
 
   mkList = string: (lib.flatten (builtins.split " " string));
 
+  noctalia =
+    cmd:
+    [
+      "noctalia-shell"
+      "ipc"
+      "call"
+    ]
+    ++ (lib.splitString " " cmd);
+
   mkSpawnAction = key: action: { "${key}".action.spawn = (mkList action); };
+  mkSpawnNoctalia = key: cmd: { "${key}".action.spawn = cmd; };
   mkSpawnActionSh = key: action: { "${key}".action.spawn-sh = action; };
   mkSpawnActionL = key: action: {
     "${key}" = {
@@ -108,21 +118,20 @@ in
           "Mod+Ctrl+l".action.focus-monitor-right = { };
 
           "Mod+Ctrl+Shift+q".action.quit = { };
-
         }
 
-        (mkSpawnActionL "XF86AudioRaiseVolume" "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+")
-        (mkSpawnActionL "XF86AudioLowerVolume" "${wpctl} set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-")
-        (mkSpawnActionL "XF86AudioMute" "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle")
-        (mkSpawnActionL "XF86AudioMicMute" "${wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ toggle")
-        (mkSpawnActionL "XF86MonBrightnessUp" "${brightnessctl} s 10%+")
-        (mkSpawnActionL "XF86MonBrightnessDown" "${brightnessctl} s 10%-")
-        (mkSpawnActionL "XF86AudioPlay" "${playerctl} play-pause")
-        (mkSpawnActionL "XF86AudioNext" "${playerctl} next")
-        (mkSpawnActionL "XF86AudioPrev" "${playerctl} previous")
+        (mkSpawnNoctalia "XF86AudioRaiseVolume" (noctalia "volume increase"))
+        (mkSpawnNoctalia "XF86AudioLowerVolume" (noctalia "volume decrease"))
+        (mkSpawnNoctalia "XF86AudioMute" (noctalia "volume muteOutput"))
+        (mkSpawnNoctalia "XF86AudioMicMute" (noctalia "volume muteInput"))
+        (mkSpawnNoctalia "XF86MonBrightnessUp" (noctalia "brightness increase"))
+        (mkSpawnNoctalia "XF86MonBrightnessDown" (noctalia "brightness decrease"))
+        (mkSpawnNoctalia "XF86AudioPlay" (noctalia "media playPause"))
+        (mkSpawnNoctalia "XF86AudioNext" (noctalia "media next"))
+        (mkSpawnNoctalia "XF86AudioPrev" (noctalia "media previous"))
         (mkSpawnAction "Mod+Return" "${lib.getExe pkgs.wezterm}")
-        (mkSpawnAction "Mod+d" "${lib.getExe config.programs.anyrun.package}")
-        (mkSpawnAction "Mod+Ctrl+Shift+l" "loginctl lock-session")
+        (mkSpawnNoctalia "Mod+d" (noctalia "launcher toggle"))
+        (mkSpawnNoctalia "Mod+Ctrl+Shift+l" (noctalia "lockScreen lock"))
         (mkSpawnActionSh "Mod+Shift+S" "${lib.custom.settings.screenshot-cmd}")
         (mkSpawnActionSh "Print" "${lib.custom.settings.screenshot-cmd}")
 

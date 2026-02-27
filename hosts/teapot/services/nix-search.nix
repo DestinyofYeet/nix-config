@@ -102,6 +102,9 @@ in
         (build-scope inputs.niri-flake.homeModules.niri "niri-flake-hm"
           "https://github.com/sodiboo/niri-flake/tree/main"
         )
+        (build-scope inputs.noctalia.homeModules.default "octalia-hm"
+          "https://github.com/noctalia-dev/noctalia-shell/tree/main"
+        )
       ];
     };
   };

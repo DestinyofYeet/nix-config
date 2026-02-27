@@ -239,6 +239,11 @@
     nix-alien.url = "github:thiagokokada/nix-alien";
 
     niri-flake.url = "github:sodiboo/niri-flake";
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

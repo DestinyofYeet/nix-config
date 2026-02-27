@@ -14,12 +14,13 @@ in
     ./dunst.nix
     ./redshift.nix
     ./wallpaperengine.nix
-    ./swaylock.nix
+    # ./swaylock.nix
     ../../hm-common/cursor.nix
     ../../hm-common/gnome-keyring.nix
     ./swayidle.nix
-    waybar
+    # waybar
     ./nushell.nix
-    ./swaybg.nix
+    # ./swaybg.nix
+    ./noctalia.nix
   ];
 }

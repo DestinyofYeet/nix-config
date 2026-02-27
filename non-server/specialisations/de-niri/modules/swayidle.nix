@@ -2,10 +2,14 @@
   lib,
   pkgs,
   osConfig,
+  inputs,
   ...
 }:
 let
-  lock = "${lib.getExe pkgs.swaylock-effects} --daemonize -C ~/.config/swaylock/config";
+  # lock = "${lib.getExe pkgs.swaylock-effects} --daemonize -C ~/.config/swaylock/config";
+  lock = "${
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+  } ipc call lockScreen lock";
   niri = "${lib.getExe' pkgs.niri "niri"}";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   keyboard-backlight = "platform::kbd_backlight";
