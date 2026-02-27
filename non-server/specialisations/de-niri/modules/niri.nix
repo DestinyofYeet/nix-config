@@ -122,7 +122,7 @@ in
         (mkSpawnNoctalia "XF86AudioPrev" (noctalia "media previous"))
         (mkSpawnAction "Mod+Return" "${lib.getExe pkgs.wezterm}")
         (mkSpawnNoctalia "Mod+d" (noctalia "launcher toggle"))
-        (mkSpawnNoctalia "Mod+Ctrl+Shift+l" (noctalia "lockScreen lock"))
+        (mkSpawnAction "Mod+Ctrl+Shift+l" "loginctl lock-session")
         (mkSpawnActionSh "Mod+Shift+S" "${lib.custom.settings.screenshot-cmd}")
         (mkSpawnActionSh "Print" "${lib.custom.settings.screenshot-cmd}")
 

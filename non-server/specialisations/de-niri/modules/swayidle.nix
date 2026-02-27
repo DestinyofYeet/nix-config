@@ -8,7 +8,7 @@
 let
   # lock = "${lib.getExe pkgs.swaylock-effects} --daemonize -C ~/.config/swaylock/config";
   lock = "${
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    lib.getExe' inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default "noctalia-shell"
   } ipc call lockScreen lock";
   niri = "${lib.getExe' pkgs.niri "niri"}";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
@@ -33,7 +33,7 @@ in
       }
       {
         timeout = 60 * 3;
-        command = lock;
+        command = "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
       }
       {
         timeout = 60 * 5;
