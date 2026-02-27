@@ -1,6 +1,14 @@
-{ config, pkgs, lib, secretStore, ... }:
-let secrets = secretStore.get-server-secrets "nix-server";
-in {
+{
+  config,
+  pkgs,
+  lib,
+  secretStore,
+  ...
+}:
+let
+  secrets = secretStore.get-server-secrets "nix-server";
+in
+{
   age.secrets = {
     paperless-ngx-admin.file = ../secrets/paperless-ngx-admin.age;
     paperless-ngx-oidc-env-file.file = secrets + "/paperless-oidc-env-file.age";
@@ -11,15 +19,12 @@ in {
 
     domain = "paperless.local.ole.blue";
 
-    dataDir = "${
-        lib.custom.settings.${config.networking.hostName}.paths.data
-      }/paperless-ngx";
+    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/paperless-ngx";
 
     settings = {
       PAPERLESS_URL = "https://${domain}";
       PAPERLESS_OCR_USER_ARGS = ''{"continue_on_soft_render_error": true}'';
-      PAPERLESS_LOGOUT_REDIRECT_URL =
-        "https://idp.ole.blue/application/o/paperless/end-session/";
+      PAPERLESS_LOGOUT_REDIRECT_URL = "https://idp.ole.blue/application/o/paperless/end-session/";
       PAPERLESS_AUTO_LOGIN = true;
       PAPERLESS_AUTO_CREATE = true;
       PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
@@ -34,10 +39,10 @@ in {
   };
 
   services.nginx.virtualHosts."${config.services.paperless.domain}" =
-    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // {
-      locations."/".proxyPass = "http://${config.services.paperless.address}:${
-          builtins.toString config.services.paperless.port
-        }";
+    lib.custom.settings.${config.networking.hostName}.nginx-local-ssl
+    // {
+      locations."/".proxyPass =
+        "http://${config.services.paperless.address}:${toString config.services.paperless.port}";
 
       extraConfig = ''
         proxy_set_header Host $host;
