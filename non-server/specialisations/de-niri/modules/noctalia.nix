@@ -43,10 +43,6 @@
           ];
           right = [
             {
-              id = "NightLight";
-              iconColor = "error";
-            }
-            {
               id = "KeepAwake";
               iconColor = "error";
             }
