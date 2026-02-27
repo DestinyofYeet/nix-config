@@ -21,6 +21,7 @@
       bar = {
         barType = "simple";
         position = "top";
+        hideOnOverview = true;
 
         widgets = {
           left = [

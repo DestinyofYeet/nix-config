@@ -154,19 +154,13 @@ in
 
       window-rules = [
         {
-          matches = [
-            {
-              app-id = "tidal-hifi";
-            }
-            {
-              app-id = "org.wezfurlong.wezterm";
-            }
-            {
-              app-id = "signal";
-            }
-            {
-              app-id = "Element";
-            }
+          matches = map (id: { app-id = id; }) [
+            "tidal-hifi"
+            "org.wezfurlong.wezterm"
+            "signal"
+            "Element"
+            "org.keepassxc.KeePassXC"
+            "firefox"
           ];
 
           open-maximized = true;
