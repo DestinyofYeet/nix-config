@@ -164,6 +164,9 @@ in
             {
               app-id = "signal";
             }
+            {
+              app-id = "Element";
+            }
           ];
 
           open-maximized = true;
