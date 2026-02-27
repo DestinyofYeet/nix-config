@@ -6,9 +6,6 @@
   ...
 }:
 let
-  brightnessctl = "${lib.getExe pkgs.brightnessctl}";
-  playerctl = "${lib.getExe pkgs.playerctl}";
-  wpctl = "${lib.getExe' pkgs.wireplumber "wpctl"}";
 
   mkList = string: (lib.flatten (builtins.split " " string));
 
@@ -24,12 +21,6 @@ let
   mkSpawnAction = key: action: { "${key}".action.spawn = (mkList action); };
   mkSpawnNoctalia = key: cmd: { "${key}".action.spawn = cmd; };
   mkSpawnActionSh = key: action: { "${key}".action.spawn-sh = action; };
-  mkSpawnActionL = key: action: {
-    "${key}" = {
-      action.spawn = (mkList action);
-      allow-when-locked = true;
-    };
-  };
   mkWorkspace = key: workspace: {
     "Mod+${toString key}".action.focus-workspace = workspace;
     "Mod+Shift+${toString key}".action.move-window-to-workspace = [
@@ -169,6 +160,9 @@ in
             }
             {
               app-id = "org.wezfurlong.wezterm";
+            }
+            {
+              app-id = "signal";
             }
           ];
 

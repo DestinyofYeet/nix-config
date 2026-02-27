@@ -1,4 +1,9 @@
-{ lib, ... }:
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}:
 {
 
   home.file.".cache/noctalia/wallpapers.json" = {
@@ -27,25 +32,42 @@
             }
             {
               id = "MediaMini";
+              textColor = "primary";
             }
           ];
           center = [
             {
               id = "Clock";
+              clockColor = "primary";
             }
           ];
           right = [
             {
+              id = "NightLight";
+              iconColor = "error";
+            }
+            {
               id = "KeepAwake";
+              iconColor = "error";
             }
             {
               id = "Volume";
+              displayMode = "alwaysShow";
+              iconColor = "secondary";
+              textColor = "primary";
             }
-            {
+            (lib.mkIf (osConfig.capabilities.hardware.keyboardBacklight.enable) {
               id = "Brightness";
-            }
+              displayMode = "alwaysShow";
+              iconColor = "secondary";
+              textColor = "primary";
+            })
             {
               id = "SystemMonitor";
+              compactMode = false;
+              iconColor = "secondary";
+              textColor = "primary";
+              usePadding = true;
             }
             {
               id = "Battery";
@@ -53,21 +75,47 @@
             }
             {
               id = "ControlCenter";
+              enableColorization = true;
+              colorizeSystemIcon = "error";
+              usePadding = true;
             }
             {
               id = "Tray";
+              chevronColor = "error";
             }
           ];
         };
       };
       location = {
-        name = "Regensburg, DE";
         showWeekNumberInCalender = true;
+        weatherEnabled = false;
+      };
+      dock = {
+        enable = false;
       };
 
       general = {
         showSessionButtonsOnLockScreen = false;
         showHibernateOnLockScreen = false;
+        passwordChars = true;
+      };
+
+      appLauncher = {
+        terminalCommand = "${lib.getExe pkgs.wezterm} -e";
+        showIconBackground = true;
+      };
+
+      nightLight = {
+        enabled = false;
+        autoSchedule = false;
+        nightTemp = "4000";
+        dayTemp = "6500";
+        manualSunrise = "07:00";
+        manualSunset = "22:00";
+      };
+
+      brightness = {
+        enableDdcSupport = true;
 
       };
     };

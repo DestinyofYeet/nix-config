@@ -33,7 +33,7 @@ in
       }
       {
         timeout = 60 * 3;
-        command = "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
+        command = lock;
       }
       {
         timeout = 60 * 5;

@@ -13,7 +13,7 @@ in
     ./niri.nix
     ./dunst.nix
     ./redshift.nix
-    ./wallpaperengine.nix
+    # ./wallpaperengine.nix
     # ./swaylock.nix
     ../../hm-common/cursor.nix
     ../../hm-common/gnome-keyring.nix

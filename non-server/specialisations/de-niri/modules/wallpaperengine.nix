@@ -1,5 +1,8 @@
 { lib, osConfig, ... }:
 lib.mkIf (osConfig.capabilities.wallpaperEngine.enable) {
+
+  home.file.".cache/noctalia/wallpapers.json" = lib.mkForce { };
+
   services.linux-wallpaperengine =
     let
       mkIgnoreSteamApps =

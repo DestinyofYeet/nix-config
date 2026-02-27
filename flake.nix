@@ -398,7 +398,10 @@
               { ... }:
               {
                 capabilities = {
-                  headless.enable = true;
+                  hardware = {
+
+                    headless.enable = true;
+                  };
                 };
               }
             )
@@ -418,8 +421,11 @@
               { ... }:
               {
                 capabilities = {
-                  battery.enable = true;
-                  monitor.enable = true;
+                  hardware = {
+
+                    battery.enable = true;
+                    monitor.enable = true;
+                  };
                 };
               }
             )
@@ -439,11 +445,15 @@
               { ... }:
               {
                 capabilities = {
-                  battery.enable = true;
-                  monitor.enable = true;
-                  touch.enable = true;
-                  wifi.enable = true;
-                  bluetooth.enable = true;
+                  hardware = {
+
+                    battery.enable = true;
+                    monitor.enable = true;
+                    touch.enable = true;
+                    wifi.enable = true;
+                    bluetooth.enable = true;
+                    keyboardBacklight.enable = true;
+                  };
                   wavesurfer-ld.enable = true;
                   strict-networking.enable = true;
                 };
@@ -465,7 +475,7 @@
               { ... }:
               {
                 capabilities = {
-                  monitor.enable = true;
+                  hardware.monitor.enable = true;
                   wavesurfer-ld.enable = true;
                   wallpaperEngine.enable = true;
                 };
@@ -492,7 +502,7 @@
               { ... }:
               {
                 capabilities = {
-                  headless.enable = true;
+                  hardware.headless.enable = true;
                   customNixInterpreter.enable = true;
                 };
               }
@@ -512,7 +522,7 @@
               { ... }:
               {
                 capabilities = {
-                  headless.enable = true;
+                  hardware.headless.enable = true;
                   customNixInterpreter.enable = true;
                 };
               }
@@ -536,7 +546,7 @@
               { ... }:
               {
                 capabilities = {
-                  headless.enable = true;
+                  hardware.headless.enable = true;
                 };
               }
             )
@@ -557,7 +567,7 @@
               { ... }:
               {
                 capabilities = {
-                  headless.enable = true;
+                  hardware.headless.enable = true;
                   customNixInterpreter.enable = false;
                   agenix.enable = false;
                   nebulaVpn.enable = false;

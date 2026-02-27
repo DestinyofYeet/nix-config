@@ -1,4 +1,10 @@
-{ pkgs, lib, osConfig, ... }: {
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}:
+{
   programs.ashell = {
     enable = true;
     systemd.enable = true;
@@ -8,14 +14,25 @@
 
         left = [ "Workspaces" ];
         center = [ "Clock" ];
-        right = [ "SystemInfo" "Settings" "Tray" ];
+        right = [
+          "SystemInfo"
+          "Settings"
+          "Tray"
+        ];
       };
 
-      workspaces = { visibility_mode = "MonitorSpecific"; };
-      clock = { format = "%a %d.%m %H:%M"; };
+      workspaces = {
+        visibility_mode = "MonitorSpecific";
+      };
+      clock = {
+        format = "%a %d.%m %H:%M";
+      };
       system_info = rec {
-        indicators = [ "Cpu" "Memory" ]
-          ++ (lib.optionals (lib.custom.isLaptop osConfig) [ "Temperature" ]);
+        indicators = [
+          "Cpu"
+          "Memory"
+        ]
+        ++ (lib.optionals (lib.custom.isLaptop osConfig) [ "Temperature" ]);
 
         cpu = {
           warn_threshold = 80;
@@ -30,15 +47,15 @@
           audio_sinks_more_cmd = "${lib.getExe pkgs.pavucontrol} -t 3";
           audio_sources_more_cmd = "${lib.getExe pkgs.pavucontrol} -t 4";
         }
-        (lib.mkIf (osConfig.capabilities.bluetooth.enable) {
+        (lib.mkIf (osConfig.capabilities.hardware.bluetooth.enable) {
           bluetooth_more_cmd = "${pkgs.blueman}/bin/blueman-manager";
         })
 
-        (lib.mkIf (!osConfig.capabilities.wifi.enable) {
+        (lib.mkIf (!osConfig.capabilities.hardware.wifi.enable) {
           remove_airplane_btn = true;
         })
 
-        (lib.mkIf (osConfig.capabilities.wifi.enable) {
+        (lib.mkIf (osConfig.capabilities.hardware.wifi.enable) {
           remove_airplane_btn = false;
         })
       ];
