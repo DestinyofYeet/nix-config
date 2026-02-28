@@ -161,6 +161,7 @@ in
             "Element"
             "org.keepassxc.KeePassXC"
             "firefox"
+            "nl.jknaapen.fladder"
           ];
 
           open-maximized = true;
