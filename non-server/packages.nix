@@ -304,7 +304,7 @@ in
       tidal-dl
       tokei
       eduvpn-client
-      inputs.fladder-nix.packages.x86_64-linux.default
+      inputs.fladder-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       nb
       inputs.tiddl-nix.packages.x86_64-linux.default
       gnome-disk-utility

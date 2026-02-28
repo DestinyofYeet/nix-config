@@ -213,7 +213,10 @@
     # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # got nuked
 
     # fladder-nix.url = "git+file:///home/ole/github/rest/fladder.nix";
-    fladder-nix.url = "github:DestinyofYeet/fladder.nix";
+    fladder-nix = {
+      url = "github:DestinyofYeet/fladder.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     tiddl-nix.url = "github:DestinyofYeet/tiddl.nix";
 
     lix = {
