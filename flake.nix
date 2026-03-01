@@ -64,11 +64,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-topology = {
-      url = "github:oddlama/nix-topology";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     shell-aliases = {
       # url = "path:///home/ole/github/shell-aliases.nix";
       url = "github:DestinyofYeet/shell-aliases.nix";
@@ -168,6 +163,7 @@
     hardware = {
       url = "github:NixOS/nixos-hardware";
     };
+
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     nix-joint-venture = {
@@ -247,6 +243,8 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/develop";
   };
 
   outputs =
@@ -255,8 +253,6 @@
       nixpkgs,
       home-manager,
       agenix,
-      plasma-manager,
-      stylix,
       nur,
       ...
     }@inputs:
@@ -278,27 +274,12 @@
         ./options/beszel
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
-        inputs.nix-topology.nixosModules.default
-        # inputs.prost.nixosModules.default
-        inputs.strichliste.nixosModules.strichliste
-        (
-          { ... }:
-          {
-            environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
-          }
-        )
 
         ./options/capabilities/options.nix
 
         inputs.microvm-nix.nixosModules.host
 
         inputs.lix-module.nixosModules.default
-        (
-          { ... }:
-          {
-            lix.enable = false;
-          }
-        )
 
         inputs.nix-index-database.nixosModules.default
       ];
@@ -309,13 +290,6 @@
             nur.overlays.default
             inputs.helix.overlays.default
             inputs.yazi.overlays.default
-
-            # no-worky
-            # inputs.nix-monitored.overlays.default
-            # (self: super: {
-            #   nix-direnv =
-            #     super.nix-direnv.override { nix = super.nix-monitored; };
-            # })
           ];
         }
 
@@ -369,8 +343,6 @@
         );
     in
     {
-      # pfusch, used for micro-vms
-      inherit defaultSpecialArgs;
       nixpkgs.config.rocmSupport = true;
 
       # This is highly advised, and will prevent many possible mistakes
@@ -516,7 +488,6 @@
         };
 
         bonk = nixpkgs.lib.nixosSystem {
-
           system = "x86_64-linux";
           modules = [
             ./hosts/bonk
@@ -536,11 +507,15 @@
           specialArgs = defaultSpecialArgs;
         };
 
-        nixie = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
+        nixie = inputs.nixos-raspberrypi.lib.nixosSystem {
           modules = [
             inputs.argon40-nix.nixosModules.default
-            inputs.hardware.nixosModules.raspberry-pi-4
+
+            {
+              imports = with inputs.nixos-raspberrypi.nixosModules; [
+                raspberry-pi-4.base
+              ];
+            }
 
             ./hosts/nixie
 
@@ -554,15 +529,23 @@
               }
             )
           ]
-          ++ baseline-modules;
-          specialArgs = defaultSpecialArgs;
+          ++ [
+            home-manager.nixosModules.home-manager
+            ./options/capabilities/options.nix
+            inputs.lix-module.nixosModules.default
+            agenix.nixosModules.default
+          ];
+
+          specialArgs = defaultSpecialArgs // {
+            nixos-raspberrypi = inputs.nixos-raspberrypi;
+          };
         };
 
         audioPi = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-            inputs.hardware.nixosModules.raspberry-pi-4
+            # inputs.hardware.nixosModules.raspberry-pi-4
 
             ./hosts/audioPi
 
