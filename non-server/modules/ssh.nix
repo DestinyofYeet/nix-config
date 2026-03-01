@@ -1,26 +1,43 @@
-{ config, osConfig, lib, custom, secretStore, ... }:
+{
+  config,
+  osConfig,
+  lib,
+  custom,
+  secretStore,
+  ...
+}:
 let
-  per-device-secrets = secretStore.secrets
-    + "/non-server/${osConfig.networking.hostName}";
+  per-device-secrets = secretStore.secrets + "/non-server/${osConfig.networking.hostName}";
 
-  mkSecrets = names:
-    builtins.listToAttrs (map (name: {
-      inherit name;
-      value = { file = "${per-device-secrets}/${name}.age"; };
-    }) (builtins.filter
-      (name: builtins.pathExists "${per-device-secrets}/${name}.age") names));
+  mkSecrets =
+    names:
+    builtins.listToAttrs (
+      map (name: {
+        inherit name;
+        value = {
+          file = "${per-device-secrets}/${name}.age";
+        };
+      }) (builtins.filter (name: builtins.pathExists "${per-device-secrets}/${name}.age") names)
+    );
 
-  mkHosts = entryList:
-    builtins.concatStringsSep "\n" (lib.filter (x: x != "") (map (host:
-      lib.optionalString
-      (builtins.hasAttr "${host.ident}" config.age.secrets) ''
-        Host ${host.host}
-          Hostname ${host.hostname}
-          User ${host.user}
-          IdentityFile ${config.age.secrets.${host.ident}.path}
-          Port ${toString (host.port or 22)}
-      '') entryList));
-in {
+  mkHosts =
+    entryList:
+    builtins.concatStringsSep "\n" (
+      lib.filter (x: x != "") (
+        map (
+          host:
+          lib.optionalString (builtins.hasAttr "${host.ident}" config.age.secrets) ''
+            Host ${host.host}
+              Hostname ${host.hostname}
+              User ${host.user}
+              IdentityFile ${config.age.secrets.${host.ident}.path}
+              Port ${toString (host.port or 22)}
+          ''
+        ) entryList
+      )
+    );
+in
+{
   age.secrets = mkSecrets [
     "ssh-key-oth-gitlab"
     "ssh-key-github"
@@ -113,6 +130,12 @@ in {
         {
           host = "nixie";
           hostname = custom.nebula.yeet.hosts.nixie.ip;
+          user = "root";
+          ident = "ssh-key-nixie";
+        }
+        {
+          host = "nixie-local";
+          hostname = "192.168.1.129";
           user = "root";
           ident = "ssh-key-nixie";
         }
