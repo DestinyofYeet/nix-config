@@ -50,7 +50,6 @@
     ./wiki-js.nix
     ./vpn.nix
     # ./nextcloud.nix
-    # ./minio.nix
     ./garage.nix
     ./nginx.nix
     ./smb.nix
@@ -72,5 +71,6 @@
     ./zigbee2mqtt.nix
     ./karakeep.nix
     ./readeck.nix
+    ./music-assistant.nix
   ];
 }

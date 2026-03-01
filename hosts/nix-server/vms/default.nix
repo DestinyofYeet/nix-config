@@ -1,17 +1,29 @@
-{ flake, pkgs, inputs, config, lib, secretStore, ... }:
+{
+  flake,
+  pkgs,
+  inputs,
+  config,
+  lib,
+  secretStore,
+  ...
+}:
 let
 
   mkVM = lib.custom.vm.getMkVm {
     inherit pkgs flake config;
     gateway = "192.168.3.1";
-    dns = [ "192.168.3.1" "9.9.9.9" ];
+    dns = [
+      "192.168.3.1"
+      "9.9.9.9"
+    ];
   };
 
   secrets = secretStore.getServerSecrets "nix-server";
 
   forgejo-vm-name = "forgejo";
 
-in {
+in
+{
   imports = [ ./nginx.nix ];
 
   age.secrets = {
@@ -23,8 +35,7 @@ in {
 
     forgejo-runner-host-key-rsa = {
       file = secrets + "/vm-forgejo-runner-hostkey-rsa.age";
-      path =
-        "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey-rsa";
+      path = "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey-rsa";
       symlink = false;
     };
 
@@ -49,15 +60,23 @@ in {
       (mkVM "rofl" {
         ip = "192.168.3.10";
         mac = "02:00:00:00:00:01";
-        config = { imports = [ ./rofl ./baseline ]; };
+        config = {
+          imports = [
+            ./rofl
+            ./baseline
+          ];
+        };
       })
 
       (mkVM forgejo-vm-name {
         ip = "192.168.3.11";
         mac = "02:00:00:00:00:02";
         config = {
-          imports =
-            [ ./baseline ./forgejo-runner inputs.agenix.nixosModules.default ];
+          imports = [
+            ./baseline
+            ./forgejo-runner
+            inputs.agenix.nixosModules.default
+          ];
         };
       })
 
@@ -75,7 +94,9 @@ in {
             ../../parts/ha-vm
           ];
 
-          capabilities = { headless.enable = true; };
+          capabilities = {
+            hardware.headless.enable = true;
+          };
         };
       })
     ];

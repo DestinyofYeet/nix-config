@@ -542,6 +542,7 @@
           modules = [
             inputs.argon40-nix.nixosModules.default
             inputs.hardware.nixosModules.raspberry-pi-4
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
 
             ./hosts/nixie
 
@@ -585,6 +586,7 @@
       };
 
       images.audioPi = self.nixosConfigurations.audioPi.config.system.build.sdImage;
+      images.nixie = self.nixosConfigurations.nixie.config.system.build.sdImage;
 
       deploy.nodes = {
         nix-server = {
