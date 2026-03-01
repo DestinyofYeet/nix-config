@@ -1,7 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./packages.nix
@@ -43,21 +49,31 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  security.pam.loginLimits = [{
-    domain = "@users";
-    item = "rtprio";
-    type = "-";
-    value = 1;
-  }];
+  security.pam.loginLimits = [
+    {
+      domain = "@users";
+      item = "rtprio";
+      type = "-";
+      value = 1;
+    }
+  ];
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     # use lib.mkForce to only use these substituters
-    substituters = [ "https://cache.ole.blue?priority=20" ];
+    substituters = [
+      "https://cache.ole.blue?priority=20"
+      "https://nixos-raspberrypi.cachix.org"
+    ];
 
-    trusted-public-keys =
-      [ "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg=" ];
+    trusted-public-keys = [
+      "cache.ole.blue:UB3+v071mF6riM4VUYqJxBRjtrCHWFxeGMzCMgxceUg="
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
     trusted-users = [ "ole" ];
   };
 
@@ -116,7 +132,9 @@
     openFirewall = true;
   };
 
-  services.udisks2 = { enable = true; };
+  services.udisks2 = {
+    enable = true;
+  };
 
   environment.systemPackages = [
     (pkgs.catppuccin-sddm.override {

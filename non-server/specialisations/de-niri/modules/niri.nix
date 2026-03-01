@@ -169,6 +169,16 @@ in
         {
           matches = [
             {
+              app-id = "org.keepassxc.KeePassXC";
+              title = "Unlock Database - KeePassXC";
+            }
+          ];
+
+          open-focused = true;
+        }
+        {
+          matches = [
+            {
               app-id = "steam";
               title = ''^notificationtoasts_\d+_desktop$'';
             }
