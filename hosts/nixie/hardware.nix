@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -34,6 +40,4 @@
 
   networking.hostName = "nixie";
   networking.hostId = "c03c0e23";
-
-  boot.supportedFilesystems = [ "zfs" ];
 }

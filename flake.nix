@@ -549,6 +549,7 @@
               {
                 capabilities = {
                   hardware.headless.enable = true;
+                  customNixInterpreter.enable = false;
                 };
               }
             )
@@ -616,7 +617,7 @@
         };
 
         nixie = {
-          hostname = "nixie-local";
+          hostname = "nixie";
           profiles.system = {
             sshUser = "root";
             path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.nixie;
