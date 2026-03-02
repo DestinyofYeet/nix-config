@@ -322,6 +322,7 @@ in
       naps2
       android-tools
       inputs.nix-alien.packages.x86_64-linux.nix-alien
+      pdfpc
     ]
     ++ luaPkgs
     ++ kdePkgs
