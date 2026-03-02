@@ -1,4 +1,5 @@
-{ osConfig, ... }: {
+{ osConfig, ... }:
+{
   home.stateVersion = "24.05";
 
   # needed for agenix service to start properly
@@ -17,7 +18,7 @@
     ./firefox.nix
     ./kitty.nix
     ./zsh.nix
-    ./nextcloud.nix
+    # ./nextcloud.nix
     ./btop.nix
     ./ssh.nix
     ./agenix.nix
@@ -49,5 +50,6 @@
     ./wezterm.nix
     # ./obs.nix
     ./xdg.nix
+    ./syncthing.nix
   ];
 }

@@ -1,17 +1,26 @@
-{ pkgs, inputs, lib }: {
+{
+  pkgs,
+  inputs,
+  lib,
+}:
+{
   getMkVm = mkVmSettings: name: vmSettings: {
     ${name} = {
 
       pkgs = vmSettings.pkgs or pkgs;
-      specialArgs = mkVmSettings.flake.defaultSpecialArgs // { vmName = name; };
+      specialArgs = mkVmSettings.flake.defaultSpecialArgs // {
+        vmName = name;
+      };
       config = lib.mkMerge [
         {
           microvm = {
-            interfaces = [{
-              type = "tap";
-              id = "vm-${name}";
-              mac = vmSettings.mac;
-            }];
+            interfaces = [
+              {
+                type = "tap";
+                id = "vm-${name}";
+                mac = vmSettings.mac;
+              }
+            ];
           };
 
           system.stateVersion = mkVmSettings.config.system.stateVersion;
