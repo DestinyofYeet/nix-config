@@ -54,7 +54,7 @@ in
           ];
 
           capabilities = {
-            headless.enable = true;
+            hardware.headless.enable = true;
           };
         };
       })

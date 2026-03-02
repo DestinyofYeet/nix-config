@@ -17,10 +17,24 @@ let
   commonSecrets = secretStore.getServerSecrets "common";
 in
 {
-  age.secrets = {
-    patroni-superuser-pw.file = commonSecrets + "/ha-vm-patroni-superuser-pw.age";
-    patroni-replicationuser-pw.file = commonSecrets + "/ha-vm-patroni-replication-pw.age";
-  };
+  age.secrets =
+    let
+      ownership = {
+
+        owner = "patroni";
+        group = "patroni";
+      };
+    in
+    {
+      patroni-superuser-pw = {
+        file = commonSecrets + "/ha-vm-patroni-superuser-pw.age";
+      }
+      // ownership;
+      patroni-replicationuser-pw = {
+        file = commonSecrets + "/ha-vm-patroni-replication-pw.age";
+      }
+      // ownership;
+    };
 
   # currently broken https://github.com/nixos/nixpkgs/issues/480064
   services.patroni = {

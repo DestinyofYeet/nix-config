@@ -30,11 +30,6 @@ let
     pycharm
   ];
 
-  pythonPkgs = with pkgs.python312Packages; [
-    python-lsp-server
-    pyclip
-  ];
-
   nerd-fontsPkgs = builtins.filter lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 in
 {
@@ -323,9 +318,9 @@ in
       android-tools
       inputs.nix-alien.packages.x86_64-linux.nix-alien
       pdfpc
+      inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ luaPkgs
     ++ kdePkgs
-    ++ jetbrainsPkgs
-    ++ pythonPkgs;
+    ++ jetbrainsPkgs;
 }

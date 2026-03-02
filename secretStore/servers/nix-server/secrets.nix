@@ -91,5 +91,7 @@ in
 
   "karakeep-env-file.age".publicKeys = authed;
   "readeck-env-file.age".publicKeys = authed;
+
+  "grafana-secret-key.age".publicKeys = authed;
 }
 // (importFolder "vms/" inputs)

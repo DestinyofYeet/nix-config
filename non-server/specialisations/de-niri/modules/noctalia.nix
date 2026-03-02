@@ -86,6 +86,7 @@
       location = {
         showWeekNumberInCalender = true;
         weatherEnabled = false;
+        firstDayOfWeek = 1;
       };
       dock = {
         enable = false;

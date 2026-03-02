@@ -343,7 +343,8 @@
         );
     in
     {
-      nixpkgs.config.rocmSupport = true;
+      # used in microvm config
+      inherit defaultSpecialArgs;
 
       # This is highly advised, and will prevent many possible mistakes
       checks =

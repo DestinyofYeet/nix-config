@@ -60,7 +60,7 @@ in
   services.nextcloud = {
     enable = true;
 
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud33;
 
     hostName = "cloud.ole.blue";
     https = true;
@@ -114,7 +114,7 @@ in
       # };
     }
     // {
-      inherit (nc4nix.nextcloud-31)
+      inherit (nc4nix.nextcloud-33)
         user_oidc
         # phonetrack
         deck

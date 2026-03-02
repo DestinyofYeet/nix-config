@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   environment.systemPackages = with pkgs; [
     zsh
@@ -13,7 +14,6 @@
     autoconf
     automake
     gcc
-    gccgo
     gnumake
     unzip
     file

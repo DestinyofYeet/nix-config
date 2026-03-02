@@ -1,5 +1,21 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  secretStore,
+  ...
+}:
+let
+  secrets = secretStore.getServerSecrets "nix-server";
+in
+{
+  age.secrets = {
+    grafanaSecretKey = {
+      file = secrets + "/grafana-secret-key.age";
+      owner = "grafana";
+      group = "grafana";
+    };
+  };
+
   services.grafana = {
     enable = true;
 
@@ -10,6 +26,8 @@
 
         domain = "dashboard.local.ole.blue";
       };
+
+      security.secret_key = "$__file{${config.age.secrets.grafanaSecretKey.path}}";
 
       analytics.reporting_enabled = false;
 

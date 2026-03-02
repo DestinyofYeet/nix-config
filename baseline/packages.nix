@@ -30,7 +30,7 @@
     autoconf
     automake
     gcc
-    gccgo
+    # gccgo
     gnumake
     unzip
     file

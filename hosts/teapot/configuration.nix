@@ -1,7 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -24,19 +30,21 @@
   services.qemuGuest.enable = true;
 
   nix = {
-    buildMachines = [{
-      hostName = "uwuwhatsthis";
-      system = "x86_64-linux";
-      protocol = "ssh";
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      mandatoryFeatures = [ ];
-      maxJobs = 6;
-      speedFactor = 1;
-    }];
+    # buildMachines = [{
+    #   hostName = "uwuwhatsthis";
+    #   system = "x86_64-linux";
+    #   protocol = "ssh";
+    #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    #   mandatoryFeatures = [ ];
+    #   maxJobs = 6;
+    #   speedFactor = 1;
+    # }];
 
     distributedBuilds = true;
 
-    settings = { builders-use-substitutes = true; };
+    settings = {
+      builders-use-substitutes = true;
+    };
   };
 
   documentation = {
