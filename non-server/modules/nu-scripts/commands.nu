@@ -27,7 +27,7 @@ def "launch anki" [] {
 }
 
 
-let path = (get-random-file /home/ole/Nextcloud/Images/nyan_cats).name;
+let path = (get-random-file /home/ole/deposit/Images/nyan_cats).name;
 
 if 'WEZTERM_EXECUTABLE' in $env {
   wezterm imgcat $path
