@@ -15,7 +15,6 @@
     # ./prost.nix
     # ./postgres.nix
     # ./docker-compose.nix
-    ./strichliste.nix
     ./swap.nix
     ../kanata.nix
     ./chromecast.nix
