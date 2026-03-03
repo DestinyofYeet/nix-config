@@ -10,6 +10,13 @@
         deposit = {
           id = "deposit";
           path = "~/deposit";
+          versioning = {
+            type = "staggered";
+            params = {
+              cleanInterval = "3600";
+              maxAge = "7776000";
+            };
+          };
 
           devices = [
             "nix-server"
