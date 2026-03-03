@@ -35,6 +35,7 @@
           devices = [
             "handy"
             "laptop"
+            "desktop"
           ];
 
         };
@@ -56,6 +57,12 @@
         laptop = {
           name = "Laptop";
           id = "R64O662-MPFMBSU-WPY4DAB-SLKRVUD-C3XHVZB-ODYGO5K-KBGUSN6-SPA2RQ2";
+          numconnections = 10;
+        };
+
+        desktop = {
+          name = "Desktop";
+          id = "VAWV3TD-OVTR26J-4W5YPSI-CDHD4FX-Y3XENDC-6QHAJT5-ZRJJMNQ-HRMNKQL";
           numconnections = 10;
         };
       };
