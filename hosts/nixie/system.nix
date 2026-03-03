@@ -6,26 +6,28 @@
 
   system.stateVersion = "25.05";
 
-  services.displayManager = {
-    enable = true;
-    autoLogin.user = "autologin";
-  };
-
-  users = {
-    users."autologin" = {
-      isNormalUser = true;
-      group = "autologin";
-    };
-
-    groups.autologin = { };
-  };
-
   networking.firewall.enable = false;
+
+  services.getty = {
+    autologinUser = "autologin";
+  };
 
   services.pipewire.enable = false;
   services.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
-    systemWide = true;
+  };
+
+  programs.bash.enable = true;
+
+  users = {
+    users."autologin" = {
+      isNormalUser = true;
+      extraGroups = [
+        "audio"
+        "video"
+      ];
+    };
+
   };
 }

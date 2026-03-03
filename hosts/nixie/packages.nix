@@ -1,1 +1,8 @@
-{ pkgs, ... }: { environment.systemPackages = with pkgs; [ zfs hdparm ]; }
+{ pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    zfs
+    hdparm
+    squeezelite
+  ];
+}

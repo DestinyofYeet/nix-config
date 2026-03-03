@@ -39,8 +39,36 @@
   networking.hostName = "nixie";
   networking.hostId = "c03c0e23";
 
-  boot.kernelParams = [
-    "snd_bcm2835.enable_hdmi=1"
-    "snd_bcm2835.enable_headphones=1"
+  hardware.deviceTree.overlays = [
+    {
+      name = "audio";
+      filter = "*rpi-4-b*";
+      dtsText = ''
+        /dts-v1/;
+        /plugin/;
+
+        / {
+            compatible = "brcm,bcm2835";
+
+            fragment@0 {
+                target-path = "/";
+                __overlay__ {
+                    pwm_audio: pwm_audio {
+                        compatible = "brcm,bcm2835-audio";
+                        brcm,auxsrc = <0>;   /* 0 = PWM audio */
+                    };
+                };
+            };
+        };
+      '';
+    }
   ];
+
+  hardware.raspberry-pi."4" = {
+    apply-overlays-dtmerge.enable = true;
+    i2c1.enable = true;
+  };
+
+  boot.kernelParams = [ "snd_bcm2835.enable_headphones=1" ];
+
 }

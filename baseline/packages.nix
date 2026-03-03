@@ -30,7 +30,6 @@
     autoconf
     automake
     gcc
-    # gccgo
     gnumake
     unzip
     file
@@ -41,7 +40,6 @@
     deploy-rs
     helix
     dig
-    glances
     wireguard-tools
     nix-output-monitor
     openssl
