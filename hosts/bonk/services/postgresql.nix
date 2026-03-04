@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   services.postgresql = {
     enable = true;
 
@@ -7,12 +8,8 @@
         name = "nextcloud";
         ensureDBOwnership = true;
       }
-      {
-        name = "authelia-main";
-        ensureDBOwnership = true;
-      }
     ];
 
-    ensureDatabases = [ "nextcloud" "authelia-main" ];
+    ensureDatabases = [ "nextcloud" ];
   };
 }

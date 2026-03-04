@@ -14,6 +14,7 @@ in
 
   "authentik-env.age".publicKeys = authed;
   "authentik-ldap-env.age".publicKeys = authed;
+  "authentik-db-pass.age".publicKeys = authed;
 
   "ha-vm-patroni-replication-pw.age".publicKeys = authed;
   "ha-vm-patroni-superuser-pw.age".publicKeys = authed;

@@ -2,15 +2,20 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./networking.nix
     ./services
     ./vms
-    ../parts/idpDnsCert.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -40,7 +45,9 @@
       };
     };
 
-    groups = { nixremote = { }; };
+    groups = {
+      nixremote = { };
+    };
   };
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
@@ -53,4 +60,3 @@
 
   nix.settings.trusted-users = [ "nixremote" ];
 }
-

@@ -1,5 +1,8 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   imports = [
+    ../../parts/ha-haproxy
+    ../../parts/idp/cert.nix
     ./nextcloud.nix
     ./postgresql.nix
     ./nginx.nix

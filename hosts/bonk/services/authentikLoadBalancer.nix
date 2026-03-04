@@ -1,19 +1,27 @@
-{ ... }: {
+{ ... }:
+{
   services.nginx = {
 
     upstreams = {
 
       "authentik" = {
         servers = {
-          "teapot.neb.ole.blue:9443" = { };
-          # "nix-server.neb.ole.blue:9443" = { backup = true; };
+          "vm-ha-teapot.neb.ole.blue:9000" = {
+            fail_timeout = "10m";
+            slow_start = "30s";
+          };
+          "vm-ha-nix-server.neb.ole.blue:9000" = {
+            backup = true;
+          };
         };
       };
 
       "authentik-ldap" = {
         servers = {
-          "teapot.neb.ole.blue" = { };
-          # "nix-server.neb.ole.blue" = { backup = true; };
+          "vm-ha-teapot.neb.ole.blue" = { };
+          "vm-ha-nix-server.neb.ole.blue" = {
+            backup = true;
+          };
         };
       };
     };
@@ -25,15 +33,15 @@
       locations."/" = {
         proxyWebsockets = true;
         recommendedProxySettings = true;
-        proxyPass = "https://authentik";
+        proxyPass = "http://authentik";
       };
 
     };
 
     streamConfig = ''
       upstream authentik_ldap {
-        server teapot.neb.ole.blue:6636;
-        # server nix-server.neb.ole.blue:6636 backup;
+        server vm-ha-teapot.neb.ole.blue:6636;
+        server vm-ha-nix-server.neb.ole.blue:6636 backup;
       }
 
       server {

@@ -1,8 +1,18 @@
-{ secretStore, config, ... }:
-let commonSecrets = secretStore.getServerSecrets "common";
-in {
+{
+  config,
+  secretStore,
+  lib,
+  ...
+}:
+let
+  secrets = secretStore.getServerSecrets "common";
+in
+{
   age.secrets = {
-    cloudflare-api-env = { file = commonSecrets + "/cloudflare-api-env.age"; };
+    cloudflare-api-env = {
+      file = secrets + "/cloudflare-api-env.age";
+    };
+
   };
 
   security.acme = {
@@ -16,6 +26,10 @@ in {
       environmentFile = config.age.secrets.cloudflare-api-env.path;
     };
 
-    certs = { "idp.ole.blue" = { domain = "idp.ole.blue"; }; };
+    certs = {
+      "idp.ole.blue" = {
+        domain = "idp.ole.blue";
+      };
+    };
   };
 }

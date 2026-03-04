@@ -15,7 +15,6 @@
     ./packages.nix
     ./services
     ./users.nix
-    ../parts/idpDnsCert.nix
     ./vms
   ];
 
