@@ -2,6 +2,6 @@
 {
   imports = [
     ./etcd.nix
-    # ./patroni.nix
+    ./patroni.nix
   ];
 }

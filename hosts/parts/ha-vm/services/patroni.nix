@@ -14,13 +14,14 @@ let
       name: value: value.ip != (machines.${config.networking.hostName}).ip
     );
 
+  cidr = "172.27.255.0/24";
+
   commonSecrets = secretStore.getServerSecrets "common";
 in
 {
   age.secrets =
     let
       ownership = {
-
         owner = "patroni";
         group = "patroni";
       };
@@ -30,13 +31,13 @@ in
         file = commonSecrets + "/ha-vm-patroni-superuser-pw.age";
       }
       // ownership;
+
       patroni-replicationuser-pw = {
         file = commonSecrets + "/ha-vm-patroni-replication-pw.age";
       }
       // ownership;
     };
 
-  # currently broken https://github.com/nixos/nixpkgs/issues/480064
   services.patroni = {
     enable = true;
 
@@ -61,11 +62,11 @@ in
     };
 
     settings = {
-      etcd = {
+      etcd3 = {
         hosts = [
-          "nix-server-ha-vm:2379"
-          "teapot-ha-vm:2379"
-          "bonk-ha-vm:2379"
+          "${machines."nix-server-ha-vm".ip}:2379"
+          "${machines."teapot-ha-vm".ip}:2379"
+          "${machines."bonk-ha-vm".ip}:2379"
         ];
       };
 
@@ -75,34 +76,30 @@ in
           loop_wait = 10;
           retry_timeout = 10;
           maximum_lag_failover = 1048576;
-
-          postgresql = {
-            use_pg_rewind = true;
-            use_slots = true;
-            parameters = {
-              wal_level = "replica";
-              hot_standby = "on";
-              max_wal_senders = 10;
-              max_replication_slots = 10;
-              wal_keep_size = "256MB";
-            };
-          };
         };
       };
 
       postgresql = {
         authentication = {
-          superuser.username = "superuser";
+          superuser.username = "postgres";
           replication.username = "replicationuser";
         };
+
         parameters = {
-          unix_socket_directories = "/var/run/postgresql";
           shared_buffers = "1GB";
           effective_cache_size = "3GB";
           maintenance_work_mem = "256MB";
           max_connections = 200;
           synchronous_commit = "on";
+          unix_socket_directories = "/tmp";
         };
+
+        pg_hba = [
+          "host replication replicationuser ${cidr} scram-sha-256"
+          "host all postgres ${cidr} scram-sha-256"
+          "host all all ${cidr} scram-sha-256"
+          "host all all 127.0.0.1/32 scram-sha-256"
+        ];
       };
     };
 
