@@ -55,7 +55,7 @@
 
   documentation = {
     enable = false;
-    man.generateCaches = false;
+    man.cache.enable = false;
   };
 
   nix.settings.trusted-users = [ "nixremote" ];

@@ -64,6 +64,7 @@ in
   ip = "172.27.255.7";
   external_ips = [ "uwuwhatsthis.de:4242" ];
   lighthouse = true;
+  relay = true;
   groups = [
     "lighthouse"
     "server"

@@ -9,15 +9,22 @@ let
   secrets = secretStore.getServerSecrets "common";
 in
 {
-  age.secrets = {
-    authentik-ldap-env.file = secrets + "/authentik-ldap-env.age";
-    authentik-env.file = secrets + "/authentik-env.age";
-    authentik-db = {
-      file = secrets + "/authentik-db-pass.age";
-      owner = "authentik";
-      group = "authentik";
+  age.secrets =
+    let
+      ownership = {
+
+        owner = "authentik";
+        group = "authentik";
+      };
+    in
+    {
+      authentik-ldap-env.file = secrets + "/authentik-ldap-env.age";
+      authentik-env.file = secrets + "/authentik-env.age";
+      authentik-db = {
+        file = secrets + "/authentik-db-pass.age";
+      }
+      // ownership;
     };
-  };
 
   users = {
     users.authentik = {
@@ -60,13 +67,34 @@ in
         timeout = 30;
       };
 
-      postgresql = {
-        host = "teapot.neb.ole.blue";
-        port = 5432;
-        name = "authentik";
-        user = "authentik";
-        password = "file://${config.age.secrets.authentik-db.path}";
-      };
+      postgresql =
+        let
+          pgsqlPw = {
+
+            name = "authentik";
+            user = "authentik";
+            password = "file://${config.age.secrets.authentik-db.path}";
+          };
+        in
+        {
+          host = "teapot.neb.ole.blue";
+          port = 5432;
+
+          read_replicas = {
+            "0" = {
+              host = "teapot.neb.ole.blue";
+              port = 5433;
+            }
+            // pgsqlPw;
+
+            "1" = {
+              host = "bonk.neb.ole.blue";
+              port = 5433;
+            }
+            // pgsqlPw;
+          };
+        }
+        // pgsqlPw;
     };
   };
 

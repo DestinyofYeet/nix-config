@@ -41,6 +41,8 @@ in
   services.patroni = {
     enable = true;
 
+    softwareWatchdog = true;
+
     name = config.networking.hostName;
 
     postgresqlPackage = pkgs.postgresql_18;
