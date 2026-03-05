@@ -319,6 +319,7 @@ in
       inputs.nix-alien.packages.x86_64-linux.nix-alien
       pdfpc
       inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+      bitwarden-desktop
     ]
     ++ luaPkgs
     ++ kdePkgs

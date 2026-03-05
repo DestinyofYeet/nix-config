@@ -310,13 +310,12 @@ in
         temporary-containers
         facebook-container
         multi-account-containers
-        # enhancer-for-youtube # got removed :(
         skip-redirect
-        keepassxc-browser
-        # tree-style-tab
+        # keepassxc-browser
         terms-of-service-didnt-read
         youtube-no-translation
         readeck
+        bitwarden
       ];
 
       userChrome = ''
