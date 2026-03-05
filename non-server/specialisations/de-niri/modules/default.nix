@@ -22,5 +22,6 @@ in
     ./nushell.nix
     # ./swaybg.nix
     ./noctalia.nix
+    ./xdg.nix
   ];
 }
