@@ -22,7 +22,7 @@ in
         timeout client 30m
         timeout connect 4s
         timeout server 30m
-        timeout check 5s
+        timeout check 15s
 
       frontend postgres_write
         bind ${localIp}:5432
