@@ -1,4 +1,4 @@
-{ ... }:
+{ flake, ... }:
 {
   services.nginx = {
 
@@ -6,22 +6,14 @@
 
       "authentik" = {
         servers = {
-          "vm-ha-teapot.neb.ole.blue:9000" = {
+          ${toString flake.nixosConfigurations."teapot".config.services.authentik.settings.listen.http} = {
             fail_timeout = "10m";
           };
 
-          "vm-ha-nix-server.neb.ole.blue:9000" = {
-            backup = true;
-          };
-        };
-      };
-
-      "authentik-ldap" = {
-        servers = {
-          "vm-ha-teapot.neb.ole.blue" = { };
-          "vm-ha-nix-server.neb.ole.blue" = {
-            backup = true;
-          };
+          ${toString flake.nixosConfigurations."nix-server".config.services.authentik.settings.listen.http} =
+            {
+              backup = true;
+            };
         };
       };
     };
@@ -44,8 +36,12 @@
 
     streamConfig = ''
       upstream authentik_ldap {
-        server vm-ha-teapot.neb.ole.blue:6636;
-        server vm-ha-nix-server.neb.ole.blue:6636 backup;
+        server ${
+          toString flake.nixosConfigurations."teapot".config.services.authentik.settings.listen.http
+        };
+        server ${
+          toString flake.nixosConfigurations."nix-server".config.services.authentik.settings.listen.http
+        } backup;
       }
 
       server {

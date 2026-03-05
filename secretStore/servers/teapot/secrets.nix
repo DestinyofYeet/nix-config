@@ -40,6 +40,8 @@ in
   "zed-uwuwhatsthis.de.age".publicKeys = authed;
   "nextcloud-ole-blue.age".publicKeys = authed;
 
+  "vaultwarden-email-password-hash.age".publicKeys = authed;
+
   "wireguard-vpn-priv-key.age".publicKeys = authed;
 
 }

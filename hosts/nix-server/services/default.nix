@@ -72,5 +72,7 @@
     ./karakeep.nix
     ./readeck.nix
     ./music-assistant.nix
+    ../../parts/vaultwarden/config.nix
+    ../../parts/idp/config.nix
   ];
 }

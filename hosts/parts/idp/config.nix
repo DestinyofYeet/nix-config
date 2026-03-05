@@ -2,11 +2,12 @@
   secretStore,
   config,
   lib,
-  inputs,
   ...
 }:
 let
   secrets = secretStore.getServerSecrets "common";
+
+  machines = import ../../../custom/nebula/machines.nix;
 in
 {
   age.secrets =
@@ -36,7 +37,6 @@ in
   };
 
   imports = [
-    inputs.authentik-nix.nixosModules.default
     ./cert.nix
   ];
 
@@ -57,6 +57,11 @@ in
     environmentFile = config.age.secrets.authentik-env.path;
 
     settings = {
+      listen = {
+
+        http = "${machines.${config.networking.hostName}.ip}:7689";
+        ldap = "${machines.${config.networking.hostName}.ip}:6748";
+      };
       cert_discovery_dir = "env://CREDENTIALS_DIRECTORY";
       email = {
         host = "mail.ole.blue";
@@ -77,7 +82,7 @@ in
           };
         in
         {
-          host = "teapot.neb.ole.blue";
+          host = "bonk.neb.ole.blue";
           port = 5432;
 
           read_replicas = {

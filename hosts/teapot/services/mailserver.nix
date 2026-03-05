@@ -39,6 +39,8 @@ in
     mastodon-email-ole-blue.file = secrets + "/mastodon_email_password_hash.age";
 
     authentik-email-ole-blue.file = secrets + "/authentik_email_password_hash.age";
+
+    vaultwarden-email-ole-blue.file = secrets + "/vaultwarden-email-password-hash.age";
   };
 
   mailserver = rec {

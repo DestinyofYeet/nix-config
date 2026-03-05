@@ -6,11 +6,11 @@
 
       "vaultwarden" = {
         servers = {
-          "vm-ha-teapot.neb.ole.blue:7462" = {
+          "teapot.neb.ole.blue:7462" = {
             fail_timeout = "10m";
           };
 
-          "vm-ha-nix-server.neb.ole.blue:7462" = {
+          "nix-server.neb.ole.blue:7462" = {
             backup = true;
           };
         };

@@ -29,8 +29,9 @@
     # ./github-runner.nix
     ./beszel-agent.nix
     ./mastdodon.nix
-    # ./authentik.nix
     ./livekit.nix
+    ../../parts/vaultwarden/config.nix
+    ../../parts/idp/config.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

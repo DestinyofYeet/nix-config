@@ -9,15 +9,21 @@ let
   machines = import ../../../custom/nebula/machines.nix;
 in
 {
-  age.secrets = {
-    vaultwarden-env.file = secrets + "/vaultwarden-env.age";
-    vaultwarden-private-key = {
-      file = secrets + "/vaultwarden-private-key.age";
-      owner = "vaultwarden";
-      group = "vaultwarden";
-      path = "/var/lib/bitwarden_rs/key.pem";
+  age.secrets =
+    let
+      ownership = {
+        owner = "vaultwarden";
+        group = "vaultwarden";
+      };
+    in
+    {
+      vaultwarden-env.file = secrets + "/vaultwarden-env.age";
+      vaultwarden-private-key = {
+        file = secrets + "/vaultwarden-private-key.age";
+        path = "/var/lib/bitwarden_rs/key.pem";
+      }
+      // ownership;
     };
-  };
 
   imports = [
     ./cert.nix
@@ -49,6 +55,12 @@ in
       SSO_CLIENT_CACHE_EXPIRATION = 0;
       SSO_ONLY = true;
       SSO_SIGNUPS_MATCH_EMAIL = true;
+
+      SMTP_HOST = "mail.ole.blue";
+      SMTP_FROM = "vaultwarden@ole.blue";
+      SMTP_FROM_NAME = "Vaultwarden";
+      SMTP_USERNAME = " vaultwarden@ole.blue";
+      SMTP_SECURITY = "force_tls";
     };
   };
 }
