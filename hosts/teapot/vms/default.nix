@@ -50,7 +50,6 @@ in
             ../../../baseline/nebula.nix
             ../../../options/capabilities/options.nix
             ../../parts/ha-vm
-            ../../parts/idp/config.nix
           ];
 
           services.nginx.enable = true;

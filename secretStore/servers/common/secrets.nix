@@ -18,4 +18,7 @@ in
 
   "ha-vm-patroni-replication-pw.age".publicKeys = authed;
   "ha-vm-patroni-superuser-pw.age".publicKeys = authed;
+
+  "vaultwarden-env.age".publicKeys = authed;
+  "vaultwarden-private-key.age".publicKeys = authed;
 }

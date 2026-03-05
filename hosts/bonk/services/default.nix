@@ -12,6 +12,7 @@
     # ./zabbix.nix
     ./beszel-agent.nix
     ./authentikLoadBalancer.nix
+    ./vaultwardenLoadBalancer.nix
   ];
 
   services.smartd.enable = lib.mkForce false;
