@@ -246,7 +246,6 @@ in
         "browser.startup.homepage" = "about:blank";
         "browser.newtabpage.enabled" = false;
         "trailhead.firstrun.didSeeAboutWelcome" = true;
-        "extensions.formautofill.creditCards.enabled" = false;
         "signon.rememberSignons" = false;
         "widget.use-xdg-desktop-portal.file-picker" = true;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
@@ -285,6 +284,10 @@ in
           ''sidebar.backupState	{"width":"224px","command":"treestyletab_piro_sakura_ne_jp-sidebar-action","expanded":false,"hidden":true}'';
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
+
+        # autofill
+        "extensions.formautofill.addresses.enabled" = false;
+        "extensions.formautofill.creditCards.enabled" = false;
       }
       // (lib.mkIf (lib.custom.isLaptop osConfig) {
 
