@@ -73,6 +73,8 @@
     ./readeck.nix
     ./music-assistant.nix
     ../../parts/vaultwarden/config.nix
+    ../../parts/vaultwarden/sync.nix
     ../../parts/idp/config.nix
+    ./vaultwardenOverride.nix
   ];
 }

@@ -1,5 +1,10 @@
-{ ... }: {
-  nix.settings.trusted-users = [ "ole" "root" "@wheel" ];
+{ pkgs, ... }:
+{
+  nix.settings.trusted-users = [
+    "ole"
+    "root"
+    "@wheel"
+  ];
 
   users.users = rec {
     ole = {
@@ -17,5 +22,6 @@
     };
 
     root.openssh.authorizedKeys = ole.openssh.authorizedKeys;
+
   };
 }

@@ -19,7 +19,7 @@
     # ./home-proxy.nix
     ./postgresql.nix
     ./forgejo.nix
-    # ./nix-search.nix
+    ./nix-search.nix
     ./ntfy.nix
     # ./nebula.nix # now in baseline
     ./mealie.nix

@@ -1,9 +1,7 @@
 { flake, ... }:
 {
   services.nginx = {
-
     upstreams = {
-
       "authentik" = {
         servers = {
           ${toString flake.nixosConfigurations."teapot".config.services.authentik.settings.listen.http} = {

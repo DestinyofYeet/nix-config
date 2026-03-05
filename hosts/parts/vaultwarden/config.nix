@@ -1,6 +1,7 @@
 {
   config,
   secretStore,
+  pkgs,
   ...
 }:
 let
@@ -37,16 +38,16 @@ in
 
     environmentFile = config.age.secrets.vaultwarden-env.path;
 
-    config = {
+    config = rec {
       ROCKET_ADDRESS = "${machines.${config.networking.hostName}.ip}";
       ROCKET_PORT = 7462;
 
-      RSA_KEY_FILENAME = "/var/lib/bitwarden_rs/key";
+      DATA_DIR = "/var/lib/bitwarden_rs/data";
+      ATTACHMENTS_FOLDER = "${DATA_DIR}/attachments";
+      SENDS_FOLDER = "${DATA_DIR}/sends";
+      ICON_CACHE = "${DATA_DIR}/icon_cache";
 
-      # No attachment for HA since they are stored on disk
-      # and I don't have a distributed disk setup
-      USER_ATTACHMENT_LIMIT = 0;
-      ORG_ATTACHMENT_LIMIT = 0;
+      RSA_KEY_FILENAME = "/var/lib/bitwarden_rs/key";
 
       SSO_ENABLED = true;
       SSO_AUTHORITY = "https://idp.ole.blue/application/o/vaultwarden/";
@@ -61,6 +62,15 @@ in
       SMTP_FROM_NAME = "Vaultwarden";
       SMTP_USERNAME = " vaultwarden@ole.blue";
       SMTP_SECURITY = "force_tls";
+    };
+  };
+
+  users.users = {
+    vaultwarden = {
+      shell = pkgs.bashInteractive;
+      openssh.authorizedKeys.keys = [
+        ''command="${pkgs.rrsync}/bin/rrsync ${config.services.vaultwarden.config.DATA_DIR}",restrict ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPOvqamLyP84oIeA4PTty4arxsPeWyzCWB46UQ7n4R+O''
+      ];
     };
   };
 }
