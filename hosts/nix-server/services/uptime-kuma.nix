@@ -4,6 +4,7 @@
     enable = true;
     settings = {
       HOST = "0.0.0.0";
+      PORT = "3001";
     };
   };
 
@@ -12,7 +13,7 @@
 
       default-conf = {
         locations."/" = {
-          proxyPass = "http://localhost:3001";
+          proxyPass = "http://localhost:${config.services.uptime-kuma.settings.PORT}";
         };
       };
 

@@ -13,6 +13,7 @@
     ./beszel-agent.nix
     ./authentikLoadBalancer.nix
     ./vaultwardenLoadBalancer.nix
+    (import ../../parts/uptime.nix "uptime.uwuwhatsthis.de")
   ];
 
   services.smartd.enable = lib.mkForce false;

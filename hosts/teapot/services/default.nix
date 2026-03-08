@@ -32,6 +32,7 @@
     ./livekit.nix
     ../../parts/vaultwarden/config.nix
     ../../parts/idp/config.nix
+    (import ../../parts/uptime.nix "uptime.ole.blue")
   ];
 
   services.smartd.enable = lib.mkForce false;
