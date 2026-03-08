@@ -35,10 +35,10 @@
     streamConfig = ''
       upstream authentik_ldap {
         server ${
-          toString flake.nixosConfigurations."teapot".config.services.authentik.settings.listen.http
+          toString flake.nixosConfigurations."teapot".config.services.authentik.settings.listen.ldaps
         };
         server ${
-          toString flake.nixosConfigurations."nix-server".config.services.authentik.settings.listen.http
+          toString flake.nixosConfigurations."nix-server".config.services.authentik.settings.listen.ldaps
         } backup;
       }
 

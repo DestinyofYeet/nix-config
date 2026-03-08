@@ -60,7 +60,7 @@ in
       listen = {
 
         http = "${machines.${config.networking.hostName}.ip}:7689";
-        ldap = "${machines.${config.networking.hostName}.ip}:6748";
+        ldaps = "${machines.${config.networking.hostName}.ip}:6748";
       };
       cert_discovery_dir = "env://CREDENTIALS_DIRECTORY";
       email = {

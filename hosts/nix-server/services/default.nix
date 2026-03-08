@@ -64,7 +64,6 @@
     # ./sunshine.nix
     ./beszel.nix
     ./home-assistant.nix
-    # ./authentik.nix
     ./minecraft
     ./jellyseer.nix
     ./recyclarr.nix
@@ -76,5 +75,6 @@
     ../../parts/vaultwarden/sync.nix
     ../../parts/idp/config.nix
     ./vaultwardenOverride.nix
+    ./authentikOverride.nix
   ];
 }

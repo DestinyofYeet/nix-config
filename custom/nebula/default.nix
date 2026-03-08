@@ -76,7 +76,7 @@ rec {
             mtu = currentNode.mtu or 1300;
           };
 
-          relay.use_relays = (builtins.length currentNode.use_relays) > 0;
+          relay.use_relays = true;
         };
 
         firewall = rec {
