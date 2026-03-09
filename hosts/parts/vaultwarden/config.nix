@@ -54,7 +54,6 @@ in
       SSO_SCOPES = "email profile offline_access";
       SSO_ALLOW_UNKNOWN_EMAIL_VERIFICATION = false;
       SSO_CLIENT_CACHE_EXPIRATION = 0;
-      SSO_ONLY = true;
       SSO_SIGNUPS_MATCH_EMAIL = true;
 
       SMTP_HOST = "mail.ole.blue";
