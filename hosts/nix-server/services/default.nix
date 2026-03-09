@@ -76,5 +76,6 @@
     ../../parts/idp/config.nix
     ./vaultwardenOverride.nix
     ./authentikOverride.nix
+    ./actual.nix
   ];
 }
