@@ -18,20 +18,20 @@ lib.mkIf (config.services.vaultwarden.enable) {
   };
 
   systemd.services."sync-vaultwarden-attachments" = {
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" ];
     script = ''
-      ${lib.getExe pkgs.rsync} -Pav -r -e "${lib.getExe' pkgs.openssh "ssh"} -o \"StrictHostKeyChecking no\" -o UserKnownHostsFile=/dev/null -i ${config.age.secrets.vaultwarden-sync-key.path}"  vaultwarden@teapot.neb.ole.blue:* ${config.services.vaultwarden.config.DATA_DIR}
+      while true
+      do
+        ${lib.getExe pkgs.rsync} -Pav -r -e "${lib.getExe' pkgs.openssh "ssh"} -o \"StrictHostKeyChecking no\" -o UserKnownHostsFile=/dev/null -i ${config.age.secrets.vaultwarden-sync-key.path}"  vaultwarden@teapot.neb.ole.blue:* ${config.services.vaultwarden.config.DATA_DIR}
+        sleep 60
+      done
     '';
 
     serviceConfig = {
       User = "vaultwarden";
       Group = "vaultwarden";
-    };
-  };
-
-  systemd.timers."sync-vaultwarden-attachments" = {
-    wantedBy = [ "multi-user.target" ];
-    timerConfig = {
-      OnCalendar = "minutely";
+      Restart = "on-failure";
     };
   };
 }
