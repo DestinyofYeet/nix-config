@@ -125,6 +125,7 @@ in
         (mkSpawnAction "Mod+Ctrl+Shift+l" "loginctl lock-session")
         (mkSpawnActionSh "Mod+Shift+S" "${lib.custom.settings.screenshot-cmd}")
         (mkSpawnActionSh "Print" "${lib.custom.settings.screenshot-cmd}")
+        (mkSpawnActionSh "Mod+P" "${lib.getExe' pkgs.wl-mirror "wl-mirror"} $(niri msg --json focused-output | ${lib.getExe pkgs.jq} -r .name)")
 
         (mkWorkspace "1" 1)
         (mkWorkspace "2" 2)
