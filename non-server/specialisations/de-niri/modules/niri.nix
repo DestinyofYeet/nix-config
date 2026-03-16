@@ -18,9 +18,28 @@ let
     ]
     ++ (lib.splitString " " cmd);
 
-  mkSpawnAction = key: action: { "${key}".action.spawn = (mkList action); };
-  mkSpawnNoctalia = key: cmd: { "${key}".action.spawn = cmd; };
-  mkSpawnActionSh = key: action: { "${key}".action.spawn-sh = action; };
+  mkAction =
+    {
+      key,
+      splitString ? false,
+      whileLocked ? false,
+      ...
+    }@settings:
+    {
+      "${key}" = {
+        allow-when-locked = whileLocked;
+        action =
+          { }
+          // (if (builtins.hasAttr "spawn-sh" settings) then { spawn-sh = settings.spawn-sh; } else { })
+          // (
+            if (builtins.hasAttr "spawn" settings) then
+              { spawn = if splitString then mkList (settings.spawn) else settings.spawn; }
+            else
+              { }
+          );
+      };
+    };
+
   mkWorkspace = key: workspace: {
     "Mod+${toString key}".action.focus-workspace = workspace;
     "Mod+Shift+${toString key}".action.move-window-to-workspace = [
@@ -45,6 +64,8 @@ in
       hotkey-overlay = {
         skip-at-startup = true;
       };
+
+      screenshot-path = "/tmp/screenshot_%Y-%m-%d_%H-%M-%S.png";
 
       cursor = {
         theme = "Posy_Cursor_Black";
@@ -111,21 +132,89 @@ in
           "Mod+Ctrl+Shift+q".action.quit = { };
         }
 
-        (mkSpawnNoctalia "XF86AudioRaiseVolume" (noctalia "volume increase"))
-        (mkSpawnNoctalia "XF86AudioLowerVolume" (noctalia "volume decrease"))
-        (mkSpawnNoctalia "XF86AudioMute" (noctalia "volume muteOutput"))
-        (mkSpawnNoctalia "XF86AudioMicMute" (noctalia "volume muteInput"))
-        (mkSpawnNoctalia "XF86MonBrightnessUp" (noctalia "brightness increase"))
-        (mkSpawnNoctalia "XF86MonBrightnessDown" (noctalia "brightness decrease"))
-        (mkSpawnNoctalia "XF86AudioPlay" (noctalia "media playPause"))
-        (mkSpawnNoctalia "XF86AudioNext" (noctalia "media next"))
-        (mkSpawnNoctalia "XF86AudioPrev" (noctalia "media previous"))
-        (mkSpawnAction "Mod+Return" "${lib.getExe pkgs.wezterm}")
-        (mkSpawnNoctalia "Mod+d" (noctalia "launcher toggle"))
-        (mkSpawnAction "Mod+Ctrl+Shift+l" "loginctl lock-session")
-        (mkSpawnActionSh "Mod+Shift+S" "${lib.custom.settings.screenshot-cmd}")
-        (mkSpawnActionSh "Print" "${lib.custom.settings.screenshot-cmd}")
-        (mkSpawnActionSh "Mod+P" "${lib.getExe' pkgs.wl-mirror "wl-mirror"} $(niri msg --json focused-output | ${lib.getExe pkgs.jq} -r .name)")
+        (mkAction {
+          key = "XF86AudioRaiseVolume";
+          spawn = (noctalia "volume increase");
+          whileLocked = true;
+        })
+        (mkAction {
+          key = "XF86AudioLowerVolume";
+          # spawn = (noctalia "volume decrease");
+          spawn = [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "volume"
+            "decrease"
+          ];
+          whileLocked = true;
+        })
+        (mkAction {
+          key = "XF86AudioMute";
+          spawn = (noctalia "volume muteOutput");
+          whileLocked = true;
+        })
+        (mkAction {
+          key = "XF86AudioMicMute";
+          spawn = (noctalia "volume muteInput");
+          whileLocked = true;
+        })
+        (mkAction {
+          key = "XF86AudioPlay";
+          spawn = (noctalia "media playPause");
+          whileLocked = true;
+        })
+        (mkAction {
+          key = "XF86AudioNext";
+          spawn = (noctalia "media next");
+          whileLocked = true;
+        })
+        (mkAction {
+          key = "XF86AudioPrev";
+          spawn = (noctalia "media previous");
+          whileLocked = true;
+        })
+
+        (mkAction {
+          key = "XF86MonBrightnessUp";
+          spawn = (noctalia "brightness increase");
+        })
+
+        (mkAction {
+          key = "XF86MonBrightnessDown";
+          spawn = (noctalia "brightness decrease");
+        })
+
+        (mkAction {
+          key = "Mod+Return";
+          spawn = "${lib.getExe pkgs.wezterm}";
+        })
+
+        (mkAction {
+          key = "Mod+d";
+          spawn = (noctalia "launcher toggle");
+        })
+
+        (mkAction {
+          key = "Mod+Ctrl+Shift+l";
+          spawn = "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
+          splitString = true;
+        })
+
+        {
+          "Mod+Shift+S".action.screenshot = {
+            show-pointer = false;
+          };
+
+          "Print".action.screenshot = {
+            show-pointer = false;
+          };
+        }
+
+        (mkAction {
+          key = "Mod+P";
+          spawn-sh = "${lib.getExe' pkgs.wl-mirror "wl-mirror"} $(niri msg --json focused-output | ${lib.getExe pkgs.jq} -r .name)";
+        })
 
         (mkWorkspace "1" 1)
         (mkWorkspace "2" 2)

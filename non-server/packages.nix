@@ -320,6 +320,7 @@ in
       pdfpc
       inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
       bitwarden-desktop
+      poppler-utils
     ]
     ++ luaPkgs
     ++ kdePkgs
