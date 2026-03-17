@@ -252,6 +252,7 @@ in
             "org.keepassxc.KeePassXC"
             "firefox"
             "nl.jknaapen.fladder"
+            "chromium-browser"
           ];
 
           open-maximized = true;
