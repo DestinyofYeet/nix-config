@@ -11,7 +11,6 @@
 
   boot.initrd.availableKernelModules = [ "uas" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
@@ -39,36 +38,19 @@
   networking.hostName = "nixie";
   networking.hostId = "c03c0e23";
 
-  hardware.deviceTree.overlays = [
-    {
-      name = "audio";
-      filter = "*rpi-4-b*";
-      dtsText = ''
-        /dts-v1/;
-        /plugin/;
+  hardware.i2c.enable = true;
 
-        / {
-            compatible = "brcm,bcm2835";
-
-            fragment@0 {
-                target-path = "/";
-                __overlay__ {
-                    pwm_audio: pwm_audio {
-                        compatible = "brcm,bcm2835-audio";
-                        brcm,auxsrc = <0>;   /* 0 = PWM audio */
-                    };
-                };
-            };
-        };
-      '';
-    }
-  ];
-
-  hardware.raspberry-pi."4" = {
-    apply-overlays-dtmerge.enable = true;
-    i2c1.enable = true;
+  hardware.raspberry-pi.config.all.base-dt-params = {
+    i2c_arm = {
+      enable = true;
+      value = "on";
+    };
+    audio = {
+      enable = true;
+      value = "on";
+    };
   };
 
-  boot.kernelParams = [ "snd_bcm2835.enable_headphones=1" ];
+  boot.kernelModules = [ "i2c_bcm2835" ]; # doesn't seem to make a difference
 
 }

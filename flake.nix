@@ -508,17 +508,18 @@
           specialArgs = defaultSpecialArgs;
         };
 
-        nixie = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
+        nixie = inputs.nixos-raspberrypi.lib.nixosSystem {
           modules = [
             inputs.argon40-nix.nixosModules.default
-            inputs.hardware.nixosModules.raspberry-pi-4
 
             ./hosts/nixie
 
             (
               { ... }:
               {
+                imports = with inputs.nixos-raspberrypi.nixosModules; [
+                  raspberry-pi-4.base
+                ];
                 capabilities = {
                   hardware.headless.enable = true;
                   customNixInterpreter.enable = false;
@@ -533,7 +534,9 @@
             agenix.nixosModules.default
           ];
 
-          specialArgs = defaultSpecialArgs;
+          specialArgs = defaultSpecialArgs // {
+            nixos-raspberrypi = inputs.nixos-raspberrypi;
+          };
         };
 
         audioPi = nixpkgs.lib.nixosSystem {
