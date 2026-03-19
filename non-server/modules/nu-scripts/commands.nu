@@ -29,9 +29,9 @@ def "launch anki" [] {
 
 let path = (get-random-file /home/ole/deposit/Images/nyan_cats).name;
 
-if 'WEZTERM_EXECUTABLE' in $env {
+if $env.TERM_PROGRAM == "WezTerm" {
   wezterm imgcat $path
-} else {
+} else if $env.TERM_PROGRAM == "Kitty" {
   icat $path
 }
 
