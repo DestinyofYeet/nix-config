@@ -1,7 +1,5 @@
 {
-  config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -41,7 +39,7 @@
   hardware.i2c.enable = true;
 
   hardware.raspberry-pi.config.all.base-dt-params = {
-    i2c_arm = {
+    i2c = {
       enable = true;
       value = "on";
     };
@@ -50,7 +48,5 @@
       value = "on";
     };
   };
-
-  boot.kernelModules = [ "i2c_bcm2835" ]; # doesn't seem to make a difference
 
 }
