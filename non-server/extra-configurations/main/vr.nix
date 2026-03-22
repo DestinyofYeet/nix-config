@@ -1,8 +1,14 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     opencomposite
     wayvr
+    bs-manager
   ];
 
   programs.alvr = {
@@ -15,7 +21,7 @@
   };
 
   services.wivrn = {
-    enable = true;
+    enable = false;
     openFirewall = true;
 
     # package = pkgs.wivrn.overrideAttrs {
