@@ -26,12 +26,26 @@ def "launch anki" [] {
   task spawn --immediate --label anki { ANKI_WAYLAND=1 anki }
 }
 
+def find_terminal [] {
+  if ($env | get -o TERM_PROGRAM) != null {
+    return $env.TERM_PROGRAM
+  }
+
+  if $env.TERM == "xterm-kitty" {
+    return "kitty"
+  }
+
+  return "unknown"
+}
+
 
 let path = (get-random-file /home/ole/deposit/Images/nyan_cats).name;
 
-if $env.TERM_PROGRAM == "WezTerm" {
+let terminal = find_terminal;
+
+if $terminal == "WezTerm" {
   wezterm imgcat $path
-} else if $env.TERM_PROGRAM == "Kitty" {
+} else if $terminal == "kitty" {
   icat $path
 }
 

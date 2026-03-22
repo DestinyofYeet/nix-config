@@ -21,7 +21,7 @@
   };
 
   services.wivrn = {
-    enable = false;
+    enable = true;
     openFirewall = true;
 
     # package = pkgs.wivrn.overrideAttrs {
