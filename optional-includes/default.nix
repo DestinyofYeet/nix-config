@@ -1,1 +1,7 @@
-{ ... }: { imports = [ ./wavesurfer.nix ./lix.nix ]; }
+{ ... }:
+{
+  imports = [
+    ./wavesurfer.nix
+    ./customNixInterpreter.nix
+  ];
+}

@@ -279,8 +279,6 @@
 
         inputs.microvm-nix.nixosModules.host
 
-        inputs.lix-module.nixosModules.default
-
         inputs.nix-index-database.nixosModules.default
       ];
 
@@ -306,6 +304,7 @@
             ];
           }
         )
+        inputs.determinate-nix.nixosModules.default
       ]
       ++ baseline-modules;
 
@@ -422,7 +421,6 @@
               {
                 capabilities = {
                   hardware = {
-
                     battery.enable = true;
                     monitor.enable = true;
                     touch.enable = true;
@@ -530,7 +528,6 @@
           ++ [
             home-manager.nixosModules.home-manager
             ./options/capabilities/options.nix
-            inputs.lix-module.nixosModules.default
             agenix.nixosModules.default
           ];
 
