@@ -245,6 +245,11 @@
     };
 
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/develop";
+
+    ds-nom-layer = {
+      url = "git+https://code.ole.blue/DestinyofYeet/ds-nom-layer";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

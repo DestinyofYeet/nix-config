@@ -429,6 +429,26 @@
         "url": "https://install.determinate.systems/determinate-nixd/tag/v3.17.1/x86_64-linux"
       }
     },
+    "ds-nom-layer": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774293725,
+        "narHash": "sha256-ySLPfo9wtNkz1DVSzURdYiQp7UGoYQueSiQdLaiiKY8=",
+        "ref": "refs/heads/main",
+        "rev": "801988096e52560dbbad1ec10bf2d58b7e6fe029",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://code.ole.blue/DestinyofYeet/ds-nom-layer"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://code.ole.blue/DestinyofYeet/ds-nom-layer"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -2329,6 +2349,7 @@
         "clean-unused-files": "clean-unused-files",
         "deploy-rs": "deploy-rs",
         "determinate-nix": "determinate-nix",
+        "ds-nom-layer": "ds-nom-layer",
         "fladder-nix": "fladder-nix",
         "hardware": "hardware",
         "helix": "helix",
