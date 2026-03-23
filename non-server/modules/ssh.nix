@@ -73,12 +73,6 @@ in
           ident = "ssh-key-vps-main";
         }
         {
-          host = "fsim.ori";
-          hostname = "fsim.othr.de";
-          user = "beo45216";
-          ident = "ssh-key-fsim-ori";
-        }
-        {
           host = "nix-server";
           hostname = custom.nebula.yeet.hosts.nix-server.ip;
           user = "root";
@@ -87,6 +81,12 @@ in
         {
           host = "fsim.backup";
           hostname = "wiki.fsim";
+          user = "ole";
+          ident = "ssh-key-fsim-backup";
+        }
+        {
+          host = "fsim.backup-wg";
+          hostname = "10.24.0.1";
           user = "ole";
           ident = "ssh-key-fsim-backup";
         }
