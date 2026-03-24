@@ -2,6 +2,7 @@
   lib,
   pkgs,
   current-specialisation,
+  inputs,
   ...
 }:
 {
@@ -40,7 +41,7 @@
 
       def --wrapped build-system [ function: string@build_system_completion, ...args ] {
         sudo -v
-        sudo nixos-rebuild $function ...$args --flake /home/ole/nixos# --log-format internal-json -v o+e>| ^${lib.getExe pkgs.python3} ${./nu-scripts/ds-nom-bridge.py} | nom --json
+        sudo nixos-rebuild $function ...$args --flake /home/ole/nixos# --log-format internal-json -v o+e>| ${lib.getExe inputs.ds-nom-layer.packages.x86_64-linux.default} | nom --json
       }
 
       def --wrapped rebuild-system [ ...args ] {

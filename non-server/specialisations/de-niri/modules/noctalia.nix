@@ -84,7 +84,7 @@
         };
       };
       location = {
-        showWeekNumberInCalender = true;
+        showWeekNumberInCalendar = true;
         weatherEnabled = false;
         firstDayOfWeek = 1;
       };
