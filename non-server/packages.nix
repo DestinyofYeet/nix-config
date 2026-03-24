@@ -296,6 +296,8 @@ in
       bitwarden-desktop
       poppler-utils
       inputs.ds-nom-layer.packages.${pkgs.stdenv.hostPlatform.system}.default
+      fastfetch
+      teams-for-linux
     ]
     ++ luaPkgs
     ++ kdePkgs

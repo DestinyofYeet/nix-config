@@ -436,11 +436,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774361362,
-        "narHash": "sha256-vPlXzh3UHbzF9y08cUszVQwScRiUWQqGZcgV4WZnBNE=",
+        "lastModified": 1774384443,
+        "narHash": "sha256-QmN/a5xHXMNuzvLTogy2YYajg2znZv5mQWACt5NAB+Q=",
         "ref": "refs/heads/main",
-        "rev": "1dd2a29026c94b0aef8373824ab825d8957bd9da",
-        "revCount": 4,
+        "rev": "78dbe3abb667d836b2ad592dabfac03571ec50b8",
+        "revCount": 5,
         "type": "git",
         "url": "https://code.ole.blue/DestinyofYeet/ds-nom-layer"
       },
