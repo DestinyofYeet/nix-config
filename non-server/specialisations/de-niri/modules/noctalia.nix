@@ -96,6 +96,7 @@
         showSessionButtonsOnLockScreen = false;
         showHibernateOnLockScreen = false;
         passwordChars = true;
+        lockScreenAnimations = true;
       };
 
       appLauncher = {
