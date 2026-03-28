@@ -3,6 +3,7 @@
   config,
   pkgs,
   secretStore,
+  stable-pkgs,
   ...
 }:
 let
@@ -27,6 +28,7 @@ in
 
   services.home-assistant = {
     enable = true;
+    package = stable-pkgs.home-assistant;
     extraComponents = [
       "history"
       "mqtt"

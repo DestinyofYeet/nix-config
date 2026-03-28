@@ -6,7 +6,7 @@
     ./sshd.nix
     ./nginx.nix
     ./fail2ban.nix
-    ./netdata.nix
+    # ./netdata.nix
     # ./docker.nix
     # ./ghost.nix
     ./mailserver.nix
