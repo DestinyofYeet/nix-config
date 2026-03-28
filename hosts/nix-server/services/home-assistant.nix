@@ -28,7 +28,24 @@ in
 
   services.home-assistant = {
     enable = true;
-    package = stable-pkgs.home-assistant;
+    package = pkgs.home-assistant.override {
+      packageOverrides = (
+        self: super: {
+          pycountry = pkgs.python314Packages.pycountry.overridePythonAttrs (old: rec {
+            version = "24.6.1";
+
+            # pycountry got updated which breaks radios which breaks home-assistant :)
+            src = pkgs.fetchFromGitHub {
+              owner = "pycountry";
+              repo = "pycountry";
+              tag = version;
+              hash = "sha256-4YVPh6OGWguqO9Ortv+vAejxx7WLs4u0SVLv8JlKSWM=";
+            };
+
+          });
+        }
+      );
+    };
     extraComponents = [
       "history"
       "mqtt"

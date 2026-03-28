@@ -285,6 +285,8 @@
         inputs.microvm-nix.nixosModules.host
 
         inputs.nix-index-database.nixosModules.default
+
+        inputs.determinate-nix.nixosModules.default
       ];
 
       non-server-modules = [
@@ -309,7 +311,6 @@
             ];
           }
         )
-        inputs.determinate-nix.nixosModules.default
       ]
       ++ baseline-modules;
 
@@ -378,8 +379,8 @@
               { ... }:
               {
                 capabilities = {
+                  customNixInterpreter.enable = false;
                   hardware = {
-
                     headless.enable = true;
                   };
                 };
