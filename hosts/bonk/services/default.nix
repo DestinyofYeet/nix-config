@@ -8,7 +8,6 @@
     ./nginx.nix
     ./openssh.nix
     # ./authelia.nix
-    ./netdata.nix
     # ./zabbix.nix
     ./beszel-agent.nix
     ./authentikLoadBalancer.nix

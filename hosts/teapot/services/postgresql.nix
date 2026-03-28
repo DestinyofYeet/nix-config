@@ -15,7 +15,6 @@
 
             vectorchord
             pgvector
-            pgvecto-rs
           ]
         );
         cfg = config.services.postgresql;
@@ -56,7 +55,6 @@
     extensions =
       ps: with ps; [
         vectorchord
-        pgvecto-rs
         pgvector
       ];
 
