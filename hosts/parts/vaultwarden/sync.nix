@@ -17,9 +17,10 @@ lib.mkIf (config.services.vaultwarden.enable) {
     };
   };
 
-  systemd.services."sync-vaultwarden-attachments" = {
+  systemd.services."sync-vaultwarden-attachments" = rec {
     wantedBy = [ "multi-user.target" ];
-    after = [ "network-online.target" ];
+    requires = [ "network-online.target" ];
+    after = requires;
     script = ''
       while true
       do
