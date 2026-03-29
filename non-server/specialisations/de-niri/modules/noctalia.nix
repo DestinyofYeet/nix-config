@@ -79,6 +79,9 @@
             {
               id = "Tray";
               chevronColor = "error";
+              pinned = [
+                "steam"
+              ];
             }
           ];
         };
