@@ -105,6 +105,7 @@
       appLauncher = {
         terminalCommand = "${lib.getExe pkgs.wezterm} -e";
         showIconBackground = true;
+        overviewLayer = true;
       };
 
       nightLight = {
