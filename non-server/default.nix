@@ -1,10 +1,5 @@
 {
   inputs,
-  stable-pkgs,
-  pkgs,
-  lib,
-  custom,
-  secretStore,
   flake,
   ...
 }:
@@ -13,12 +8,13 @@
     backupFileExtension = "backup";
 
     extraSpecialArgs = {
-      inherit
+      inherit (flake.defaultSpecialArgs)
         inputs
         stable-pkgs
         custom
         secretStore
         flake
+        rlib
         ;
     };
 

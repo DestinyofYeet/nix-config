@@ -1,9 +1,14 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  rlib,
+  ...
+}:
 let
   mkMapBind =
     numbers:
     # lib.mapAttrs' (name: value: lib.nameValuePair ("ctrl+space>1") (value)) (lib.genAttrs numbers (name: "goto_tab ${toString name}"));
-    lib.mkMerge (map (num: { "ctrl+space>${toString num}" = "goto_tab ${toString num}"; }) numbers);
+    rlib.mkMerge (map (num: { "ctrl+space>${toString num}" = "goto_tab ${toString num}"; }) numbers);
 in
 {
   programs.kitty = {

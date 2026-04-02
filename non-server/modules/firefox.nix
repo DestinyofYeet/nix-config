@@ -1,4 +1,5 @@
 {
+  rlib,
   pkgs,
   lib,
   osConfig,
@@ -9,7 +10,7 @@ let
 
   build-containers =
     container-list:
-    lib.mkMerge (
+    rlib.mkMerge (
       lib.imap1 (
         i: v:
         builtins.mapAttrs (name: value: {

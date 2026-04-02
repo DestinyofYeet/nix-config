@@ -1,4 +1,5 @@
 {
+  rlib,
   pkgs,
   lib,
   config,
@@ -110,7 +111,7 @@ in
 
       };
 
-      binds = lib.mkMerge [
+      binds = rlib.mkMerge [
         {
           "Mod+m".action.maximize-column = { };
           "Mod+f".action.fullscreen-window = { };

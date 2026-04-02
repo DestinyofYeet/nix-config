@@ -1,5 +1,6 @@
 {
   lib,
+  rlib,
   config,
   pkgs,
   inputs,
@@ -26,7 +27,7 @@
   #   download-buffer-size = 500000000
   # '';
 
-  nix = lib.mkMerge [
+  nix = rlib.mkMerge [
     # match nix-channels (nix-shell) with nix flake input
     {
       nixPath = [
@@ -38,7 +39,6 @@
     }
     {
       settings = {
-
         experimental-features = [
           "nix-command"
           "flakes"

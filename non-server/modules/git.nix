@@ -1,7 +1,15 @@
-{ pkgs, config, lib, osConfig, secretStore, ... }:
+{
+  rlib,
+  pkgs,
+  config,
+  lib,
+  osConfig,
+  secretStore,
+  ...
+}:
 let
-  public-signing-key-path = secretStore.secrets
-    + "/non-server/${osConfig.networking.hostName}/ssh-key-signing-key";
+  public-signing-key-path =
+    secretStore.secrets + "/non-server/${osConfig.networking.hostName}/ssh-key-signing-key";
 
   allowed-signers = pkgs.writeText "allowed_signers" ''
     * ${builtins.readFile public-signing-key-path}
@@ -13,17 +21,25 @@ let
       email = "ole.bendixen@st.oth-regensburg.de";
     };
   };
-in {
+in
+{
   # name and email is set in baseline
   programs.git = {
-    includes = [{
-      path = git-config-oth;
-      condition = "gitdir/i:~/github/oth/";
-    }];
+    includes = [
+      {
+        path = git-config-oth;
+        condition = "gitdir/i:~/github/oth/";
+      }
+    ];
+    # rlib breaks the user conf somehow
     settings = lib.mkMerge [
       {
-        safe = { directory = "*"; };
-        init = { defaultBranch = "main"; };
+        safe = {
+          directory = "*";
+        };
+        init = {
+          defaultBranch = "main";
+        };
         user = {
           name = "DestinyofYeet";
           email = "ole@ole.blue";
@@ -32,7 +48,7 @@ in {
       (lib.mkIf (builtins.hasAttr "ssh-key-gitea" config.age.secrets) {
         gpg = {
           format = "ssh";
-          ssh.allowedSignersFile = builtins.toString allowed-signers;
+          ssh.allowedSignersFile = toString allowed-signers;
         };
 
         commit.gpgsign = true;
@@ -45,6 +61,8 @@ in {
 
   programs.lazygit = {
     enable = true;
-    settings = { git.overrideGpg = true; };
+    settings = {
+      git.overrideGpg = true;
+    };
   };
 }

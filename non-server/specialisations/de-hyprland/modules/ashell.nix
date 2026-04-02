@@ -1,4 +1,5 @@
 {
+  rlib,
   pkgs,
   lib,
   osConfig,
@@ -42,7 +43,7 @@
         memory = cpu;
         temperature = cpu;
       };
-      settings = lib.mkMerge [
+      settings = rlib.mkMerge [
         {
           audio_sinks_more_cmd = "${lib.getExe pkgs.pavucontrol} -t 3";
           audio_sources_more_cmd = "${lib.getExe pkgs.pavucontrol} -t 4";

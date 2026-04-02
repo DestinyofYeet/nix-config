@@ -250,6 +250,10 @@
       url = "git+https://code.ole.blue/DestinyofYeet/ds-nom-layer";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rlib = {
+      url = "git+https://code.ole.blue/DestinyofYeet/nix-lib-rs/";
+    };
   };
 
   outputs =
@@ -336,6 +340,7 @@
           secretStore
           ;
         flake = self;
+        rlib = inputs.rlib.lib;
       };
 
       makeConfigurations =
