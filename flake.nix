@@ -252,7 +252,7 @@
     };
 
     rlib = {
-      url = "git+https://code.ole.blue/DestinyofYeet/nix-lib-rs/";
+      url = "git+https://code.ole.blue/DestinyofYeet/rlib/";
     };
   };
 

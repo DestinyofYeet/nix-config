@@ -2376,17 +2376,17 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1775159412,
-        "narHash": "sha256-DcCv00tcnTeqmhKSqMltc8OzMogmnu39IOqVUbbRvHc=",
+        "lastModified": 1775234006,
+        "narHash": "sha256-dHuTMaXIplEMR4p4DLzz/kFtI43LXa48cGPS1AVgDCQ=",
         "ref": "refs/heads/main",
-        "rev": "82465530e91cc23b4e37734f5ff987af2cad9c58",
-        "revCount": 6,
+        "rev": "ee296da3fdb65d8c4f2ed89127f9a5c8bca515db",
+        "revCount": 9,
         "type": "git",
-        "url": "https://code.ole.blue/DestinyofYeet/nix-lib-rs/"
+        "url": "https://code.ole.blue/DestinyofYeet/rlib/"
       },
       "original": {
         "type": "git",
-        "url": "https://code.ole.blue/DestinyofYeet/nix-lib-rs/"
+        "url": "https://code.ole.blue/DestinyofYeet/rlib/"
       }
     },
     "root": {

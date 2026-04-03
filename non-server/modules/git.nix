@@ -31,8 +31,7 @@ in
         condition = "gitdir/i:~/github/oth/";
       }
     ];
-    # rlib breaks the user conf somehow
-    settings = lib.mkMerge [
+    settings = rlib.mkMerge [
       {
         safe = {
           directory = "*";
@@ -45,14 +44,18 @@ in
           email = "ole@ole.blue";
         };
       }
-      (lib.mkIf (builtins.hasAttr "ssh-key-gitea" config.age.secrets) {
-        gpg = {
-          format = "ssh";
-          ssh.allowedSignersFile = toString allowed-signers;
-        };
+      (rlib.mkIf {
+        condition = (builtins.hasAttr "ssh-key-gitea" config.age.secrets);
+        value = {
 
-        commit.gpgsign = true;
-        user.signingKey = config.age.secrets.ssh-key-gitea.path;
+          gpg = {
+            format = "ssh";
+            ssh.allowedSignersFile = toString allowed-signers;
+          };
+
+          commit.gpgsign = true;
+          user.signingKey = config.age.secrets.ssh-key-gitea.path;
+        };
       })
     ];
   };
