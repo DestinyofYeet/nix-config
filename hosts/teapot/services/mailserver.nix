@@ -84,11 +84,6 @@ in
 
     enableManageSieve = true;
 
-    monitoring = {
-      enable = true;
-      alertAddress = "ole@ole.blue";
-    };
-
     # somehow nukes my nameserver entries in /etc/resolv.conf and no more ns lookups are possible
     localDnsResolver = false;
 

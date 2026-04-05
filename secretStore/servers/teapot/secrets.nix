@@ -6,6 +6,7 @@ in
 {
   "forgejo_email_password.age".publicKeys = authed;
   "forgejo_env_file.age".publicKeys = authed;
+  "forgejo_lfs_jwt.age".publicKeys = authed;
 
   "authelia-hashed-email-password.age".publicKeys = authed;
   "dmarc-hashed-email-password.age".publicKeys = authed;

@@ -2,7 +2,8 @@
 let
   interface = "ens18";
   microvm-name = "microvm-bridge";
-in {
+in
+{
   systemd.network = {
     enable = true;
     netdevs."10-microvm".netdevConfig = {
@@ -15,14 +16,17 @@ in {
         matchConfig.Name = interface;
         address = [ "5.83.152.153/26" ];
 
-        routes = [{ Gateway = "5.83.152.129"; }];
+        routes = [ { Gateway = "5.83.152.129"; } ];
 
-        dns = [ "1.1.1.1" "8.8.8.8" ];
+        dns = [
+          "1.1.1.1"
+          "8.8.8.8"
+        ];
       };
 
       "10-microvm" = {
         matchConfig.Name = microvm-name;
-        addresses = [{ Address = "192.168.3.1/24"; }];
+        addresses = [ { Address = "192.168.3.1/24"; } ];
       };
 
       "11-microvm" = {

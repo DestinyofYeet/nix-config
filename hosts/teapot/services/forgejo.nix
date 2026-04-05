@@ -1,8 +1,21 @@
-{ config, lib, pkgs, secretStore, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  secretStore,
+  ...
+}:
+let
+  secrets = secretStore.getServerSecrets "teapot";
+in
+{
 
   age.secrets = {
-    forgejo-env-file.file = secretStore.secrets
-      + "/servers/teapot/forgejo_env_file.age";
+    forgejo-env-file.file = secrets + "/forgejo_env_file.age";
+    forgejo_lfs_jwt = {
+      file = secrets + "/forgejo_lfs_jwt.age";
+      owner = "forgejo";
+    };
   };
 
   services.forgejo = rec {
@@ -16,11 +29,17 @@
     };
 
     settings = {
-      DEFAULT = { APP_NAME = "code.ole.blue"; };
+      DEFAULT = {
+        APP_NAME = "code.ole.blue";
+      };
 
-      indexer = { REPO_INDEXER_ENABLED = true; };
+      indexer = {
+        REPO_INDEXER_ENABLED = true;
+      };
 
-      session = { COOKIE_SECURE = true; };
+      session = {
+        COOKIE_SECURE = true;
+      };
 
       service = {
         DISABLE_REGISTRATION = false;
@@ -36,9 +55,13 @@
         ENABLE_OPENID_SIGNUP = true;
       };
 
-      "repository.pull-request" = { DEFAULT_MERGE_STYLE = "rebase"; };
+      "repository.pull-request" = {
+        DEFAULT_MERGE_STYLE = "rebase";
+      };
 
-      federation = { ENABLED = true; };
+      federation = {
+        ENABLED = true;
+      };
 
       security = {
         INSTALL_LOCK = true;
@@ -59,7 +82,9 @@
         ENVELOPE_FROM = USER;
       };
 
-      admin = { SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true; };
+      admin = {
+        SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true;
+      };
 
       server = {
         ROOT_URL = "https://${settings.DEFAULT.APP_NAME}";
@@ -67,24 +92,25 @@
         HTTP_PORT = 3005;
         DOMAIN = settings.DEFAULT.APP_NAME;
         LANDING_PAGE = "explore";
+
+        LFS_START_SERVER = true;
+        LFS_JWT_SECRET_URI = "file:${config.age.secrets.forgejo_lfs_jwt.path}";
       };
 
-      log = { LEVEL = "Debug"; };
+      log = {
+        LEVEL = "Debug";
+      };
     };
   };
 
-  systemd.services."forgejo".serviceConfig.EnvironmentFile =
-    config.age.secrets.forgejo-env-file.path;
+  systemd.services."forgejo".serviceConfig.EnvironmentFile = config.age.secrets.forgejo-env-file.path;
 
   services.nginx.virtualHosts."code.ole.blue" = {
     forceSSL = true;
     enableACME = true;
 
     locations."/" = {
-      proxyPass =
-        "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${
-          toString config.services.forgejo.settings.server.HTTP_PORT
-        }";
+      proxyPass = "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${toString config.services.forgejo.settings.server.HTTP_PORT}";
       proxyWebsockets = true;
       extraConfig = ''
         proxy_set_header Connection $http_connection;
