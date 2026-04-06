@@ -472,11 +472,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772283106,
-        "narHash": "sha256-hKESLu12A0HuRVF4DRGOn1Q5f2wWxfsIc6b1/RtzMOU=",
+        "lastModified": 1775235363,
+        "narHash": "sha256-dvAldbfyayT+2JtVrsSYk34c/aWkKzsSt7hC39DZw4M=",
         "owner": "DestinyofYeet",
         "repo": "fladder.nix",
-        "rev": "0f89a87e1157490cc25ea74cf2865b3e8c8693cf",
+        "rev": "0d4660a20c58ae002d67bfda0b1a7eef58aa19e2",
         "type": "github"
       },
       "original": {
