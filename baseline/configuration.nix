@@ -58,10 +58,14 @@
         ];
       };
     }
-    (lib.mkIf (config.capabilities.customNixInterpreter.enable) {
-      settings = {
-        eval-cores = 0;
-        experimental-features = [ "wasm-builtin" ];
+    (rlib.mkIf {
+      condition = config.capabilities.customNixInterpreter.enable;
+      value = {
+
+        settings = {
+          eval-cores = 0;
+          experimental-features = [ "wasm-builtin" ];
+        };
       };
     })
   ];
