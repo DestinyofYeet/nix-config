@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 let
   interface = "ens18";
   microvm-name = "microvm-bridge";
