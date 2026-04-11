@@ -15,7 +15,14 @@ in
       "10-external" = {
         matchConfig.Name = interface;
         address = [ "45.137.68.119/25" ];
-        routes = [ { Gateway = "45.137.68.1"; } ];
+        routes = [
+          {
+            Destination = "0.0.0.0/0";
+            Gateway = "37.114.36.0";
+            GatewayOnLink = true;
+          }
+          { Destination = "37.114.36.0/32"; }
+        ];
 
         dns = [
           "1.1.1.1"

@@ -16,7 +16,14 @@ in
         matchConfig.Name = interface;
         address = [ "5.83.152.153/26" ];
 
-        routes = [ { Gateway = "5.83.152.129"; } ];
+        routes = [
+          {
+            Destination = "0.0.0.0/0";
+            Gateway = "37.114.36.0";
+            GatewayOnLink = true;
+          }
+          { Destination = "37.114.36.0/32"; }
+        ];
 
         dns = [
           "1.1.1.1"
