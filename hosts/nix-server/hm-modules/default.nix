@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   home.stateVersion = "24.05";
 
   # needed for agenix service to start properly
@@ -9,6 +10,6 @@
     ./bash.nix
     ./agenix.nix
     # ./hyprland.nix
-    ./sway.nix
+    # ./sway.nix
   ];
 }

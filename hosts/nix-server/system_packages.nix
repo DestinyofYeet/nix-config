@@ -18,7 +18,6 @@
     matrix-conduit
     nginx
     bat
-    netdata
     libcgroup
     wireguard-tools
     iproute2

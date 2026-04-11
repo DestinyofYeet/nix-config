@@ -1,19 +1,28 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   serviceUser = "jellyseerr";
-  serviceName = "jellyseerr";
-in {
+  serviceName = "seerr";
+in
+{
   imports = [
-    ({ lib, ... }: {
-      systemd.services.${serviceName}.serviceConfig = {
-        User = lib.mkForce serviceUser;
-        DynamicUser = lib.mkForce false;
-        ProtectSystem = lib.mkForce false;
-      };
-    })
+    (
+      { lib, ... }:
+      {
+        systemd.services.${serviceName}.serviceConfig = {
+          User = lib.mkForce serviceUser;
+          DynamicUser = lib.mkForce false;
+          ProtectSystem = lib.mkForce false;
+        };
+      }
+    )
   ];
 
-  services.jellyseerr = {
+  services.seerr = {
     enable = true;
     configDir = "/mnt/data/configs/jellyseer/config";
   };
@@ -27,24 +36,26 @@ in {
     groups.${serviceUser} = { };
   };
 
-  systemd.services."${serviceName}-setup" = let
+  systemd.services."${serviceName}-setup" =
+    let
 
-    setfacl = (lib.getExe' pkgs.acl "setfacl");
-  in rec {
-    script = ''
-      ${setfacl} -d -m u:${serviceUser}:rwx /mnt/data/configs/jellyseer
-      ${setfacl} -m u:${serviceUser}:rx /mnt/data/configs
-    '';
+      setfacl = (lib.getExe' pkgs.acl "setfacl");
+    in
+    rec {
+      script = ''
+        ${setfacl} -d -m u:${serviceUser}:rwx /mnt/data/configs/jellyseer
+        ${setfacl} -m u:${serviceUser}:rx /mnt/data/configs
+      '';
 
-    requiredBy = [ "${serviceName}.service" ];
-    before = requiredBy;
-  };
+      requiredBy = [ "${serviceName}.service" ];
+      before = requiredBy;
+    };
 
   services.nginx.virtualHosts."requests.local.ole.blue" =
-    lib.custom.settings.nix-server.nginx-local-ssl // {
+    lib.custom.settings.nix-server.nginx-local-ssl
+    // {
       locations."/" = {
-        proxyPass =
-          "http://localhost:${toString config.services.jellyseerr.port}";
+        proxyPass = "http://localhost:${toString config.services.seerr.port}";
         proxyWebsockets = true;
         recommendedProxySettings = true;
       };
