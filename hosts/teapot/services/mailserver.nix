@@ -90,7 +90,7 @@ in
     # forwards = { "security@strichliste.rs" = [ "ole@strichliste.rs" ]; };
 
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
-    loginAccounts = {
+    accounts = {
       "ole@ole.blue" = {
         hashedPasswordFile = "${config.age.secrets.ole-mail.path}";
 

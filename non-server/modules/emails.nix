@@ -1,9 +1,14 @@
-{ config, pkgs, secretStore, flake, ... }: {
+{
+  config,
+  pkgs,
+  secretStore,
+  flake,
+  ...
+}:
+{
   age.secrets = {
-    oth-regensburg-email-pw.file = secretStore.secrets
-      + /non-server/oth-regensburg-email-pw.age;
-    email-ole-blue-pw.file = secretStore.secrets
-      + /non-server/email-ole-blue-pw.age;
+    oth-regensburg-email-pw.file = secretStore.secrets + /non-server/oth-regensburg-email-pw.age;
+    email-ole-blue-pw.file = secretStore.secrets + /non-server/email-ole-blue-pw.age;
   };
 
   programs = {
@@ -12,7 +17,11 @@
       profiles = {
         "default" = {
           isDefault = true;
-          accountsOrder = [ "oth_stud_email" "fachschaft_im" "ole_blue" ];
+          accountsOrder = [
+            "oth_stud_email"
+            "fachschaft_im"
+            "ole_blue"
+          ];
         };
       };
 
@@ -47,7 +56,9 @@
       imap = {
         host = "outlook.office365.com";
         port = 993;
-        tls = { enable = true; };
+        tls = {
+          enable = true;
+        };
       };
 
       smtp = {
@@ -97,7 +108,9 @@
       imap = {
         host = "outlook.office365.com";
         port = 993;
-        tls = { enable = true; };
+        tls = {
+          enable = true;
+        };
       };
 
       smtp = {
@@ -138,7 +151,9 @@
       passwordCommand = "cat ${config.age.secrets.email-ole-blue-pw.path}";
       imap = {
         host = "mail.ole.blue";
-        tls = { enable = true; };
+        tls = {
+          enable = true;
+        };
         authentication = "plain";
         port = 993;
       };
@@ -150,8 +165,7 @@
         port = 465;
       };
 
-      aliases =
-        flake.nixosConfigurations."teapot".config.mailserver.loginAccounts."ole@ole.blue".aliases;
+      aliases = flake.nixosConfigurations."teapot".config.mailserver.accounts."ole@ole.blue".aliases;
     };
   };
 }

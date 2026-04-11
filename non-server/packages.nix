@@ -132,7 +132,6 @@ in
       monero-gui
       fd
       tree-sitter
-      nodePackages.nodejs
       ungoogled-chromium
       magic-wormhole-rs
       element-desktop
