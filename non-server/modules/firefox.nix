@@ -243,6 +243,8 @@ in
         # "privacy.resistFingerprinting" = true;
         # "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
 
+        "browser.formfill.enable" = false;
+
         "browser.toolbars.bookmarks.visibility" = "never";
         "browser.startup.homepage" = "about:blank";
         "browser.newtabpage.enabled" = false;
