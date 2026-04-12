@@ -2338,11 +2338,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1775633839,
-        "narHash": "sha256-3S12TYcQE5KRMJVJulz8LyqADOd2U0NWz3Y/8AhWlWA=",
+        "lastModified": 1775999756,
+        "narHash": "sha256-wJMq4QQsDI/EEf7lYCaYcaAFr1HheAhHyAlYdF6mlSs=",
         "ref": "refs/heads/main",
-        "rev": "f4ddc06b2c11e81b34263adfc5d63cefa3b6b195",
-        "revCount": 11,
+        "rev": "39e3f1f910b7d90e358bff78e6471c6d8a2c052b",
+        "revCount": 12,
         "type": "git",
         "url": "https://code.ole.blue/DestinyofYeet/rlib/"
       },

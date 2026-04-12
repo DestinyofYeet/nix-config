@@ -44,18 +44,14 @@ in
           email = "ole@ole.blue";
         };
       }
-      (rlib.mkIf {
-        condition = (builtins.hasAttr "ssh-key-gitea" config.age.secrets);
-        value = {
-
-          gpg = {
-            format = "ssh";
-            ssh.allowedSignersFile = toString allowed-signers;
-          };
-
-          commit.gpgsign = true;
-          user.signingKey = config.age.secrets.ssh-key-gitea.path;
+      (rlib.mkIf (builtins.hasAttr "ssh-key-gitea" config.age.secrets) {
+        gpg = {
+          format = "ssh";
+          ssh.allowedSignersFile = toString allowed-signers;
         };
+
+        commit.gpgsign = true;
+        user.signingKey = config.age.secrets.ssh-key-gitea.path;
       })
     ];
   };

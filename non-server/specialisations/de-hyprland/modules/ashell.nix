@@ -48,15 +48,15 @@
           audio_sinks_more_cmd = "${lib.getExe pkgs.pavucontrol} -t 3";
           audio_sources_more_cmd = "${lib.getExe pkgs.pavucontrol} -t 4";
         }
-        (lib.mkIf (osConfig.capabilities.hardware.bluetooth.enable) {
+        (rlib.mkIf (osConfig.capabilities.hardware.bluetooth.enable) {
           bluetooth_more_cmd = "${pkgs.blueman}/bin/blueman-manager";
         })
 
-        (lib.mkIf (!osConfig.capabilities.hardware.wifi.enable) {
+        (rlib.mkIf (!osConfig.capabilities.hardware.wifi.enable) {
           remove_airplane_btn = true;
         })
 
-        (lib.mkIf (osConfig.capabilities.hardware.wifi.enable) {
+        (rlib.mkIf (osConfig.capabilities.hardware.wifi.enable) {
           remove_airplane_btn = false;
         })
       ];
