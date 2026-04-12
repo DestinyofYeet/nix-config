@@ -66,6 +66,12 @@ in
           user = "git";
           ident = "ssh-key-oth-gitlab";
         }
+        rec {
+          host = "git.oth-service.de";
+          hostname = host;
+          user = "git";
+          ident = "ssh-key-oth-gitlab";
+        }
         {
           host = "bonk";
           hostname = "uwuwhatsthis.de";
