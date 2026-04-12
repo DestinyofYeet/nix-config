@@ -31,6 +31,7 @@ in
         condition = "gitdir/i:~/github/oth/";
       }
     ];
+    signing.format = "ssh";
     settings = rlib.mkMerge [
       {
         safe = {

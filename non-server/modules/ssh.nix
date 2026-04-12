@@ -70,7 +70,7 @@ in
           host = "git.oth-service.de";
           hostname = host;
           user = "git";
-          ident = "ssh-key-oth-gitlab";
+          ident = "ssh-key-gitea";
         }
         {
           host = "bonk";

@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -10,6 +11,7 @@
     };
 
     gtk4.extraConfig = gtk3.extraConfig;
+    gtk4.theme = config.gtk.theme;
   };
 
   qt = {
