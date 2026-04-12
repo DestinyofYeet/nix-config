@@ -95,6 +95,7 @@ in
           hostname = "195.37.211.44";
           user = "beo45216";
           ident = "ssh-key-fsim-pedro";
+          port = 8081;
         }
         {
           host = "fsim.pedro-wg";
