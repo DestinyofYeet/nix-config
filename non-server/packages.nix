@@ -297,6 +297,7 @@ in
       inputs.ds-nom-layer.packages.${pkgs.stdenv.hostPlatform.system}.default
       fastfetch
       teams-for-linux
+      airshipper
     ]
     ++ luaPkgs
     ++ kdePkgs

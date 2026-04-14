@@ -291,11 +291,7 @@ in
         # autofill
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
-      }
-      // (lib.mkIf (lib.custom.isLaptop osConfig) {
-
-        "mousewheel.system_scroll_override.enabled" = false;
-      });
+      };
 
       search.default = "Startpage";
 

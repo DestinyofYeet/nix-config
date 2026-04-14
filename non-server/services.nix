@@ -32,43 +32,5 @@ in
 
   services.pcscd.enable = true;
 
-  # https://github.com/PixlOne/logiops/issues/520
-  systemd.services."logid" =
-    let
-      cfg = pkgs.writers.writeText "logid.cfg" ''
-          devices: ({
-          name: "MX Master 4 for Mac";
-          dpi: 800;
-
-          smartshift: {
-              on: true;
-              threshold: 5;
-              torque: 50;
-          };
-
-          hiresscroll: {
-            hires: true;
-          };
-
-          thumbwheel: {
-            invert: true;
-          };
-        });
-      '';
-    in
-    {
-      script = ''
-        ${lib.getExe pkgs.logiops} -c ${cfg}
-      '';
-
-      wantedBy = [ "multi-user.target" ];
-    };
-
-  services.udev.extraHwdb = ''
-    mouse:*:name:*MX Master 4*:
-        MOUSE_WHEEL_CLICK_ANGLE=1
-        MOUSE_WHEEL_CLICK_COUNT=720
-        MOUSE_WHEEL_CLICK_ANGLE_HORIZONTAL=26
-        MOUSE_WHEEL_CLICK_COUNT_HORIZONTAL=14
-  '';
+  services.solaar.enable = true;
 }
