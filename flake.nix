@@ -249,6 +249,10 @@
     rlib = {
       url = "git+https://code.ole.blue/DestinyofYeet/rlib/";
     };
+
+    solaar = {
+      url = "github:Svenum/Solaar-Flake";
+    };
   };
 
   outputs =
@@ -310,6 +314,8 @@
             ];
           }
         )
+
+        inputs.solaar.nixosModules.default
       ]
       ++ baseline-modules;
 
