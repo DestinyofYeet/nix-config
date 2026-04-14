@@ -1,6 +1,8 @@
 { pkgs, lib, ... }:
-let service_dependency = "home-manager-ole.service";
-in {
+let
+  service_dependency = "home-manager-ole.service";
+in
+{
   systemd.services.home-manager-ole-pre = {
     before = [ service_dependency ];
     requiredBy = [ service_dependency ];
@@ -24,39 +26,43 @@ in {
     };
   };
 
-  networking.firewall = { enable = false; };
+  networking.firewall = {
+    enable = false;
+  };
 
   services.pcscd.enable = true;
 
   # https://github.com/PixlOne/logiops/issues/520
-  systemd.services."logid" = let
-    cfg = pkgs.writers.writeText "logid.cfg" ''
-        devices: ({
-        name: "MX Master 4 for Mac";
-        dpi: 800;
+  systemd.services."logid" =
+    let
+      cfg = pkgs.writers.writeText "logid.cfg" ''
+          devices: ({
+          name: "MX Master 4 for Mac";
+          dpi: 800;
 
-        smartshift: {
-            on: true;
-            threshold: 5;
-            torque: 50;
-        };
+          smartshift: {
+              on: true;
+              threshold: 5;
+              torque: 50;
+          };
 
-        hiresscroll: {
-          hires: true;
-        };
+          hiresscroll: {
+            hires: true;
+          };
 
-        thumbwheel: {
-          invert: true;
-        };
-      });
-    '';
-  in {
-    script = ''
-      ${lib.getExe pkgs.logiops} -c ${cfg}
-    '';
+          thumbwheel: {
+            invert: true;
+          };
+        });
+      '';
+    in
+    {
+      script = ''
+        ${lib.getExe pkgs.logiops} -c ${cfg}
+      '';
 
-    wantedBy = [ "multi-user.target" ];
-  };
+      wantedBy = [ "multi-user.target" ];
+    };
 
   services.udev.extraHwdb = ''
     mouse:*:name:*MX Master 4*:
