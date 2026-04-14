@@ -253,6 +253,11 @@
     solaar = {
       url = "github:Svenum/Solaar-Flake";
     };
+
+    veloren = {
+      # url = "git+https://gitlab.com/veloren/veloren.git";
+      url = "github:/veloren/veloren";
+    };
   };
 
   outputs =

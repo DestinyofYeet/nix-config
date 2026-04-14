@@ -298,6 +298,7 @@ in
       fastfetch
       teams-for-linux
       airshipper
+      inputs.veloren.packages.${pkgs.stdenv.hostPlatform.system}.veloren-voxygen
     ]
     ++ luaPkgs
     ++ kdePkgs
