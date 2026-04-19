@@ -52,7 +52,7 @@
     # ./nextcloud.nix
     ./garage.nix
     ./nginx.nix
-    ./smb.nix
+    # ./smb.nix
     ./lldap.nix
     # ./parsedmarc.nix
     ./elasticsearch.nix

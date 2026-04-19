@@ -231,6 +231,9 @@ in
 
       spawn-at-startup = [
         {
+          command = [ "noctalia-shell" ];
+        }
+        {
           argv = (mkList "${lib.getExe' pkgs.networkmanagerapplet "nm-applet"} --indicator");
         }
       ]
