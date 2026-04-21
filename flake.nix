@@ -372,6 +372,7 @@
           specialArgs = defaultSpecialArgs;
           modules = [
             inputs.add-replay-gain.nixosModules.add-replay-gain
+            { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }
             inputs.nix-minecraft.nixosModules.minecraft-servers
             # inputs.strichliste.nixosModules.strichliste
             inputs.networkNamespaces.nixosModules.networkNamespaces
