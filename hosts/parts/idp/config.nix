@@ -87,12 +87,6 @@ in
 
           read_replicas = {
             "0" = {
-              host = "teapot.neb.ole.blue";
-              port = 5433;
-            }
-            // pgsqlPw;
-
-            "1" = {
               host = "bonk.neb.ole.blue";
               port = 5433;
             }

@@ -77,11 +77,14 @@ in
           ttl = 30;
           loop_wait = 10;
           retry_timeout = 10;
-          maximum_lag_failover = 1048576;
+          maximum_lag_on_failover = 1048576;
+          check_timeline = true;
         };
       };
 
       postgresql = {
+        use_pg_rewind = true;
+
         authentication = {
           superuser.username = "postgres";
           replication.username = "replicationuser";
@@ -91,9 +94,15 @@ in
           shared_buffers = "1GB";
           effective_cache_size = "3GB";
           maintenance_work_mem = "256MB";
-          max_connections = 200;
           synchronous_commit = "on";
           unix_socket_directories = "/tmp";
+          max_connections = 200;
+          max_wal_senders = 10;
+          max_replication_slots = 10;
+
+          wal_level = "replica";
+          host_standby = "on";
+          wal_log_hints = "on";
         };
 
         pg_hba = [
