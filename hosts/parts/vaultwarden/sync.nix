@@ -1,38 +1,60 @@
 {
-  pkgs,
   config,
   lib,
-  secretStore,
   ...
 }:
-let
-  secrets = secretStore.getServerSecrets "common";
-in
-lib.mkIf (config.services.vaultwarden.enable) {
-  age.secrets = {
-    vaultwarden-sync-key = {
-      file = secrets + "/vaultwarden-sync-key.age";
-      owner = "vaultwarden";
-      group = "vaultwarden";
+{
+  users = {
+    users = {
+      vaultwarden = {
+        isSystemUser = true;
+        group = "vaultwarden";
+      };
+
+      syncthing = {
+        isSystemUser = true;
+        group = "syncthing";
+        extraGroups = [ "vaultwarden" ];
+      };
+    };
+
+    groups = {
+      vaultwarden = { };
+      syncthing = { };
     };
   };
 
-  systemd.services."sync-vaultwarden-attachments" = rec {
-    wantedBy = [ "multi-user.target" ];
-    requires = [ "network-online.target" ];
-    after = requires;
-    script = ''
-      while true
-      do
-        ${lib.getExe pkgs.rsync} -Pav -r -e "${lib.getExe' pkgs.openssh "ssh"} -o \"StrictHostKeyChecking no\" -o UserKnownHostsFile=/dev/null -i ${config.age.secrets.vaultwarden-sync-key.path}"  vaultwarden@teapot.neb.ole.blue:* ${config.services.vaultwarden.config.DATA_DIR}
-        sleep 60
-      done
-    '';
+  services.syncthing = {
+    user = "syncthing";
+    group = "syncthing";
 
-    serviceConfig = {
-      User = "vaultwarden";
-      Group = "vaultwarden";
-      Restart = "on-failure";
+    settings = {
+      folders = {
+        "${config.services.vaultwarden.config.DATA_DIR}" = {
+          id = "vaultwarden";
+          ignorePerms = true;
+          devices = builtins.filter (elem: elem != config.networking.hostName) [
+            "nix-server"
+            "teapot"
+          ];
+        };
+      };
     };
+  };
+
+  systemd.services.vaultwarden.serviceConfig.StateDirectoryMode = lib.mkForce 770;
+  systemd.services.syncthing.serviceConfig.CapabilityBoundingSet = [ "CAP_CHOWN" ];
+
+  systemd.services."vaultwarden-setup" = rec {
+    requiredBy = [ "vaultwarden.service" ];
+    wantedBy = requiredBy;
+    script =
+      let
+        dataDir = config.services.vaultwarden.config.DATA_DIR;
+      in
+      ''
+        chmod -R 770 ${dataDir}
+        chmod -R g+s ${dataDir}
+      '';
   };
 }

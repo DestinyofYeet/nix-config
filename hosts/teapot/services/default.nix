@@ -1,6 +1,7 @@
 { lib, ... }:
 {
   imports = [
+    ./acme.nix
     ../../parts/ha-haproxy
     ../../parts/idp/cert.nix
     ./sshd.nix
@@ -21,7 +22,6 @@
     ./forgejo.nix
     ./nix-search.nix
     ./ntfy.nix
-    # ./nebula.nix # now in baseline
     ./mealie.nix
     # ./minecraft-server.nix
     ./atuin.nix
@@ -33,6 +33,7 @@
     ../../parts/vaultwarden/config.nix
     ../../parts/idp/config.nix
     (import ../../parts/uptime.nix "uptime.ole.blue")
+    ./syncthing.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

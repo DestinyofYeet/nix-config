@@ -28,6 +28,7 @@ in
 
   imports = [
     ./cert.nix
+    ./sync.nix
   ];
 
   services.vaultwarden = {
@@ -61,15 +62,6 @@ in
       SMTP_FROM_NAME = "Vaultwarden";
       SMTP_USERNAME = " vaultwarden@ole.blue";
       SMTP_SECURITY = "force_tls";
-    };
-  };
-
-  users.users = {
-    vaultwarden = {
-      shell = pkgs.bashInteractive;
-      openssh.authorizedKeys.keys = [
-        ''command="${pkgs.rrsync}/bin/rrsync ${config.services.vaultwarden.config.DATA_DIR}",restrict ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPOvqamLyP84oIeA4PTty4arxsPeWyzCWB46UQ7n4R+O''
-      ];
     };
   };
 }

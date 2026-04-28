@@ -45,5 +45,7 @@ in
 
   "wireguard-vpn-priv-key.age".publicKeys = authed;
 
+  "syncthing-gui-pass.age".publicKeys = authed;
+
 }
 // (importFolder "vms/" inputs)

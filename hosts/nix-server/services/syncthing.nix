@@ -65,6 +65,11 @@
           id = "VAWV3TD-OVTR26J-4W5YPSI-CDHD4FX-Y3XENDC-6QHAJT5-ZRJJMNQ-HRMNKQL";
           numconnections = 10;
         };
+
+        teapot = {
+          id = "7RLIZB4-X3YZGN7-DKNI2I5-T25R745-AWHBZZZ-BNKOI7F-37QYTYW-CMQ7EQD";
+          numconnections = 10;
+        };
       };
 
       gui = {
@@ -76,8 +81,6 @@
     guiAddress = "127.0.0.1:8384";
 
     dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/syncthing";
-
-    inherit (lib.custom.settings.${config.networking.hostName}) user group;
   };
 
   services.nginx =
