@@ -104,13 +104,6 @@ in
           port = 8081;
         }
         {
-          host = "fsim.pedro-wg";
-          hostname = custom.nebula.yeet.hosts.teapot.ip;
-          user = "beo45216";
-          ident = "ssh-key-fsim-pedro";
-          port = 2222;
-        }
-        {
           host = "teapot";
           hostname = "ole.blue";
           user = "ole";
