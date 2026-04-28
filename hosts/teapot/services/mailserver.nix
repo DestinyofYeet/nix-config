@@ -6,41 +6,41 @@
   ...
 }:
 let
-  secrets = secretStore.get-server-secrets "teapot";
+  secrets = secretStore.getServerSecrets "teapot";
 in
 {
   age.secrets = {
-    ole-mail.file = secrets + "/ole-ole.blue.age";
-    scripts-uwuwhatsthis-de.file = secrets + "/scripts-uwuwhatsthis.de.age";
-    sonarr-uwuwhatsthis-de.file = secrets + "/sonarr-uwuwhatsthis.de.age";
-    prowlarr-uwuwhatsthis-de.file = secrets + "/prowlarr-uwuwhatsthis.de.age";
-    uptime-kuma-uwuwhatsthis-de.file = secrets + "/prowlarr-uwuwhatsthis.de.age";
+    ole-mail.file = secrets.getSecret "ole-ole.blue";
+    scripts-uwuwhatsthis-de.file = secrets.getSecret "scripts-uwuwhatsthis.de";
+    sonarr-uwuwhatsthis-de.file = secrets.getSecret "sonarr-uwuwhatsthis.de";
+    prowlarr-uwuwhatsthis-de.file = secrets.getSecret "prowlarr-uwuwhatsthis.de";
+    uptime-kuma-uwuwhatsthis-de.file = secrets.getSecret "prowlarr-uwuwhatsthis.de";
 
-    firefly-iii-ole-blue.file = secrets + "/firefly-email-credentials.age";
-    zed-uwuwhatsthis-de.file = secrets + "/zed-uwuwhatsthis.de.age";
+    firefly-iii-ole-blue.file = secrets.getSecret "firefly-email-credentials";
+    zed-uwuwhatsthis-de.file = secrets.getSecret "zed-uwuwhatsthis.de";
 
-    nextcloud-uwuwhatsthis-de.file = secrets + "/nextcloud-uwuwhatsthis.de.age";
-    nextcloud-ole-blue.file = secrets + "/nextcloud-ole-blue.age";
+    nextcloud-uwuwhatsthis-de.file = secrets.getSecret "nextcloud-uwuwhatsthis.de";
+    nextcloud-ole-blue.file = secrets.getSecret "nextcloud-ole-blue";
 
-    forgejo-email-ole-blue.file = secretStore.secrets + "/servers/teapot/forgejo_email_password.age";
+    forgejo-email-ole-blue.file = secrets.getSecret "forgejo_email_password";
 
-    authelia-email-ole-blue.file = secrets + "/authelia-hashed-email-password.age";
+    authelia-email-ole-blue.file = secrets.getSecret "authelia-hashed-email-password";
 
-    dmarc-email-ole-blue.file = secrets + "/dmarc-hashed-email-password.age";
+    dmarc-email-ole-blue.file = secrets.getSecret "dmarc-hashed-email-password";
 
-    msmtp-email-ole-blue.file = secrets + "/msmtp-ole-blue.age";
+    msmtp-email-ole-blue.file = secrets.getSecret "msmtp-ole-blue";
 
     rspamd-domain-whitelist = {
-      file = secrets + "/rspamd-domain-whitelist.age";
+      file = secrets.getSecret "rspamd-domain-whitelist";
       owner = config.services.rspamd.user;
       group = config.services.rspamd.group;
     };
 
-    mastodon-email-ole-blue.file = secrets + "/mastodon_email_password_hash.age";
+    mastodon-email-ole-blue.file = secrets.getSecret "mastodon_email_password_hash";
 
-    authentik-email-ole-blue.file = secrets + "/authentik_email_password_hash.age";
+    authentik-email-ole-blue.file = secrets.getSecret "authentik_email_password_hash";
 
-    vaultwarden-email-ole-blue.file = secrets + "/vaultwarden-email-password-hash.age";
+    vaultwarden-email-ole-blue.file = secrets.getSecret "vaultwarden-email-password-hash";
   };
 
   mailserver = rec {
