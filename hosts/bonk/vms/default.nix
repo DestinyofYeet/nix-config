@@ -25,13 +25,13 @@ in
   age.secrets = {
     # need to create root/persistent folder manually manually
     ha-host-key = {
-      file = secrets + "/vm-ha-hostkey-ed25519.age";
+      file = secrets.getSecret "vm-ha-hostkey-ed25519";
       path = "${config.microvm.stateDir}/ha-vm/root/persistent/hostkey";
       symlink = false;
     };
 
     ha-host-key-rsa = {
-      file = secrets + "/vm-ha-hostkey-rsa.age";
+      file = secrets.getSecret "vm-ha-hostkey-rsa";
       path = "${config.microvm.stateDir}/ha-vm/root/persistent/hostkey-rsa";
       symlink = false;
     };

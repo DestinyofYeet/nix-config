@@ -20,12 +20,12 @@ in
 {
   age.secrets =
     let
-      secrets = secretStore.get-server-secrets "bonk";
+      secrets = secretStore.getHostSecrets "bonk";
 
     in
     {
       bonk-nextcloud-admin-pw = {
-        file = secrets + "/nextcloud-root-pw.age";
+        file = secrets.getSecret "nextcloud-root-pw";
         owner = "nextcloud";
         group = "nextcloud";
       };

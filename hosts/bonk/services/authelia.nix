@@ -1,6 +1,11 @@
-{ lib, secretStore, config, ... }:
+{
+  lib,
+  secretStore,
+  config,
+  ...
+}:
 let
-  secrets = secretStore.get-server-secrets "bonk";
+  secrets = secretStore.getHostSecrets "bonk";
 
   authelia-instance = "main";
   authelia-user = "authelia-${authelia-instance}";
@@ -18,7 +23,8 @@ let
     owner = authelia-user;
     group = authelia-user;
   };
-in {
+in
+{
   age.secrets = {
     authelia-ldap-pw = gen-secret "authelia-lldap-pw";
 
@@ -29,27 +35,21 @@ in {
 
     authelia-session-secret = gen-secret "authelia-session-secret";
 
-    authelia-storage-encryption-keys =
-      gen-secret "authelia-storage-encryption-keys";
+    authelia-storage-encryption-keys = gen-secret "authelia-storage-encryption-keys";
 
     authelia-email-ole-blue-pw = gen-secret "authelia-ole-blue-email-pw";
 
     authelia-oidc-client-jellyfin-id = gen-secret "authelia-openid-jellyfin-id";
-    authelia-oidc-client-jellyfin-key =
-      gen-secret "authelia-openid-jellyfin-key";
+    authelia-oidc-client-jellyfin-key = gen-secret "authelia-openid-jellyfin-key";
 
     authelia-oidc-client-forgejo-id = gen-secret "authelia-openid-forgejo-id";
     authelia-oidc-client-forgejo-key = gen-secret "authelia-openid-forgejo-key";
 
-    authelia-oidc-client-nextcloud-id =
-      gen-secret "authelia-openid-nextcloud-id";
-    authelia-oidc-client-nextcloud-key =
-      gen-secret "authelia-openid-nextcloud-key";
+    authelia-oidc-client-nextcloud-id = gen-secret "authelia-openid-nextcloud-id";
+    authelia-oidc-client-nextcloud-key = gen-secret "authelia-openid-nextcloud-key";
 
-    authelia-oidc-client-paperless-id =
-      gen-secret "authelia-openid-paperless-id";
-    authelia-oidc-client-paperless-key =
-      gen-secret "authelia-openid-paperless-key";
+    authelia-oidc-client-paperless-id = gen-secret "authelia-openid-paperless-id";
+    authelia-oidc-client-paperless-key = gen-secret "authelia-openid-paperless-key";
 
     authelia-oidc-client-immich-id = gen-secret "authelia-openid-immich-id";
     authelia-oidc-client-immich-key = gen-secret "authelia-openid-immich-key";
@@ -69,21 +69,21 @@ in {
         notifier.smtp = {
           address = "submissions://mail.ole.blue:465";
           username = "auth@ole.blue";
-          password = ''
-            {{ secret "${config.age.secrets.authelia-email-ole-blue-pw.path}" }}'';
+          password = ''{{ secret "${config.age.secrets.authelia-email-ole-blue-pw.path}" }}'';
           sender = "Authelia <auth@ole.blue>";
         };
         identity_providers.oidc.clients = [
           {
             authorization_policy = "two_factor";
             client_name = "jellyfin";
-            client_id = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-id.path}" }}'';
-            client_secret = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-key.path}" }}'';
-            redirect_uris =
-              [ "https://jellyfin.local.ole.blue/sso/OID/redirect/authelia" ];
-            scopes = [ "openid" "profile" "groups" ];
+            client_id = ''{{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-id.path}" }}'';
+            client_secret = ''{{ secret "${config.age.secrets.authelia-oidc-client-jellyfin-key.path}" }}'';
+            redirect_uris = [ "https://jellyfin.local.ole.blue/sso/OID/redirect/authelia" ];
+            scopes = [
+              "openid"
+              "profile"
+              "groups"
+            ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_post";
             public = false;
@@ -92,39 +92,42 @@ in {
           }
           {
             client_name = "Forgejo";
-            client_id = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-forgejo-id.path}" }}'';
-            client_secret = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-forgejo-key.path}" }}'';
+            client_id = ''{{ secret "${config.age.secrets.authelia-oidc-client-forgejo-id.path}" }}'';
+            client_secret = ''{{ secret "${config.age.secrets.authelia-oidc-client-forgejo-key.path}" }}'';
             public = false;
             authorization_policy = "two_factor";
-            redirect_uris =
-              [ "https://code.ole.blue/user/oauth2/authelia/callback" ];
-            scopes = [ "openid" "email" "profile" "groups" ];
+            redirect_uris = [ "https://code.ole.blue/user/oauth2/authelia/callback" ];
+            scopes = [
+              "openid"
+              "email"
+              "profile"
+              "groups"
+            ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_basic";
           }
           {
             client_name = "nextcloud";
-            client_id = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-nextcloud-id.path}" }}'';
-            client_secret = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-nextcloud-key.path}" }}'';
+            client_id = ''{{ secret "${config.age.secrets.authelia-oidc-client-nextcloud-id.path}" }}'';
+            client_secret = ''{{ secret "${config.age.secrets.authelia-oidc-client-nextcloud-key.path}" }}'';
             public = false;
             authorization_policy = "one_factor";
             require_pkce = true;
             pkce_challenge_method = "S256";
             redirect_uris = [ "https://cloud.ole.blue/apps/user_oidc/code" ];
-            scopes = [ "openid" "profile" "email" "groups" ];
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+              "groups"
+            ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_post";
           }
           {
             client_name = "paperless";
-            client_id = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-paperless-id.path}" }}'';
-            client_secret = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-paperless-key.path}" }}'';
+            client_id = ''{{ secret "${config.age.secrets.authelia-oidc-client-paperless-id.path}" }}'';
+            client_secret = ''{{ secret "${config.age.secrets.authelia-oidc-client-paperless-key.path}" }}'';
             public = false;
             authorization_policy = "two_factor";
             require_pkce = true;
@@ -132,16 +135,19 @@ in {
             redirect_uris = [
               "https://paperless.local.ole.blue/accounts/oidc/authelia/login/callback/"
             ];
-            scopes = [ "openid" "profile" "email" "groups" ];
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+              "groups"
+            ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_basic";
           }
           {
             client_name = "immich";
-            client_id = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-immich-id.path}" }}'';
-            client_secret = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-immich-key.path}" }}'';
+            client_id = ''{{ secret "${config.age.secrets.authelia-oidc-client-immich-id.path}" }}'';
+            client_secret = ''{{ secret "${config.age.secrets.authelia-oidc-client-immich-key.path}" }}'';
             public = false;
             authorization_policy = "two_factor";
             redirect_uris = [
@@ -150,35 +156,45 @@ in {
               "app.immich:///oauth-callback"
             ];
 
-            scopes = [ "openid" "profile" "email" ];
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+            ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_post";
           }
           {
             client_name = "Wiki JS";
-            client_id = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-wikijs-id.path}" }}'';
-            client_secret = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-wikijs-key.path}" }}'';
+            client_id = ''{{ secret "${config.age.secrets.authelia-oidc-client-wikijs-id.path}" }}'';
+            client_secret = ''{{ secret "${config.age.secrets.authelia-oidc-client-wikijs-key.path}" }}'';
             public = false;
             authorization_policy = "two_factor";
             redirect_uris = [
               "https://wiki.local.ole.blue/login/e2c196dd-6667-46af-8517-d09e846afa82/callback"
             ];
-            scopes = [ "openid" "email" "profile" "groups" ];
+            scopes = [
+              "openid"
+              "email"
+              "profile"
+              "groups"
+            ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_post";
           }
           {
             client_name = "Mealie";
-            client_id = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-mealie-id.path}" }}'';
-            client_secret = ''
-              {{ secret "${config.age.secrets.authelia-oidc-client-mealie-key.path}" }}'';
+            client_id = ''{{ secret "${config.age.secrets.authelia-oidc-client-mealie-id.path}" }}'';
+            client_secret = ''{{ secret "${config.age.secrets.authelia-oidc-client-mealie-key.path}" }}'';
             # client_secret = "";
             public = false;
             authorization_policy = "one_factor";
-            scopes = [ "openid" "email" "profile" "groups" ];
+            scopes = [
+              "openid"
+              "email"
+              "profile"
+              "groups"
+            ];
             require_pkce = true;
             pkce_challenge_method = "S256";
             redirect_uris = [
@@ -196,8 +212,7 @@ in {
         authentication_backend.ldap = {
           address = "ldap://nix-server.neb.ole.blue:3890";
           base_dn = "dc=ole,dc=blue";
-          users_filter =
-            "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))";
+          users_filter = "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))";
           groups_filter = "(member={dn})";
           user = "uid=authelia,ou=people,dc=ole,dc=blue";
         };
@@ -230,15 +245,19 @@ in {
         };
 
         session = {
-          redis = { host = "/var/run/redis-authelia/redis.sock"; };
-          cookies = [{
-            domain = "ole.blue";
-            authelia_url = "https://auth.local.ole.blue";
-            inactivity = "1M";
-            expiration = "3M";
+          redis = {
+            host = "/var/run/redis-authelia/redis.sock";
+          };
+          cookies = [
+            {
+              domain = "ole.blue";
+              authelia_url = "https://auth.local.ole.blue";
+              inactivity = "1M";
+              expiration = "3M";
 
-            remember_me = "1y";
-          }];
+              remember_me = "1y";
+            }
+          ];
         };
 
         identity_providers.oidc = {
@@ -248,10 +267,12 @@ in {
           };
           authorization_policies.default = {
             default_policy = "one_factor";
-            rules = [{
-              policy = "deny";
-              subject = "group:lldap_strict_readonly";
-            }];
+            rules = [
+              {
+                policy = "deny";
+                subject = "group:lldap_strict_readonly";
+              }
+            ];
           };
         };
 
@@ -282,8 +303,7 @@ in {
       };
 
       environmentVariables = {
-        AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE =
-          config.age.secrets.authelia-ldap-pw.path;
+        AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE = config.age.secrets.authelia-ldap-pw.path;
       };
     };
   };
@@ -327,12 +347,16 @@ in {
   services.redis.servers.authelia.enable = true;
 
   systemd.services.${authelia-user} =
-    let deps = [ "postgresql.service" "redis-authelia.service" ];
-    in {
+    let
+      deps = [
+        "postgresql.service"
+        "redis-authelia.service"
+      ];
+    in
+    {
       after = deps;
       requires = deps;
     };
 
-  users.users."${config.services.authelia.instances.main.user}".extraGroups =
-    [ "redis-authelia" ];
+  users.users."${config.services.authelia.instances.main.user}".extraGroups = [ "redis-authelia" ];
 }
