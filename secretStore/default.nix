@@ -1,9 +1,11 @@
 { ... }:
-{
+rec {
   keys = import ./pubkeys.nix;
   secrets = ./.;
-  getServerSecrets = server: {
-    getSecret = name: ./servers/${server}/${name}.age;
+  getServerSecrets = getHostSecrets;
+
+  getHostSecrets = host: {
+    getSecret = name: ./hosts/${host}/${name}.age;
   };
 
   nonServer = ./non-server;
