@@ -1,11 +1,14 @@
 { config, lib, ... }:
+let
+  storagePath = lib.custom.settings.nix-server.paths.data;
+in
 {
   services.syncthing = {
     enable = true;
     settings = {
       folders = {
         camera = {
-          path = "${lib.custom.settings.${config.networking.hostName}.paths.data}/photos/handy/Camera";
+          path = "${storagePath}/photos/handy/Camera";
           label = "Camera";
           id = "camera";
 
@@ -13,22 +16,32 @@
         };
 
         whatsapp = {
-          path = "${
-            lib.custom.settings.${config.networking.hostName}.paths.data
-          }/photos/handy/whatsapp_media";
+          path = "${storagePath}/photos/handy/whatsapp_media";
           label = "WhatsApp Media";
           id = "whatsapp_media";
 
           devices = [ "handy" ];
 
-          ignores = [
+          ignorePatterns = [
+            "Private/"
+            "Sent/"
+          ];
+        };
+
+        whatsapp_video = {
+          path = "${storagePath}/photos/handy/whatsapp_video";
+          id = "3dk2p-ju4rt";
+          label = "Whatsapp Video";
+          devices = [ "handy" ];
+
+          ignorePatterns = [
             "Private/"
             "Sent/"
           ];
         };
 
         deposit = {
-          path = "${lib.custom.settings.nix-server.paths.data}/syncthing/deposit";
+          path = "${storagePath}/syncthing/deposit";
           label = "Deposit";
           id = "deposit";
 
@@ -38,10 +51,14 @@
             "desktop"
           ];
 
+          ignorePatterns = [
+            "Cargo.toml/target/"
+          ];
+
         };
 
         default = {
-          path = "${lib.custom.settings.${config.networking.hostName}.paths.data}/syncthing/default-folder";
+          path = "${storagePath}/syncthing/default-folder";
           label = "Default Folder";
           id = "default";
         };
@@ -80,21 +97,20 @@
 
     guiAddress = "127.0.0.1:8384";
 
-    dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/syncthing";
+    dataDir = "${storagePath}/syncthing";
   };
 
   services.nginx =
     let
       default-config = {
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8384";
+          proxyPass = "http://${config.services.syncthing.guiAddress}";
         };
       };
     in
     {
       virtualHosts = {
-        "syncthing.local.ole.blue" =
-          lib.custom.settings.${config.networking.hostName}.nginx-local-ssl // default-config;
+        "syncthing.local.ole.blue" = lib.custom.settings.nix-server.nginx-local-ssl // default-config;
       };
     };
 }
