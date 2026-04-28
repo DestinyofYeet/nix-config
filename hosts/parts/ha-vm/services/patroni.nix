@@ -28,12 +28,12 @@ in
     in
     {
       patroni-superuser-pw = {
-        file = commonSecrets + "/ha-vm-patroni-superuser-pw.age";
+        file = commonSecrets.getSecret "ha-vm-patroni-superuser-pw";
       }
       // ownership;
 
       patroni-replicationuser-pw = {
-        file = commonSecrets + "/ha-vm-patroni-replication-pw.age";
+        file = commonSecrets.getSecret "ha-vm-patroni-replication-pw";
       }
       // ownership;
     };

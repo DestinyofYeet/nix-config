@@ -9,7 +9,7 @@ let
 in
 {
   age.secrets = {
-    teapot-authentik-env.file = commonSecrets + "/authentik-env.age";
+    teapot-authentik-env.file = commonSecrets.getSecret "authentik-env";
   };
   imports = [ ../../parts/idp.nix ];
 

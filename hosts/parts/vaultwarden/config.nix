@@ -18,9 +18,9 @@ in
       };
     in
     {
-      vaultwarden-env.file = secrets + "/vaultwarden-env.age";
+      vaultwarden-env.file = secrets.getSecret "vaultwarden-env";
       vaultwarden-private-key = {
-        file = secrets + "/vaultwarden-private-key.age";
+        file = secrets.getSecret "vaultwarden-private-key";
         path = "/var/lib/bitwarden_rs/key.pem";
       }
       // ownership;
@@ -62,6 +62,7 @@ in
       SMTP_FROM_NAME = "Vaultwarden";
       SMTP_USERNAME = " vaultwarden@ole.blue";
       SMTP_SECURITY = "force_tls";
+      SMTP_PORT = 465;
     };
   };
 }

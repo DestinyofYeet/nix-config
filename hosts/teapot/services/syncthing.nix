@@ -7,7 +7,7 @@ in
 {
   age.secrets = {
     syncthing-gui-file = {
-      file = secrets + "/syncthing-gui-pass.age";
+      file = secrets.getSecret "syncthing-gui-pass";
       owner = "syncthing";
       group = "syncthing";
     };

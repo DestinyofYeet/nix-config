@@ -17,17 +17,17 @@ in
     in
     {
       matrix-registration-token = {
-        file = secrets + "/matrix-registration-token.age";
+        file = secrets.getSecret "matrix-registration-token";
       }
       // matrixOwner;
 
       matrix-turn-secret = {
-        file = secrets + "/matrix-turn-secret.age";
+        file = secrets.getSecret "matrix-turn-secret";
       }
       // matrixOwner;
 
       matrix-oauth-secret = {
-        file = secrets + "/matrix-oauth_client_secret.age";
+        file = secrets.getSecret "matrix-oauth_client_secret";
       }
       // matrixOwner;
     };

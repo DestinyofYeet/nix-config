@@ -10,7 +10,7 @@ in
 {
   age.secrets = {
     coturn-auth-secret = rec {
-      file = secrets + "/matrix-turn-secret.age";
+      file = secrets.getSecret "matrix-turn-secret";
       owner = "turnserver";
       group = owner;
     };

@@ -1,18 +1,13 @@
 { secretStore, config, ... }:
-let
-  secrets = secretStore.getServerSecrets "common";
-in
 {
-  age.secrets = {
-    cloudflare-api-env.file = secrets + "/cloudflare-api-env.age";
-  };
-
   security.acme = {
     acceptTerms = true;
     defaults = {
       email = "ole@ole.blue";
       dnsProvider = "cloudflare";
       group = "nginx";
+
+      # set in hosts/parts/dnsCerts.nix
       environmentFile = config.age.secrets.cloudflare-api-env.path;
     };
 

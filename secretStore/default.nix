@@ -1,8 +1,10 @@
-{ ... }: rec {
+{ ... }:
+{
   keys = import ./pubkeys.nix;
   secrets = ./.;
-  get-server-secrets = name: ./servers/${name};
-  getServerSecrets = get-server-secrets;
+  getServerSecrets = server: {
+    getSecret = name: ./servers/${server}/${name}.age;
+  };
 
   nonServer = ./non-server;
 }

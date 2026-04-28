@@ -10,7 +10,7 @@ in
 {
   age.secrets = {
     cloudflare-api-env = {
-      file = secrets + "/cloudflare-api-env.age";
+      file = secrets.getSecret "cloudflare-api-env";
     };
   };
 

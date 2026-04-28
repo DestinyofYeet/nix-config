@@ -1,9 +1,10 @@
 { config, secretStore, ... }:
-let secrets = secretStore.getServerSecrets "teapot";
-in {
+let
+  secrets = secretStore.getServerSecrets "teapot";
+in
+{
   age.secrets = {
-    github-runner-strichliste-rs.file = secrets
-      + "/github-runners-strichliste-rs.age";
+    github-runner-strichliste-rs.file = secrets.getSecret "github-runners-strichliste-rs";
   };
   services.github-runners = {
     "strichliste-rs" = {

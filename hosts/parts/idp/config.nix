@@ -19,10 +19,10 @@ in
       };
     in
     {
-      authentik-ldap-env.file = secrets + "/authentik-ldap-env.age";
-      authentik-env.file = secrets + "/authentik-env.age";
+      authentik-ldap-env.file = secrets.getSecret "authentik-ldap-env";
+      authentik-env.file = secrets.getSecret "authentik-env";
       authentik-db = {
-        file = secrets + "/authentik-db-pass.age";
+        file = secrets.getSecret "authentik-db-pass";
       }
       // ownership;
     };

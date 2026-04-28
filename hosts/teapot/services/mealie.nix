@@ -5,12 +5,12 @@
   ...
 }:
 let
-  secrets = secretStore.get-server-secrets "teapot";
+  secrets = secretStore.getServerSecrets "teapot";
 in
 {
 
   age.secrets = {
-    mealie-env-file.file = secrets + "/mealie_env_file.age";
+    mealie-env-file.file = secrets.getSecret "mealie_env_file";
   };
 
   services.mealie = {

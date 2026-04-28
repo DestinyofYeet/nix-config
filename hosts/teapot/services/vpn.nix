@@ -12,7 +12,7 @@ in
 rec {
   age.secrets = {
     wireguard-vpn-priv-key = {
-      file = secrets + "/wireguard-vpn-priv-key.age";
+      file = secrets.getSecret "wireguard-vpn-priv-key";
       mode = "640";
       owner = "systemd-network";
       group = "systemd-network";

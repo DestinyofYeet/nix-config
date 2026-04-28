@@ -11,9 +11,9 @@ in
 {
 
   age.secrets = {
-    forgejo-env-file.file = secrets + "/forgejo_env_file.age";
+    forgejo-env-file.file = secrets.getSecret "forgejo_env_file";
     forgejo_lfs_jwt = {
-      file = secrets + "/forgejo_lfs_jwt.age";
+      file = secrets.getSecret "forgejo_lfs_jwt";
       owner = "forgejo";
     };
   };

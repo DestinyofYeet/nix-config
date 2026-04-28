@@ -192,6 +192,11 @@ in
         hashedPasswordFile = config.age.secrets.authentik-email-ole-blue.path;
         aliases = [ "authentik@ole.blue" ];
       };
+
+      "vaultwarden@ole.blue" = {
+        sendOnly = true;
+        hashedPasswordFile = config.age.secrets.vaultwarden-email-ole-blue.path;
+      };
     };
   };
 

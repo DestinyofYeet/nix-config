@@ -1,9 +1,11 @@
 { config, secretStore, ... }:
-let secrets = secretStore.get-server-secrets "teapot";
-in {
+let
+  secrets = secretStore.getServerSecrets "teapot";
+in
+{
   age.secrets = {
     mastodon-email-password = {
-      file = secrets + "/mastodon_email_password.age";
+      file = secrets.getSecret "mastodon_email_password";
       group = "mastodon";
       owner = "mastodon";
     };
