@@ -60,7 +60,7 @@
             })
             {
               id = "SystemMonitor";
-              compactMode = false;
+              compactMode = true;
               iconColor = "secondary";
               textColor = "primary";
               usePadding = true;
