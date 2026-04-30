@@ -15,12 +15,12 @@ in
 {
   age.secrets = {
     ha_longitude = {
-      file = secrets + "/ha_longitude.age";
+      file = secrets.getSecret "ha_longitude";
       owner = haUser;
       group = haGroup;
     };
     ha_latitude = {
-      file = secrets + "/ha_latitude.age";
+      file = secrets.getSecret "ha_latitude";
       owner = haUser;
       group = haGroup;
     };
@@ -64,6 +64,7 @@ in
       "met"
       "radio_browser"
       "shopping_list"
+      "upnp"
     ];
 
     config = {

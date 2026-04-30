@@ -6,7 +6,7 @@
   ...
 }:
 let
-  secrets = secretStore.getServerSecrets "nix-server";
+  secrets = secretStore.getHostSecrets "nix-server";
 
   dataDir = "/mnt/data/data/readeck";
 
@@ -15,7 +15,7 @@ let
 in
 {
   age.secrets = {
-    readeck-env-file.file = secrets + "/readeck-env-file.age";
+    readeck-env-file.file = secrets.getSecret "readeck-env-file";
   };
 
   users = {

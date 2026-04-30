@@ -17,7 +17,7 @@ let
 in
 {
   age.secrets = {
-    karakeepEnvFile.file = secrets + "/karakeep-env-file.age";
+    karakeepEnvFile.file = secrets.getSecret "karakeep-env-file";
   };
 
   services.karakeep = {

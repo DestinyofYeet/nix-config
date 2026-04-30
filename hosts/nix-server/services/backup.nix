@@ -1,6 +1,12 @@
-{ pkgs, secretStore, config, lib, ... }:
+{
+  pkgs,
+  secretStore,
+  config,
+  lib,
+  ...
+}:
 let
-  secrets = secretStore.get-server-secrets "nix-server";
+  secrets = secretStore.getHostSecrets "nix-server";
 
   default-opts = {
     initialize = true;
@@ -12,15 +18,18 @@ let
   };
 
   mkRepoSecret = name: {
-    "restic-repo-${name}".file = secrets + "/restic-repo-${name}.age";
-    "restic-repo-${name}-pw".file = secrets + "/restic-repo-${name}-pw.age";
+    "restic-repo-${name}".file = secrets.getSecret "restic-repo-${name}";
+    "restic-repo-${name}-pw".file = secrets.getSecret "restic-repo-${name}-pw";
   };
-in {
-  age.secrets = { } // lib.mkMerge [
-    (mkRepoSecret "photos")
-    (mkRepoSecret "configs")
-    (mkRepoSecret "documents")
-  ];
+in
+{
+  age.secrets =
+    { }
+    // lib.mkMerge [
+      (mkRepoSecret "photos")
+      (mkRepoSecret "configs")
+      (mkRepoSecret "documents")
+    ];
   environment.systemPackages = with pkgs; [ restic ];
 
   services.restic.backups = {

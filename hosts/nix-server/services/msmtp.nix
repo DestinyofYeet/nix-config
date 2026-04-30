@@ -1,16 +1,23 @@
-{ config, pkgs, secretStore, ... }:
+{
+  config,
+  pkgs,
+  secretStore,
+  ...
+}:
 let
   cat = "${pkgs.coreutils}/bin/cat";
-  secrets = secretStore.get-server-secrets "nix-server";
-in {
+  secrets = secretStore.getHostSecrets "nix-server";
+in
+{
 
   age.secrets = {
-    email-firefly-iii-credentials.file =
-      ../secrets/firefly-email-credentials.age;
+    email-firefly-iii-credentials.file = ../secrets/firefly-email-credentials.age;
     email-uptime-kuma.file = ../secrets/email-uptime-kuma.age;
-    zed-email-credentials = { file = ../secrets/zed-email-credentials.age; };
+    zed-email-credentials = {
+      file = ../secrets/zed-email-credentials.age;
+    };
 
-    msmtp-ole-blue.file = secrets + "/msmtp-ole-blue.age";
+    msmtp-ole-blue.file = secrets.getSecret "msmtp-ole-blue";
   };
 
   programs.msmtp = {
@@ -29,8 +36,7 @@ in {
 
     accounts = {
       firefly = rec {
-        passwordeval =
-          "${cat} ${config.age.secrets.email-firefly-iii-credentials.path}";
+        passwordeval = "${cat} ${config.age.secrets.email-firefly-iii-credentials.path}";
         user = "firefly-iii@ole.blue";
         from = user;
       };
@@ -42,8 +48,7 @@ in {
       };
 
       default = rec {
-        passwordeval =
-          "${cat} ${config.age.secrets.zed-email-credentials.path}";
+        passwordeval = "${cat} ${config.age.secrets.zed-email-credentials.path}";
         user = "zed@ole.blue";
         from = user;
       };

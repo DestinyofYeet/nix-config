@@ -1,8 +1,12 @@
 { config, secretStore, ... }:
-let secrets = secretStore.getServerSecrets "common";
-in {
+let
+  secrets = secretStore.getServerSecrets "common";
+in
+{
   age.secrets = {
-    cloudflare-api-env = { file = secrets + "/cloudflare-api-env.age"; };
+    cloudflare-api-env = {
+      file = secrets.getSecret "cloudflare-api-env";
+    };
   };
 
   # on the basis of https://www.youtube.com/watch?v=qlcVx-k-02E

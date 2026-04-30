@@ -18,7 +18,7 @@ let
     ];
   };
 
-  secrets = secretStore.getServerSecrets "nix-server";
+  secrets = secretStore.getHostSecrets "nix-server";
 
   forgejo-vm-name = "forgejo";
 
@@ -28,25 +28,25 @@ in
 
   age.secrets = {
     forgejo-runner-host-key = {
-      file = secrets + "/vm-forgejo-runner-hostkey.age";
+      file = secrets.getSecret "vm-forgejo-runner-hostkey";
       path = "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey";
       symlink = false;
     };
 
     forgejo-runner-host-key-rsa = {
-      file = secrets + "/vm-forgejo-runner-hostkey-rsa.age";
+      file = secrets.getSecret "vm-forgejo-runner-hostkey-rsa";
       path = "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey-rsa";
       symlink = false;
     };
 
     ha-hostkey-ed25519 = {
-      file = secrets + "/vm-ha-hostkey-ed25519.age";
+      file = secrets.getSecret "vm-ha-hostkey-ed25519";
       path = "${config.microvm.stateDir}/ha-vm/root/persistent/hostkey";
       symlink = false;
     };
 
     ha-hostkey-rsa = {
-      file = secrets + "/vm-ha-hostkey-rsa.age";
+      file = secrets.getSecret "vm-ha-hostkey-rsa";
       path = "${config.microvm.stateDir}/ha-vm/root/persistent/hostkey-rsa";
       symlink = false;
     };

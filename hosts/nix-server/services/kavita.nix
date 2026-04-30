@@ -1,15 +1,26 @@
-{ secretStore, config, lib, ... }:
-let secrets = secretStore.get-server-secrets "nix-server";
-in {
+{
+  secretStore,
+  config,
+  lib,
+  ...
+}:
+let
+  secrets = secretStore.getHostSecrets "nix-server";
+in
+{
 
-  age.secrets = { kavita-tokenkey.file = secrets + "/kavita-tokenkey.age"; };
+  age.secrets = {
+    kavita-tokenkey.file = secrets.getSecret "kavita-tokenkey";
+  };
 
   services.kavita = {
     enable = true;
     user = "apps";
     dataDir = "/mnt/data/configs/kavita";
     tokenKeyFile = config.age.secrets.kavita-tokenkey.path;
-    settings = { Port = 5773; };
+    settings = {
+      Port = 5773;
+    };
   };
 
   # users = {
@@ -23,9 +34,9 @@ in {
 
   services.nginx.virtualHosts."books.local.ole.blue" = {
     locations."/" = {
-      proxyPass =
-        "http://127.0.0.1:${toString config.services.kavita.settings.Port}";
+      proxyPass = "http://127.0.0.1:${toString config.services.kavita.settings.Port}";
       proxyWebsockets = true;
     };
-  } // lib.custom.settings.nix-server.nginx-local-ssl;
+  }
+  // lib.custom.settings.nix-server.nginx-local-ssl;
 }

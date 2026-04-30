@@ -1,8 +1,10 @@
 { config, secretStore, ... }:
-let secrets = secretStore.getServerSecrets "nix-server";
-in {
+let
+  secrets = secretStore.getServerSecrets "nix-server";
+in
+{
   age.secrets = {
-    clean-unused-files-config.file = secrets + "/clean-unused-files.age";
+    clean-unused-files-config.file = secrets.getSecret "clean-unused-files";
   };
 
   services.clean-unused-files = {

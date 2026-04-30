@@ -1,9 +1,16 @@
-{ config, secretStore, lib, ... }:
-let secrets = secretStore.get-server-secrets "nix-server";
-in {
+{
+  config,
+  secretStore,
+  lib,
+  ...
+}:
+let
+  secrets = secretStore.getHostSecrets "nix-server";
+in
+{
   age.secrets = {
-    dmarc-ole-blue-email-pw.file = secrets + "/dmarc-ole-blue-password.age";
-    maxmind-license-key.file = secrets + "/maxmind-license-key.age";
+    dmarc-ole-blue-email-pw.file = secrets.getSecret "dmarc-ole-blue-password";
+    maxmind-license-key.file = secrets.getSecret "maxmind-license-key";
   };
   services.parsedmarc = {
     enable = true;
@@ -29,7 +36,9 @@ in {
         to = [ "ole@ole.blue" ];
       };
 
-      elasticsearch = { ssl = false; };
+      elasticsearch = {
+        ssl = false;
+      };
 
       mailbox.watch = true;
     };
@@ -40,7 +49,11 @@ in {
     settings = {
       AccountID = 1149846;
       LicenseKey = config.age.secrets.maxmind-license-key.path;
-      EditionIDs = [ "GeoLite2-ASN" "GeoLite2-City" "GeoLite2-Country" ];
+      EditionIDs = [
+        "GeoLite2-ASN"
+        "GeoLite2-City"
+        "GeoLite2-Country"
+      ];
     };
   };
 }

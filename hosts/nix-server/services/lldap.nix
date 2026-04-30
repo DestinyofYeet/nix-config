@@ -1,25 +1,31 @@
-{ secretStore, lib, config, ... }:
+{
+  secretStore,
+  lib,
+  config,
+  ...
+}:
 let
-  secrets = secretStore.get-server-secrets "nix-server";
+  secrets = secretStore.getHostSecrets "nix-server";
 
   lldap-user = "lldap";
   lldap-group = "lldap";
-in {
+in
+{
   age.secrets = {
     lldap-jwt-secret = {
-      file = secrets + "/lldap-jwt-secret.age";
+      file = secrets.getSecret "lldap-jwt-secret";
       owner = lldap-user;
       group = lldap-group;
     };
 
     lldap-key-seed = {
-      file = secrets + "/lldap-key-seed.age";
+      file = secrets.getSecret "lldap-key-seed";
       owner = lldap-user;
       group = lldap-group;
     };
 
     lldap-user-pass = {
-      file = secrets + "/lldap-user-pass.age";
+      file = secrets.getSecret "lldap-user-pass";
       owner = lldap-user;
       group = lldap-group;
     };
@@ -41,18 +47,21 @@ in {
   };
 
   services.nginx.virtualHosts."users.local.ole.blue" =
-    lib.custom.settings."nix-server".nginx-local-ssl // {
-      locations."/".proxyPass =
-        "http://localhost:${toString config.services.lldap.settings.http_port}";
+    lib.custom.settings."nix-server".nginx-local-ssl
+    // {
+      locations."/".proxyPass = "http://localhost:${toString config.services.lldap.settings.http_port}";
     };
 
-  systemd.services.lldap = let deps = [ "postgresql.service" ];
-  in {
-    after = deps;
-    requires = deps;
+  systemd.services.lldap =
+    let
+      deps = [ "postgresql.service" ];
+    in
+    {
+      after = deps;
+      requires = deps;
 
-    serviceConfig.DynamicUser = lib.mkForce false;
-  };
+      serviceConfig.DynamicUser = lib.mkForce false;
+    };
 
   users = {
     users.lldap = {

@@ -6,12 +6,12 @@
   ...
 }:
 let
-  secrets = secretStore.get-server-secrets "nix-server";
+  secrets = secretStore.getHostSecrets "nix-server";
 in
 {
   age.secrets = {
     paperless-ngx-admin.file = ../secrets/paperless-ngx-admin.age;
-    paperless-ngx-oidc-env-file.file = secrets + "/paperless-oidc-env-file.age";
+    paperless-ngx-oidc-env-file.file = secrets.getSecret "paperless-oidc-env-file";
   };
 
   services.paperless = rec {

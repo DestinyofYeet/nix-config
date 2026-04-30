@@ -1,8 +1,15 @@
-{ secretStore, config, lib, ... }:
-let secrets = secretStore.getServerSecrets "nix-server";
-in {
+{
+  secretStore,
+  config,
+  lib,
+  ...
+}:
+let
+  secrets = secretStore.getHostSecrets "nix-server";
+in
+{
   age.secrets = {
-    photoprism-admin-pw.file = secrets + "/photoprism-admin.age";
+    photoprism-admin-pw.file = secrets.getSecret "photoprism-admin";
   };
 
   services.photoprism = {
@@ -21,11 +28,11 @@ in {
   systemd.services.photoprism.serviceConfig.DynamicUser = lib.mkForce false;
 
   services.nginx.virtualHosts."photos.local.ole.blue" =
-    lib.custom.settings.nix-server.nginx-local-ssl // {
+    lib.custom.settings.nix-server.nginx-local-ssl
+    // {
       locations."/" = {
         proxyWebsockets = true;
-        proxyPass =
-          "http://localhost:${toString config.services.photoprism.port}";
+        proxyPass = "http://localhost:${toString config.services.photoprism.port}";
       };
     };
 }

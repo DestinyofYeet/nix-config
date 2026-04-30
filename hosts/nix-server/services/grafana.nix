@@ -10,7 +10,7 @@ in
 {
   age.secrets = {
     grafanaSecretKey = {
-      file = secrets + "/grafana-secret-key.age";
+      file = secrets.getSecret "grafana-secret-key";
       owner = "grafana";
       group = "grafana";
     };
