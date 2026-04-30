@@ -4,6 +4,7 @@
   pkgs,
   secretStore,
   stable-pkgs,
+  options,
   ...
 }:
 let
@@ -65,12 +66,46 @@ in
       "radio_browser"
       "shopping_list"
       "upnp"
+      "vodafone_station"
     ];
+
+    # extraComponents = builtins.filter (
+    #   elem:
+    #   # check https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/servers/home-assistant/component-packages.nix
+    #   # when something is broken to exclude it.
+    #   # Look above the stack-trace message to see which dependency breaks for a python-package, then search for the python package.
+    #   !(builtins.elem elem [
+
+    #     # broken
+    #     "aquacell"
+    #     "aseko_pool_live"
+    #     "bitcoin"
+    #     "gdacs"
+    #     "hydrawise"
+    #     "influxdb"
+    #     "nice_go"
+    #     "sendgrid"
+    #     "aten_pe"
+    #     "august"
+    #     "yale"
+    #     "yalexs_ble"
+    #     "aws"
+    #     "aws_s3"
+    #     "cloudflare_r2"
+    #     "idrive_e2"
+    #     "permobil"
+    #     "raincloud"
+    #     "twilio"
+    #     "twilio_call"
+    #     "twilio_sms"
+    #     "kef"
+    #   ])
+    # ) config.services.home-assistant.package.availableComponents;
 
     config = {
       http = {
         server_host = "127.0.0.1";
-        server_port = 8123;
+        server_port = 8124;
       };
 
       homeassistant = {

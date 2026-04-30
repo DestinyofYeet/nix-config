@@ -63,7 +63,7 @@
     # ./photoprism.nix
     # ./sunshine.nix
     ./beszel.nix
-    ./home-assistant.nix
+    # ./home-assistant.nix
     ./minecraft
     ./jellyseer.nix
     ./recyclarr.nix
@@ -76,5 +76,6 @@
     ./vaultwardenOverride.nix
     ./authentikOverride.nix
     ./actual.nix
+    ./home-assistant-container.nix
   ];
 }

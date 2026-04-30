@@ -11,6 +11,8 @@
       "snapcast"
       "tidal"
       "squeezelite"
+      "hass"
+      "hass_players"
     ];
   };
 
