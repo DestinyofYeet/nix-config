@@ -66,6 +66,12 @@
               usePadding = true;
             }
             {
+              displayMode = "alwaysShow";
+              iconColor = "secondary";
+              id = "Network";
+              textColor = "primary";
+            }
+            {
               id = "Battery";
               displayMode = "graphic";
             }
