@@ -72,6 +72,13 @@
               textColor = "primary";
             }
             {
+              displayMode = "onhover";
+              iconColor = "secondary";
+              id = "Bluetooth";
+              textColor = "primary";
+            }
+
+            {
               id = "Battery";
               displayMode = "graphic";
             }
