@@ -7,4 +7,5 @@ let
   args = { inherit functions keys lib; };
 
   importFolder = (functions.getImportFolder ./.);
-in (importFolder "non-server/" args) // (importFolder "servers/" args)
+in
+(importFolder "non-server/" args) // (importFolder "hosts/" args)

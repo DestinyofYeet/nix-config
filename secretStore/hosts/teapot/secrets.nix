@@ -47,5 +47,8 @@ in
 
   "syncthing-gui-pass.age".publicKeys = authed;
 
+  "stalwart-admin.age".publicKeys = authed;
+  "stalwart-db.age".publicKeys = authed;
+
 }
 // (importFolder "vms/" inputs)

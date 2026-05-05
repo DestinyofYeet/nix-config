@@ -10,7 +10,8 @@
     # ./netdata.nix
     # ./docker.nix
     # ./ghost.nix
-    ./mailserver.nix
+    ./mailserver_simple_nixos.nix
+    # ./mailserver_stalwart.nix
     ./matrix.nix
     ./coturn.nix
     # ./hydra.nix
@@ -20,7 +21,7 @@
     # ./home-proxy.nix
     ./postgresql.nix
     ./forgejo.nix
-    ./nix-search.nix
+    # ./nix-search.nix
     ./ntfy.nix
     ./mealie.nix
     # ./minecraft-server.nix
@@ -34,6 +35,7 @@
     ../../parts/idp/config.nix
     (import ../../parts/uptime.nix "uptime.ole.blue")
     ./syncthing.nix
+    ./virtualisation.nix
   ];
 
   services.smartd.enable = lib.mkForce false;
