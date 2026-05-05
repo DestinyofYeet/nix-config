@@ -49,6 +49,7 @@ in
 
   "stalwart-admin.age".publicKeys = authed;
   "stalwart-db.age".publicKeys = authed;
+  "stalwart-ldap.age".publicKeys = authed;
 
 }
 // (importFolder "vms/" inputs)

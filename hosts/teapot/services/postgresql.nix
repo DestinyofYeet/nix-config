@@ -60,6 +60,7 @@
 
     authentication = ''
       host authentik authentik_replicator 172.27.255.2/32 trust
+      host stalwart stalwart localhost trust
     '';
 
     ensureUsers = [

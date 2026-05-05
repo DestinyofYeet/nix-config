@@ -26,6 +26,11 @@ in
       file = secrets.getSecret "stalwart-db";
     }
     // ownership;
+
+    stalwart-ldap = {
+      file = secrets.getSecret "stalwart-ldap";
+    }
+    // ownership;
   };
 
   services.postgresql = {
@@ -38,19 +43,19 @@ in
     ];
   };
 
-  # systemd.services.stalwart.environment = {
-  #   STALWART_RECOVERY_MODE = "1";
-  #   STALWART_RECOVERY_MODE_PORT = "8085";
-  #   STALWART_RECOVERY_ADMIN = "admin:xZ5IatGUtx1JX9cuYqRuEeabaWLJRWlVWKM9Jol0";
-  # };
+  users.users.${config.services.stalwart.user} = {
+    extraGroups = [ "nginx" ];
+  };
 
   services.stalwart = {
     enable = true;
     stateVersion = "26.05";
     openFirewall = true;
+
     credentials = {
-      stalwart-admin = config.age.secrets.stalwart-admin.path;
       stalwart-db = config.age.secrets.stalwart-db.path;
+      stalwart-admin = config.age.secrets.stalwart-admin.path;
+      stalwart-ldap = config.age.secrets.stalwart-ldap.path;
     };
 
     settings = rec {
@@ -86,10 +91,26 @@ in
           };
         };
       };
+
       lookup.default = {
         hostname = "mail.ole.blue";
         domain = "ole.blue";
       };
+
+      store.postgres = {
+        type = "postgresql";
+        # host = "bonk.neb.ole.blue";
+        # port = 5432;
+        # database = "stalwart";
+        # user = "stalwart";
+        # # password = getCredential "stalwart-db";
+        # password = "$2a$10$9M168KN/inkKB3uPO2GyteNJhBmO3EJjdcHvkMayM52TN6nNRXevS";
+        host = "localhost";
+        database = "stalwart";
+        user = "stalwart";
+        password = "stupid";
+      };
+
       # acme."letsencrypt" = {
       #   directory = "https://acme-v02.api.letsencrypt.org/directory";
       #   challenge = "dns-01";
@@ -101,46 +122,64 @@ in
       #   provider = "cloudflare";
       #   secret = "%{file:/run/credentials/stalwart.service/acme-secret}%";
       # };
+
       certificate.default = {
         cert = "%{file:${config.security.acme.certs.${server.hostname}.directory}/cert.pem}%";
         private-key = "%{file:${config.security.acme.certs.${server.hostname}.directory}/key.pem}%";
       };
 
-      storage.directory = "authentik";
       directory."authentik" = {
-        type = "oidc";
-        description = "Authentik";
-        issuerUrl = "https://idp.ole.blue/application/o/stalwart/";
-        claimName = "name";
+        base-dn = "ou=users,dc=ldap,dc=idp";
+        type = "ldap";
+        url = "ldaps://idp.ole.blue:636";
+        tls.enable = false;
+        bind = {
+          dn = "cn=stalwartLdap,ou=users,dc=ldap,dc=idp";
+          secret = getCredential "stalwart-ldap";
+          auth.method = "lookup";
+        };
+        attributes = {
+          secret-changed = "pwdChangedTime";
+          name = "cn";
+          email = "mail";
+          class = "objectClass";
+          groups = "memberOf";
+          email-alias = "mailAlias";
+          quota = "diskQuota";
+        };
+
+        filter = {
+          email = "(&(objectClass=person)(|(mail=?)(mailAlias=?)))";
+          name = "(&(objectClass=person)(mail=?))";
+        };
       };
+
+      storage = {
+        encryption = {
+          enable = true;
+          append = true;
+        };
+
+        data = "postgres";
+        blob = "postgres";
+        fts = "postgres";
+        lookup = "postgres";
+        directory = "authentik";
+      };
+
       authentication.fallback-admin = {
         user = "admin";
-        secret = "%{file:/run/credentials/stalwart.service/stalwart-admin}%";
+        secret = "$argon2id$v=19$m=65540,t=3,p=4$0jnx1MfU/FGZfH70keifD8m8YJpqm71NjrtpB5j76TI$3a3SkjgNkUjyAXDY4rMWBneJGVVvbitLc5UoDOkrKnA";
       };
     };
   };
 
-  # virtualisation.oci-containers.containers."stalwart" = {
-  #   image = "stalwartlabs/stalwart:v0.16";
-  #   volumes = [
-  #     "/var/lib/stalwart/config:/etc/stalwart"
-  #     "/var/lib/stalwart/data:/var/lib/stalwart"
-  #   ];
-  #   ports = [
-  #     "8082:8080"
-  #     "25:25"
-  #     "587:587"
-  #     "465:465"
-  #     "4190:4190"
-  #   ];
-  # };
-
-  # networking.firewall.allowedTCPPorts = [
-  #   25
-  #   587
-  #   465
-  #   4190
-  # ];
+  networking.firewall.allowedTCPPorts = [
+    25
+    587
+    465
+    4190
+  ];
 
   services.nginx.virtualHosts."mail.ole.blue" = {
     enableACME = true;
