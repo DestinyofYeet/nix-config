@@ -85,11 +85,23 @@ in
             url = "https://mail.example.org";
             protocol = "http";
           };
+
+          sieve = {
+            protocol = "managesieve";
+            bind = [ "[::]:4190" ];
+          };
+
           management = {
             bind = [ "127.0.0.1:8082" ];
             protocol = "http";
           };
         };
+      };
+
+      http = {
+        use-x-forwarded = true;
+        url = "https://mail.ole.blue";
+        permissive-cors = true;
       };
 
       lookup.default = {
