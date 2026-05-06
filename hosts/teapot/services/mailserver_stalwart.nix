@@ -195,24 +195,6 @@ in
         hostname = "mail.ole.blue";
       };
 
-      # sessions.rcpt = {
-      #   catch-all = ''
-      #     [ { if = "matches('(.+)@(.+)$', rcpt)", then = "'ole@ole.blue'" },
-      #                       { else = false } ]'';
-      # };
-
-      domain = [
-        {
-          name = "ole.blue";
-        }
-        {
-          name = "uwuwhatsthis.de";
-        }
-        {
-          name = "drogen.gratis";
-        }
-      ];
-
       tracer.journal = {
         type = "log";
         level = "info";
