@@ -1,11 +1,13 @@
 {
   config,
   lib,
+  pkgs,
   secretStore,
   ...
 }:
 let
   secrets = secretStore.getHostSecrets "teapot";
+  commonSecrets = secretStore.getHostSecrets "common";
 
   ownership = {
     owner = config.services.stalwart.user;
@@ -13,6 +15,7 @@ let
   };
 
   getCredential = string: "%{file:/run/credentials/stalwart.service/${string}}%";
+
 in
 {
 
@@ -31,6 +34,11 @@ in
       file = secrets.getSecret "stalwart-ldap";
     }
     // ownership;
+
+    cloudflare-api-key = {
+      file = commonSecrets.getSecret "cloudflare-api-token";
+    }
+    // ownership;
   };
 
   services.postgresql = {
@@ -47,6 +55,15 @@ in
     extraGroups = [ "nginx" ];
   };
 
+  # security.acme.certs.${config.services.stalwart.settings.server.hostname} = {
+  #   dnsProvider = "cloudflare";
+  #   webroot = null;
+  #   extraDomainNames = [
+  #     "uwuwhatsthis.de"
+  #     "drogen.gratis"
+  #   ];
+  # };
+
   services.stalwart = {
     enable = true;
     stateVersion = "26.05";
@@ -56,34 +73,40 @@ in
       stalwart-db = config.age.secrets.stalwart-db.path;
       stalwart-admin = config.age.secrets.stalwart-admin.path;
       stalwart-ldap = config.age.secrets.stalwart-ldap.path;
+      cloudflare-api-key = config.age.secrets.cloudflare-api-key.path;
     };
 
     settings = rec {
       server = {
         hostname = "mail.ole.blue";
+
         tls = {
           enable = true;
           implicit = true;
         };
+
         listener = {
           smtp = {
             protocol = "smtp";
             bind = "[::]:25";
           };
+
           submissions = {
             bind = "[::]:465";
             protocol = "smtp";
             tls.implicit = true;
           };
+
           imaps = {
             bind = "[::]:993";
             protocol = "imap";
             tls.implicit = true;
           };
+
           jmap = {
             bind = "[::]:8081";
-            url = "https://mail.example.org";
             protocol = "http";
+            url = "https://mail.ole.blue";
           };
 
           sieve = {
@@ -94,19 +117,14 @@ in
           management = {
             bind = [ "127.0.0.1:8082" ];
             protocol = "http";
+            url = "https://manage.mail.ole.blue";
           };
         };
       };
 
       http = {
         use-x-forwarded = true;
-        url = "https://mail.ole.blue";
         permissive-cors = true;
-      };
-
-      lookup.default = {
-        hostname = "mail.ole.blue";
-        domain = "ole.blue";
       };
 
       store.postgres = {
@@ -123,22 +141,10 @@ in
         password = "stupid";
       };
 
-      # acme."letsencrypt" = {
-      #   directory = "https://acme-v02.api.letsencrypt.org/directory";
-      #   challenge = "dns-01";
-      #   contact = "user1@example.org";
-      #   domains = [
-      #     "example.org"
-      #     "mx1.example.org"
-      #   ];
-      #   provider = "cloudflare";
-      #   secret = "%{file:/run/credentials/stalwart.service/acme-secret}%";
+      # certificate.default = {
+      #   cert = "%{file:${config.security.acme.certs.${server.hostname}.directory}/cert.pem}%";
+      #   private-key = "%{file:${config.security.acme.certs.${server.hostname}.directory}/key.pem}%";
       # };
-
-      certificate.default = {
-        cert = "%{file:${config.security.acme.certs.${server.hostname}.directory}/cert.pem}%";
-        private-key = "%{file:${config.security.acme.certs.${server.hostname}.directory}/key.pem}%";
-      };
 
       directory."authentik" = {
         base-dn = "ou=users,dc=ldap,dc=idp";
@@ -150,13 +156,14 @@ in
           secret = getCredential "stalwart-ldap";
           auth.method = "lookup";
         };
+
         attributes = {
           secret-changed = "pwdChangedTime";
           name = "cn";
           email = "mail";
           class = "objectClass";
           groups = "memberOf";
-          email-alias = "mailAlias";
+          email-alias = "emailAliases";
           quota = "diskQuota";
         };
 
@@ -183,6 +190,48 @@ in
         user = "admin";
         secret = "$argon2id$v=19$m=65540,t=3,p=4$0jnx1MfU/FGZfH70keifD8m8YJpqm71NjrtpB5j76TI$3a3SkjgNkUjyAXDY4rMWBneJGVVvbitLc5UoDOkrKnA";
       };
+
+      lookup.default = {
+        hostname = "mail.ole.blue";
+      };
+
+      # sessions.rcpt = {
+      #   catch-all = ''
+      #     [ { if = "matches('(.+)@(.+)$', rcpt)", then = "'ole@ole.blue'" },
+      #                       { else = false } ]'';
+      # };
+
+      domain = [
+        {
+          name = "ole.blue";
+        }
+        {
+          name = "uwuwhatsthis.de";
+        }
+        {
+          name = "drogen.gratis";
+        }
+      ];
+
+      tracer.journal = {
+        type = "log";
+        level = "info";
+        path = "/var/lib/stalwart/logs/";
+      };
+
+      # configured in webinterface
+      # acme."cf" = {
+      #   provider = "cloudflare";
+      #   contact = "ole@ole.blue";
+      #   email = "bendiixeno@hotmail.de";
+      #   secret = getCredential "cloudflare-api-key";
+      #   challengeType = "dns-01";
+      #   domains = [
+      #     "mail.ole.blue"
+      #     "drogen.gratis"
+      #     "uwuwhatsthis.de"
+      #   ];
+      # };
     };
   };
 
@@ -193,15 +242,13 @@ in
     4190
   ];
 
-  services.nginx.virtualHosts."mail.ole.blue" = {
+  security.acme.certs = {
+    "mgm.mail.ole.blue" = { };
+  };
+
+  services.nginx.virtualHosts."mgm.mail.ole.blue" = {
     enableACME = true;
     forceSSL = true;
-
-    serverAliases = [
-      "mta-sts.ole.blue"
-      "autoconfig.ole.blue"
-      "autodiscover.ole.blue"
-    ];
 
     locations."/" = {
       proxyPass = "http://localhost:8082";
@@ -209,4 +256,37 @@ in
       proxyWebsockets = true;
     };
   };
+
+  services.roundcube = {
+    enable = true;
+
+    dicts = with pkgs.aspellDicts; [
+      en
+      de
+    ];
+
+    plugins = [
+      "managesieve"
+    ];
+
+    hostName = "mail.ole.blue";
+    extraConfig = ''
+      $config['imap_host'] = "ssl://mail.ole.blue:993";
+
+      $config['smtp_host'] = "ssl://mail.ole.blue:465";
+      $config['smtp_user'] = "%u";
+      $config['smtp_pass'] = "%p";
+
+      $config['managesieve_port'] = '4190';
+      $config['managesieve_host'] = '127.0.0.1';
+      $config['managesieve_auth_type'] = 'PLAIN';
+      $config['managesieve_usetls'] = false;
+
+    '';
+    # $config['virtuser_file'] = "${virtuser_file}";
+    # u
+
+    configureNginx = true;
+  };
+
 }

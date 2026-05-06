@@ -589,7 +589,7 @@
         };
 
         teapot = {
-          hostname = "teapot";
+          hostname = "teapot-wg";
           profiles.system = {
             sshUser = "root";
             # user = "root";
