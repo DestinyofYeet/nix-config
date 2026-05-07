@@ -104,7 +104,7 @@ in
           };
 
           jmap = {
-            bind = "[::]:8081";
+            bind = "127.0.0.1:8081";
             protocol = "http";
             url = "https://mail.ole.blue";
           };
@@ -225,18 +225,36 @@ in
   ];
 
   security.acme.certs = {
-    "mgm.mail.ole.blue" = { };
+    "jmap.mail.ole.blue" = {
+      dnsProvider = "cloudflare";
+      webroot = null;
+    };
   };
 
-  services.nginx.virtualHosts."mgm.mail.ole.blue" = {
-    enableACME = true;
-    forceSSL = true;
+  services.nginx.virtualHosts = {
 
-    locations."/" = {
-      proxyPass = "http://localhost:8082";
-      recommendedProxySettings = true;
-      proxyWebsockets = true;
+    "mgm.mail.ole.blue" = {
+      enableACME = true;
+      forceSSL = true;
+
+      locations."/" = {
+        proxyPass = "http://localhost:8082";
+        recommendedProxySettings = true;
+        proxyWebsockets = true;
+      };
     };
+
+    "jmap.mail.ole.blue" = {
+      enableACME = true;
+      forceSSL = true;
+
+      locations."/" = {
+        proxyPass = "http://localhost:8081";
+        recommendedProxySettings = true;
+        proxyWebsockets = true;
+      };
+    };
+
   };
 
   services.roundcube = {
