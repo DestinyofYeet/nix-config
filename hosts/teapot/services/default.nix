@@ -10,8 +10,8 @@
     # ./netdata.nix
     # ./docker.nix
     # ./ghost.nix
-    # ./mailserver_simple_nixos.nix
-    ./mailserver_stalwart.nix
+    ./mailserver_simple_nixos.nix
+    # ./mailserver_stalwart.nix
     ./matrix.nix
     ./coturn.nix
     # ./hydra.nix

@@ -131,7 +131,7 @@ in
         sendOnly = true;
       };
 
-      "prowlarr@uwuwhatsthis.de" = {
+      "prowlarr@ole.blue" = {
         hashedPasswordFile = "${config.age.secrets.prowlarr-uwuwhatsthis-de.path}";
         sendOnly = true;
       };
