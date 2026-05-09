@@ -14,7 +14,7 @@ in
     networks = {
       "10-external" = {
         matchConfig.Name = interface;
-        address = [ "5.83.152.153/26" ];
+        address = [ "5.83.152.153/32" ];
 
         routes = [
           {
