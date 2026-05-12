@@ -91,7 +91,7 @@ in
         auth_token = "!secrets.yaml auth_token";
       };
       availability.enabled = true;
-      homeassistant = lib.optionalAttrs config.services.home-assistant.enable {
+      homeassistant = {
         enable = true;
       };
 
