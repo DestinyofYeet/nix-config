@@ -77,5 +77,6 @@
     ./authentikOverride.nix
     ./actual.nix
     ./home-assistant-container.nix
+    ./scrutiny.nix
   ];
 }
