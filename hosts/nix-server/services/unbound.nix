@@ -3,10 +3,9 @@
 let
   root-domain = "nix-server.infra.wg";
   ip = "192.168.1.1";
-  build-subdomains = build-domain: build-ip: sub-domains:
-    (map (sub-domain:
-      (wrap-string "${sub-domain}.${build-domain}. IN A ${build-ip}"))
-      sub-domains);
+  build-subdomains =
+    build-domain: build-ip: sub-domains:
+    (map (sub-domain: (wrap-string "${sub-domain}.${build-domain}. IN A ${build-ip}")) sub-domains);
 
   wrap-string = string: ''"${string}"'';
 
@@ -25,17 +24,17 @@ let
     local.ole.blue.      IN A ${ip}
     *.local.ole.blue.    IN A ${ip}
   '';
-in {
+in
+{
   services.unbound = {
     user = "nginx";
     enable = true;
     checkconf = true;
     resolveLocalQueries = true;
+
     # localControlSocketPath = "/run/unbound/unbound.ctl";
+
     settings = {
-      remote-control = {
-        # control-enable = true;
-      };
       server = {
         interface = [
           "0.0.0.0@53"
@@ -45,8 +44,11 @@ in {
           "127.0.0.1@53"
           "127.0.0.1@853"
         ];
-        access-control =
-          [ "0.0.0.0/0 allow" "::0/0 allow" "127.0.0.1/0 allow" ];
+        access-control = [
+          "0.0.0.0/0 allow"
+          "::0/0 allow"
+          "127.0.0.1/0 allow"
+        ];
 
         tls-service-key = "/var/lib/acme/local.ole.blue/key.pem";
         tls-service-pem = "/var/lib/acme/local.ole.blue/fullchain.pem";
@@ -85,36 +87,25 @@ in {
       };
 
       # I want the unbound server to have a local storage of the zone data incase the internet goes out
-      auth-zone = [{
-        name = wrap-string "local.ole.blue";
-        zonefile = wrap-string "${zone-file}";
-      }];
+      auth-zone = [
+        {
+          name = wrap-string "local.ole.blue";
+          zonefile = wrap-string "${zone-file}";
+        }
+      ];
 
-      forward-zone = [{
-        name = ".";
-        forward-addr = [
-          # 853 for tls
-          "9.9.9.9@853"
-          "8.8.8.8@853"
-          "1.1.1.1@853"
-        ];
-        forward-tls-upstream = true;
-      }];
+      forward-zone = [
+        {
+          name = ".";
+          forward-addr = [
+            # 853 for tls
+            "9.9.9.9@853"
+            "8.8.8.8@853"
+            "1.1.1.1@853"
+          ];
+          forward-tls-upstream = true;
+        }
+      ];
     };
   };
-
-  # services.prometheus.exporters.unbound = {
-  #   enable = true;
-  #   listenAddress = "localhost";
-  #   # unbound = {
-  #   #   host = config.services.unbound.localControlSocketPath;
-  #   # };
-  #   #
-
-  #   # inherit (config.services.unbound) user group;
-  # };
-
-  # users.groups.${config.services.unbound.group}.members = [
-  #   config.services.prometheus.exporters.unbound.user
-  # ];
 }
