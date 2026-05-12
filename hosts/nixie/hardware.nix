@@ -1,6 +1,7 @@
 {
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -36,17 +37,5 @@
   networking.hostName = "nixie";
   networking.hostId = "c03c0e23";
 
-  hardware.i2c.enable = true;
-
-  hardware.raspberry-pi.config.all.base-dt-params = {
-    i2c = {
-      enable = true;
-      value = "on";
-    };
-    audio = {
-      enable = true;
-      value = "on";
-    };
-  };
-
+  boot.kernelParams = [ "snd_bcm2835.enable_headphones=1" ];
 }

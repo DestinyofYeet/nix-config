@@ -519,18 +519,17 @@
           specialArgs = defaultSpecialArgs;
         };
 
-        nixie = inputs.nixos-raspberrypi.lib.nixosSystem {
+        nixie = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
           modules = [
             inputs.argon40-nix.nixosModules.default
+            inputs.hardware.nixosModules.raspberry-pi-4
 
             ./hosts/nixie
 
             (
               { ... }:
               {
-                imports = with inputs.nixos-raspberrypi.nixosModules; [
-                  raspberry-pi-4.base
-                ];
                 capabilities = {
                   hardware.headless.enable = true;
                   customNixInterpreter.enable = false;
@@ -553,7 +552,7 @@
           system = "aarch64-linux";
           modules = [
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-            # inputs.hardware.nixosModules.raspberry-pi-4
+            inputs.hardware.nixosModules.raspberry-pi-4
 
             ./hosts/audioPi
 

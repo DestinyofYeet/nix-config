@@ -12,12 +12,6 @@
     autologinUser = "autologin";
   };
 
-  services.pipewire.enable = false;
-  services.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-  };
-
   programs.bash.enable = true;
 
   users = {
