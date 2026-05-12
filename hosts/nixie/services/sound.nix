@@ -9,4 +9,8 @@
     systemWide = true;
     package = pkgs.pulseaudioFull;
   };
+
+  # hardware.alsa = {
+  #   enable = true;
+  # };
 }

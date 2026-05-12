@@ -522,8 +522,8 @@
         nixie = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
-            inputs.argon40-nix.nixosModules.default
-            inputs.hardware.nixosModules.raspberry-pi-4
+            # inputs.argon40-nix.nixosModules.default
+            # inputs.hardware.nixosModules.raspberry-pi-4
 
             ./hosts/nixie
 

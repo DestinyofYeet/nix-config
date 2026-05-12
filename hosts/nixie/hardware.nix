@@ -38,4 +38,8 @@
   networking.hostId = "c03c0e23";
 
   boot.kernelParams = [ "snd_bcm2835.enable_headphones=1" ];
+
+  # hardware.raspberry-pi."4" = {
+  #   apply-overlays-dtmerge.enable = true;
+  # };
 }

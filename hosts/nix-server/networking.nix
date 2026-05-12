@@ -1,4 +1,10 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  ...
+}:
 let
   externalInterface = "enp35s0";
   homeRouter = {
@@ -20,8 +26,13 @@ let
       mac = "74:56:3c:6f:b8:8a";
       ip = "192.168.1.18";
     };
+    anlagenPi = {
+      mac = "dc:a6:32:ce:f2:c4";
+      ip = "192.168.1.129";
+    };
   };
-in {
+in
+{
   networking = {
     dhcpcd.enable = false;
     useDHCP = false;
@@ -31,70 +42,79 @@ in {
     nat = {
       enable = true;
       externalInterface = externalInterface;
-      internalInterfaces =
-        [ "infra" "veth" "${homeRouter.interface}" "microvm-bridge" ];
+      internalInterfaces = [
+        "infra"
+        "veth"
+        "${homeRouter.interface}"
+        "microvm-bridge"
+      ];
 
       internalIPs = [ "${homeRouter.ip.base}.0/24" ];
     };
   };
 
-  systemd.network = let microvm-name = "microvm-bridge";
-  in {
-    enable = true;
-    netdevs."10-microvm".netdevConfig = {
-      Kind = "bridge";
-      Name = microvm-name;
-    };
-
-    networks = {
-      "10-external" = {
-        matchConfig.Name = [ externalInterface ];
-        networkConfig.DHCP = "yes";
-        linkConfig.RequiredForOnline = "routable";
+  systemd.network =
+    let
+      microvm-name = "microvm-bridge";
+    in
+    {
+      enable = true;
+      netdevs."10-microvm".netdevConfig = {
+        Kind = "bridge";
+        Name = microvm-name;
       };
 
-      "10-microvm" = {
-        matchConfig.Name = microvm-name;
-        addresses = [{ Address = "192.168.3.1/24"; }];
-      };
-
-      "11-microvm" = {
-        matchConfig.Name = "vm-*";
-        networkConfig.Bridge = microvm-name;
-      };
-
-      "20-internal" = {
-        matchConfig.Name = homeRouter.interface;
-        networkConfig = {
-          Address = "${homeRouter.ip.router}/24";
-          DHCPServer = true;
-          DNS = [ "127.0.0.1" ];
+      networks = {
+        "10-external" = {
+          matchConfig.Name = [ externalInterface ];
+          networkConfig.DHCP = "yes";
+          linkConfig.RequiredForOnline = "routable";
         };
 
-        routes = [{
-          Destination = "192.168.2.0/24";
-          Gateway = deviceList.tp-link-router.ip;
-        }];
-
-        dhcpServerConfig = {
-          EmitDNS = true;
-          DNS = [ homeRouter.ip.router ];
-          EmitRouter = true;
+        "10-microvm" = {
+          matchConfig.Name = microvm-name;
+          addresses = [ { Address = "192.168.3.1/24"; } ];
         };
 
-        dhcpServerStaticLeases = [
-          {
-            MACAddress = deviceList.tp-link-router.mac;
-            Address = deviceList.tp-link-router.ip;
-          }
-          {
-            MACAddress = deviceList.main.mac;
-            Address = deviceList.main.ip;
-          }
-        ];
+        "11-microvm" = {
+          matchConfig.Name = "vm-*";
+          networkConfig.Bridge = microvm-name;
+        };
+
+        "20-internal" = {
+          matchConfig.Name = homeRouter.interface;
+          networkConfig = {
+            Address = "${homeRouter.ip.router}/24";
+            DHCPServer = true;
+            DNS = [ "127.0.0.1" ];
+          };
+
+          routes = [
+            {
+              Destination = "192.168.2.0/24";
+              Gateway = deviceList.tp-link-router.ip;
+            }
+          ];
+
+          dhcpServerConfig = {
+            EmitDNS = true;
+            DNS = [ homeRouter.ip.router ];
+            EmitRouter = true;
+          };
+
+          dhcpServerStaticLeases = [
+            {
+              MACAddress = deviceList.tp-link-router.mac;
+              Address = deviceList.tp-link-router.ip;
+            }
+            {
+              MACAddress = deviceList.main.mac;
+              Address = deviceList.main.ip;
+            }
+          ];
+        };
       };
     };
-  };
 
   services.resolved.enable = false;
 

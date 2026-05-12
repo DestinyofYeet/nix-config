@@ -21,7 +21,7 @@
     # ./home-proxy.nix
     ./postgresql.nix
     ./forgejo.nix
-    # ./nix-search.nix
+    ./nix-search.nix
     ./ntfy.nix
     ./mealie.nix
     # ./minecraft-server.nix
