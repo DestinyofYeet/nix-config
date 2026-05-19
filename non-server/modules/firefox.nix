@@ -236,6 +236,11 @@ in
             color = "purple";
           };
         }
+        {
+          scrr = {
+            color = "green";
+          };
+        }
       ];
 
       settings = {

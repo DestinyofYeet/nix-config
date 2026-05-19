@@ -255,7 +255,7 @@ in
             "Element"
             "org.keepassxc.KeePassXC"
             "firefox"
-            "nl.jknaapen.fladder"
+            "fladder"
             "chromium-browser"
           ];
 

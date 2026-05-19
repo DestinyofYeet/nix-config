@@ -79,7 +79,6 @@ in
     fullTextSearch = {
       enable = true;
       autoIndex = true;
-      enforced = "body";
     };
 
     enableManageSieve = true;

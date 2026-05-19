@@ -50,11 +50,11 @@ in
     config = {
       permittedInsecurePackages = [
         "electron-31.7.7"
-        "ventoy-1.1.05"
+        # "ventoy-1.1.05"
         "dotnet-sdk-6.0.428" # eddie
         "dotnet-runtime-6.0.36" # eddie
         # "qtwebengine-5.15.19" # jellyfin-media-player
-        "ventoy-1.1.10"
+        # "ventoy-1.1.10"
       ];
       allowUnfree = true;
       nvidia.acceptLicense = true;
@@ -163,7 +163,7 @@ in
       discord
       audacity
       gdb
-      ventoy-full
+      # ventoy-full
       qbittorrent
       dig
       freerdp
@@ -199,7 +199,7 @@ in
       anki-bin
       tldr
       authenticator
-      lutris
+      # lutris
       waydroid
       lzip
       deluge-gtk
