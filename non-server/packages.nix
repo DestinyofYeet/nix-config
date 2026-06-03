@@ -55,9 +55,11 @@ in
         "dotnet-runtime-6.0.36" # eddie
         # "qtwebengine-5.15.19" # jellyfin-media-player
         # "ventoy-1.1.10"
+        "segger-jlink-qt4-874"
       ];
       allowUnfree = true;
       nvidia.acceptLicense = true;
+      segger-jlink.acceptLicense = true;
     };
   };
 
@@ -298,6 +300,10 @@ in
       fastfetch
       teams-for-linux
       airshipper
+
+      # hackaburg 2026
+      arduino-ide
+      segger-jlink
     ]
     ++ luaPkgs
     ++ kdePkgs
