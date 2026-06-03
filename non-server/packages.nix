@@ -298,6 +298,7 @@ in
       fastfetch
       teams-for-linux
       airshipper
+      wl-clipboard
     ]
     ++ luaPkgs
     ++ kdePkgs
