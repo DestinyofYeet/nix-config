@@ -49,7 +49,7 @@ in
   nixpkgs = {
     config = {
       permittedInsecurePackages = [
-        "electron-31.7.7"
+        "electron-39.8.10"
         # "ventoy-1.1.05"
         "dotnet-sdk-6.0.428" # eddie
         "dotnet-runtime-6.0.36" # eddie

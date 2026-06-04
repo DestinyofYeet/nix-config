@@ -11,7 +11,7 @@
     };
 
     gtk4.extraConfig = gtk3.extraConfig;
-    gtk4.theme = config.gtk.theme;
+    gtk4.theme = lib.mkForce config.gtk.theme;
   };
 
   qt = {

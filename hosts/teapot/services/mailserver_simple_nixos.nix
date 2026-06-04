@@ -52,7 +52,7 @@ in
 
     x509.useACMEHost = "mail.ole.blue";
 
-    stateVersion = 3;
+    stateVersion = 5;
 
     useUTF8FolderNames = true;
 
