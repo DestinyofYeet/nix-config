@@ -19,6 +19,7 @@
     ../kanata.nix
     ./chromecast.nix
     ./fix-mouse-warping.nix
+    ./fix-trackpad.nix
   ];
 
   nix = {
