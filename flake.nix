@@ -53,12 +53,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    strichliste = {
-      url = "git+https://code.ole.blue/ole/strichliste.nix";
-      # url = "path:///home/ole/github/strichliste.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     prometheus-qbit = {
       url = "github:DestinyofYeet/prometheus-qbitorrent.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -253,6 +247,11 @@
     solaar = {
       url = "github:Svenum/Solaar-Flake";
     };
+
+    strichliste = {
+      # url = "path:///home/ole/github/rest/strichliste-samu";
+      url = "github:semmelsamu/strichliste/feat/nix";
+    };
   };
 
   outputs =
@@ -316,6 +315,7 @@
         )
 
         inputs.solaar.nixosModules.default
+        inputs.strichliste.nixosModules.strichliste
       ]
       ++ baseline-modules;
 
@@ -374,7 +374,6 @@
             inputs.add-replay-gain.nixosModules.add-replay-gain
             { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }
             inputs.nix-minecraft.nixosModules.minecraft-servers
-            # inputs.strichliste.nixosModules.strichliste
             inputs.networkNamespaces.nixosModules.networkNamespaces
             inputs.prometheus-qbit.nixosModules.default
             inputs.auto-add-torrents.nixosModules.default
