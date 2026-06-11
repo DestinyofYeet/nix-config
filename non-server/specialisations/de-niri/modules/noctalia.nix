@@ -114,11 +114,20 @@
         lockScreenAnimations = true;
       };
 
-      appLauncher = {
-        terminalCommand = "${lib.getExe pkgs.wezterm} -e";
-        showIconBackground = true;
-        overviewLayer = true;
-      };
+      appLauncher =
+        let
+          wl-paste = lib.getExe' pkgs.wl-clipboard "wl-paste";
+          satty = lib.getExe pkgs.satty;
+        in
+        {
+          terminalCommand = "${lib.getExe pkgs.wezterm} -e";
+          showIconBackground = true;
+          overviewLayer = true;
+          enableClipboardHistory = true;
+          clipboardWatchTextCommand = "${wl-paste} --type text --watch cliphist store";
+          clipboardWatchImageCommand = "${wl-paste} --type image --watch cliphist store";
+          screenshotAnnotationTool = "${satty} -f -";
+        };
 
       nightLight = {
         enabled = false;
