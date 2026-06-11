@@ -156,4 +156,20 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.libinput.enable = true;
+
+  boot = {
+    plymouth = {
+      enable = true;
+      themePackages = with pkgs; [ adi1090x-plymouth-themes ];
+      theme = "connect";
+    };
+
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "rd.udev.log_level=3"
+      "rd.systemd.show_status=auto"
+    ];
+  };
 }
