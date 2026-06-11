@@ -26,8 +26,6 @@ let
   ];
 
   jetbrainsPkgs = with pkgs.jetbrains; [
-    rust-rover
-    pycharm
   ];
 
   nerd-fontsPkgs = builtins.filter lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
@@ -67,7 +65,7 @@ in
   programs.firefox.enable = true;
   programs.neovim.enable = true;
 
-  virtualisation.waydroid.enable = true;
+  # virtualisation.waydroid.enable = true;
 
   # programs.ssh.startAgent = true;
 
@@ -266,12 +264,10 @@ in
       caligula
       presenterm
       python313Packages.weasyprint
-      clippy # rust check
       serpl
       cgdb
       # eddie
       moonlight-qt
-      tidal-dl
       tokei
       eduvpn-client
       fladder
@@ -288,7 +284,6 @@ in
       libinput
       evtest
       rnote
-      simple-scan
       naps2
       android-tools
       inputs.nix-alien.packages.x86_64-linux.nix-alien
@@ -298,15 +293,14 @@ in
       poppler-utils
       inputs.ds-nom-layer.packages.${pkgs.stdenv.hostPlatform.system}.default
       fastfetch
-      teams-for-linux
-      airshipper
+      # teams-for-linux
       wl-clipboard
 
       # hackaburg 2026
-      arduino-ide
-      segger-jlink
+      # arduino-ide
+      # segger-jlink
     ]
-    ++ luaPkgs
+    # ++ luaPkgs
     ++ kdePkgs
     ++ jetbrainsPkgs;
 }
