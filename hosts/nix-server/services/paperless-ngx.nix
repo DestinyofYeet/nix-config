@@ -17,7 +17,7 @@ in
   services.paperless = rec {
     enable = true;
 
-    domain = "paperless.local.ole.blue";
+    domain = "documents.local.ole.blue";
 
     dataDir = "${lib.custom.settings.${config.networking.hostName}.paths.data}/paperless-ngx";
 
