@@ -55,6 +55,10 @@ in
         ENABLE_OPENID_SIGNUP = true;
       };
 
+      repository = {
+        MAX_CREATION_LIMIT = 0;
+      };
+
       "repository.pull-request" = {
         DEFAULT_MERGE_STYLE = "rebase";
       };

@@ -24,9 +24,6 @@ in
         (build-scope ../../../options/capabilities/options.nix "capabilities"
           "https://code.ole.blue/ole/nix-config/src/branch/main/"
         )
-        (build-scope inputs.strichliste.nixosModules.strichliste "strichliste"
-          "https://git.ole.blue/ole/strichliste.nix/src/branch/no-docker/"
-        )
         (build-scope inputs.agenix.nixosModules.default "agenix"
           "https://github.com/ryantm/agenix/tree/main/"
         )
