@@ -35,6 +35,8 @@ in
           enable = true;
           trigger-length = 2;
         };
+
+        clipboard-provider = "wayland";
       };
 
       theme = "tokyonight_moon";
