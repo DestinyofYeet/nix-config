@@ -2718,13 +2718,18 @@
         "nixpkgs": "nixpkgs_17"
       },
       "locked": {
-        "narHash": "sha256-LJG1i1WpE1NCsrsQx8LBJt6o4G1K+oJLojUuFHU2x8Y=",
-        "path": "/home/ole/github/rest/strichliste-samu",
-        "type": "path"
+        "lastModified": 1781715728,
+        "narHash": "sha256-2SHCSek/eNlBNdvMNZFz3aU7EKmN3u9feO31mzep6Lo=",
+        "owner": "semmelsamu",
+        "repo": "strichliste",
+        "rev": "8d0cf5b67d2ff17c8a1a381d6b4eb82988e1455b",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ole/github/rest/strichliste-samu",
-        "type": "path"
+        "owner": "semmelsamu",
+        "ref": "feat/nix",
+        "repo": "strichliste",
+        "type": "github"
       }
     },
     "strichliste-rs": {
