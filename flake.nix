@@ -252,7 +252,7 @@
     };
 
     strichliste = {
-      # url = "path:///home/ole/github/rest/strichliste-samu";
+      # url = "git+file:///home/ole/github/rest/strichliste-samu";
       url = "github:semmelsamu/strichliste/feat/nix";
     };
   };

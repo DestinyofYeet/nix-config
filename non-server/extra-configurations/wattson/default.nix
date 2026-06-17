@@ -12,7 +12,7 @@
     ../common
     # ./vpn.nix
     ./agenix.nix
-    # ./strichliste.nix
+    ./strichliste.nix
     # ./postgres.nix
     # ./docker-compose.nix
     ./swap.nix
