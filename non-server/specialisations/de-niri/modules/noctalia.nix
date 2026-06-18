@@ -15,6 +15,26 @@
   programs.noctalia-shell = {
     enable = true;
 
+    plugins = {
+      sources = [
+        {
+          enabled = true;
+          name = "Official Noctalia Plugins";
+          url = "https://github.com/noctalia-dev/noctalia-plugins";
+        }
+      ];
+
+      states = {
+        screenshot = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+      };
+      version = 2;
+    };
+
+    # pluginSettings = { };
+
     settings = {
       settingsVersion = 0;
       bar = {
@@ -39,6 +59,9 @@
             {
               id = "Clock";
               clockColor = "primary";
+            }
+            {
+              id = "plugin:screenshot";
             }
           ];
           right = [
@@ -98,6 +121,7 @@
           ];
         };
       };
+
       location = {
         showWeekNumberInCalendar = true;
         weatherEnabled = false;
