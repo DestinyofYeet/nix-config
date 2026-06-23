@@ -2718,17 +2718,17 @@
         "nixpkgs": "nixpkgs_17"
       },
       "locked": {
-        "lastModified": 1782159382,
-        "narHash": "sha256-QFjS25oq9epokyMsn56+CeF3H+adx1uuzn63LRKEbbg=",
-        "ref": "refs/heads/better-tables",
-        "rev": "d980d231b4694ec564f21c7da32a01db0dec0bf4",
-        "revCount": 458,
-        "type": "git",
-        "url": "file:///home/ole/github/rest/strichliste-samu"
+        "lastModified": 1782228082,
+        "narHash": "sha256-6s7A2qaYrpsjFNRdTuqbePg5k4M48p/aNAoMsxecQsA=",
+        "owner": "semmelsamu",
+        "repo": "strichliste",
+        "rev": "9bb27a4cb9a440a45cb44492543e2f6707aa742c",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/ole/github/rest/strichliste-samu"
+        "owner": "semmelsamu",
+        "repo": "strichliste",
+        "type": "github"
       }
     },
     "strichliste-rs": {
