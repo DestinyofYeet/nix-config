@@ -1322,11 +1322,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782219930,
-        "narHash": "sha256-zyTuIp+A/dUPDaSnpYUqmlHkWs7Drm5JqBy2gmQnWps=",
+        "lastModified": 1782249792,
+        "narHash": "sha256-9MfmX4hIL34vlH3bnmDLY7pcMQz7Of3q1of/DpfXjoU=",
         "ref": "refs/heads/main",
-        "rev": "ebf9397898006fb1886ca845abe40f28cd783615",
-        "revCount": 40,
+        "rev": "5643554e105ac5f636826b328b86841a47fdf44c",
+        "revCount": 46,
         "type": "git",
         "url": "https://code.ole.blue/DestinyofYeet/nb-rs"
       },
