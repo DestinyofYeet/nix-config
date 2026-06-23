@@ -1322,11 +1322,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781681073,
-        "narHash": "sha256-Fmgi2L8iUbtsavlWU/JjP1JBkY5nLRXduJGR6b6JXsc=",
+        "lastModified": 1782219930,
+        "narHash": "sha256-zyTuIp+A/dUPDaSnpYUqmlHkWs7Drm5JqBy2gmQnWps=",
         "ref": "refs/heads/main",
-        "rev": "0d554c0754822fd8d7e0b1861338f7083a472700",
-        "revCount": 19,
+        "rev": "ebf9397898006fb1886ca845abe40f28cd783615",
+        "revCount": 40,
         "type": "git",
         "url": "https://code.ole.blue/DestinyofYeet/nb-rs"
       },
@@ -2718,18 +2718,17 @@
         "nixpkgs": "nixpkgs_17"
       },
       "locked": {
-        "lastModified": 1781715728,
-        "narHash": "sha256-2SHCSek/eNlBNdvMNZFz3aU7EKmN3u9feO31mzep6Lo=",
-        "owner": "semmelsamu",
-        "repo": "strichliste",
-        "rev": "8d0cf5b67d2ff17c8a1a381d6b4eb82988e1455b",
-        "type": "github"
+        "lastModified": 1782159382,
+        "narHash": "sha256-QFjS25oq9epokyMsn56+CeF3H+adx1uuzn63LRKEbbg=",
+        "ref": "refs/heads/better-tables",
+        "rev": "d980d231b4694ec564f21c7da32a01db0dec0bf4",
+        "revCount": 458,
+        "type": "git",
+        "url": "file:///home/ole/github/rest/strichliste-samu"
       },
       "original": {
-        "owner": "semmelsamu",
-        "ref": "feat/nix",
-        "repo": "strichliste",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/ole/github/rest/strichliste-samu"
       }
     },
     "strichliste-rs": {

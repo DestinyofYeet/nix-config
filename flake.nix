@@ -216,6 +216,7 @@
     };
 
     authentik-nix.url = "github:nix-community/authentik-nix";
+
     nb-rs = {
       url = "git+https://code.ole.blue/DestinyofYeet/nb-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -252,8 +253,8 @@
     };
 
     strichliste = {
-      # url = "git+file:///home/ole/github/rest/strichliste-samu";
-      url = "github:semmelsamu/strichliste/feat/nix";
+      url = "git+file:///home/ole/github/rest/strichliste-samu";
+      # url = "github:semmelsamu/strichliste/feat/nix";
     };
   };
 

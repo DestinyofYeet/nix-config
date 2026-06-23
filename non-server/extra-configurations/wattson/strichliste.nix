@@ -3,7 +3,7 @@
 }:
 {
   services.semmelstrichliste = {
-    enable = true;
+    enable = false;
     settings = {
       expectSSL = false;
       domain = "localhost";
