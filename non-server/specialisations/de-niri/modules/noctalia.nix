@@ -49,6 +49,7 @@
             }
             {
               id = "ActiveWindow";
+              colorizeIcons = false;
             }
             {
               id = "MediaMini";
