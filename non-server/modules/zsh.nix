@@ -58,9 +58,6 @@ in
       stylix-color-picker = "${stylix-color-picker}/bin/stylix-color-picker";
 
       setup-env = "${osConfig.customScripts.setup-env}";
-
-      kssh = "kitten ssh";
-      icat = "kitten icat";
     };
 
     sessionVariables = {

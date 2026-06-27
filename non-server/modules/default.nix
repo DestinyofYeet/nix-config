@@ -51,5 +51,6 @@
     # ./obs.nix
     ./xdg.nix
     ./syncthing.nix
+    ./ghostty.nix
   ];
 }

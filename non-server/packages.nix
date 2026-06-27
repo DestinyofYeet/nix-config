@@ -299,6 +299,7 @@ in
       # hackaburg 2026
       # arduino-ide
       # segger-jlink
+      viu
     ]
     # ++ luaPkgs
     ++ kdePkgs

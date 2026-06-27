@@ -1,4 +1,10 @@
-{ lib, pkgs, inputs, ... }: {
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   programs.shell-aliases = {
     enable = true;
     aliases = {
@@ -26,29 +32,32 @@
 
       # "yz" = { default = "${pkgs.yazi}/bin/yazi"; };
 
-      "lg" = { default = "${pkgs.lazygit}/bin/lazygit"; };
+      "lg" = {
+        default = "${pkgs.lazygit}/bin/lazygit";
+      };
 
-      "tt" = { default = "${pkgs.taskwarrior-tui}/bin/taskwarrior-tui"; };
-
-      "kssh" = "kitten ssh";
-      "icat" = "kitten icat";
+      "tt" = {
+        default = "${pkgs.taskwarrior-tui}/bin/taskwarrior-tui";
+      };
 
       "generate-email-alias" = {
-        default =
-          "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
+        default = "${lib.custom.scripts.generate-email-alias}/bin/generate-email-alias";
 
         # bash = null;
       };
 
       "fix-store" = "nix-store --verify --check-contents --repair";
 
-      "wicat" = "wezterm imgcat";
-      "wssh" = "wezterm ssh";
-      "wconnect" = "wezterm connect";
+      "icat" = {
+        default = "${lib.getExe pkgs.viu}";
+      };
+
+      # "wicat" = "wezterm imgcat";
+      # "wssh" = "wezterm ssh";
+      # "wconnect" = "wezterm connect";
 
       "dl-music" = {
-        default =
-          "${inputs.squid-api.packages.x86_64-linux.default}/bin/squid-api";
+        default = "${inputs.squid-api.packages.x86_64-linux.default}/bin/squid-api";
       };
 
       "loc".default = "${pkgs.tokei}/bin/tokei";

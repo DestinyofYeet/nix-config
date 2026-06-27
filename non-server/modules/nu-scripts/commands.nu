@@ -43,9 +43,4 @@ let path = (get-random-file /home/ole/deposit/Images/nyan_cats).name;
 
 let terminal = find_terminal;
 
-if $terminal == "WezTerm" {
-  wezterm imgcat $path
-} else if $terminal == "kitty" {
-  icat $path
-}
-
+viu -h 15 $path
