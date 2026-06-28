@@ -1,4 +1,5 @@
 {
+  flake,
   ...
 }:
 {
@@ -32,11 +33,7 @@
           numconnections = 10;
         };
 
-        handy = {
-          name = "Handy";
-          id = "SLOYG5Q-RMVBV5F-E5MO32D-DYCKEV5-A7K74AX-EKGAEJW-HPDIHER-4FJK6AR";
-          numconnections = 10;
-        };
+        handy = flake.nixosConfigurations."nix-server".config.services.syncthing.settings.devices.handy;
       };
     };
   };

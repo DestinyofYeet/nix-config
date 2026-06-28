@@ -67,7 +67,7 @@ in
       devices = {
         handy = {
           name = "Handy";
-          id = "SLOYG5Q-RMVBV5F-E5MO32D-DYCKEV5-A7K74AX-EKGAEJW-HPDIHER-4FJK6AR";
+          id = "ANR7ZUR-ST7PXYW-HMKJCTX-YQRTTXQ-4X6V352-64RBKJC-RELOADH-QRNNZAH";
           numconnections = 10;
         };
 
