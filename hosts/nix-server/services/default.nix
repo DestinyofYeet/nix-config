@@ -50,10 +50,10 @@
     ./wiki-js.nix
     ./vpn.nix
     # ./nextcloud.nix
-    ./garage.nix
+    # ./garage.nix
     ./nginx.nix
     # ./smb.nix
-    ./lldap.nix
+    # ./lldap.nix
     # ./parsedmarc.nix
     ./elasticsearch.nix
     ./smartd.nix
@@ -62,7 +62,6 @@
     # ./zabbix.nix
     # ./photoprism.nix
     # ./sunshine.nix
-    ./beszel.nix
     # ./home-assistant.nix
     ./minecraft
     ./jellyseer.nix
@@ -78,5 +77,11 @@
     ./actual.nix
     ./home-assistant-container.nix
     ./scrutiny.nix
+
+    (import ../../parts/gatus/gatus.nix {
+      domain = "status.local.ole.blue";
+      filter = [ "ankisync.local.ole.blue" ];
+    })
+    ./gatus.nix
   ];
 }

@@ -32,4 +32,21 @@ in
       locations."/".proxyPass =
         "http://${config.services.anki-sync-server.address}:${toString config.services.anki-sync-server.port}";
     };
+
+  services.gatus.settings.endpoints = [
+    {
+      name = "Ankisync";
+      interval = "60s";
+      url = "https://ankisync.local.ole.blue/sync/meta";
+      conditions = [
+        "[STATUS] == 405"
+      ];
+
+      alerts = [
+        {
+          type = "ntfy";
+        }
+      ];
+    }
+  ];
 }

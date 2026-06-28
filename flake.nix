@@ -282,7 +282,6 @@
       custom = import ./custom { inherit lib; };
 
       baseline-modules = [
-        ./options/beszel
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
 

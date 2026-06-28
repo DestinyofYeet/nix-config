@@ -9,10 +9,10 @@
     ./openssh.nix
     # ./authelia.nix
     # ./zabbix.nix
-    ./beszel-agent.nix
     ./authentikLoadBalancer.nix
     ./vaultwardenLoadBalancer.nix
     (import ../../parts/uptime.nix "uptime.uwuwhatsthis.de")
+    (import ../../parts/gatus/gatus.nix { domain = "status.uwuwhatsthis.de"; })
   ];
 
   services.smartd.enable = lib.mkForce false;

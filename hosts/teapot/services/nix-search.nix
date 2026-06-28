@@ -18,9 +18,6 @@ in
     enableACME = true;
     locations."/".root = inputs.nuscht-search.packages.${pkgs.stdenv.system}.mkMultiSearch {
       scopes = [
-        (build-scope ../../../options/beszel/default.nix "beszel"
-          "https://code.ole.blue/ole/nix-config/src/branch/main/"
-        )
         (build-scope ../../../options/capabilities/options.nix "capabilities"
           "https://code.ole.blue/ole/nix-config/src/branch/main/"
         )

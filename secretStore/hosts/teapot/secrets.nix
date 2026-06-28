@@ -51,5 +51,7 @@ in
   "stalwart-db.age".publicKeys = authed;
   "stalwart-ldap.age".publicKeys = authed;
 
+  "mollysocket-env.age".publicKeys = authed;
+
 }
 // (importFolder "vms/" inputs)

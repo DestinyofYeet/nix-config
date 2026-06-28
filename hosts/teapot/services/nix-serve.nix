@@ -41,4 +41,21 @@ in
       proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
     };
   };
+
+  services.gatus.settings.endpoints = [
+    {
+      name = "Binary cache";
+      interval = "60s";
+      url = "https://cache.ole.blue/nix-cache-info";
+      conditions = [
+        "[STATUS] == 200"
+      ];
+
+      alerts = [
+        {
+          type = "ntfy";
+        }
+      ];
+    }
+  ];
 }

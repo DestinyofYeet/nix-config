@@ -1,1 +1,7 @@
-{ ... }: { imports = [ ./configuration.nix ../../baseline ]; }
+{ ... }:
+{
+  imports = [
+    ./configuration.nix
+    ../../baseline
+  ];
+}

@@ -28,7 +28,6 @@
     ./atuin.nix
     ./strichliste-demo.nix
     # ./github-runner.nix
-    ./beszel-agent.nix
     ./mastdodon.nix
     ./livekit.nix
     ../../parts/vaultwarden/config.nix
@@ -36,6 +35,11 @@
     (import ../../parts/uptime.nix "uptime.ole.blue")
     ./syncthing.nix
     ./virtualisation.nix
+    (import ../../parts/gatus/gatus.nix {
+      domain = "status.ole.blue";
+      filter = [ "cache.ole.blue" ];
+    })
+    ./molly.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

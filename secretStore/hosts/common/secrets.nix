@@ -23,4 +23,6 @@ in
   "vaultwarden-env.age".publicKeys = authed;
   "vaultwarden-private-key.age".publicKeys = authed;
   "vaultwarden-sync-key.age".publicKeys = authed;
+
+  "gatus-env.age".publicKeys = authed;
 }
