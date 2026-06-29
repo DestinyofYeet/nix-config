@@ -51,6 +51,12 @@ in
     "desktop"
   ];
 })
+// (mkEntry "handy" {
+  ip = "172.27.255.5";
+  groups = [
+    "end-user"
+  ];
+})
 // (mkEntry "kartoffelkiste" {
 
   ip = "172.27.255.6";
