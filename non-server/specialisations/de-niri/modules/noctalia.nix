@@ -128,8 +128,9 @@
         weatherEnabled = false;
         firstDayOfWeek = 1;
       };
+
       dock = {
-        enable = false;
+        enabled = false;
       };
 
       general = {
