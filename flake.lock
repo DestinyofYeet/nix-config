@@ -1342,11 +1342,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1782857862,
-        "narHash": "sha256-e0drqqzXDfuTc0zdUEEXc5d/2OD3v1RUTIc6uRuA3aU=",
+        "lastModified": 1783333644,
+        "narHash": "sha256-8dl8FtNEpRKUUUjLOIka4x3xevPDhpDCAea5TDhDNHQ=",
         "ref": "refs/heads/main",
-        "rev": "30a93ca57c0d8ac4bc7463b3a0ea404e968644bf",
-        "revCount": 54,
+        "rev": "95bb8b9952cfd85cf05cef39425c8a437386779d",
+        "revCount": 56,
         "type": "git",
         "url": "https://code.ole.blue/DestinyofYeet/nb-rs"
       },
