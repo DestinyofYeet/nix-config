@@ -7,6 +7,8 @@
       dnsProvider = "cloudflare";
       group = "nginx";
 
+      extraLegoRenewFlags = [ "--ari-disable" ];
+
       # set in hosts/parts/dnsCerts.nix
       environmentFile = config.age.secrets.cloudflare-api-env.path;
     };

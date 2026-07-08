@@ -37,9 +37,14 @@
     ./virtualisation.nix
     (import ../../parts/gatus/gatus.nix {
       domain = "status.ole.blue";
-      filter = [ "cache.ole.blue" ];
+      filter = [
+        "cache.ole.blue"
+        "ole.blue-anubis"
+      ];
     })
     ./molly.nix
+    ./anubis.nix
+    ./homepage.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

@@ -256,6 +256,11 @@
       # url = "git+file:///home/ole/github/rest/strichliste-samu";
       url = "github:semmelsamu/strichliste";
     };
+
+    homepage = {
+      url = "git+https://code.ole.blue/DestinyofYeet/website.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

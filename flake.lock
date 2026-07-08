@@ -449,6 +449,22 @@
         "url": "https://code.ole.blue/DestinyofYeet/ds-nom-layer"
       }
     },
+    "feelIt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782390185,
+        "narHash": "sha256-+gfRNhabEZdfSh9Gr9+r/4mAruwpbDyfZ7dJV4mu0lI=",
+        "owner": "khusika",
+        "repo": "FeelIt",
+        "rev": "63f56d28509fe400e9070b3b9847e8a4256e84ae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "khusika",
+        "repo": "FeelIt",
+        "type": "github"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -1176,6 +1192,27 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
+      }
+    },
+    "homepage": {
+      "inputs": {
+        "feelIt": "feelIt",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783476828,
+        "narHash": "sha256-Y8wXUxkbBER09vYXed6+OwlvRGZr7lUg4xrXjEmbGvM=",
+        "ref": "refs/heads/main",
+        "rev": "d2f6aaf566be84d587f09ffeab4202004b54d675",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://code.ole.blue/DestinyofYeet/website.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://code.ole.blue/DestinyofYeet/website.git"
       }
     },
     "ixx": {
@@ -2454,6 +2491,7 @@
         "hardware": "hardware",
         "helix": "helix",
         "home-manager": "home-manager_2",
+        "homepage": "homepage",
         "lanzaboote": "lanzaboote",
         "lemonake": "lemonake",
         "lix": "lix",
