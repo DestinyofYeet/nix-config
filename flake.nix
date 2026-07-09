@@ -484,7 +484,7 @@
           system = "x86_64-linux";
           specialArgs = defaultSpecialArgs;
           modules = [
-            inputs.simple-nixos-mailserver.nixosModule
+            inputs.simple-nixos-mailserver.nixosModules.mailserver
             inputs.nix-minecraft.nixosModules.minecraft-servers
             inputs.strichliste-rs.nixosModules.${system}.default
             { nixpkgs.overlays = [ inputs.nix-minecraft.overlay ]; }

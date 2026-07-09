@@ -67,7 +67,10 @@
     ./jellyseer.nix
     ./recyclarr.nix
     ./zigbee2mqtt.nix
-    ./karakeep.nix
+
+    # cve hell
+    # ./karakeep.nix
+
     ./readeck.nix
     ./music-assistant.nix
     ../../parts/vaultwarden/config.nix
