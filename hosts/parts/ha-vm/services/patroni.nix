@@ -105,12 +105,16 @@ in
           wal_log_hints = "on";
         };
 
-        pg_hba = [
-          "host replication replicationuser ${cidr} scram-sha-256"
-          "host all postgres ${cidr} scram-sha-256"
-          "host all all ${cidr} scram-sha-256"
-          "host all all 127.0.0.1/32 scram-sha-256"
-        ];
+        pg_hba =
+          let
+            cfg = config.services.patroni.settings.postgresql.authentication;
+          in
+          [
+            "host replication ${cfg.replication.username} ${cidr} scram-sha-256"
+            "host all ${cfg.superuser.username} ${cidr} scram-sha-256"
+            "host all all ${cidr} scram-sha-256"
+            "host all all 127.0.0.1/32 scram-sha-256"
+          ];
       };
     };
 
