@@ -57,11 +57,12 @@ in
     environmentFile = config.age.secrets.authentik-env.path;
 
     settings = {
-      listen = {
 
-        http = "${machines.${config.networking.hostName}.ip}:7689";
-        ldaps = "${machines.${config.networking.hostName}.ip}:6748";
+      listen = {
+        http = [ "${machines.${config.networking.hostName}.ip}:7689" ];
+        ldaps = [ "${machines.${config.networking.hostName}.ip}:6748" ];
       };
+
       cert_discovery_dir = "env://CREDENTIALS_DIRECTORY";
       email = {
         host = "mail.ole.blue";
