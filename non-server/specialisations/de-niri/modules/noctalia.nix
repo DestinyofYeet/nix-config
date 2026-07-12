@@ -166,7 +166,10 @@
 
       brightness = {
         enableDdcSupport = true;
+      };
 
+      notifications = {
+        overlayLayer = false;
       };
     };
   };
