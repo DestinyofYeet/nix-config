@@ -69,11 +69,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-fast-build = {
-      url = "github:Mic92/nix-fast-build";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -316,7 +311,6 @@
           { ... }:
           {
             environment.systemPackages = [
-              inputs.nix-fast-build.packages.x86_64-linux.default
               inputs.setup-env-rs.packages.x86_64-linux.default
             ];
           }

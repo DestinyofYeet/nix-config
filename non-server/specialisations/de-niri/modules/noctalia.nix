@@ -1,9 +1,13 @@
 {
   pkgs,
   lib,
-  osConfig,
+  config,
   ...
 }:
+let
+  satty = lib.getExe pkgs.satty;
+
+in
 {
 
   home.file.".cache/noctalia/wallpapers.json" = {
@@ -12,164 +16,163 @@
     };
   };
 
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
 
-    plugins = {
-      sources = [
-        {
-          enabled = true;
-          name = "Official Noctalia Plugins";
-          url = "https://github.com/noctalia-dev/noctalia-plugins";
-        }
-      ];
-
-      states = {
-        screenshot = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-      };
-      version = 2;
-    };
-
-    # pluginSettings = { };
+    systemd.enable = true;
 
     settings = {
-      settingsVersion = 0;
+      plugins = {
+
+        enabled = [ "noctalia/screenshot" ];
+
+        source = [
+          {
+            name = "Official Noctalia Plugins";
+            kind = "git";
+            location = "https://github.com/noctalia-dev/noctalia-plugins";
+            auto_update = true;
+          }
+        ];
+      };
+
+      wallpaper = {
+        enabled = true;
+        default.path = lib.custom.settings.non-server.background;
+      };
+
+      theme = {
+        source = "builtin";
+        mode = "dark";
+      };
+
+      shell = {
+        screenshot = {
+          save_to_file = false;
+          copy_to_clipboard = false;
+          pipe_to_command = true;
+          pipe_command = "${satty} -f -";
+        };
+
+        show_location = false;
+        clipboard_enabled = true;
+        clipboard_image_action_command = "${satty} -f -";
+        launch_apps_as_systemd_services = config.programs.noctalia.systemd.enable;
+
+        password_style = "random";
+        setup_wizard_enabled = false;
+
+      };
+
+      widget =
+        let
+          colors = {
+            color = "primary";
+            icon_color = "secondary";
+          };
+        in
+        {
+          clock = {
+            format = "{:%H:%M %a, %b %d}";
+          };
+
+          workspaces = {
+            focused_color = "#00BAFF";
+            occupied_color = "tertiary";
+          };
+
+          active_window = {
+            title_scroll = "on_hover";
+            max_length = 180;
+          };
+
+          sysmon = {
+            stat = "cpu_usage";
+            label_min_width = 40;
+          }
+          // colors;
+
+          network = {
+            show_label = true;
+          }
+          // colors;
+
+          battery = {
+            displayMode = "graphic";
+          };
+
+          tray = {
+            pinned = [ "steam" ];
+            drawer = true;
+            icon_color = "error";
+          };
+
+          caffeine = {
+            color = "error";
+          };
+
+          volume = {
+          }
+          // colors;
+
+          control-center = {
+            icon_color = "error";
+          };
+        };
+
       bar = {
-        barType = "simple";
-        position = "top";
-        hideOnOverview = true;
+        order = [ "main" ];
 
-        widgets = {
-          left = [
-            {
-              id = "Workspace";
-            }
-            {
-              id = "ActiveWindow";
-              colorizeIcons = false;
-            }
-            {
-              id = "MediaMini";
-              textColor = "primary";
-            }
+        main = {
+          position = "top";
+          layer = "top";
+          show_on_workspace_switch = false;
+          auto_hide = false;
+          margin_ends = 0;
+
+          start = [
+            "workspaces"
+            "active_window"
+            "media"
           ];
+
           center = [
-            {
-              id = "Clock";
-              clockColor = "primary";
-            }
-            {
-              id = "plugin:screenshot";
-            }
+            "clock"
+            # "noctalia/screenshot:screenshot"
           ];
-          right = [
-            {
-              id = "KeepAwake";
-              iconColor = "error";
-            }
-            {
-              id = "Volume";
-              displayMode = "alwaysShow";
-              iconColor = "secondary";
-              textColor = "primary";
-            }
-            (lib.mkIf (osConfig.capabilities.hardware.keyboardBacklight.enable) {
-              id = "Brightness";
-              displayMode = "alwaysShow";
-              iconColor = "secondary";
-              textColor = "primary";
-            })
-            {
-              id = "SystemMonitor";
-              compactMode = true;
-              iconColor = "secondary";
-              textColor = "primary";
-              usePadding = true;
-            }
-            {
-              displayMode = "alwaysShow";
-              iconColor = "secondary";
-              id = "Network";
-              textColor = "primary";
-            }
-            {
-              displayMode = "onhover";
-              iconColor = "secondary";
-              id = "Bluetooth";
-              textColor = "primary";
-            }
 
-            {
-              id = "Battery";
-              displayMode = "graphic";
-            }
-            {
-              id = "ControlCenter";
-              enableColorization = true;
-              colorizeSystemIcon = "error";
-              usePadding = true;
-            }
-            {
-              id = "Tray";
-              chevronColor = "error";
-              pinned = [
-                "steam"
-              ];
-            }
+          end = [
+            "caffeine"
+            "volume"
+            "brightness"
+            "sysmon"
+            "network"
+            "bluetooth"
+            "battery"
+            "control-center"
+            "tray"
           ];
         };
       };
 
       location = {
-        showWeekNumberInCalendar = true;
-        weatherEnabled = false;
-        firstDayOfWeek = 1;
+        auto_locate = true;
+
+        # no replacement found
+        # showWeekNumberInCalendar = true;
       };
 
-      dock = {
-        enabled = false;
-      };
+      notification = {
+        enable_daemon = true;
+        show_app_name = true;
+        show_actions = true;
 
-      general = {
-        showSessionButtonsOnLockScreen = false;
-        showHibernateOnLockScreen = false;
-        passwordChars = true;
-        lockScreenAnimations = true;
-      };
-
-      appLauncher =
-        let
-          wl-paste = lib.getExe' pkgs.wl-clipboard "wl-paste";
-          satty = lib.getExe pkgs.satty;
-        in
-        {
-          terminalCommand = "${lib.getExe pkgs.wezterm} -e";
-          showIconBackground = true;
-          overviewLayer = true;
-          enableClipboardHistory = true;
-          clipboardWatchTextCommand = "${wl-paste} --type text --watch cliphist store";
-          clipboardWatchImageCommand = "${wl-paste} --type image --watch cliphist store";
-          screenshotAnnotationTool = "${satty} -f -";
-        };
-
-      nightLight = {
-        enabled = false;
-        autoSchedule = false;
-        nightTemp = "4000";
-        dayTemp = "6500";
-        manualSunrise = "07:00";
-        manualSunset = "22:00";
+        position = "top_right";
+        layer = "top";
       };
 
       brightness = {
-        enableDdcSupport = true;
-      };
-
-      notifications = {
-        overlayLayer = false;
+        enable_ddcutil = true;
       };
     };
   };

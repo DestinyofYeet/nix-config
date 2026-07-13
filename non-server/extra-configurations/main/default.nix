@@ -19,7 +19,6 @@
 
   environment.systemPackages = with pkgs; [
     vulkan-tools
-    sidequest
     # beatsabermodmanager
     protonup-qt
     glslang

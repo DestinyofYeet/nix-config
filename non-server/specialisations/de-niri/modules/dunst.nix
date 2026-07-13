@@ -1,5 +1,5 @@
 { config, lib, ... }:
-lib.mkIf (!config.programs.noctalia-shell.enable) {
+lib.mkIf (!config.programs.noctalia.enable) {
   services.dunst = {
     enable = true;
 

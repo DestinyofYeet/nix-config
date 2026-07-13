@@ -300,6 +300,7 @@ in
       # arduino-ide
       # segger-jlink
       viu
+      ddcutil
     ]
     # ++ luaPkgs
     ++ kdePkgs

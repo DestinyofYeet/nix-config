@@ -13,9 +13,8 @@ let
   noctalia =
     cmd:
     [
-      "noctalia-shell"
-      "ipc"
-      "call"
+      "noctalia"
+      "msg"
     ]
     ++ (lib.splitString " " cmd);
 
@@ -135,34 +134,27 @@ in
 
         (mkAction {
           key = "XF86AudioRaiseVolume";
-          spawn = (noctalia "volume increase");
+          spawn = (noctalia "volume-up");
           whileLocked = true;
         })
         (mkAction {
           key = "XF86AudioLowerVolume";
-          # spawn = (noctalia "volume decrease");
-          spawn = [
-            "noctalia-shell"
-            "ipc"
-            "call"
-            "volume"
-            "decrease"
-          ];
+          spawn = (noctalia "volume-down");
           whileLocked = true;
         })
         (mkAction {
           key = "XF86AudioMute";
-          spawn = (noctalia "volume muteOutput");
+          spawn = (noctalia "volume-mute");
           whileLocked = true;
         })
         (mkAction {
           key = "XF86AudioMicMute";
-          spawn = (noctalia "volume muteInput");
+          spawn = (noctalia "mic-mute");
           whileLocked = true;
         })
         (mkAction {
           key = "XF86AudioPlay";
-          spawn = (noctalia "media playPause");
+          spawn = (noctalia "media toggle");
           whileLocked = true;
         })
         (mkAction {
@@ -178,12 +170,12 @@ in
 
         (mkAction {
           key = "XF86MonBrightnessUp";
-          spawn = (noctalia "brightness increase");
+          spawn = (noctalia "brightness-up");
         })
 
         (mkAction {
           key = "XF86MonBrightnessDown";
-          spawn = (noctalia "brightness decrease");
+          spawn = (noctalia "brightness-down");
         })
 
         (mkAction {
@@ -193,7 +185,7 @@ in
 
         (mkAction {
           key = "Mod+d";
-          spawn = (noctalia "launcher toggle");
+          spawn = (noctalia "panel-toggle launcher");
         })
 
         (mkAction {
@@ -230,9 +222,6 @@ in
       ];
 
       spawn-at-startup = [
-        {
-          command = [ "noctalia-shell" ];
-        }
         {
           argv = (mkList "${lib.getExe' pkgs.networkmanagerapplet "nm-applet"} --indicator");
         }

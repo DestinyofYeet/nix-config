@@ -1,4 +1,10 @@
-{ pkgs, config, lib, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
   stylix.enable = true;
 
   # me likey
@@ -7,8 +13,7 @@
   # tokyo-night-terminal-dark
   # synth-midnight-dark
   # tokyo-city-dark
-  stylix.base16Scheme =
-    "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
   #
   # stylix.image = pkgs.fetchurl {
   #   url = "https://w.wallhaven.cc/full/qz/wallhaven-qzq1p5.jpg";
@@ -41,5 +46,6 @@
 
     yazi.enable = false;
     ashell.enable = false;
+    noctalia.enable = false;
   };
 }
