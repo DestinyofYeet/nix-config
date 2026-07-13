@@ -98,8 +98,9 @@ in
           // colors;
 
           battery = {
-            displayMode = "graphic";
-          };
+            display_mode = "graphic";
+          }
+          // colors;
 
           tray = {
             pinned = [ "steam" ];
@@ -118,6 +119,8 @@ in
           control-center = {
             icon_color = "error";
           };
+
+          brightness = { } // colors;
         };
 
       bar = {
