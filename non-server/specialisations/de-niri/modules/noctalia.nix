@@ -121,6 +121,7 @@ in
 
           clock = {
             format = "{:%H:%M %a, %b %d}";
+            color = "secondary";
           };
 
           workspaces = {
@@ -155,7 +156,7 @@ in
             icon_color = "error";
 
             drawer = true;
-            drawer_item_size = 16;
+            drawer_item_size = 20;
           };
 
           caffeine = {

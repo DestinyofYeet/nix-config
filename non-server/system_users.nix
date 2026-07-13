@@ -11,6 +11,7 @@
       "wheel"
       "dialout"
       "tty"
+      "i2c"
     ];
     hashedPassword = "$y$j9T$crvVN5eaEGJM85SYKOAVm/$WYjB56/3GcSB5sR7/u8Ldpz0wtMcyrJWinqru/dvkB/";
   };

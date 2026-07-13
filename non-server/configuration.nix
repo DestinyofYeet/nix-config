@@ -172,4 +172,6 @@
       "rd.systemd.show_status=auto"
     ];
   };
+
+  hardware.i2c.enable = true;
 }

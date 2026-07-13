@@ -104,6 +104,9 @@ in
 
   programs.ssh = {
     enable = true;
+
+    enableDefaultConfig = false;
+
     settings = rlib.mkMerge [
       (mkHost rec {
         host = "github.com";
