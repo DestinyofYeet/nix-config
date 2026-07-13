@@ -139,6 +139,8 @@ in
           active_window = {
             title_scroll = "on_hover";
             max_length = 180;
+
+            inherit (colors) color;
           };
 
           sysmon = {
@@ -172,6 +174,7 @@ in
           };
 
           volume = {
+            mute_color = "#787878";
           }
           // colors;
 
