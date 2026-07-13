@@ -30,7 +30,13 @@ in
           {
             name = "official";
             kind = "git";
-            location = "https://github.com/noctalia-dev/noctalia-plugins";
+            location = "https://github.com/noctalia-dev/official-plugins";
+            auto_update = true;
+          }
+          {
+            name = "community";
+            kind = "git";
+            location = "https://github.com/noctalia-dev/community-plugins";
             auto_update = true;
           }
         ];
