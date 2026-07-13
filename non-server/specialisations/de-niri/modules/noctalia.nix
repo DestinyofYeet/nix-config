@@ -28,7 +28,7 @@ in
 
         source = [
           {
-            name = "Official Noctalia Plugins";
+            name = "official";
             kind = "git";
             location = "https://github.com/noctalia-dev/noctalia-plugins";
             auto_update = true;
@@ -113,7 +113,7 @@ in
       widget =
         let
           colors = {
-            color = "primary";
+            color = "#00B7C2";
             icon_color = "secondary";
           };
         in
@@ -150,6 +150,8 @@ in
             display_mode = "graphic";
           }
           // colors;
+
+          bluetooth = { } // colors;
 
           tray = {
             pinned = [ "steam" ];
@@ -214,7 +216,7 @@ in
       };
 
       weather = {
-        enable = false;
+        enabled = false;
       };
 
       notification = {
