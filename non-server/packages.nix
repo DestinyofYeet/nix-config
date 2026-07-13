@@ -301,6 +301,7 @@ in
       # segger-jlink
       viu
       ddcutil
+      wl-color-picker
     ]
     # ++ luaPkgs
     ++ kdePkgs

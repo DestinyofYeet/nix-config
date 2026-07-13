@@ -64,6 +64,52 @@ in
 
       };
 
+      idle =
+        let
+
+          brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+          keyboard-backlight = "platform::kbd_backlight";
+        in
+        {
+          pre_action_fade_seconds = 0;
+          behavior_order = [
+            "kb_backlight"
+            "dimm_screen"
+            "lock"
+            "screen_off"
+          ];
+
+          behavior = {
+            kb_backlight = {
+              action = "command";
+              timeout = 60;
+              command = "${brightnessctl} -sd ${keyboard-backlight} set 0";
+              resume_command = "${brightnessctl} -rd ${keyboard-backlight}";
+              enabled = true;
+            };
+
+            dimm_screen = {
+              action = "command";
+              timeout = (60 * 1.5);
+              command = "${brightnessctl} -s set 10";
+              resume_command = "${brightnessctl} -r";
+              enabled = true;
+            };
+
+            lock = {
+              timeout = (60 * 3);
+              action = "lock";
+              enabled = true;
+            };
+
+            screen_off = {
+              timeout = (60 * 5);
+              action = "screen_off";
+              enabled = true;
+            };
+          };
+        };
+
       widget =
         let
           colors = {
@@ -72,13 +118,15 @@ in
           };
         in
         {
+
           clock = {
             format = "{:%H:%M %a, %b %d}";
           };
 
           workspaces = {
             focused_color = "#00BAFF";
-            occupied_color = "tertiary";
+            occupied_color = "#9bfece";
+            empty_color = "#60639b";
           };
 
           active_window = {
@@ -104,8 +152,10 @@ in
 
           tray = {
             pinned = [ "steam" ];
-            drawer = true;
             icon_color = "error";
+
+            drawer = true;
+            drawer_item_size = 16;
           };
 
           caffeine = {
@@ -159,10 +209,11 @@ in
       };
 
       location = {
-        auto_locate = true;
+        auto_locate = false;
+      };
 
-        # no replacement found
-        # showWeekNumberInCalendar = true;
+      weather = {
+        enable = false;
       };
 
       notification = {

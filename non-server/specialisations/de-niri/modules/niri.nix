@@ -299,6 +299,10 @@ in
           };
         };
       };
+
+      switch-events = {
+        lid-close.action.spawn = mkList "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
+      };
     };
   };
 }

@@ -2,19 +2,17 @@
   lib,
   pkgs,
   osConfig,
+  config,
   inputs,
   ...
 }:
 let
-  # lock = "${lib.getExe pkgs.swaylock-effects} --daemonize -C ~/.config/swaylock/config";
-  lock = "${
-    lib.getExe' inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default "noctalia-shell"
-  } ipc call lockScreen lock";
+  lock = "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
   niri = "${lib.getExe' pkgs.niri "niri"}";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   keyboard-backlight = "platform::kbd_backlight";
 in
-{
+lib.mkIf (!config.programs.noctalia.enable) {
   services.swayidle = {
     enable = true;
 
@@ -33,7 +31,7 @@ in
       }
       {
         timeout = 60 * 3;
-        command = "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
+        command = lock;
       }
       {
         timeout = 60 * 5;
