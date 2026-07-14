@@ -70,6 +70,13 @@ in
 
       };
 
+      osd = {
+        kinds = {
+          privacy = false;
+          media = false;
+        };
+      };
+
       idle =
         let
 
