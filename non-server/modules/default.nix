@@ -5,10 +5,6 @@
   # needed for agenix service to start properly
   systemd.user.startServices = "sd-switch";
 
-  nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.overlays = osConfig.nixpkgs.overlays;
-
   imports = [
     ../../baseline/modules
     ./nu-scripts

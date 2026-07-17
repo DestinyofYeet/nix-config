@@ -11,8 +11,6 @@
 
   security.polkit.enable = true;
 
-  nixpkgs.overlays = [ inputs.niri-flake.overlays.niri ];
-
   programs.niri.enable = true;
 
   services.iio-niri = {

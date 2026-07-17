@@ -48,7 +48,7 @@ in
     config = {
       permittedInsecurePackages = [
         "electron-39.8.10" # eol, don't know what uses it
-        "electron-40.10.5" # eol, don't know what uses it
+        "electron-40.10.5" # eol, vesktop
         # "ventoy-1.1.05"
         "dotnet-sdk-6.0.428" # eddie
         "dotnet-runtime-6.0.36" # eddie

@@ -13,7 +13,6 @@
     ./nix-serve.nix
     # ./netdata.nix
     ./navidrome.nix
-    ./netdata.nix
     ./openssh.nix
     # ./hydra.nix
     # ./innernet.nix

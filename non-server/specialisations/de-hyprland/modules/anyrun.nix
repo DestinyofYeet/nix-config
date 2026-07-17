@@ -1,9 +1,16 @@
-{ inputs, pkgs, secretStore, config, lib, ... }:
+{
+  inputs,
+  pkgs,
+  secretStore,
+  config,
+  lib,
+  ...
+}:
 let
-  startVpnScript =
-    lib.custom.scripts.startOpenfortiVpn config.age.secrets.openfortivpn.path;
+  startVpnScript = lib.custom.scripts.startOpenfortiVpn config.age.secrets.openfortivpn.path;
   stopVpnScript = lib.custom.scripts.stopOpenfortiVpn;
-in {
+in
+{
   age.secrets = {
     openfortivpn.file = secretStore.nonServer + "/openfortivpn-config.age";
   };
@@ -14,9 +21,15 @@ in {
     package = pkgs.anyrun;
 
     config = {
-      x = { fraction = 0.5; };
-      y = { fraction = 0.3; };
-      width = { fraction = 0.5; };
+      x = {
+        fraction = 0.5;
+      };
+      y = {
+        fraction = 0.3;
+      };
+      width = {
+        fraction = 0.5;
+      };
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
@@ -114,7 +127,7 @@ in {
         Config(
           prefix: ":run",
           allow_unfree: true,
-          channel: "nixpkgs-unstable",
+          channel: "sh: line 1: q: command not foundnixpkgs-unstable",
           max_entries: 10,
         )
       '';

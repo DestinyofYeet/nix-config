@@ -6,6 +6,7 @@
 {
   home-manager = {
     backupFileExtension = "backup";
+    useGlobalPkgs = true;
 
     extraSpecialArgs = {
       inherit (flake.defaultSpecialArgs)
