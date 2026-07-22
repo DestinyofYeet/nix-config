@@ -30,7 +30,7 @@ in
 
     settings = {
       DEFAULT = {
-        APP_NAME = "code.ole.blue";
+        APP_NAME = "git.ole.blue";
       };
 
       indexer = {
@@ -109,22 +109,32 @@ in
 
   systemd.services."forgejo".serviceConfig.EnvironmentFile = config.age.secrets.forgejo-env-file.path;
 
-  services.nginx.virtualHosts."code.ole.blue" = {
-    forceSSL = true;
-    enableACME = true;
+  services.nginx.virtualHosts = {
 
-    locations."/" = {
-      proxyPass = "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${toString config.services.forgejo.settings.server.HTTP_PORT}";
-      proxyWebsockets = true;
-      extraConfig = ''
-        proxy_set_header Connection $http_connection;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+    ${config.services.forgejo.settings.DEFAULT.APP_NAME} = {
+      forceSSL = true;
+      enableACME = true;
 
-        client_max_body_size 0;
-      '';
+      locations."/" = {
+        proxyPass = "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${toString config.services.forgejo.settings.server.HTTP_PORT}";
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header Connection $http_connection;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+
+          client_max_body_size 0;
+        '';
+      };
     };
+
+    "code.ole.blue" = {
+      enableACME = true;
+      forceSSL = true;
+      globalRedirect = config.services.forgejo.settings.DEFAULT.APP_NAME;
+    };
+
   };
 }

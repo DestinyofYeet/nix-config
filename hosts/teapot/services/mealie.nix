@@ -14,7 +14,7 @@ in
   };
 
   services.mealie = {
-    enable = false;
+    enable = true;
     # package = stable-pkgs.mealie;
     settings = {
       ALLOW_SIGNUP = "false";

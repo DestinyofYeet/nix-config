@@ -95,13 +95,13 @@
     };
 
     waybar-taskwarrior = {
-      url = "git+https://code.ole.blue/ole/waybar-taskwarrior.rs";
+      url = "git+https://git.ole.blue/DestinyofYeet/waybar-taskwarrior.rs";
       # url = "path:///home/ole/github/waybar-taskwarrior.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     setup-env-rs = {
-      url = "git+https://code.ole.blue/ole/setup-env.rs";
+      url = "git+https://git.ole.blue/DestinyofYeet/setup-env.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -124,7 +124,7 @@
     # };
 
     auto-add-torrents = {
-      url = "git+https://code.ole.blue/ole/auto-add-torrents-python";
+      url = "git+https://git.ole.blue/DestinyofYeet/auto-add-torrents-python";
       # url = "path:///home/ole/github/auto-add-torrents-python";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -176,12 +176,12 @@
     nix-monitored.url = "github:ners/nix-monitored";
 
     squid-api = {
-      url = "git+https://code.ole.blue/ole/squid-api";
+      url = "git+https://git.ole.blue/DestinyofYeet/squid-api";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     strichliste-rs = {
-      url = "git+https://code.ole.blue/strichliste-rs/strichliste-rs";
+      url = "git+https://git.ole.blue/strichliste-rs/strichliste-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -213,16 +213,16 @@
     authentik-nix.url = "github:nix-community/authentik-nix";
 
     nb-rs = {
-      url = "git+https://code.ole.blue/DestinyofYeet/nb-rs";
+      url = "git+https://git.ole.blue/DestinyofYeet/nb-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    typ2anki.url = "git+https://code.ole.blue/typ2anki/typ2anki?submodules=1";
+    typ2anki.url = "git+https://git.ole.blue/typ2anki/typ2anki?submodules=1";
 
-    clean-unused-files.url = "git+https://code.ole.blue/DestinyofYeet/clean-qbittorrent-rs";
+    clean-unused-files.url = "git+https://git.ole.blue/DestinyofYeet/clean-qbittorrent-rs";
     nix-alien.url = "github:thiagokokada/nix-alien";
 
     niri-flake.url = "github:sodiboo/niri-flake";
@@ -235,12 +235,12 @@
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/develop";
 
     ds-nom-layer = {
-      url = "git+https://code.ole.blue/DestinyofYeet/ds-nom-layer";
+      url = "git+https://git.ole.blue/DestinyofYeet/ds-nom-layer";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     rlib = {
-      url = "git+https://code.ole.blue/DestinyofYeet/rlib/";
+      url = "git+https://git.ole.blue/DestinyofYeet/rlib/";
     };
 
     solaar = {
@@ -253,7 +253,7 @@
     };
 
     homepage = {
-      url = "git+https://code.ole.blue/DestinyofYeet/website.git";
+      url = "git+https://git.ole.blue/DestinyofYeet/website.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

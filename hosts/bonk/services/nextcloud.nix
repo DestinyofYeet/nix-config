@@ -16,6 +16,8 @@ let
       callPackage
       ;
   };
+
+  ncVersion = "34";
 in
 {
   age.secrets =
@@ -60,7 +62,7 @@ in
   services.nextcloud = {
     enable = true;
 
-    package = pkgs.nextcloud33;
+    package = pkgs."nextcloud${ncVersion}";
 
     hostName = "cloud.ole.blue";
     https = true;
@@ -114,7 +116,7 @@ in
       # };
     }
     // {
-      inherit (nc4nix.nextcloud-33)
+      inherit (nc4nix."nextcloud-${ncVersion}")
         user_oidc
         # phonetrack
         deck
