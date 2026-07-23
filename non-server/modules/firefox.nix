@@ -41,6 +41,17 @@ in
       name = "Passbolt FS-Admin";
     };
 
+    proxy = {
+      id = 3;
+      name = "Proxy on port 2020";
+
+      settings = {
+        "network.proxy.socks" = "localhost";
+        "network.proxy.type" = 1;
+        "network.proxy.socks_port" = 2020;
+      };
+    };
+
     default-profile = {
       id = 0;
       name = "default-profile";
