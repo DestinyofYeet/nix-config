@@ -91,8 +91,9 @@ in
         auth_token = "!secrets.yaml auth_token";
       };
       availability.enabled = true;
+
       homeassistant = {
-        enable = true;
+        enabled = true;
       };
 
       mqtt = {
