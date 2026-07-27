@@ -13,6 +13,7 @@ in
 {
   programs.wezterm = {
     enable = true;
+
     extraConfig = ''
       local wezterm = require("wezterm")
       local config = wezterm.config_builder()
@@ -22,6 +23,7 @@ in
         font = wezterm.font "Comic Code Ligatures",
         color_scheme = "Tokyo Night Moon",
         window_background_opacity = 0.6,
+        wayland_window_background_blur = true,
 
         window_padding = {
           left = 0,
