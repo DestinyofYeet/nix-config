@@ -1,6 +1,4 @@
 {
-  # nixConfig = { allow-import-from-derivation = false; }; # stylix base16.nix has IFD
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -25,9 +23,7 @@
     };
 
     stylix = {
-      # url = "github:danth/stylix/ed91a20c84a80a525780dcb5ea3387dddf6cd2de";
       url = "github:danth/stylix";
-      # inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -47,8 +43,6 @@
     };
 
     networkNamespaces = {
-      # url = "path:///home/ole/nixos/customLibs/networkNamespaces";
-      # url = "path:///home/ole/github/namespaces.nix";
       url = "github:DestinyofYeet/namespaces.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -59,7 +53,6 @@
     };
 
     shell-aliases = {
-      # url = "path:///home/ole/github/shell-aliases.nix";
       url = "github:DestinyofYeet/shell-aliases.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -74,11 +67,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # mdpls-nix = {
-    #   url = "github:DestinyofYeet/mdpls.nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,39 +77,20 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lemonake = {
-      url = "github:PassiveLemon/lemonake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    waybar-taskwarrior = {
-      url = "git+https://git.ole.blue/DestinyofYeet/waybar-taskwarrior.rs";
-      # url = "path:///home/ole/github/waybar-taskwarrior.rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # waybar-taskwarrior = {
+    #   url = "git+https://git.ole.blue/DestinyofYeet/waybar-taskwarrior.rs";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     setup-env-rs = {
       url = "git+https://git.ole.blue/DestinyofYeet/setup-env.rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # prost = {
-    #   url = "github:haennes/prost";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     nuscht-search = {
       url = "github:NuschtOS/search";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # hyprgrass = {
-    #   url = "github:horriblename/hyprgrass";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     hyprland.follows = "hyprland";
-    #   };
-    # };
 
     auto-add-torrents = {
       url = "git+https://git.ole.blue/DestinyofYeet/auto-add-torrents-python";
