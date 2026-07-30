@@ -2,9 +2,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    stable-nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    stable-nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
-    old-nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    old-nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+
+    deluge-pkgs.url = "github:NixOS/nixpkgs/241313f4e8e508cb9b13278c2b0fa25b9ca27163";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -290,14 +292,14 @@
       ]
       ++ baseline-modules;
 
-      stable-pkgs = import inputs.stable-nixpkgs {
+      pkg-config = {
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
-      old-pkgs = import inputs.old-nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
+
+      stable-pkgs = import inputs.stable-nixpkgs pkg-config;
+      old-pkgs = import inputs.old-nixpkgs pkg-config;
+      deluge-pkgs = import inputs.deluge-pkgs pkg-config;
 
       secretStore = import ./secretStore { };
 
@@ -310,6 +312,7 @@
           custom
           home-manager
           secretStore
+          deluge-pkgs
           ;
         flake = self;
         rlib = inputs.rlib.lib;

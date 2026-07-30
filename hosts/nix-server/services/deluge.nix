@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  deluge-pkgs,
   ...
 }:
 {
@@ -22,10 +23,10 @@
     web.enable = true;
     dataDir = "/mnt/data/configs/deluge";
 
-    package = pkgs.deluge-2_x.override {
+    package = deluge-pkgs.deluge-2_x.override {
 
       # https://github.com/NixOS/nixpkgs/issues/540545
-      python3Packages = pkgs.python3Packages.overrideScope (
+      python3Packages = deluge-pkgs.python3Packages.overrideScope (
         final: prev: {
           setuptools = prev.setuptools_80;
         }

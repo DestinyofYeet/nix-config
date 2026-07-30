@@ -24,7 +24,6 @@
     deploy-rs
     helix
     dig
-    glances
     wireguard-tools
     nix-output-monitor
     openssl
