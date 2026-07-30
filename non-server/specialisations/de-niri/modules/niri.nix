@@ -2,7 +2,6 @@
   rlib,
   pkgs,
   lib,
-  config,
   osConfig,
   ...
 }:
@@ -42,16 +41,70 @@ let
 
   mkWorkspace = key: workspace: {
     "Mod+${toString key}".action.focus-workspace = workspace;
-    "Mod+Shift+${toString key}".action.move-window-to-workspace = [
-      { focus = false; }
-      (toString key)
-    ];
   };
 in
 {
 
+  imports = [
+    ./niri_custom_options.nix
+  ];
+
   programs.niri = {
     enable = true;
+
+    custom = {
+      namedWorkspaces = [
+        {
+          name = "term";
+          keybind = "Mod+Shift+t";
+          matches = [
+            {
+              app-id = "org.wezfurlong.wezterm";
+            }
+          ];
+        }
+        {
+          name = "browser";
+          keybind = "Mod+Shift+b";
+          matches = [
+            {
+              app-id = "firefox";
+            }
+          ];
+        }
+        {
+          name = "pwmgr";
+          keybind = "Mod+Shift+p";
+          matches = [
+            {
+              app-id = "Bitwarden";
+            }
+          ];
+        }
+        {
+          name = "comms";
+          keybind = "Mod+Shift+c";
+          matches = [
+            {
+              app-id = "signal";
+            }
+            {
+              app-id = "vesktop";
+            }
+          ];
+        }
+        {
+          name = "music";
+          keybind = "Mod+Shift+m";
+          matches = [
+            {
+              app-id = "tidal-hifi";
+            }
+          ];
+        }
+      ];
+    };
+
     settings = {
       environment = {
         QT_QPA_PLATFORM = "wayland";
@@ -83,6 +136,8 @@ in
         focus-ring = {
           enable = false;
         };
+
+        empty-workspace-above-first = true;
       };
 
       input = {
@@ -108,6 +163,12 @@ in
 
         mod-key = "super";
 
+        workspace-auto-back-and-forth = true;
+      };
+
+      workspaces = lib.mkIf (lib.custom.isMain osConfig) {
+        "comms".open-on-output = "DP-3";
+        "music".open-on-output = "DP-3";
       };
 
       binds = rlib.mkMerge [
@@ -275,17 +336,6 @@ in
           };
 
           open-focused = false;
-        }
-      ]
-      ++ lib.optionals (lib.custom.isMain osConfig) [
-        {
-          matches = [
-            {
-              app-id = "vesktop";
-            }
-          ];
-          open-on-output = "DP-3";
-          open-maximized = true;
         }
       ];
 

@@ -141,6 +141,9 @@ in
             focused_color = "#00BAFF";
             occupied_color = "#9bfece";
             empty_color = "#60639b";
+            labels_only_when_occupied = true;
+            max_label_chars = 10;
+            display = "name";
           };
 
           active_window = {
