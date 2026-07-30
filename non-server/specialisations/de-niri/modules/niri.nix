@@ -310,6 +310,7 @@ in
           ];
 
           open-maximized = true;
+          open-focused = true;
         }
         {
           matches = [
