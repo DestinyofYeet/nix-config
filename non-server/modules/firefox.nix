@@ -334,6 +334,7 @@ in
         youtube-no-translation
         readeck
         bitwarden
+        floccus
       ];
 
       userChrome = ''

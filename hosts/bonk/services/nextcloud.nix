@@ -105,6 +105,7 @@ in
         calendar
         tasks
         richdocuments
+        bookmarks
         ;
 
       # user_oidc = pkgs.fetchNextcloudApp {
@@ -121,6 +122,7 @@ in
         # phonetrack
         deck
         cospend
+
         ;
     };
   };
