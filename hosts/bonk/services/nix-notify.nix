@@ -86,6 +86,7 @@ in
             "nginxMainline"
             "deluge"
             "qbittorrent-nox"
+            "anki"
           ];
         }
       ];
