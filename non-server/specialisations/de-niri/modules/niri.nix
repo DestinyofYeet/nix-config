@@ -166,10 +166,16 @@ in
         workspace-auto-back-and-forth = true;
       };
 
-      workspaces = lib.mkIf (lib.custom.isMain osConfig) {
-        "comms".open-on-output = "DP-3";
-        "music".open-on-output = "DP-3";
-      };
+      workspaces = rlib.mkMerge [
+        (rlib.mkIf (lib.custom.isMain osConfig) {
+          "comms".open-on-output = "DP-3";
+          "music".open-on-output = "DP-3";
+        })
+        (rlib.mkIf (lib.custom.isLaptop osConfig) {
+          "browser".open-on-output = "HDMI-A-1";
+          "term".open-on-output = "HDMI-A-1";
+        })
+      ];
 
       binds = rlib.mkMerge [
         {
