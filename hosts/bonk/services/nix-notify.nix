@@ -82,6 +82,10 @@ in
           packages = [
             "mastodon"
             "forgejo"
+            "nginx"
+            "nginxMainline"
+            "deluge"
+            "qbittorrent-nox"
           ];
         }
       ];
