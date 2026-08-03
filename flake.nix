@@ -227,6 +227,12 @@
       url = "git+https://git.ole.blue/DestinyofYeet/website.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-notify = {
+      # url = "git+file:///home/ole/github/rest/nix-notify";
+      url = "git+https://git.ole.blue/DestinyofYeet/nix-notify";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -263,6 +269,8 @@
         inputs.nix-index-database.nixosModules.default
 
         inputs.determinate-nix.nixosModules.default
+
+        inputs.nix-notify.nixosModules.x86_64-linux.default
       ];
 
       non-server-modules = [

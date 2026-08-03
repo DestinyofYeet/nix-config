@@ -1,6 +1,8 @@
 { keys, ... }@inputs:
-let authed = keys.authed ++ [ keys.hosts.bonk.hostKey ];
-in {
+let
+  authed = keys.authed ++ [ keys.hosts.bonk.hostKey ];
+in
+{
   "nextcloud-root-pw.age".publicKeys = authed;
 
   "authelia-lldap-pw.age".publicKeys = authed;
@@ -34,4 +36,7 @@ in {
 
   "vm-ha-hostkey-ed25519.age".publicKeys = authed;
   "vm-ha-hostkey-rsa.age".publicKeys = authed;
+
+  "nix-notify-github.age".publicKeys = authed;
+  "nix-notify-email.age".publicKeys = authed;
 }

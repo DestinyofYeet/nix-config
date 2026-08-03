@@ -109,6 +109,9 @@ in
           (build-scope inputs.noctalia.homeModules.default "octalia-hm"
             "https://github.com/noctalia-dev/noctalia-shell/tree/main"
           )
+          (build-scope inputs.nix-notify.nixosModules.${config.nixpkgs.system}.default "nix-notify"
+            "https://git.ole.blue/DestinyofYeet/tree/main"
+          )
         ];
       };
     };
