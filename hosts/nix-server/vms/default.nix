@@ -29,13 +29,13 @@ in
   age.secrets = {
     forgejo-runner-host-key = {
       file = secrets.getSecret "vm-forgejo-runner-hostkey";
-      path = "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey";
+      path = "${config.microvm.stateDir}/${forgejo-vm-name}/root/persistent/hostkey";
       symlink = false;
     };
 
     forgejo-runner-host-key-rsa = {
       file = secrets.getSecret "vm-forgejo-runner-hostkey-rsa";
-      path = "${config.microvm.stateDir}/${forgejo-vm-name}/persistent/hostkey-rsa";
+      path = "${config.microvm.stateDir}/${forgejo-vm-name}/root/persistent/hostkey-rsa";
       symlink = false;
     };
 

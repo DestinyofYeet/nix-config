@@ -1,1 +1,6 @@
-{ ... }: { imports = [ ./forgejo-runner.nix ]; }
+{ ... }: {
+  imports = [
+    ./forgejo-runner.nix
+    ./docker.nix
+  ];
+}

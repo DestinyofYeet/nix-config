@@ -7,29 +7,39 @@
 }:
 let
   secrets = secretStore.getHostSecrets "nix-server/vms/forgejo-runner";
+
+  forgejo_url = "https://${
+    flake.nixosConfigurations."teapot".config.services.forgejo.settings.DEFAULT.APP_NAME
+
+  }";
 in
 {
   age.secrets = {
     forgejo-runner-registration-token.file = secrets.getSecret "forgejo-registration-token";
   };
 
-  services.gitea-actions-runner.instances."git-ole-blue" = {
-    enable = true;
+  services.gitea-actions-runner.instances = {
+    "global-1-native" = {
+      enable = true;
 
-    url = "https://${
-      flake.nixosConfigurations."teapot".config.services.forgejo.settings.DEFAULT.APP_NAME
-    }";
-    name = "nix-server";
-    labels = [ "native:host" ];
-    tokenFile = config.age.secrets.forgejo-runner-registration-token.path;
-    hostPackages = with pkgs; [
-      nix
-      nodejs
-      gnutar
-      gzip
-      bash
-      git
-    ];
+      url = forgejo_url;
+      name = "global-1";
+
+      labels = [
+        "native:host"
+        "rust:docker://rust:1.97.1"
+      ];
+
+      tokenFile = config.age.secrets.forgejo-runner-registration-token.path;
+      hostPackages = with pkgs; [
+        nix
+        nodejs
+        gnutar
+        gzip
+        bash
+        git
+      ];
+    };
   };
 
 }
