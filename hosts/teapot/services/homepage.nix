@@ -18,8 +18,9 @@ in
     };
   };
 
-  systemd.services.anubis-homepage = {
+  systemd.services.anubis-homepage = rec {
     after = [ "nginx.service" ];
+    wants = after;
 
     serviceConfig = {
       ReadWritePaths = "/run/nginx/nginx.sock";

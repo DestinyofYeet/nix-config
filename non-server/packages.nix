@@ -224,7 +224,6 @@ in
       networkmanagerapplet
       libnotify
       hyprpaper
-      hyprshot
       hyprsunset
       sbctl
       lm_sensors
