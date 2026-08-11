@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   imports = [
     ./services
@@ -9,5 +9,7 @@
   capabilities = {
     customNixInterpreter.enable = false;
   };
+
+  programs.nh.clean.enable = lib.mkForce false;
 
 }
