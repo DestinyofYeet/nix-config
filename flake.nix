@@ -271,6 +271,7 @@
         inputs.determinate-nix.nixosModules.default
 
         inputs.nix-notify.nixosModules.x86_64-linux.default
+
       ];
 
       non-server-modules = [
@@ -279,6 +280,7 @@
             nur.overlays.default
             inputs.helix.overlays.default
             inputs.yazi.overlays.default
+            inputs.niri-flake.overlays.niri
           ];
         }
 

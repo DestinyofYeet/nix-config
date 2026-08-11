@@ -52,6 +52,8 @@ in
   programs.niri = {
     enable = true;
 
+    package = osConfig.programs.niri.package;
+
     custom = {
       namedWorkspaces = [
         {
