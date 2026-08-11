@@ -233,6 +233,8 @@
       url = "git+https://git.ole.blue/DestinyofYeet/nix-notify";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ts3-noweb.url = "github:Jokler/ts3client-noweb-nix";
   };
 
   outputs =
@@ -281,6 +283,7 @@
             inputs.helix.overlays.default
             inputs.yazi.overlays.default
             inputs.niri-flake.overlays.niri
+            inputs.ts3-noweb.overlays.default
           ];
         }
 
@@ -304,7 +307,12 @@
 
       pkg-config = {
         system = "x86_64-linux";
-        config.allowUnfree = true;
+        config = {
+          permittedInsecurePackages = [
+            "qtwebengine-5.15.19" # teamspeak3
+          ];
+          allowUnfree = true;
+        };
       };
 
       stable-pkgs = import inputs.stable-nixpkgs pkg-config;

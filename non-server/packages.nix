@@ -302,6 +302,7 @@ in
       viu
       ddcutil
       wl-color-picker
+      teamspeak3
     ]
     # ++ luaPkgs
     ++ kdePkgs
