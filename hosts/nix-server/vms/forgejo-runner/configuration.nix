@@ -2,15 +2,16 @@
 {
 
   microvm = {
-    vcpu = 4;
+    vcpu = 6;
     mem = 4096;
 
     shares = [
       {
         proto = "virtiofs";
-        tag = "root";
-        source = "root";
-        mountPoint = "/";
+        tag = "persistent";
+        source = "persistent";
+        mountPoint = "/persistent";
+        readOnly = true;
       }
     ];
 
@@ -20,10 +21,18 @@
         mountPoint = config.microvm.writableStoreOverlay;
         size = 20480;
       }
+      {
+        image = "root.img";
+        mountPoint = "/";
+        size = (1024 * 10);
+        fsType = "ext4";
+      }
     ];
 
     writableStoreOverlay = "/nix/.rw-store";
   };
+
+  fileSystems."/persistent".neededForBoot = true;
 
   services.openssh = {
     enable = true;

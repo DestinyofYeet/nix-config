@@ -28,6 +28,8 @@ in
       labels = [
         "native:host"
         "rust:docker://rust:1.97.1"
+        "ubuntu:docker://ubuntu:26.04"
+        "debian:docker://debian:stable-20260803"
       ];
 
       tokenFile = config.age.secrets.forgejo-runner-registration-token.path;

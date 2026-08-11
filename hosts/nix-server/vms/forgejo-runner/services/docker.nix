@@ -2,9 +2,9 @@
   virtualisation = {
     docker = {
       enable = true;
-      daemon.settings = {
-        storage-driver = "vfs";
-      };
+      # daemon.settings = {
+      # storage-driver = "vfs";
+      # };
     };
 
     oci-containers = {
