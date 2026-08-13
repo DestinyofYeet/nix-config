@@ -79,7 +79,7 @@ in
           keybind = "Mod+Shift+p";
           matches = [
             {
-              app-id = "Bitwarden";
+              app-id = "bitwarden";
             }
           ];
         }
