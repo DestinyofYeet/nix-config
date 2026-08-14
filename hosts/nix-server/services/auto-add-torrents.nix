@@ -12,7 +12,7 @@
   };
 
   services.auto-add-torrents = {
-    enable = true;
+    enable = false;
     configFile = config.age.secrets.auto-add-torrents-conf.path;
   };
 }
