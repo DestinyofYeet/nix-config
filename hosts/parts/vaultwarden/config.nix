@@ -43,6 +43,8 @@ in
       ROCKET_ADDRESS = "${machines.${config.networking.hostName}.ip}";
       ROCKET_PORT = 7462;
 
+      DATABASE_TIMEOUT = 30;
+
       DATA_DIR = "/var/lib/bitwarden_rs/data";
       ATTACHMENTS_FOLDER = "${DATA_DIR}/attachments";
       SENDS_FOLDER = "${DATA_DIR}/sends";
