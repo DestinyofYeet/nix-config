@@ -31,6 +31,4 @@ in
   };
 
   services.pcscd.enable = true;
-
-  services.solaar.enable = true;
 }

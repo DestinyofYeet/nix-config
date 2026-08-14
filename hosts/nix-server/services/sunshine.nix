@@ -29,11 +29,10 @@
 
   # listens on https://{}:47990
   services.sunshine = {
-    enable = true;
+    enable = false;
 
     autoStart = false;
-    capSysAdmin =
-      true; # only needed for Wayland -- omit this when using with Xorg
+    capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
     openFirewall = true;
   };
 }

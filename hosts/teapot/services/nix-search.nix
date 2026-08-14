@@ -99,13 +99,13 @@ in
           (build-scope inputs.clean-unused-files.nixosModules.default "clean-qbit"
             "https://code.ole.blue/DestinyofYeet/clean-qbittorrent-rs/src/branch/master/"
           )
-          (build-scope inputs.niri-flake.nixosModules.niri "niri-flake"
-            "https://github.com/sodiboo/niri-flake/tree/main"
-          )
-
-          (build-scope inputs.niri-flake.homeModules.niri "niri-flake-hm"
-            "https://github.com/sodiboo/niri-flake/tree/main"
-          )
+          # currently upstream package failes to eval
+          # (build-scope inputs.niri-flake.nixosModules.niri "niri-flake"
+          #   "https://github.com/sodiboo/niri-flake/tree/main"
+          # )
+          # (build-scope inputs.niri-flake.homeModules.niri "niri-flake-hm"
+          #   "https://github.com/sodiboo/niri-flake/tree/main"
+          # )
           (build-scope inputs.noctalia.homeModules.default "octalia-hm"
             "https://github.com/noctalia-dev/noctalia-shell/tree/main"
           )

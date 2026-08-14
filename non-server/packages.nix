@@ -237,7 +237,7 @@ in
       wirelesstools
       inetutils
       krita
-      (lib.mkIf (config.networking.hostName != "wattson") aseprite)
+      # (lib.mkIf (config.networking.hostName != "wattson") aseprite)
       # pyprland
       qFlipper
       yt-dlp
@@ -267,7 +267,6 @@ in
       serpl
       cgdb
       # eddie
-      moonlight-qt
       tokei
       eduvpn-client
       fladder

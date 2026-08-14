@@ -214,10 +214,6 @@
       url = "git+https://git.ole.blue/DestinyofYeet/rlib/";
     };
 
-    solaar = {
-      url = "github:Svenum/Solaar-Flake";
-    };
-
     strichliste = {
       # url = "git+file:///home/ole/github/rest/strichliste-samu";
       url = "github:semmelsamu/strichliste";
@@ -300,7 +296,6 @@
           }
         )
 
-        inputs.solaar.nixosModules.default
         inputs.strichliste.nixosModules.strichliste
       ]
       ++ baseline-modules;
