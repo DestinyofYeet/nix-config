@@ -92,28 +92,35 @@ in
     "${ipPrefix}.7"
   ];
 })
-// (
-  mkEntry "bonk-ha-vm" {
-    ip = "${ipPrefix}.10";
-    groups = [
-      "server"
-      "ha-vm"
-    ];
-    use_relays = [
-      "${ipPrefix}.1"
-      "${ipPrefix}.7"
-    ];
+// (mkEntry "bonk-ha-vm" {
+  ip = "${ipPrefix}.10";
+  groups = [
+    "server"
+    "ha-vm"
+  ];
+  use_relays = [
+    "${ipPrefix}.1"
+    "${ipPrefix}.7"
+  ];
 
-  }
-  // (mkEntry "nix-server-ha-vm" {
-    ip = "${ipPrefix}.11";
-    groups = [
-      "server"
-      "ha-vm"
-    ];
-    use_relays = [
-      "${ipPrefix}.1"
-      "${ipPrefix}.7"
-    ];
-  })
-)
+})
+// (mkEntry "nix-server-ha-vm" {
+  ip = "${ipPrefix}.11";
+  groups = [
+    "server"
+    "ha-vm"
+  ];
+  use_relays = [
+    "${ipPrefix}.1"
+    "${ipPrefix}.7"
+  ];
+})
+// (mkEntry "hope" {
+  ip = "${ipPrefix}.12";
+  external_ips = [ "hope.ole.blue:4242" ];
+  lighthouse = true;
+  groups = [
+    "lighthouse"
+    "server"
+  ];
+})

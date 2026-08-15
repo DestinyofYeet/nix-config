@@ -40,6 +40,12 @@ rec {
       };
     };
     nixie.hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEeqhJC4lcygBzfJ4CQPNRKhtuBkcmvj93IafqGm9nd1 root@nixos";
+
+    hope = {
+      hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEox737p8GpJ3AlrV0NtiOAyXjwfNpWzgqrHCmmlYA8g root@hope";
+
+      users.root.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGcREt5wTWBX+X5GEY6OmPNvsHnkjQXiO0PhBKNEm1cB root@hope";
+    };
   };
 
   authed = with users; [

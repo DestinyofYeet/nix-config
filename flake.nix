@@ -581,6 +581,9 @@
           modules = [
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
 
+            ./baseline/caches.nix
+            ./options/capabilities/options.nix
+
             ({ secretStore, ... }: {
               services.openssh = {
                 enable = true;
@@ -590,6 +593,11 @@
               console.keyMap = "de";
 
               users.users.root.openssh.authorizedKeys.keys = secretStore.keys.authed;
+
+              capabilities = {
+                customNixInterpreter.enable = false;
+                hardware.headless.enable = true;
+              };
             })
           ];
         };
@@ -610,7 +618,7 @@
         };
 
         teapot = {
-          hostname = "teapot-wg";
+          hostname = "teapot";
           profiles.system = {
             sshUser = "root";
             # user = "root";
@@ -633,6 +641,14 @@
           profiles.system = {
             sshUser = "root";
             path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.nixie;
+          };
+        };
+
+        hope = {
+          hostname = "91.132.144.172";
+          profiles.system = {
+            sshUser = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hope;
           };
         };
       };

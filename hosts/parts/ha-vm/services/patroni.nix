@@ -53,6 +53,7 @@ in
         machines."nix-server-ha-vm"
         machines."bonk-ha-vm"
         machines."teapot-ha-vm"
+        machines."hope"
       ]
     );
 
@@ -69,6 +70,7 @@ in
           "${machines."nix-server-ha-vm".ip}:2379"
           "${machines."teapot-ha-vm".ip}:2379"
           "${machines."bonk-ha-vm".ip}:2379"
+          "${machines."hope".ip}:2379"
         ];
       };
 

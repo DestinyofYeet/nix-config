@@ -7,6 +7,7 @@ let
     keys.hosts.nix-server.vms.ha-vm.hostKey
     keys.hosts.teapot.vms.ha-vm.hostKey
     keys.hosts.bonk.vms.ha-vm.hostKey
+    keys.hosts.hope.hostKey
   ];
 in
 {

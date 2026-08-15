@@ -1,27 +1,22 @@
-  def "main gen-ca" [] {
+def "main gen-ca" [] {
   # Will generate a ca.key for 99 years
   nebula-cert ca -name "YeetsNetwork" -duration 867800h
   print "DO NOT COMMIT ca.key !!!"
 };
 
 def "main create-host" [name: string] {
-  mut found_host = null;
-
   for host in (nix eval --json -f ./machines.nix | from json | transpose "key" "value") {
     let hname = $host.key;
     let hvalue = $host.value;
 
     if $name == $hname {
-      $found_host = $hvalue
+      nebula-cert sign -name $name -ip $"($hvalue.ip)/24" -groups $"($hvalue.groups | str join ",")"
+      return;
     }
   }
 
-  if $found_host == null {
-    print $"Failed to find host ($name) in machines.nix"
-    return;
-  }
+  print $"Failed to find host ($name) in machines.nix"
 
-  nebula-cert sign -name $name -ip $"($found_host.ip)/24" -groups $"($found_host.groups | str join ",")"
 }
 
 def "main create-hosts" [] {
