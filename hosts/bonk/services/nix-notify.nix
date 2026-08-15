@@ -94,6 +94,15 @@ in
           derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.nix-server.config.system.build.toplevel.drvPath";
           delay_minutes = 720;
         }
+        {
+          kind = "derivation";
+          name = "hope-closure";
+          via = "blue-email";
+          recipient = "ole@ole.blue";
+          feed_name = "nixos-unstable";
+          derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.hope.config.system.build.toplevel.drvPath";
+          delay_minutes = 720;
+        }
       ];
     };
   };
