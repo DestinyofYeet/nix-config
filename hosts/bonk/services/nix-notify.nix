@@ -67,27 +67,32 @@ in
       ];
 
       subscriptions = [
-        # {
-        #   via = "blue-mail";
-        #   recipient = "ole@ole.blue";
-        #   feed_name = "master";
-        #   packages = [
-        #     "mastodon"
-        #   ];
-        # }
         {
+          kind = "derivation";
+          name = "teapot-closure";
           via = "blue-mail";
           recipient = "ole@ole.blue";
           feed_name = "nixos-unstable";
-          packages = [
-            "mastodon"
-            "forgejo"
-            "nginx"
-            "nginxMainline"
-            "deluge"
-            "qbittorrent-nox"
-            "anki"
-          ];
+          derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.teapot.config.system.build.toplevel.drvPath";
+          delay_minutes = 720; # 6 hours
+        }
+        {
+          kind = "derivation";
+          name = "bonk-closure";
+          via = "blue-email";
+          recipient = "ole@ole.blue";
+          feed_name = "nixos-unstable";
+          derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.bonk.config.system.build.toplevel.drvPath";
+          delay_minutes = 720;
+        }
+        {
+          kind = "derivation";
+          name = "nix-server-closure";
+          via = "blue-email";
+          recipient = "ole@ole.blue";
+          feed_name = "nixos-unstable";
+          derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.nix-server.config.system.build.toplevel.drvPath";
+          delay_minutes = 720;
         }
       ];
     };
