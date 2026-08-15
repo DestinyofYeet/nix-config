@@ -558,8 +558,44 @@
 
           specialArgs = defaultSpecialArgs;
         };
+
+        hope = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = defaultSpecialArgs;
+          modules = [
+            ./hosts/hope
+            ({ ... }: {
+              capabilities = {
+                hardware.headless.enable = true;
+                customNixInterpreter.enable = true;
+              };
+            })
+
+          ]
+          ++ baseline-modules;
+        };
+
+        installer-image = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = defaultSpecialArgs;
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+
+            ({ secretStore, ... }: {
+              services.openssh = {
+                enable = true;
+                settings.PasswordAuthentication = false;
+              };
+
+              console.keyMap = "de";
+
+              users.users.root.openssh.authorizedKeys.keys = secretStore.keys.authed;
+            })
+          ];
+        };
       };
 
+      images.iso.installer = self.nixosConfigurations.installer-image.config.system.build.isoImage;
       images.audioPi = self.nixosConfigurations.audioPi.config.system.build.sdImage;
 
       deploy.nodes = {
