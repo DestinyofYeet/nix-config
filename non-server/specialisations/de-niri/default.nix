@@ -7,8 +7,6 @@
 
   system.nixos.tags = [ "de-niri" ];
 
-  security.pam.services.swaylock = { };
-
   security.polkit.enable = true;
 
   programs.niri.enable = true;
