@@ -163,7 +163,7 @@ in
         ident = "ssh-key-vps-teapot";
 
         extraHosts = {
-          wg = {
+          vpn = {
             hostname = nebulaHosts.teapot.ip;
           };
         };
@@ -223,6 +223,18 @@ in
             extra = {
               ProxyJump = "fsim.backup-via-pedro";
             };
+          };
+        };
+      })
+
+      (mkHost {
+        host = "hope";
+        hostname = "hope.ole.blue";
+        user = "root";
+
+        extraHosts = {
+          vpn = {
+            hostname = nebulaHosts.hope.ip;
           };
         };
       })
