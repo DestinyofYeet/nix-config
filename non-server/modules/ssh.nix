@@ -123,7 +123,7 @@ in
       })
 
       (mkHost rec {
-        host = "git.oth-service.de";
+        host = "git.fsim-ev.de";
         hostname = host;
         user = "git";
         ident = "ssh-key-gitea";
