@@ -68,6 +68,22 @@ in
 
       subscriptions = [
         {
+          kind = "simple";
+          name = "manual";
+          via = "blue-email";
+          recipient = "ole@ole.blue";
+          feed_name = "nixos-unstable";
+          packages = [
+            "sonarr"
+            "jellyfin"
+            "shoko"
+            "nextcloud"
+            "etcd"
+            "patroni"
+            "niri"
+          ];
+        }
+        {
           kind = "derivation";
           name = "teapot-closure";
           via = "blue-mail";

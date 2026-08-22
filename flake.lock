@@ -1463,11 +1463,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1786834000,
-        "narHash": "sha256-iBCKZL6Y2cNlqQoEBzWYA3/wJ1tQA9irV1N1QHV8luY=",
+        "lastModified": 1787397920,
+        "narHash": "sha256-w3I/9V2fYgtHRQ2bxcQ6P2k6xeZ9VaazUA+oXlVlLfY=",
         "ref": "refs/heads/main",
-        "rev": "f0c1a0612ab482be4703e7096aaaec14cc121be2",
-        "revCount": 42,
+        "rev": "6440ece021b204e7ad21e6312c8cff81afd8bb90",
+        "revCount": 46,
         "type": "git",
         "url": "https://git.ole.blue/DestinyofYeet/nix-notify"
       },
