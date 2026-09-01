@@ -51,9 +51,10 @@ in
     otherNodesIps = (
       otherNodes [
         machines."nix-server-ha-vm"
-        machines."bonk-ha-vm"
+        # machines."bonk-ha-vm"
         machines."teapot-ha-vm"
         machines."hope"
+        machines."fate"
       ]
     );
 
@@ -69,8 +70,9 @@ in
         hosts = [
           "${machines."nix-server-ha-vm".ip}:2379"
           "${machines."teapot-ha-vm".ip}:2379"
-          "${machines."bonk-ha-vm".ip}:2379"
+          # "${machines."bonk-ha-vm".ip}:2379"
           "${machines."hope".ip}:2379"
+          "${machines."fate".ip}:2379"
         ];
       };
 

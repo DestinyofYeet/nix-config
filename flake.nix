@@ -575,6 +575,21 @@
           ++ baseline-modules;
         };
 
+        fate = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = defaultSpecialArgs;
+          modules = [
+            ./hosts/fate
+            ({ ... }: {
+              capabilities = {
+                hardware.headless.enable = true;
+                customNixInterpreter.enable = true;
+              };
+            })
+          ]
+          ++ baseline-modules;
+        };
+
         installer-image = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = defaultSpecialArgs;
@@ -649,6 +664,14 @@
           profiles.system = {
             sshUser = "root";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hope;
+          };
+        };
+
+        fate = {
+          hostname = "fate.ole.blue";
+          profiles.system = {
+            sshUser = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fate;
           };
         };
       };

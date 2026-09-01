@@ -13,11 +13,14 @@ in
       "http://localhost:2379"
     ];
 
+    initialClusterState = "existing";
+
     initialCluster = [
       "nix-server-ha-vm=http://${(machines."nix-server-ha-vm").ip}:2380"
       "teapot-ha-vm=http://${(machines."teapot-ha-vm").ip}:2380"
       # "bonk-ha-vm=http://${(machines."bonk-ha-vm").ip}:2380"
       "hope=http://${(machines."hope").ip}:2380"
+      "fate=http://${(machines."fate").ip}:2380"
     ];
   };
 }

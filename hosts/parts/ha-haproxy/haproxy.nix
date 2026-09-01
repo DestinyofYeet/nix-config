@@ -34,8 +34,10 @@ in
         http-check expect status 200
 
         server teapot-ha-vm ${vpnMachines."teapot-ha-vm".ip}:5432 check port 8008
-        server bonk-ha-vm ${vpnMachines."bonk-ha-vm".ip}:5432 check port 8008
+        # server bonk-ha-vm ${vpnMachines."bonk-ha-vm".ip}:5432 check port 8008
         server nix-server-ha-vm ${vpnMachines."nix-server-ha-vm".ip}:5432 check port 8008
+        server hope ${vpnMachines."hope".ip}:5432 check port 8008
+        server fate ${vpnMachines."fate".ip}:5432 check port 8008
 
       frontend postgres_read
         bind ${localIp}:5433
@@ -47,8 +49,10 @@ in
         option httpchk GET /replica
 
         server teapot-ha-vm ${vpnMachines."teapot-ha-vm".ip}:5432 check port 8008
-        server bonk-ha-vm ${vpnMachines."bonk-ha-vm".ip}:5432 check port 8008
+        # server bonk-ha-vm ${vpnMachines."bonk-ha-vm".ip}:5432 check port 8008
         server nix-server-ha-vm ${vpnMachines."nix-server-ha-vm".ip}:5432 check port 8008
+        server hope ${vpnMachines."hope".ip}:5432 check port 8008
+        server fate ${vpnMachines."fate".ip}:5432 check port 8008
     '';
   };
 }

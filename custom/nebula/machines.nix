@@ -124,3 +124,12 @@ in
     "server"
   ];
 })
+// (mkEntry "fate" {
+  ip = "${ipPrefix}.13";
+  external_ips = [ "fate.ole.blue:4242" ];
+  lighthouse = true;
+  groups = [
+    "lighthouse"
+    "server"
+  ];
+})

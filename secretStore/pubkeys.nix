@@ -46,6 +46,10 @@ rec {
 
       users.root.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGcREt5wTWBX+X5GEY6OmPNvsHnkjQXiO0PhBKNEm1cB root@hope";
     };
+
+    fate = {
+      hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPbMPCuGK6P8j021z8AdjzNwaVzop55jcQ3ZT6x9e0No root@nixos";
+    };
   };
 
   authed = with users; [

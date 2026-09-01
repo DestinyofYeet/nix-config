@@ -8,6 +8,7 @@ let
     keys.hosts.teapot.vms.ha-vm.hostKey
     keys.hosts.bonk.vms.ha-vm.hostKey
     keys.hosts.hope.hostKey
+    keys.hosts.fate.hostKey
   ];
 in
 {
