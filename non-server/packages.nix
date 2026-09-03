@@ -133,7 +133,7 @@ in
       monero-gui
       fd
       tree-sitter
-      ungoogled-chromium
+      chromium
       magic-wormhole-rs
       element-desktop
       python3
