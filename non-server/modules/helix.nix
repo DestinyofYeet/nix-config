@@ -77,6 +77,12 @@ in
           name = "rust";
           auto-format = true;
         }
+        {
+          name = "typst";
+          formatter.command = "typstyle";
+          language-servers = [ "tinymist" ];
+          auto-format = true;
+        }
       ];
 
       language-server = {

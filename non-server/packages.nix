@@ -302,6 +302,7 @@ in
       ddcutil
       wl-color-picker
       teamspeak3
+      typstyle
     ]
     # ++ luaPkgs
     ++ kdePkgs
