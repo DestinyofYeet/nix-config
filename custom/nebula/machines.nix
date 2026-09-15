@@ -19,6 +19,7 @@ let
       publicKeyFile = getPublicKey name;
     };
   };
+
 in
 (mkEntry "teapot" {
   ip = "172.27.255.1";
@@ -110,6 +111,7 @@ in
     "server"
     "ha-vm"
   ];
+
   use_relays = [
     "${ipPrefix}.1"
     "${ipPrefix}.7"
@@ -127,9 +129,14 @@ in
 // (mkEntry "fate" {
   ip = "${ipPrefix}.13";
   external_ips = [ "fate.ole.blue:4242" ];
-  lighthouse = true;
+  lighthouse = false;
   groups = [
-    "lighthouse"
     "server"
+  ];
+
+  use_relays = [
+    "${ipPrefix}.1"
+    "${ipPrefix}.7"
+    "${ipPrefix}.12"
   ];
 })

@@ -174,6 +174,12 @@ in
         hostname = nebulaHosts.nix-server.ip;
         user = "root";
         ident = "ssh-key-nix-server";
+
+        extraHosts = {
+          local = {
+            hostname = "192.168.1.1";
+          };
+        };
       })
 
       (mkHost {
@@ -235,6 +241,18 @@ in
         extraHosts = {
           vpn = {
             hostname = nebulaHosts.hope.ip;
+          };
+        };
+      })
+
+      (mkHost {
+        host = "fate";
+        hostname = "fate.ole.blue";
+        user = "root";
+
+        extraHosts = {
+          vpn = {
+            hostname = nebulaHosts.fate.ip;
           };
         };
       })
