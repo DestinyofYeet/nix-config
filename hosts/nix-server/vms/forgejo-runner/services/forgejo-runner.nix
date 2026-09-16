@@ -19,10 +19,15 @@ in
   };
 
   services.forgejo-runner.instances = {
-    "global-1-native" = {
-      settings = {
+    "global-1-native" =
+      let
+        conn_name = "git.ole.blue";
+      in
+      {
+        enable = true;
+
         secrets = {
-          server.connections."git.ole.blue".token = config.age.secrets.forgejo-runner-token.path;
+          server.connections.${conn_name}.token_url = config.age.secrets.forgejo-runner-token.path;
         };
 
         hostPackages = with pkgs; [
@@ -34,22 +39,22 @@ in
           git
         ];
 
-        runner = {
-          labels = [
-            "native:host"
-            "rust:docker://rust:1.97.1"
-            "ubuntu:docker://ubuntu:26.04"
-            "debian:docker://debian:stable-20260803"
-          ];
-        };
+        settings = {
+          runner = {
+            labels = [
+              "native:host"
+              "rust:docker://rust:1.97.1"
+              "ubuntu:docker://ubuntu:26.04"
+              "debian:docker://debian:stable-20260803"
+            ];
+          };
 
-        server.connections."git.ole.blue" = {
-
-          url = forgejo_url;
-          uuid = "cdc08825-f314-42e6-a1d3-802e50161e09";
+          server.connections.${conn_name} = {
+            url = forgejo_url;
+            uuid = "cdc08825-f314-42e6-a1d3-802e50161e09";
+          };
         };
       };
-    };
   };
 
 }
