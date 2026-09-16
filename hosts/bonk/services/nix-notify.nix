@@ -81,44 +81,46 @@ in
             "etcd"
             "patroni"
             "niri"
+            "mastodon"
+            "forgejo"
           ];
         }
-        {
-          kind = "derivation";
-          name = "teapot-closure";
-          via = "blue-mail";
-          recipient = "ole@ole.blue";
-          feed_name = "nixos-unstable";
-          derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.teapot.config.system.build.toplevel.drvPath";
-          delay_minutes = 720; # 6 hours
-        }
-        {
-          kind = "derivation";
-          name = "bonk-closure";
-          via = "blue-email";
-          recipient = "ole@ole.blue";
-          feed_name = "nixos-unstable";
-          derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.bonk.config.system.build.toplevel.drvPath";
-          delay_minutes = 720;
-        }
-        {
-          kind = "derivation";
-          name = "nix-server-closure";
-          via = "blue-email";
-          recipient = "ole@ole.blue";
-          feed_name = "nixos-unstable";
-          derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.nix-server.config.system.build.toplevel.drvPath";
-          delay_minutes = 720;
-        }
-        {
-          kind = "derivation";
-          name = "hope-closure";
-          via = "blue-email";
-          recipient = "ole@ole.blue";
-          feed_name = "nixos-unstable";
-          derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.hope.config.system.build.toplevel.drvPath";
-          delay_minutes = 720;
-        }
+        #   {
+        #     kind = "derivation";
+        #     name = "teapot-closure";
+        #     via = "blue-mail";
+        #     recipient = "ole@ole.blue";
+        #     feed_name = "nixos-unstable";
+        #     derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.teapot.config.system.build.toplevel.drvPath";
+        #     delay_minutes = 720; # 6 hours
+        #   }
+        #   {
+        #     kind = "derivation";
+        #     name = "bonk-closure";
+        #     via = "blue-email";
+        #     recipient = "ole@ole.blue";
+        #     feed_name = "nixos-unstable";
+        #     derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.bonk.config.system.build.toplevel.drvPath";
+        #     delay_minutes = 720;
+        #   }
+        #   {
+        #     kind = "derivation";
+        #     name = "nix-server-closure";
+        #     via = "blue-email";
+        #     recipient = "ole@ole.blue";
+        #     feed_name = "nixos-unstable";
+        #     derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.nix-server.config.system.build.toplevel.drvPath";
+        #     delay_minutes = 720;
+        #   }
+        #   {
+        #     kind = "derivation";
+        #     name = "hope-closure";
+        #     via = "blue-email";
+        #     recipient = "ole@ole.blue";
+        #     feed_name = "nixos-unstable";
+        #     derivation_expr = "github:DestinyofYeet/nix-config#nixosConfigurations.hope.config.system.build.toplevel.drvPath";
+        #     delay_minutes = 720;
+        #   }
       ];
     };
   };
