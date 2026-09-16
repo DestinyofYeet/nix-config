@@ -15,32 +15,40 @@ let
 in
 {
   age.secrets = {
-    forgejo-runner-registration-token.file = secrets.getSecret "forgejo-registration-token";
+    forgejo-runner-token.file = secrets.getSecret "forgejo-runner-token";
   };
 
-  services.gitea-actions-runner.instances = {
+  services.forgejo-runner.instances = {
     "global-1-native" = {
-      enable = true;
+      settings = {
+        secrets = {
+          server.connections."git.ole.blue".token = config.age.secrets.forgejo-runner-token.path;
+        };
 
-      url = forgejo_url;
-      name = "global-1";
+        hostPackages = with pkgs; [
+          nix
+          nodejs
+          gnutar
+          gzip
+          bash
+          git
+        ];
 
-      labels = [
-        "native:host"
-        "rust:docker://rust:1.97.1"
-        "ubuntu:docker://ubuntu:26.04"
-        "debian:docker://debian:stable-20260803"
-      ];
+        runner = {
+          labels = [
+            "native:host"
+            "rust:docker://rust:1.97.1"
+            "ubuntu:docker://ubuntu:26.04"
+            "debian:docker://debian:stable-20260803"
+          ];
+        };
 
-      tokenFile = config.age.secrets.forgejo-runner-registration-token.path;
-      hostPackages = with pkgs; [
-        nix
-        nodejs
-        gnutar
-        gzip
-        bash
-        git
-      ];
+        server.connections."git.ole.blue" = {
+
+          url = forgejo_url;
+          uuid = "cdc08825-f314-42e6-a1d3-802e50161e09";
+        };
+      };
     };
   };
 
