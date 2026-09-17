@@ -14,6 +14,26 @@ in
     paperless-ngx-oidc-env-file.file = secrets.getSecret "paperless-oidc-env-file";
   };
 
+  systemd.services."paperless-pre" = rec {
+    wantedBy = [ "paperless-scheduler.service" ];
+    requiredBy = wantedBy;
+
+    script =
+      let
+        setfacl = lib.getExe' pkgs.acl "setfacl";
+        user = config.services.paperless.user;
+        group = config.services.paperless.group;
+        dataDir = config.services.paperless.dataDir;
+      in
+      ''
+        chown ${user}:${group} ${dataDir}
+
+        ${setfacl} -d -m u:${user}:rwx ${dataDir}
+        ${setfacl} -m u:${user}:rx /mnt/data/data
+        ${setfacl} -m u:${user}:rx /mnt/data
+      '';
+  };
+
   services.paperless = rec {
     enable = true;
 
@@ -34,8 +54,6 @@ in
     passwordFile = config.age.secrets.paperless-ngx-admin.path;
 
     environmentFile = config.age.secrets.paperless-ngx-oidc-env-file.path;
-
-    inherit (lib.custom.settings.${config.networking.hostName}) user;
   };
 
   services.nginx.virtualHosts."${config.services.paperless.domain}" =
