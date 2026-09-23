@@ -6,11 +6,34 @@
 
     shellWrapperName = "yz";
 
-    flavors = let ghFlavors = inputs.yazi-flavors;
-    in { catppuccin-mocha = "${ghFlavors}/catppuccin-mocha.yazi/"; };
+    flavors =
+      let
+        ghFlavors = inputs.yazi-flavors;
+      in
+      {
+        catppuccin-mocha = "${ghFlavors}/catppuccin-mocha.yazi/";
+      };
 
-    theme = { flavor = { dark = "catppuccin-mocha"; }; };
+    theme = {
+      flavor = {
+        dark = "catppuccin-mocha";
+      };
+    };
 
-    settings = { mgr = { show_hidden = true; }; };
+    settings = {
+      mgr = {
+        show_hidden = true;
+      };
+
+      opener = {
+        edit = [
+          {
+            run = "$EDITOR %s";
+            block = true;
+            for = "unix";
+          }
+        ];
+      };
+    };
   };
 }

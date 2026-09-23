@@ -138,7 +138,7 @@ in
       element-desktop
       python3
       helix
-      libreoffice-qt6-fresh
+      libreoffice
       vlc
       wl-clipboard
       openfortivpn
