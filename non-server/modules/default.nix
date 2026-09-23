@@ -34,7 +34,7 @@
     ./emails.nix
     ./mailcap.nix
     ./environment.nix
-    ./rofi.nix
+    # ./rofi.nix
     ./application-theming.nix
     ./cava.nix
     ./taskwarrior.nix

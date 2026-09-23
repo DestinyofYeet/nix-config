@@ -62,11 +62,11 @@ in
         search = rec {
           force = true;
 
-          default = "startpage";
+          default = "_startpage";
           privateDefault = default;
 
           engines = {
-            "Startpage" = {
+            "_startpage" = {
               urls = [
                 {
                   template = "https://www.startpage.com/sp/search";
@@ -78,6 +78,8 @@ in
                   ];
                 }
               ];
+
+              definedAliases = [ "@st" ];
             };
 
             "Home-manager Option" = {
@@ -184,6 +186,7 @@ in
             "google".metaData.hidden = true;
             "ddg".metaData.hidden = true;
             "ecosia".metaData.hidden = true;
+            "perplexity".metaData.hidden = true;
           };
         };
 
