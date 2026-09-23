@@ -2,6 +2,7 @@
   rlib,
   pkgs,
   lib,
+  config,
   osConfig,
   ...
 }:
@@ -23,328 +24,332 @@ let
 
 in
 {
-  programs.firefox.enable = true;
-
   home.sessionVariables = {
     # enable wayland for firefox
     MOZ_ENABLE_WAYLAND = 1;
   };
 
-  programs.firefox.profiles = {
-    blank = {
-      id = 1;
-      name = "Blank profile";
-    };
-
-    passbolt-admin = {
-      id = 2;
-      name = "Passbolt FS-Admin";
-    };
-
-    proxy = {
-      id = 3;
-      name = "Proxy on port 2020";
-
-      settings = {
-        "network.proxy.socks" = "localhost";
-        "network.proxy.type" = 1;
-        "network.proxy.socks_port" = 2020;
+  programs.firefox = {
+    enable = true;
+    configPath = lib.mkIf (lib.custom.isMain osConfig) "${config.xdg.configHome}/mozilla/firefox";
+    profiles = {
+      blank = {
+        id = 1;
+        name = "Blank profile";
       };
-    };
 
-    default-profile = {
-      id = 0;
-      name = "default-profile";
-      isDefault = true;
+      passbolt-admin = {
+        id = 2;
+        name = "Passbolt FS-Admin";
+      };
 
-      search = {
-        force = true;
+      proxy = {
+        id = 3;
+        name = "Proxy on port 2020";
 
-        engines = {
-          "Startpage" = {
-            urls = [
-              {
-                template = "https://www.startpage.com/sp/search";
-                params = [
-                  {
-                    name = "q";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
-          };
-
-          "Home-manager Option" = {
-            urls = [
-              {
-                template = "https://home-manager-options.extranix.com";
-                params = [
-                  {
-                    name = "release";
-                    value = "master";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
-
-            definedAliases = [ "@hmo" ];
-          };
-
-          "Nix Packages" = {
-            urls = [
-              {
-                template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "type";
-                    value = "packages";
-                  }
-                  {
-                    name = "channel";
-                    value = "unstable";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
-
-            icon = ../../images/nix-logo.png;
-
-            definedAliases = [ "@np" ];
-          };
-
-          "Nix Options" = {
-            urls = [
-              {
-                template = "https://search.nixos.org/options";
-                params = [
-                  {
-                    name = "channel";
-                    value = "unstable";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
-
-            icon = ../../images/nix-logo.png;
-
-            definedAliases = [ "@no" ];
-          };
-
-          "Nix manual search" = {
-            urls = [
-              {
-                template = "https://noogle.dev/";
-                params = [
-                  {
-                    name = "term";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
-
-            definedAliases = [ "@nms" ];
-          };
-
-          "custom nüschst search" = {
-            urls = [
-              {
-                template = "https://search.ole.blue/";
-                params = [
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
-            ];
-
-            definedAliases = [ "@nüs" ];
-          };
-
-          "bing".metaData.hidden = true;
-          "google".metaData.hidden = true;
-          "ddg".metaData.hidden = true;
+        settings = {
+          "network.proxy.socks" = "localhost";
+          "network.proxy.type" = 1;
+          "network.proxy.socks_port" = 2020;
         };
       };
 
-      containersForce = true;
+      default-profile = {
+        id = 0;
+        name = "default-profile";
+        isDefault = true;
 
-      containers = build-containers [
-        # add new containers at the bottom
-        {
-          google = {
-            color = "red";
-          };
-        }
-        {
-          oth = {
-            color = "turquoise";
-          };
-        }
-        {
-          ai = {
-            color = "red";
-          };
-        }
-        {
-          amazon = {
-            icon = "cart";
-            color = "purple";
-          };
-        }
-        {
-          coding = {
-            color = "blue";
-          };
-        }
-        {
-          infra = {
-            color = "blue";
-          };
-        }
-        {
-          personal = {
-            color = "blue";
-            icon = "fingerprint";
-          };
-        }
-        {
-          reddit = {
-            color = "red";
-          };
-        }
-        {
-          anime = {
-            color = "purple";
-          };
-        }
-        {
-          tidal = {
-            color = "blue";
-          };
-        }
-        {
-          news = {
-            color = "turquoise";
-          };
-        }
-        {
-          banking = {
-            color = "purple";
-          };
-        }
-        {
-          scrr = {
-            color = "green";
-          };
-        }
-      ];
+        search = rec {
+          force = true;
 
-      settings = {
-        # privacy stuff
-        # "privacy.resistFingerprinting" = true;
-        # "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
+          default = "startpage";
+          privateDefault = default;
 
-        "browser.formfill.enable" = false;
+          engines = {
+            "Startpage" = {
+              urls = [
+                {
+                  template = "https://www.startpage.com/sp/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+            };
 
-        "browser.toolbars.bookmarks.visibility" = "never";
-        "browser.startup.homepage" = "about:blank";
-        "browser.newtabpage.enabled" = false;
-        "trailhead.firstrun.didSeeAboutWelcome" = true;
-        "signon.rememberSignons" = false;
-        "widget.use-xdg-desktop-portal.file-picker" = true;
-        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        "browser.fixup.domainsuffixwhitelist.wg" = true; # make nix-server.infra.wg not result in a search
+            "Home-manager Option" = {
+              urls = [
+                {
+                  template = "https://home-manager-options.extranix.com";
+                  params = [
+                    {
+                      name = "release";
+                      value = "master";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
 
-        # telemetry
-        "datareporting.policy.dataSubmissionEnabled" = false;
-        "datareporting.healthreport.uploadEnabled" = false;
-        "toolkit.telemetry.unified" = false;
-        "toolkit.telemetry.enabled" = false;
-        "toolkit.telemetry.server" = "data:,";
-        "toolkit.telemetry.archive.enabled" = false;
-        "toolkit.telemetry.newProfilePing.enabled" = false;
-        "toolkit.telemetry.shutdownPingSender.enabled" = false;
-        "toolkit.telemetry.updatePing.enabled" = false;
-        "toolkit.telemetry.bhrPing.enabled" = false;
-        "toolkit.telemetry.firstShutdownPing.enabled" = false;
-        "toolkit.telemetry.coverage.opt-out" = true;
-        "toolkit.coverage.opt-out" = true;
-        "toolkit.coverage.endpoint.base" = "";
-        "browser.ping-centre.telemetry" = false;
-        "browser.newtabpage.activity-stream.feeds.telemetry" = false;
-        "browser.newtabpage.activity-stream.telemetry" = false;
+              definedAliases = [ "@hmo" ];
+            };
 
-        # Studies
-        "app.shield.optoutstudies.enabled" = false;
-        "app.normandy.enabled" = false;
-        "app.normandy.api_url" = "";
+            "Nix Packages" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "channel";
+                      value = "unstable";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
 
-        "browser.contentblocking.category" = "strict";
+              icon = ../../images/nix-logo.png;
 
-        "extensions.autoDisableScopes" = 0; # automatically enable plugins
-        # sidebar
-        "browser.engagement.sidebar-button.has-used" = true;
-        "sidebar.backupState" =
-          ''sidebar.backupState	{"width":"224px","command":"treestyletab_piro_sakura_ne_jp-sidebar-action","expanded":false,"hidden":true}'';
-        "sidebar.revamp" = true;
-        "sidebar.verticalTabs" = true;
+              definedAliases = [ "@np" ];
+            };
 
-        # autofill
-        "extensions.formautofill.addresses.enabled" = false;
-        "extensions.formautofill.creditCards.enabled" = false;
+            "Nix Options" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/options";
+                  params = [
+                    {
+                      name = "channel";
+                      value = "unstable";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+
+              icon = ../../images/nix-logo.png;
+
+              definedAliases = [ "@no" ];
+            };
+
+            "Nix manual search" = {
+              urls = [
+                {
+                  template = "https://noogle.dev/";
+                  params = [
+                    {
+                      name = "term";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+
+              definedAliases = [ "@nms" ];
+            };
+
+            "custom nüschst search" = {
+              urls = [
+                {
+                  template = "https://search.ole.blue/";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+
+              definedAliases = [ "@nüs" ];
+            };
+
+            "bing".metaData.hidden = true;
+            "google".metaData.hidden = true;
+            "ddg".metaData.hidden = true;
+            "ecosia".metaData.hidden = true;
+          };
+        };
+
+        containersForce = true;
+
+        containers = build-containers [
+          # add new containers at the bottom
+          {
+            google = {
+              color = "red";
+            };
+          }
+          {
+            oth = {
+              color = "turquoise";
+            };
+          }
+          {
+            ai = {
+              color = "red";
+            };
+          }
+          {
+            amazon = {
+              icon = "cart";
+              color = "purple";
+            };
+          }
+          {
+            coding = {
+              color = "blue";
+            };
+          }
+          {
+            infra = {
+              color = "blue";
+            };
+          }
+          {
+            personal = {
+              color = "blue";
+              icon = "fingerprint";
+            };
+          }
+          {
+            reddit = {
+              color = "red";
+            };
+          }
+          {
+            anime = {
+              color = "purple";
+            };
+          }
+          {
+            tidal = {
+              color = "blue";
+            };
+          }
+          {
+            news = {
+              color = "turquoise";
+            };
+          }
+          {
+            banking = {
+              color = "purple";
+            };
+          }
+          {
+            scrr = {
+              color = "green";
+            };
+          }
+        ];
+
+        settings = {
+          # privacy stuff
+          # "privacy.resistFingerprinting" = true;
+          # "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
+
+          "browser.formfill.enable" = false;
+
+          "browser.toolbars.bookmarks.visibility" = "never";
+          "browser.startup.homepage" = "about:blank";
+          "browser.newtabpage.enabled" = false;
+          "trailhead.firstrun.didSeeAboutWelcome" = true;
+          "signon.rememberSignons" = false;
+          "widget.use-xdg-desktop-portal.file-picker" = true;
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "browser.fixup.domainsuffixwhitelist.wg" = true; # make nix-server.infra.wg not result in a search
+
+          # telemetry
+          "datareporting.policy.dataSubmissionEnabled" = false;
+          "datareporting.healthreport.uploadEnabled" = false;
+          "toolkit.telemetry.unified" = false;
+          "toolkit.telemetry.enabled" = false;
+          "toolkit.telemetry.server" = "data:,";
+          "toolkit.telemetry.archive.enabled" = false;
+          "toolkit.telemetry.newProfilePing.enabled" = false;
+          "toolkit.telemetry.shutdownPingSender.enabled" = false;
+          "toolkit.telemetry.updatePing.enabled" = false;
+          "toolkit.telemetry.bhrPing.enabled" = false;
+          "toolkit.telemetry.firstShutdownPing.enabled" = false;
+          "toolkit.telemetry.coverage.opt-out" = true;
+          "toolkit.coverage.opt-out" = true;
+          "toolkit.coverage.endpoint.base" = "";
+          "browser.ping-centre.telemetry" = false;
+          "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+          "browser.newtabpage.activity-stream.telemetry" = false;
+
+          # Studies
+          "app.shield.optoutstudies.enabled" = false;
+          "app.normandy.enabled" = false;
+          "app.normandy.api_url" = "";
+
+          "browser.contentblocking.category" = "strict";
+
+          "extensions.autoDisableScopes" = 0; # automatically enable plugins
+          # sidebar
+          "browser.engagement.sidebar-button.has-used" = true;
+          "sidebar.backupState" =
+            ''sidebar.backupState	{"width":"224px","command":"treestyletab_piro_sakura_ne_jp-sidebar-action","expanded":false,"hidden":true}'';
+          "sidebar.revamp" = true;
+          "sidebar.verticalTabs" = true;
+
+          # autofill
+          "extensions.formautofill.addresses.enabled" = false;
+          "extensions.formautofill.creditCards.enabled" = false;
+        };
+
+        extensions.packages = with addons; [
+          darkreader
+          ublock-origin
+          # bitwarden
+          consent-o-matic
+          sponsorblock
+          dearrow
+          vimium
+          clearurls
+          decentraleyes
+          canvasblocker
+          don-t-fuck-with-paste
+          return-youtube-dislikes
+          single-file
+          temporary-containers
+          facebook-container
+          multi-account-containers
+          skip-redirect
+          # keepassxc-browser
+          terms-of-service-didnt-read
+          youtube-no-translation
+          readeck
+          bitwarden
+          floccus
+        ];
+
+        userChrome = ''
+
+          /* hides the native tabs */
+          #TabsToolbar {
+            visibility: collapse !important;
+          }     
+
+        '';
       };
-
-      search.default = "Startpage";
-
-      extensions.packages = with addons; [
-        darkreader
-        ublock-origin
-        # bitwarden
-        consent-o-matic
-        sponsorblock
-        dearrow
-        vimium
-        clearurls
-        decentraleyes
-        canvasblocker
-        don-t-fuck-with-paste
-        return-youtube-dislikes
-        single-file
-        temporary-containers
-        facebook-container
-        multi-account-containers
-        skip-redirect
-        # keepassxc-browser
-        terms-of-service-didnt-read
-        youtube-no-translation
-        readeck
-        bitwarden
-        floccus
-      ];
-
-      userChrome = ''
-
-        /* hides the native tabs */
-        #TabsToolbar {
-          visibility: collapse !important;
-        }     
-
-      '';
     };
   };
 }
