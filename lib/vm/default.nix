@@ -46,4 +46,6 @@
       ];
     };
   };
+
+  microvmEnabled = config: builtins.length (lib.attrsToList config.microvm.vms) != 0;
 }

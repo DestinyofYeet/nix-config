@@ -1,4 +1,9 @@
-{ ... }:
+{
+  rlib,
+  lib,
+  config,
+  ...
+}:
 let
   interface = "ens18";
   microvm-name = "microvm-bridge";
@@ -6,41 +11,51 @@ in
 {
   systemd.network = {
     enable = true;
-    netdevs."10-microvm".netdevConfig = {
-      Kind = "bridge";
-      Name = microvm-name;
-    };
 
-    networks = {
-      "10-external" = {
-        matchConfig.Name = interface;
-        address = [ "45.137.68.119/25" ];
-        routes = [
-          {
-            Destination = "0.0.0.0/0";
-            Gateway = "37.114.36.0";
-            GatewayOnLink = true;
-          }
-          { Destination = "37.114.36.0/32"; }
-        ];
+    netdevs = rlib.mkMerge [
+      (rlib.mkIf (lib.custom.vm.microvmEnabled config) {
+        "10-microvm".netdevConfig = {
+          Kind = "bridge";
+          Name = microvm-name;
+        };
+      })
+    ];
 
-        dns = [
-          "1.1.1.1"
-          "8.8.8.8"
-        ];
+    networks = rlib.mkMerge [
+      {
 
-      };
+        "10-external" = {
+          matchConfig.Name = interface;
+          address = [ "45.137.68.119/25" ];
+          routes = [
+            {
+              Destination = "0.0.0.0/0";
+              Gateway = "37.114.36.0";
+              GatewayOnLink = true;
+            }
+            { Destination = "37.114.36.0/32"; }
+          ];
 
-      "10-microvm" = {
-        matchConfig.Name = microvm-name;
-        addresses = [ { Address = "192.168.3.1/24"; } ];
-      };
+          dns = [
+            "1.1.1.1"
+            "8.8.8.8"
+          ];
 
-      "11-microvm" = {
-        matchConfig.Name = "vm-*";
-        networkConfig.Bridge = microvm-name;
-      };
-    };
+        };
+      }
+
+      (rlib.mkIf (lib.custom.vm.microvmEnabled config) {
+        "10-microvm" = {
+          matchConfig.Name = microvm-name;
+          addresses = [ { Address = "192.168.3.1/24"; } ];
+        };
+
+        "11-microvm" = {
+          matchConfig.Name = "vm-*";
+          networkConfig.Bridge = microvm-name;
+        };
+      })
+    ];
   };
 
   networking = {
@@ -55,7 +70,7 @@ in
     nat = {
       enable = true;
       externalInterface = interface;
-      internalInterfaces = [ microvm-name ];
+      internalInterfaces = if (lib.custom.vm.microvmEnabled config) then [ microvm-name ] else [ ];
     };
   };
 

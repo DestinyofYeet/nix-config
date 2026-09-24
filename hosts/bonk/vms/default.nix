@@ -39,25 +39,26 @@ in
 
   microvm = {
     vms = lib.mkMerge [
-      (mkVM "ha-vm" {
-        ip = "192.168.3.10";
-        mac = "02:00:00:00:00:05";
-        config = {
-          networking.hostName = "bonk-ha-vm";
-          imports = [
-            ./baseline
-            ./ha-vm
-            inputs.agenix.nixosModules.default
-            ../../../baseline/nebula.nix
-            ../../../options/capabilities/options.nix
-            ../../parts/ha-vm
-          ];
+      # currently broken
+      # (mkVM "ha-vm" {
+      #   ip = "192.168.3.10";
+      #   mac = "02:00:00:00:00:05";
+      #   config = {
+      #     networking.hostName = "bonk-ha-vm";
+      #     imports = [
+      #       ./baseline
+      #       ./ha-vm
+      #       inputs.agenix.nixosModules.default
+      #       ../../../baseline/nebula.nix
+      #       ../../../options/capabilities/options.nix
+      #       ../../parts/ha-vm
+      #     ];
 
-          capabilities = {
-            hardware.headless.enable = true;
-          };
-        };
-      })
+      #     capabilities = {
+      #       hardware.headless.enable = true;
+      #     };
+      #   };
+      # })
     ];
   };
 }
