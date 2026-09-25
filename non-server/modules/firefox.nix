@@ -31,7 +31,7 @@ in
 
   programs.firefox = {
     enable = true;
-    configPath = lib.mkIf (lib.custom.isMain osConfig) "${config.xdg.configHome}/mozilla/firefox";
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     profiles = {
       blank = {
         id = 1;
