@@ -41,14 +41,6 @@ in
 
           base_url = "https://sonarr.local.ole.blue";
 
-          include = (
-            mkTemplates [
-              "sonarr-quality-definition-anime"
-              "sonarr-v4-quality-profile-anime"
-              "sonarr-v4-custom-formats-anime"
-            ]
-          );
-
           # Custom Formats: https://recyclarr.dev/reference/configuration/custom-formats/
           custom_formats =
             let
@@ -89,14 +81,6 @@ in
           api_key = {
             _secret = config.age.secrets.radarrApiKey.path;
           };
-
-          include = (
-            mkTemplates [
-              "radarr-quality-definition-anime"
-              "radarr-quality-profile-anime"
-              "radarr-custom-formats-anime"
-            ]
-          );
 
           custom_formats =
             let
