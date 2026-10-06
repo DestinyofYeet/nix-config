@@ -303,6 +303,7 @@ in
       wl-color-picker
       teamspeak3
       typstyle
+      pv
     ]
     # ++ luaPkgs
     ++ kdePkgs
