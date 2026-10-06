@@ -20,6 +20,7 @@
     ./chromecast.nix
     ./fix-mouse-warping.nix
     ./fix-trackpad.nix
+    ./dd.nix
   ];
 
   nix = {
