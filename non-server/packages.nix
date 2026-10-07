@@ -304,6 +304,7 @@ in
       teamspeak3
       typstyle
       pv
+      libarchive
     ]
     # ++ luaPkgs
     ++ kdePkgs
