@@ -143,7 +143,8 @@ in
             empty_color = "#60639b";
             labels_only_when_occupied = true;
             max_label_chars = 10;
-            display = "name";
+            label_source = "name";
+            show_labels = true;
           };
 
           active_window = {
