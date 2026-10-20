@@ -370,12 +370,20 @@ in
           scale = 1;
         };
 
-        "DP-2" = lib.mkIf (lib.custom.isMain osConfig) {
+        "Ancor Communications Inc VG248 J5LMQS185620" = {
           focus-at-startup = true;
           mode = {
             height = 1080;
             width = 1920;
             refresh = 144.001;
+          };
+        };
+
+        "Samsung Electric Company C27R50x H1AK500000" = {
+          mode = {
+            height = 1080;
+            width = 1920;
+            refresh = 71.910;
           };
         };
       };
