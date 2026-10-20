@@ -191,12 +191,16 @@ in
           "Mod+l".action.focus-column-right = { };
 
           "Mod+Shift+h".action.move-column-left-or-to-monitor-left = { };
+          "Mod+Shift+l".action.move-column-right-or-to-monitor-right = { };
           "Mod+Shift+j".action.move-window-down-or-to-workspace-down = { };
           "Mod+Shift+k".action.move-window-up-or-to-workspace-up = { };
-          "Mod+Shift+l".action.move-column-right-or-to-monitor-right = { };
+          "Mod+Ctrl+Shift+j".action.move-column-to-monitor-down = { };
+          "Mod+Ctrl+Shift+k".action.move-column-to-monitor-up = { };
 
           "Mod+Ctrl+h".action.focus-monitor-left = { };
           "Mod+Ctrl+l".action.focus-monitor-right = { };
+          "Mod+Ctrl+k".action.focus-monitor-up = { };
+          "Mod+Ctrl+j".action.focus-monitor-down = { };
 
           "Mod+Ctrl+Shift+q".action.quit = { };
         }
@@ -348,8 +352,25 @@ in
         }
       ];
 
-      outputs = lib.mkIf (lib.custom.isMain osConfig) {
-        "DP-2" = {
+      outputs = {
+        "Philips Consumer Electronics Company PHL 240B9 AU12220000850" = {
+          position = {
+            y = 0;
+            x = 0;
+          };
+          scale = 1;
+        };
+
+        "eDP-1" = {
+          position = {
+            y = 1200;
+            x = 0;
+          };
+
+          scale = 1;
+        };
+
+        "DP-2" = lib.mkIf (lib.custom.isMain osConfig) {
           focus-at-startup = true;
           mode = {
             height = 1080;
