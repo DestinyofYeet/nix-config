@@ -352,41 +352,48 @@ in
         }
       ];
 
-      outputs = {
-        "Philips Consumer Electronics Company PHL 240B9 AU12220000850" = {
-          position = {
-            y = 0;
-            x = 0;
-          };
-          scale = 1;
-        };
+      outputs =
+        let
+          fsim_common = {
 
-        "eDP-1" = {
-          position = {
-            y = 1200;
-            x = 0;
+            position = {
+              y = 0;
+              x = 0;
+            };
+            scale = 1;
+          };
+        in
+        {
+          "Philips Consumer Electronics Company PHL 240B9 AU12220000850" = fsim_common;
+
+          "Philips Consumer Electronics Company PHL 240B9 AU12220000844" = fsim_common;
+
+          "eDP-1" = {
+            position = {
+              y = 1200;
+              x = 0;
+            };
+
+            scale = 1;
           };
 
-          scale = 1;
-        };
+          "Ancor Communications Inc VG248 J5LMQS185620" = {
+            focus-at-startup = true;
+            mode = {
+              height = 1080;
+              width = 1920;
+              refresh = 144.001;
+            };
+          };
 
-        "Ancor Communications Inc VG248 J5LMQS185620" = {
-          focus-at-startup = true;
-          mode = {
-            height = 1080;
-            width = 1920;
-            refresh = 144.001;
+          "Samsung Electric Company C27R50x H1AK500000" = {
+            mode = {
+              height = 1080;
+              width = 1920;
+              refresh = 71.910;
+            };
           };
         };
-
-        "Samsung Electric Company C27R50x H1AK500000" = {
-          mode = {
-            height = 1080;
-            width = 1920;
-            refresh = 71.910;
-          };
-        };
-      };
 
       switch-events = {
         lid-close.action.spawn = mkList "${lib.getExe' pkgs.systemd "loginctl"} lock-session";
