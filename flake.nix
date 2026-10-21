@@ -251,6 +251,8 @@
             inherit inputs;
             lib = self;
           };
+
+          # inherit (inputs.rlib.lib) mkMerge mkIf;
         }
       );
 
@@ -660,7 +662,7 @@
         };
 
         hope = {
-          hostname = "91.132.144.172";
+          hostname = "hope.ole.blue";
           profiles.system = {
             sshUser = "root";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hope;

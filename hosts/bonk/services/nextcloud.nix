@@ -4,6 +4,7 @@
   config,
   pkgs,
   lib,
+  rlib,
   ...
 }:
 let
@@ -20,19 +21,6 @@ let
   ncVersion = "34";
 in
 {
-  age.secrets =
-    let
-      secrets = secretStore.getHostSecrets "bonk";
-
-    in
-    {
-      bonk-nextcloud-admin-pw = lib.mkIf (config.services.nextcloud.enable) {
-        file = secrets.getSecret "nextcloud-root-pw";
-        owner = "nextcloud";
-        group = "nextcloud";
-      };
-    };
-
   services.collabora-online = {
     enable = config.services.nextcloud.enable;
     port = 9980;
@@ -74,9 +62,6 @@ in
       dbname = "nextcloud";
       dbtype = "pgsql";
       dbuser = "nextcloud";
-
-      adminuser = "root";
-      adminpassFile = config.age.secrets.bonk-nextcloud-admin-pw.path;
     };
 
     configureRedis = true;

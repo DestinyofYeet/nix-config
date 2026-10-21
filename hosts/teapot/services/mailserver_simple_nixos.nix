@@ -200,7 +200,7 @@ in
   };
 
   services.roundcube = {
-    enable = true;
+    enable = false;
 
     dicts = with pkgs.aspellDicts; [
       en
