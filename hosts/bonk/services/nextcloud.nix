@@ -26,7 +26,7 @@ in
 
     in
     {
-      bonk-nextcloud-admin-pw = {
+      bonk-nextcloud-admin-pw = lib.mkIf (config.services.nextcloud.enable) {
         file = secrets.getSecret "nextcloud-root-pw";
         owner = "nextcloud";
         group = "nextcloud";
@@ -34,7 +34,7 @@ in
     };
 
   services.collabora-online = {
-    enable = true;
+    enable = config.services.nextcloud.enable;
     port = 9980;
     settings = {
       ssl = {
@@ -60,7 +60,7 @@ in
   systemd.services."nextcloud-setup".wants = [ "postgresql.service" ];
 
   services.nextcloud = {
-    enable = true;
+    enable = false;
 
     package = pkgs."nextcloud${ncVersion}";
 
