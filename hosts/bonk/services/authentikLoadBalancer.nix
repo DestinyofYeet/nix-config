@@ -1,6 +1,8 @@
 { flake, ... }:
 {
   services.nginx = {
+    enable = true;
+
     upstreams = {
       "authentik" = {
         servers = {
