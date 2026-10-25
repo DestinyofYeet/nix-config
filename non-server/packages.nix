@@ -243,7 +243,6 @@ in
       yt-dlp
       typescript-language-server
       obsidian
-      cavalier
       nebula
       prismlauncher
       alejandra
