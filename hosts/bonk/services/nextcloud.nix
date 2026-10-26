@@ -18,7 +18,7 @@ let
       ;
   };
 
-  ncVersion = "34";
+  ncVersion = "35";
 in
 {
   services.collabora-online = {
@@ -48,7 +48,7 @@ in
   systemd.services."nextcloud-setup".wants = [ "postgresql.service" ];
 
   services.nextcloud = {
-    enable = false;
+    enable = true;
 
     package = pkgs."nextcloud${ncVersion}";
 

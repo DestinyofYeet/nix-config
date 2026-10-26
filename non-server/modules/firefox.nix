@@ -337,7 +337,7 @@ in
           multi-account-containers
           skip-redirect
           # keepassxc-browser
-          terms-of-service-didnt-read
+          # terms-of-service-didnt-read
           youtube-no-translation
           readeck
           bitwarden
