@@ -76,7 +76,7 @@
 
     helix = {
       url = "github:helix-editor/helix";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # waybar-taskwarrior = {
@@ -278,7 +278,7 @@
         {
           nixpkgs.overlays = [
             nur.overlays.default
-            inputs.helix.overlays.default
+            # inputs.helix.overlays.default
             inputs.yazi.overlays.default
             inputs.niri-flake.overlays.niri
             inputs.ts3-noweb.overlays.default

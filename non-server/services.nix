@@ -31,4 +31,6 @@ in
   };
 
   services.pcscd.enable = true;
+
+  services.davfs2.enable = true;
 }

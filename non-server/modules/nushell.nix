@@ -10,6 +10,7 @@
     enable = true;
 
     envFile.text = "";
+    loadSessionVariables = true;
 
     configFile.text = ''
       $env.EDITOR = '${lib.custom.settings.editor}'

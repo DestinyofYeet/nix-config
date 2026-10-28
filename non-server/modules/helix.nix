@@ -1,4 +1,5 @@
 {
+  stable-pkgs,
   pkgs,
   inputs,
   lib,
@@ -16,7 +17,19 @@ in
   programs.helix = {
     enable = true;
 
-    # package = pkgs.evil-helix;
+    # until https://github.com/helix-editor/helix/pull/16348 is merged
+    package = pkgs.stdenvNoCC.mkDerivation {
+      name = "helix-patched";
+      src = inputs.helix;
+      nativeBuildInputs = [ pkgs.dasel ];
+      buildPhase = ''
+        cat languages.toml | dasel -i toml --root 'grammar = grammar.filter($this.name != "perl")' > languages.toml.new
+        mv languages.toml.new languages.toml
+
+        mkdir -p "$out"
+        cp -r . "$out"
+      '';
+    };
 
     defaultEditor = true;
 
@@ -31,10 +44,12 @@ in
 
         mouse = false;
         completion-replace = true;
-        word-completion = {
-          enable = true;
-          trigger-length = 2;
-        };
+
+        # until this stupid shit above is merged
+        # word-completion = {
+        #   enable = true;
+        #   trigger-length = 2;
+        # };
 
         clipboard-provider = "wayland";
       };

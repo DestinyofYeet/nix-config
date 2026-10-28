@@ -304,6 +304,7 @@ in
       typstyle
       pv
       libarchive
+      davfs2
     ]
     # ++ luaPkgs
     ++ kdePkgs
