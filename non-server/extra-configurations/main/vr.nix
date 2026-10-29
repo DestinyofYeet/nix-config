@@ -58,16 +58,4 @@
     #   };
     # };
   };
-
-  boot.extraModulePackages = [
-    (pkgs.callPackage ./amdgpu.nix {
-      inherit (config.boot.kernelPackages) kernel;
-      patches = [
-        (pkgs.fetchpatch {
-          url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
-          hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
-        })
-      ];
-    })
-  ];
 }
