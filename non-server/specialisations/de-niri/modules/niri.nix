@@ -22,22 +22,25 @@ let
       key,
       splitString ? false,
       whileLocked ? false,
-      ...
-    }@settings:
-    {
-      "${key}" = {
-        allow-when-locked = whileLocked;
-        action =
-          { }
-          // (if (builtins.hasAttr "spawn-sh" settings) then { spawn-sh = settings.spawn-sh; } else { })
-          // (
-            if (builtins.hasAttr "spawn" settings) then
-              { spawn = if splitString then mkList (settings.spawn) else settings.spawn; }
-            else
-              { }
-          );
+      spawn-sh ? null,
+      spawn ? null,
+    }:
+    if (spawn == null && spawn-sh == null) then
+      throw "Either set spawn or spawn-sh in mkAction"
+    else
+      {
+        "${key}" = {
+          allow-when-locked = whileLocked;
+          action = rlib.mkMerge [
+            (rlib.mkIf (spawn-sh != null) {
+              inherit spawn-sh;
+            })
+            (rlib.mkIf (spawn != null) {
+              spawn = if splitString then (mkList spawn) else spawn;
+            })
+          ];
+        };
       };
-    };
 
   mkWorkspace = key: workspace: {
     "Mod+${toString key}".action.focus-workspace = workspace;
@@ -244,11 +247,13 @@ in
         (mkAction {
           key = "XF86MonBrightnessUp";
           spawn = (noctalia "brightness-up");
+          whileLocked = true;
         })
 
         (mkAction {
           key = "XF86MonBrightnessDown";
           spawn = (noctalia "brightness-down");
+          whileLocked = true;
         })
 
         (mkAction {
