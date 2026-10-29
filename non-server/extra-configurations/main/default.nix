@@ -9,7 +9,7 @@
     # ./vpn.nix
     ./agenix.nix
     ./swap.nix
-    ./sunshine.nix
+    # ./sunshine.nix
     # ./bore_kernel.nix
   ];
 
