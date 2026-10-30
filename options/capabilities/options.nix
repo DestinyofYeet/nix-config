@@ -24,6 +24,10 @@ in
         keyboardBacklight.enable = mkBoolOption false "this host has keyboard backlight";
       };
 
+      storage = {
+        lowAmount = mkBoolOption false "this host has a low amount of storage";
+      };
+
       customNixInterpreter.enable = mkBoolOption true "to use a custom nix interpreter";
       nebulaVpn.enable = mkBoolOption true "to use the nebulaVpn";
       agenix.enable = mkBoolOption true "to use agenix";

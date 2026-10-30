@@ -17,7 +17,7 @@
     enable = true;
     clean = {
       enable = true;
-      extraArgs = "--keep 5";
+      extraArgs = if (config.capabilities.storage.lowAmount) then "--keep 1" else "--keep 5";
       dates = "daily";
     };
   };

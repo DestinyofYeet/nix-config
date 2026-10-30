@@ -23,4 +23,6 @@ in
       "fate=http://${(machines."fate").ip}:2380"
     ];
   };
+
+  systemd.services.etcd.serviceConfig.TimeoutStartSec = 600;
 }

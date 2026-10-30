@@ -16,10 +16,6 @@
     openFirewall = true;
   };
 
-  programs.envision = {
-    enable = false;
-  };
-
   services.wivrn = {
     enable = true;
     openFirewall = true;

@@ -570,6 +570,7 @@
               capabilities = {
                 hardware.headless.enable = true;
                 customNixInterpreter.enable = true;
+                storage.lowAmount = true;
               };
             })
 
@@ -586,6 +587,7 @@
               capabilities = {
                 hardware.headless.enable = true;
                 customNixInterpreter.enable = true;
+                storage.lowAmount = true;
               };
             })
           ]

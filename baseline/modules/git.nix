@@ -1,11 +1,11 @@
-{ ... }: {
-  programs.git = {
-    enable = true;
-    # userEmail = "ole@ole.blue";
-    # userName = "DestinyofYeet";
-  };
+{ rlib, capabilities, ... }: {
+  programs = rlib.mkMerge [
+    {
+      git.enable = true;
+    }
 
-  programs.lazygit = { enable = true; };
-
-  programs.gitui = { enable = true; };
+    (rlib.mkIf (!capabilities.storage.lowAmount) {
+      lazygit.enable = true;
+    })
+  ];
 }

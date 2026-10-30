@@ -4,6 +4,9 @@
   lib,
   ...
 }:
+let
+  configPath = lib.custom.settings."nix-server".paths.configs;
+in
 {
   services.navidrome = {
     enable = true;
@@ -12,7 +15,7 @@
       Address = "0.0.0.0";
 
       MusicFolder = "${lib.custom.settings.${config.networking.hostName}.paths.data}/media/navidrome";
-      DataFolder = "${lib.custom.settings.${config.networking.hostName}.paths.configs}/navidrome";
+      DataFolder = "${configPath}/navidrome/config";
       FFmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
       EnableSharing = true;
     };

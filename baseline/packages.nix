@@ -10,39 +10,43 @@
     "flakes"
   ];
 
-  environment.systemPackages = with pkgs; [
-    zsh
-    vim
-    wget
-    btop
-    bat
-    git
-    ripgrep
-    fzf
-    autoconf
-    automake
-    gcc
-    gnumake
-    unzip
-    file
-    lshw
-    pciutils
-    amdgpu_top
-    radeontop
-    deploy-rs
-    helix
-    dig
-    wireguard-tools
-    nix-output-monitor
-    openssl
-    ffmpeg
-    iperf
-    smartmontools
-    dmidecode
-    wezterm
-    unixtools.netstat
-    net-tools
-    nmap
-    tcpdump
-  ];
+  environment.systemPackages =
+    with pkgs;
+    [
+      vim
+      wget
+      btop
+      bat
+      git
+      unzip
+      file
+      helix
+      dig
+      iperf
+      unixtools.netstat
+      net-tools
+      nmap
+      tcpdump
+    ]
+    ++ (lib.optionals (!config.capabilities.storage.lowAmount) [
+      zsh
+      dmidecode
+      wezterm
+      smartmontools
+      radeontop
+      deploy-rs
+      lshw
+      pciutils
+      amdgpu_top
+      ripgrep
+      fzf
+      autoconf
+      automake
+      gcc
+      gnumake
+      nix-output-monitor
+      wireguard-tools
+      openssl
+      ffmpeg
+    ]);
 }
