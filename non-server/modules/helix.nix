@@ -67,7 +67,7 @@ in
           ":sh rm -f /tmp/unique-file"
           ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
           '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
-          ":open %sh{cat /tmp/unique-file | ${lib.getExe pkgs.sd} '(?:[a-z]*:\\/\\/[a-z]*:[0-9]*:[0-9]*\\/@[\\w\\d\\.]*\\/)([\\S| ]*)' '$1'}"
+          ":open %sh{cat /tmp/unique-file | ${lib.getExe pkgs.sd} '(?:[a-z]*:\\/\\/[a-z]*:[0-9]*:[0-9]*\\/@[\\w\\d\\.-]*\\/)([\\S| ]*)' '$1'}"
           ":redraw"
         ];
         space.y.y = ":clipboard-yank";
