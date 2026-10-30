@@ -6,7 +6,7 @@
   systemd.user.startServices = "sd-switch";
 
   imports = [
-    ../../baseline/modules
+    ../../baseline/hm-modules
     ./nu-scripts
 
     ./bash.nix

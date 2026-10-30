@@ -1,10 +1,10 @@
-{ rlib, capabilities, ... }: {
+{ rlib, osConfig, ... }: {
   programs = rlib.mkMerge [
     {
       git.enable = true;
     }
 
-    (rlib.mkIf (!capabilities.storage.lowAmount) {
+    (rlib.mkIf (!osConfig.capabilities.storage.lowAmount) {
       lazygit.enable = true;
     })
   ];

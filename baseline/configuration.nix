@@ -7,12 +7,6 @@
   ...
 }:
 {
-  imports = [
-    ./packages.nix
-    ./nebula.nix
-    ./caches.nix
-  ];
-
   programs.nh = {
     enable = true;
     clean = {
