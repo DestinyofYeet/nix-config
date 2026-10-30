@@ -1,9 +1,8 @@
-{ home-manager, inputs, ... }:
+{ inputs, ... }:
 {
   imports = [
     ../../baseline
     ./configuration.nix
-    ./home_manager.nix
     ./acls.nix
   ];
 }

@@ -6,7 +6,7 @@
 }:
 {
   virtualisation.oci-containers.containers."firefly-iii-fints-importer" = {
-    image = "benkl/firefly-iii-fints-importer";
+    image = "benkl/firefly-iii-fints-importer:2026-05-23";
     volumes = [
       "${
         lib.custom.settings.${config.networking.hostName}.paths.configs
