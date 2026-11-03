@@ -57,10 +57,10 @@ in
       theme = "tokyonight_moon";
 
       keys.normal = {
-        space.t.y.l = '':sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} "%{file_path_absolute}" 2>/dev/null &'';
+        space.t.y.l = '':sh ${inputs.nix-joint-venture.packages.x86_64-linux.scripts.standalone.typst_zathura_preview} "$(pwd)/%{buffer_name}" 2>/dev/null &'';
         space.t.y.r = [
           ":lsp-workspace-command tinymist.doStartPreview"
-          '':sh ${getPdfName} "%{file_path_absolute}" 2>/dev/null''
+          '':sh ${getPdfName} "$(pwd)/%{buffer_name}" 2>/dev/null''
           ":lsp-workspace-command tinymist.doKillPreview"
         ];
         space.y.z = [
