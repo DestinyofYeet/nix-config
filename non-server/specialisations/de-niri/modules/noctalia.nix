@@ -24,7 +24,7 @@ in
     settings = {
       plugins = {
 
-        enabled = [ "noctalia/screenshot" ];
+        enabled = [ "aristides/udiskie" ];
 
         source = [
           {
@@ -137,6 +137,11 @@ in
             color = "secondary";
           };
 
+          udiskiemanager = {
+            type = "aristides/udiskie:status";
+            hide_when_empty = true;
+          };
+
           workspaces = {
             focused_color = "#00BAFF";
             occupied_color = "#9bfece";
@@ -214,10 +219,10 @@ in
 
           center = [
             "clock"
-            # "noctalia/screenshot:screenshot"
           ];
 
           end = [
+            "udiskiemanager"
             "caffeine"
             "volume"
             "brightness"
