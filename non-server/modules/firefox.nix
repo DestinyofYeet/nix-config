@@ -179,7 +179,23 @@ in
                 }
               ];
 
-              definedAliases = [ "@nüs" ];
+              definedAliases = [ "@cno" ];
+            };
+
+            "nur search" = {
+              urls = [
+                {
+                  template = "https://nur.nix-community.org";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+
+              definedAliases = [ "@nur" ];
             };
 
             "bing".metaData.hidden = true;
@@ -342,6 +358,7 @@ in
           readeck
           bitwarden
           floccus
+          vimium
         ];
 
         userChrome = ''
