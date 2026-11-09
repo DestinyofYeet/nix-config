@@ -92,11 +92,6 @@ in
     dnsResolver = "1.1.1.1:53";
     environmentFile = config.age.secrets.cloudflare-api-env.path;
 
-    extraLegoFlags = [
-      "--dns-timeout"
-      "60"
-    ];
-
     # dnsPropagationCheck = false;
 
     postRun = "systemctl restart coturn.service";
