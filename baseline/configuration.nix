@@ -25,4 +25,8 @@
   environment.etc."channels/nixpkgs".source = inputs.nixpkgs.outPath;
 
   services.smartd.enable = lib.mkDefault true;
+
+  security.sudo.extraConfig = ''
+    Defaults insults
+  '';
 }
