@@ -66,6 +66,9 @@ in
         "uwbswd.com"
         "csxkg.net"
         "hb-fec.net"
+        "dmarc.artegic.net"
+        "mx1.artegic.net"
+        "mx2.artegic.net"
       ];
     };
 
