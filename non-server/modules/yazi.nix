@@ -1,6 +1,9 @@
-{ inputs, ... }: {
+{ inputs, stable-pkgs, ... }: {
   programs.yazi = {
     enable = true;
+
+    package = stable-pkgs.yazi;
+
     enableZshIntegration = true;
     enableNushellIntegration = true;
 
