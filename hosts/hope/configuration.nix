@@ -2,7 +2,7 @@
 
   imports = [
     ../parts/ha-vm/services
-    ../../baseline/configuration.nix
+    ../../baseline
     ./services
     ./hardware.nix
   ];

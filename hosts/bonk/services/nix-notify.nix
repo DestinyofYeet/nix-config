@@ -26,7 +26,7 @@ in
     };
 
   services.nix-notify = {
-    enable = true;
+    enable = false;
 
     settings = {
       general = {
