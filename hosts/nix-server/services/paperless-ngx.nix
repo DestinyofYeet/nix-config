@@ -3,6 +3,7 @@
   pkgs,
   lib,
   secretStore,
+  paperless-pkgs,
   ...
 }:
 let
@@ -36,6 +37,8 @@ in
 
   services.paperless = rec {
     enable = true;
+
+    package = paperless-pkgs.paperless-ngx;
 
     domain = "documents.local.ole.blue";
 

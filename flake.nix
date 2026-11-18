@@ -6,6 +6,8 @@
 
     old-nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
+    paperless-pkgs.url = "github:NixOS/nixpkgs/02c087f3fe673c9e317f206a627cb6b910336dbe";
+
     deluge-pkgs.url = "github:NixOS/nixpkgs/241313f4e8e508cb9b13278c2b0fa25b9ca27163";
 
     home-manager = {
@@ -315,6 +317,7 @@
       stable-pkgs = import inputs.stable-nixpkgs pkg-config;
       old-pkgs = import inputs.old-nixpkgs pkg-config;
       deluge-pkgs = import inputs.deluge-pkgs pkg-config;
+      paperless-pkgs = import inputs.paperless-pkgs pkg-config;
 
       secretStore = import ./secretStore { };
 
@@ -328,6 +331,7 @@
           home-manager
           secretStore
           deluge-pkgs
+          paperless-pkgs
           ;
         flake = self;
         rlib = inputs.rlib.lib;
