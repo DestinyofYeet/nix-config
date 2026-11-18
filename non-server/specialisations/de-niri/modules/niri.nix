@@ -96,6 +96,9 @@ in
             {
               app-id = "vesktop";
             }
+            {
+              app-id = "element-desktop";
+            }
           ];
         }
         {
