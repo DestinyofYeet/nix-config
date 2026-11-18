@@ -18,9 +18,8 @@
         "default" = {
           isDefault = true;
           accountsOrder = [
-            "oth_stud_email"
-            "fachschaft_im"
             "ole_blue"
+            "oth_stud_email"
           ];
         };
       };
@@ -35,7 +34,6 @@
 
   accounts.email.accounts = {
     oth_stud_email = {
-      primary = true;
       address = "ole.bendixen@st.oth-regensburg.de";
 
       flavor = "outlook.office365.com";
@@ -144,6 +142,7 @@
     };
 
     ole_blue = rec {
+      primary = true;
       address = "ole@ole.blue";
       thunderbird.enable = true;
       userName = "ole@ole.blue";
