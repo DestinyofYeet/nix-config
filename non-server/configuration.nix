@@ -18,6 +18,7 @@
     ./yubikey.nix
     ./background.nix
     ./greeter.nix
+    ./boot_animation.nix
   ];
 
   # Configure network proxy if necessary
@@ -158,12 +159,6 @@
   services.libinput.enable = true;
 
   boot = {
-    plymouth = {
-      enable = true;
-      themePackages = with pkgs; [ adi1090x-plymouth-themes ];
-      theme = "connect";
-    };
-
     consoleLogLevel = 3;
     kernelParams = [
       "quiet"
