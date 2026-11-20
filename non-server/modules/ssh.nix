@@ -198,8 +198,8 @@ in
       (mkHost {
         host = "fsim.backup";
         hostname = "wiki.fsim";
-        user = "ole";
-        ident = "ssh-key-fsim-backup";
+        user = "beo45216";
+        ident = "ssh-key-fsim-pedro";
 
         extraHosts = {
           via-pedro = {
@@ -223,6 +223,7 @@ in
         host = "fsim.apollo";
         hostname = "apollo";
         user = "beo45216";
+        ident = "ssh-key-fsim-pedro";
 
         extraHosts = {
           via-pedro-via-backup = {
