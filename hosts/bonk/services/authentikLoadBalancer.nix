@@ -2,6 +2,8 @@
 {
   services.nginx = {
     enable = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
 
     upstreams = {
       "authentik" = {
@@ -22,15 +24,35 @@
       forceSSL = true;
       useACMEHost = "idp.ole.blue";
 
-      locations."/" = {
-        proxyWebsockets = true;
-        recommendedProxySettings = true;
-        proxyPass = "http://authentik";
-        extraConfig = ''
-          proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
-          proxy_connect_timeout 10s;
-        '';
-      };
+      locations =
+        let
+          extraConfig = ''
+            proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
+            proxy_connect_timeout 10s;
+          '';
+          proxyPass = "http://authentik";
+        in
+        {
+
+          "/" = {
+            inherit proxyPass extraConfig;
+          };
+
+          "/ws/" = {
+            proxyWebsockets = true;
+            inherit extraConfig proxyPass;
+          };
+
+          "/static/" = {
+            inherit proxyPass;
+            extraConfig = ''
+              ${extraConfig}
+              add_header Cache-Control "public, max-age=0, must-revalidate";
+              add_header Expires "Thu, 01 Jan 1970 00:00:00 GMT";
+            '';
+          };
+
+        };
 
     };
 
