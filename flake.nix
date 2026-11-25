@@ -223,7 +223,7 @@
 
     homepage = {
       url = "git+https://git.ole.blue/DestinyofYeet/website.git";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-notify = {

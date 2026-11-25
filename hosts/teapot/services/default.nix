@@ -10,8 +10,7 @@
     # ./netdata.nix
     # ./docker.nix
     # ./ghost.nix
-    ./mailserver_simple_nixos.nix
-    # ./mailserver_stalwart.nix
+    # ./mailserver_simple_nixos.nix
     ./matrix.nix
     ./coturn.nix
     # ./hydra.nix
@@ -45,6 +44,8 @@
     ./molly.nix
     ./anubis.nix
     ./homepage.nix
+    ./stalwart.nix
+    ./bulwark.nix
   ];
 
   services.smartd.enable = lib.mkForce false;

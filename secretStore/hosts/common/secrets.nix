@@ -27,4 +27,7 @@ in
   "vaultwarden-sync-key.age".publicKeys = authed;
 
   "gatus-env.age".publicKeys = authed;
+
+  "bulwark-admin-hash.age".publicKeys = authed;
+  "bulwark-session-secret-key.age".publicKeys = authed;
 }

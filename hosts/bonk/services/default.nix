@@ -14,6 +14,8 @@
     (import ../../parts/uptime.nix "uptime.uwuwhatsthis.de")
     (import ../../parts/gatus/gatus.nix { domain = "status.uwuwhatsthis.de"; })
     # ./nix-notify.nix
+    # ./stalwart.nix
+    # ./bulwark.nix
   ];
 
   services.smartd.enable = lib.mkForce false;
