@@ -1,8 +1,19 @@
 {
   config,
+  secretStore,
   ...
 }:
+let
+  commonSecrets = secretStore.getHostSecrets "common";
+in
 {
+  age.secrets = {
+    stalwart-prometheus = {
+      file = commonSecrets.getSecret "stalwart-prometheus-pw";
+      owner = config.systemd.services.prometheus.serviceConfig.User;
+    };
+  };
+
   services.prometheus = {
     enable = true;
 
@@ -13,6 +24,21 @@
     };
 
     scrapeConfigs = [
+      {
+        job_name = "stalwart";
+        scrape_interval = "1m";
+        scheme = "https";
+        metrics_path = "/metrics/prometheus";
+        basic_auth = {
+          username = "prometheus";
+          password_file = config.age.secrets.stalwart-prometheus.path;
+        };
+        static_configs = [
+          {
+            targets = [ "mail.ole.blue" ];
+          }
+        ];
+      }
       {
         job_name = "zfs";
         static_configs = [

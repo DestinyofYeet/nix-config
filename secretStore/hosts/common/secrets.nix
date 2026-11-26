@@ -30,4 +30,5 @@ in
 
   "bulwark-admin-hash.age".publicKeys = authed;
   "bulwark-session-secret-key.age".publicKeys = authed;
+  "stalwart-prometheus-pw.age".publicKeys = authed;
 }
