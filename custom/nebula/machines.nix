@@ -32,7 +32,6 @@ in
   ];
 })
 // (mkEntry "nix-server" {
-
   ip = "172.27.255.2";
   groups = [ "server" ];
 })
